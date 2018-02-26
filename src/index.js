@@ -1,15 +1,15 @@
-import React from 'react';
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class WinterfellFormBuilder extends Component {
   static propTypes = {
-    title: PropTypes.string,
+    // title: PropTypes.string,
     schema: PropTypes.object,
-    updateForm: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
-    title: '',
+    // title: '',
     panelId: '',
     schema: {},
   }
@@ -30,12 +30,12 @@ class WinterfellFormBuilder extends Component {
     this.setState({ schema: JSON.parse(e.target.value) });
   }
 
-mv   onFormUpdate(e) {
+  onFormUpdate(e) {
     e.preventDefault();
-    this.props.updateForm(this.state.schema);
+    this.setState({ schema: JSON.parse(e.target.value) });
   }
 
-  render () {
+  render() {
     return (
       <div className="winterfell-formbuilder">
         Coming soon.
@@ -51,5 +51,5 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { createForm, updateForm })(WinterFormBuilder);
+export default connect(mapStateToProps, {})(WinterfellFormBuilder);
 
