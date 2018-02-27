@@ -7,7 +7,9 @@
     "test": "jest",
     "clean": "rimraf dist",
     "lint": "eslint src",
-    "start": "node build/dev-server.js"
+    "start": "node build/dev-server.js",
+    "build": "babel src --out-dir dist",
+    "prepublish": "npm run clean && npm run build"
   },
   "keywords": [
     "winterfell",
