@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Winterfell from 'winterfell';
+
+import Previewer from './components/Previewer/Previewer';
+import { CreateFormButton, EditFormButton, AddPageButton } from './components/FormMenu';
 
 class WinterfellFormBuilder extends Component {
   static propTypes = {
+    title: PropTypes.string,
     schema: PropTypes.object,
   }
 
   static defaultProps = {
+    title: '',
     panelId: '',
     schema: {},
   }
@@ -34,38 +38,34 @@ class WinterfellFormBuilder extends Component {
     this.setState({ schema: JSON.parse(e.target.value) });
   }
 
-
   render() {
-    const onRender = () => {
-      console.log('Great news! Winterfell rendered successfully');
-    };
+    const { title, schema } = this.props;
+    console.log('schema:', schema);
 
-    const onUpdate = (questionAnswers) => {
-      console.log('Question Updated! The current set of answers is: ', questionAnswers);
-    };
-
-    const onSwitchPanel = (panel) => {
-      console.log(`Moving on to the panel that is identified as ${panel.panelId}`);
-    };
-
-    const onSubmit = (questionAnswers) => {
-      console.log('Form submitted!', questionAnswers);
-      console.log('-----');
-      console.log('For this example, we disabled normal form submission functionality. ');
-      console.log('-----');
-      alert('Submitted. Check the console to see the answers!');
-    };
     return (
       <div className="grid">
         <div className="row">
-          <div className="col-xs-6 col-xs-offset-3">
-            <Winterfell
-              schema={this.props.schema}
-              onRender={onRender}
-              onUpdate={onUpdate}
-              onSwitchPanel={onSwitchPanel}
-              onSubmit={onSubmit}
+          <div className="col-xs-12">
+            <h2>Winterfell Form Builder</h2>
+          </div>
+          <div className="col-xs-12">
+            <h3>Form: {title}</h3>
+          </div>
+          <div className="col-xs-12">
+            <Previewer
+              schema={schema}
             />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-3">
+            <CreateFormButton />
+          </div>
+          <div className="col-xs-3">
+            <EditFormButton />
+          </div>
+          <div className="col-xs-3">
+            <AddPageButton />
           </div>
         </div>
       </div>
@@ -76,6 +76,7 @@ class WinterfellFormBuilder extends Component {
 function mapStateToProps(state) {
   return {
     title: state.getIn(['form', 'title']),
+    schema: state.getIn(['form', 'schema']).toJS(),
   };
 }
 

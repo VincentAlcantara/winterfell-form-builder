@@ -1,4 +1,4 @@
-# Wintefell-FormBuilder
+# Winterfell-Form-Builder
 A form builder using the JSON schema defined by the Winterfell library.
 
 ## Winterfell
