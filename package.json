@@ -2,7 +2,7 @@
   "name": "winterfell-form-builder",
   "version": "0.0.1",
   "description": "Generate JSON schema for Winterfell forms",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "jest",
     "clean": "rimraf dist",
@@ -24,10 +24,10 @@
     "questions",
     "react-component"
   ],
-  "author": "Andrew Hathaway <andrew@andrewhathaway.net>",
+  "author": "Vincent Alcantara <vincent.alcantara@yahoo.com.au>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/andrewhathaway/winterfell.git"
+    "url": "git://github.com/VincentAlcantara/Winterfell-Formbuilder.git"
   },
   "license": "MIT",
   "peerDependencies": {
