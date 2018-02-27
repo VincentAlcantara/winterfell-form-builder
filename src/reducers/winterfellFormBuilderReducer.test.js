@@ -13,12 +13,9 @@ describe('wintefellFormBuilderReducer', () => {
   const classes = constants.BOOTSTRAP_CLASSES;
 
   const initialState = fromJS({
-    formsList: [],
-    currentForm: {
-      title: '',
-      schema: {
-        classes,
-      },
+    title: '',
+    schema: {
+      classes,
     },
     error: '',
   });
@@ -34,21 +31,18 @@ describe('wintefellFormBuilderReducer', () => {
     };
 
     const expectedState = fromJS({
-      formsList: [],
-      currentForm: {
-        title: 'My Awesome Form',
-        schema: {
-          classes,
-          formPanels: [{
-            index: 1,
-            panelId: 'page-1',
-          }],
-          questionPanels: [{
-            panelId: 'page-1',
-            panelHeader: 'My Awesome Form - page 1',
-            panelText: 'Let\'s grab some of your details',
-          }],
-        },
+      title: 'My Awesome Form',
+      schema: {
+        classes,
+        formPanels: [{
+          index: 1,
+          panelId: 'page-1',
+        }],
+        questionPanels: [{
+          panelId: 'page-1',
+          panelHeader: 'My Awesome Form - page 1',
+          panelText: 'Let\'s grab some of your details',
+        }],
       },
       error: '',
     });
@@ -63,12 +57,9 @@ describe('wintefellFormBuilderReducer', () => {
     };
 
     const expectedState = fromJS({
-      formsList: [],
-      currentForm: {
-        title: '',
-        schema: {
-          classes,
-        },
+      title: '',
+      schema: {
+        classes,
       },
       error: 'An error occurred.',
     });
@@ -83,55 +74,49 @@ describe('wintefellFormBuilderReducer', () => {
     };
 
     const beforeState = fromJS({
-      formsList: [],
-      currentForm: {
-        title: 'My Awesome Form',
-        schema: {
-          formPanels: [
-            {
-              index: 1,
-              panelId: 'page-1',
-            },
-          ],
-          questionPanels: [
-            {
-              panelId: 'page-1',
-              panelHeader: 'Survey Page 1',
-              panelText: 'Let\'s grab some of your details',
-            },
-          ],
-        },
+      title: 'My Awesome Form',
+      schema: {
+        formPanels: [
+          {
+            index: 1,
+            panelId: 'page-1',
+          },
+        ],
+        questionPanels: [
+          {
+            panelId: 'page-1',
+            panelHeader: 'Survey Page 1',
+            panelText: 'Let\'s grab some of your details',
+          },
+        ],
       },
       error: '',
     });
 
     const expectedState = fromJS({
-      formsList: [],
-      currentForm: {
-        title: 'My Awesome Form',
-        schema: {
-          formPanels: [
-            {
-              index: 1,
-              panelId: 'page-1',
-            },
-            {
-              index: 2,
-              panelId: 'page-2',
-            },
-          ],
-          questionPanels: [
-            {
-              panelId: 'page-1',
-              panelHeader: 'Survey Page 1',
-              panelText: 'Let\'s grab some of your details',
-            }, {
-              panelId: 'page-2',
-              panelHeader: 'Heading-2',
-              panelText: 'Text-2',
-            },
-          ],
-        },
+      title: 'My Awesome Form',
+      schema: {
+        formPanels: [
+          {
+            index: 1,
+            panelId: 'page-1',
+          },
+          {
+            index: 2,
+            panelId: 'page-2',
+          },
+        ],
+        questionPanels: [
+          {
+            panelId: 'page-1',
+            panelHeader: 'Survey Page 1',
+            panelText: 'Let\'s grab some of your details',
+          }, {
+            panelId: 'page-2',
+            panelHeader: 'Heading-2',
+            panelText: 'Text-2',
+          },
+        ],
       },
       error: '',
     });
@@ -150,55 +135,49 @@ describe('wintefellFormBuilderReducer', () => {
     };
 
     const beforeState = fromJS({
-      formsList: [],
-      currentForm: {
-        title: 'My Awesome Form',
-        schema: {
-          formPanels: [
-            {
-              index: 1,
-              panelId: 'page-1',
-            },
-          ],
-          questionPanels: [
-            {
-              panelId: 'page-1',
-              panelHeader: 'Survey Page 1',
-              panelText: 'Let\'s grab some of your details',
-            },
-          ],
-        },
+      title: 'My Awesome Form',
+      schema: {
+        formPanels: [
+          {
+            index: 1,
+            panelId: 'page-1',
+          },
+        ],
+        questionPanels: [
+          {
+            panelId: 'page-1',
+            panelHeader: 'Survey Page 1',
+            panelText: 'Let\'s grab some of your details',
+          },
+        ],
       },
       error: '',
     });
 
     const expectedState = fromJS({
-      formsList: [],
-      currentForm: {
-        title: 'My Awesome Form',
-        schema: {
-          formPanels: [
-            {
-              index: 1,
-              panelId: 'page-1',
-            },
-            {
-              index: 2,
-              panelId: 'page-2',
-            },
-          ],
-          questionPanels: [
-            {
-              panelId: 'page-1',
-              panelHeader: 'Survey Page 1',
-              panelText: 'Let\'s grab some of your details',
-            }, {
-              panelId: 'page-2',
-              panelHeader: 'A New Page 2',
-              panelText: 'This is a new page',
-            },
-          ],
-        },
+      title: 'My Awesome Form',
+      schema: {
+        formPanels: [
+          {
+            index: 1,
+            panelId: 'page-1',
+          },
+          {
+            index: 2,
+            panelId: 'page-2',
+          },
+        ],
+        questionPanels: [
+          {
+            panelId: 'page-1',
+            panelHeader: 'Survey Page 1',
+            panelText: 'Let\'s grab some of your details',
+          }, {
+            panelId: 'page-2',
+            panelHeader: 'A New Page 2',
+            panelText: 'This is a new page',
+          },
+        ],
       },
       error: '',
     });

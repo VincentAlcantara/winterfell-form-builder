@@ -7,19 +7,20 @@
 import React from 'react';
 
 import { render } from 'react-dom';
-import { Provider, compose } from 'react-redux';
-// import createHistory from 'history/createBrowserHistory';
-
-
+import { Provider } from 'react-redux';
 import WinterfellFormBuilder from './src/';
+import configureStore from './store';
+import schema from './examples/schema';
 
-// const history = createHistory();
 
-window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      }) : compose;
+const initialState = {};
+const store = configureStore(initialState);
 
 render(
-    <WinterfellFormBuilder  />,
+  <Provider store={store}>
+    <WinterfellFormBuilder
+      schema={schema}
+    />
+  </Provider>,
   document.getElementById('root'),
 );

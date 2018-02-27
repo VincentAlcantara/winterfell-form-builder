@@ -137,39 +137,37 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .set('error', '');
     case RETRIEVE_FORM_SUCCESS:
       return state
-        .set('currentForm', fromJS(action.payload.form))
+        .set('schema', fromJS(action.payload.form))
         .set('error', '');
     case CREATE_FORM_SUCCESS:
       return state
-        .set('currentForm', fromJS({
-          title: action.payload.title,
-          schema: {
-            classes: BOOTSTRAP_CLASSES,
-            formPanels: [{
-              index: 1,
-              panelId: 'page-1',
-            }],
-            questionPanels: [{
-              panelId: 'page-1',
-              panelHeader: `${action.payload.title} - page 1`,
-              panelText: 'Let\'s grab some of your details',
-            }],
-          },
+        .set('title', action.payload.title)
+        .set('schema', fromJS({
+          classes: BOOTSTRAP_CLASSES,
+          formPanels: [{
+            index: 1,
+            panelId: 'page-1',
+          }],
+          questionPanels: [{
+            panelId: 'page-1',
+            panelHeader: `${action.payload.title} - page 1`,
+            panelText: 'Let\'s grab some of your details',
+          }],
         }))
         .set('error', '');
     case EDIT_FORM_SUCCESS:
       return state
-        .setIn(['currentForm', 'title'], action.payload.title)
+        .set('title', action.payload.title)
         .set('error', '');
     case UPDATE_FORM_SUCCESS:
       return state
-        .setIn(['currentForm', 'schema'], fromJS(action.payload.schema))
+        .set('schema', fromJS(action.payload.schema))
         .set('error', '');
     case DELETE_FORM_SUCCESS:
       return state
         .set('error', '');
     case ADD_PAGE_SUCCESS: {
-      const formPanelsCount = state.getIn(['currentForm', 'schema', 'formPanels']).count() + 1;
+      const formPanelsCount = state.getIn(['schema', 'formPanels']).count() + 1;
 
       const newFormPanel = {
         index: formPanelsCount,
@@ -183,9 +181,9 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       };
 
       return state
-        .updateIn(['currentForm', 'schema', 'formPanels'], arr =>
+        .updateIn(['schema', 'formPanels'], arr =>
           arr.push(fromJS(newFormPanel)))
-        .updateIn(['currentForm', 'schema', 'questionPanels'], arr =>
+        .updateIn(['schema', 'questionPanels'], arr =>
           arr.push(fromJS(newQuestionPanel)))
         .set('error', '');
     }

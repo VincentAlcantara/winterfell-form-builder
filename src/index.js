@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Winterfell from 'winterfell';
 
 class WinterfellFormBuilder extends Component {
   static propTypes = {
-    // title: PropTypes.string,
     schema: PropTypes.object,
   }
 
   static defaultProps = {
-    // title: '',
     panelId: '',
     schema: {},
   }
@@ -25,7 +24,7 @@ class WinterfellFormBuilder extends Component {
     this.onFormUpdate = this.onFormUpdate.bind(this);
   }
 
-  onChange(e) {
+  onDomChange(e) {
     e.preventDefault();
     this.setState({ schema: JSON.parse(e.target.value) });
   }
@@ -35,10 +34,40 @@ class WinterfellFormBuilder extends Component {
     this.setState({ schema: JSON.parse(e.target.value) });
   }
 
+
   render() {
+    const onRender = () => {
+      console.log('Great news! Winterfell rendered successfully');
+    };
+
+    const onUpdate = (questionAnswers) => {
+      console.log('Question Updated! The current set of answers is: ', questionAnswers);
+    };
+
+    const onSwitchPanel = (panel) => {
+      console.log(`Moving on to the panel that is identified as ${panel.panelId}`);
+    };
+
+    const onSubmit = (questionAnswers) => {
+      console.log('Form submitted!', questionAnswers);
+      console.log('-----');
+      console.log('For this example, we disabled normal form submission functionality. ');
+      console.log('-----');
+      alert('Submitted. Check the console to see the answers!');
+    };
     return (
-      <div className="winterfell-formbuilder">
-        Coming soon.
+      <div className="grid">
+        <div className="row">
+          <div className="col-xs-6 col-xs-offset-3">
+            <Winterfell
+              schema={this.props.schema}
+              onRender={onRender}
+              onUpdate={onUpdate}
+              onSwitchPanel={onSwitchPanel}
+              onSubmit={onSubmit}
+            />
+          </div>
+        </div>
       </div>
     );
   }
@@ -47,7 +76,6 @@ class WinterfellFormBuilder extends Component {
 function mapStateToProps(state) {
   return {
     title: state.getIn(['form', 'title']),
-    schema: state.getIn(['form', 'schema']).toJS(),
   };
 }
 
