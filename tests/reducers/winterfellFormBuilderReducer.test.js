@@ -1,8 +1,7 @@
 import { fromJS } from 'immutable';
 
-import winterfellFormBuilderReducer from './winterfellFormBuilderReducer';
-
-import * as constants from '../common/constants';
+import winterfellFormBuilderReducer from '../../src/reducers/winterfellFormBuilderReducer';
+import * as constants from '../../src/common/constants';
 
 /*
  * The format of the test should be:
