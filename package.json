@@ -2,7 +2,7 @@
   "name": "winterfell-form-builder",
   "version": "0.0.1",
   "description": "Generate JSON schema for Winterfell form",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "clean": "rimraf dist",

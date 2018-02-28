@@ -63,7 +63,7 @@ describe('wintefellFormBuilderReducer', () => {
         classes,
       },
       error: 'An error occurred.',
-      currentPanelId: null,      
+      currentPanelId: null,
     });
 
     expect(winterfellFormBuilderReducer(initialState, currentAction)).toEqual(expectedState);
