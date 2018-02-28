@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createForm = createForm;
 exports.editForm = editForm;
-exports.skipPage = skipPage;
+exports.goToPage = goToPage;
 exports.updateForm = updateForm;
 exports.addPage = addPage;
 
@@ -25,9 +25,9 @@ function editForm(title) {
   };
 }
 
-function skipPage(panelId) {
+function goToPage(panelId) {
   return {
-    type: _constants.SKIP_PAGE_SUCCESS,
+    type: _constants.GOTO_PAGE_SUCCESS,
     payload: { panelId: panelId }
   };
 }
@@ -56,7 +56,7 @@ var _temp = function () {
 
   __REACT_HOT_LOADER__.register(editForm, 'editForm', 'src/actions/winterfellFormBuilderActions.js');
 
-  __REACT_HOT_LOADER__.register(skipPage, 'skipPage', 'src/actions/winterfellFormBuilderActions.js');
+  __REACT_HOT_LOADER__.register(goToPage, 'goToPage', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(updateForm, 'updateForm', 'src/actions/winterfellFormBuilderActions.js');
 

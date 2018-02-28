@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -34,9 +38,17 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _winterfell = require('winterfell');
+var _reactBootstrap = require('react-bootstrap');
 
-var _winterfell2 = _interopRequireDefault(_winterfell);
+var _Pagination = require('./components/Pagination');
+
+var _Pagination2 = _interopRequireDefault(_Pagination);
+
+var _Previewer = require('./components/Previewer');
+
+var _Previewer2 = _interopRequireDefault(_Previewer);
+
+var _FormMenu = require('./components/FormMenu');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -72,41 +84,117 @@ var WinterfellFormBuilder = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var onRender = function onRender() {
-        console.log('Great news! Winterfell rendered successfully');
-      };
+      var _props = this.props,
+          title = _props.title,
+          schema = _props.schema,
+          currentPanelId = _props.currentPanelId;
 
-      var onUpdate = function onUpdate(questionAnswers) {
-        console.log('Question Updated! The current set of answers is: ', questionAnswers);
-      };
-
-      var onSwitchPanel = function onSwitchPanel(panel) {
-        console.log('Moving on to the panel that is identified as ' + panel.panelId);
-      };
-
-      var onSubmit = function onSubmit(questionAnswers) {
-        console.log('Form submitted!', questionAnswers);
-        console.log('-----');
-        console.log('For this example, we disabled normal form submission functionality. ');
-        console.log('-----');
-        alert('Submitted. Check the console to see the answers!');
-      };
       return _react2.default.createElement(
-        'div',
-        { className: 'grid' },
+        _reactBootstrap.Grid,
+        null,
         _react2.default.createElement(
-          'div',
-          { className: 'row' },
+          _reactBootstrap.Row,
+          null,
           _react2.default.createElement(
-            'div',
-            { className: 'col-xs-6 col-xs-offset-3' },
-            _react2.default.createElement(_winterfell2.default, {
-              schema: this.props.schema,
-              onRender: onRender,
-              onUpdate: onUpdate,
-              onSwitchPanel: onSwitchPanel,
-              onSubmit: onSubmit
-            })
+            _reactBootstrap.Col,
+            { xs: 12 },
+            _react2.default.createElement(
+              _reactBootstrap.Row,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 12 },
+                _react2.default.createElement(
+                  'h2',
+                  null,
+                  'Winterfell Form Builder'
+                )
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 12 },
+                _react2.default.createElement(
+                  'h3',
+                  null,
+                  'Form: ',
+                  _react2.default.createElement(
+                    'u',
+                    null,
+                    title
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement('hr', null),
+            _react2.default.createElement(
+              _reactBootstrap.Row,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 12 },
+                _react2.default.createElement(_Pagination2.default, null)
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Row,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 12 },
+                _react2.default.createElement(_Previewer2.default, {
+                  schema: schema,
+                  currentPanelId: currentPanelId
+                })
+              )
+            ),
+            _react2.default.createElement('hr', null),
+            _react2.default.createElement(
+              _reactBootstrap.Row,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 3 },
+                _react2.default.createElement(_FormMenu.CreateFormButton, null)
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 3 },
+                _react2.default.createElement(_FormMenu.EditFormButton, null)
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 3 },
+                _react2.default.createElement(_FormMenu.AddPageButton, null)
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 3 },
+                _react2.default.createElement(_FormMenu.EditSchemaButton, null)
+              )
+            ),
+            _react2.default.createElement('hr', null),
+            _react2.default.createElement(
+              _reactBootstrap.Row,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 12 },
+                _react2.default.createElement(
+                  'h3',
+                  null,
+                  'Winterfell Schema:'
+                )
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 12 },
+                _react2.default.createElement(
+                  'pre',
+                  null,
+                  (0, _stringify2.default)(schema, undefined, 2)
+                )
+              )
+            )
           )
         )
       );
@@ -116,17 +204,22 @@ var WinterfellFormBuilder = function (_Component) {
 }(_react.Component);
 
 WinterfellFormBuilder.propTypes = {
-  schema: _propTypes2.default.object
+  title: _propTypes2.default.string,
+  schema: _propTypes2.default.object,
+  currentPanelId: _propTypes2.default.string
 };
 WinterfellFormBuilder.defaultProps = {
-  panelId: '',
-  schema: {}
+  title: '',
+  schema: {},
+  currentPanelId: null
 };
 
 
 function mapStateToProps(state) {
   return {
-    title: state.getIn(['form', 'title'])
+    title: state.getIn(['form', 'title']),
+    schema: state.getIn(['form', 'schema']).toJS(),
+    currentPanelId: state.getIn(['form', 'currentPanelId'])
   };
 }
 

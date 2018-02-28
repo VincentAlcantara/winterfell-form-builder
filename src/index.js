@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Winterfell from 'winterfell';
+import { Grid, Row, Col } from 'react-bootstrap';
+
+import Pagination from './components/Pagination';
+import Previewer from './components/Previewer';
+
+import { CreateFormButton, EditFormButton, AddPageButton, EditSchemaButton } from './components/FormMenu';
 
 class WinterfellFormBuilder extends Component {
   static propTypes = {
+    title: PropTypes.string,
     schema: PropTypes.object,
+    currentPanelId: PropTypes.string,
   }
 
   static defaultProps = {
-    panelId: '',
+    title: '',
     schema: {},
+    currentPanelId: null,
   }
 
   constructor(props) {
@@ -34,41 +42,63 @@ class WinterfellFormBuilder extends Component {
     this.setState({ schema: JSON.parse(e.target.value) });
   }
 
-
   render() {
-    const onRender = () => {
-      console.log('Great news! Winterfell rendered successfully');
-    };
-
-    const onUpdate = (questionAnswers) => {
-      console.log('Question Updated! The current set of answers is: ', questionAnswers);
-    };
-
-    const onSwitchPanel = (panel) => {
-      console.log(`Moving on to the panel that is identified as ${panel.panelId}`);
-    };
-
-    const onSubmit = (questionAnswers) => {
-      console.log('Form submitted!', questionAnswers);
-      console.log('-----');
-      console.log('For this example, we disabled normal form submission functionality. ');
-      console.log('-----');
-      alert('Submitted. Check the console to see the answers!');
-    };
+    const { title, schema, currentPanelId } = this.props;
     return (
-      <div className="grid">
-        <div className="row">
-          <div className="col-xs-6 col-xs-offset-3">
-            <Winterfell
-              schema={this.props.schema}
-              onRender={onRender}
-              onUpdate={onUpdate}
-              onSwitchPanel={onSwitchPanel}
-              onSubmit={onSubmit}
-            />
-          </div>
-        </div>
-      </div>
+      <Grid>
+        <Row>
+          <Col xs={12}>
+            <Row>
+              <Col xs={12}>
+                <h2>Winterfell Form Builder</h2>
+              </Col>
+              <Col xs={12}>
+                <h3>Form: <u>{title}</u></h3>
+              </Col>
+            </Row>
+            <hr />
+            <Row>
+              <Col xs={12}>
+                <Pagination />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <Previewer
+                  schema={schema}
+                  currentPanelId={currentPanelId}
+                />
+              </Col>
+            </Row>
+            <hr />
+            <Row>
+              <Col xs={3}>
+                <CreateFormButton />
+              </Col>
+              <Col xs={3}>
+                <EditFormButton />
+              </Col>
+              <Col xs={3}>
+                <AddPageButton />
+              </Col>
+              <Col xs={3}>
+                <EditSchemaButton />
+              </Col>
+            </Row>
+            <hr />
+            <Row>
+              <Col xs={12}>
+                <h3>Winterfell Schema:</h3>
+              </Col>
+              <Col xs={12}>
+                <pre>
+                  {JSON.stringify(schema, undefined, 2)}
+                </pre>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
@@ -76,6 +106,8 @@ class WinterfellFormBuilder extends Component {
 function mapStateToProps(state) {
   return {
     title: state.getIn(['form', 'title']),
+    schema: state.getIn(['form', 'schema']).toJS(),
+    currentPanelId: state.getIn(['form', 'currentPanelId']),
   };
 }
 
