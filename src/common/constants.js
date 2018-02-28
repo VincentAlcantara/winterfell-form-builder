@@ -6,7 +6,7 @@ export const RETRIEVE_FORM_REQUEST = 'RETRIEVE_FORM_REQUEST';
 export const RETRIEVE_FORM_SUCCESS = 'RETRIEVE_FORM_SUCCESS';
 export const RETRIEVE_FORM_ERROR = 'RETRIEVE_FORM_ERROR';
 export const CREATE_FORM_REQUEST = 'CREATE_FORM_REQUEST';
-export const SKIP_PAGE_SUCCESS = 'SKIP_PAGE_SUCCESS';
+export const GOTO_PAGE_SUCCESS = 'GOTO_PAGE_SUCCESS';
 export const EDIT_FORM_SUCCESS = 'EDIT_FORM_SUCCESS';
 export const CREATE_FORM_SUCCESS = 'CREATE_FORM_SUCCESS';
 export const CREATE_FORM_ERROR = 'CREATE_FORM_ERROR';
@@ -46,8 +46,8 @@ export const BOOTSTRAP_CLASSES = {
   checkboxInput: 'checkbox',
   checkboxListItem: 'checkbox',
   checkboxList: 'clean-list',
-  controlButton: 'btn btn-blue pull-right',
-  backButton: 'btn btn-red pull-left',
+  controlButton: 'btn btn-primary pull-right',
+  backButton: 'btn btn-default pull-left',
   errorMessage: 'alert alert-danger',
   questionPostText: 'push-top',
   buttonBar: 'button-bar',

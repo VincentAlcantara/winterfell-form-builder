@@ -18,7 +18,9 @@ const store = configureStore(initialState);
 
 render(
   <Provider store={store}>
-    <WinterfellFormBuilder />
+    <WinterfellFormBuilder
+      schema={schema}
+    />
   </Provider>,
   document.getElementById('root'),
 );

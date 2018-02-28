@@ -17,7 +17,7 @@ var initialState = (0, _immutable.fromJS)({
       checkboxInput: 'checkbox',
       checkboxList: 'clean-list',
       checkboxListItem: 'checkbox',
-      controlButton: 'btn btn-blue pull-right',
+      controlButton: 'btn btn-primary pull-right',
       errorMessage: 'alert alert-danger',
       input: 'form-control',
       question: 'form-group',
@@ -79,7 +79,7 @@ function winterfellFormBuilderReducer() {
       return state.set('error', 'An error occurred.');
     case _constants.DELETE_QUESTION_ERROR:
       return state.set('error', 'An error occurred');
-    case _constants.SKIP_PAGE_SUCCESS:
+    case _constants.GOTO_PAGE_SUCCESS:
       console.log('skipping to page:', action.payload.panelId);
       return state.set('currentPage', action.payload.panelId);
     case _constants.RETRIEVE_FORMLIST_SUCCESS:

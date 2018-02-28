@@ -17,6 +17,7 @@ describe('wintefellFormBuilderReducer', () => {
       classes,
     },
     error: '',
+    currentPanelId: null,
   });
 
   it('should return the initial state', () => {
@@ -44,6 +45,7 @@ describe('wintefellFormBuilderReducer', () => {
         }],
       },
       error: '',
+      currentPanelId: null,
     });
 
     expect(winterfellFormBuilderReducer(initialState, currentAction)).toEqual(expectedState);
@@ -61,6 +63,7 @@ describe('wintefellFormBuilderReducer', () => {
         classes,
       },
       error: 'An error occurred.',
+      currentPanelId: null,      
     });
 
     expect(winterfellFormBuilderReducer(initialState, currentAction)).toEqual(expectedState);
@@ -90,6 +93,7 @@ describe('wintefellFormBuilderReducer', () => {
         ],
       },
       error: '',
+      currentPanelId: null,
     });
 
     const expectedState = fromJS({
@@ -118,6 +122,7 @@ describe('wintefellFormBuilderReducer', () => {
         ],
       },
       error: '',
+      currentPanelId: null,
     });
 
     expect(winterfellFormBuilderReducer(beforeState, currentAction)).toEqual(expectedState);
@@ -151,6 +156,7 @@ describe('wintefellFormBuilderReducer', () => {
         ],
       },
       error: '',
+      currentPanelId: null,
     });
 
     const expectedState = fromJS({
@@ -179,6 +185,7 @@ describe('wintefellFormBuilderReducer', () => {
         ],
       },
       error: '',
+      currentPanelId: null,
     });
 
     expect(winterfellFormBuilderReducer(beforeState, currentAction)).toEqual(expectedState);

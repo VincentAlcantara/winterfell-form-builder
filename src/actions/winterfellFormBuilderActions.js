@@ -11,7 +11,7 @@ import {
   // UPDATE_FORM_REQUEST,
   EDIT_FORM_SUCCESS,
   UPDATE_FORM_SUCCESS,
-  SKIP_PAGE_SUCCESS,
+  GOTO_PAGE_SUCCESS,
   // UPDATE_FORM_ERROR,
   // DELETE_FORM_REQUEST,
   // DELETE_FORM_SUCCESS,
@@ -50,9 +50,9 @@ export function editForm(title) {
   };
 }
 
-export function skipPage(panelId) {
+export function goToPage(panelId) {
   return {
-    type: SKIP_PAGE_SUCCESS,
+    type: GOTO_PAGE_SUCCESS,
     payload: { panelId },
   };
 }

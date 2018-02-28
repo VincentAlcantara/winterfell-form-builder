@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Grid, Row, Col } from 'react-bootstrap';
 
-import Previewer from './components/Previewer/Previewer';
-import { CreateFormButton, EditFormButton, AddPageButton } from './components/FormMenu';
+import Pagination from './components/Pagination';
+import Previewer from './components/Previewer';
+
+import { CreateFormButton, EditFormButton, AddPageButton, EditSchemaButton } from './components/FormMenu';
 
 class WinterfellFormBuilder extends Component {
   static propTypes = {
     title: PropTypes.string,
     schema: PropTypes.object,
+    currentPanelId: PropTypes.string,
   }
 
   static defaultProps = {
     title: '',
-    panelId: '',
     schema: {},
+    currentPanelId: null,
   }
 
   constructor(props) {
@@ -39,36 +43,62 @@ class WinterfellFormBuilder extends Component {
   }
 
   render() {
-    const { title, schema } = this.props;
-    console.log('schema:', schema);
-
+    const { title, schema, currentPanelId } = this.props;
     return (
-      <div className="grid">
-        <div className="row">
-          <div className="col-xs-12">
-            <h2>Winterfell Form Builder</h2>
-          </div>
-          <div className="col-xs-12">
-            <h3>Form: {title}</h3>
-          </div>
-          <div className="col-xs-12">
-            <Previewer
-              schema={schema}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-xs-3">
-            <CreateFormButton />
-          </div>
-          <div className="col-xs-3">
-            <EditFormButton />
-          </div>
-          <div className="col-xs-3">
-            <AddPageButton />
-          </div>
-        </div>
-      </div>
+      <Grid>
+        <Row>
+          <Col xs={12}>
+            <Row>
+              <Col xs={12}>
+                <h2>Winterfell Form Builder</h2>
+              </Col>
+              <Col xs={12}>
+                <h3>Form: <u>{title}</u></h3>
+              </Col>
+            </Row>
+            <hr />
+            <Row>
+              <Col xs={12}>
+                <Pagination />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <Previewer
+                  schema={schema}
+                  currentPanelId={currentPanelId}
+                />
+              </Col>
+            </Row>
+            <hr />
+            <Row>
+              <Col xs={3}>
+                <CreateFormButton />
+              </Col>
+              <Col xs={3}>
+                <EditFormButton />
+              </Col>
+              <Col xs={3}>
+                <AddPageButton />
+              </Col>
+              <Col xs={3}>
+                <EditSchemaButton />
+              </Col>
+            </Row>
+            <hr />
+            <Row>
+              <Col xs={12}>
+                <h3>Winterfell Schema:</h3>
+              </Col>
+              <Col xs={12}>
+                <pre>
+                  {JSON.stringify(schema, undefined, 2)}
+                </pre>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
@@ -77,6 +107,7 @@ function mapStateToProps(state) {
   return {
     title: state.getIn(['form', 'title']),
     schema: state.getIn(['form', 'schema']).toJS(),
+    currentPanelId: state.getIn(['form', 'currentPanelId']),
   };
 }
 

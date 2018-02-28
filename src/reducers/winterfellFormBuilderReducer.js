@@ -11,7 +11,7 @@ import {
   CREATE_FORM_ERROR,
   EDIT_FORM_SUCCESS,
   UPDATE_FORM_REQUEST,
-  SKIP_PAGE_SUCCESS,
+  GOTO_PAGE_SUCCESS,
   UPDATE_FORM_SUCCESS,
   UPDATE_FORM_ERROR,
   DELETE_FORM_REQUEST,
@@ -42,21 +42,22 @@ const initialState = fromJS({
   title: '',
   schema: {
     classes: {
-      backButton: 'btn btn-red pull-left',
-      buttonBar: 'button-bar',
-      checkboxInput: 'checkbox',
-      checkboxList: 'clean-list',
-      checkboxListItem: 'checkbox',
-      controlButton: 'btn btn-blue pull-right',
-      errorMessage: 'alert alert-danger',
       input: 'form-control',
-      question: 'form-group',
-      questionPostText: 'push-top',
-      radioList: 'clean-list',
-      radioListItem: 'radio',
       select: 'form-control',
+      question: 'form-group',
+      radioListItem: 'radio',
+      radioList: 'clean-list',
+      checkboxInput: 'checkbox',
+      checkboxListItem: 'checkbox',
+      checkboxList: 'clean-list',
+      controlButton: 'btn btn-primary pull-right',
+      backButton: 'btn btn-default pull-left',
+      errorMessage: 'alert alert-danger',
+      questionPostText: 'push-top',
+      buttonBar: 'button-bar',
     },
   },
+  currentPanelId: null,
   error: '',
 });
 
@@ -128,10 +129,9 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     case DELETE_QUESTION_ERROR:
       return state
         .set('error', 'An error occurred');
-    case SKIP_PAGE_SUCCESS:
-      console.log('skipping to page:', action.payload.panelId);
+    case GOTO_PAGE_SUCCESS:
       return state
-        .set('currentPage', action.payload.panelId);
+        .set('currentPanelId', action.payload.panelId);
     case RETRIEVE_FORMLIST_SUCCESS:
       return state
         .set('error', '');
