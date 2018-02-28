@@ -11,7 +11,7 @@ var RETRIEVE_FORM_REQUEST = exports.RETRIEVE_FORM_REQUEST = 'RETRIEVE_FORM_REQUE
 var RETRIEVE_FORM_SUCCESS = exports.RETRIEVE_FORM_SUCCESS = 'RETRIEVE_FORM_SUCCESS';
 var RETRIEVE_FORM_ERROR = exports.RETRIEVE_FORM_ERROR = 'RETRIEVE_FORM_ERROR';
 var CREATE_FORM_REQUEST = exports.CREATE_FORM_REQUEST = 'CREATE_FORM_REQUEST';
-var SKIP_PAGE_SUCCESS = exports.SKIP_PAGE_SUCCESS = 'SKIP_PAGE_SUCCESS';
+var GOTO_PAGE_SUCCESS = exports.GOTO_PAGE_SUCCESS = 'GOTO_PAGE_SUCCESS';
 var EDIT_FORM_SUCCESS = exports.EDIT_FORM_SUCCESS = 'EDIT_FORM_SUCCESS';
 var CREATE_FORM_SUCCESS = exports.CREATE_FORM_SUCCESS = 'CREATE_FORM_SUCCESS';
 var CREATE_FORM_ERROR = exports.CREATE_FORM_ERROR = 'CREATE_FORM_ERROR';
@@ -51,8 +51,8 @@ var BOOTSTRAP_CLASSES = exports.BOOTSTRAP_CLASSES = {
   checkboxInput: 'checkbox',
   checkboxListItem: 'checkbox',
   checkboxList: 'clean-list',
-  controlButton: 'btn btn-blue pull-right',
-  backButton: 'btn btn-red pull-left',
+  controlButton: 'btn btn-primary pull-right',
+  backButton: 'btn btn-default pull-left',
   errorMessage: 'alert alert-danger',
   questionPostText: 'push-top',
   buttonBar: 'button-bar'
@@ -78,7 +78,7 @@ var _temp = function () {
 
   __REACT_HOT_LOADER__.register(CREATE_FORM_REQUEST, 'CREATE_FORM_REQUEST', 'src/common/constants.js');
 
-  __REACT_HOT_LOADER__.register(SKIP_PAGE_SUCCESS, 'SKIP_PAGE_SUCCESS', 'src/common/constants.js');
+  __REACT_HOT_LOADER__.register(GOTO_PAGE_SUCCESS, 'GOTO_PAGE_SUCCESS', 'src/common/constants.js');
 
   __REACT_HOT_LOADER__.register(EDIT_FORM_SUCCESS, 'EDIT_FORM_SUCCESS', 'src/common/constants.js');
 

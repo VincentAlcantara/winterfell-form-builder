@@ -12,21 +12,22 @@ var initialState = (0, _immutable.fromJS)({
   title: '',
   schema: {
     classes: {
-      backButton: 'btn btn-red pull-left',
-      buttonBar: 'button-bar',
-      checkboxInput: 'checkbox',
-      checkboxList: 'clean-list',
-      checkboxListItem: 'checkbox',
-      controlButton: 'btn btn-primary pull-right',
-      errorMessage: 'alert alert-danger',
       input: 'form-control',
+      select: 'form-control',
       question: 'form-group',
-      questionPostText: 'push-top',
-      radioList: 'clean-list',
       radioListItem: 'radio',
-      select: 'form-control'
+      radioList: 'clean-list',
+      checkboxInput: 'checkbox',
+      checkboxListItem: 'checkbox',
+      checkboxList: 'clean-list',
+      controlButton: 'btn btn-primary pull-right',
+      backButton: 'btn btn-default pull-left',
+      errorMessage: 'alert alert-danger',
+      questionPostText: 'push-top',
+      buttonBar: 'button-bar'
     }
   },
+  currentPanelId: null,
   error: ''
 });
 
@@ -80,8 +81,7 @@ function winterfellFormBuilderReducer() {
     case _constants.DELETE_QUESTION_ERROR:
       return state.set('error', 'An error occurred');
     case _constants.GOTO_PAGE_SUCCESS:
-      console.log('skipping to page:', action.payload.panelId);
-      return state.set('currentPage', action.payload.panelId);
+      return state.set('currentPanelId', action.payload.panelId);
     case _constants.RETRIEVE_FORMLIST_SUCCESS:
       return state.set('error', '');
     case _constants.RETRIEVE_FORM_SUCCESS:
