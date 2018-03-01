@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Grid, Row, Col, Nav, NavItem } from 'react-bootstrap';
 import WinterfellFormBuilder from './src';
 
-import demo from './examples/schema';
+import demo from './examples/schema.json';
 import contractor from './examples/contractor.json';
 import nda from './examples/nda.json';
 

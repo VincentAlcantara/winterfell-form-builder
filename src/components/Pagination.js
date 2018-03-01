@@ -16,8 +16,6 @@ class Pagination extends Component {
     const { schema, currentPanelId } = this.props;
 
     const getPages = () => {
-      console.log('schema.formPanels: ', schema.formPanels);
-
       return schema.formPanels.map((panel, index) => (
         <MenuItem
           key={`${index}-${panel.panelId}`}

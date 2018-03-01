@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const postcssMixins = require('postcss-mixins');
 const postcssNested = require('postcss-nested');
 const postcssExtend = require('postcss-extend');
@@ -62,17 +62,17 @@ module.exports = {
         loader: 'babel',
         query: {
           plugins: ['transform-runtime', 'array-includes'],
-          presets: ['es2015', 'stage-0', 'react']
-        }
+          presets: ['es2015', 'stage-0', 'react'],
+        },
       },
       {
         test: /\.(jpe?g|png|gif|svg|ico)$/i,
         use: [
           // 'file?hash=sha512&digest=hex' + (isProd ? '&name=/media/[name].[ext]' : ''),
           'file?hash=sha512&digest=hex',
-          'image-webpack?bypassOnDebug=false&optimizationLevel=1&interlaced=true'
+          'image-webpack?bypassOnDebug=false&optimizationLevel=1&interlaced=true',
         ],
-        include: './static/images/'
+        include: './static/images/',
       },
       {
         test: /\.scss$/,

@@ -8,7 +8,7 @@ import Pagination from './Pagination';
 import Previewer from './Previewer';
 import {
   CreateFormButton,
-  EditFormButton,
+  EditFormTitleButton,
   AddPageButton,
   EditSchemaButton,
 } from './FormMenu';
@@ -20,7 +20,6 @@ class WinterfellFormBuilder extends Component {
     schema: PropTypes.object,
     currentPanelId: PropTypes.string,
     loadForm: PropTypes.func.isRequired,
-    goToPage: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -84,7 +83,7 @@ class WinterfellFormBuilder extends Component {
                 <CreateFormButton />
               </Col>
               <Col xs={3}>
-                <EditFormButton />
+                <EditFormTitleButton />
               </Col>
               <Col xs={3}>
                 <AddPageButton />

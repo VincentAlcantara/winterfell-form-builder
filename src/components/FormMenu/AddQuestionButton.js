@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
-import { editForm } from '../../actions/winterfellFormBuilderActions';
+import { addQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
 
 
-class EditFormButton extends Component {
+class AddQuestionButton extends Component {
   static propTypes = {
-    editForm: PropTypes.func.isRequired,
+    addQuestion: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -16,7 +16,9 @@ class EditFormButton extends Component {
 
     this.state = {
       showModal: false,
-      formTitle: '',
+      questionSetId: '',
+      questionSetHeader: '',
+      questionSetText: '',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -35,7 +37,7 @@ class EditFormButton extends Component {
 
   onFormUpdate(e) {
     e.preventDefault();
-    this.props.editForm(this.state.formTitle);
+    this.props.addQuestion(this.state.questionSetId, this.state.questionSetHeader, this.state.questionSetText);
     this.setState({ showModal: false });
   }
 
@@ -45,18 +47,38 @@ class EditFormButton extends Component {
         <div className="static-modal">
           <Modal show={this.state.showModal}>
             <Modal.Header>
-              <Modal.Title>Edit form title</Modal.Title>
+              <Modal.Title>Add a new question to the page</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <form>
                 <FormGroup>
                   <FieldGroup
-                    id="formTitle"
-                    name="formTitle"
-                    label="Enter title of the form"
+                    id="questionSetId"
+                    name="questionSetId"
+                    label="Page ID"
+                    onChange={this.onChange}
+                    placeholder="(optional)"
+                    value={this.state.questionSetId}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <FieldGroup
+                    id="questionSetHeader"
+                    name="questionSetHeader"
+                    label="Page Title"
                     onChange={this.onChange}
                     placeholder=""
-                    value={this.state.formTitle}
+                    value={this.state.questionSetHeader}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <FieldGroup
+                    id="questionSetText"
+                    name="questionSetText"
+                    label="Enter Page Description"
+                    onChange={this.onChange}
+                    placeholder=""
+                    value={this.state.questionSetText}
                   />
                 </FormGroup>
               </form>
@@ -79,7 +101,7 @@ class EditFormButton extends Component {
             onClick={() => {
               this.setState({ showModal: true });
             }}
-          >edit form title
+          >add page
           </Button>
         </Col>
       </Row>
@@ -89,8 +111,8 @@ class EditFormButton extends Component {
 
 function mapStateToProps(state) {
   return {
-    title: state.getIn(['form', 'title']),
+    title: state.getIn(['form', 'currentForm', 'title']),
   };
 }
-export default connect(mapStateToProps, { editForm })(EditFormButton);
+export default connect(mapStateToProps, { addQuestion })(AddQuestionButton);
 
