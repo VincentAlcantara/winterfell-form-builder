@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { Grid, Row, Col, Button } from 'react-bootstrap';
+import { Grid, Row, Col, Nav, NavItem } from 'react-bootstrap';
 import WinterfellFormBuilder from './src';
 
 import demo from './examples/schema';
@@ -32,29 +32,27 @@ class WinterfellFormBuilderDemo extends Component {
         <Row>
           <Col xs={12}>
             <Row>
-              <Col xs={4} className="text-center">
-                <a                  
-                  onClick={() => {
-                    this.setState({ demoSchema: 'demo' });
-                  }}
-                >Winterfell Demo
-                </a>
-              </Col>
-              <Col xs={4} className="text-center">
-                <a                  
-                  onClick={() => {
-                    this.setState({ demoSchema: 'contractor' });
-                  }}
-                >Contractor Agreement
-                </a>
-              </Col>
-              <Col xs={4} className="text-center">
-                <a                  
-                  onClick={() => {
-                    this.setState({ demoSchema: 'nda' });
-                  }}
-                >NDA 1 Way
-                </a>
+              <Col xs={12} className="text-center">
+                <Nav bsStyle="pills">
+                  <NavItem
+                    onClick={() => {
+                      this.setState({ demoSchema: 'demo' });
+                    }}
+                  >Winterfell Demo
+                  </NavItem>
+                  <NavItem
+                    onClick={() => {
+                      this.setState({ demoSchema: 'contractor' });
+                    }}
+                  >Contractor Agreement
+                  </NavItem>
+                  <NavItem
+                    onClick={() => {
+                      this.setState({ demoSchema: 'nda' });
+                    }}
+                  >NDA 1 Way
+                  </NavItem>
+                </Nav>
               </Col>
             </Row>
             <Row>

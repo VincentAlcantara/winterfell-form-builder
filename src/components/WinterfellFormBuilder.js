@@ -63,7 +63,7 @@ class WinterfellFormBuilder extends Component {
                 <h2>Winterfell Form Builder</h2>
               </Col>
               <Col xs={10}>
-                <h3>Form: <u>{title}</u></h3>
+                <h3>Form: {title}</h3>
               </Col>
               <Col xs={2} className="text-right">
                 <Pagination />
