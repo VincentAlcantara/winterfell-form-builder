@@ -38,7 +38,7 @@ function winterfellFormBuilderReducer() {
   switch (action.type) {
     case _constants.RETRIEVE_FORMLIST_REQUEST:
       return state.set('error', '');
-    case _constants.RETRIEVE_FORM_REQUEST:
+    case _constants.LOAD_FORM_REQUEST:
       return state.set('error', '');
     case _constants.CREATE_FORM_REQUEST:
       return state.set('error', '');
@@ -60,7 +60,7 @@ function winterfellFormBuilderReducer() {
       return state.set('error', '');
     case _constants.RETRIEVE_FORMLIST_ERROR:
       return state.set('error', 'An error occurred.');
-    case _constants.RETRIEVE_FORM_ERROR:
+    case _constants.LOAD_FORM_ERROR:
       return state.set('error', 'An error occurred.');
     case _constants.CREATE_FORM_ERROR:
       return state.set('error', 'An error occurred.');
@@ -84,7 +84,7 @@ function winterfellFormBuilderReducer() {
       return state.set('currentPanelId', action.payload.panelId);
     case _constants.RETRIEVE_FORMLIST_SUCCESS:
       return state.set('error', '');
-    case _constants.RETRIEVE_FORM_SUCCESS:
+    case _constants.LOAD_FORM_SUCCESS:
       return state.set('schema', (0, _immutable.fromJS)(action.payload.form)).set('error', '');
     case _constants.CREATE_FORM_SUCCESS:
       return state.set('title', action.payload.title).set('schema', (0, _immutable.fromJS)({

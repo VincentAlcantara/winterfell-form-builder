@@ -46,6 +46,11 @@ For more information refer to the [documentation](https://github.com/andrewhatha
       "formPanels": []
     }
     ```
+
+1. LoadForm(*schema*)
+
+   Given a schema, this will be loaded in to the form builder.
+   
 1. AddPage(*panelId, panelHeader*)
 
    This button will add an entry to the formPanels array and the qustionPanels array.  Note the panelId in the formPanel and questionPanel are identical.
@@ -64,7 +69,7 @@ For more information refer to the [documentation](https://github.com/andrewhatha
     }
     ``` 
 
-3. AddQuestion(**panelId, question, type**)
+1. AddQuestion(**panelId, question, type**)
     ```
     {
       "formPanels": [{
@@ -82,9 +87,9 @@ For more information refer to the [documentation](https://github.com/andrewhatha
     }
     ``` 
 
-4. Edit Question
+1. Edit Question
 
-5. Add Dependency
+1. Add Dependency
 
 ## Test
 For testing we're using Jest.  In the spirit of Test Driven Design, the tests will be written first.

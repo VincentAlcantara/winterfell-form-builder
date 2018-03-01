@@ -2,9 +2,9 @@ import {
   // RETRIEVE_FORMLIST_REQUEST,
   // RETRIEVE_FORMLIST_SUCCESS,
   // RETRIEVE_FORMLIST_ERROR,
-  // RETRIEVE_FORM_REQUEST,
-  // RETRIEVE_FORM_SUCCESS,
-  // RETRIEVE_FORM_ERROR,
+  // LOAD_FORM_REQUEST,
+  LOAD_FORM_SUCCESS,
+  // LOAD_FORM_ERROR,
   // CREATE_FORM_REQUEST,
   CREATE_FORM_SUCCESS,
   // CREATE_FORM_ERROR,
@@ -35,6 +35,13 @@ import {
   // DELETE_QUESTION_SUCCESS,
   // DELETE_QUESTION_ERROR,
 } from '../common/constants';
+
+export function loadForm(schema) {
+  return {
+    type: LOAD_FORM_SUCCESS,
+    payload: { schema },
+  };
+}
 
 export function createForm(title) {
   return {

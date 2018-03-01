@@ -1,0 +1,1310 @@
+{
+  "classes": {
+    "input": "form-control",
+    "select": "form-control",
+    "question": "form-group",
+    "radioListItem": "radio",
+    "radioList": "clean-list",
+    "checkboxInput": "checkbox",
+    "checkboxListItem": "checkbox",
+    "checkboxList": "clean-list",
+    "controlButton": "btn btn-primary pull-right",
+    "backButton": "btn btn-red pull-left",
+    "errorMessage": "alert alert-danger",
+    "questionPostText": "push-top",
+    "buttonBar": "button-bar"
+  },
+  "formPanels": [{
+    "index": 1,
+    "panelId": "page-1"
+  }, {
+    "index": 2,
+    "panelId": "page-2"
+  }, {
+    "index": 3,
+    "panelId": "page-3"
+  }, {
+    "index": 4,
+    "panelId": "page-4"
+  }, {
+    "index": 5,
+    "panelId": "page-5"
+  }, {
+    "index": 6,
+    "panelId": "page-6"
+  }, {
+    "index": 7,
+    "panelId": "page-7"
+  }, {
+    "index": 8,
+    "panelId": "page-8"
+  }, {
+    "index": 9,
+    "panelId": "page-9"
+  }, {
+    "index": 10,
+    "panelId": "page-10"
+  }, {
+    "index": 11,
+    "panelId": "page-11"
+  }, {
+    "index": 12,
+    "panelId": "page-12"
+  }, {
+    "index": 13,
+    "panelId": "page-13"
+  }, {
+    "index": 14,
+    "panelId": "page-14"
+  }, {
+    "index": 15,
+    "panelId": "page-15"
+  }, {
+    "index": 16,
+    "panelId": "page-16"
+  }, {
+    "index": 17,
+    "panelId": "page-17"
+  }, {
+    "index": 18,
+    "panelId": "page-18"
+  }, {
+    "index": 19,
+    "panelId": "page-19"
+  }, {
+    "index": 20,
+    "panelId": "page-20"
+  }, {
+    "index": 21,
+    "panelId": "page-21"
+  }, {
+    "index": 22,
+    "panelId": "page-22"
+  }, {
+    "index": 23,
+    "panelId": "page-23"
+  }, {
+    "index": 24,
+    "panelId": "page-24"
+  }, {
+    "index": 25,
+    "panelId": "page-25"
+  }, {
+    "index": 26,
+    "panelId": "page-26"
+  }, {
+    "index": 27,
+    "panelId": "page-27"
+  }, {
+    "index": 28,
+    "panelId": "page-28"
+  }, {
+    "index": 29,
+    "panelId": "page-29"
+  }, {
+    "index": 30,
+    "panelId": "page-30"
+  }, {
+    "index": 31,
+    "panelId": "page-31"
+  }, {
+    "index": 32,
+    "panelId": "page-32"
+  }, {
+    "index": 33,
+    "panelId": "page-33"
+  }, {
+    "index": 34,
+    "panelId": "page-34"
+  }, {
+    "index": 35,
+    "panelId": "page-35"
+  }, {
+    "index": 36,
+    "panelId": "page-36"
+  }, {
+    "index": 37,
+    "panelId": "page-37"
+  }, {
+    "index": 38,
+    "panelId": "page-38"
+  }, {
+    "index": 39,
+    "panelId": "page-39"
+  }, {
+    "index": 40,
+    "panelId": "final-panel"
+  }],
+  "questionPanels": [{
+    "panelId": "page-1",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-2"
+      }
+    },
+    "questionSets": [{
+      "index": 1,
+      "questionSetId": "question-1"
+    }]
+  }, {
+    "panelId": "page-2",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-3"
+      }
+    },
+    "questionSets": [{
+      "index": 2,
+      "questionSetId": "question-2"
+    }]
+  }, {
+    "panelId": "page-3",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-4"
+      }
+    },
+    "questionSets": [{
+      "index": 3,
+      "questionSetId": "question-3"
+    }]
+  }, {
+    "panelId": "page-4",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-5"
+      }
+    },
+    "questionSets": [{
+      "index": 4,
+      "questionSetId": "question-4"
+    }]
+  }, {
+    "panelId": "page-5",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-6"
+      }
+    },
+    "questionSets": [{
+      "index": 5,
+      "questionSetId": "question-5"
+    }]
+  }, {
+    "panelId": "page-6",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-7"
+      }
+    },
+    "questionSets": [{
+      "index": 6,
+      "questionSetId": "question-6"
+    }]
+  }, {
+    "panelId": "page-7",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-8"
+      }
+    },
+    "questionSets": [{
+      "index": 7,
+      "questionSetId": "question-7"
+    }]
+  }, {
+    "panelId": "page-8",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-9"
+      }
+    },
+    "questionSets": [{
+      "index": 8,
+      "questionSetId": "question-8"
+    }]
+  }, {
+    "panelId": "page-9",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-10"
+      }
+    },
+    "questionSets": [{
+      "index": 9,
+      "questionSetId": "question-9"
+    }]
+  }, {
+    "panelId": "page-10",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-11"
+      }
+    },
+    "questionSets": [{
+      "index": 10,
+      "questionSetId": "question-10"
+    }]
+  }, {
+    "panelId": "page-11",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-12"
+      }
+    },
+    "questionSets": [{
+      "index": 11,
+      "questionSetId": "question-11"
+    }]
+  }, {
+    "panelId": "page-12",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-13"
+      }
+    },
+    "questionSets": [{
+      "index": 12,
+      "questionSetId": "question-12"
+    }]
+  }, {
+    "panelId": "page-13",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-14"
+      }
+    },
+    "questionSets": [{
+      "index": 13,
+      "questionSetId": "question-13"
+    }]
+  }, {
+    "panelId": "page-14",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-15"
+      }
+    },
+    "questionSets": [{
+      "index": 14,
+      "questionSetId": "question-14"
+    }]
+  }, {
+    "panelId": "page-15",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-16"
+      }
+    },
+    "questionSets": [{
+      "index": 15,
+      "questionSetId": "question-15"
+    }]
+  }, {
+    "panelId": "page-16",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-17"
+      }
+    },
+    "questionSets": [{
+      "index": 16,
+      "questionSetId": "question-16"
+    }]
+  }, {
+    "panelId": "page-17",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-18"
+      }
+    },
+    "questionSets": [{
+      "index": 17,
+      "questionSetId": "question-17"
+    }]
+  }, {
+    "panelId": "page-18",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-19"
+      }
+    },
+    "questionSets": [{
+      "index": 18,
+      "questionSetId": "question-18"
+    }]
+  }, {
+    "panelId": "page-19",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-20"
+      }
+    },
+    "questionSets": [{
+      "index": 19,
+      "questionSetId": "question-19"
+    }]
+  }, {
+    "panelId": "page-20",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-21"
+      }
+    },
+    "questionSets": [{
+      "index": 20,
+      "questionSetId": "question-20"
+    }]
+  }, {
+    "panelId": "page-21",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-22"
+      }
+    },
+    "questionSets": [{
+      "index": 21,
+      "questionSetId": "question-21"
+    }]
+  }, {
+    "panelId": "page-22",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-23"
+      }
+    },
+    "questionSets": [{
+      "index": 22,
+      "questionSetId": "question-22"
+    }]
+  }, {
+    "panelId": "page-23",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-24"
+      }
+    },
+    "questionSets": [{
+      "index": 23,
+      "questionSetId": "question-23"
+    }]
+  }, {
+    "panelId": "page-24",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-25"
+      }
+    },
+    "questionSets": [{
+      "index": 24,
+      "questionSetId": "question-24"
+    }]
+  }, {
+    "panelId": "page-25",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-26"
+      }
+    },
+    "questionSets": [{
+      "index": 25,
+      "questionSetId": "question-25"
+    }]
+  }, {
+    "panelId": "page-26",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-27"
+      }
+    },
+    "questionSets": [{
+      "index": 26,
+      "questionSetId": "question-26"
+    }]
+  }, {
+    "panelId": "page-27",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-28"
+      }
+    },
+    "questionSets": [{
+      "index": 27,
+      "questionSetId": "question-27"
+    }]
+  }, {
+    "panelId": "page-28",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-29"
+      }
+    },
+    "questionSets": [{
+      "index": 28,
+      "questionSetId": "question-28"
+    }]
+  }, {
+    "panelId": "page-29",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-30"
+      }
+    },
+    "questionSets": [{
+      "index": 29,
+      "questionSetId": "question-29"
+    }]
+  }, {
+    "panelId": "page-30",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-31"
+      }
+    },
+    "questionSets": [{
+      "index": 30,
+      "questionSetId": "question-30"
+    }]
+  }, {
+    "panelId": "page-31",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-32"
+      }
+    },
+    "questionSets": [{
+      "index": 31,
+      "questionSetId": "question-31"
+    }]
+  }, {
+    "panelId": "page-32",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-33"
+      }
+    },
+    "questionSets": [{
+      "index": 32,
+      "questionSetId": "question-32"
+    }]
+  }, {
+    "panelId": "page-33",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-34"
+      }
+    },
+    "questionSets": [{
+      "index": 33,
+      "questionSetId": "question-33"
+    }]
+  }, {
+    "panelId": "page-34",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-35"
+      }
+    },
+    "questionSets": [{
+      "index": 34,
+      "questionSetId": "question-34"
+    }]
+  }, {
+    "panelId": "page-35",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-36"
+      }
+    },
+    "questionSets": [{
+      "index": 35,
+      "questionSetId": "question-35"
+    }]
+  }, {
+    "panelId": "page-36",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-37"
+      }
+    },
+    "questionSets": [{
+      "index": 36,
+      "questionSetId": "question-36"
+    }]
+  }, {
+    "panelId": "page-37",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-38"
+      }
+    },
+    "questionSets": [{
+      "index": 37,
+      "questionSetId": "question-37"
+    }]
+  }, {
+    "panelId": "page-38",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "page-39"
+      }
+    },
+    "questionSets": [{
+      "index": 38,
+      "questionSetId": "question-38"
+    }]
+  }, {
+    "panelId": "page-39",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Complete this form to finish your Contractors Agreement (Company).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "final-panel"
+      }
+    },
+    "questionSets": [{
+      "index": 39,
+      "questionSetId": "question-39"
+    }]
+  }, {
+    "panelId": "final-panel",
+    "panelHeader": "Contractors Agreement (Company)",
+    "panelText": "Please review your document below and click submit to finalise your document.",
+    "action": {
+      "conditions": [],
+      "default" : {
+        "action": "SUBMIT"
+      }
+    }
+  }],
+  "questionSets": [{
+    "questionSetId": "question-1",
+    "questions": [{
+      "questionId": "questionid-1",
+      "question": "On what date will this Contractor Agreement be signed?",
+      "input": {
+        "type": "textInput"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-2",
+    "questions": [{
+      "questionId": "questionid-2",
+      "question": "What is the full name of the Contractor?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. ABC Contracting Pty Ltd"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-3",
+    "questions": [{
+      "questionId": "questionid-3",
+      "question": "What is the full name of the person representing the Contractor?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "John Smith"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-4",
+    "questions": [{
+      "questionId": "questionid-4",
+      "question": "What is the address of the Contractor?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. 1 Smith Street, Smithfield NSW 2222"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-5",
+    "questions": [{
+      "questionId": "questionid-5",
+      "question": "What is the email address of the Contractor?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "info@abc.com.au"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-6",
+    "questions": [{
+      "questionId": "questionid-6",
+      "question": "What is the full name of the Business or Company hiring the Contractor?",
+      "input": {
+        "type": "textInput"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-7",
+    "questions": [{
+      "questionId": "questionid-7",
+      "question": "What is the address of the Business or Company hiring the Contractor?",
+      "input": {
+        "type": "textInput"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-8",
+    "questions": [{
+      "questionId": "questionid-8",
+      "question": "What is the name of the person at the Business or Company responsible for administering this agreement?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. This could be HR or Operations Contact (The person managing the admin for the role)"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-9",
+    "questions": [{
+      "questionId": "questionid-9",
+      "question": "What is the email address of the person at the Business or Company responsible for this agreement?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "jjohnson@xyz.com.au"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-10",
+    "questions": [{
+      "questionId": "questionid-10",
+      "question": "Provide a short description of the services to be provided",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. Web Design"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-11",
+    "questions": [{
+      "questionId": "questionid-11",
+      "question": "Provide a detailed description of the Services that will be performed by the Contractor",
+      "input": {
+        "type": "textInput",
+        "placeholder": "We recommend you provide as much detail as possible, start each responsibility on a new line."
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-12",
+    "questions": [{
+      "questionId": "questionid-12",
+      "question": "Where will these Services be performend?",
+      "input": {
+        "type": "textInput"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-13",
+    "questions": [{
+      "questionId": "questionid-13",
+      "question": "Is the Contractor engaged on an ongoing basis or for a fixed term?",
+      "input": {
+        "type": "textInput"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-14",
+    "questions": [{
+      "questionId": "questionid-14",
+      "question": "What is the commencement date?",
+      "input": {
+        "type": "textInput"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-15",
+    "questions": [{
+      "questionId": "questionid-15",
+      "question": "What is the expiration date?",
+      "input": {
+        "type": "textInput"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-16",
+    "questions": [{
+      "questionId": "questionid-16",
+      "question": "What is the name of the Contractor's supervisor at the Business or Company?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. Jane Johnson"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-17",
+    "questions": [{
+      "questionId": "questionid-17",
+      "question": "What is the Fee for the Contractor and how is it calculated?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "e.g EXCLUDING GST, $5000 for the entire project or $2000 up front and $3000 on completion. NOTE: $ must be used to indicate it is a monetary value."
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-18",
+    "questions": [{
+      "questionId": "questionid-18",
+      "question": "Howl long does the Business or Company have to pay an invoice recieved from the Contractor?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. 3 business days; 5 days; 3 weeks"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-19",
+    "questions": [{
+      "questionId": "questionid-19",
+      "question": "Will the Contractor be using the Business or Company's facilities?",
+      "input": {
+        "type": "radioOptionsInput",
+        "options": [{
+          "text": "Yes",
+          "value": "yes"
+        }, {
+          "text": "No",
+          "value": "no"
+        }]
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-20",
+    "questions": [{
+      "questionId": "questionid-20",
+      "question": "Make a list of the facilities the Contractor can use",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. office facilities, computer, photocopier and printer, telephone etc."
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-21",
+    "questions": [{
+      "questionId": "questionid-21",
+      "question": "Is the Contract required to take out additional insurances?",
+      "input": {
+        "type": "radioOptionsInput",
+        "options": [{
+          "text": "Yes",
+          "value": "yes"
+        }, {
+          "text": "No",
+          "value": "no"
+        }]
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-22",
+    "questions": [{
+      "questionId": "questionid-22",
+      "question": "What is the minimum amount of public liability insurance the Contractor must have?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. $200,000"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-23",
+    "questions": [{
+      "questionId": "questionid-23",
+      "question": "What is the minimum amount of professional indemnity insurance the Contractor must have?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. $200,000"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-24",
+    "questions": [{
+      "questionId": "questionid-24",
+      "question": "What is the minimum amount of personal accident/ salary continuance insurance the Contractor must have?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. $200,000"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-25",
+    "questions": [{
+      "questionId": "questionid-25",
+      "question": "Will the Contractor be reimbursed for expenses incurred relating to the provision of the service?",
+      "input": {
+        "type": "radioOptionsInput",
+        "options": [{
+          "text": "Yes",
+          "value": "yes"
+        }, {
+          "text": "No",
+          "value": "no"
+        }]
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-26",
+    "questions": [{
+      "questionId": "questionid-26",
+      "question": "What expenses is the Contractor entitled to be reimbursed for?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. travel, accomodation, photocopying, couriers, postage etc"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-27",
+    "questions": [{
+      "questionId": "questionid-27",
+      "question": "What is the termination notice period of this agreement?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. 2 weeks; 1 month"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-28",
+    "questions": [{
+      "questionId": "questionid-28",
+      "question": "If the Contractor breaches a term in this agreement, how many days will you give them to recitfy this breach?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. for 14 days write 14"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-29",
+    "questions": [{
+      "questionId": "questionid-29",
+      "question": "If the Agreement is terminated, how long will the Company have to pay the Contractor any outstanding invoices frmo the time of recieving the invoice?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. 2 weeks; 1 month"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-30",
+    "questions": [{
+      "questionId": "questionid-30",
+      "question": "Do you want to include a non-compete clause?",
+      "input": {
+        "type": "radioOptionsInput",
+        "options": [{
+          "text": "Yes",
+          "value": "yes"
+        }, {
+          "text": "No",
+          "value": "no"
+        }]
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-31",
+    "questions": [{
+      "questionId": "questionid-31",
+      "question": "How long is the Contractor's non-compete period?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. 3 weeks; 5 months"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-32",
+    "questions": [{
+      "questionId": "questionid-32",
+      "question": "In what geographic area can the Contractor non-compete with you?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. Sydney or New South Wales"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-33",
+    "questions": [{
+      "questionId": "questionid-33",
+      "question": "Give a short description of the Business or Company Operations",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. supply of accounting services or selling goods online"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-34",
+    "questions": [{
+      "questionId": "questionid-34",
+      "question": "Do you want to include a non-solicit clause?",
+      "input": {
+        "type": "radioOptionsInput",
+        "options": [{
+          "text": "Yes",
+          "value": "yes"
+        }, {
+          "text": "No",
+          "value": "no"
+        }]
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-35",
+    "questions": [{
+      "questionId": "questionid-35",
+      "question": "How long is the Contractor's non-solicit period?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "Value is in months. For 12 months write 12"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-36",
+    "questions": [{
+      "questionId": "questionid-36",
+      "question": "Do you want to include a limitation of liability clause?",
+      "input": {
+        "type": "radioOptionsInput",
+        "options": [{
+          "text": "Yes",
+          "value": "yes"
+        }, {
+          "text": "No",
+          "value": "no"
+        }]
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-37",
+    "questions": [{
+      "questionId": "questionid-37",
+      "question": "Will the Contractor's limitiation on liability cover negligent behaviour?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. The Contractor would be acting negligently by failing to exercise the care expected of a reasonably prudent person in like circumstances"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-38",
+    "questions": [{
+      "questionId": "questionid-38",
+      "question": "What amount will the Contractor's liability be capped at?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. $300,000 or The Fees paid by the Company under this Agreement"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }, {
+    "questionSetId": "question-39",
+    "questions": [{
+      "questionId": "questionid-39",
+      "question": "The laws of which state or territory govern this agreement?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "eg. The State or Territory in which the Company primarily operates"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }]
+  }]
+}

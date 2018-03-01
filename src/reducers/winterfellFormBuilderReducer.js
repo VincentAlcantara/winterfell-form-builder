@@ -3,9 +3,9 @@ import {
   RETRIEVE_FORMLIST_REQUEST,
   RETRIEVE_FORMLIST_SUCCESS,
   RETRIEVE_FORMLIST_ERROR,
-  RETRIEVE_FORM_REQUEST,
-  RETRIEVE_FORM_SUCCESS,
-  RETRIEVE_FORM_ERROR,
+  LOAD_FORM_REQUEST,
+  LOAD_FORM_SUCCESS,
+  LOAD_FORM_ERROR,
   CREATE_FORM_REQUEST,
   CREATE_FORM_SUCCESS,
   CREATE_FORM_ERROR,
@@ -41,21 +41,7 @@ import {
 const initialState = fromJS({
   title: '',
   schema: {
-    classes: {
-      input: 'form-control',
-      select: 'form-control',
-      question: 'form-group',
-      radioListItem: 'radio',
-      radioList: 'clean-list',
-      checkboxInput: 'checkbox',
-      checkboxListItem: 'checkbox',
-      checkboxList: 'clean-list',
-      controlButton: 'btn btn-primary pull-right',
-      backButton: 'btn btn-default pull-left',
-      errorMessage: 'alert alert-danger',
-      questionPostText: 'push-top',
-      buttonBar: 'button-bar',
-    },
+    classes: BOOTSTRAP_CLASSES,
   },
   currentPanelId: null,
   error: '',
@@ -66,7 +52,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     case RETRIEVE_FORMLIST_REQUEST:
       return state
         .set('error', '');
-    case RETRIEVE_FORM_REQUEST:
+    case LOAD_FORM_REQUEST:
       return state
         .set('error', '');
     case CREATE_FORM_REQUEST:
@@ -99,9 +85,9 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     case RETRIEVE_FORMLIST_ERROR:
       return state
         .set('error', 'An error occurred.');
-    case RETRIEVE_FORM_ERROR:
+    case LOAD_FORM_ERROR:
       return state
-        .set('error', 'An error occurred.');
+        .set('error', 'Unable to load form.');
     case CREATE_FORM_ERROR:
       return state
         .set('error', 'An error occurred.');
@@ -135,10 +121,12 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     case RETRIEVE_FORMLIST_SUCCESS:
       return state
         .set('error', '');
-    case RETRIEVE_FORM_SUCCESS:
+    case LOAD_FORM_SUCCESS: {
       return state
-        .set('schema', fromJS(action.payload.form))
+        .set('currentPanelId', 'Select Page')
+        .set('schema', fromJS(action.payload.schema))
         .set('error', '');
+    }
     case CREATE_FORM_SUCCESS:
       return state
         .set('title', action.payload.title)

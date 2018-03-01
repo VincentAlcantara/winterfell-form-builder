@@ -17,7 +17,6 @@ class EditSchemaButton extends Component {
 
   constructor(props) {
     super(props);
-    console.log('schema1:', this.props.schema);
     this.state = {
       schema: this.props.schema,
     };

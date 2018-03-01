@@ -57,9 +57,10 @@ class Previewer extends Component {
     } = this.props;
 
     const displayWinterFellForm = () => (
-      schema.formPanels.map((formPanel, index) => (
-        formPanel.panelId === currentPanelId) &&
-          <Winterfell
+      schema.formPanels.map((formPanel, index) => {
+        console.log('currentPanelId: ', currentPanelId);
+        if (formPanel.panelId === currentPanelId && currentPanelId !== 'Select Page') {
+          return (<Winterfell
             schema={schema}
             disableSubmit
             onRender={onRender}
@@ -69,8 +70,19 @@ class Previewer extends Component {
             questionAnswers={questionAnswers}
             panelId={currentPanelId}
             key={index}
-          />,
-      )
+          />);
+        } else if (currentPanelId === 'Select Page') {
+          return (<Winterfell
+            schema={schema}
+            disableSubmit
+            onRender={onRender}
+            onUpdate={onUpdate}
+            onSwitchPanel={onSwitchPanel}
+            onSubmit={onSubmit}
+            questionAnswers={questionAnswers}
+          />);
+        }
+      })
     );
 
     return (
@@ -78,6 +90,8 @@ class Previewer extends Component {
         {(schema &&
           schema.formPanels &&
           schema.formPanels.length > 0) &&
+          currentPanelId &&
+          currentPanelId !== 'Select Page' &&
           displayWinterFellForm()
         }
       </div>

@@ -3,33 +3,43 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
 
+import { loadForm, goToPage } from '../actions/winterfellFormBuilderActions';
 import Pagination from './Pagination';
 import Previewer from './Previewer';
-
-import { CreateFormButton, EditFormButton, AddPageButton, EditSchemaButton } from './FormMenu';
+import {
+  CreateFormButton,
+  EditFormButton,
+  AddPageButton,
+  EditSchemaButton,
+} from './FormMenu';
 
 class WinterfellFormBuilder extends Component {
   static propTypes = {
+    inputSchema: PropTypes.object,
     title: PropTypes.string,
     schema: PropTypes.object,
     currentPanelId: PropTypes.string,
+    loadForm: PropTypes.func.isRequired,
+    goToPage: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
     title: '',
     schema: {},
     currentPanelId: null,
+    inputSchema: {},
   }
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      schema: this.props.schema,
-    };
-
     this.onDomChange = this.onDomChange.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
+  }
+
+  componentWillMount() {
+    const { inputSchema } = this.props;
+    this.props.loadForm(inputSchema);
   }
 
   onDomChange(e) {
@@ -52,16 +62,14 @@ class WinterfellFormBuilder extends Component {
               <Col xs={12}>
                 <h2>Winterfell Form Builder</h2>
               </Col>
-              <Col xs={12}>
+              <Col xs={10}>
                 <h3>Form: <u>{title}</u></h3>
               </Col>
-            </Row>
-            <hr />
-            <Row>
-              <Col xs={12}>
+              <Col xs={2} className="text-right">
                 <Pagination />
               </Col>
             </Row>
+            <hr />
             <Row>
               <Col xs={12}>
                 <Previewer
@@ -111,5 +119,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {})(WinterfellFormBuilder);
-
+export default connect(mapStateToProps, { loadForm, goToPage })(WinterfellFormBuilder);
