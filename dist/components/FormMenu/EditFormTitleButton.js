@@ -48,13 +48,13 @@ var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var EditFormButton = function (_Component) {
-  (0, _inherits3.default)(EditFormButton, _Component);
+var EditFormTitleButton = function (_Component) {
+  (0, _inherits3.default)(EditFormTitleButton, _Component);
 
-  function EditFormButton(props) {
-    (0, _classCallCheck3.default)(this, EditFormButton);
+  function EditFormTitleButton(props) {
+    (0, _classCallCheck3.default)(this, EditFormTitleButton);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (EditFormButton.__proto__ || (0, _getPrototypeOf2.default)(EditFormButton)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (EditFormTitleButton.__proto__ || (0, _getPrototypeOf2.default)(EditFormTitleButton)).call(this, props));
 
     _this.state = {
       showModal: false,
@@ -66,7 +66,7 @@ var EditFormButton = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(EditFormButton, [{
+  (0, _createClass3.default)(EditFormTitleButton, [{
     key: 'onChange',
     value: function onChange(event) {
       event.preventDefault();
@@ -89,6 +89,9 @@ var EditFormButton = function (_Component) {
     key: 'render',
     value: function render() {
       var _this2 = this;
+
+      var title = this.props.title;
+
 
       return _react2.default.createElement(
         _reactBootstrap.Row,
@@ -122,7 +125,7 @@ var EditFormButton = function (_Component) {
                     name: 'formTitle',
                     label: 'Enter title of the form',
                     onChange: this.onChange,
-                    placeholder: '',
+                    placeholder: title,
                     value: this.state.formTitle
                   })
                 )
@@ -169,11 +172,12 @@ var EditFormButton = function (_Component) {
       );
     }
   }]);
-  return EditFormButton;
+  return EditFormTitleButton;
 }(_react.Component);
 
-EditFormButton.propTypes = {
-  editForm: _propTypes2.default.func.isRequired
+EditFormTitleButton.propTypes = {
+  editForm: _propTypes2.default.func.isRequired,
+  title: _propTypes2.default.string.isRequired
 };
 
 
@@ -183,7 +187,7 @@ function mapStateToProps(state) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { editForm: _winterfellFormBuilderActions.editForm })(EditFormButton);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { editForm: _winterfellFormBuilderActions.editForm })(EditFormTitleButton);
 
 exports.default = _default;
 ;
@@ -193,11 +197,11 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(EditFormButton, 'EditFormButton', 'src/components/FormMenu/EditFormButton.js');
+  __REACT_HOT_LOADER__.register(EditFormTitleButton, 'EditFormTitleButton', 'src/components/FormMenu/EditFormTitleButton.js');
 
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/EditFormButton.js');
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/EditFormTitleButton.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/EditFormButton.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/EditFormTitleButton.js');
 }();
 
 ;

@@ -4,9 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _stringify = require('babel-runtime/core-js/json/stringify');
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 
-var _stringify2 = _interopRequireDefault(_stringify);
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
@@ -32,28 +32,35 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = require('react-redux');
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _reactRedux = require('react-redux');
 
 var _reactBootstrap = require('react-bootstrap');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
+var _FieldGroup = require('../UI/FieldGroup');
+
+var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var EditSchemaButton = function (_Component) {
-  (0, _inherits3.default)(EditSchemaButton, _Component);
+var AddQuestionButton = function (_Component) {
+  (0, _inherits3.default)(AddQuestionButton, _Component);
 
-  function EditSchemaButton(props) {
-    (0, _classCallCheck3.default)(this, EditSchemaButton);
+  function AddQuestionButton(props) {
+    (0, _classCallCheck3.default)(this, AddQuestionButton);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (EditSchemaButton.__proto__ || (0, _getPrototypeOf2.default)(EditSchemaButton)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (AddQuestionButton.__proto__ || (0, _getPrototypeOf2.default)(AddQuestionButton)).call(this, props));
 
     _this.state = {
-      schema: _this.props.schema
+      showModal: false,
+      questionSetId: '',
+      questionSetHeader: '',
+      questionSetText: ''
     };
 
     _this.onChange = _this.onChange.bind(_this);
@@ -61,16 +68,23 @@ var EditSchemaButton = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(EditSchemaButton, [{
+  (0, _createClass3.default)(AddQuestionButton, [{
     key: 'onChange',
-    value: function onChange(e) {
-      this.setState({ schema: JSON.parse(e.target.value) });
+    value: function onChange(event) {
+      event.preventDefault();
+      this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
+    }
+  }, {
+    key: 'onClose',
+    value: function onClose(e) {
+      e.preventDefault();
+      this.setState({ showModal: true });
     }
   }, {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
-      this.props.updateForm(this.state.schema);
+      this.props.addQuestion(this.state.questionSetId, this.state.questionSetHeader, this.state.questionSetText);
       this.setState({ showModal: false });
     }
   }, {
@@ -93,7 +107,7 @@ var EditSchemaButton = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Modal.Title,
                 null,
-                'Edit Schema'
+                'Add a new question to the page'
               )
             ),
             _react2.default.createElement(
@@ -105,11 +119,37 @@ var EditSchemaButton = function (_Component) {
                 _react2.default.createElement(
                   _reactBootstrap.FormGroup,
                   null,
-                  _react2.default.createElement('textarea', {
-                    rows: '30',
-                    cols: '78',
-                    value: (0, _stringify2.default)(this.state.schema, undefined, 2),
-                    onChange: this.onChange
+                  _react2.default.createElement(_FieldGroup2.default, {
+                    id: 'questionSetId',
+                    name: 'questionSetId',
+                    label: 'Page ID',
+                    onChange: this.onChange,
+                    placeholder: '(optional)',
+                    value: this.state.questionSetId
+                  })
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.FormGroup,
+                  null,
+                  _react2.default.createElement(_FieldGroup2.default, {
+                    id: 'questionSetHeader',
+                    name: 'questionSetHeader',
+                    label: 'Page Title',
+                    onChange: this.onChange,
+                    placeholder: '',
+                    value: this.state.questionSetHeader
+                  })
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.FormGroup,
+                  null,
+                  _react2.default.createElement(_FieldGroup2.default, {
+                    id: 'questionSetText',
+                    name: 'questionSetText',
+                    label: 'Enter Page Description',
+                    onChange: this.onChange,
+                    placeholder: '',
+                    value: this.state.questionSetText
                   })
                 )
               )
@@ -146,37 +186,30 @@ var EditSchemaButton = function (_Component) {
             {
               className: 'btn btn-block btn-info',
               onClick: function onClick() {
-                _this2.setState({
-                  schema: _this2.props.schema,
-                  showModal: true
-                });
+                _this2.setState({ showModal: true });
               }
             },
-            'edit schema'
+            'add page'
           )
         )
       );
     }
   }]);
-  return EditSchemaButton;
+  return AddQuestionButton;
 }(_react.Component);
 
-EditSchemaButton.propTypes = {
-  schema: _propTypes2.default.object,
-  updateForm: _propTypes2.default.func.isRequired
-};
-EditSchemaButton.defaultProps = {
-  schema: {}
+AddQuestionButton.propTypes = {
+  addQuestion: _propTypes2.default.func.isRequired
 };
 
 
 function mapStateToProps(state) {
   return {
-    schema: state.getIn(['form', 'schema']).toJS()
+    title: state.getIn(['form', 'currentForm', 'title'])
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { updateForm: _winterfellFormBuilderActions.updateForm })(EditSchemaButton);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { addQuestion: _winterfellFormBuilderActions.addQuestion })(AddQuestionButton);
 
 exports.default = _default;
 ;
@@ -186,11 +219,11 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(EditSchemaButton, 'EditSchemaButton', 'src/components/FormMenu/EditSchemaButton.js');
+  __REACT_HOT_LOADER__.register(AddQuestionButton, 'AddQuestionButton', 'src/components/FormMenu/AddQuestionButton.js');
 
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/EditSchemaButton.js');
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/AddQuestionButton.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/EditSchemaButton.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/AddQuestionButton.js');
 }();
 
 ;

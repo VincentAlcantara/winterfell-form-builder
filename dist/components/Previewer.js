@@ -93,6 +93,14 @@ var Previewer = function (_Component) {
             questionAnswers: questionAnswers,
             panelId: currentPanelId,
             key: index
+          }) || currentPanelId === 'Select Page' && _react2.default.createElement(_winterfell2.default, {
+            schema: schema,
+            disableSubmit: true,
+            onRender: onRender,
+            onUpdate: onUpdate,
+            onSwitchPanel: onSwitchPanel,
+            onSubmit: onSubmit,
+            questionAnswers: questionAnswers
           });
         });
       };
@@ -100,7 +108,7 @@ var Previewer = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'winterfell-form-builer-previewer col-xs-12' },
-        schema && schema.formPanels && schema.formPanels.length > 0 && displayWinterFellForm()
+        schema && schema.formPanels && schema.formPanels.length > 0 && currentPanelId && currentPanelId !== 'Select Page' && displayWinterFellForm()
       );
     }
   }]);

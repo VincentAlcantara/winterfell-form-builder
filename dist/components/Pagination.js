@@ -59,8 +59,6 @@ var Pagination = function (_Component) {
 
 
       var getPages = function getPages() {
-        console.log('schema.formPanels: ', schema.formPanels);
-
         return schema.formPanels.map(function (panel, index) {
           return _react2.default.createElement(
             _reactBootstrap.MenuItem,

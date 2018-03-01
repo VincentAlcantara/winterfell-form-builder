@@ -11,6 +11,10 @@
     "build": "babel src --out-dir dist",
     "prepublish": "npm run clean && npm run build"
   },
+  "pre-commit": [
+    "build",
+    "test"
+  ],
   "keywords": [
     "winterfell",
     "form",

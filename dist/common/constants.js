@@ -51,8 +51,8 @@ var BOOTSTRAP_CLASSES = exports.BOOTSTRAP_CLASSES = {
   checkboxInput: 'checkbox',
   checkboxListItem: 'checkbox',
   checkboxList: 'clean-list',
-  controlButton: 'btn btn-blue pull-right',
-  backButton: 'btn btn-red pull-left',
+  controlButton: 'btn btn-primary pull-right',
+  backButton: 'btn btn-default pull-left',
   errorMessage: 'alert alert-danger',
   questionPostText: 'push-top',
   buttonBar: 'button-bar'

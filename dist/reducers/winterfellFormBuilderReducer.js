@@ -11,21 +11,7 @@ var _constants = require('../common/constants');
 var initialState = (0, _immutable.fromJS)({
   title: '',
   schema: {
-    classes: {
-      input: 'form-control',
-      select: 'form-control',
-      question: 'form-group',
-      radioListItem: 'radio',
-      radioList: 'clean-list',
-      checkboxInput: 'checkbox',
-      checkboxListItem: 'checkbox',
-      checkboxList: 'clean-list',
-      controlButton: 'btn btn-primary pull-right',
-      backButton: 'btn btn-default pull-left',
-      errorMessage: 'alert alert-danger',
-      questionPostText: 'push-top',
-      buttonBar: 'button-bar'
-    }
+    classes: _constants.BOOTSTRAP_CLASSES
   },
   currentPanelId: null,
   error: ''
@@ -61,7 +47,7 @@ function winterfellFormBuilderReducer() {
     case _constants.RETRIEVE_FORMLIST_ERROR:
       return state.set('error', 'An error occurred.');
     case _constants.LOAD_FORM_ERROR:
-      return state.set('error', 'An error occurred.');
+      return state.set('error', 'Unable to load form.');
     case _constants.CREATE_FORM_ERROR:
       return state.set('error', 'An error occurred.');
     case _constants.UPDATE_FORM_ERROR:
@@ -85,7 +71,9 @@ function winterfellFormBuilderReducer() {
     case _constants.RETRIEVE_FORMLIST_SUCCESS:
       return state.set('error', '');
     case _constants.LOAD_FORM_SUCCESS:
-      return state.set('schema', (0, _immutable.fromJS)(action.payload.form)).set('error', '');
+      {
+        return state.set('currentPanelId', 'Select Page').set('schema', (0, _immutable.fromJS)(action.payload.schema)).set('error', '');
+      }
     case _constants.CREATE_FORM_SUCCESS:
       return state.set('title', action.payload.title).set('schema', (0, _immutable.fromJS)({
         classes: _constants.BOOTSTRAP_CLASSES,

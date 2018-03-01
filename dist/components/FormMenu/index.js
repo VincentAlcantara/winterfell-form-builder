@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.EditSchemaButton = exports.EditFormButton = exports.CreateFormButton = exports.AddPageButton = undefined;
+exports.EditSchemaButton = exports.EditFormTitleButton = exports.CreateFormButton = exports.AddPageButton = undefined;
 
 var _AddPageButton = require('./AddPageButton');
 
@@ -13,9 +13,9 @@ var _CreateFormButton = require('./CreateFormButton');
 
 var _CreateFormButton2 = _interopRequireDefault(_CreateFormButton);
 
-var _EditFormButton = require('./EditFormButton');
+var _EditFormTitleButton = require('./EditFormTitleButton');
 
-var _EditFormButton2 = _interopRequireDefault(_EditFormButton);
+var _EditFormTitleButton2 = _interopRequireDefault(_EditFormTitleButton);
 
 var _EditSchemaButton = require('./EditSchemaButton');
 
@@ -25,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.AddPageButton = _AddPageButton2.default;
 exports.CreateFormButton = _CreateFormButton2.default;
-exports.EditFormButton = _EditFormButton2.default;
+exports.EditFormTitleButton = _EditFormTitleButton2.default;
 exports.EditSchemaButton = _EditSchemaButton2.default;
 ;
 
