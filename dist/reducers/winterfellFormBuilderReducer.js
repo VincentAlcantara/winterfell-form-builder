@@ -135,7 +135,15 @@ function winterfellFormBuilderReducer() {
         }).set('error', '');
       }
     case _constants.UPDATE_QUESTION_SUCCESS:
-      return state.set('error', '');
+      {
+        var _action$payload = action.payload,
+            questionSetIndex = _action$payload.questionSetIndex,
+            questionIndex = _action$payload.questionIndex,
+            question = _action$payload.question,
+            questionText = _action$payload.questionText;
+
+        return state.setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'question'], question).setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'text'], questionText).set('error', '');
+      }
     case _constants.DELETE_QUESTION_SUCCESS:
       return state.set('error', '');
     default:

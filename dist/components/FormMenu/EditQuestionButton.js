@@ -56,18 +56,20 @@ var EditQuestionButton = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (EditQuestionButton.__proto__ || (0, _getPrototypeOf2.default)(EditQuestionButton)).call(this, props));
 
-    console.log('***', _this.props.questionIndex);
-    console.log('***', _this.props.questionIndex);
+    var questionSets = props.questionSets,
+        questionSetIndex = props.questionSetIndex,
+        questionIndex = props.questionIndex;
+
 
     _this.state = {
       showModal: false,
       questionSets: [],
       questionSetId: '',
-      questionSetHeader: _this.props.questionSets[_this.props.questionSetIndex].questions[_this.props.questionIndex].questionSetHeader,
+      questionSetHeader: questionSets[questionSetIndex].questions[questionIndex].questionSetHeader,
       questionSetText: '',
-      question: _this.props.questionSets[_this.props.questionSetIndex].questions[_this.props.questionIndex].question,
-      questionText: '',
-      questionType: ''
+      question: questionSets[questionSetIndex].questions[questionIndex].question,
+      questionText: questionSets[questionSetIndex].questions[questionIndex].text,
+      questionType: questionSets[questionSetIndex].questions[questionIndex].input.type
     };
 
     _this.onChange = _this.onChange.bind(_this);
@@ -91,7 +93,7 @@ var EditQuestionButton = function (_Component) {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
-      this.props.addQuestion(this.state.questionSetId, this.state.questionSetHeader, this.state.questionSetText, this.state.question, this.state.questionText, this.state.questionType);
+      this.props.editQuestion(this.props.questionSetIndex, this.props.questionIndex, this.state.question, this.state.questionText, this.state.questionType);
       this.setState({ showModal: false });
     }
   }, {
@@ -99,12 +101,6 @@ var EditQuestionButton = function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var _props = this.props,
-          questionSetIndex = _props.questionSetIndex,
-          questionIndex = _props.questionIndex,
-          questionSets = _props.questionSets;
-
-      console.log('questionSets[]', questionSets[questionIndex].questions[questionSets]);
       return _react2.default.createElement(
         _reactBootstrap.Row,
         null,
@@ -129,42 +125,6 @@ var EditQuestionButton = function (_Component) {
               _react2.default.createElement(
                 'form',
                 null,
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionSetId',
-                    name: 'questionSetId',
-                    label: 'Question Set ID',
-                    onChange: this.onChange,
-                    placeholder: '(optional)',
-                    value: this.state.questionSetId
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionSetHeader',
-                    name: 'questionSetHeader',
-                    label: 'Question Set Title',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.questionSetHeader
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionSetText',
-                    name: 'questionSetText',
-                    label: 'Enter Question Set Description',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.questionSetText
-                  })
-                ),
                 _react2.default.createElement(
                   _reactBootstrap.FormGroup,
                   null,
@@ -221,15 +181,12 @@ var EditQuestionButton = function (_Component) {
           _react2.default.createElement(
             _reactBootstrap.Button,
             {
-              className: 'btn btn-block',
+              className: 'btn',
               onClick: function onClick() {
                 _this2.setState({ showModal: true });
               }
             },
-            'Edit question ',
-            questionSetIndex,
-            '.',
-            questionIndex
+            'edit'
           )
         )
       );
@@ -239,7 +196,7 @@ var EditQuestionButton = function (_Component) {
 }(_react.Component);
 
 EditQuestionButton.propTypes = {
-  addQuestion: _propTypes2.default.func.isRequired,
+  editQuestion: _propTypes2.default.func.isRequired,
   questionSetIndex: _propTypes2.default.string.isRequired,
   questionIndex: _propTypes2.default.string.isRequired,
   questionSets: _propTypes2.default.array.isRequired

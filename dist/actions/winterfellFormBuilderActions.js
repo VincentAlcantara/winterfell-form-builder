@@ -69,10 +69,10 @@ function addQuestion(questionSetId, questionSetHeader, questionSetText, question
   };
 }
 
-function editQuestion(questionSetIndex, questionIndex, questionObj) {
+function editQuestion(questionSetIndex, questionIndex, question, questionText) {
   return {
-    type: _constants.EDIT_QUESTION_SUCCESS,
-    payload: { questionSetIndex: questionSetIndex, questionIndex: questionIndex, questionObj: questionObj }
+    type: _constants.UPDATE_QUESTION_SUCCESS,
+    payload: { questionSetIndex: questionSetIndex, questionIndex: questionIndex, question: question, questionText: questionText }
   };
 }
 ;
