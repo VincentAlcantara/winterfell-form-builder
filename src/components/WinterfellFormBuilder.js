@@ -11,7 +11,6 @@ import {
   AddPageButton,
   EditSchemaButton,
   AddQuestionButton,
-  EditQuestionButton,
 } from './FormMenu';
 
 import FormEditor from './FormEditor';

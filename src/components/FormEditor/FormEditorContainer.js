@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import _ from 'lodash';
 
 import { editForm } from '../../actions/winterfellFormBuilderActions';
+import EditQuestionButton from '../FormMenu/EditQuestionButton';
 
 class FormEditorContainer extends Component {
   static propTypes = {
@@ -72,11 +73,14 @@ class FormEditorContainer extends Component {
         questionSets.map((questionSet, index) => {
           if (currentQuestionSet.questionSetId === questionSet.questionSetId) {
             return questionSet.questions.map((question, ix) => (
-              <div>
-                <p>Question: {index} {ix}</p>
-                <b>{question.question}</b>
-                <p>{question.text}</p>
-              </div>
+              <p>
+                <i>{question.question}</i>
+                
+                <EditQuestionButton
+                  questionSetIndex={index}
+                  questionIndex={ix}
+                />
+              </p>
             ));
           } // end-of-if
           return null;
