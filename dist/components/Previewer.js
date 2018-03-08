@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -35,6 +39,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 var _winterfell = require('winterfell');
 
 var _winterfell2 = _interopRequireDefault(_winterfell);
+
+var _reactBootstrap = require('react-bootstrap');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -106,9 +112,31 @@ var Previewer = function (_Component) {
       };
 
       return _react2.default.createElement(
-        'div',
-        { className: 'winterfell-form-builer-previewer col-xs-12' },
-        schema && schema.formPanels && schema.formPanels.length > 0 && currentPanelId && currentPanelId !== 'Select Page' && displayWinterFellForm()
+        _reactBootstrap.Row,
+        { className: 'winterfell-form-builer-previewer' },
+        _react2.default.createElement(
+          _reactBootstrap.Col,
+          { xs: 12 },
+          schema && schema.formPanels && schema.formPanels.length > 0 && currentPanelId && currentPanelId !== 'Select Page' && displayWinterFellForm()
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.Col,
+          { xs: 12 },
+          _react2.default.createElement(
+            'h3',
+            null,
+            'Winterfell Schema:'
+          )
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.Col,
+          { xs: 12 },
+          _react2.default.createElement(
+            'pre',
+            null,
+            (0, _stringify2.default)(schema, undefined, 2)
+          )
+        )
       );
     }
   }]);

@@ -5,13 +5,12 @@ const postcssMixins = require('postcss-mixins');
 const postcssNested = require('postcss-nested');
 const postcssExtend = require('postcss-extend');
 const autoprefixer = require('autoprefixer');
-const json = require('json-loader');
 
 module.exports = {
   devtool: 'eval',
   entry: {
     app: [
-      'webpack-dev-server/client?http://localhost:3000',
+      'webpack-dev-server/client?http://localhost:3001',
       'webpack/hot/only-dev-server',
       'react-hot-loader/patch',
       './index',

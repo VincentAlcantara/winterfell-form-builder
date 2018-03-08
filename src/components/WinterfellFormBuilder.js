@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-bootstrap';
-
 import { loadForm, goToPage } from '../actions/winterfellFormBuilderActions';
 import Pagination from './Pagination';
 import Previewer from './Previewer';
@@ -11,7 +10,11 @@ import {
   EditFormTitleButton,
   AddPageButton,
   EditSchemaButton,
+  AddQuestionButton,
+  EditQuestionButton,
 } from './FormMenu';
+
+import FormEditor from './FormEditor';
 
 class WinterfellFormBuilder extends Component {
   static propTypes = {
@@ -20,13 +23,16 @@ class WinterfellFormBuilder extends Component {
     schema: PropTypes.object,
     currentPanelId: PropTypes.string,
     loadForm: PropTypes.func.isRequired,
+    questionSet: PropTypes.object,
   }
 
   static defaultProps = {
     title: '',
-    schema: {},
+    schema: null,
     currentPanelId: null,
     inputSchema: {},
+    formPanels: null,
+    questionSet: null,
   }
 
   constructor(props) {
@@ -52,7 +58,7 @@ class WinterfellFormBuilder extends Component {
   }
 
   render() {
-    const { title, schema, currentPanelId } = this.props;
+    const { title, schema, currentPanelId, questionSet } = this.props;
     return (
       <Grid>
         <Row>
@@ -70,37 +76,32 @@ class WinterfellFormBuilder extends Component {
             </Row>
             <hr />
             <Row>
-              <Col xs={12}>
+              <Col xs={2}>
+                <CreateFormButton />
+              </Col>
+              <Col xs={2}>
+                <EditFormTitleButton />
+              </Col>
+              <Col xs={2}>
+                <AddPageButton />
+              </Col>
+              <Col xs={2}>
+                <EditSchemaButton />
+              </Col>
+              <Col xs={2}>
+                <AddQuestionButton />
+              </Col>
+            </Row>
+            <hr />
+            <Row>
+              <Col xs={2}>
+                <FormEditor />
+              </Col>
+              <Col xs={10}>
                 <Previewer
                   schema={schema}
                   currentPanelId={currentPanelId}
                 />
-              </Col>
-            </Row>
-            <hr />
-            <Row>
-              <Col xs={3}>
-                <CreateFormButton />
-              </Col>
-              <Col xs={3}>
-                <EditFormTitleButton />
-              </Col>
-              <Col xs={3}>
-                <AddPageButton />
-              </Col>
-              <Col xs={3}>
-                <EditSchemaButton />
-              </Col>
-            </Row>
-            <hr />
-            <Row>
-              <Col xs={12}>
-                <h3>Winterfell Schema:</h3>
-              </Col>
-              <Col xs={12}>
-                <pre>
-                  {JSON.stringify(schema, undefined, 2)}
-                </pre>
               </Col>
             </Row>
           </Col>
@@ -115,6 +116,7 @@ function mapStateToProps(state) {
     title: state.getIn(['form', 'title']),
     schema: state.getIn(['form', 'schema']).toJS(),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
+    questionSet: state.getIn(['form', 'schema', 'questionSets', 0]),
   };
 }
 

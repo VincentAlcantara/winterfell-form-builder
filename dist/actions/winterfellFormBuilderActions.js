@@ -9,6 +9,8 @@ exports.editForm = editForm;
 exports.goToPage = goToPage;
 exports.updateForm = updateForm;
 exports.addPage = addPage;
+exports.addQuestion = addQuestion;
+exports.editQuestion = editQuestion;
 
 var _constants = require('../common/constants');
 
@@ -28,7 +30,7 @@ function createForm(title) {
 
 function editForm(title) {
   return {
-    type: _constants.EDIT_FORM_SUCCESS,
+    type: _constants.EDIT_FORM_TITLE_SUCCESS,
     payload: { title: title }
   };
 }
@@ -53,6 +55,26 @@ function addPage(panelId, panelHeader, panelText) {
     payload: { panelId: panelId, panelHeader: panelHeader, panelText: panelText }
   };
 }
+
+function addQuestion(questionSetId, questionSetHeader, questionSetText, question, questionText, questionType) {
+  return {
+    type: _constants.ADD_QUESTION_SUCCESS,
+    payload: {
+      questionSetId: questionSetId,
+      questionSetHeader: questionSetHeader,
+      questionSetText: questionSetText,
+      question: question,
+      questionText: questionText,
+      questionType: questionType }
+  };
+}
+
+function editQuestion(questionSetIndex, questionIndex, questionObj) {
+  return {
+    type: _constants.EDIT_QUESTION_SUCCESS,
+    payload: { questionSetIndex: questionSetIndex, questionIndex: questionIndex, questionObj: questionObj }
+  };
+}
 ;
 
 var _temp = function () {
@@ -71,6 +93,10 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(updateForm, 'updateForm', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(addPage, 'addPage', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(addQuestion, 'addQuestion', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(editQuestion, 'editQuestion', 'src/actions/winterfellFormBuilderActions.js');
 }();
 
 ;

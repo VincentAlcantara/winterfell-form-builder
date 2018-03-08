@@ -19,6 +19,9 @@ class AddQuestionButton extends Component {
       questionSetId: '',
       questionSetHeader: '',
       questionSetText: '',
+      question: '',
+      questionText: '',
+      questionType: '',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -37,7 +40,14 @@ class AddQuestionButton extends Component {
 
   onFormUpdate(e) {
     e.preventDefault();
-    this.props.addQuestion(this.state.questionSetId, this.state.questionSetHeader, this.state.questionSetText);
+    this.props.addQuestion(
+      this.state.questionSetId,
+      this.state.questionSetHeader,
+      this.state.questionSetText,
+      this.state.question,
+      this.state.questionText,
+      this.state.questionType,
+    );
     this.setState({ showModal: false });
   }
 
@@ -55,7 +65,7 @@ class AddQuestionButton extends Component {
                   <FieldGroup
                     id="questionSetId"
                     name="questionSetId"
-                    label="Page ID"
+                    label="Question Set ID"
                     onChange={this.onChange}
                     placeholder="(optional)"
                     value={this.state.questionSetId}
@@ -65,7 +75,7 @@ class AddQuestionButton extends Component {
                   <FieldGroup
                     id="questionSetHeader"
                     name="questionSetHeader"
-                    label="Page Title"
+                    label="Question Set Title"
                     onChange={this.onChange}
                     placeholder=""
                     value={this.state.questionSetHeader}
@@ -75,10 +85,30 @@ class AddQuestionButton extends Component {
                   <FieldGroup
                     id="questionSetText"
                     name="questionSetText"
-                    label="Enter Page Description"
+                    label="Enter Question Set Description"
                     onChange={this.onChange}
                     placeholder=""
                     value={this.state.questionSetText}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <FieldGroup
+                    id="question"
+                    name="question"
+                    label="Enter Question"
+                    onChange={this.onChange}
+                    placeholder=""
+                    value={this.state.question}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <FieldGroup
+                    id="questionText"
+                    name="questionText"
+                    label="Enter Question Text"
+                    onChange={this.onChange}
+                    placeholder=""
+                    value={this.state.questionText}
                   />
                 </FormGroup>
               </form>
@@ -101,7 +131,7 @@ class AddQuestionButton extends Component {
             onClick={() => {
               this.setState({ showModal: true });
             }}
-          >add page
+          >add question
           </Button>
         </Col>
       </Row>

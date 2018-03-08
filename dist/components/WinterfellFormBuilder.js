@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _stringify = require('babel-runtime/core-js/json/stringify');
-
-var _stringify2 = _interopRequireDefault(_stringify);
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -52,6 +48,10 @@ var _Previewer2 = _interopRequireDefault(_Previewer);
 
 var _FormMenu = require('./FormMenu');
 
+var _FormEditor = require('./FormEditor');
+
+var _FormEditor2 = _interopRequireDefault(_FormEditor);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var WinterfellFormBuilder = function (_Component) {
@@ -92,7 +92,8 @@ var WinterfellFormBuilder = function (_Component) {
       var _props = this.props,
           title = _props.title,
           schema = _props.schema,
-          currentPanelId = _props.currentPanelId;
+          currentPanelId = _props.currentPanelId,
+          questionSet = _props.questionSet;
 
       return _react2.default.createElement(
         _reactBootstrap.Grid,
@@ -137,36 +138,28 @@ var WinterfellFormBuilder = function (_Component) {
               null,
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 12 },
-                _react2.default.createElement(_Previewer2.default, {
-                  schema: schema,
-                  currentPanelId: currentPanelId
-                })
-              )
-            ),
-            _react2.default.createElement('hr', null),
-            _react2.default.createElement(
-              _reactBootstrap.Row,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Col,
-                { xs: 3 },
+                { xs: 2 },
                 _react2.default.createElement(_FormMenu.CreateFormButton, null)
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 3 },
+                { xs: 2 },
                 _react2.default.createElement(_FormMenu.EditFormTitleButton, null)
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 3 },
+                { xs: 2 },
                 _react2.default.createElement(_FormMenu.AddPageButton, null)
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 3 },
+                { xs: 2 },
                 _react2.default.createElement(_FormMenu.EditSchemaButton, null)
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 2 },
+                _react2.default.createElement(_FormMenu.AddQuestionButton, null)
               )
             ),
             _react2.default.createElement('hr', null),
@@ -175,21 +168,16 @@ var WinterfellFormBuilder = function (_Component) {
               null,
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 12 },
-                _react2.default.createElement(
-                  'h3',
-                  null,
-                  'Winterfell Schema:'
-                )
+                { xs: 2 },
+                _react2.default.createElement(_FormEditor2.default, null)
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 12 },
-                _react2.default.createElement(
-                  'pre',
-                  null,
-                  (0, _stringify2.default)(schema, undefined, 2)
-                )
+                { xs: 10 },
+                _react2.default.createElement(_Previewer2.default, {
+                  schema: schema,
+                  currentPanelId: currentPanelId
+                })
               )
             )
           )
@@ -205,13 +193,16 @@ WinterfellFormBuilder.propTypes = {
   title: _propTypes2.default.string,
   schema: _propTypes2.default.object,
   currentPanelId: _propTypes2.default.string,
-  loadForm: _propTypes2.default.func.isRequired
+  loadForm: _propTypes2.default.func.isRequired,
+  questionSet: _propTypes2.default.object
 };
 WinterfellFormBuilder.defaultProps = {
   title: '',
-  schema: {},
+  schema: null,
   currentPanelId: null,
-  inputSchema: {}
+  inputSchema: {},
+  formPanels: null,
+  questionSet: null
 };
 
 
@@ -219,7 +210,8 @@ function mapStateToProps(state) {
   return {
     title: state.getIn(['form', 'title']),
     schema: state.getIn(['form', 'schema']).toJS(),
-    currentPanelId: state.getIn(['form', 'currentPanelId'])
+    currentPanelId: state.getIn(['form', 'currentPanelId']),
+    questionSet: state.getIn(['form', 'schema', 'questionSets', 0])
   };
 }
 

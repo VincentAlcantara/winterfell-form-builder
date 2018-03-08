@@ -9,7 +9,7 @@ import {
   CREATE_FORM_SUCCESS,
   // CREATE_FORM_ERROR,
   // UPDATE_FORM_REQUEST,
-  EDIT_FORM_SUCCESS,
+  EDIT_FORM_TITLE_SUCCESS,
   UPDATE_FORM_SUCCESS,
   GOTO_PAGE_SUCCESS,
   // UPDATE_FORM_ERROR,
@@ -26,7 +26,8 @@ import {
   // DELETE_PAGE_SUCCESS,
   // DELETE_PAGE_ERROR,
   // ADD_QUESTION_REQUEST,
-  // ADD_QUESTION_SUCCESS,
+  ADD_QUESTION_SUCCESS,
+  EDIT_QUESTION_SUCCESS,
   // ADD_QUESTION_ERROR,
   // UPDATE_QUESTION_REQUEST,
   // UPDATE_QUESTION_SUCCESS,
@@ -52,7 +53,7 @@ export function createForm(title) {
 
 export function editForm(title) {
   return {
-    type: EDIT_FORM_SUCCESS,
+    type: EDIT_FORM_TITLE_SUCCESS,
     payload: { title },
   };
 }
@@ -75,5 +76,31 @@ export function addPage(panelId, panelHeader, panelText) {
   return {
     type: ADD_PAGE_SUCCESS,
     payload: { panelId, panelHeader, panelText },
+  };
+}
+
+export function addQuestion(
+  questionSetId,
+  questionSetHeader,
+  questionSetText,
+  question,
+  questionText,
+  questionType) {
+  return {
+    type: ADD_QUESTION_SUCCESS,
+    payload: {
+      questionSetId,
+      questionSetHeader,
+      questionSetText,
+      question,
+      questionText,
+      questionType },
+  };
+}
+
+export function editQuestion(questionSetIndex, questionIndex, questionObj) {
+  return {
+    type: EDIT_QUESTION_SUCCESS,
+    payload: { questionSetIndex, questionIndex, questionObj },
   };
 }

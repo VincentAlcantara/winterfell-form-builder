@@ -48,22 +48,17 @@ var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var AddQuestionButton = function (_Component) {
-  (0, _inherits3.default)(AddQuestionButton, _Component);
+var FormTitleEditor = function (_Component) {
+  (0, _inherits3.default)(FormTitleEditor, _Component);
 
-  function AddQuestionButton(props) {
-    (0, _classCallCheck3.default)(this, AddQuestionButton);
+  function FormTitleEditor(props) {
+    (0, _classCallCheck3.default)(this, FormTitleEditor);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AddQuestionButton.__proto__ || (0, _getPrototypeOf2.default)(AddQuestionButton)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (FormTitleEditor.__proto__ || (0, _getPrototypeOf2.default)(FormTitleEditor)).call(this, props));
 
     _this.state = {
       showModal: false,
-      questionSetId: '',
-      questionSetHeader: '',
-      questionSetText: '',
-      question: '',
-      questionText: '',
-      questionType: ''
+      formTitle: ''
     };
 
     _this.onChange = _this.onChange.bind(_this);
@@ -71,7 +66,7 @@ var AddQuestionButton = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(AddQuestionButton, [{
+  (0, _createClass3.default)(FormTitleEditor, [{
     key: 'onChange',
     value: function onChange(event) {
       event.preventDefault();
@@ -87,13 +82,16 @@ var AddQuestionButton = function (_Component) {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
-      this.props.addQuestion(this.state.questionSetId, this.state.questionSetHeader, this.state.questionSetText, this.state.question, this.state.questionText, this.state.questionType);
+      this.props.editForm(this.state.formTitle);
       this.setState({ showModal: false });
     }
   }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
+
+      var title = this.props.title;
+
 
       return _react2.default.createElement(
         _reactBootstrap.Row,
@@ -110,7 +108,7 @@ var AddQuestionButton = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Modal.Title,
                 null,
-                'Add a new question to the page'
+                'Edit form title'
               )
             ),
             _react2.default.createElement(
@@ -123,60 +121,12 @@ var AddQuestionButton = function (_Component) {
                   _reactBootstrap.FormGroup,
                   null,
                   _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionSetId',
-                    name: 'questionSetId',
-                    label: 'Question Set ID',
+                    id: 'formTitle',
+                    name: 'formTitle',
+                    label: 'Enter title of the form',
                     onChange: this.onChange,
-                    placeholder: '(optional)',
-                    value: this.state.questionSetId
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionSetHeader',
-                    name: 'questionSetHeader',
-                    label: 'Question Set Title',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.questionSetHeader
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionSetText',
-                    name: 'questionSetText',
-                    label: 'Enter Question Set Description',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.questionSetText
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'question',
-                    name: 'question',
-                    label: 'Enter Question',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.question
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionText',
-                    name: 'questionText',
-                    label: 'Enter Question Text',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.questionText
+                    placeholder: title,
+                    value: this.state.formTitle
                   })
                 )
               )
@@ -216,27 +166,28 @@ var AddQuestionButton = function (_Component) {
                 _this2.setState({ showModal: true });
               }
             },
-            'add question'
+            'edit form title'
           )
         )
       );
     }
   }]);
-  return AddQuestionButton;
+  return FormTitleEditor;
 }(_react.Component);
 
-AddQuestionButton.propTypes = {
-  addQuestion: _propTypes2.default.func.isRequired
+FormTitleEditor.propTypes = {
+  editForm: _propTypes2.default.func.isRequired,
+  title: _propTypes2.default.string.isRequired
 };
 
 
 function mapStateToProps(state) {
   return {
-    title: state.getIn(['form', 'currentForm', 'title'])
+    title: state.getIn(['form', 'title'])
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { addQuestion: _winterfellFormBuilderActions.addQuestion })(AddQuestionButton);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { editForm: _winterfellFormBuilderActions.editForm })(FormTitleEditor);
 
 exports.default = _default;
 ;
@@ -246,11 +197,11 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(AddQuestionButton, 'AddQuestionButton', 'src/components/FormMenu/AddQuestionButton.js');
+  __REACT_HOT_LOADER__.register(FormTitleEditor, 'FormTitleEditor', 'src/components/FormEditor/FormTitleEditor.js');
 
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/AddQuestionButton.js');
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormEditor/FormTitleEditor.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/AddQuestionButton.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormEditor/FormTitleEditor.js');
 }();
 
 ;

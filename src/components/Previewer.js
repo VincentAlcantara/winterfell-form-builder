@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Winterfell from 'winterfell';
+import { Row, Col } from 'react-bootstrap';
 
 const onRenderDefault = () => {
   console.log('Great news! Winterfell rendered successfully');
@@ -85,15 +86,25 @@ class Previewer extends Component {
     );
 
     return (
-      <div className="winterfell-form-builer-previewer col-xs-12" >
-        {(schema &&
-          schema.formPanels &&
-          schema.formPanels.length > 0) &&
-          currentPanelId &&
-          currentPanelId !== 'Select Page' &&
-          displayWinterFellForm()
-        }
-      </div>
+      <Row className="winterfell-form-builer-previewer" >
+        <Col xs={12}>
+          {(schema &&
+            schema.formPanels &&
+            schema.formPanels.length > 0) &&
+            currentPanelId &&
+            currentPanelId !== 'Select Page' &&
+            displayWinterFellForm()
+          }
+        </Col>
+        <Col xs={12}>
+          <h3>Winterfell Schema:</h3>
+        </Col>
+        <Col xs={12}>
+          <pre>
+            {JSON.stringify(schema, undefined, 2)}
+          </pre>
+        </Col>
+      </Row>
     );
   }
 }
