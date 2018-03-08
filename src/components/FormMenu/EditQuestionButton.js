@@ -8,7 +8,7 @@ import FieldGroup from '../UI/FieldGroup';
 
 class EditQuestionButton extends Component {
   static propTypes = {
-    addQuestion: PropTypes.func.isRequired,
+    editQuestion: PropTypes.func.isRequired,
     questionSetIndex: PropTypes.string.isRequired,
     questionIndex: PropTypes.string.isRequired,
     questionSets: PropTypes.array.isRequired,
@@ -16,18 +16,17 @@ class EditQuestionButton extends Component {
 
   constructor(props) {
     super(props);
-    console.log('***', this.props.questionIndex);
-    console.log('***', this.props.questionIndex);
-    
+    const { questionSets, questionSetIndex, questionIndex } = props;
+
     this.state = {
       showModal: false,
       questionSets: [],
       questionSetId: '',
-      questionSetHeader: this.props.questionSets[this.props.questionSetIndex].questions[this.props.questionIndex].questionSetHeader,
+      questionSetHeader: questionSets[questionSetIndex].questions[questionIndex].questionSetHeader,
       questionSetText: '',
-      question: this.props.questionSets[this.props.questionSetIndex].questions[this.props.questionIndex].question,
-      questionText: '',
-      questionType: '',
+      question: questionSets[questionSetIndex].questions[questionIndex].question,
+      questionText: questionSets[questionSetIndex].questions[questionIndex].text,
+      questionType: questionSets[questionSetIndex].questions[questionIndex].input.type,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -46,10 +45,9 @@ class EditQuestionButton extends Component {
 
   onFormUpdate(e) {
     e.preventDefault();
-    this.props.addQuestion(
-      this.state.questionSetId,
-      this.state.questionSetHeader,
-      this.state.questionSetText,
+    this.props.editQuestion(
+      this.props.questionSetIndex,
+      this.props.questionIndex,
       this.state.question,
       this.state.questionText,
       this.state.questionType,
@@ -58,8 +56,6 @@ class EditQuestionButton extends Component {
   }
 
   render() {
-    const { questionSetIndex, questionIndex, questionSets } = this.props;
-    console.log('questionSets[]', questionSets[questionIndex].questions[questionSets]);
     return (
       <Row>
         <div className="static-modal">
@@ -69,36 +65,6 @@ class EditQuestionButton extends Component {
             </Modal.Header>
             <Modal.Body>
               <form>
-                <FormGroup>
-                  <FieldGroup
-                    id="questionSetId"
-                    name="questionSetId"
-                    label="Question Set ID"
-                    onChange={this.onChange}
-                    placeholder="(optional)"
-                    value={this.state.questionSetId}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <FieldGroup
-                    id="questionSetHeader"
-                    name="questionSetHeader"
-                    label="Question Set Title"
-                    onChange={this.onChange}
-                    placeholder=""
-                    value={this.state.questionSetHeader}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <FieldGroup
-                    id="questionSetText"
-                    name="questionSetText"
-                    label="Enter Question Set Description"
-                    onChange={this.onChange}
-                    placeholder=""
-                    value={this.state.questionSetText}
-                  />
-                </FormGroup>
                 <FormGroup>
                   <FieldGroup
                     id="question"
@@ -135,11 +101,11 @@ class EditQuestionButton extends Component {
         </div>
         <Col xs={12}>
           <Button
-            className="btn btn-block"
+            className="btn"
             onClick={() => {
               this.setState({ showModal: true });
             }}
-          >Edit question {questionSetIndex}&#46;{questionIndex}
+          >edit
           </Button>
         </Col>
       </Row>

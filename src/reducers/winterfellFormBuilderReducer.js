@@ -179,9 +179,15 @@ function winterfellFormBuilderReducer(state = initialState, action) {
           arr.push(fromJS(newQuestionSet)))
         .set('error', '');
     }
-    case UPDATE_QUESTION_SUCCESS:
+    case UPDATE_QUESTION_SUCCESS: {
+      const { questionSetIndex, questionIndex, question, questionText } = action.payload;
       return state
+        .setIn(['schema', 'questionSets', questionSetIndex,
+          'questions', questionIndex, 'question'], question)
+        .setIn(['schema', 'questionSets', questionSetIndex,
+          'questions', questionIndex, 'text'], questionText)
         .set('error', '');
+    }
     case DELETE_QUESTION_SUCCESS:
       return state
         .set('error', '');

@@ -46,6 +46,10 @@ var _lodash2 = _interopRequireDefault(_lodash);
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
+var _EditQuestionButton = require('../FormMenu/EditQuestionButton');
+
+var _EditQuestionButton2 = _interopRequireDefault(_EditQuestionButton);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FormEditorContainer = function (_Component) {
@@ -130,26 +134,17 @@ var FormEditorContainer = function (_Component) {
             if (currentQuestionSet.questionSetId === questionSet.questionSetId) {
               return questionSet.questions.map(function (question, ix) {
                 return _react2.default.createElement(
-                  'div',
+                  'p',
                   null,
                   _react2.default.createElement(
-                    'p',
-                    null,
-                    'Question: ',
-                    index,
-                    ' ',
-                    ix
-                  ),
-                  _react2.default.createElement(
-                    'b',
+                    'i',
                     null,
                     question.question
                   ),
-                  _react2.default.createElement(
-                    'p',
-                    null,
-                    question.text
-                  )
+                  _react2.default.createElement(_EditQuestionButton2.default, {
+                    questionSetIndex: index,
+                    questionIndex: ix
+                  })
                 );
               });
             } // end-of-if

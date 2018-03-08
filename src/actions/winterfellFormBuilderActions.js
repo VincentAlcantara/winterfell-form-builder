@@ -27,10 +27,9 @@ import {
   // DELETE_PAGE_ERROR,
   // ADD_QUESTION_REQUEST,
   ADD_QUESTION_SUCCESS,
-  EDIT_QUESTION_SUCCESS,
   // ADD_QUESTION_ERROR,
   // UPDATE_QUESTION_REQUEST,
-  // UPDATE_QUESTION_SUCCESS,
+  UPDATE_QUESTION_SUCCESS,
   // UPDATE_QUESTION_ERROR,
   // DELETE_QUESTION_REQUEST,
   // DELETE_QUESTION_SUCCESS,
@@ -98,9 +97,9 @@ export function addQuestion(
   };
 }
 
-export function editQuestion(questionSetIndex, questionIndex, questionObj) {
+export function editQuestion(questionSetIndex, questionIndex, question, questionText) {
   return {
-    type: EDIT_QUESTION_SUCCESS,
-    payload: { questionSetIndex, questionIndex, questionObj },
+    type: UPDATE_QUESTION_SUCCESS,
+    payload: { questionSetIndex, questionIndex, question, questionText },
   };
 }
