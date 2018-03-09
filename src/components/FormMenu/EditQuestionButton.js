@@ -11,22 +11,20 @@ class EditQuestionButton extends Component {
     editQuestion: PropTypes.func.isRequired,
     questionSetIndex: PropTypes.string.isRequired,
     questionIndex: PropTypes.string.isRequired,
-    questionSets: PropTypes.array.isRequired,
+    question: PropTypes.string.isRequired,
+    questionText: PropTypes.string.isRequired,
+    questionType: PropTypes.string.isRequired,
   };
 
   constructor(props) {
     super(props);
-    const { questionSets, questionSetIndex, questionIndex } = props;
+    const { question, questionText, questionType } = props;
 
     this.state = {
       showModal: false,
-      questionSets: [],
-      questionSetId: '',
-      questionSetHeader: questionSets[questionSetIndex].questions[questionIndex].questionSetHeader,
-      questionSetText: '',
-      question: questionSets[questionSetIndex].questions[questionIndex].question,
-      questionText: questionSets[questionSetIndex].questions[questionIndex].text,
-      questionType: questionSets[questionSetIndex].questions[questionIndex].input.type,
+      question,
+      questionText,
+      questionType,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -113,9 +111,14 @@ class EditQuestionButton extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    questionSets: state.getIn(['form', 'schema', 'questionSets']).toJS(),
+    question: state.getIn(['form', 'schema', 'questionSets', ownProps.questionSetIndex, 'questions',
+      ownProps.questionIndex, 'question']),
+    questionText: state.getIn(['form', 'schema', 'questionSets', ownProps.questionSetIndex, 'questions',
+      ownProps.questionIndex, 'text']),
+    questionType: state.getIn(['form', 'schema', 'questionSets', ownProps.questionSetIndex, 'questions',
+      ownProps.questionIndex, 'input', 'type']),
   };
 }
 export default connect(mapStateToProps, { editQuestion })(EditQuestionButton);

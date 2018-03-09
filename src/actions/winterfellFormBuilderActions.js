@@ -79,6 +79,7 @@ export function addPage(panelId, panelHeader, panelText) {
 }
 
 export function addQuestion(
+  currentPanelId,
   questionSetId,
   questionSetHeader,
   questionSetText,
@@ -88,6 +89,7 @@ export function addQuestion(
   return {
     type: ADD_QUESTION_SUCCESS,
     payload: {
+      currentPanelId,
       questionSetId,
       questionSetHeader,
       questionSetText,

@@ -9,6 +9,7 @@ import FieldGroup from '../UI/FieldGroup';
 class AddQuestionButton extends Component {
   static propTypes = {
     addQuestion: PropTypes.func.isRequired,
+    currentPanelId: PropTypes.string.isRequired,
   }
 
   constructor(props) {
@@ -41,6 +42,7 @@ class AddQuestionButton extends Component {
   onFormUpdate(e) {
     e.preventDefault();
     this.props.addQuestion(
+      this.props.currentPanelId,
       this.state.questionSetId,
       this.state.questionSetHeader,
       this.state.questionSetText,
@@ -141,7 +143,7 @@ class AddQuestionButton extends Component {
 
 function mapStateToProps(state) {
   return {
-    title: state.getIn(['form', 'currentForm', 'title']),
+    currentPanelId: state.getIn(['form', 'currentPanelId']),
   };
 }
 export default connect(mapStateToProps, { addQuestion })(AddQuestionButton);

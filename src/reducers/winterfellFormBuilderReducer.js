@@ -1,4 +1,6 @@
 import { fromJS } from 'immutable';
+import _ from 'lodash';
+
 import {
   RETRIEVE_FORMLIST_REQUEST,
   RETRIEVE_FORMLIST_SUCCESS,
@@ -79,9 +81,20 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     case DELETE_QUESTION_ERROR:
       return state
         .set('error', 'An error occurred');
-    case GOTO_PAGE_SUCCESS:
+    case GOTO_PAGE_SUCCESS: {
+      const questionPanels = state.getIn(['schema', 'questionPanels']).toJS();
+      const currentPanelId = action.payload.panelId;
+      let currentPanelIndex = -1;
+      for (let i = 0; i < questionPanels.length; i += 1) {
+        if (questionPanels[i].panelId === currentPanelId) {
+          currentPanelIndex = i;
+        }
+      }
+
       return state
+        .set('currentPanelIndex', currentPanelIndex)
         .set('currentPanelId', action.payload.panelId);
+    }
     case RETRIEVE_FORMLIST_SUCCESS:
       return state
         .set('error', '');
@@ -148,7 +161,9 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       return state
         .set('error', '');
     case ADD_QUESTION_SUCCESS: {
-      const questionSetCount = state.getIn(['schema', 'questionPanels', 0, 'questionSets']).count() + 1;
+      const currentPanelIndex = state.get('currentPanelIndex');
+
+      const questionSetCount = state.getIn(['schema', 'questionPanels', currentPanelIndex, 'questionSets']).size;
 
       const newQuestionSetId = {
         index: questionSetCount,
@@ -173,7 +188,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       };
 
       return state
-        .updateIn(['schema', 'questionPanels', 0, 'questionSets'], arr =>
+        .updateIn(['schema', 'questionPanels', currentPanelIndex, 'questionSets'], arr =>
           arr.push(fromJS(newQuestionSetId)))
         .updateIn(['schema', 'questionSets'], arr =>
           arr.push(fromJS(newQuestionSet)))

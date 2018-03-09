@@ -10,7 +10,6 @@ import EditQuestionButton from '../FormMenu/EditQuestionButton';
 class FormEditorContainer extends Component {
   static propTypes = {
     editForm: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
     questionSets: PropTypes.array,
     questionPanels: PropTypes.array,
     currentPanelId: PropTypes.string,
@@ -75,7 +74,6 @@ class FormEditorContainer extends Component {
             return questionSet.questions.map((question, ix) => (
               <p>
                 <i>{question.question}</i>
-                
                 <EditQuestionButton
                   questionSetIndex={index}
                   questionIndex={ix}
@@ -91,11 +89,9 @@ class FormEditorContainer extends Component {
   }
 
   render() {
-    const { title } = this.props;
     return (
       <Row>
         <Col xs={12}>
-          { title }
           { this.getCurrentHeader() }
           { this.getCurrentQuestions() }
         </Col>
