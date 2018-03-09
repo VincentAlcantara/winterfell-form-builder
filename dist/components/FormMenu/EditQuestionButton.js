@@ -56,20 +56,16 @@ var EditQuestionButton = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (EditQuestionButton.__proto__ || (0, _getPrototypeOf2.default)(EditQuestionButton)).call(this, props));
 
-    var questionSets = props.questionSets,
-        questionSetIndex = props.questionSetIndex,
-        questionIndex = props.questionIndex;
+    var question = props.question,
+        questionText = props.questionText,
+        questionType = props.questionType;
 
 
     _this.state = {
       showModal: false,
-      questionSets: [],
-      questionSetId: '',
-      questionSetHeader: questionSets[questionSetIndex].questions[questionIndex].questionSetHeader,
-      questionSetText: '',
-      question: questionSets[questionSetIndex].questions[questionIndex].question,
-      questionText: questionSets[questionSetIndex].questions[questionIndex].text,
-      questionType: questionSets[questionSetIndex].questions[questionIndex].input.type
+      question: question,
+      questionText: questionText,
+      questionType: questionType
     };
 
     _this.onChange = _this.onChange.bind(_this);
@@ -199,13 +195,17 @@ EditQuestionButton.propTypes = {
   editQuestion: _propTypes2.default.func.isRequired,
   questionSetIndex: _propTypes2.default.string.isRequired,
   questionIndex: _propTypes2.default.string.isRequired,
-  questionSets: _propTypes2.default.array.isRequired
+  question: _propTypes2.default.string.isRequired,
+  questionText: _propTypes2.default.string.isRequired,
+  questionType: _propTypes2.default.string.isRequired
 };
 
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    questionSets: state.getIn(['form', 'schema', 'questionSets']).toJS()
+    question: state.getIn(['form', 'schema', 'questionSets', ownProps.questionSetIndex, 'questions', ownProps.questionIndex, 'question']),
+    questionText: state.getIn(['form', 'schema', 'questionSets', ownProps.questionSetIndex, 'questions', ownProps.questionIndex, 'text']),
+    questionType: state.getIn(['form', 'schema', 'questionSets', ownProps.questionSetIndex, 'questions', ownProps.questionIndex, 'input', 'type'])
   };
 }
 

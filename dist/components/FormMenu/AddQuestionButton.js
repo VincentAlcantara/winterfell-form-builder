@@ -87,7 +87,7 @@ var AddQuestionButton = function (_Component) {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
-      this.props.addQuestion(this.state.questionSetId, this.state.questionSetHeader, this.state.questionSetText, this.state.question, this.state.questionText, this.state.questionType);
+      this.props.addQuestion(this.props.currentPanelId, this.state.questionSetId, this.state.questionSetHeader, this.state.questionSetText, this.state.question, this.state.questionText, this.state.questionType);
       this.setState({ showModal: false });
     }
   }, {
@@ -226,13 +226,14 @@ var AddQuestionButton = function (_Component) {
 }(_react.Component);
 
 AddQuestionButton.propTypes = {
-  addQuestion: _propTypes2.default.func.isRequired
+  addQuestion: _propTypes2.default.func.isRequired,
+  currentPanelId: _propTypes2.default.string.isRequired
 };
 
 
 function mapStateToProps(state) {
   return {
-    title: state.getIn(['form', 'currentForm', 'title'])
+    currentPanelId: state.getIn(['form', 'currentPanelId'])
   };
 }
 

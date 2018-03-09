@@ -6,7 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _immutable = require('immutable');
 
+var _lodash = require('lodash');
+
+var _lodash2 = _interopRequireDefault(_lodash);
+
 var _constants = require('../common/constants');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var initialState = (0, _immutable.fromJS)({
   title: '',
@@ -47,7 +53,18 @@ function winterfellFormBuilderReducer() {
     case _constants.DELETE_QUESTION_ERROR:
       return state.set('error', 'An error occurred');
     case _constants.GOTO_PAGE_SUCCESS:
-      return state.set('currentPanelId', action.payload.panelId);
+      {
+        var questionPanels = state.getIn(['schema', 'questionPanels']).toJS();
+        var currentPanelId = action.payload.panelId;
+        var currentPanelIndex = -1;
+        for (var i = 0; i < questionPanels.length; i += 1) {
+          if (questionPanels[i].panelId === currentPanelId) {
+            currentPanelIndex = i;
+          }
+        }
+
+        return state.set('currentPanelIndex', currentPanelIndex).set('currentPanelId', action.payload.panelId);
+      }
     case _constants.RETRIEVE_FORMLIST_SUCCESS:
       return state.set('error', '');
     case _constants.LOAD_FORM_SUCCESS:
@@ -104,7 +121,9 @@ function winterfellFormBuilderReducer() {
       return state.set('error', '');
     case _constants.ADD_QUESTION_SUCCESS:
       {
-        var questionSetCount = state.getIn(['schema', 'questionPanels', 0, 'questionSets']).count() + 1;
+        var _currentPanelIndex = state.get('currentPanelIndex');
+
+        var questionSetCount = state.getIn(['schema', 'questionPanels', _currentPanelIndex, 'questionSets']).size;
 
         var newQuestionSetId = {
           index: questionSetCount,
@@ -128,7 +147,7 @@ function winterfellFormBuilderReducer() {
           questions: [newQuestion]
         };
 
-        return state.updateIn(['schema', 'questionPanels', 0, 'questionSets'], function (arr) {
+        return state.updateIn(['schema', 'questionPanels', _currentPanelIndex, 'questionSets'], function (arr) {
           return arr.push((0, _immutable.fromJS)(newQuestionSetId));
         }).updateIn(['schema', 'questionSets'], function (arr) {
           return arr.push((0, _immutable.fromJS)(newQuestionSet));

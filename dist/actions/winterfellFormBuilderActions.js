@@ -56,10 +56,11 @@ function addPage(panelId, panelHeader, panelText) {
   };
 }
 
-function addQuestion(questionSetId, questionSetHeader, questionSetText, question, questionText, questionType) {
+function addQuestion(currentPanelId, questionSetId, questionSetHeader, questionSetText, question, questionText, questionType) {
   return {
     type: _constants.ADD_QUESTION_SUCCESS,
     payload: {
+      currentPanelId: currentPanelId,
       questionSetId: questionSetId,
       questionSetHeader: questionSetHeader,
       questionSetText: questionSetText,

@@ -52,6 +52,8 @@ var _FormEditor = require('./FormEditor');
 
 var _FormEditor2 = _interopRequireDefault(_FormEditor);
 
+var _FieldEditors = require('./FieldEditors');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var WinterfellFormBuilder = function (_Component) {
@@ -93,8 +95,9 @@ var WinterfellFormBuilder = function (_Component) {
           title = _props.title,
           schema = _props.schema,
           currentPanelId = _props.currentPanelId,
-          questionSet = _props.questionSet;
+          currentPanelIndex = _props.currentPanelIndex;
 
+      console.log('currentPanelIndex: ', currentPanelIndex);
       return _react2.default.createElement(
         _reactBootstrap.Grid,
         null,
@@ -168,12 +171,19 @@ var WinterfellFormBuilder = function (_Component) {
               null,
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 2 },
+                { xs: 3 },
+                _react2.default.createElement(_FieldEditors.PageEditor, {
+                  currentPanelIndex: currentPanelIndex
+                })
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 9 },
                 _react2.default.createElement(_FormEditor2.default, null)
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 10 },
+                { xs: 12 },
                 _react2.default.createElement(_Previewer2.default, {
                   schema: schema,
                   currentPanelId: currentPanelId
@@ -193,16 +203,15 @@ WinterfellFormBuilder.propTypes = {
   title: _propTypes2.default.string,
   schema: _propTypes2.default.object,
   currentPanelId: _propTypes2.default.string,
-  loadForm: _propTypes2.default.func.isRequired,
-  questionSet: _propTypes2.default.object
+  currentPanelIndex: _propTypes2.default.number.isRequired,
+  loadForm: _propTypes2.default.func.isRequired
 };
 WinterfellFormBuilder.defaultProps = {
   title: '',
   schema: null,
   currentPanelId: null,
   inputSchema: {},
-  formPanels: null,
-  questionSet: null
+  formPanels: null
 };
 
 
@@ -211,6 +220,7 @@ function mapStateToProps(state) {
     title: state.getIn(['form', 'title']),
     schema: state.getIn(['form', 'schema']).toJS(),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
+    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
     questionSet: state.getIn(['form', 'schema', 'questionSets', 0])
   };
 }

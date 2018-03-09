@@ -157,15 +157,12 @@ var FormEditorContainer = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var title = this.props.title;
-
       return _react2.default.createElement(
         _reactBootstrap.Row,
         null,
         _react2.default.createElement(
           _reactBootstrap.Col,
           { xs: 12 },
-          title,
           this.getCurrentHeader(),
           this.getCurrentQuestions()
         )
@@ -177,7 +174,6 @@ var FormEditorContainer = function (_Component) {
 
 FormEditorContainer.propTypes = {
   editForm: _propTypes2.default.func.isRequired,
-  title: _propTypes2.default.string.isRequired,
   questionSets: _propTypes2.default.array,
   questionPanels: _propTypes2.default.array,
   currentPanelId: _propTypes2.default.string
