@@ -37,7 +37,8 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
               _reactBootstrap.Button,
               {
                 className: 'winterfell-field-editor btn-block',
-                onClick: onClick
+                onClick: onClick,
+                key: '' + question.questionId
               },
               _react2.default.createElement(
                 'div',

@@ -68,6 +68,8 @@ class FormEditorContainer extends Component {
             />
           }
           { typeof currentPanelIndex !== 'undefined' &&
+            questionPanels[currentPanelIndex] &&
+            questionPanels[currentPanelIndex].questionSets &&
             <FormQuestionSetEditor
               currentQuestionSets={questionPanels[currentPanelIndex].questionSets}
               questionSets={questionSets}

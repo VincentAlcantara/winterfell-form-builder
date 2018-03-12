@@ -193,8 +193,8 @@ var EditQuestionButton = function (_Component) {
 
 EditQuestionButton.propTypes = {
   editQuestion: _propTypes2.default.func.isRequired,
-  questionSetIndex: _propTypes2.default.string.isRequired,
-  questionIndex: _propTypes2.default.string.isRequired,
+  questionSetIndex: _propTypes2.default.number.isRequired,
+  questionIndex: _propTypes2.default.number.isRequired,
   question: _propTypes2.default.string.isRequired,
   questionText: _propTypes2.default.string.isRequired,
   questionType: _propTypes2.default.string.isRequired

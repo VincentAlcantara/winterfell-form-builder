@@ -16,6 +16,7 @@ export const FormQuestionSetEditor = (props) => {
               <Button
                 className="winterfell-field-editor btn-block"
                 onClick={onClick}
+                key={`${question.questionId}`}
               >
                 <div>
                   <label htmlFor={question.questionId}>{question.question}</label>

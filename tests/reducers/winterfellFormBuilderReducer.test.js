@@ -89,8 +89,10 @@ describe('wintefellFormBuilderReducer', () => {
             panelId: 'page-1',
             panelHeader: 'Survey Page 1',
             panelText: 'Let\'s grab some of your details',
+            questionSets: [],
           },
         ],
+        questionSets: [],
       },
 
       currentPanelId: null,
@@ -114,12 +116,15 @@ describe('wintefellFormBuilderReducer', () => {
             panelId: 'page-1',
             panelHeader: 'Survey Page 1',
             panelText: 'Let\'s grab some of your details',
+            questionSets: [],
           }, {
             panelId: 'page-2',
             panelHeader: 'Page-Heading-2',
             panelText: 'Page-Text-2',
+            questionSets: [],
           },
         ],
+        questionSets: [],
       },
 
       currentPanelId: null,
@@ -152,8 +157,10 @@ describe('wintefellFormBuilderReducer', () => {
             panelId: 'page-1',
             panelHeader: 'Survey Page 1',
             panelText: 'Let\'s grab some of your details',
+            questionSets: [],
           },
         ],
+        questionSets: [],
       },
 
       currentPanelId: null,
@@ -177,12 +184,15 @@ describe('wintefellFormBuilderReducer', () => {
             panelId: 'page-1',
             panelHeader: 'Survey Page 1',
             panelText: 'Let\'s grab some of your details',
+            questionSets: [],
           }, {
             panelId: 'page-2',
             panelHeader: 'A New Page 2',
             panelText: 'This is a new page',
+            questionSets: [],
           },
         ],
+        questionSets: [],
       },
 
       currentPanelId: null,

@@ -75,7 +75,8 @@ function winterfellFormBuilderReducer() {
         var newQuestionPanel = {
           panelId: action.payload.panelId || 'page-' + formPanelsCount,
           panelHeader: action.payload.panelHeader || 'Page-Heading-' + formPanelsCount,
-          panelText: action.payload.panelText || 'Page-Text-' + formPanelsCount
+          panelText: action.payload.panelText || 'Page-Text-' + formPanelsCount,
+          questionSets: []
         };
 
         return state.updateIn(['schema', 'formPanels'], function (arr) {

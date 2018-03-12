@@ -117,7 +117,7 @@ var FormEditorContainer = function (_Component) {
               return _this2.props.changeCurrentEditingField('page');
             }
           }),
-          typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_FormQuestionSetEditor.FormQuestionSetEditor, {
+          typeof currentPanelIndex !== 'undefined' && questionPanels[currentPanelIndex] && questionPanels[currentPanelIndex].questionSets && _react2.default.createElement(_FormQuestionSetEditor.FormQuestionSetEditor, {
             currentQuestionSets: questionPanels[currentPanelIndex].questionSets,
             questionSets: questionSets,
             onClick: function onClick() {

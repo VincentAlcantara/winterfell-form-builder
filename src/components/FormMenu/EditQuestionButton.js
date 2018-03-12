@@ -9,8 +9,8 @@ import FieldGroup from '../UI/FieldGroup';
 class EditQuestionButton extends Component {
   static propTypes = {
     editQuestion: PropTypes.func.isRequired,
-    questionSetIndex: PropTypes.string.isRequired,
-    questionIndex: PropTypes.string.isRequired,
+    questionSetIndex: PropTypes.number.isRequired,
+    questionIndex: PropTypes.number.isRequired,
     question: PropTypes.string.isRequired,
     questionText: PropTypes.string.isRequired,
     questionType: PropTypes.string.isRequired,
