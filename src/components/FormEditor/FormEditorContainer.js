@@ -37,7 +37,6 @@ class FormEditorContainer extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
-    this.getCurrentQuestions = this.getCurrentQuestions.bind(this);
   }
 
   onChange(event) {
@@ -54,33 +53,6 @@ class FormEditorContainer extends Component {
     e.preventDefault();
     this.props.editFormTitle(this.state.formTitle);
     this.setState({ showModal: false });
-  }
-
-  getCurrentQuestions() {
-    const { questionPanels, questionSets, currentPanelIndex } = this.props;
-    // const currentPanel = _.find(questionPanels, panel => panel.panelId === currentPanelId);
-    const currentPanel = questionPanels[currentPanelIndex];
-
-    if (currentPanel) {
-      const currentQuestionSets = currentPanel.questionSets; // currentQuestionSets includes
-      return currentQuestionSets.map(currentQuestionSet => (
-        questionSets.map((questionSet, index) => {
-          if (currentQuestionSet.questionSetId === questionSet.questionSetId) {
-            return questionSet.questions.map((question, ix) => (
-              <p>
-                <i>{question.question}</i>
-                <EditQuestionButton
-                  questionSetIndex={index}
-                  questionIndex={ix}
-                />
-              </p>
-            ));
-          } // end-of-if
-          return null;
-        })
-      ));
-    }
-    return null;
   }
 
   render() {
@@ -102,7 +74,6 @@ class FormEditorContainer extends Component {
               onClick={() => this.props.changeCurrentEditingField('questionSet')}
             />
           }
-          { this.getCurrentQuestions() }
         </Col>
       </Row>
     );

@@ -73,7 +73,6 @@ var PageEditor = function (_Component) {
   (0, _createClass3.default)(PageEditor, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      console.log('nextProps', nextProps);
       this.state = {
         panelHeader: nextProps.panelHeader,
         panelText: nextProps.panelText
@@ -95,7 +94,6 @@ var PageEditor = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log('panelHeader:');
       return _react2.default.createElement(
         _reactBootstrap.Row,
         null,
@@ -150,9 +148,6 @@ PageEditor.defaultProps = {
 
 
 function mapStateToProps(state, ownProps) {
-  console.log('ownProps:', ownProps);
-  console.log('panelHeader:', state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelHeader']));
-
   return {
     panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelHeader']),
     panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelText'])

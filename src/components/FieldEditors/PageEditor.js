@@ -31,7 +31,6 @@ class PageEditor extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('nextProps', nextProps);
     this.state = {
       panelHeader: nextProps.panelHeader,
       panelText: nextProps.panelText,
@@ -81,10 +80,6 @@ class PageEditor extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('ownProps:', ownProps);
-  console.log('panelHeader:', state.getIn(['form', 'schema', 'questionPanels',
-    ownProps.currentPanelIndex, 'panelHeader']));
-
   return {
     panelHeader: state.getIn(['form', 'schema', 'questionPanels',
       ownProps.currentPanelIndex, 'panelHeader']),

@@ -69,9 +69,6 @@ class WinterfellFormBuilder extends Component {
               <Col xs={10}>
                 <h3>Form: {title}</h3>
               </Col>
-              <Col xs={2} className="text-right">
-                <Pagination />
-              </Col>
             </Row>
             <hr />
             <Row>
@@ -89,6 +86,9 @@ class WinterfellFormBuilder extends Component {
               </Col>
               <Col xs={2}>
                 <AddQuestionButton />
+              </Col>
+              <Col xs={2} className="text-right">
+                <Pagination />
               </Col>
             </Row>
             <hr />

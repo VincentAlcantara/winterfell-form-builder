@@ -40,10 +40,6 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactBootstrap = require('react-bootstrap');
 
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 var _EditQuestionButton = require('../FormMenu/EditQuestionButton');
@@ -76,7 +72,6 @@ var FormEditorContainer = function (_Component) {
 
     _this.onChange = _this.onChange.bind(_this);
     _this.onFormUpdate = _this.onFormUpdate.bind(_this);
-    _this.getCurrentQuestions = _this.getCurrentQuestions.bind(_this);
     return _this;
   }
 
@@ -100,51 +95,14 @@ var FormEditorContainer = function (_Component) {
       this.setState({ showModal: false });
     }
   }, {
-    key: 'getCurrentQuestions',
-    value: function getCurrentQuestions() {
-      var _props = this.props,
-          questionPanels = _props.questionPanels,
-          questionSets = _props.questionSets,
-          currentPanelId = _props.currentPanelId;
-
-      var currentPanel = questionPanels[currentPanelId];
-      if (currentPanel) {
-        var currentQuestionSets = currentPanel.questionSets; // currentQuestionSets includes
-        return currentQuestionSets.map(function (currentQuestionSet) {
-          return questionSets.map(function (questionSet, index) {
-            if (currentQuestionSet.questionSetId === questionSet.questionSetId) {
-              return questionSet.questions.map(function (question, ix) {
-                return _react2.default.createElement(
-                  'p',
-                  null,
-                  _react2.default.createElement(
-                    'i',
-                    null,
-                    question.question
-                  ),
-                  _react2.default.createElement(_EditQuestionButton2.default, {
-                    questionSetIndex: index,
-                    questionIndex: ix
-                  })
-                );
-              });
-            } // end-of-if
-            return null;
-          });
-        });
-      }
-      return null;
-    }
-  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
-      var _props2 = this.props,
-          currentPanelIndex = _props2.currentPanelIndex,
-          questionPanels = _props2.questionPanels,
-          questionSets = _props2.questionSets,
-          questionSetIndex = _props2.questionSetIndex;
+      var _props = this.props,
+          currentPanelIndex = _props.currentPanelIndex,
+          questionPanels = _props.questionPanels,
+          questionSets = _props.questionSets;
 
       return _react2.default.createElement(
         _reactBootstrap.Row,
@@ -160,13 +118,12 @@ var FormEditorContainer = function (_Component) {
             }
           }),
           typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_FormQuestionSetEditor.FormQuestionSetEditor, {
+            currentQuestionSets: questionPanels[currentPanelIndex].questionSets,
             questionSets: questionSets,
-            questionSetIndex: questionSetIndex,
             onClick: function onClick() {
               return _this2.props.changeCurrentEditingField('questionSet');
             }
-          }),
-          this.getCurrentQuestions()
+          })
         )
       );
     }
@@ -178,10 +135,8 @@ FormEditorContainer.propTypes = {
   editFormTitle: _propTypes2.default.func.isRequired,
   changeCurrentEditingField: _propTypes2.default.func.isRequired,
   currentPanelIndex: _propTypes2.default.number.isRequired,
-  questionSetIndex: _propTypes2.default.number.isRequired,
   questionSets: _propTypes2.default.array,
-  questionPanels: _propTypes2.default.array,
-  currentPanelId: _propTypes2.default.string
+  questionPanels: _propTypes2.default.array
 };
 FormEditorContainer.defaultProps = {
   currentPanelId: _propTypes2.default.string,

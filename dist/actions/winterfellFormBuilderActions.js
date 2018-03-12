@@ -128,7 +128,6 @@ function addQuestion(currentPanelId, questionSetId, questionSetHeader, questionS
 }
 
 function changeCurrentEditingField(currentEditingField) {
-  console.log('changing field');
   return {
     type: _constants.CHANGE_EDITING_FIELD_SUCCESS,
     payload: { currentEditingField: currentEditingField }

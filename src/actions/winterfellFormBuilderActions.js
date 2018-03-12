@@ -157,7 +157,6 @@ export function addQuestion(
 }
 
 export function changeCurrentEditingField(currentEditingField) {
-  console.log('changing field');
   return {
     type: CHANGE_EDITING_FIELD_SUCCESS,
     payload: { currentEditingField },
