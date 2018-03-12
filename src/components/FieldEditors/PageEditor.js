@@ -49,7 +49,6 @@ class PageEditor extends Component {
   }
 
   render() {
-    console.log('panelHeader:');
     return (
       <Row>
         <Col xs={12}>

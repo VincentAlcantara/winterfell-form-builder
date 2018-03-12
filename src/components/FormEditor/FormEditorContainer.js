@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
-import _ from 'lodash';
 
 import { changeCurrentEditingField, editFormTitle } from '../../actions/winterfellFormBuilderActions';
 import EditQuestionButton from '../FormMenu/EditQuestionButton';
@@ -18,10 +17,8 @@ class FormEditorContainer extends Component {
     editFormTitle: PropTypes.func.isRequired,
     changeCurrentEditingField: PropTypes.func.isRequired,
     currentPanelIndex: PropTypes.number.isRequired,
-    questionSetIndex: PropTypes.number.isRequired,
     questionSets: PropTypes.array,
     questionPanels: PropTypes.array,
-    currentPanelId: PropTypes.string,
   };
 
   static defaultProps = {
@@ -60,8 +57,10 @@ class FormEditorContainer extends Component {
   }
 
   getCurrentQuestions() {
-    const { questionPanels, questionSets, currentPanelId } = this.props;
-    const currentPanel = questionPanels[currentPanelId];
+    const { questionPanels, questionSets, currentPanelIndex } = this.props;
+    // const currentPanel = _.find(questionPanels, panel => panel.panelId === currentPanelId);
+    const currentPanel = questionPanels[currentPanelIndex];
+
     if (currentPanel) {
       const currentQuestionSets = currentPanel.questionSets; // currentQuestionSets includes
       return currentQuestionSets.map(currentQuestionSet => (
@@ -85,7 +84,7 @@ class FormEditorContainer extends Component {
   }
 
   render() {
-    const { currentPanelIndex, questionPanels, questionSets, questionSetIndex } = this.props;
+    const { currentPanelIndex, questionPanels, questionSets } = this.props;
     return (
       <Row>
         <Col xs={12}>
@@ -98,8 +97,8 @@ class FormEditorContainer extends Component {
           }
           { typeof currentPanelIndex !== 'undefined' &&
             <FormQuestionSetEditor
+              currentQuestionSets={questionPanels[currentPanelIndex].questionSets}
               questionSets={questionSets}
-              questionSetIndex={questionSetIndex}
               onClick={() => this.props.changeCurrentEditingField('questionSet')}
             />
           }

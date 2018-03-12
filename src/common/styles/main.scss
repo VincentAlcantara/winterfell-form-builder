@@ -1,21 +1,9 @@
-// Colors
-$bg-color: #7577FA;
-$dot-color: #9192FB;
-$dot-size: 2px;
-$dot-space: 22px;
-
-.swinterfell-field-editor:hover {
-  background:
-  linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
-  linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center,
-  $dot-color;
-  background-size: $dot-space $dot-space;
-}
-
 .winterfell-field-editor.btn-default {
   text-align: left;
   border: 1px solid transparent;
   border-radius: 0;
+  padding-top: 0;
+  padding-bottom: 0;
   &:hover {
     text-align: left;
     border: 1px dotted #ccc;
