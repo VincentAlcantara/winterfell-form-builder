@@ -82,7 +82,7 @@ var FormTitleEditor = function (_Component) {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
-      this.props.editForm(this.state.formTitle);
+      this.props.editFormTitle(this.state.formTitle);
       this.setState({ showModal: false });
     }
   }, {
@@ -176,7 +176,7 @@ var FormTitleEditor = function (_Component) {
 }(_react.Component);
 
 FormTitleEditor.propTypes = {
-  editForm: _propTypes2.default.func.isRequired,
+  editFormTitle: _propTypes2.default.func.isRequired,
   title: _propTypes2.default.string.isRequired
 };
 
@@ -187,7 +187,7 @@ function mapStateToProps(state) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { editForm: _winterfellFormBuilderActions.editForm })(FormTitleEditor);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { editFormTitle: _winterfellFormBuilderActions.editFormTitle })(FormTitleEditor);
 
 exports.default = _default;
 ;

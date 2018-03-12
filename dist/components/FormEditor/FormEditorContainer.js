@@ -50,7 +50,16 @@ var _EditQuestionButton = require('../FormMenu/EditQuestionButton');
 
 var _EditQuestionButton2 = _interopRequireDefault(_EditQuestionButton);
 
+var _FormPageEditor = require('./FormPageEditor');
+
+var _FormQuestionSetEditor = require('./FormQuestionSetEditor');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// import {
+//   FormPageEditor,
+//   FormQuestionSetEditor,
+//  } from './index';
 
 var FormEditorContainer = function (_Component) {
   (0, _inherits3.default)(FormEditorContainer, _Component);
@@ -67,7 +76,6 @@ var FormEditorContainer = function (_Component) {
 
     _this.onChange = _this.onChange.bind(_this);
     _this.onFormUpdate = _this.onFormUpdate.bind(_this);
-    _this.getCurrentHeader = _this.getCurrentHeader.bind(_this);
     _this.getCurrentQuestions = _this.getCurrentQuestions.bind(_this);
     return _this;
   }
@@ -88,45 +96,18 @@ var FormEditorContainer = function (_Component) {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
-      this.props.editForm(this.state.formTitle);
+      this.props.editFormTitle(this.state.formTitle);
       this.setState({ showModal: false });
-    }
-  }, {
-    key: 'getCurrentHeader',
-    value: function getCurrentHeader() {
-      var _props = this.props,
-          questionPanels = _props.questionPanels,
-          currentPanelId = _props.currentPanelId;
-
-      var currentPanel = _lodash2.default.find(questionPanels, function (panel) {
-        return panel.panelId === currentPanelId;
-      });
-      return currentPanel && _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(
-          'h3',
-          null,
-          currentPanel.panelHeader
-        ),
-        _react2.default.createElement(
-          'p',
-          null,
-          currentPanel.panelText
-        )
-      );
     }
   }, {
     key: 'getCurrentQuestions',
     value: function getCurrentQuestions() {
-      var _props2 = this.props,
-          questionPanels = _props2.questionPanels,
-          questionSets = _props2.questionSets,
-          currentPanelId = _props2.currentPanelId;
+      var _props = this.props,
+          questionPanels = _props.questionPanels,
+          questionSets = _props.questionSets,
+          currentPanelId = _props.currentPanelId;
 
-      var currentPanel = _lodash2.default.find(questionPanels, function (panel) {
-        return panel.panelId === currentPanelId;
-      });
+      var currentPanel = questionPanels[currentPanelId];
       if (currentPanel) {
         var currentQuestionSets = currentPanel.questionSets; // currentQuestionSets includes
         return currentQuestionSets.map(function (currentQuestionSet) {
@@ -157,13 +138,34 @@ var FormEditorContainer = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
+      var _props2 = this.props,
+          currentPanelIndex = _props2.currentPanelIndex,
+          questionPanels = _props2.questionPanels,
+          questionSets = _props2.questionSets,
+          questionSetIndex = _props2.questionSetIndex;
+
       return _react2.default.createElement(
         _reactBootstrap.Row,
         null,
         _react2.default.createElement(
           _reactBootstrap.Col,
           { xs: 12 },
-          this.getCurrentHeader(),
+          typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_FormPageEditor.FormPageEditor, {
+            questionPanels: questionPanels,
+            currentPanelIndex: currentPanelIndex,
+            onClick: function onClick() {
+              return _this2.props.changeCurrentEditingField('page');
+            }
+          }),
+          typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_FormQuestionSetEditor.FormQuestionSetEditor, {
+            questionSets: questionSets,
+            questionSetIndex: questionSetIndex,
+            onClick: function onClick() {
+              return _this2.props.changeCurrentEditingField('questionSet');
+            }
+          }),
           this.getCurrentQuestions()
         )
       );
@@ -173,7 +175,10 @@ var FormEditorContainer = function (_Component) {
 }(_react.Component);
 
 FormEditorContainer.propTypes = {
-  editForm: _propTypes2.default.func.isRequired,
+  editFormTitle: _propTypes2.default.func.isRequired,
+  changeCurrentEditingField: _propTypes2.default.func.isRequired,
+  currentPanelIndex: _propTypes2.default.number.isRequired,
+  questionSetIndex: _propTypes2.default.number.isRequired,
   questionSets: _propTypes2.default.array,
   questionPanels: _propTypes2.default.array,
   currentPanelId: _propTypes2.default.string
@@ -189,13 +194,14 @@ function mapStateToProps(state) {
   return {
     title: state.getIn(['form', 'title']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
+    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
     questionPanels: state.getIn(['form', 'schema', 'questionPanels']).toJS(),
     questionSets: state.getIn(['form', 'schema', 'questionSets']).toJS(),
     schema: state.getIn(['form', 'schema'])
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { editForm: _winterfellFormBuilderActions.editForm })(FormEditorContainer);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField, editFormTitle: _winterfellFormBuilderActions.editFormTitle })(FormEditorContainer);
 
 exports.default = _default;
 ;

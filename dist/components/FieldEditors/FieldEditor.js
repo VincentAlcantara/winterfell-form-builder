@@ -82,7 +82,7 @@ var EditFormTitleButton = function (_Component) {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
-      this.props.editForm(this.state.formTitle);
+      this.props.editFormTitle(this.state.formTitle);
       this.setState({ showModal: false });
     }
   }, {
@@ -117,7 +117,7 @@ var EditFormTitleButton = function (_Component) {
 }(_react.Component);
 
 EditFormTitleButton.propTypes = {
-  editForm: _propTypes2.default.func.isRequired,
+  editFormTitle: _propTypes2.default.func.isRequired,
   title: _propTypes2.default.string.isRequired
 };
 
@@ -128,7 +128,7 @@ function mapStateToProps(state) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { editForm: _winterfellFormBuilderActions.editForm })(EditFormTitleButton);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { editFormTitle: _winterfellFormBuilderActions.editFormTitle })(EditFormTitleButton);
 
 exports.default = _default;
 ;

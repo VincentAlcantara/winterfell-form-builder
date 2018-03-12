@@ -52,7 +52,9 @@ var _FormEditor = require('./FormEditor');
 
 var _FormEditor2 = _interopRequireDefault(_FormEditor);
 
-var _FieldEditors = require('./FieldEditors');
+var _PageEditor = require('./FieldEditors/PageEditor');
+
+var _PageEditor2 = _interopRequireDefault(_PageEditor);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -172,7 +174,7 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 3 },
-                _react2.default.createElement(_FieldEditors.PageEditor, {
+                typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_PageEditor2.default, {
                   currentPanelIndex: currentPanelIndex
                 })
               ),
