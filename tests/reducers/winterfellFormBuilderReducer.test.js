@@ -16,7 +16,6 @@ describe('wintefellFormBuilderReducer', () => {
     schema: {
       classes,
     },
-    error: '',
     currentPanelId: null,
   });
 
@@ -46,7 +45,6 @@ describe('wintefellFormBuilderReducer', () => {
         }],
         questionSets: [],
       },
-      error: '',
       currentPanelId: null,
     });
 
@@ -64,7 +62,7 @@ describe('wintefellFormBuilderReducer', () => {
       schema: {
         classes,
       },
-      error: 'An error occurred.',
+
       currentPanelId: null,
     });
 
@@ -94,7 +92,7 @@ describe('wintefellFormBuilderReducer', () => {
           },
         ],
       },
-      error: '',
+
       currentPanelId: null,
     });
 
@@ -123,7 +121,7 @@ describe('wintefellFormBuilderReducer', () => {
           },
         ],
       },
-      error: '',
+
       currentPanelId: null,
     });
 
@@ -157,7 +155,7 @@ describe('wintefellFormBuilderReducer', () => {
           },
         ],
       },
-      error: '',
+
       currentPanelId: null,
     });
 
@@ -186,7 +184,7 @@ describe('wintefellFormBuilderReducer', () => {
           },
         ],
       },
-      error: '',
+
       currentPanelId: null,
     });
 

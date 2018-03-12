@@ -1,37 +1,16 @@
 import { fromJS } from 'immutable';
-import _ from 'lodash';
 
 import {
-  RETRIEVE_FORMLIST_REQUEST,
-  RETRIEVE_FORMLIST_SUCCESS,
-  RETRIEVE_FORMLIST_ERROR,
+  BOOTSTRAP_CLASSES,
   LOAD_FORM_SUCCESS,
-  LOAD_FORM_ERROR,
   CREATE_FORM_SUCCESS,
-  CREATE_FORM_ERROR,
   EDIT_FORM_TITLE_SUCCESS,
   GOTO_PAGE_SUCCESS,
   UPDATE_FORM_SUCCESS,
-  UPDATE_FORM_ERROR,
-  DELETE_FORM_SUCCESS,
-  DELETE_FORM_ERROR,
   ADD_PAGE_SUCCESS,
-  ADD_PAGE_ERROR,
-  UPDATE_PAGE_SUCCESS,
-  UPDATE_PAGE_ERROR,
-  // UPDATE_PAGE_HEADER_SUCCESS,
-  // UPDATE_PAGE_HEADER_ERROR,
-  // UPDATE_PAGE_TEXT_SUCCESS,
-  // UPDATE_PAGE_TEXT_ERROR,
-  DELETE_PAGE_SUCCESS,
-  DELETE_PAGE_ERROR,
   ADD_QUESTION_SUCCESS,
-  ADD_QUESTION_ERROR,
   UPDATE_QUESTION_SUCCESS,
-  UPDATE_QUESTION_ERROR,
-  DELETE_QUESTION_SUCCESS,
-  DELETE_QUESTION_ERROR,
-  BOOTSTRAP_CLASSES,
+  CHANGE_EDITING_FIELD_SUCCESS,
 } from '../common/constants';
 
 const initialState = fromJS({
@@ -40,47 +19,10 @@ const initialState = fromJS({
     classes: BOOTSTRAP_CLASSES,
   },
   currentPanelId: null,
-  error: '',
 });
 
 function winterfellFormBuilderReducer(state = initialState, action) {
   switch (action.type) {
-    case RETRIEVE_FORMLIST_REQUEST:
-      return state
-        .set('error', '');
-    case RETRIEVE_FORMLIST_ERROR:
-      return state
-        .set('error', 'An error occurred.');
-    case LOAD_FORM_ERROR:
-      return state
-        .set('error', 'Unable to load form.');
-    case CREATE_FORM_ERROR:
-      return state
-        .set('error', 'An error occurred.');
-    case UPDATE_FORM_ERROR:
-      return state
-        .set('error', 'An error occurred.');
-    case DELETE_FORM_ERROR:
-      return state
-        .set('error', 'An error occurred.');
-    case ADD_PAGE_ERROR:
-      return state
-        .set('error', 'An error occurred.');
-    case UPDATE_PAGE_ERROR:
-      return state
-        .set('error', 'An error occurred.');
-    case DELETE_PAGE_ERROR:
-      return state
-        .set('error', 'An error occurred.');
-    case ADD_QUESTION_ERROR:
-      return state
-        .set('error', 'An error occurred.');
-    case UPDATE_QUESTION_ERROR:
-      return state
-        .set('error', 'An error occurred.');
-    case DELETE_QUESTION_ERROR:
-      return state
-        .set('error', 'An error occurred');
     case GOTO_PAGE_SUCCESS: {
       const questionPanels = state.getIn(['schema', 'questionPanels']).toJS();
       const currentPanelId = action.payload.panelId;
@@ -95,14 +37,14 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .set('currentPanelIndex', currentPanelIndex)
         .set('currentPanelId', action.payload.panelId);
     }
-    case RETRIEVE_FORMLIST_SUCCESS:
-      return state
-        .set('error', '');
     case LOAD_FORM_SUCCESS: {
       return state
         .set('currentPanelId', 'Select Page')
-        .set('schema', fromJS(action.payload.schema))
-        .set('error', '');
+        .set('schema', fromJS(action.payload.schema));
+    }
+    case CHANGE_EDITING_FIELD_SUCCESS: {
+      return state
+        .set('currentEditingField', action.payload.currentEditingField);
     }
     case CREATE_FORM_SUCCESS:
       return state
@@ -120,19 +62,13 @@ function winterfellFormBuilderReducer(state = initialState, action) {
             questionSets: [],
           }],
           questionSets: [],
-        }))
-        .set('error', '');
+        }));
     case EDIT_FORM_TITLE_SUCCESS:
       return state
-        .set('title', action.payload.title)
-        .set('error', '');
+        .set('title', action.payload.title);
     case UPDATE_FORM_SUCCESS:
       return state
-        .update('schema', () => fromJS(action.payload.schema))
-        .set('error', '');
-    case DELETE_FORM_SUCCESS:
-      return state
-        .set('error', '');
+        .update('schema', () => fromJS(action.payload.schema));
     case ADD_PAGE_SUCCESS: {
       const formPanelsCount = state.getIn(['schema', 'formPanels']).count() + 1;
 
@@ -151,15 +87,8 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .updateIn(['schema', 'formPanels'], arr =>
           arr.push(fromJS(newFormPanel)))
         .updateIn(['schema', 'questionPanels'], arr =>
-          arr.push(fromJS(newQuestionPanel)))
-        .set('error', '');
+          arr.push(fromJS(newQuestionPanel)));
     }
-    case UPDATE_PAGE_SUCCESS:
-      return state
-        .set('error', '');
-    case DELETE_PAGE_SUCCESS:
-      return state
-        .set('error', '');
     case ADD_QUESTION_SUCCESS: {
       const currentPanelIndex = state.get('currentPanelIndex');
 
@@ -191,8 +120,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .updateIn(['schema', 'questionPanels', currentPanelIndex, 'questionSets'], arr =>
           arr.push(fromJS(newQuestionSetId)))
         .updateIn(['schema', 'questionSets'], arr =>
-          arr.push(fromJS(newQuestionSet)))
-        .set('error', '');
+          arr.push(fromJS(newQuestionSet)));
     }
     case UPDATE_QUESTION_SUCCESS: {
       const { questionSetIndex, questionIndex, question, questionText } = action.payload;
@@ -200,15 +128,11 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .setIn(['schema', 'questionSets', questionSetIndex,
           'questions', questionIndex, 'question'], question)
         .setIn(['schema', 'questionSets', questionSetIndex,
-          'questions', questionIndex, 'text'], questionText)
-        .set('error', '');
+          'questions', questionIndex, 'text'], questionText);
     }
-    case DELETE_QUESTION_SUCCESS:
-      return state
-        .set('error', '');
-    default: {
+
+    default:
       return state;
-    }
   }
 }
 

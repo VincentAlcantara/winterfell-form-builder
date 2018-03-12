@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Row, FormGroup } from 'react-bootstrap';
-import { editForm } from '../../actions/winterfellFormBuilderActions';
+import { Row, Col, FormGroup } from 'react-bootstrap';
+import { editFormTitle } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
-
 
 class PageEditor extends Component {
   static propTypes = {
-    editForm: PropTypes.func.isRequired,
+    editFormTitle: PropTypes.func.isRequired,
     panelHeader: PropTypes.string,
     panelText: PropTypes.string,
   }
@@ -41,39 +40,42 @@ class PageEditor extends Component {
   onChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
-    this.props.editForm(event.target.value);
+    this.props.editFormTitle(event.target.value);
   }
 
   onFormUpdate(e) {
     e.preventDefault();
-    this.props.editForm(this.state.formTitle);
+    this.props.editFormTitle(this.state.formTitle);
   }
 
   render() {
+    console.log('panelHeader:');
     return (
       <Row>
-        <form>
-          <FormGroup>
-            <FieldGroup
-              id="panelHeader"
-              name="panelHeader"
-              label="Page Header"
-              onChange={this.onChange}
-              placeholder={this.props.panelHeader}
-              value={this.state.panelHeader}
-            />
-          </FormGroup>
-          <FormGroup>
-            <FieldGroup
-              id="panelText"
-              name="panelText"
-              label="Page Text"
-              placeholder="low"
-              onChange={this.onChange}
-              value={this.state.panelText}
-            />
-          </FormGroup>
-        </form>
+        <Col xs={12}>
+          <form>
+            <FormGroup>
+              <FieldGroup
+                id="panelHeader"
+                name="panelHeader"
+                label="Page Header"
+                onChange={this.onChange}
+                placeholder={this.props.panelHeader}
+                value={this.state.panelHeader}
+              />
+            </FormGroup>
+            <FormGroup>
+              <FieldGroup
+                id="panelText"
+                name="panelText"
+                label="Page Text"
+                placeholder="low"
+                onChange={this.onChange}
+                value={this.state.panelText}
+              />
+            </FormGroup>
+          </form>
+        </Col>
       </Row>
     );
   }
@@ -91,5 +93,5 @@ function mapStateToProps(state, ownProps) {
       ownProps.currentPanelIndex, 'panelText']),
   };
 }
-export default connect(mapStateToProps, { editForm })(PageEditor);
+export default connect(mapStateToProps, { editFormTitle })(PageEditor);
 

@@ -13,7 +13,7 @@ import {
   AddQuestionButton,
 } from './FormMenu';
 import FormEditor from './FormEditor';
-import { PageEditor } from './FieldEditors';
+import PageEditor from './FieldEditors/PageEditor';
 
 class WinterfellFormBuilder extends Component {
   static propTypes = {
@@ -94,9 +94,11 @@ class WinterfellFormBuilder extends Component {
             <hr />
             <Row>
               <Col xs={3}>
-                <PageEditor
-                  currentPanelIndex={currentPanelIndex}
-                />
+                { typeof currentPanelIndex !== 'undefined' &&
+                  <PageEditor
+                    currentPanelIndex={currentPanelIndex}
+                  />
+                }
               </Col>
               <Col xs={9}>
                 <FormEditor />

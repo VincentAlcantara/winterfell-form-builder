@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
-import { editForm } from '../../actions/winterfellFormBuilderActions';
+import { editFormTitle } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
 
 
 class EditFormTitleButton extends Component {
   static propTypes = {
-    editForm: PropTypes.func.isRequired,
+    editFormTitle: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
   }
 
@@ -27,12 +27,12 @@ class EditFormTitleButton extends Component {
   onChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
-    this.props.editForm(event.target.value);
+    this.props.editFormTitle(event.target.value);
   }
 
   onFormUpdate(e) {
     e.preventDefault();
-    this.props.editForm(this.state.formTitle);
+    this.props.editFormTitle(this.state.formTitle);
   }
 
   render() {
@@ -62,5 +62,5 @@ function mapStateToProps(state) {
     title: state.getIn(['form', 'title']),
   };
 }
-export default connect(mapStateToProps, { editForm })(EditFormTitleButton);
+export default connect(mapStateToProps, { editFormTitle })(EditFormTitleButton);
 

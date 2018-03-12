@@ -5,10 +5,9 @@
 import PageEditor from './PageEditor';
 
 
-export {
-  // FormHeaderButton,
+export default PageEditor;
+ // FormHeaderButton,
   // FormTextButton,
   // FieldEditor,
   // AddQuestionButton,
-  PageEditor,
-};
+

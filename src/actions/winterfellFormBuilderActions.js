@@ -34,6 +34,14 @@ import {
   // DELETE_QUESTION_REQUEST,
   // DELETE_QUESTION_SUCCESS,
   // DELETE_QUESTION_ERROR,
+  CHANGE_EDITING_FIELD_SUCCESS,
+  EDIT_PAGE_HEADER_SUCCESS,
+  EDIT_PAGE_TEXT_SUCCESS,
+  EDIT_QUESTION_SET_HEADER_SUCCESS,
+  EDIT_QUESTION_SET_TEXT_SUCCESS,
+  EDIT_QUESTION_TEXT_SUCCESS,
+  EDIT_QUESTION_PRE_TEXT_SUCCESS,
+  EDIT_QUESTION_POST_TEXT_SUCCESS,
 } from '../common/constants';
 
 export function loadForm(schema) {
@@ -50,10 +58,59 @@ export function createForm(title) {
   };
 }
 
-export function editForm(title) {
+export function editFormTitle(title) {
   return {
     type: EDIT_FORM_TITLE_SUCCESS,
     payload: { title },
+  };
+}
+
+export function editPageHeader(questionPanelIndex, header) {
+  return {
+    type: EDIT_PAGE_HEADER_SUCCESS,
+    payload: { questionPanelIndex, header },
+  };
+}
+
+export function editPageText(questionPanelIndex, text) {
+  return {
+    type: EDIT_PAGE_TEXT_SUCCESS,
+    payload: { questionPanelIndex, text },
+  };
+}
+
+export function editQuestionSetHeader(questionSetIndex, header) {
+  return {
+    type: EDIT_QUESTION_SET_HEADER_SUCCESS,
+    payload: { questionSetIndex, header },
+  };
+}
+
+export function editQuestionSetText(questionSetIndex, text) {
+  return {
+    type: EDIT_QUESTION_SET_TEXT_SUCCESS,
+    payload: { questionSetIndex, text },
+  };
+}
+
+export function editQuestionText(questionSetIndex, questionIndex, text) {
+  return {
+    type: EDIT_QUESTION_TEXT_SUCCESS,
+    payload: { questionSetIndex, questionIndex, text },
+  };
+}
+
+export function editQuestionPreText(questionSetIndex, questionIndex, text) {
+  return {
+    type: EDIT_QUESTION_PRE_TEXT_SUCCESS,
+    payload: { questionSetIndex, questionIndex, text },
+  };
+}
+
+export function editQuestionPostText(questionSetIndex, questionIndex, text) {
+  return {
+    type: EDIT_QUESTION_POST_TEXT_SUCCESS,
+    payload: { questionSetIndex, questionIndex, text },
   };
 }
 
@@ -96,6 +153,14 @@ export function addQuestion(
       question,
       questionText,
       questionType },
+  };
+}
+
+export function changeCurrentEditingField(currentEditingField) {
+  console.log('changing field');
+  return {
+    type: CHANGE_EDITING_FIELD_SUCCESS,
+    payload: { currentEditingField },
   };
 }
 

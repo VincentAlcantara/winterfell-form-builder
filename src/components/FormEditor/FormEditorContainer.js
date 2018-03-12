@@ -4,12 +4,21 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import _ from 'lodash';
 
-import { editForm } from '../../actions/winterfellFormBuilderActions';
+import { changeCurrentEditingField, editFormTitle } from '../../actions/winterfellFormBuilderActions';
 import EditQuestionButton from '../FormMenu/EditQuestionButton';
+import { FormPageEditor } from './FormPageEditor';
+import { FormQuestionSetEditor } from './FormQuestionSetEditor';
+// import {
+//   FormPageEditor,
+//   FormQuestionSetEditor,
+//  } from './index';
 
 class FormEditorContainer extends Component {
   static propTypes = {
-    editForm: PropTypes.func.isRequired,
+    editFormTitle: PropTypes.func.isRequired,
+    changeCurrentEditingField: PropTypes.func.isRequired,
+    currentPanelIndex: PropTypes.number.isRequired,
+    questionSetIndex: PropTypes.number.isRequired,
     questionSets: PropTypes.array,
     questionPanels: PropTypes.array,
     currentPanelId: PropTypes.string,
@@ -31,7 +40,6 @@ class FormEditorContainer extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
-    this.getCurrentHeader = this.getCurrentHeader.bind(this);
     this.getCurrentQuestions = this.getCurrentQuestions.bind(this);
   }
 
@@ -47,25 +55,13 @@ class FormEditorContainer extends Component {
 
   onFormUpdate(e) {
     e.preventDefault();
-    this.props.editForm(this.state.formTitle);
+    this.props.editFormTitle(this.state.formTitle);
     this.setState({ showModal: false });
   }
 
-  getCurrentHeader() {
-    const { questionPanels, currentPanelId } = this.props;
-    const currentPanel = _.find(questionPanels, panel => panel.panelId === currentPanelId);
-    return currentPanel && (
-      <div>
-        <h3>{currentPanel.panelHeader}</h3>
-        <p>{currentPanel.panelText}</p>
-      </div>
-    );
-  }
-
-
   getCurrentQuestions() {
     const { questionPanels, questionSets, currentPanelId } = this.props;
-    const currentPanel = _.find(questionPanels, panel => panel.panelId === currentPanelId);
+    const currentPanel = questionPanels[currentPanelId];
     if (currentPanel) {
       const currentQuestionSets = currentPanel.questionSets; // currentQuestionSets includes
       return currentQuestionSets.map(currentQuestionSet => (
@@ -89,10 +85,24 @@ class FormEditorContainer extends Component {
   }
 
   render() {
+    const { currentPanelIndex, questionPanels, questionSets, questionSetIndex } = this.props;
     return (
       <Row>
         <Col xs={12}>
-          { this.getCurrentHeader() }
+          { typeof currentPanelIndex !== 'undefined' &&
+            <FormPageEditor
+              questionPanels={questionPanels}
+              currentPanelIndex={currentPanelIndex}
+              onClick={() => this.props.changeCurrentEditingField('page')}
+            />
+          }
+          { typeof currentPanelIndex !== 'undefined' &&
+            <FormQuestionSetEditor
+              questionSets={questionSets}
+              questionSetIndex={questionSetIndex}
+              onClick={() => this.props.changeCurrentEditingField('questionSet')}
+            />
+          }
           { this.getCurrentQuestions() }
         </Col>
       </Row>
@@ -104,10 +114,15 @@ function mapStateToProps(state) {
   return {
     title: state.getIn(['form', 'title']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
+    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
     questionPanels: state.getIn(['form', 'schema', 'questionPanels']).toJS(),
     questionSets: state.getIn(['form', 'schema', 'questionSets']).toJS(),
     schema: state.getIn(['form', 'schema']),
   };
 }
-export default connect(mapStateToProps, { editForm })(FormEditorContainer);
+
+export default connect(
+  mapStateToProps,
+  { changeCurrentEditingField, editFormTitle },
+)(FormEditorContainer);
 
