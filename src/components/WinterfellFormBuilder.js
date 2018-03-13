@@ -21,8 +21,10 @@ class WinterfellFormBuilder extends Component {
     title: PropTypes.string,
     schema: PropTypes.object,
     currentPanelId: PropTypes.string,
-    currentPanelIndex: PropTypes.number.isRequired,
+    currentPanelIndex: PropTypes.number,
     loadForm: PropTypes.func.isRequired,
+    formPanels: PropTypes.object,
+    goToPage: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -31,6 +33,7 @@ class WinterfellFormBuilder extends Component {
     currentPanelId: null,
     inputSchema: {},
     formPanels: null,
+    currentPanelIndex: 0, // first page by default
   }
 
   constructor(props) {
@@ -56,8 +59,7 @@ class WinterfellFormBuilder extends Component {
   }
 
   render() {
-    const { title, schema, currentPanelId, currentPanelIndex } = this.props;
-    console.log('currentPanelIndex: ', currentPanelIndex);
+    const { title, schema, currentPanelId, currentPanelIndex, formPanels } = this.props;
     return (
       <Grid>
         <Row>
@@ -88,7 +90,20 @@ class WinterfellFormBuilder extends Component {
                 <AddQuestionButton />
               </Col>
               <Col xs={2} className="text-right">
-                <Pagination />
+                {
+                  formPanels &&
+                  <Pagination
+                    formPanels={formPanels.toJS()}
+                    currentPanelId={currentPanelId}
+                    onClick={this.props.goToPage}
+                  />
+                }
+                {
+                  !formPanels &&
+                  <span>
+                    No form loaded
+                  </span>
+                }
               </Col>
             </Row>
             <hr />
@@ -120,9 +135,10 @@ class WinterfellFormBuilder extends Component {
 function mapStateToProps(state) {
   return {
     title: state.getIn(['form', 'title']),
-    schema: state.getIn(['form', 'schema']).toJS(),
+    schema: state.getIn(['form', 'schema']) && state.getIn(['form', 'schema']).toJS(),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
     currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
+    formPanels: state.getIn(['form', 'schema', 'formPanels']),
     questionSet: state.getIn(['form', 'schema', 'questionSets', 0]),
   };
 }

@@ -1,18 +1,15 @@
 
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Row, Col, DropdownButton, MenuItem } from 'react-bootstrap';
-import { goToPage } from '../actions/winterfellFormBuilderActions';
 
 function Pagination(props) {
-  const { currentPanelId, formPanels } = props;
-
+  const { currentPanelId, formPanels, onClick } = props;
   const getPages = () => formPanels.map((panel, index) => (
     <MenuItem
       key={`${index}-${panel.panelId}`}
       onClick={() => {
-        props.goToPage(panel.panelId);
+        onClick(panel.panelId);
       }}
     >
       {panel.panelId}
@@ -24,7 +21,7 @@ function Pagination(props) {
       <Col xs={12}>
         <DropdownButton
           id="pagination"
-          title={currentPanelId}
+          title={currentPanelId || 'Select Page'}
         >
           { formPanels && getPages() }
         </DropdownButton>
@@ -33,17 +30,15 @@ function Pagination(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    formPanels: state.getIn(['form', 'schema', 'formPanels']).toJS(),
-    currentPanelId: state.getIn(['form', 'currentPanelId']),
-  };
-}
-
 Pagination.propTypes = {
-  formPanels: PropTypes.array.isRequired,
-  currentPanelId: PropTypes.string.isRequired,
+  formPanels: PropTypes.object.isRequired,
+  currentPanelId: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { goToPage })(Pagination);
+Pagination.defaultProps = {
+  currentPanelId: 'Select Page',
+};
+
+export default Pagination;
 

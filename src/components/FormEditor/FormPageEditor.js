@@ -26,7 +26,6 @@ FormPageEditor.propTypes = {
 FormPageEditor.defaultProps = {
   currentPanelIndex: 0,
   questionPanels: null,
-  changeCurrentEditingField: null,
 };
 
 export default FormPageEditor;

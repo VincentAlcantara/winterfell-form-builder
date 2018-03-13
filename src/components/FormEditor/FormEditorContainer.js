@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 
 import { changeCurrentEditingField, editFormTitle } from '../../actions/winterfellFormBuilderActions';
-import EditQuestionButton from '../FormMenu/EditQuestionButton';
 import { FormPageEditor } from './FormPageEditor';
 import { FormQuestionSetEditor } from './FormQuestionSetEditor';
 // import {
@@ -17,8 +16,8 @@ class FormEditorContainer extends Component {
     editFormTitle: PropTypes.func.isRequired,
     changeCurrentEditingField: PropTypes.func.isRequired,
     currentPanelIndex: PropTypes.number.isRequired,
-    questionSets: PropTypes.array,
-    questionPanels: PropTypes.array,
+    questionSets: PropTypes.object,
+    questionPanels: PropTypes.object,
   };
 
   static defaultProps = {
@@ -68,6 +67,7 @@ class FormEditorContainer extends Component {
             />
           }
           { typeof currentPanelIndex !== 'undefined' &&
+            questionPanels &&
             questionPanels[currentPanelIndex] &&
             questionPanels[currentPanelIndex].questionSets &&
             <FormQuestionSetEditor
@@ -87,8 +87,10 @@ function mapStateToProps(state) {
     title: state.getIn(['form', 'title']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
     currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
-    questionPanels: state.getIn(['form', 'schema', 'questionPanels']).toJS(),
-    questionSets: state.getIn(['form', 'schema', 'questionSets']).toJS(),
+    questionPanels: state.getIn(['form', 'schema', 'questionPanels']) &&
+      state.getIn(['form', 'schema', 'questionPanels']).toJS(),
+    questionSets: state.getIn(['form', 'schema', 'questionSets']) &&
+      state.getIn(['form', 'schema', 'questionSets']).toJS(),
     schema: state.getIn(['form', 'schema']),
   };
 }

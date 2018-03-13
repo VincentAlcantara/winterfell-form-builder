@@ -87,7 +87,7 @@ class EditSchemaButton extends Component {
 
 function mapStateToProps(state) {
   return {
-    schema: state.getIn(['form', 'schema']).toJS(),
+    schema: state.getIn(['form', 'schema']) && state.getIn(['form', 'schema']).toJS(),
   };
 }
 export default connect(mapStateToProps, { updateForm })(EditSchemaButton);
