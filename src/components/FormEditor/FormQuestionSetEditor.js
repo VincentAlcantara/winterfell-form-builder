@@ -12,10 +12,10 @@ export const FormQuestionSetEditor = (props) => {
         (questionSet, questionSetIndex) => {
           if (currentQuestionSet.questionSetId === questionSet.questionSetId) {
             // get the questions first for the question set
-            const questionButtons = questionSet.questions.map((question, ix) => (
+            const questionButtons = questionSet.questions.map((question, questionIndex) => (
               <Button
                 className="winterfell-field-editor btn-block"
-                onClick={() => onClick('question')}
+                onClick={() => onClick('question', questionSetIndex, questionIndex)}
                 key={`${question.questionId}`}
               >
                 <div>
@@ -27,7 +27,7 @@ export const FormQuestionSetEditor = (props) => {
                   <input id={question.questionId} type="text" className="form-control" />
                   <EditQuestionButton
                     questionSetIndex={questionSetIndex}
-                    questionIndex={ix}
+                    questionIndex={questionIndex}
                   />
                 </div>
               </Button>
@@ -36,7 +36,7 @@ export const FormQuestionSetEditor = (props) => {
               <div>
                 <Button
                   className="winterfell-field-editor btn-block"
-                  onClick={() => onClick('questionSet')}
+                  onClick={() => onClick('questionSet', questionSetIndex)}
                 >
                   <div>
                     <h4>{questionSet.questionSetHeader}</h4>

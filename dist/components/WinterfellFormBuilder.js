@@ -97,9 +97,11 @@ var WinterfellFormBuilder = function (_Component) {
           title = _props.title,
           schema = _props.schema,
           currentPanelId = _props.currentPanelId,
-          currentPanelIndex = _props.currentPanelIndex,
           formPanels = _props.formPanels,
-          currentEditingField = _props.currentEditingField;
+          currentEditingField = _props.currentEditingField,
+          currentPanelIndex = _props.currentPanelIndex,
+          currentQuestionSetIndex = _props.currentQuestionSetIndex,
+          currentQuestionIndex = _props.currentQuestionIndex;
 
       return _react2.default.createElement(
         _reactBootstrap.Grid,
@@ -186,7 +188,9 @@ var WinterfellFormBuilder = function (_Component) {
                 { xs: 3 },
                 typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_FieldEditor2.default, {
                   currentPanelIndex: currentPanelIndex,
-                  currentEditingField: currentEditingField
+                  currentEditingField: currentEditingField,
+                  currentQuestionSetIndex: currentQuestionSetIndex,
+                  currentQuestionIndex: currentQuestionIndex
                 })
               ),
               _react2.default.createElement(
@@ -219,6 +223,8 @@ WinterfellFormBuilder.propTypes = {
   schema: _propTypes2.default.object,
   currentPanelId: _propTypes2.default.string,
   currentPanelIndex: _propTypes2.default.number,
+  currentQuestionSetIndex: _propTypes2.default.number,
+  currentQuestionIndex: _propTypes2.default.number,
   loadForm: _propTypes2.default.func.isRequired,
   formPanels: _propTypes2.default.object,
   goToPage: _propTypes2.default.func.isRequired,
@@ -231,6 +237,8 @@ WinterfellFormBuilder.defaultProps = {
   inputSchema: {},
   formPanels: null,
   currentPanelIndex: 0, // first page by default
+  currentQuestionSetIndex: null,
+  currentQuestionIndex: null,
   currentEditingField: 'page'
 };
 
@@ -240,10 +248,12 @@ function mapStateToProps(state) {
     title: state.getIn(['form', 'title']),
     schema: state.getIn(['form', 'schema']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
-    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
     formPanels: state.getIn(['form', 'schema', 'formPanels']),
     questionSet: state.getIn(['form', 'schema', 'questionSets', 0]),
-    currentEditingField: state.getIn(['form', 'currentEditingField'])
+    currentEditingField: state.getIn(['form', 'currentEditingField']),
+    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
+    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex'])
   };
 }
 

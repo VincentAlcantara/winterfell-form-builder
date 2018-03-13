@@ -79,38 +79,38 @@ export function editPageText(questionPanelIndex, text) {
   };
 }
 
-export function editQuestionSetHeader(questionSetIndex, header) {
+export function editQuestionSetHeader(currentQuestionSetIndex, header) {
   return {
     type: EDIT_QUESTION_SET_HEADER_SUCCESS,
-    payload: { questionSetIndex, header },
+    payload: { currentQuestionSetIndex, header },
   };
 }
 
-export function editQuestionSetText(questionSetIndex, text) {
+export function editQuestionSetText(currentQuestionSetIndex, text) {
   return {
     type: EDIT_QUESTION_SET_TEXT_SUCCESS,
-    payload: { questionSetIndex, text },
+    payload: { currentQuestionSetIndex, text },
   };
 }
 
-export function editQuestionText(questionSetIndex, questionIndex, text) {
+export function editQuestionText(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
     type: EDIT_QUESTION_TEXT_SUCCESS,
-    payload: { questionSetIndex, questionIndex, text },
+    payload: { currentQuestionSetIndex, currentQuestionIndex, text },
   };
 }
 
-export function editQuestionPreText(questionSetIndex, questionIndex, text) {
+export function editQuestionPreText(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
     type: EDIT_QUESTION_PRE_TEXT_SUCCESS,
-    payload: { questionSetIndex, questionIndex, text },
+    payload: { currentQuestionSetIndex, currentQuestionIndex, text },
   };
 }
 
-export function editQuestionPostText(questionSetIndex, questionIndex, text) {
+export function editQuestionPostText(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
     type: EDIT_QUESTION_POST_TEXT_SUCCESS,
-    payload: { questionSetIndex, questionIndex, text },
+    payload: { currentQuestionSetIndex, currentQuestionIndex, text },
   };
 }
 
@@ -156,16 +156,18 @@ export function addQuestion(
   };
 }
 
-export function changeCurrentEditingField(currentEditingField) {
+export function changeCurrentEditingField(
+  currentEditingField, currentQuestionSetIndex, currentQuestionIndex) {
   return {
     type: CHANGE_EDITING_FIELD_SUCCESS,
-    payload: { currentEditingField },
+    payload: { currentEditingField, currentQuestionSetIndex, currentQuestionIndex },
   };
 }
 
-export function editQuestion(questionSetIndex, questionIndex, question, questionText) {
+export function editQuestion(
+  currentQuestionSetIndex, currentQuestionIndex, question, questionText) {
   return {
     type: UPDATE_QUESTION_SUCCESS,
-    payload: { questionSetIndex, questionIndex, question, questionText },
+    payload: { currentQuestionSetIndex, currentQuestionIndex, question, questionText },
   };
 }

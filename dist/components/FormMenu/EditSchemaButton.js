@@ -147,7 +147,7 @@ var EditSchemaButton = function (_Component) {
               className: 'btn btn-block btn-info',
               onClick: function onClick() {
                 _this2.setState({
-                  schema: _this2.props.schema,
+                  schema: _this2.props.schema.toJS(),
                   showModal: true
                 });
               }
@@ -172,7 +172,7 @@ EditSchemaButton.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    schema: state.getIn(['form', 'schema']) && state.getIn(['form', 'schema']).toJS()
+    schema: state.getIn(['form', 'schema']) && state.getIn(['form', 'schema'])
   };
 }
 

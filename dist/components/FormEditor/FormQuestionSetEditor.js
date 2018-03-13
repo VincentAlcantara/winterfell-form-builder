@@ -32,13 +32,13 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
       return questionSets.map(function (questionSet, questionSetIndex) {
         if (currentQuestionSet.questionSetId === questionSet.questionSetId) {
           // get the questions first for the question set
-          var questionButtons = questionSet.questions.map(function (question, ix) {
+          var questionButtons = questionSet.questions.map(function (question, questionIndex) {
             return _react2.default.createElement(
               _reactBootstrap.Button,
               {
                 className: 'winterfell-field-editor btn-block',
                 onClick: function onClick() {
-                  return _onClick('question');
+                  return _onClick('question', questionSetIndex, questionIndex);
                 },
                 key: '' + question.questionId
               },
@@ -58,7 +58,7 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
                 _react2.default.createElement('input', { id: question.questionId, type: 'text', className: 'form-control' }),
                 _react2.default.createElement(_EditQuestionButton2.default, {
                   questionSetIndex: questionSetIndex,
-                  questionIndex: ix
+                  questionIndex: questionIndex
                 })
               )
             );
@@ -71,7 +71,7 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
               {
                 className: 'winterfell-field-editor btn-block',
                 onClick: function onClick() {
-                  return _onClick('questionSet');
+                  return _onClick('questionSet', questionSetIndex);
                 }
               },
               _react2.default.createElement(

@@ -57,38 +57,38 @@ function editPageText(questionPanelIndex, text) {
   };
 }
 
-function editQuestionSetHeader(questionSetIndex, header) {
+function editQuestionSetHeader(currentQuestionSetIndex, header) {
   return {
     type: _constants.EDIT_QUESTION_SET_HEADER_SUCCESS,
-    payload: { questionSetIndex: questionSetIndex, header: header }
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, header: header }
   };
 }
 
-function editQuestionSetText(questionSetIndex, text) {
+function editQuestionSetText(currentQuestionSetIndex, text) {
   return {
     type: _constants.EDIT_QUESTION_SET_TEXT_SUCCESS,
-    payload: { questionSetIndex: questionSetIndex, text: text }
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, text: text }
   };
 }
 
-function editQuestionText(questionSetIndex, questionIndex, text) {
+function editQuestionText(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
     type: _constants.EDIT_QUESTION_TEXT_SUCCESS,
-    payload: { questionSetIndex: questionSetIndex, questionIndex: questionIndex, text: text }
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, text: text }
   };
 }
 
-function editQuestionPreText(questionSetIndex, questionIndex, text) {
+function editQuestionPreText(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
     type: _constants.EDIT_QUESTION_PRE_TEXT_SUCCESS,
-    payload: { questionSetIndex: questionSetIndex, questionIndex: questionIndex, text: text }
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, text: text }
   };
 }
 
-function editQuestionPostText(questionSetIndex, questionIndex, text) {
+function editQuestionPostText(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
     type: _constants.EDIT_QUESTION_POST_TEXT_SUCCESS,
-    payload: { questionSetIndex: questionSetIndex, questionIndex: questionIndex, text: text }
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, text: text }
   };
 }
 
@@ -127,17 +127,17 @@ function addQuestion(currentPanelId, questionSetId, questionSetHeader, questionS
   };
 }
 
-function changeCurrentEditingField(currentEditingField) {
+function changeCurrentEditingField(currentEditingField, currentQuestionSetIndex, currentQuestionIndex) {
   return {
     type: _constants.CHANGE_EDITING_FIELD_SUCCESS,
-    payload: { currentEditingField: currentEditingField }
+    payload: { currentEditingField: currentEditingField, currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex }
   };
 }
 
-function editQuestion(questionSetIndex, questionIndex, question, questionText) {
+function editQuestion(currentQuestionSetIndex, currentQuestionIndex, question, questionText) {
   return {
     type: _constants.UPDATE_QUESTION_SUCCESS,
-    payload: { questionSetIndex: questionSetIndex, questionIndex: questionIndex, question: question, questionText: questionText }
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, question: question, questionText: questionText }
   };
 }
 ;

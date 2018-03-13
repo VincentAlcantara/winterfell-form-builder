@@ -13,6 +13,10 @@ import {
   CHANGE_EDITING_FIELD_SUCCESS,
   EDIT_PAGE_HEADER_SUCCESS,
   EDIT_PAGE_TEXT_SUCCESS,
+  EDIT_QUESTION_SET_HEADER_SUCCESS,
+  EDIT_QUESTION_SET_TEXT_SUCCESS,
+  EDIT_QUESTION_TEXT_SUCCESS,
+  EDIT_QUESTION_PRE_TEXT_SUCCESS,
 } from '../common/constants';
 
 const initialState = fromJS({
@@ -38,6 +42,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
 
       return state
         .set('currentPanelIndex', currentPanelIndex)
+        .set('currentEditingField', 'page')
         .set('currentPanelId', action.payload.panelId);
     }
     case LOAD_FORM_SUCCESS: {
@@ -55,9 +60,34 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       return state
         .setIn(['schema', 'questionPanels', questionPanelIndex, 'panelText'], text);
     }
-    case CHANGE_EDITING_FIELD_SUCCESS: {
+    case EDIT_QUESTION_SET_HEADER_SUCCESS: {
+      const { currentQuestionSetIndex, header } = action.payload;
       return state
-        .set('currentEditingField', action.payload.currentEditingField);
+        .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questionSetHeader'], header);
+    }
+    case EDIT_QUESTION_SET_TEXT_SUCCESS: {
+      const { currentQuestionSetIndex, text } = action.payload;
+      return state
+        .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questionSetText'], text);
+    }
+    case EDIT_QUESTION_TEXT_SUCCESS: {
+      const { currentQuestionSetIndex, currentQuestionIndex, text } = action.payload;
+      return state
+        .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'question'], text);
+    }
+    case EDIT_QUESTION_PRE_TEXT_SUCCESS: {
+      const { currentQuestionSetIndex, currentQuestionIndex, text } = action.payload;
+      return state
+        .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'text'], text);
+    }
+    case CHANGE_EDITING_FIELD_SUCCESS: {
+      const { currentEditingField, currentQuestionSetIndex, currentQuestionIndex } = action.payload;
+      return state
+        .set('currentEditingField', currentEditingField)
+        .set('currentQuestionSetIndex', currentQuestionSetIndex)
+        .set('currentQuestionIndex', currentQuestionIndex);
     }
     case CREATE_FORM_SUCCESS:
       return state

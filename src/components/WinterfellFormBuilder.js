@@ -22,6 +22,8 @@ class WinterfellFormBuilder extends Component {
     schema: PropTypes.object,
     currentPanelId: PropTypes.string,
     currentPanelIndex: PropTypes.number,
+    currentQuestionSetIndex: PropTypes.number,
+    currentQuestionIndex: PropTypes.number,
     loadForm: PropTypes.func.isRequired,
     formPanels: PropTypes.object,
     goToPage: PropTypes.func.isRequired,
@@ -35,6 +37,8 @@ class WinterfellFormBuilder extends Component {
     inputSchema: {},
     formPanels: null,
     currentPanelIndex: 0, // first page by default
+    currentQuestionSetIndex: null,
+    currentQuestionIndex: null,
     currentEditingField: 'page',
   }
 
@@ -65,9 +69,11 @@ class WinterfellFormBuilder extends Component {
       title,
       schema,
       currentPanelId,
-      currentPanelIndex,
       formPanels,
       currentEditingField,
+      currentPanelIndex,
+      currentQuestionSetIndex,
+      currentQuestionIndex,
     } = this.props;
     return (
       <Grid>
@@ -122,6 +128,8 @@ class WinterfellFormBuilder extends Component {
                   <FieldEditor
                     currentPanelIndex={currentPanelIndex}
                     currentEditingField={currentEditingField}
+                    currentQuestionSetIndex={currentQuestionSetIndex}
+                    currentQuestionIndex={currentQuestionIndex}
                   />
                 }
               </Col>
@@ -152,10 +160,12 @@ function mapStateToProps(state) {
     title: state.getIn(['form', 'title']),
     schema: state.getIn(['form', 'schema']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
-    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
     formPanels: state.getIn(['form', 'schema', 'formPanels']),
     questionSet: state.getIn(['form', 'schema', 'questionSets', 0]),
     currentEditingField: state.getIn(['form', 'currentEditingField']),
+    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
+    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
   };
 }
 
