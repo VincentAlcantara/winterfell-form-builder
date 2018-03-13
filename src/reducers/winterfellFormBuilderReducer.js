@@ -11,6 +11,8 @@ import {
   ADD_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
   CHANGE_EDITING_FIELD_SUCCESS,
+  EDIT_PAGE_HEADER_SUCCESS,
+  EDIT_PAGE_TEXT_SUCCESS,
 } from '../common/constants';
 
 const initialState = fromJS({
@@ -19,6 +21,7 @@ const initialState = fromJS({
     classes: BOOTSTRAP_CLASSES,
   },
   currentPanelId: null,
+  currentPanelIndex: 0,
 });
 
 function winterfellFormBuilderReducer(state = initialState, action) {
@@ -42,6 +45,16 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .set('currentPanelId', 'Select Page')
         .set('schema', fromJS(action.payload.schema));
     }
+    case EDIT_PAGE_HEADER_SUCCESS: {
+      const { questionPanelIndex, header } = action.payload;
+      return state
+        .setIn(['schema', 'questionPanels', questionPanelIndex, 'panelHeader'], header);
+    }
+    case EDIT_PAGE_TEXT_SUCCESS: {
+      const { questionPanelIndex, text } = action.payload;
+      return state
+        .setIn(['schema', 'questionPanels', questionPanelIndex, 'panelText'], text);
+    }
     case CHANGE_EDITING_FIELD_SUCCESS: {
       return state
         .set('currentEditingField', action.payload.currentEditingField);
@@ -49,6 +62,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     case CREATE_FORM_SUCCESS:
       return state
         .set('title', action.payload.title)
+        .set('currentPanelIndex', 0)
         .set('schema', fromJS({
           classes: BOOTSTRAP_CLASSES,
           formPanels: [{
@@ -57,8 +71,8 @@ function winterfellFormBuilderReducer(state = initialState, action) {
           }],
           questionPanels: [{
             panelId: 'page-1',
-            panelHeader: `${action.payload.title} - page 1`,
-            panelText: 'Let\'s grab some of your details',
+            panelHeader: `${action.payload.title} - page-1`,
+            panelText: 'page-1 text',
             questionSets: [],
           }],
           questionSets: [],

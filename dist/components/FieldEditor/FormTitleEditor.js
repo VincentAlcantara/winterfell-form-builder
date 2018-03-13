@@ -132,11 +132,11 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(EditFormTitleButton, 'EditFormTitleButton', 'src/components/FieldEditors/FormTitleEditor.js');
+  __REACT_HOT_LOADER__.register(EditFormTitleButton, 'EditFormTitleButton', 'src/components/FieldEditor/FormTitleEditor.js');
 
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FieldEditors/FormTitleEditor.js');
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FieldEditor/FormTitleEditor.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldEditors/FormTitleEditor.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldEditor/FormTitleEditor.js');
 }();
 
 ;

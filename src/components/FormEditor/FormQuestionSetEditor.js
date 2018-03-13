@@ -15,7 +15,7 @@ export const FormQuestionSetEditor = (props) => {
             const questionButtons = questionSet.questions.map((question, ix) => (
               <Button
                 className="winterfell-field-editor btn-block"
-                onClick={onClick}
+                onClick={() => onClick('question')}
                 key={`${question.questionId}`}
               >
                 <div>
@@ -36,7 +36,7 @@ export const FormQuestionSetEditor = (props) => {
               <div>
                 <Button
                   className="winterfell-field-editor btn-block"
-                  onClick={onClick}
+                  onClick={() => onClick('questionSet')}
                 >
                   <div>
                     <h4>{questionSet.questionSetHeader}</h4>

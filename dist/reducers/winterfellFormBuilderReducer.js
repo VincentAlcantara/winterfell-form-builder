@@ -13,7 +13,8 @@ var initialState = (0, _immutable.fromJS)({
   schema: {
     classes: _constants.BOOTSTRAP_CLASSES
   },
-  currentPanelId: null
+  currentPanelId: null,
+  currentPanelIndex: 0
 });
 
 function winterfellFormBuilderReducer() {
@@ -38,12 +39,28 @@ function winterfellFormBuilderReducer() {
       {
         return state.set('currentPanelId', 'Select Page').set('schema', (0, _immutable.fromJS)(action.payload.schema));
       }
+    case _constants.EDIT_PAGE_HEADER_SUCCESS:
+      {
+        var _action$payload = action.payload,
+            questionPanelIndex = _action$payload.questionPanelIndex,
+            header = _action$payload.header;
+
+        return state.setIn(['schema', 'questionPanels', questionPanelIndex, 'panelHeader'], header);
+      }
+    case _constants.EDIT_PAGE_TEXT_SUCCESS:
+      {
+        var _action$payload2 = action.payload,
+            _questionPanelIndex = _action$payload2.questionPanelIndex,
+            text = _action$payload2.text;
+
+        return state.setIn(['schema', 'questionPanels', _questionPanelIndex, 'panelText'], text);
+      }
     case _constants.CHANGE_EDITING_FIELD_SUCCESS:
       {
         return state.set('currentEditingField', action.payload.currentEditingField);
       }
     case _constants.CREATE_FORM_SUCCESS:
-      return state.set('title', action.payload.title).set('schema', (0, _immutable.fromJS)({
+      return state.set('title', action.payload.title).set('currentPanelIndex', 0).set('schema', (0, _immutable.fromJS)({
         classes: _constants.BOOTSTRAP_CLASSES,
         formPanels: [{
           index: 1,
@@ -51,8 +68,8 @@ function winterfellFormBuilderReducer() {
         }],
         questionPanels: [{
           panelId: 'page-1',
-          panelHeader: action.payload.title + ' - page 1',
-          panelText: 'Let\'s grab some of your details',
+          panelHeader: action.payload.title + ' - page-1',
+          panelText: 'page-1 text',
           questionSets: []
         }],
         questionSets: []
@@ -121,11 +138,11 @@ function winterfellFormBuilderReducer() {
       }
     case _constants.UPDATE_QUESTION_SUCCESS:
       {
-        var _action$payload = action.payload,
-            questionSetIndex = _action$payload.questionSetIndex,
-            questionIndex = _action$payload.questionIndex,
-            question = _action$payload.question,
-            questionText = _action$payload.questionText;
+        var _action$payload3 = action.payload,
+            questionSetIndex = _action$payload3.questionSetIndex,
+            questionIndex = _action$payload3.questionIndex,
+            question = _action$payload3.question,
+            questionText = _action$payload3.questionText;
 
         return state.setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'question'], question).setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'text'], questionText);
       }

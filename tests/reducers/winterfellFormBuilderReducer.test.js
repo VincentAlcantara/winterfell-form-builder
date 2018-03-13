@@ -17,6 +17,7 @@ describe('wintefellFormBuilderReducer', () => {
       classes,
     },
     currentPanelId: null,
+    currentPanelIndex: 0,
   });
 
   it('should return the initial state', () => {
@@ -39,13 +40,14 @@ describe('wintefellFormBuilderReducer', () => {
         }],
         questionPanels: [{
           panelId: 'page-1',
-          panelHeader: 'My Awesome Form - page 1',
-          panelText: 'Let\'s grab some of your details',
+          panelHeader: 'My Awesome Form - page-1',
+          panelText: 'page-1 text',
           questionSets: [],
         }],
         questionSets: [],
       },
       currentPanelId: null,
+      currentPanelIndex: 0,
     });
 
     expect(winterfellFormBuilderReducer(initialState, currentAction)).toEqual(expectedState);
@@ -62,8 +64,8 @@ describe('wintefellFormBuilderReducer', () => {
       schema: {
         classes,
       },
-
       currentPanelId: null,
+      currentPanelIndex: 0,
     });
 
     expect(winterfellFormBuilderReducer(initialState, currentAction)).toEqual(expectedState);

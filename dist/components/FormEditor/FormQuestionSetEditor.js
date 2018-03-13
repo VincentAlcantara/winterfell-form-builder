@@ -24,7 +24,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestionSetEditor(props) {
   var currentQuestionSets = props.currentQuestionSets,
       questionSets = props.questionSets,
-      onClick = props.onClick;
+      _onClick = props.onClick;
 
 
   var displayQuestionSet = function displayQuestionSet() {
@@ -37,7 +37,9 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
               _reactBootstrap.Button,
               {
                 className: 'winterfell-field-editor btn-block',
-                onClick: onClick,
+                onClick: function onClick() {
+                  return _onClick('question');
+                },
                 key: '' + question.questionId
               },
               _react2.default.createElement(
@@ -68,7 +70,9 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
               _reactBootstrap.Button,
               {
                 className: 'winterfell-field-editor btn-block',
-                onClick: onClick
+                onClick: function onClick() {
+                  return _onClick('questionSet');
+                }
               },
               _react2.default.createElement(
                 'div',

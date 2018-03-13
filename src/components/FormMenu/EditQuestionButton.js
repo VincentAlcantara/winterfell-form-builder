@@ -12,8 +12,12 @@ class EditQuestionButton extends Component {
     questionSetIndex: PropTypes.number.isRequired,
     questionIndex: PropTypes.number.isRequired,
     question: PropTypes.string.isRequired,
-    questionText: PropTypes.string.isRequired,
+    questionText: PropTypes.string,
     questionType: PropTypes.string.isRequired,
+  };
+
+  static defaultProps = {
+    questionText: '',
   };
 
   constructor(props) {

@@ -172,7 +172,7 @@ EditSchemaButton.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    schema: state.getIn(['form', 'schema']).toJS()
+    schema: state.getIn(['form', 'schema']) && state.getIn(['form', 'schema']).toJS()
   };
 }
 

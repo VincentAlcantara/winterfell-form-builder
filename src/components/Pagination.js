@@ -31,7 +31,7 @@ function Pagination(props) {
 }
 
 Pagination.propTypes = {
-  formPanels: PropTypes.object.isRequired,
+  formPanels: PropTypes.array.isRequired,
   currentPanelId: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };

@@ -65,8 +65,8 @@ var PageEditor = function (_Component) {
       panelText: panelText
     };
 
-    _this.onChange = _this.onChange.bind(_this);
-    _this.onFormUpdate = _this.onFormUpdate.bind(_this);
+    _this.onChangePageHeader = _this.onChangePageHeader.bind(_this);
+    _this.onChangePageText = _this.onChangePageText.bind(_this);
     return _this;
   }
 
@@ -79,55 +79,48 @@ var PageEditor = function (_Component) {
       };
     }
   }, {
-    key: 'onChange',
-    value: function onChange(event) {
+    key: 'onChangePageHeader',
+    value: function onChangePageHeader(event) {
       event.preventDefault();
       this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
-      this.props.editFormTitle(event.target.value);
+      this.props.editPageHeader(this.props.currentPanelIndex, event.target.value);
     }
   }, {
-    key: 'onFormUpdate',
-    value: function onFormUpdate(e) {
-      e.preventDefault();
-      this.props.editFormTitle(this.state.formTitle);
+    key: 'onChangePageText',
+    value: function onChangePageText(event) {
+      event.preventDefault();
+      this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
+      this.props.editPageText(this.props.currentPanelIndex, event.target.value);
     }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        _reactBootstrap.Row,
+        'form',
         null,
         _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
-          _react2.default.createElement(
-            'form',
-            null,
-            _react2.default.createElement(
-              _reactBootstrap.FormGroup,
-              null,
-              _react2.default.createElement(_FieldGroup2.default, {
-                id: 'panelHeader',
-                name: 'panelHeader',
-                label: 'Page Header',
-                onChange: this.onChange,
-                placeholder: this.props.panelHeader,
-                value: this.state.panelHeader
-              })
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.FormGroup,
-              null,
-              _react2.default.createElement(_FieldGroup2.default, {
-                id: 'panelText',
-                name: 'panelText',
-                label: 'Page Text',
-                placeholder: 'low',
-                onChange: this.onChange,
-                value: this.state.panelText
-              })
-            )
-          )
+          _reactBootstrap.FormGroup,
+          null,
+          _react2.default.createElement(_FieldGroup2.default, {
+            id: 'panelHeader',
+            name: 'panelHeader',
+            label: 'Page Header',
+            onChange: this.onChangePageHeader,
+            placeholder: this.props.panelHeader,
+            value: this.state.panelHeader
+          })
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.FormGroup,
+          null,
+          _react2.default.createElement(_FieldGroup2.default, {
+            id: 'panelText',
+            name: 'panelText',
+            label: 'Page Text',
+            placeholder: this.props.panelText,
+            onChange: this.onChangePageText,
+            value: this.state.panelText
+          })
         )
       );
     }
@@ -136,9 +129,11 @@ var PageEditor = function (_Component) {
 }(_react.Component);
 
 PageEditor.propTypes = {
-  editFormTitle: _propTypes2.default.func.isRequired,
+  editPageHeader: _propTypes2.default.func.isRequired,
+  editPageText: _propTypes2.default.func.isRequired,
   panelHeader: _propTypes2.default.string,
-  panelText: _propTypes2.default.string
+  panelText: _propTypes2.default.string,
+  currentPanelIndex: _propTypes2.default.number.isRequired
 };
 PageEditor.defaultProps = {
   currentPanelIndex: 0,
@@ -150,11 +145,12 @@ PageEditor.defaultProps = {
 function mapStateToProps(state, ownProps) {
   return {
     panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelHeader']),
-    panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelText'])
+    panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelText']),
+    currentPanelIndex: ownProps.currentPanelIndex
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { editFormTitle: _winterfellFormBuilderActions.editFormTitle })(PageEditor);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { editPageHeader: _winterfellFormBuilderActions.editPageHeader, editPageText: _winterfellFormBuilderActions.editPageText })(PageEditor);
 
 exports.default = _default;
 ;
@@ -164,11 +160,11 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(PageEditor, 'PageEditor', 'src/components/FieldEditors/PageEditor.js');
+  __REACT_HOT_LOADER__.register(PageEditor, 'PageEditor', 'src/components/FieldEditor/PageEditor.js');
 
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FieldEditors/PageEditor.js');
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FieldEditor/PageEditor.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldEditors/PageEditor.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldEditor/PageEditor.js');
 }();
 
 ;
