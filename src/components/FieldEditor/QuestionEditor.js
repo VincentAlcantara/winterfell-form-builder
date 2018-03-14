@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup } from 'react-bootstrap';
+import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import { editQuestionId, editQuestion, editQuestionText, editQuestionPostText } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
 
@@ -15,6 +15,8 @@ class QuestionEditor extends Component {
     question: PropTypes.string,
     questionText: PropTypes.string,
     questionPostText: PropTypes.string,
+    questionInputType: PropTypes.string,
+    questionInputOptions: PropTypes.object,
     currentQuestionSetIndex: PropTypes.number.isRequired,
     currentQuestionIndex: PropTypes.number.isRequired,
   }
@@ -24,16 +26,27 @@ class QuestionEditor extends Component {
     question: '',
     questionText: '',
     questionPostText: '',
+    questionInputType: '',
+    questionInputOptions: [],
   }
   constructor(props) {
     super(props);
-    const { questionId, question, questionText, questionPostText } = props;
+    const {
+      questionId,
+      question,
+      questionText,
+      questionPostText,
+      questionInputType,
+      questionInputOptions,
+    } = props;
 
     this.state = {
       questionId,
       question,
       questionText,
       questionPostText,
+      questionInputType,
+      questionInputOptions,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -69,7 +82,49 @@ class QuestionEditor extends Component {
     }
   }
 
+  getQuestionOptions() {
+    return (
+      <FormGroup>
+        <table>
+          <tbody>
+            <tr>
+              <th>Options</th>
+              <th>Values</th>
+            </tr>
+            { this.props.questionInputOptions &&
+              this.props.questionInputOptions.toJS().map((option, ix) => (
+                <tr key={`${option.text}-${ix}`}>
+                  <td>
+                    <FormControl
+                      type="text"
+                      value={option.text}
+                    />
+                  </td>
+                  <td>
+                    <FormControl
+                      type="text"
+                      value={option.value}
+                    />
+                  </td>
+                  <td><Button className="btn-success">+</Button></td>
+                  <td><Button className="btn-danger">-</Button></td>
+                </tr>))
+            }
+          </tbody>
+        </table>
+      </FormGroup>
+    );
+  }
+
   render() {
+    const {
+      questionId,
+      question,
+      questionText,
+      questionPostText,
+      questionInputType,
+      questionInputOptions,
+    } = this.props;
     return (
       <form>
         <FormGroup>
@@ -78,7 +133,7 @@ class QuestionEditor extends Component {
             name="questionId"
             label="Question ID"
             onChange={this.onChange}
-            placeholder={this.props.questionId}
+            placeholder={questionId}
             value={this.state.questionId}
           />
         </FormGroup>
@@ -88,7 +143,7 @@ class QuestionEditor extends Component {
             name="question"
             label="Question"
             onChange={this.onChange}
-            placeholder={this.props.question}
+            placeholder={question}
             value={this.state.question}
           />
         </FormGroup>
@@ -97,7 +152,7 @@ class QuestionEditor extends Component {
             id="questionText"
             name="questionText"
             label="Question Text"
-            placeholder={this.props.questionText}
+            placeholder={questionText}
             onChange={this.onChange}
             value={this.state.questionText}
           />
@@ -107,11 +162,18 @@ class QuestionEditor extends Component {
             id="questionPostText"
             name="questionPostText"
             label="Question Post Text"
-            placeholder={this.props.questionPostText}
+            placeholder={questionPostText}
             onChange={this.onChange}
             value={this.state.questionPostText}
           />
         </FormGroup>
+        {
+          (questionInputType === 'checkboxOptionsInput' ||
+          questionInputType === 'selectInput' ||
+          questionInputType === 'radioOptionsInput') &&
+          questionInputOptions &&
+          this.getQuestionOptions()
+        }
       </form>
     );
   }
@@ -127,6 +189,10 @@ function mapStateToProps(state, ownProps) {
       'questions', ownProps.currentQuestionIndex, 'text']),
     questionPostText: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex,
       'questions', ownProps.currentQuestionIndex, 'postText']),
+    questionInputType: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex,
+      'questions', ownProps.currentQuestionIndex, 'input', 'type']),
+    questionInputOptions: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex,
+      'questions', ownProps.currentQuestionIndex, 'input', 'options']),
     currentQuestionSetIndex: ownProps.currentQuestionSetIndex,
     currentQuestionIndex: ownProps.currentQuestionIndex,
   };

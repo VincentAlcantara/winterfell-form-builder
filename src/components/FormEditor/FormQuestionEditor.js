@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
+import RadioButtonOptionsInput from '../InputTypes/RadioButtonOptionsInput';
 
 export const FormQuestionEditor = (props) => {
   const { questionSetIndex, questions, onClick } = props;
@@ -17,7 +18,21 @@ export const FormQuestionEditor = (props) => {
           question.text &&
           <p>{question.text}</p>
         }
-        <input id={question.questionId} type="text" className="form-control" />
+        {
+          question.input &&
+          (question.input.type === 'textInput' ||
+          question.input.type === 'emailInput') &&
+          <input id={question.questionId} type="text" className="form-control" />
+        }
+        {
+          question.input &&
+          question.input.type === 'radioOptionsInput' &&
+          <RadioButtonOptionsInput
+            id={question.questionId}
+            labelId={question.questionId}
+            options={question.input.options}
+          />
+        }
         {
           question.postText &&
           <p>{question.postText}</p>

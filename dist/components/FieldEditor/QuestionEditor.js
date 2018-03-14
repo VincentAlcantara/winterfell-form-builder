@@ -59,14 +59,18 @@ var QuestionEditor = function (_Component) {
     var questionId = props.questionId,
         question = props.question,
         questionText = props.questionText,
-        questionPostText = props.questionPostText;
+        questionPostText = props.questionPostText,
+        questionInputType = props.questionInputType,
+        questionInputOptions = props.questionInputOptions;
 
 
     _this.state = {
       questionId: questionId,
       question: question,
       questionText: questionText,
-      questionPostText: questionPostText
+      questionPostText: questionPostText,
+      questionInputType: questionInputType,
+      questionInputOptions: questionInputOptions
     };
 
     _this.onChange = _this.onChange.bind(_this);
@@ -111,8 +115,86 @@ var QuestionEditor = function (_Component) {
       }
     }
   }, {
+    key: 'getQuestionOptions',
+    value: function getQuestionOptions() {
+      return _react2.default.createElement(
+        _reactBootstrap.FormGroup,
+        null,
+        _react2.default.createElement(
+          'table',
+          null,
+          _react2.default.createElement(
+            'tbody',
+            null,
+            _react2.default.createElement(
+              'tr',
+              null,
+              _react2.default.createElement(
+                'th',
+                null,
+                'Options'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Values'
+              )
+            ),
+            this.props.questionInputOptions && this.props.questionInputOptions.toJS().map(function (option, ix) {
+              return _react2.default.createElement(
+                'tr',
+                { key: option.text + '-' + ix },
+                _react2.default.createElement(
+                  'td',
+                  null,
+                  _react2.default.createElement(_reactBootstrap.FormControl, {
+                    type: 'text',
+                    value: option.text
+                  })
+                ),
+                _react2.default.createElement(
+                  'td',
+                  null,
+                  _react2.default.createElement(_reactBootstrap.FormControl, {
+                    type: 'text',
+                    value: option.value
+                  })
+                ),
+                _react2.default.createElement(
+                  'td',
+                  null,
+                  _react2.default.createElement(
+                    _reactBootstrap.Button,
+                    { className: 'btn-success' },
+                    '+'
+                  )
+                ),
+                _react2.default.createElement(
+                  'td',
+                  null,
+                  _react2.default.createElement(
+                    _reactBootstrap.Button,
+                    { className: 'btn-danger' },
+                    '-'
+                  )
+                )
+              );
+            })
+          )
+        )
+      );
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _props2 = this.props,
+          questionId = _props2.questionId,
+          question = _props2.question,
+          questionText = _props2.questionText,
+          questionPostText = _props2.questionPostText,
+          questionInputType = _props2.questionInputType,
+          questionInputOptions = _props2.questionInputOptions;
+
       return _react2.default.createElement(
         'form',
         null,
@@ -124,7 +206,7 @@ var QuestionEditor = function (_Component) {
             name: 'questionId',
             label: 'Question ID',
             onChange: this.onChange,
-            placeholder: this.props.questionId,
+            placeholder: questionId,
             value: this.state.questionId
           })
         ),
@@ -136,7 +218,7 @@ var QuestionEditor = function (_Component) {
             name: 'question',
             label: 'Question',
             onChange: this.onChange,
-            placeholder: this.props.question,
+            placeholder: question,
             value: this.state.question
           })
         ),
@@ -147,7 +229,7 @@ var QuestionEditor = function (_Component) {
             id: 'questionText',
             name: 'questionText',
             label: 'Question Text',
-            placeholder: this.props.questionText,
+            placeholder: questionText,
             onChange: this.onChange,
             value: this.state.questionText
           })
@@ -159,11 +241,12 @@ var QuestionEditor = function (_Component) {
             id: 'questionPostText',
             name: 'questionPostText',
             label: 'Question Post Text',
-            placeholder: this.props.questionPostText,
+            placeholder: questionPostText,
             onChange: this.onChange,
             value: this.state.questionPostText
           })
-        )
+        ),
+        (questionInputType === 'checkboxOptionsInput' || questionInputType === 'selectInput' || questionInputType === 'radioOptionsInput') && questionInputOptions && this.getQuestionOptions()
       );
     }
   }]);
@@ -179,6 +262,8 @@ QuestionEditor.propTypes = {
   question: _propTypes2.default.string,
   questionText: _propTypes2.default.string,
   questionPostText: _propTypes2.default.string,
+  questionInputType: _propTypes2.default.string,
+  questionInputOptions: _propTypes2.default.object,
   currentQuestionSetIndex: _propTypes2.default.number.isRequired,
   currentQuestionIndex: _propTypes2.default.number.isRequired
 };
@@ -186,7 +271,9 @@ QuestionEditor.defaultProps = {
   questionId: '',
   question: '',
   questionText: '',
-  questionPostText: ''
+  questionPostText: '',
+  questionInputType: '',
+  questionInputOptions: []
 };
 
 
@@ -196,6 +283,8 @@ function mapStateToProps(state, ownProps) {
     question: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'question']),
     questionText: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'text']),
     questionPostText: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'postText']),
+    questionInputType: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'input', 'type']),
+    questionInputOptions: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'input', 'options']),
     currentQuestionSetIndex: ownProps.currentQuestionSetIndex,
     currentQuestionIndex: ownProps.currentQuestionIndex
   };
