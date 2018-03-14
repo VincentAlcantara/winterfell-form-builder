@@ -10,6 +10,7 @@ exports.editPageHeader = editPageHeader;
 exports.editPageText = editPageText;
 exports.editQuestionSetHeader = editQuestionSetHeader;
 exports.editQuestionSetText = editQuestionSetText;
+exports.editQuestionId = editQuestionId;
 exports.editQuestion = editQuestion;
 exports.editQuestionText = editQuestionText;
 exports.editQuestionPostText = editQuestionPostText;
@@ -71,16 +72,23 @@ function editQuestionSetText(currentQuestionSetIndex, text) {
   };
 }
 
+function editQuestionId(currentQuestionSetIndex, currentQuestionIndex, text) {
+  return {
+    type: _constants.EDIT_QUESTION_ID_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, text: text }
+  };
+}
+
 function editQuestion(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
-    type: _constants.EDIT_QUESTION_TEXT_SUCCESS,
+    type: _constants.EDIT_QUESTION_SUCCESS,
     payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, text: text }
   };
 }
 
 function editQuestionText(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
-    type: _constants.EDIT_QUESTION_PRE_TEXT_SUCCESS,
+    type: _constants.EDIT_QUESTION_TEXT_SUCCESS,
     payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, text: text }
   };
 }
@@ -160,6 +168,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(editQuestionSetHeader, 'editQuestionSetHeader', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(editQuestionSetText, 'editQuestionSetText', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(editQuestionId, 'editQuestionId', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(editQuestion, 'editQuestion', 'src/actions/winterfellFormBuilderActions.js');
 

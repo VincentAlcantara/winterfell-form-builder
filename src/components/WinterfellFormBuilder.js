@@ -123,7 +123,7 @@ class WinterfellFormBuilder extends Component {
             </Row>
             <hr />
             <Row>
-              <Col xs={3}>
+              <Col xs={4} className="winterfell-form-builder-field-editor">
                 { typeof currentPanelIndex !== 'undefined' &&
                   <FieldEditor
                     currentPanelIndex={currentPanelIndex}
@@ -133,11 +133,14 @@ class WinterfellFormBuilder extends Component {
                   />
                 }
               </Col>
-              <Col xs={9}>
+              <Col xs={8}>
                 <FormEditor
                   currentPanelIndex={currentPanelIndex}
                 />
               </Col>
+            </Row>
+            <hr />
+            <Row>
               <Col xs={12}>
                 {
                   schema &&

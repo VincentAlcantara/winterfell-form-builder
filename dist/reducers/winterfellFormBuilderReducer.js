@@ -71,32 +71,50 @@ function winterfellFormBuilderReducer() {
 
         return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex, 'questionSetText'], _text);
       }
-    case _constants.EDIT_QUESTION_TEXT_SUCCESS:
+    case _constants.EDIT_QUESTION_ID_SUCCESS:
       {
         var _action$payload5 = action.payload,
             _currentQuestionSetIndex2 = _action$payload5.currentQuestionSetIndex,
             currentQuestionIndex = _action$payload5.currentQuestionIndex,
             _text2 = _action$payload5.text;
 
-        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex2, 'questions', currentQuestionIndex, 'question'], _text2);
+        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex2, 'questions', currentQuestionIndex, 'questionId'], _text2);
       }
-    case _constants.EDIT_QUESTION_POST_TEXT_SUCCESS:
+    case _constants.EDIT_QUESTION_SUCCESS:
       {
         var _action$payload6 = action.payload,
             _currentQuestionSetIndex3 = _action$payload6.currentQuestionSetIndex,
             _currentQuestionIndex = _action$payload6.currentQuestionIndex,
             _text3 = _action$payload6.text;
 
-        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex3, 'questions', _currentQuestionIndex, 'postText'], _text3);
+        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex3, 'questions', _currentQuestionIndex, 'question'], _text3);
+      }
+    case _constants.EDIT_QUESTION_TEXT_SUCCESS:
+      {
+        var _action$payload7 = action.payload,
+            _currentQuestionSetIndex4 = _action$payload7.currentQuestionSetIndex,
+            _currentQuestionIndex2 = _action$payload7.currentQuestionIndex,
+            _text4 = _action$payload7.text;
+
+        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex4, 'questions', _currentQuestionIndex2, 'text'], _text4);
+      }
+    case _constants.EDIT_QUESTION_POST_TEXT_SUCCESS:
+      {
+        var _action$payload8 = action.payload,
+            _currentQuestionSetIndex5 = _action$payload8.currentQuestionSetIndex,
+            _currentQuestionIndex3 = _action$payload8.currentQuestionIndex,
+            _text5 = _action$payload8.text;
+
+        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex5, 'questions', _currentQuestionIndex3, 'postText'], _text5);
       }
     case _constants.CHANGE_EDITING_FIELD_SUCCESS:
       {
-        var _action$payload7 = action.payload,
-            currentEditingField = _action$payload7.currentEditingField,
-            _currentQuestionSetIndex4 = _action$payload7.currentQuestionSetIndex,
-            _currentQuestionIndex2 = _action$payload7.currentQuestionIndex;
+        var _action$payload9 = action.payload,
+            currentEditingField = _action$payload9.currentEditingField,
+            _currentQuestionSetIndex6 = _action$payload9.currentQuestionSetIndex,
+            _currentQuestionIndex4 = _action$payload9.currentQuestionIndex;
 
-        return state.set('currentEditingField', currentEditingField).set('currentQuestionSetIndex', _currentQuestionSetIndex4).set('currentQuestionIndex', _currentQuestionIndex2);
+        return state.set('currentEditingField', currentEditingField).set('currentQuestionSetIndex', _currentQuestionSetIndex6).set('currentQuestionIndex', _currentQuestionIndex4);
       }
     case _constants.CREATE_FORM_SUCCESS:
       return state.set('title', action.payload.title).set('currentPanelIndex', 0).set('schema', (0, _immutable.fromJS)({
@@ -177,11 +195,11 @@ function winterfellFormBuilderReducer() {
       }
     case _constants.UPDATE_QUESTION_SUCCESS:
       {
-        var _action$payload8 = action.payload,
-            questionSetIndex = _action$payload8.questionSetIndex,
-            questionIndex = _action$payload8.questionIndex,
-            question = _action$payload8.question,
-            questionText = _action$payload8.questionText;
+        var _action$payload10 = action.payload,
+            questionSetIndex = _action$payload10.questionSetIndex,
+            questionIndex = _action$payload10.questionIndex,
+            question = _action$payload10.question,
+            questionText = _action$payload10.questionText;
 
         return state.setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'question'], question).setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'text'], questionText);
       }

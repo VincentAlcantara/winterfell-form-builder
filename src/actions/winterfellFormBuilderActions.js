@@ -39,8 +39,9 @@ import {
   EDIT_PAGE_TEXT_SUCCESS,
   EDIT_QUESTION_SET_HEADER_SUCCESS,
   EDIT_QUESTION_SET_TEXT_SUCCESS,
+  EDIT_QUESTION_ID_SUCCESS,
+  EDIT_QUESTION_SUCCESS,
   EDIT_QUESTION_TEXT_SUCCESS,
-  EDIT_QUESTION_PRE_TEXT_SUCCESS,
   EDIT_QUESTION_POST_TEXT_SUCCESS,
 } from '../common/constants';
 
@@ -93,16 +94,23 @@ export function editQuestionSetText(currentQuestionSetIndex, text) {
   };
 }
 
+export function editQuestionId(currentQuestionSetIndex, currentQuestionIndex, text) {
+  return {
+    type: EDIT_QUESTION_ID_SUCCESS,
+    payload: { currentQuestionSetIndex, currentQuestionIndex, text },
+  };
+}
+
 export function editQuestion(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
-    type: EDIT_QUESTION_TEXT_SUCCESS,
+    type: EDIT_QUESTION_SUCCESS,
     payload: { currentQuestionSetIndex, currentQuestionIndex, text },
   };
 }
 
 export function editQuestionText(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
-    type: EDIT_QUESTION_PRE_TEXT_SUCCESS,
+    type: EDIT_QUESTION_TEXT_SUCCESS,
     payload: { currentQuestionSetIndex, currentQuestionIndex, text },
   };
 }

@@ -185,7 +185,7 @@ var WinterfellFormBuilder = function (_Component) {
               null,
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 3 },
+                { xs: 4, className: 'winterfell-form-builder-field-editor' },
                 typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_FieldEditor2.default, {
                   currentPanelIndex: currentPanelIndex,
                   currentEditingField: currentEditingField,
@@ -195,11 +195,16 @@ var WinterfellFormBuilder = function (_Component) {
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 9 },
+                { xs: 8 },
                 _react2.default.createElement(_FormEditor2.default, {
                   currentPanelIndex: currentPanelIndex
                 })
-              ),
+              )
+            ),
+            _react2.default.createElement('hr', null),
+            _react2.default.createElement(
+              _reactBootstrap.Row,
+              null,
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 12 },

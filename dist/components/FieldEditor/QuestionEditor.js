@@ -56,12 +56,14 @@ var QuestionEditor = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (QuestionEditor.__proto__ || (0, _getPrototypeOf2.default)(QuestionEditor)).call(this, props));
 
-    var question = props.question,
+    var questionId = props.questionId,
+        question = props.question,
         questionText = props.questionText,
         questionPostText = props.questionPostText;
 
 
     _this.state = {
+      questionId: questionId,
       question: question,
       questionText: questionText,
       questionPostText: questionPostText
@@ -75,6 +77,7 @@ var QuestionEditor = function (_Component) {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       this.state = {
+        questionId: nextProps.questionId,
         question: nextProps.question,
         questionText: nextProps.questionText,
         questionPostText: nextProps.questionPostText
@@ -92,6 +95,9 @@ var QuestionEditor = function (_Component) {
 
       this.setState((0, _defineProperty3.default)({}, name, value));
       switch (name) {
+        case 'questionId':
+          this.props.editQuestionId(currentQuestionSetIndex, currentQuestionIndex, value);
+          break;
         case 'question':
           this.props.editQuestion(currentQuestionSetIndex, currentQuestionIndex, value);
           break;
@@ -110,6 +116,18 @@ var QuestionEditor = function (_Component) {
       return _react2.default.createElement(
         'form',
         null,
+        _react2.default.createElement(
+          _reactBootstrap.FormGroup,
+          null,
+          _react2.default.createElement(_FieldGroup2.default, {
+            id: 'questionId',
+            name: 'questionId',
+            label: 'Question ID',
+            onChange: this.onChange,
+            placeholder: this.props.questionId,
+            value: this.state.questionId
+          })
+        ),
         _react2.default.createElement(
           _reactBootstrap.FormGroup,
           null,
@@ -153,9 +171,11 @@ var QuestionEditor = function (_Component) {
 }(_react.Component);
 
 QuestionEditor.propTypes = {
+  editQuestionId: _propTypes2.default.func.isRequired,
   editQuestion: _propTypes2.default.func.isRequired,
   editQuestionText: _propTypes2.default.func.isRequired,
   editQuestionPostText: _propTypes2.default.func.isRequired,
+  questionId: _propTypes2.default.string,
   question: _propTypes2.default.string,
   questionText: _propTypes2.default.string,
   questionPostText: _propTypes2.default.string,
@@ -163,6 +183,7 @@ QuestionEditor.propTypes = {
   currentQuestionIndex: _propTypes2.default.number.isRequired
 };
 QuestionEditor.defaultProps = {
+  questionId: '',
   question: '',
   questionText: '',
   questionPostText: ''
@@ -171,6 +192,7 @@ QuestionEditor.defaultProps = {
 
 function mapStateToProps(state, ownProps) {
   return {
+    questionId: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'questionId']),
     question: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'question']),
     questionText: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'text']),
     questionPostText: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'postText']),
@@ -179,7 +201,7 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { editQuestion: _winterfellFormBuilderActions.editQuestion, editQuestionText: _winterfellFormBuilderActions.editQuestionText, editQuestionPostText: _winterfellFormBuilderActions.editQuestionPostText })(QuestionEditor);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { editQuestionId: _winterfellFormBuilderActions.editQuestionId, editQuestion: _winterfellFormBuilderActions.editQuestion, editQuestionText: _winterfellFormBuilderActions.editQuestionText, editQuestionPostText: _winterfellFormBuilderActions.editQuestionPostText })(QuestionEditor);
 
 exports.default = _default;
 ;
