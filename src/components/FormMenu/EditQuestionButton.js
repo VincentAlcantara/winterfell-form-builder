@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
-import { editQuestion } from '../../actions/winterfellFormBuilderActions';
+import { updateQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
 
 
-class EditQuestionButton extends Component {
+class updateQuestionButton extends Component {
   static propTypes = {
-    editQuestion: PropTypes.func.isRequired,
+    updateQuestion: PropTypes.func.isRequired,
     questionSetIndex: PropTypes.number.isRequired,
     questionIndex: PropTypes.number.isRequired,
     question: PropTypes.string.isRequired,
@@ -47,7 +47,7 @@ class EditQuestionButton extends Component {
 
   onFormUpdate(e) {
     e.preventDefault();
-    this.props.editQuestion(
+    this.props.updateQuestion(
       this.props.questionSetIndex,
       this.props.questionIndex,
       this.state.question,
@@ -125,5 +125,5 @@ function mapStateToProps(state, ownProps) {
       ownProps.questionIndex, 'input', 'type']),
   };
 }
-export default connect(mapStateToProps, { editQuestion })(EditQuestionButton);
+export default connect(mapStateToProps, { updateQuestion })(updateQuestionButton);
 

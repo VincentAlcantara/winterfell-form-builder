@@ -22,6 +22,10 @@ var _QuestionSetEditor = require('./QuestionSetEditor');
 
 var _QuestionSetEditor2 = _interopRequireDefault(_QuestionSetEditor);
 
+var _QuestionEditor = require('./QuestionEditor');
+
+var _QuestionEditor2 = _interopRequireDefault(_QuestionEditor);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function FieldEditor(props) {
@@ -43,7 +47,7 @@ function FieldEditor(props) {
       currentEditingField === 'questionSet' && _react2.default.createElement(_QuestionSetEditor2.default, {
         currentQuestionSetIndex: currentQuestionSetIndex
       }),
-      currentEditingField === 'question' && _react2.default.createElement(_PageEditor2.default, {
+      currentEditingField === 'question' && _react2.default.createElement(_QuestionEditor2.default, {
         currentQuestionSetIndex: currentQuestionSetIndex,
         currentQuestionIndex: currentQuestionIndex
       })

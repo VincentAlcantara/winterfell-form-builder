@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import PageEditor from './PageEditor';
 import QuestionSetEditor from './QuestionSetEditor';
+import QuestionEditor from './QuestionEditor';
 
 
 function FieldEditor(props) {
@@ -30,7 +31,7 @@ function FieldEditor(props) {
         }
         {
           currentEditingField === 'question' &&
-          <PageEditor
+          <QuestionEditor
             currentQuestionSetIndex={currentQuestionSetIndex}
             currentQuestionIndex={currentQuestionIndex}
           />

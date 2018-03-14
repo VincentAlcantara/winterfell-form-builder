@@ -93,14 +93,14 @@ export function editQuestionSetText(currentQuestionSetIndex, text) {
   };
 }
 
-export function editQuestionText(currentQuestionSetIndex, currentQuestionIndex, text) {
+export function editQuestion(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
     type: EDIT_QUESTION_TEXT_SUCCESS,
     payload: { currentQuestionSetIndex, currentQuestionIndex, text },
   };
 }
 
-export function editQuestionPreText(currentQuestionSetIndex, currentQuestionIndex, text) {
+export function editQuestionText(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
     type: EDIT_QUESTION_PRE_TEXT_SUCCESS,
     payload: { currentQuestionSetIndex, currentQuestionIndex, text },
@@ -164,7 +164,7 @@ export function changeCurrentEditingField(
   };
 }
 
-export function editQuestion(
+export function updateQuestion(
   currentQuestionSetIndex, currentQuestionIndex, question, questionText) {
   return {
     type: UPDATE_QUESTION_SUCCESS,

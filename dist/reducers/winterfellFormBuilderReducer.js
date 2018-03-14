@@ -80,14 +80,14 @@ function winterfellFormBuilderReducer() {
 
         return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex2, 'questions', currentQuestionIndex, 'question'], _text2);
       }
-    case _constants.EDIT_QUESTION_PRE_TEXT_SUCCESS:
+    case _constants.EDIT_QUESTION_POST_TEXT_SUCCESS:
       {
         var _action$payload6 = action.payload,
             _currentQuestionSetIndex3 = _action$payload6.currentQuestionSetIndex,
             _currentQuestionIndex = _action$payload6.currentQuestionIndex,
             _text3 = _action$payload6.text;
 
-        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex3, 'questions', _currentQuestionIndex, 'text'], _text3);
+        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex3, 'questions', _currentQuestionIndex, 'postText'], _text3);
       }
     case _constants.CHANGE_EDITING_FIELD_SUCCESS:
       {

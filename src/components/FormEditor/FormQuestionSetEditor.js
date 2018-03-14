@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import EditQuestionButton from '../FormMenu/EditQuestionButton';
+import { FormQuestionEditor } from './FormQuestionEditor';
 
 export const FormQuestionSetEditor = (props) => {
   const { currentQuestionSets, questionSets, onClick } = props;
@@ -11,27 +11,6 @@ export const FormQuestionSetEditor = (props) => {
       questionSets.map(
         (questionSet, questionSetIndex) => {
           if (currentQuestionSet.questionSetId === questionSet.questionSetId) {
-            // get the questions first for the question set
-            const questionButtons = questionSet.questions.map((question, questionIndex) => (
-              <Button
-                className="winterfell-field-editor btn-block"
-                onClick={() => onClick('question', questionSetIndex, questionIndex)}
-                key={`${question.questionId}`}
-              >
-                <div>
-                  <label htmlFor={question.questionId}>{question.question}</label>
-                  {
-                    question.text &&
-                    <p>{question.text}</p>
-                  }
-                  <input id={question.questionId} type="text" className="form-control" />
-                  <EditQuestionButton
-                    questionSetIndex={questionSetIndex}
-                    questionIndex={questionIndex}
-                  />
-                </div>
-              </Button>
-            ));
             return (
               <div>
                 <Button
@@ -43,9 +22,11 @@ export const FormQuestionSetEditor = (props) => {
                     <p>{questionSet.questionSetText}</p>
                   </div>
                 </Button>
-                <div>
-                  {questionButtons}
-                </div>
+                <FormQuestionEditor
+                  questionSetIndex={questionSetIndex}
+                  questions={questionSet.questions}
+                  onClick={onClick}
+                />
               </div>
             );
           }

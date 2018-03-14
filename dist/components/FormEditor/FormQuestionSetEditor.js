@@ -15,9 +15,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactBootstrap = require('react-bootstrap');
 
-var _EditQuestionButton = require('../FormMenu/EditQuestionButton');
-
-var _EditQuestionButton2 = _interopRequireDefault(_EditQuestionButton);
+var _FormQuestionEditor = require('./FormQuestionEditor');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31,38 +29,6 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
     return currentQuestionSets.map(function (currentQuestionSet) {
       return questionSets.map(function (questionSet, questionSetIndex) {
         if (currentQuestionSet.questionSetId === questionSet.questionSetId) {
-          // get the questions first for the question set
-          var questionButtons = questionSet.questions.map(function (question, questionIndex) {
-            return _react2.default.createElement(
-              _reactBootstrap.Button,
-              {
-                className: 'winterfell-field-editor btn-block',
-                onClick: function onClick() {
-                  return _onClick('question', questionSetIndex, questionIndex);
-                },
-                key: '' + question.questionId
-              },
-              _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: question.questionId },
-                  question.question
-                ),
-                question.text && _react2.default.createElement(
-                  'p',
-                  null,
-                  question.text
-                ),
-                _react2.default.createElement('input', { id: question.questionId, type: 'text', className: 'form-control' }),
-                _react2.default.createElement(_EditQuestionButton2.default, {
-                  questionSetIndex: questionSetIndex,
-                  questionIndex: questionIndex
-                })
-              )
-            );
-          });
           return _react2.default.createElement(
             'div',
             null,
@@ -89,11 +55,11 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
                 )
               )
             ),
-            _react2.default.createElement(
-              'div',
-              null,
-              questionButtons
-            )
+            _react2.default.createElement(_FormQuestionEditor.FormQuestionEditor, {
+              questionSetIndex: questionSetIndex,
+              questions: questionSet.questions,
+              onClick: _onClick
+            })
           );
         }
         return null;

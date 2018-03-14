@@ -48,13 +48,13 @@ var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var EditQuestionButton = function (_Component) {
-  (0, _inherits3.default)(EditQuestionButton, _Component);
+var updateQuestionButton = function (_Component) {
+  (0, _inherits3.default)(updateQuestionButton, _Component);
 
-  function EditQuestionButton(props) {
-    (0, _classCallCheck3.default)(this, EditQuestionButton);
+  function updateQuestionButton(props) {
+    (0, _classCallCheck3.default)(this, updateQuestionButton);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (EditQuestionButton.__proto__ || (0, _getPrototypeOf2.default)(EditQuestionButton)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (updateQuestionButton.__proto__ || (0, _getPrototypeOf2.default)(updateQuestionButton)).call(this, props));
 
     var question = props.question,
         questionText = props.questionText,
@@ -73,7 +73,7 @@ var EditQuestionButton = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(EditQuestionButton, [{
+  (0, _createClass3.default)(updateQuestionButton, [{
     key: 'onChange',
     value: function onChange(event) {
       event.preventDefault();
@@ -89,7 +89,7 @@ var EditQuestionButton = function (_Component) {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
-      this.props.editQuestion(this.props.questionSetIndex, this.props.questionIndex, this.state.question, this.state.questionText, this.state.questionType);
+      this.props.updateQuestion(this.props.questionSetIndex, this.props.questionIndex, this.state.question, this.state.questionText, this.state.questionType);
       this.setState({ showModal: false });
     }
   }, {
@@ -188,18 +188,18 @@ var EditQuestionButton = function (_Component) {
       );
     }
   }]);
-  return EditQuestionButton;
+  return updateQuestionButton;
 }(_react.Component);
 
-EditQuestionButton.propTypes = {
-  editQuestion: _propTypes2.default.func.isRequired,
+updateQuestionButton.propTypes = {
+  updateQuestion: _propTypes2.default.func.isRequired,
   questionSetIndex: _propTypes2.default.number.isRequired,
   questionIndex: _propTypes2.default.number.isRequired,
   question: _propTypes2.default.string.isRequired,
   questionText: _propTypes2.default.string,
   questionType: _propTypes2.default.string.isRequired
 };
-EditQuestionButton.defaultProps = {
+updateQuestionButton.defaultProps = {
   questionText: ''
 };
 
@@ -212,7 +212,7 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { editQuestion: _winterfellFormBuilderActions.editQuestion })(EditQuestionButton);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { updateQuestion: _winterfellFormBuilderActions.updateQuestion })(updateQuestionButton);
 
 exports.default = _default;
 ;
@@ -222,7 +222,7 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(EditQuestionButton, 'EditQuestionButton', 'src/components/FormMenu/EditQuestionButton.js');
+  __REACT_HOT_LOADER__.register(updateQuestionButton, 'updateQuestionButton', 'src/components/FormMenu/EditQuestionButton.js');
 
   __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/EditQuestionButton.js');
 

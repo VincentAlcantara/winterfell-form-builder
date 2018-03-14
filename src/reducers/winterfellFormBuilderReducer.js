@@ -16,7 +16,7 @@ import {
   EDIT_QUESTION_SET_HEADER_SUCCESS,
   EDIT_QUESTION_SET_TEXT_SUCCESS,
   EDIT_QUESTION_TEXT_SUCCESS,
-  EDIT_QUESTION_PRE_TEXT_SUCCESS,
+  EDIT_QUESTION_POST_TEXT_SUCCESS,
 } from '../common/constants';
 
 const initialState = fromJS({
@@ -76,11 +76,11 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
           currentQuestionIndex, 'question'], text);
     }
-    case EDIT_QUESTION_PRE_TEXT_SUCCESS: {
+    case EDIT_QUESTION_POST_TEXT_SUCCESS: {
       const { currentQuestionSetIndex, currentQuestionIndex, text } = action.payload;
       return state
         .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
-          currentQuestionIndex, 'text'], text);
+          currentQuestionIndex, 'postText'], text);
     }
     case CHANGE_EDITING_FIELD_SUCCESS: {
       const { currentEditingField, currentQuestionSetIndex, currentQuestionIndex } = action.payload;
