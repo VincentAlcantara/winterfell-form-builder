@@ -144,7 +144,7 @@ var Previewer = function (_Component) {
 }(_react.Component);
 
 Previewer.propTypes = {
-  currentPanelId: _propTypes2.default.string.isRequired,
+  currentPanelId: _propTypes2.default.string,
   schema: _propTypes2.default.object.isRequired,
   onRender: _propTypes2.default.func,
   onUpdate: _propTypes2.default.func,
@@ -161,26 +161,4 @@ Previewer.defaultProps = {
   onSwitchPanel: onSwitchPanelDefault,
   questionAnswers: {}
 };
-var _default = Previewer;
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(onRenderDefault, 'onRenderDefault', 'src/components/Previewer.js');
-
-  __REACT_HOT_LOADER__.register(onUpdateDefault, 'onUpdateDefault', 'src/components/Previewer.js');
-
-  __REACT_HOT_LOADER__.register(onSwitchPanelDefault, 'onSwitchPanelDefault', 'src/components/Previewer.js');
-
-  __REACT_HOT_LOADER__.register(onSubmitDefault, 'onSubmitDefault', 'src/components/Previewer.js');
-
-  __REACT_HOT_LOADER__.register(Previewer, 'Previewer', 'src/components/Previewer.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/Previewer.js');
-}();
-
-;
+exports.default = Previewer;

@@ -18,8 +18,8 @@ var _reactBootstrap = require('react-bootstrap');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FormPageEditor = exports.FormPageEditor = function FormPageEditor(props) {
-  var questionPanels = props.questionPanels,
-      currentPanelIndex = props.currentPanelIndex,
+  var panelHeader = props.panelHeader,
+      panelText = props.panelText,
       onClick = props.onClick;
 
   return _react2.default.createElement(
@@ -34,12 +34,12 @@ var FormPageEditor = exports.FormPageEditor = function FormPageEditor(props) {
       _react2.default.createElement(
         'h3',
         null,
-        questionPanels[currentPanelIndex].panelHeader
+        panelHeader
       ),
       _react2.default.createElement(
         'p',
         null,
-        questionPanels[currentPanelIndex].panelText
+        panelText
       )
     )
   );
@@ -47,28 +47,13 @@ var FormPageEditor = exports.FormPageEditor = function FormPageEditor(props) {
 
 FormPageEditor.propTypes = {
   onClick: _propTypes2.default.func.isRequired,
-  questionPanels: _propTypes2.default.array,
-  currentPanelIndex: _propTypes2.default.number
+  panelHeader: _propTypes2.default.string,
+  panelText: _propTypes2.default.string
 };
 
 FormPageEditor.defaultProps = {
-  currentPanelIndex: 0,
-  questionPanels: null,
-  changeCurrentEditingField: null
+  panelHeader: '',
+  panelText: ''
 };
 
-var _default = FormPageEditor;
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(FormPageEditor, 'FormPageEditor', 'src/components/FormEditor/FormPageEditor.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormEditor/FormPageEditor.js');
-}();
-
-;
+exports.default = FormPageEditor;

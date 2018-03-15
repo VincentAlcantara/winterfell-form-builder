@@ -42,20 +42,11 @@ var _reactBootstrap = require('react-bootstrap');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
-var _EditQuestionButton = require('../FormMenu/EditQuestionButton');
-
-var _EditQuestionButton2 = _interopRequireDefault(_EditQuestionButton);
-
 var _FormPageEditor = require('./FormPageEditor');
 
 var _FormQuestionSetEditor = require('./FormQuestionSetEditor');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// import {
-//   FormPageEditor,
-//   FormQuestionSetEditor,
-//  } from './index';
 
 var FormEditorContainer = function (_Component) {
   (0, _inherits3.default)(FormEditorContainer, _Component);
@@ -102,8 +93,13 @@ var FormEditorContainer = function (_Component) {
       var _props = this.props,
           currentPanelIndex = _props.currentPanelIndex,
           questionPanels = _props.questionPanels,
-          questionSets = _props.questionSets;
+          questionSets = _props.questionSets,
+          panelHeader = _props.panelHeader,
+          panelText = _props.panelText;
 
+      var questionPanelsArray = questionPanels && questionPanels.toJS();
+      var questionSetsArray = questionSets && questionSets.toJS();
+      console.log('panelHeader, panelText: ', panelHeader, panelText);
       return _react2.default.createElement(
         _reactBootstrap.Row,
         null,
@@ -111,18 +107,16 @@ var FormEditorContainer = function (_Component) {
           _reactBootstrap.Col,
           { xs: 12 },
           typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_FormPageEditor.FormPageEditor, {
-            questionPanels: questionPanels,
-            currentPanelIndex: currentPanelIndex,
+            panelHeader: panelHeader,
+            panelText: panelText,
             onClick: function onClick() {
               return _this2.props.changeCurrentEditingField('page');
             }
           }),
-          typeof currentPanelIndex !== 'undefined' && questionPanels[currentPanelIndex] && questionPanels[currentPanelIndex].questionSets && _react2.default.createElement(_FormQuestionSetEditor.FormQuestionSetEditor, {
-            currentQuestionSets: questionPanels[currentPanelIndex].questionSets,
-            questionSets: questionSets,
-            onClick: function onClick() {
-              return _this2.props.changeCurrentEditingField('questionSet');
-            }
+          typeof currentPanelIndex !== 'undefined' && questionPanelsArray && _react2.default.createElement(_FormQuestionSetEditor.FormQuestionSetEditor, {
+            currentQuestionSets: questionPanelsArray[currentPanelIndex].questionSets,
+            questionSets: questionSetsArray,
+            onClick: this.props.changeCurrentEditingField
           })
         )
       );
@@ -135,42 +129,32 @@ FormEditorContainer.propTypes = {
   editFormTitle: _propTypes2.default.func.isRequired,
   changeCurrentEditingField: _propTypes2.default.func.isRequired,
   currentPanelIndex: _propTypes2.default.number.isRequired,
-  questionSets: _propTypes2.default.array,
-  questionPanels: _propTypes2.default.array
+  questionSets: _propTypes2.default.object,
+  questionPanels: _propTypes2.default.object,
+  panelHeader: _propTypes2.default.string,
+  panelText: _propTypes2.default.string
 };
 FormEditorContainer.defaultProps = {
-  currentPanelId: _propTypes2.default.string,
+  currentPanelId: 'Select Page',
+  currentPanelIndex: 0,
   questionPanels: null,
-  questionSets: null
+  questionSets: null,
+  panelHeader: '',
+  panelText: ''
 };
 
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     title: state.getIn(['form', 'title']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
     currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
-    questionPanels: state.getIn(['form', 'schema', 'questionPanels']).toJS(),
-    questionSets: state.getIn(['form', 'schema', 'questionSets']).toJS(),
-    schema: state.getIn(['form', 'schema'])
+    questionPanels: state.getIn(['form', 'schema', 'questionPanels']),
+    questionSets: state.getIn(['form', 'schema', 'questionSets']),
+    schema: state.getIn(['form', 'schema']),
+    panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelHeader']),
+    panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelText'])
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField, editFormTitle: _winterfellFormBuilderActions.editFormTitle })(FormEditorContainer);
-
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(FormEditorContainer, 'FormEditorContainer', 'src/components/FormEditor/FormEditorContainer.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormEditor/FormEditorContainer.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormEditor/FormEditorContainer.js');
-}();
-
-;
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField, editFormTitle: _winterfellFormBuilderActions.editFormTitle })(FormEditorContainer);

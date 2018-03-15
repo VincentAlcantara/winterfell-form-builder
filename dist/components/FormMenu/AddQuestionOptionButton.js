@@ -48,27 +48,26 @@ var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var AddPageButton = function (_Component) {
-  (0, _inherits3.default)(AddPageButton, _Component);
+var AddQuestionOptionButton = function (_Component) {
+  (0, _inherits3.default)(AddQuestionOptionButton, _Component);
 
-  function AddPageButton(props) {
-    (0, _classCallCheck3.default)(this, AddPageButton);
+  function AddQuestionOptionButton(props) {
+    (0, _classCallCheck3.default)(this, AddQuestionOptionButton);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AddPageButton.__proto__ || (0, _getPrototypeOf2.default)(AddPageButton)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (AddQuestionOptionButton.__proto__ || (0, _getPrototypeOf2.default)(AddQuestionOptionButton)).call(this, props));
 
     _this.state = {
       showModal: false,
-      panelId: '',
-      panelHeader: '',
-      panelText: ''
+      questionOptionText: '',
+      questionOptionValue: ''
     };
 
     _this.onChange = _this.onChange.bind(_this);
-    _this.onFormUpdate = _this.onFormUpdate.bind(_this);
+    _this.onConfirmAddOption = _this.onConfirmAddOption.bind(_this);
     return _this;
   }
 
-  (0, _createClass3.default)(AddPageButton, [{
+  (0, _createClass3.default)(AddQuestionOptionButton, [{
     key: 'onChange',
     value: function onChange(event) {
       event.preventDefault();
@@ -81,10 +80,14 @@ var AddPageButton = function (_Component) {
       this.setState({ showModal: true });
     }
   }, {
-    key: 'onFormUpdate',
-    value: function onFormUpdate(e) {
+    key: 'onConfirmAddOption',
+    value: function onConfirmAddOption(e) {
       e.preventDefault();
-      this.props.addPage(this.state.panelId, this.state.panelHeader, this.state.panelText);
+      var _props = this.props,
+          currentQuestionSetIndex = _props.currentQuestionSetIndex,
+          currentQuestionIndex = _props.currentQuestionIndex;
+
+      this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex, this.state.questionOptionText, this.state.questionOptionValue);
       this.setState({ showModal: false });
     }
   }, {
@@ -107,7 +110,7 @@ var AddPageButton = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Modal.Title,
                 null,
-                'Add a new page to the form'
+                'Add new question option'
               )
             ),
             _react2.default.createElement(
@@ -120,36 +123,24 @@ var AddPageButton = function (_Component) {
                   _reactBootstrap.FormGroup,
                   null,
                   _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'panelId',
-                    name: 'panelId',
-                    label: 'Page ID',
+                    id: 'questionOptionText',
+                    name: 'questionOptionText',
+                    label: 'Enter option text',
                     onChange: this.onChange,
-                    placeholder: '(optional)',
-                    value: this.state.panelId
+                    placeholder: 'Enter text',
+                    value: this.state.questionOptionText
                   })
                 ),
                 _react2.default.createElement(
                   _reactBootstrap.FormGroup,
                   null,
                   _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'panelHeader',
-                    name: 'panelHeader',
-                    label: 'Page Title',
+                    id: 'questionOptionValue',
+                    name: 'questionOptionValue',
+                    label: 'Enter option value',
                     onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.panelHeader
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'panelText',
-                    name: 'panelText',
-                    label: 'Enter Page Description',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.panelText
+                    placeholder: 'Enter value',
+                    value: this.state.questionOptionValue
                   })
                 )
               )
@@ -171,7 +162,7 @@ var AddPageButton = function (_Component) {
                 _reactBootstrap.Button,
                 {
                   bsStyle: 'primary',
-                  onClick: this.onFormUpdate
+                  onClick: this.onConfirmAddOption
                 },
                 'Save changes'
               )
@@ -184,28 +175,31 @@ var AddPageButton = function (_Component) {
           _react2.default.createElement(
             _reactBootstrap.Button,
             {
-              className: 'btn btn-block btn-info',
+              className: 'btn btn-block btn-success',
               onClick: function onClick() {
                 _this2.setState({ showModal: true });
               }
             },
-            'add page'
+            'Add Option'
           )
         )
       );
     }
   }]);
-  return AddPageButton;
+  return AddQuestionOptionButton;
 }(_react.Component);
 
-AddPageButton.propTypes = {
-  addPage: _propTypes2.default.func.isRequired
+AddQuestionOptionButton.propTypes = {
+  addQuestionOption: _propTypes2.default.func.isRequired,
+  currentQuestionSetIndex: _propTypes2.default.number.isRequired,
+  currentQuestionIndex: _propTypes2.default.number.isRequired
 };
 
 
 function mapStateToProps(state) {
   return {
-    title: state.getIn(['form', 'currentForm', 'title'])
+    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex'])
   };
 }
-exports.default = (0, _reactRedux.connect)(mapStateToProps, { addPage: _winterfellFormBuilderActions.addPage })(AddPageButton);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { addQuestionOption: _winterfellFormBuilderActions.addQuestionOption })(AddQuestionOptionButton);

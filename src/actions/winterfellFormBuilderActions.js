@@ -39,9 +39,14 @@ import {
   EDIT_PAGE_TEXT_SUCCESS,
   EDIT_QUESTION_SET_HEADER_SUCCESS,
   EDIT_QUESTION_SET_TEXT_SUCCESS,
+  EDIT_QUESTION_ID_SUCCESS,
+  EDIT_QUESTION_SUCCESS,
   EDIT_QUESTION_TEXT_SUCCESS,
-  EDIT_QUESTION_PRE_TEXT_SUCCESS,
   EDIT_QUESTION_POST_TEXT_SUCCESS,
+  ADD_QUESTION_OPTION_SUCCESS,
+  EDIT_QUESTION_OPTION_TEXT_SUCCESS,
+  EDIT_QUESTION_OPTION_VALUE_SUCCESS,
+  DELETE_QUESTION_OPTION_SUCCESS,
 } from '../common/constants';
 
 export function loadForm(schema) {
@@ -79,38 +84,82 @@ export function editPageText(questionPanelIndex, text) {
   };
 }
 
-export function editQuestionSetHeader(questionSetIndex, header) {
+export function editQuestionSetHeader(currentQuestionSetIndex, header) {
   return {
     type: EDIT_QUESTION_SET_HEADER_SUCCESS,
-    payload: { questionSetIndex, header },
+    payload: { currentQuestionSetIndex, header },
   };
 }
 
-export function editQuestionSetText(questionSetIndex, text) {
+export function editQuestionSetText(currentQuestionSetIndex, text) {
   return {
     type: EDIT_QUESTION_SET_TEXT_SUCCESS,
-    payload: { questionSetIndex, text },
+    payload: { currentQuestionSetIndex, text },
   };
 }
 
-export function editQuestionText(questionSetIndex, questionIndex, text) {
+export function editQuestionId(currentQuestionSetIndex, currentQuestionIndex, text) {
+  return {
+    type: EDIT_QUESTION_ID_SUCCESS,
+    payload: { currentQuestionSetIndex, currentQuestionIndex, text },
+  };
+}
+
+export function editQuestion(currentQuestionSetIndex, currentQuestionIndex, text) {
+  return {
+    type: EDIT_QUESTION_SUCCESS,
+    payload: { currentQuestionSetIndex, currentQuestionIndex, text },
+  };
+}
+
+export function editQuestionText(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
     type: EDIT_QUESTION_TEXT_SUCCESS,
-    payload: { questionSetIndex, questionIndex, text },
+    payload: { currentQuestionSetIndex, currentQuestionIndex, text },
   };
 }
 
-export function editQuestionPreText(questionSetIndex, questionIndex, text) {
-  return {
-    type: EDIT_QUESTION_PRE_TEXT_SUCCESS,
-    payload: { questionSetIndex, questionIndex, text },
-  };
-}
-
-export function editQuestionPostText(questionSetIndex, questionIndex, text) {
+export function editQuestionPostText(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
     type: EDIT_QUESTION_POST_TEXT_SUCCESS,
-    payload: { questionSetIndex, questionIndex, text },
+    payload: { currentQuestionSetIndex, currentQuestionIndex, text },
+  };
+}
+
+export function addQuestionOption(
+  currentQuestionSetIndex, currentQuestionIndex, questionOptionText, questionOptionValue) {
+  return {
+    type: ADD_QUESTION_OPTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex,
+      currentQuestionIndex,
+      questionOptionText,
+      questionOptionValue,
+    },
+  };
+}
+
+export function editQuestionOptionText(
+  currentQuestionSetIndex, currentQuestionIndex, optionIndex, option) {
+  return {
+    type: EDIT_QUESTION_OPTION_TEXT_SUCCESS,
+    payload: { currentQuestionSetIndex, currentQuestionIndex, optionIndex, option },
+  };
+}
+
+export function editQuestionOptionValue(
+  currentQuestionSetIndex, currentQuestionIndex, optionIndex, value) {
+  return {
+    type: EDIT_QUESTION_OPTION_VALUE_SUCCESS,
+    payload: { currentQuestionSetIndex, currentQuestionIndex, optionIndex, value },
+  };
+}
+
+export function deleteQuestionOption(
+  currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex) {
+  return {
+    type: DELETE_QUESTION_OPTION_SUCCESS,
+    payload: { currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex },
   };
 }
 
@@ -156,16 +205,18 @@ export function addQuestion(
   };
 }
 
-export function changeCurrentEditingField(currentEditingField) {
+export function changeCurrentEditingField(
+  currentEditingField, currentQuestionSetIndex, currentQuestionIndex) {
   return {
     type: CHANGE_EDITING_FIELD_SUCCESS,
-    payload: { currentEditingField },
+    payload: { currentEditingField, currentQuestionSetIndex, currentQuestionIndex },
   };
 }
 
-export function editQuestion(questionSetIndex, questionIndex, question, questionText) {
+export function updateQuestion(
+  currentQuestionSetIndex, currentQuestionIndex, question, questionText) {
   return {
     type: UPDATE_QUESTION_SUCCESS,
-    payload: { questionSetIndex, questionIndex, question, questionText },
+    payload: { currentQuestionSetIndex, currentQuestionIndex, question, questionText },
   };
 }

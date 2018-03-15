@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _stringify = require('babel-runtime/core-js/json/stringify');
-
-var _stringify2 = _interopRequireDefault(_stringify);
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -32,11 +28,11 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactRedux = require('react-redux');
+
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _reactRedux = require('react-redux');
 
 var _reactBootstrap = require('react-bootstrap');
 
@@ -44,34 +40,39 @@ var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilder
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var EditSchemaButton = function (_Component) {
-  (0, _inherits3.default)(EditSchemaButton, _Component);
+var DeleteQuestionOptionButton = function (_Component) {
+  (0, _inherits3.default)(DeleteQuestionOptionButton, _Component);
 
-  function EditSchemaButton(props) {
-    (0, _classCallCheck3.default)(this, EditSchemaButton);
+  function DeleteQuestionOptionButton(props) {
+    (0, _classCallCheck3.default)(this, DeleteQuestionOptionButton);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (EditSchemaButton.__proto__ || (0, _getPrototypeOf2.default)(EditSchemaButton)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (DeleteQuestionOptionButton.__proto__ || (0, _getPrototypeOf2.default)(DeleteQuestionOptionButton)).call(this, props));
 
     _this.state = {
-      schema: _this.props.schema
+      showModal: false
     };
 
-    _this.onChange = _this.onChange.bind(_this);
-    _this.onFormUpdate = _this.onFormUpdate.bind(_this);
+    _this.onConfirmDelete = _this.onConfirmDelete.bind(_this);
     return _this;
   }
 
-  (0, _createClass3.default)(EditSchemaButton, [{
-    key: 'onChange',
-    value: function onChange(e) {
-      this.setState({ schema: JSON.parse(e.target.value) });
+  (0, _createClass3.default)(DeleteQuestionOptionButton, [{
+    key: 'onClose',
+    value: function onClose(e) {
+      e.preventDefault();
+      this.setState({ showModal: false });
     }
   }, {
-    key: 'onFormUpdate',
-    value: function onFormUpdate(e) {
+    key: 'onConfirmDelete',
+    value: function onConfirmDelete(e) {
+      var _props = this.props,
+          currentQuestionSetIndex = _props.currentQuestionSetIndex,
+          currentQuestionIndex = _props.currentQuestionIndex,
+          questionOptionIndex = _props.questionOptionIndex;
+
       e.preventDefault();
-      this.props.updateForm(this.state.schema);
       this.setState({ showModal: false });
+      this.props.deleteQuestionOption(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex);
     }
   }, {
     key: 'render',
@@ -79,7 +80,7 @@ var EditSchemaButton = function (_Component) {
       var _this2 = this;
 
       return _react2.default.createElement(
-        _reactBootstrap.Row,
+        'span',
         null,
         _react2.default.createElement(
           'div',
@@ -93,26 +94,13 @@ var EditSchemaButton = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Modal.Title,
                 null,
-                'Edit Schema'
+                'Delete Option Confirmation'
               )
             ),
             _react2.default.createElement(
               _reactBootstrap.Modal.Body,
               null,
-              _react2.default.createElement(
-                'form',
-                null,
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement('textarea', {
-                    rows: '30',
-                    cols: '78',
-                    value: (0, _stringify2.default)(this.state.schema, undefined, 2),
-                    onChange: this.onChange
-                  })
-                )
-              )
+              'Are you sure you want to delete this option?'
             ),
             _react2.default.createElement(
               _reactBootstrap.Modal.Footer,
@@ -131,48 +119,42 @@ var EditSchemaButton = function (_Component) {
                 _reactBootstrap.Button,
                 {
                   bsStyle: 'primary',
-                  onClick: this.onFormUpdate
+                  onClick: this.onConfirmDelete
                 },
-                'Save changes'
+                'Confirm Delete'
               )
             )
           )
         ),
         _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
-          _react2.default.createElement(
-            _reactBootstrap.Button,
-            {
-              className: 'btn btn-block btn-info',
-              onClick: function onClick() {
-                _this2.setState({
-                  schema: _this2.props.schema.toJS(),
-                  showModal: true
-                });
-              }
-            },
-            'edit schema'
-          )
+          _reactBootstrap.Button,
+          {
+            className: 'btn btn-block btn-danger',
+            onClick: function onClick() {
+              _this2.setState({ showModal: true });
+            }
+          },
+          '-'
         )
       );
     }
   }]);
-  return EditSchemaButton;
+  return DeleteQuestionOptionButton;
 }(_react.Component);
 
-EditSchemaButton.propTypes = {
-  schema: _propTypes2.default.object,
-  updateForm: _propTypes2.default.func.isRequired
-};
-EditSchemaButton.defaultProps = {
-  schema: {}
+DeleteQuestionOptionButton.propTypes = {
+  deleteQuestionOption: _propTypes2.default.func.isRequired,
+  currentQuestionSetIndex: _propTypes2.default.number.isRequired,
+  currentQuestionIndex: _propTypes2.default.number.isRequired,
+  questionOptionIndex: _propTypes2.default.number.isRequired
 };
 
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
-    schema: state.getIn(['form', 'schema']) && state.getIn(['form', 'schema'])
+    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
+    questionOptionIndex: ownProps.questionOptionIndex
   };
 }
-exports.default = (0, _reactRedux.connect)(mapStateToProps, { updateForm: _winterfellFormBuilderActions.updateForm })(EditSchemaButton);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { deleteQuestionOption: _winterfellFormBuilderActions.deleteQuestionOption })(DeleteQuestionOptionButton);

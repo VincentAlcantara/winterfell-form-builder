@@ -4,11 +4,16 @@
   border-radius: 0;
   padding-top: 0;
   padding-bottom: 0;
+  white-space: normal;
   &:hover {
     text-align: left;
     border: 1px dotted #ccc;
     background: #eee;
   }
+}
+
+.winterfell-form-builder-field-editor {
+  background: #eee;
 }
 
 

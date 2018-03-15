@@ -27,7 +27,7 @@ const onSubmitDefault = (questionAndAnswers, target) => {
 
 class Previewer extends Component {
   static propTypes = {
-    currentPanelId: PropTypes.string.isRequired,
+    currentPanelId: PropTypes.string,
     schema: PropTypes.object.isRequired,
     onRender: PropTypes.func,
     onUpdate: PropTypes.func,

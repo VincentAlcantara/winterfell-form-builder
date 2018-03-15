@@ -10,15 +10,20 @@ exports.editPageHeader = editPageHeader;
 exports.editPageText = editPageText;
 exports.editQuestionSetHeader = editQuestionSetHeader;
 exports.editQuestionSetText = editQuestionSetText;
+exports.editQuestionId = editQuestionId;
+exports.editQuestion = editQuestion;
 exports.editQuestionText = editQuestionText;
-exports.editQuestionPreText = editQuestionPreText;
 exports.editQuestionPostText = editQuestionPostText;
+exports.addQuestionOption = addQuestionOption;
+exports.editQuestionOptionText = editQuestionOptionText;
+exports.editQuestionOptionValue = editQuestionOptionValue;
+exports.deleteQuestionOption = deleteQuestionOption;
 exports.goToPage = goToPage;
 exports.updateForm = updateForm;
 exports.addPage = addPage;
 exports.addQuestion = addQuestion;
 exports.changeCurrentEditingField = changeCurrentEditingField;
-exports.editQuestion = editQuestion;
+exports.updateQuestion = updateQuestion;
 
 var _constants = require('../common/constants');
 
@@ -57,38 +62,78 @@ function editPageText(questionPanelIndex, text) {
   };
 }
 
-function editQuestionSetHeader(questionSetIndex, header) {
+function editQuestionSetHeader(currentQuestionSetIndex, header) {
   return {
     type: _constants.EDIT_QUESTION_SET_HEADER_SUCCESS,
-    payload: { questionSetIndex: questionSetIndex, header: header }
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, header: header }
   };
 }
 
-function editQuestionSetText(questionSetIndex, text) {
+function editQuestionSetText(currentQuestionSetIndex, text) {
   return {
     type: _constants.EDIT_QUESTION_SET_TEXT_SUCCESS,
-    payload: { questionSetIndex: questionSetIndex, text: text }
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, text: text }
   };
 }
 
-function editQuestionText(questionSetIndex, questionIndex, text) {
+function editQuestionId(currentQuestionSetIndex, currentQuestionIndex, text) {
+  return {
+    type: _constants.EDIT_QUESTION_ID_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, text: text }
+  };
+}
+
+function editQuestion(currentQuestionSetIndex, currentQuestionIndex, text) {
+  return {
+    type: _constants.EDIT_QUESTION_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, text: text }
+  };
+}
+
+function editQuestionText(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
     type: _constants.EDIT_QUESTION_TEXT_SUCCESS,
-    payload: { questionSetIndex: questionSetIndex, questionIndex: questionIndex, text: text }
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, text: text }
   };
 }
 
-function editQuestionPreText(questionSetIndex, questionIndex, text) {
-  return {
-    type: _constants.EDIT_QUESTION_PRE_TEXT_SUCCESS,
-    payload: { questionSetIndex: questionSetIndex, questionIndex: questionIndex, text: text }
-  };
-}
-
-function editQuestionPostText(questionSetIndex, questionIndex, text) {
+function editQuestionPostText(currentQuestionSetIndex, currentQuestionIndex, text) {
   return {
     type: _constants.EDIT_QUESTION_POST_TEXT_SUCCESS,
-    payload: { questionSetIndex: questionSetIndex, questionIndex: questionIndex, text: text }
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, text: text }
+  };
+}
+
+function addQuestionOption(currentQuestionSetIndex, currentQuestionIndex, questionOptionText, questionOptionValue) {
+  return {
+    type: _constants.ADD_QUESTION_OPTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex: currentQuestionSetIndex,
+      currentQuestionIndex: currentQuestionIndex,
+      questionOptionText: questionOptionText,
+      questionOptionValue: questionOptionValue
+    }
+  };
+}
+
+function editQuestionOptionText(currentQuestionSetIndex, currentQuestionIndex, optionIndex, option) {
+  return {
+    type: _constants.EDIT_QUESTION_OPTION_TEXT_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, optionIndex: optionIndex, option: option }
+  };
+}
+
+function editQuestionOptionValue(currentQuestionSetIndex, currentQuestionIndex, optionIndex, value) {
+  return {
+    type: _constants.EDIT_QUESTION_OPTION_VALUE_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, optionIndex: optionIndex, value: value }
+  };
+}
+
+function deleteQuestionOption(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex) {
+  return {
+    type: _constants.DELETE_QUESTION_OPTION_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, questionOptionIndex: questionOptionIndex }
   };
 }
 
@@ -127,57 +172,16 @@ function addQuestion(currentPanelId, questionSetId, questionSetHeader, questionS
   };
 }
 
-function changeCurrentEditingField(currentEditingField) {
+function changeCurrentEditingField(currentEditingField, currentQuestionSetIndex, currentQuestionIndex) {
   return {
     type: _constants.CHANGE_EDITING_FIELD_SUCCESS,
-    payload: { currentEditingField: currentEditingField }
+    payload: { currentEditingField: currentEditingField, currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex }
   };
 }
 
-function editQuestion(questionSetIndex, questionIndex, question, questionText) {
+function updateQuestion(currentQuestionSetIndex, currentQuestionIndex, question, questionText) {
   return {
     type: _constants.UPDATE_QUESTION_SUCCESS,
-    payload: { questionSetIndex: questionSetIndex, questionIndex: questionIndex, question: question, questionText: questionText }
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, question: question, questionText: questionText }
   };
 }
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(loadForm, 'loadForm', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(createForm, 'createForm', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(editFormTitle, 'editFormTitle', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(editPageHeader, 'editPageHeader', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(editPageText, 'editPageText', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(editQuestionSetHeader, 'editQuestionSetHeader', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(editQuestionSetText, 'editQuestionSetText', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(editQuestionText, 'editQuestionText', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(editQuestionPreText, 'editQuestionPreText', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(editQuestionPostText, 'editQuestionPostText', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(goToPage, 'goToPage', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(updateForm, 'updateForm', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(addPage, 'addPage', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(addQuestion, 'addQuestion', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(changeCurrentEditingField, 'changeCurrentEditingField', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(editQuestion, 'editQuestion', 'src/actions/winterfellFormBuilderActions.js');
-}();
-
-;

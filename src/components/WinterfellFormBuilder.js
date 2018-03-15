@@ -13,7 +13,7 @@ import {
   AddQuestionButton,
 } from './FormMenu';
 import FormEditor from './FormEditor';
-import PageEditor from './FieldEditors/PageEditor';
+import FieldEditor from './FieldEditor';
 
 class WinterfellFormBuilder extends Component {
   static propTypes = {
@@ -22,9 +22,12 @@ class WinterfellFormBuilder extends Component {
     schema: PropTypes.object,
     currentPanelId: PropTypes.string,
     currentPanelIndex: PropTypes.number,
+    currentQuestionSetIndex: PropTypes.number,
+    currentQuestionIndex: PropTypes.number,
     loadForm: PropTypes.func.isRequired,
     formPanels: PropTypes.object,
     goToPage: PropTypes.func.isRequired,
+    currentEditingField: PropTypes.string,
   }
 
   static defaultProps = {
@@ -34,6 +37,9 @@ class WinterfellFormBuilder extends Component {
     inputSchema: {},
     formPanels: null,
     currentPanelIndex: 0, // first page by default
+    currentQuestionSetIndex: null,
+    currentQuestionIndex: null,
+    currentEditingField: 'page',
   }
 
   constructor(props) {
@@ -59,7 +65,16 @@ class WinterfellFormBuilder extends Component {
   }
 
   render() {
-    const { title, schema, currentPanelId, currentPanelIndex, formPanels } = this.props;
+    const {
+      title,
+      schema,
+      currentPanelId,
+      formPanels,
+      currentEditingField,
+      currentPanelIndex,
+      currentQuestionSetIndex,
+      currentQuestionIndex,
+    } = this.props;
     return (
       <Grid>
         <Row>
@@ -108,21 +123,32 @@ class WinterfellFormBuilder extends Component {
             </Row>
             <hr />
             <Row>
-              <Col xs={3}>
+              <Col xs={4} className="winterfell-form-builder-field-editor">
                 { typeof currentPanelIndex !== 'undefined' &&
-                  <PageEditor
+                  <FieldEditor
                     currentPanelIndex={currentPanelIndex}
+                    currentEditingField={currentEditingField}
+                    currentQuestionSetIndex={currentQuestionSetIndex}
+                    currentQuestionIndex={currentQuestionIndex}
                   />
                 }
               </Col>
-              <Col xs={9}>
-                <FormEditor />
-              </Col>
-              <Col xs={12}>
-                <Previewer
-                  schema={schema}
-                  currentPanelId={currentPanelId}
+              <Col xs={8}>
+                <FormEditor
+                  currentPanelIndex={currentPanelIndex}
                 />
+              </Col>
+            </Row>
+            <hr />
+            <Row>
+              <Col xs={12}>
+                {
+                  schema &&
+                  <Previewer
+                    schema={schema.toJS()}
+                    currentPanelId={currentPanelId}
+                  />
+                }
               </Col>
             </Row>
           </Col>
@@ -135,11 +161,14 @@ class WinterfellFormBuilder extends Component {
 function mapStateToProps(state) {
   return {
     title: state.getIn(['form', 'title']),
-    schema: state.getIn(['form', 'schema']) && state.getIn(['form', 'schema']).toJS(),
+    schema: state.getIn(['form', 'schema']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
-    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
     formPanels: state.getIn(['form', 'schema', 'formPanels']),
     questionSet: state.getIn(['form', 'schema', 'questionSets', 0]),
+    currentEditingField: state.getIn(['form', 'currentEditingField']),
+    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
+    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
   };
 }
 

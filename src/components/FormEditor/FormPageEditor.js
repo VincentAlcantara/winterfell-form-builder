@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
 export const FormPageEditor = (props) => {
-  const { questionPanels, currentPanelIndex, onClick } = props;
+  const { panelHeader, panelText, onClick } = props;
   return (
     <Button
       className="winterfell-field-editor btn-block"
       onClick={onClick}
     >
       <div>
-        <h3>{questionPanels[currentPanelIndex].panelHeader}</h3>
-        <p>{questionPanels[currentPanelIndex].panelText}</p>
+        <h3>{panelHeader}</h3>
+        <p>{panelText}</p>
       </div>
     </Button>
   );
@@ -19,13 +19,13 @@ export const FormPageEditor = (props) => {
 
 FormPageEditor.propTypes = {
   onClick: PropTypes.func.isRequired,
-  questionPanels: PropTypes.array,
-  currentPanelIndex: PropTypes.number,
+  panelHeader: PropTypes.string,
+  panelText: PropTypes.string,
 };
 
 FormPageEditor.defaultProps = {
-  currentPanelIndex: 0,
-  questionPanels: null,
+  panelHeader: '',
+  panelText: '',
 };
 
 export default FormPageEditor;

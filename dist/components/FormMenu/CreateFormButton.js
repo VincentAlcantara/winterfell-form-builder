@@ -182,22 +182,4 @@ function mapStateToProps(state) {
     title: state.getIn(['form', 'title'])
   };
 }
-
-var _default = (0, _reactRedux.connect)(mapStateToProps, { createForm: _winterfellFormBuilderActions.createForm })(CreateFormButton);
-
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(CreateFormButton, 'CreateFormButton', 'src/components/FormMenu/CreateFormButton.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/CreateFormButton.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/CreateFormButton.js');
-}();
-
-;
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { createForm: _winterfellFormBuilderActions.createForm })(CreateFormButton);

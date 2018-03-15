@@ -52,9 +52,9 @@ var _FormEditor = require('./FormEditor');
 
 var _FormEditor2 = _interopRequireDefault(_FormEditor);
 
-var _PageEditor = require('./FieldEditors/PageEditor');
+var _FieldEditor = require('./FieldEditor');
 
-var _PageEditor2 = _interopRequireDefault(_PageEditor);
+var _FieldEditor2 = _interopRequireDefault(_FieldEditor);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -97,9 +97,12 @@ var WinterfellFormBuilder = function (_Component) {
           title = _props.title,
           schema = _props.schema,
           currentPanelId = _props.currentPanelId,
-          currentPanelIndex = _props.currentPanelIndex;
+          formPanels = _props.formPanels,
+          currentEditingField = _props.currentEditingField,
+          currentPanelIndex = _props.currentPanelIndex,
+          currentQuestionSetIndex = _props.currentQuestionSetIndex,
+          currentQuestionIndex = _props.currentQuestionIndex;
 
-      console.log('currentPanelIndex: ', currentPanelIndex);
       return _react2.default.createElement(
         _reactBootstrap.Grid,
         null,
@@ -164,7 +167,16 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 2, className: 'text-right' },
-                _react2.default.createElement(_Pagination2.default, null)
+                formPanels && _react2.default.createElement(_Pagination2.default, {
+                  formPanels: formPanels.toJS(),
+                  currentPanelId: currentPanelId,
+                  onClick: this.props.goToPage
+                }),
+                !formPanels && _react2.default.createElement(
+                  'span',
+                  null,
+                  'No form loaded'
+                )
               )
             ),
             _react2.default.createElement('hr', null),
@@ -173,21 +185,31 @@ var WinterfellFormBuilder = function (_Component) {
               null,
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 3 },
-                typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_PageEditor2.default, {
-                  currentPanelIndex: currentPanelIndex
+                { xs: 4, className: 'winterfell-form-builder-field-editor' },
+                typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_FieldEditor2.default, {
+                  currentPanelIndex: currentPanelIndex,
+                  currentEditingField: currentEditingField,
+                  currentQuestionSetIndex: currentQuestionSetIndex,
+                  currentQuestionIndex: currentQuestionIndex
                 })
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 9 },
-                _react2.default.createElement(_FormEditor2.default, null)
-              ),
+                { xs: 8 },
+                _react2.default.createElement(_FormEditor2.default, {
+                  currentPanelIndex: currentPanelIndex
+                })
+              )
+            ),
+            _react2.default.createElement('hr', null),
+            _react2.default.createElement(
+              _reactBootstrap.Row,
+              null,
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 12 },
-                _react2.default.createElement(_Previewer2.default, {
-                  schema: schema,
+                schema && _react2.default.createElement(_Previewer2.default, {
+                  schema: schema.toJS(),
                   currentPanelId: currentPanelId
                 })
               )
@@ -205,43 +227,39 @@ WinterfellFormBuilder.propTypes = {
   title: _propTypes2.default.string,
   schema: _propTypes2.default.object,
   currentPanelId: _propTypes2.default.string,
-  currentPanelIndex: _propTypes2.default.number.isRequired,
-  loadForm: _propTypes2.default.func.isRequired
+  currentPanelIndex: _propTypes2.default.number,
+  currentQuestionSetIndex: _propTypes2.default.number,
+  currentQuestionIndex: _propTypes2.default.number,
+  loadForm: _propTypes2.default.func.isRequired,
+  formPanels: _propTypes2.default.object,
+  goToPage: _propTypes2.default.func.isRequired,
+  currentEditingField: _propTypes2.default.string
 };
 WinterfellFormBuilder.defaultProps = {
   title: '',
   schema: null,
   currentPanelId: null,
   inputSchema: {},
-  formPanels: null
+  formPanels: null,
+  currentPanelIndex: 0, // first page by default
+  currentQuestionSetIndex: null,
+  currentQuestionIndex: null,
+  currentEditingField: 'page'
 };
 
 
 function mapStateToProps(state) {
   return {
     title: state.getIn(['form', 'title']),
-    schema: state.getIn(['form', 'schema']).toJS(),
+    schema: state.getIn(['form', 'schema']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
+    formPanels: state.getIn(['form', 'schema', 'formPanels']),
+    questionSet: state.getIn(['form', 'schema', 'questionSets', 0]),
+    currentEditingField: state.getIn(['form', 'currentEditingField']),
     currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
-    questionSet: state.getIn(['form', 'schema', 'questionSets', 0])
+    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex'])
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { loadForm: _winterfellFormBuilderActions.loadForm, goToPage: _winterfellFormBuilderActions.goToPage })(WinterfellFormBuilder);
-
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(WinterfellFormBuilder, 'WinterfellFormBuilder', 'src/components/WinterfellFormBuilder.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/WinterfellFormBuilder.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/WinterfellFormBuilder.js');
-}();
-
-;
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { loadForm: _winterfellFormBuilderActions.loadForm, goToPage: _winterfellFormBuilderActions.goToPage })(WinterfellFormBuilder);

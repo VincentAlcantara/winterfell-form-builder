@@ -37,12 +37,3 @@ exports.EditFormTitleButton = _EditFormTitleButton2.default;
 exports.EditSchemaButton = _EditSchemaButton2.default;
 exports.AddQuestionButton = _AddQuestionButton2.default;
 exports.EditQuestionButton = _EditQuestionButton2.default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-}();
-
-;
