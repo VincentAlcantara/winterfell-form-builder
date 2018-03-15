@@ -7,7 +7,7 @@ class SelectInput extends React.Component {
     options: PropTypes.array.isRequired,
     classes: PropTypes.object,
     name: PropTypes.string,
-    id: PropTypes.string,
+    onSelect: PropTypes.func,
     required: PropTypes.bool,
   };
 
@@ -20,7 +20,7 @@ class SelectInput extends React.Component {
     value: [],
     options: [],
     onChange: () => {},
-    onBlur: () => {},
+    onSelect: () => {},
     required: false,
   };
   constructor(props) {
@@ -35,6 +35,7 @@ class SelectInput extends React.Component {
 
   handleChange(e) {
     this.setState({ value: e.target.value });
+    this.props.onSelect(e.target.value);
   }
 
   render() {
@@ -50,7 +51,11 @@ class SelectInput extends React.Component {
         name={this.props.name}
         className={this.props.classes.select}
         value={this.state.value}
+        required={this.props.required
+          ? 'required'
+          : undefined}
         onChange={this.handleChange}
+        onSelect={() => this.onSelect}
       >
         {options}
       </select>

@@ -93,4 +93,18 @@ FormQuestionEditor.defaultProps = {
   questions: []
 };
 
-exports.default = FormQuestionEditor;
+var _default = FormQuestionEditor;
+exports.default = _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(FormQuestionEditor, 'FormQuestionEditor', 'src/components/FormEditor/FormQuestionEditor.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormEditor/FormQuestionEditor.js');
+}();
+
+;

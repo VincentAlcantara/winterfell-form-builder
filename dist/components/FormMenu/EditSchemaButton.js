@@ -175,4 +175,22 @@ function mapStateToProps(state) {
     schema: state.getIn(['form', 'schema']) && state.getIn(['form', 'schema'])
   };
 }
-exports.default = (0, _reactRedux.connect)(mapStateToProps, { updateForm: _winterfellFormBuilderActions.updateForm })(EditSchemaButton);
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, { updateForm: _winterfellFormBuilderActions.updateForm })(EditSchemaButton);
+
+exports.default = _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(EditSchemaButton, 'EditSchemaButton', 'src/components/FormMenu/EditSchemaButton.js');
+
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/EditSchemaButton.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/EditSchemaButton.js');
+}();
+
+;

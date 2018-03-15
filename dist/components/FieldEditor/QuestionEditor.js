@@ -44,6 +44,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactBootstrap = require('react-bootstrap');
 
+var _immutable = require('immutable');
+
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 var _FieldGroup = require('../UI/FieldGroup');
@@ -360,7 +362,7 @@ QuestionEditor.defaultProps = {
   questionText: '',
   questionPostText: '',
   questionInputType: '',
-  questionInputOptions: []
+  questionInputOptions: (0, _immutable.fromJS)([])
 };
 
 
@@ -377,7 +379,7 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, {
+var _default = (0, _reactRedux.connect)(mapStateToProps, {
   editQuestionId: _winterfellFormBuilderActions.editQuestionId,
   editQuestion: _winterfellFormBuilderActions.editQuestion,
   editQuestionText: _winterfellFormBuilderActions.editQuestionText,
@@ -387,3 +389,20 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, {
   addQuestionOption: _winterfellFormBuilderActions.addQuestionOption,
   deleteQuestionOption: _winterfellFormBuilderActions.deleteQuestionOption
 })(QuestionEditor);
+
+exports.default = _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(QuestionEditor, 'QuestionEditor', 'src/components/FieldEditor/QuestionEditor.js');
+
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FieldEditor/QuestionEditor.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldEditor/QuestionEditor.js');
+}();
+
+;

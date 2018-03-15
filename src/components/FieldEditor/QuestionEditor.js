@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FormGroup, FormControl } from 'react-bootstrap';
+import { fromJS } from 'immutable';
 import {
   editQuestionId,
   editQuestion,
@@ -41,7 +42,7 @@ class QuestionEditor extends Component {
     questionText: '',
     questionPostText: '',
     questionInputType: '',
-    questionInputOptions: [],
+    questionInputOptions: fromJS([]),
   }
   constructor(props) {
     super(props);

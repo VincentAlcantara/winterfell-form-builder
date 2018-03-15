@@ -43,4 +43,18 @@ FieldEditorContainer.propTypes = {
   currentPanelIndex: _propTypes2.default.number.isRequired
 };
 
-exports.default = FieldEditorContainer;
+var _default = FieldEditorContainer;
+exports.default = _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(FieldEditorContainer, 'FieldEditorContainer', 'src/components/FieldEditor/FieldEditorContainer.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldEditor/FieldEditorContainer.js');
+}();
+
+;

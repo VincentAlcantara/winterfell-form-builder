@@ -218,7 +218,8 @@ function winterfellFormBuilderReducer() {
           text: action.payload.questionText || 'question-text-' + questionSetCount,
           input: {
             type: action.payload.questionType || 'textInput',
-            placeholder: action.payload.questionPlaceholder || ''
+            placeholder: action.payload.questionPlaceholder || '',
+            options: action.payload.questionType !== 'textInput' ? [] : undefined
           }
         };
 
@@ -251,4 +252,20 @@ function winterfellFormBuilderReducer() {
   }
 }
 
-exports.default = winterfellFormBuilderReducer;
+var _default = winterfellFormBuilderReducer;
+exports.default = _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(initialState, 'initialState', 'src/reducers/winterfellFormBuilderReducer.js');
+
+  __REACT_HOT_LOADER__.register(winterfellFormBuilderReducer, 'winterfellFormBuilderReducer', 'src/reducers/winterfellFormBuilderReducer.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/reducers/winterfellFormBuilderReducer.js');
+}();
+
+;

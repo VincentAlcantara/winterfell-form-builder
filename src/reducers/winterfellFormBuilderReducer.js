@@ -214,6 +214,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         input: {
           type: action.payload.questionType || 'textInput',
           placeholder: action.payload.questionPlaceholder || '',
+          options: action.payload.questionType !== 'textInput' ? [] : undefined,
         },
       };
 

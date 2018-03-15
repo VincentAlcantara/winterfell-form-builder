@@ -202,4 +202,22 @@ function mapStateToProps(state) {
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex'])
   };
 }
-exports.default = (0, _reactRedux.connect)(mapStateToProps, { addQuestionOption: _winterfellFormBuilderActions.addQuestionOption })(AddQuestionOptionButton);
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, { addQuestionOption: _winterfellFormBuilderActions.addQuestionOption })(AddQuestionOptionButton);
+
+exports.default = _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(AddQuestionOptionButton, 'AddQuestionOptionButton', 'src/components/FormMenu/AddQuestionOptionButton.js');
+
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/AddQuestionOptionButton.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/AddQuestionOptionButton.js');
+}();
+
+;
