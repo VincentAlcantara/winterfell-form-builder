@@ -211,22 +211,4 @@ function mapStateToProps(state, ownProps) {
     questionType: state.getIn(['form', 'schema', 'questionSets', ownProps.questionSetIndex, 'questions', ownProps.questionIndex, 'input', 'type'])
   };
 }
-
-var _default = (0, _reactRedux.connect)(mapStateToProps, { updateQuestion: _winterfellFormBuilderActions.updateQuestion })(updateQuestionButton);
-
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(updateQuestionButton, 'updateQuestionButton', 'src/components/FormMenu/EditQuestionButton.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/EditQuestionButton.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/EditQuestionButton.js');
-}();
-
-;
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { updateQuestion: _winterfellFormBuilderActions.updateQuestion })(updateQuestionButton);

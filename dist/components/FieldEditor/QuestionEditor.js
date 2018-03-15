@@ -377,7 +377,7 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, {
+exports.default = (0, _reactRedux.connect)(mapStateToProps, {
   editQuestionId: _winterfellFormBuilderActions.editQuestionId,
   editQuestion: _winterfellFormBuilderActions.editQuestion,
   editQuestionText: _winterfellFormBuilderActions.editQuestionText,
@@ -387,20 +387,3 @@ var _default = (0, _reactRedux.connect)(mapStateToProps, {
   addQuestionOption: _winterfellFormBuilderActions.addQuestionOption,
   deleteQuestionOption: _winterfellFormBuilderActions.deleteQuestionOption
 })(QuestionEditor);
-
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(QuestionEditor, 'QuestionEditor', 'src/components/FieldEditor/QuestionEditor.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FieldEditor/QuestionEditor.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldEditor/QuestionEditor.js');
-}();
-
-;

@@ -208,22 +208,4 @@ function mapStateToProps(state) {
     title: state.getIn(['form', 'currentForm', 'title'])
   };
 }
-
-var _default = (0, _reactRedux.connect)(mapStateToProps, { addPage: _winterfellFormBuilderActions.addPage })(AddPageButton);
-
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(AddPageButton, 'AddPageButton', 'src/components/FormMenu/AddPageButton.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/AddPageButton.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/AddPageButton.js');
-}();
-
-;
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { addPage: _winterfellFormBuilderActions.addPage })(AddPageButton);

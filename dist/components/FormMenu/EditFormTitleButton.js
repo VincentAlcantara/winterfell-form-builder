@@ -186,22 +186,4 @@ function mapStateToProps(state) {
     title: state.getIn(['form', 'title'])
   };
 }
-
-var _default = (0, _reactRedux.connect)(mapStateToProps, { editFormTitle: _winterfellFormBuilderActions.editFormTitle })(EditFormTitleButton);
-
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(EditFormTitleButton, 'EditFormTitleButton', 'src/components/FormMenu/EditFormTitleButton.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/EditFormTitleButton.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/EditFormTitleButton.js');
-}();
-
-;
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { editFormTitle: _winterfellFormBuilderActions.editFormTitle })(EditFormTitleButton);

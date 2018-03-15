@@ -122,18 +122,4 @@ SelectInput.defaultProps = {
   onBlur: function onBlur() {},
   required: false
 };
-var _default = SelectInput;
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(SelectInput, 'SelectInput', 'src/components/InputTypes/SelectInput.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/InputTypes/SelectInput.js');
-}();
-
-;
+exports.default = SelectInput;

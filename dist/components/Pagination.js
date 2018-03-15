@@ -64,18 +64,4 @@ Pagination.defaultProps = {
   currentPanelId: 'Select Page'
 };
 
-var _default = Pagination;
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(Pagination, 'Pagination', 'src/components/Pagination.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/Pagination.js');
-}();
-
-;
+exports.default = Pagination;

@@ -157,21 +157,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField, editFormTitle: _winterfellFormBuilderActions.editFormTitle })(FormEditorContainer);
-
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(FormEditorContainer, 'FormEditorContainer', 'src/components/FormEditor/FormEditorContainer.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormEditor/FormEditorContainer.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormEditor/FormEditorContainer.js');
-}();
-
-;
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField, editFormTitle: _winterfellFormBuilderActions.editFormTitle })(FormEditorContainer);

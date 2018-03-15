@@ -145,18 +145,4 @@ RadioButtonOptionsInput.defaultProps = {
   onBlur: function onBlur() {},
   required: false
 };
-var _default = RadioButtonOptionsInput;
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(RadioButtonOptionsInput, 'RadioButtonOptionsInput', 'src/components/InputTypes/RadioButtonOptionsInput.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/InputTypes/RadioButtonOptionsInput.js');
-}();
-
-;
+exports.default = RadioButtonOptionsInput;

@@ -49,20 +49,4 @@ function winterfellFormBuilderReducer() {
   }
 }
 
-var _default = winterfellFormBuilderReducer;
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(initialState, 'initialState', 'src/reducers/winterfellErrorReducer.js');
-
-  __REACT_HOT_LOADER__.register(winterfellFormBuilderReducer, 'winterfellFormBuilderReducer', 'src/reducers/winterfellErrorReducer.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/reducers/winterfellErrorReducer.js');
-}();
-
-;
+exports.default = winterfellFormBuilderReducer;

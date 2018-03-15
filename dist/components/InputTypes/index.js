@@ -22,12 +22,3 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.RadioButtonOptionsInput = _RadioButtonOptionsInput2.default;
 exports.CheckboxOptionsInput = _CheckboxOptionsInput2.default;
 exports.SelectInput = _SelectInput2.default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-}();
-
-;
