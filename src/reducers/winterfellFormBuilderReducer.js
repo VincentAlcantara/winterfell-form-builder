@@ -104,14 +104,14 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       const {
         currentQuestionSetIndex,
         currentQuestionIndex,
-        optionIndex,
-        option,
-        value,
+        questionOptionText,
+        questionOptionValue,
       } = action.payload;
-      const newOption = fromJS({ option, value });
+      const newOption = fromJS({ text: questionOptionText, value: questionOptionValue });
       return state
-        .insert(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
-          currentQuestionIndex, 'input', 'options', optionIndex], newOption);
+        .updateIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'input', 'options'], arr =>
+          arr.push(newOption));
     }
     case EDIT_QUESTION_OPTION_TEXT_SUCCESS: {
       const {
@@ -139,11 +139,11 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       const {
         currentQuestionSetIndex,
         currentQuestionIndex,
-        optionIndex,
+        questionOptionIndex,
       } = action.payload;
       return state
-        .delete(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
-          currentQuestionIndex, 'input', 'options', optionIndex]);
+        .deleteIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'input', 'options', questionOptionIndex]);
     }
     case CHANGE_EDITING_FIELD_SUCCESS: {
       const { currentEditingField, currentQuestionSetIndex, currentQuestionIndex } = action.payload;

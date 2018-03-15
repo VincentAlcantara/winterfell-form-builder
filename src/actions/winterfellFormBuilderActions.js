@@ -127,10 +127,15 @@ export function editQuestionPostText(currentQuestionSetIndex, currentQuestionInd
 }
 
 export function addQuestionOption(
-  currentQuestionSetIndex, currentQuestionIndex, optionIndex, option, value) {
+  currentQuestionSetIndex, currentQuestionIndex, questionOptionText, questionOptionValue) {
   return {
     type: ADD_QUESTION_OPTION_SUCCESS,
-    payload: { currentQuestionSetIndex, currentQuestionIndex, option, value },
+    payload: {
+      currentQuestionSetIndex,
+      currentQuestionIndex,
+      questionOptionText,
+      questionOptionValue,
+    },
   };
 }
 
@@ -149,10 +154,12 @@ export function editQuestionOptionValue(
     payload: { currentQuestionSetIndex, currentQuestionIndex, optionIndex, value },
   };
 }
-export function deleteQuestionOption(currentQuestionSetIndex, currentQuestionIndex, optionIndex) {
+
+export function deleteQuestionOption(
+  currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex) {
   return {
     type: DELETE_QUESTION_OPTION_SUCCESS,
-    payload: { currentQuestionSetIndex, currentQuestionIndex, optionIndex },
+    payload: { currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex },
   };
 }
 

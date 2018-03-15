@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, FormControl } from 'react-bootstrap';
 import {
   editQuestionId,
   editQuestion,
@@ -9,8 +9,12 @@ import {
   editQuestionPostText,
   editQuestionOptionText,
   editQuestionOptionValue,
+  addQuestionOption,
+  deleteQuestionOption,
 } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
+import DeleteQuestionOptionButton from '../FormMenu/DeleteQuestionOptionButton';
+import AddQuestionOptionButton from '../FormMenu/AddQuestionOptionButton';
 
 class QuestionEditor extends Component {
   static propTypes = {
@@ -20,6 +24,7 @@ class QuestionEditor extends Component {
     editQuestionPostText: PropTypes.func.isRequired,
     editQuestionOptionText: PropTypes.func.isRequired,
     editQuestionOptionValue: PropTypes.func.isRequired,
+    addQuestionOption: PropTypes.func.isRequired,
     questionId: PropTypes.string,
     question: PropTypes.string,
     questionText: PropTypes.string,
@@ -61,6 +66,7 @@ class QuestionEditor extends Component {
     this.onChange = this.onChange.bind(this);
     this.onOptionTextChange = this.onOptionTextChange.bind(this);
     this.onOptionValueChange = this.onOptionValueChange.bind(this);
+    this.onAddQuestionOptionClick = this.onAddQuestionOptionClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -111,6 +117,28 @@ class QuestionEditor extends Component {
     this.props.editQuestionOptionValue(currentQuestionSetIndex, currentQuestionIndex,
       index, event.target.value);
   }
+
+  onAddQuestionOptionClick() {
+    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
+    const questionInputOptions = [];
+    for (let i = 0; i < this.state.questionInputOptions.length; i += 1) {
+      questionInputOptions.push(this.state.questionInputOptions[i]);
+    }
+    questionInputOptions.push({ text: '', value: '' });
+
+    this.setState({ questionInputOptions });
+    this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex);
+  }
+
+  onDeleteOptionClick() {
+    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
+    const questionInputOptions = [];
+    for (let i = 0; i < this.state.questionInputOptions.length; i += 1) {
+      questionInputOptions.push(this.state.questionInputOptions[i]);
+    }
+    this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex);
+  }
+
   getQuestionOptions() {
     return (
       <FormGroup>
@@ -139,10 +167,21 @@ class QuestionEditor extends Component {
                       onChange={event => this.onOptionValueChange(event, ix)}
                     />
                   </td>
-                  <td><Button className="btn-success">+</Button></td>
-                  <td><Button className="btn-danger">-</Button></td>
+                  <td>
+                    <DeleteQuestionOptionButton questionOptionIndex={ix} />
+                  </td>
                 </tr>))
             }
+            <tr>
+              <td colSpan={3}>
+                &nbsp;
+              </td>
+            </tr>
+            <tr>
+              <td colSpan={3}>
+                <AddQuestionOptionButton />
+              </td>
+            </tr>
           </tbody>
         </table>
       </FormGroup>
@@ -239,5 +278,8 @@ export default connect(
     editQuestionText,
     editQuestionPostText,
     editQuestionOptionText,
-    editQuestionOptionValue })(QuestionEditor);
+    editQuestionOptionValue,
+    addQuestionOption,
+    deleteQuestionOption,
+  })(QuestionEditor);
 

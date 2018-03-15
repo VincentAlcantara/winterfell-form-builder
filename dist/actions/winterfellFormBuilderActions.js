@@ -104,10 +104,15 @@ function editQuestionPostText(currentQuestionSetIndex, currentQuestionIndex, tex
   };
 }
 
-function addQuestionOption(currentQuestionSetIndex, currentQuestionIndex, optionIndex, option, value) {
+function addQuestionOption(currentQuestionSetIndex, currentQuestionIndex, questionOptionText, questionOptionValue) {
   return {
     type: _constants.ADD_QUESTION_OPTION_SUCCESS,
-    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, option: option, value: value }
+    payload: {
+      currentQuestionSetIndex: currentQuestionSetIndex,
+      currentQuestionIndex: currentQuestionIndex,
+      questionOptionText: questionOptionText,
+      questionOptionValue: questionOptionValue
+    }
   };
 }
 
@@ -124,10 +129,11 @@ function editQuestionOptionValue(currentQuestionSetIndex, currentQuestionIndex, 
     payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, optionIndex: optionIndex, value: value }
   };
 }
-function deleteQuestionOption(currentQuestionSetIndex, currentQuestionIndex, optionIndex) {
+
+function deleteQuestionOption(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex) {
   return {
     type: _constants.DELETE_QUESTION_OPTION_SUCCESS,
-    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, optionIndex: optionIndex }
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, questionOptionIndex: questionOptionIndex }
   };
 }
 
