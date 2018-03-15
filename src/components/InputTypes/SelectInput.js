@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class SelectInput extends React.Component {
   static propTypes = {
     value: PropTypes.array.isRequired,
-    // onChange: PropTypes.func,
     options: PropTypes.array.isRequired,
     classes: PropTypes.object,
     name: PropTypes.string,
@@ -32,17 +31,6 @@ class SelectInput extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.onBlur = this.onBlur.bind(this);
-  }
-
-  onBlur(e) {
-    let currentValue = this.state.value;
-
-    if (e.target.checked) {
-      currentValue = currentValue.filter(v => v !== e.target.value);
-    }
-
-    this.setState({ value: currentValue });
   }
 
   handleChange(e) {
@@ -52,7 +40,6 @@ class SelectInput extends React.Component {
   render() {
     const options = this.props.options.map(opt =>
       <option
-        key={opt.value}
         value={opt.value}
       >
         {opt.text}
@@ -61,15 +48,9 @@ class SelectInput extends React.Component {
     return (
       <select
         name={this.props.name}
-        id={this.props.id}
         className={this.props.classes.select}
         value={this.state.value}
-        required={this.props.required
-          ? 'required'
-          : undefined}
         onChange={this.handleChange}
-        onBlur={this.onBlur}
-        multiple={this.state.value.length > 0}
       >
         {options}
       </select>
