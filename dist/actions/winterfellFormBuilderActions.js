@@ -14,6 +14,10 @@ exports.editQuestionId = editQuestionId;
 exports.editQuestion = editQuestion;
 exports.editQuestionText = editQuestionText;
 exports.editQuestionPostText = editQuestionPostText;
+exports.addQuestionOption = addQuestionOption;
+exports.editQuestionOptionText = editQuestionOptionText;
+exports.editQuestionOptionValue = editQuestionOptionValue;
+exports.deleteQuestionOption = deleteQuestionOption;
 exports.goToPage = goToPage;
 exports.updateForm = updateForm;
 exports.addPage = addPage;
@@ -100,6 +104,33 @@ function editQuestionPostText(currentQuestionSetIndex, currentQuestionIndex, tex
   };
 }
 
+function addQuestionOption(currentQuestionSetIndex, currentQuestionIndex, optionIndex, option, value) {
+  return {
+    type: _constants.ADD_QUESTION_OPTION_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, option: option, value: value }
+  };
+}
+
+function editQuestionOptionText(currentQuestionSetIndex, currentQuestionIndex, optionIndex, option) {
+  return {
+    type: _constants.EDIT_QUESTION_OPTION_TEXT_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, optionIndex: optionIndex, option: option }
+  };
+}
+
+function editQuestionOptionValue(currentQuestionSetIndex, currentQuestionIndex, optionIndex, value) {
+  return {
+    type: _constants.EDIT_QUESTION_OPTION_VALUE_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, optionIndex: optionIndex, value: value }
+  };
+}
+function deleteQuestionOption(currentQuestionSetIndex, currentQuestionIndex, optionIndex) {
+  return {
+    type: _constants.DELETE_QUESTION_OPTION_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, optionIndex: optionIndex }
+  };
+}
+
 function goToPage(panelId) {
   return {
     type: _constants.GOTO_PAGE_SUCCESS,
@@ -176,6 +207,14 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(editQuestionText, 'editQuestionText', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(editQuestionPostText, 'editQuestionPostText', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(addQuestionOption, 'addQuestionOption', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(editQuestionOptionText, 'editQuestionOptionText', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(editQuestionOptionValue, 'editQuestionOptionValue', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(deleteQuestionOption, 'deleteQuestionOption', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(goToPage, 'goToPage', 'src/actions/winterfellFormBuilderActions.js');
 

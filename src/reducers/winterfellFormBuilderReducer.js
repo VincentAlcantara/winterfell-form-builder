@@ -19,6 +19,10 @@ import {
   EDIT_QUESTION_SUCCESS,
   EDIT_QUESTION_TEXT_SUCCESS,
   EDIT_QUESTION_POST_TEXT_SUCCESS,
+  ADD_QUESTION_OPTION_SUCCESS,
+  EDIT_QUESTION_OPTION_TEXT_SUCCESS,
+  EDIT_QUESTION_OPTION_VALUE_SUCCESS,
+  DELETE_QUESTION_OPTION_SUCCESS,
 } from '../common/constants';
 
 const initialState = fromJS({
@@ -95,6 +99,51 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       return state
         .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
           currentQuestionIndex, 'postText'], text);
+    }
+    case ADD_QUESTION_OPTION_SUCCESS: {
+      const {
+        currentQuestionSetIndex,
+        currentQuestionIndex,
+        optionIndex,
+        option,
+        value,
+      } = action.payload;
+      const newOption = fromJS({ option, value });
+      return state
+        .insert(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'input', 'options', optionIndex], newOption);
+    }
+    case EDIT_QUESTION_OPTION_TEXT_SUCCESS: {
+      const {
+        currentQuestionSetIndex,
+        currentQuestionIndex,
+        optionIndex,
+        option,
+      } = action.payload;
+      return state
+        .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'input', 'options', optionIndex, 'text'], option);
+    }
+    case EDIT_QUESTION_OPTION_VALUE_SUCCESS: {
+      const {
+        currentQuestionSetIndex,
+        currentQuestionIndex,
+        optionIndex,
+        value,
+      } = action.payload;
+      return state
+        .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'input', 'options', optionIndex, 'value'], value);
+    }
+    case DELETE_QUESTION_OPTION_SUCCESS: {
+      const {
+        currentQuestionSetIndex,
+        currentQuestionIndex,
+        optionIndex,
+      } = action.payload;
+      return state
+        .delete(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'input', 'options', optionIndex]);
     }
     case CHANGE_EDITING_FIELD_SUCCESS: {
       const { currentEditingField, currentQuestionSetIndex, currentQuestionIndex } = action.payload;

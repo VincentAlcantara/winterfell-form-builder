@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _assign = require('babel-runtime/core-js/object/assign');
+
+var _assign2 = _interopRequireDefault(_assign);
+
 var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
@@ -70,10 +74,12 @@ var QuestionEditor = function (_Component) {
       questionText: questionText,
       questionPostText: questionPostText,
       questionInputType: questionInputType,
-      questionInputOptions: questionInputOptions
+      questionInputOptions: questionInputOptions.toJS()
     };
 
     _this.onChange = _this.onChange.bind(_this);
+    _this.onOptionTextChange = _this.onOptionTextChange.bind(_this);
+    _this.onOptionValueChange = _this.onOptionValueChange.bind(_this);
     return _this;
   }
 
@@ -84,7 +90,8 @@ var QuestionEditor = function (_Component) {
         questionId: nextProps.questionId,
         question: nextProps.question,
         questionText: nextProps.questionText,
-        questionPostText: nextProps.questionPostText
+        questionPostText: nextProps.questionPostText,
+        questionInputOptions: nextProps.questionInputOptions.toJS()
       };
     }
   }, {
@@ -115,8 +122,34 @@ var QuestionEditor = function (_Component) {
       }
     }
   }, {
+    key: 'onOptionTextChange',
+    value: function onOptionTextChange(event, index) {
+      var _props2 = this.props,
+          currentQuestionSetIndex = _props2.currentQuestionSetIndex,
+          currentQuestionIndex = _props2.currentQuestionIndex;
+
+      var questionInputOptions = (0, _assign2.default)({}, this.state.questionInputOptions);
+      questionInputOptions[index].text = event.target.value;
+      this.setState({ questionInputOptions: questionInputOptions });
+      this.props.editQuestionOptionText(currentQuestionSetIndex, currentQuestionIndex, index, event.target.value);
+    }
+  }, {
+    key: 'onOptionValueChange',
+    value: function onOptionValueChange(event, index) {
+      var _props3 = this.props,
+          currentQuestionSetIndex = _props3.currentQuestionSetIndex,
+          currentQuestionIndex = _props3.currentQuestionIndex;
+
+      var questionInputOptions = (0, _assign2.default)({}, this.state.questionInputOptions);
+      questionInputOptions[index].value = event.target.value;
+      this.setState({ questionInputOptions: questionInputOptions });
+      this.props.editQuestionOptionValue(currentQuestionSetIndex, currentQuestionIndex, index, event.target.value);
+    }
+  }, {
     key: 'getQuestionOptions',
     value: function getQuestionOptions() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         _reactBootstrap.FormGroup,
         null,
@@ -143,13 +176,17 @@ var QuestionEditor = function (_Component) {
             this.props.questionInputOptions && this.props.questionInputOptions.toJS().map(function (option, ix) {
               return _react2.default.createElement(
                 'tr',
-                { key: option.text + '-' + ix },
+                { key: '' + ix },
                 _react2.default.createElement(
                   'td',
                   null,
                   _react2.default.createElement(_reactBootstrap.FormControl, {
                     type: 'text',
-                    value: option.text
+                    name: _this2.state.questionInputOptions[ix].text,
+                    value: _this2.state.questionInputOptions[ix].text,
+                    onChange: function onChange(event) {
+                      return _this2.onOptionTextChange(event, ix);
+                    }
                   })
                 ),
                 _react2.default.createElement(
@@ -157,7 +194,11 @@ var QuestionEditor = function (_Component) {
                   null,
                   _react2.default.createElement(_reactBootstrap.FormControl, {
                     type: 'text',
-                    value: option.value
+                    name: _this2.state.questionInputOptions[ix].value,
+                    value: _this2.state.questionInputOptions[ix].value,
+                    onChange: function onChange(event) {
+                      return _this2.onOptionValueChange(event, ix);
+                    }
                   })
                 ),
                 _react2.default.createElement(
@@ -187,13 +228,13 @@ var QuestionEditor = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _props2 = this.props,
-          questionId = _props2.questionId,
-          question = _props2.question,
-          questionText = _props2.questionText,
-          questionPostText = _props2.questionPostText,
-          questionInputType = _props2.questionInputType,
-          questionInputOptions = _props2.questionInputOptions;
+      var _props4 = this.props,
+          questionId = _props4.questionId,
+          question = _props4.question,
+          questionText = _props4.questionText,
+          questionPostText = _props4.questionPostText,
+          questionInputType = _props4.questionInputType,
+          questionInputOptions = _props4.questionInputOptions;
 
       return _react2.default.createElement(
         'form',
@@ -258,6 +299,8 @@ QuestionEditor.propTypes = {
   editQuestion: _propTypes2.default.func.isRequired,
   editQuestionText: _propTypes2.default.func.isRequired,
   editQuestionPostText: _propTypes2.default.func.isRequired,
+  editQuestionOptionText: _propTypes2.default.func.isRequired,
+  editQuestionOptionValue: _propTypes2.default.func.isRequired,
   questionId: _propTypes2.default.string,
   question: _propTypes2.default.string,
   questionText: _propTypes2.default.string,
@@ -290,7 +333,13 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { editQuestionId: _winterfellFormBuilderActions.editQuestionId, editQuestion: _winterfellFormBuilderActions.editQuestion, editQuestionText: _winterfellFormBuilderActions.editQuestionText, editQuestionPostText: _winterfellFormBuilderActions.editQuestionPostText })(QuestionEditor);
+var _default = (0, _reactRedux.connect)(mapStateToProps, {
+  editQuestionId: _winterfellFormBuilderActions.editQuestionId,
+  editQuestion: _winterfellFormBuilderActions.editQuestion,
+  editQuestionText: _winterfellFormBuilderActions.editQuestionText,
+  editQuestionPostText: _winterfellFormBuilderActions.editQuestionPostText,
+  editQuestionOptionText: _winterfellFormBuilderActions.editQuestionOptionText,
+  editQuestionOptionValue: _winterfellFormBuilderActions.editQuestionOptionValue })(QuestionEditor);
 
 exports.default = _default;
 ;

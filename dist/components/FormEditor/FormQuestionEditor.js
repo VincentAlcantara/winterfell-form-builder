@@ -15,9 +15,7 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactBootstrap = require('react-bootstrap');
 
-var _RadioButtonOptionsInput = require('../InputTypes/RadioButtonOptionsInput');
-
-var _RadioButtonOptionsInput2 = _interopRequireDefault(_RadioButtonOptionsInput);
+var _InputTypes = require('../InputTypes/');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -52,7 +50,17 @@ var FormQuestionEditor = exports.FormQuestionEditor = function FormQuestionEdito
             question.text
           ),
           question.input && (question.input.type === 'textInput' || question.input.type === 'emailInput') && _react2.default.createElement('input', { id: question.questionId, type: 'text', className: 'form-control' }),
-          question.input && question.input.type === 'radioOptionsInput' && _react2.default.createElement(_RadioButtonOptionsInput2.default, {
+          question.input && question.input.type === 'radioOptionsInput' && _react2.default.createElement(_InputTypes.RadioButtonOptionsInput, {
+            id: question.questionId,
+            labelId: question.questionId,
+            options: question.input.options
+          }),
+          question.input && question.input.type === 'checkboxOptionsInput' && _react2.default.createElement(_InputTypes.CheckboxOptionsInput, {
+            id: question.questionId,
+            labelId: question.questionId,
+            options: question.input.options
+          }),
+          question.input && question.input.type === 'selectInput' && _react2.default.createElement(_InputTypes.SelectInput, {
             id: question.questionId,
             labelId: question.questionId,
             options: question.input.options

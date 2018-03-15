@@ -43,6 +43,10 @@ import {
   EDIT_QUESTION_SUCCESS,
   EDIT_QUESTION_TEXT_SUCCESS,
   EDIT_QUESTION_POST_TEXT_SUCCESS,
+  ADD_QUESTION_OPTION_SUCCESS,
+  EDIT_QUESTION_OPTION_TEXT_SUCCESS,
+  EDIT_QUESTION_OPTION_VALUE_SUCCESS,
+  DELETE_QUESTION_OPTION_SUCCESS,
 } from '../common/constants';
 
 export function loadForm(schema) {
@@ -119,6 +123,36 @@ export function editQuestionPostText(currentQuestionSetIndex, currentQuestionInd
   return {
     type: EDIT_QUESTION_POST_TEXT_SUCCESS,
     payload: { currentQuestionSetIndex, currentQuestionIndex, text },
+  };
+}
+
+export function addQuestionOption(
+  currentQuestionSetIndex, currentQuestionIndex, optionIndex, option, value) {
+  return {
+    type: ADD_QUESTION_OPTION_SUCCESS,
+    payload: { currentQuestionSetIndex, currentQuestionIndex, option, value },
+  };
+}
+
+export function editQuestionOptionText(
+  currentQuestionSetIndex, currentQuestionIndex, optionIndex, option) {
+  return {
+    type: EDIT_QUESTION_OPTION_TEXT_SUCCESS,
+    payload: { currentQuestionSetIndex, currentQuestionIndex, optionIndex, option },
+  };
+}
+
+export function editQuestionOptionValue(
+  currentQuestionSetIndex, currentQuestionIndex, optionIndex, value) {
+  return {
+    type: EDIT_QUESTION_OPTION_VALUE_SUCCESS,
+    payload: { currentQuestionSetIndex, currentQuestionIndex, optionIndex, value },
+  };
+}
+export function deleteQuestionOption(currentQuestionSetIndex, currentQuestionIndex, optionIndex) {
+  return {
+    type: DELETE_QUESTION_OPTION_SUCCESS,
+    payload: { currentQuestionSetIndex, currentQuestionIndex, optionIndex },
   };
 }
 

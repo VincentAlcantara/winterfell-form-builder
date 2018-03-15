@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FormGroup, FormControl, Button } from 'react-bootstrap';
-import { editQuestionId, editQuestion, editQuestionText, editQuestionPostText } from '../../actions/winterfellFormBuilderActions';
+import {
+  editQuestionId,
+  editQuestion,
+  editQuestionText,
+  editQuestionPostText,
+  editQuestionOptionText,
+  editQuestionOptionValue,
+} from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
 
 class QuestionEditor extends Component {
@@ -11,6 +18,8 @@ class QuestionEditor extends Component {
     editQuestion: PropTypes.func.isRequired,
     editQuestionText: PropTypes.func.isRequired,
     editQuestionPostText: PropTypes.func.isRequired,
+    editQuestionOptionText: PropTypes.func.isRequired,
+    editQuestionOptionValue: PropTypes.func.isRequired,
     questionId: PropTypes.string,
     question: PropTypes.string,
     questionText: PropTypes.string,
@@ -46,10 +55,12 @@ class QuestionEditor extends Component {
       questionText,
       questionPostText,
       questionInputType,
-      questionInputOptions,
+      questionInputOptions: questionInputOptions.toJS(),
     };
 
     this.onChange = this.onChange.bind(this);
+    this.onOptionTextChange = this.onOptionTextChange.bind(this);
+    this.onOptionValueChange = this.onOptionValueChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -58,6 +69,7 @@ class QuestionEditor extends Component {
       question: nextProps.question,
       questionText: nextProps.questionText,
       questionPostText: nextProps.questionPostText,
+      questionInputOptions: nextProps.questionInputOptions.toJS(),
     };
   }
 
@@ -82,6 +94,23 @@ class QuestionEditor extends Component {
     }
   }
 
+  onOptionTextChange(event, index) {
+    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
+    const questionInputOptions = Object.assign({}, this.state.questionInputOptions);
+    questionInputOptions[index].text = event.target.value;
+    this.setState({ questionInputOptions });
+    this.props.editQuestionOptionText(currentQuestionSetIndex, currentQuestionIndex,
+      index, event.target.value);
+  }
+
+  onOptionValueChange(event, index) {
+    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
+    const questionInputOptions = Object.assign({}, this.state.questionInputOptions);
+    questionInputOptions[index].value = event.target.value;
+    this.setState({ questionInputOptions });
+    this.props.editQuestionOptionValue(currentQuestionSetIndex, currentQuestionIndex,
+      index, event.target.value);
+  }
   getQuestionOptions() {
     return (
       <FormGroup>
@@ -93,17 +122,21 @@ class QuestionEditor extends Component {
             </tr>
             { this.props.questionInputOptions &&
               this.props.questionInputOptions.toJS().map((option, ix) => (
-                <tr key={`${option.text}-${ix}`}>
+                <tr key={`${ix}`}>
                   <td>
                     <FormControl
                       type="text"
-                      value={option.text}
+                      name={this.state.questionInputOptions[ix].text}
+                      value={this.state.questionInputOptions[ix].text}
+                      onChange={event => this.onOptionTextChange(event, ix)}
                     />
                   </td>
                   <td>
                     <FormControl
                       type="text"
-                      value={option.value}
+                      name={this.state.questionInputOptions[ix].value}
+                      value={this.state.questionInputOptions[ix].value}
+                      onChange={event => this.onOptionValueChange(event, ix)}
                     />
                   </td>
                   <td><Button className="btn-success">+</Button></td>
@@ -200,5 +233,11 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps,
-  { editQuestionId, editQuestion, editQuestionText, editQuestionPostText })(QuestionEditor);
+  {
+    editQuestionId,
+    editQuestion,
+    editQuestionText,
+    editQuestionPostText,
+    editQuestionOptionText,
+    editQuestionOptionValue })(QuestionEditor);
 
