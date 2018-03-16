@@ -129,4 +129,18 @@ CheckboxOptionsInput.defaultProps = {
   onChange: function onChange() {},
   required: false
 };
-exports.default = CheckboxOptionsInput;
+var _default = CheckboxOptionsInput;
+exports.default = _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(CheckboxOptionsInput, 'CheckboxOptionsInput', 'src/components/InputTypes/CheckboxOptionsInput.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/InputTypes/CheckboxOptionsInput.js');
+}();
+
+;

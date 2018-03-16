@@ -61,7 +61,7 @@ export const FormQuestionEditor = (props) => {
 
   return (
     <div>
-      { displayQuestionButtons() }
+      { questions && displayQuestionButtons() }
     </div>
   );
 };

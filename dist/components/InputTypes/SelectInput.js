@@ -47,36 +47,25 @@ var SelectInput = function (_React$Component) {
     };
 
     _this.handleChange = _this.handleChange.bind(_this);
-    _this.onBlur = _this.onBlur.bind(_this);
     return _this;
   }
 
   (0, _createClass3.default)(SelectInput, [{
-    key: 'onBlur',
-    value: function onBlur(e) {
-      var currentValue = this.state.value;
-
-      if (e.target.checked) {
-        currentValue = currentValue.filter(function (v) {
-          return v !== e.target.value;
-        });
-      }
-
-      this.setState({ value: currentValue });
-    }
-  }, {
     key: 'handleChange',
     value: function handleChange(e) {
       this.setState({ value: e.target.value });
+      this.props.onSelect(e.target.value);
     }
   }, {
     key: 'render',
     value: function render() {
-      var options = this.props.options.map(function (opt) {
+      var _this2 = this;
+
+      var options = this.props.options.map(function (opt, index) {
         return _react2.default.createElement(
           'option',
           {
-            key: opt.value,
+            key: index,
             value: opt.value
           },
           opt.text
@@ -86,13 +75,13 @@ var SelectInput = function (_React$Component) {
         'select',
         {
           name: this.props.name,
-          id: this.props.id,
           className: this.props.classes.select,
           value: this.state.value,
           required: this.props.required ? 'required' : undefined,
           onChange: this.handleChange,
-          onBlur: this.onBlur,
-          multiple: this.state.value.length > 0
+          onSelect: function onSelect() {
+            return _this2.onSelect;
+          }
         },
         options
       );
@@ -103,11 +92,10 @@ var SelectInput = function (_React$Component) {
 
 SelectInput.propTypes = {
   value: _propTypes2.default.array.isRequired,
-  // onChange: PropTypes.func,
   options: _propTypes2.default.array.isRequired,
   classes: _propTypes2.default.object,
   name: _propTypes2.default.string,
-  id: _propTypes2.default.string,
+  onSelect: _propTypes2.default.func,
   required: _propTypes2.default.bool
 };
 SelectInput.defaultProps = {
@@ -119,7 +107,21 @@ SelectInput.defaultProps = {
   value: [],
   options: [],
   onChange: function onChange() {},
-  onBlur: function onBlur() {},
+  onSelect: function onSelect() {},
   required: false
 };
-exports.default = SelectInput;
+var _default = SelectInput;
+exports.default = _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(SelectInput, 'SelectInput', 'src/components/InputTypes/SelectInput.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/InputTypes/SelectInput.js');
+}();
+
+;

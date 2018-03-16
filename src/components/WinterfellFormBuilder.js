@@ -11,6 +11,7 @@ import {
   AddPageButton,
   EditSchemaButton,
   AddQuestionButton,
+  UploadJSONButton,
 } from './FormMenu';
 import FormEditor from './FormEditor';
 import FieldEditor from './FieldEditor';
@@ -93,45 +94,52 @@ class WinterfellFormBuilder extends Component {
                 <CreateFormButton />
               </Col>
               <Col xs={2}>
+                <UploadJSONButton />
+              </Col>
+              <Col xs={2}>
                 <EditFormTitleButton />
               </Col>
               <Col xs={2}>
                 <AddPageButton />
               </Col>
               <Col xs={2}>
-                <EditSchemaButton />
-              </Col>
-              <Col xs={2}>
                 <AddQuestionButton />
               </Col>
-              <Col xs={2} className="text-right">
-                {
-                  formPanels &&
-                  <Pagination
-                    formPanels={formPanels.toJS()}
-                    currentPanelId={currentPanelId}
-                    onClick={this.props.goToPage}
-                  />
-                }
-                {
-                  !formPanels &&
-                  <span>
-                    No form loaded
-                  </span>
-                }
+              <Col xs={2}>
+                <EditSchemaButton />
               </Col>
             </Row>
             <hr />
             <Row>
               <Col xs={4} className="winterfell-form-builder-field-editor">
-                { typeof currentPanelIndex !== 'undefined' &&
-                  <FieldEditor
-                    currentPanelIndex={currentPanelIndex}
-                    currentEditingField={currentEditingField}
-                    currentQuestionSetIndex={currentQuestionSetIndex}
-                    currentQuestionIndex={currentQuestionIndex}
-                  />
-                }
+                <Row>
+                  <Col xs={12} className="text-left">
+                    {
+                      formPanels &&
+                      <Pagination
+                        formPanels={formPanels.toJS()}
+                        currentPanelId={currentPanelId}
+                        onClick={this.props.goToPage}
+                      />
+                    }
+                    {
+                      !formPanels &&
+                      <span>
+                        No form loaded
+                      </span>
+                    }
+                  </Col>
+                  <Col xs={12}>
+                    { typeof currentPanelIndex !== 'undefined' &&
+                      <FieldEditor
+                        currentPanelIndex={currentPanelIndex}
+                        currentEditingField={currentEditingField}
+                        currentQuestionSetIndex={currentQuestionSetIndex}
+                        currentQuestionIndex={currentQuestionIndex}
+                      />
+                    }
+                  </Col>
+                </Row>
               </Col>
               <Col xs={8}>
                 <FormEditor
@@ -142,6 +150,7 @@ class WinterfellFormBuilder extends Component {
             <hr />
             <Row>
               <Col xs={12}>
+                <h3>Preview:</h3>
                 {
                   schema &&
                   <Previewer

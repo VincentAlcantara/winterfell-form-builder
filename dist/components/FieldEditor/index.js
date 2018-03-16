@@ -67,4 +67,18 @@ FieldEditor.defaultProps = {
   currentQuestionIndex: null
 };
 
-exports.default = FieldEditor;
+var _default = FieldEditor;
+exports.default = _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(FieldEditor, 'FieldEditor', 'src/components/FieldEditor/index.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldEditor/index.js');
+}();
+
+;

@@ -46,6 +46,10 @@ var _FieldGroup = require('../UI/FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
+var _SelectInput = require('../InputTypes/SelectInput');
+
+var _SelectInput2 = _interopRequireDefault(_SelectInput);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AddQuestionButton = function (_Component) {
@@ -67,6 +71,7 @@ var AddQuestionButton = function (_Component) {
     };
 
     _this.onChange = _this.onChange.bind(_this);
+    _this.onSelect = _this.onSelect.bind(_this);
     _this.onFormUpdate = _this.onFormUpdate.bind(_this);
     return _this;
   }
@@ -76,6 +81,11 @@ var AddQuestionButton = function (_Component) {
     value: function onChange(event) {
       event.preventDefault();
       this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
+    }
+  }, {
+    key: 'onSelect',
+    value: function onSelect(type) {
+      this.setState({ questionType: type });
     }
   }, {
     key: 'onClose',
@@ -94,6 +104,20 @@ var AddQuestionButton = function (_Component) {
     key: 'render',
     value: function render() {
       var _this2 = this;
+
+      var inputTypeOptions = [{
+        text: 'text',
+        value: 'inputText'
+      }, {
+        text: 'select',
+        value: 'selectInput'
+      }, {
+        text: 'checkbox',
+        value: 'checkboxOptionsInput'
+      }, {
+        text: 'radio button',
+        value: 'radioOptionsInput'
+      }];
 
       return _react2.default.createElement(
         _reactBootstrap.Row,
@@ -178,6 +202,22 @@ var AddQuestionButton = function (_Component) {
                     placeholder: '',
                     value: this.state.questionText
                   })
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.FormGroup,
+                  null,
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'questionType' },
+                    'Select question type'
+                  ),
+                  _react2.default.createElement(_SelectInput2.default, {
+                    id: 'questionType',
+                    labelId: 'questionType',
+                    options: inputTypeOptions,
+                    onSelect: this.onSelect,
+                    value: this.state.questionType
+                  })
                 )
               )
             ),
@@ -236,4 +276,22 @@ function mapStateToProps(state) {
     currentPanelId: state.getIn(['form', 'currentPanelId'])
   };
 }
-exports.default = (0, _reactRedux.connect)(mapStateToProps, { addQuestion: _winterfellFormBuilderActions.addQuestion })(AddQuestionButton);
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, { addQuestion: _winterfellFormBuilderActions.addQuestion })(AddQuestionButton);
+
+exports.default = _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(AddQuestionButton, 'AddQuestionButton', 'src/components/FormMenu/AddQuestionButton.js');
+
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/AddQuestionButton.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/AddQuestionButton.js');
+}();
+
+;

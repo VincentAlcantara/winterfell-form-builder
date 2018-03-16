@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
 import { addQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
+import SelectInput from '../InputTypes/SelectInput';
 
 
 class AddQuestionButton extends Component {
@@ -26,12 +27,17 @@ class AddQuestionButton extends Component {
     };
 
     this.onChange = this.onChange.bind(this);
+    this.onSelect = this.onSelect.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
   }
 
   onChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
+  }
+
+  onSelect(type) {
+    this.setState({ questionType: type });
   }
 
   onClose(e) {
@@ -54,6 +60,20 @@ class AddQuestionButton extends Component {
   }
 
   render() {
+    const inputTypeOptions = [{
+      text: 'text',
+      value: 'inputText',
+    }, {
+      text: 'select',
+      value: 'selectInput',
+    }, {
+      text: 'checkbox',
+      value: 'checkboxOptionsInput',
+    }, {
+      text: 'radio button',
+      value: 'radioOptionsInput',
+    }];
+
     return (
       <Row>
         <div className="static-modal">
@@ -111,6 +131,18 @@ class AddQuestionButton extends Component {
                     onChange={this.onChange}
                     placeholder=""
                     value={this.state.questionText}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <label htmlFor="questionType">
+                    Select question type
+                  </label>
+                  <SelectInput
+                    id="questionType"
+                    labelId="questionType"
+                    options={inputTypeOptions}
+                    onSelect={this.onSelect}
+                    value={this.state.questionType}
                   />
                 </FormGroup>
               </form>

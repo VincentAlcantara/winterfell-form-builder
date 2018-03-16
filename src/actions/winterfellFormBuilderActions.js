@@ -47,6 +47,7 @@ import {
   EDIT_QUESTION_OPTION_TEXT_SUCCESS,
   EDIT_QUESTION_OPTION_VALUE_SUCCESS,
   DELETE_QUESTION_OPTION_SUCCESS,
+  UPLOAD_JSON_SUCCESS,
 } from '../common/constants';
 
 export function loadForm(schema) {
@@ -218,5 +219,12 @@ export function updateQuestion(
   return {
     type: UPDATE_QUESTION_SUCCESS,
     payload: { currentQuestionSetIndex, currentQuestionIndex, question, questionText },
+  };
+}
+
+export function uploadJSON(schema) {
+  return {
+    type: UPLOAD_JSON_SUCCESS,
+    payload: { schema },
   };
 }

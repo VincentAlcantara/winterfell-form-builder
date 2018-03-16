@@ -70,7 +70,7 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
   return _react2.default.createElement(
     'div',
     null,
-    displayQuestionSet()
+    currentQuestionSets && displayQuestionSet()
   );
 };
 
@@ -86,4 +86,18 @@ FormQuestionSetEditor.defaultProps = {
   currentQuestionSets: null
 };
 
-exports.default = FormQuestionSetEditor;
+var _default = FormQuestionSetEditor;
+exports.default = _default;
+;
+
+var _temp = function () {
+  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
+    return;
+  }
+
+  __REACT_HOT_LOADER__.register(FormQuestionSetEditor, 'FormQuestionSetEditor', 'src/components/FormEditor/FormQuestionSetEditor.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormEditor/FormQuestionSetEditor.js');
+}();
+
+;

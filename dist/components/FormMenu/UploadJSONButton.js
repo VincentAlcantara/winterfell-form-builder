@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -42,56 +38,52 @@ var _reactBootstrap = require('react-bootstrap');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
-var _FieldGroup = require('../UI/FieldGroup');
-
-var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var EditFormTitleButton = function (_Component) {
-  (0, _inherits3.default)(EditFormTitleButton, _Component);
+var UploadJSONButton = function (_Component) {
+  (0, _inherits3.default)(UploadJSONButton, _Component);
 
-  function EditFormTitleButton(props) {
-    (0, _classCallCheck3.default)(this, EditFormTitleButton);
+  function UploadJSONButton(props) {
+    (0, _classCallCheck3.default)(this, UploadJSONButton);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (EditFormTitleButton.__proto__ || (0, _getPrototypeOf2.default)(EditFormTitleButton)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (UploadJSONButton.__proto__ || (0, _getPrototypeOf2.default)(UploadJSONButton)).call(this, props));
 
     _this.state = {
       showModal: false,
-      formTitle: ''
+      schema: ''
     };
 
     _this.onChange = _this.onChange.bind(_this);
-    _this.onFormUpdate = _this.onFormUpdate.bind(_this);
+    _this.onJSONUpload = _this.onJSONUpload.bind(_this);
     return _this;
   }
 
-  (0, _createClass3.default)(EditFormTitleButton, [{
+  (0, _createClass3.default)(UploadJSONButton, [{
     key: 'onChange',
     value: function onChange(event) {
+      var _this2 = this;
+
       event.preventDefault();
-      this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
+      var file = event.target.files[0];
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var contents = e.target.result;
+        console.log('contents', JSON.parse(contents));
+        _this2.setState({ schema: JSON.parse(contents) });
+      };
+      reader.readAsText(file);
     }
   }, {
-    key: 'onClose',
-    value: function onClose(e) {
+    key: 'onJSONUpload',
+    value: function onJSONUpload(e) {
       e.preventDefault();
-      this.setState({ showModal: true });
-    }
-  }, {
-    key: 'onFormUpdate',
-    value: function onFormUpdate(e) {
-      e.preventDefault();
-      this.props.editFormTitle(this.state.formTitle);
+      this.props.uploadJSON(this.state.schema);
       this.setState({ showModal: false });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
-      var title = this.props.title;
-
+      var _this3 = this;
 
       return _react2.default.createElement(
         _reactBootstrap.Row,
@@ -108,7 +100,7 @@ var EditFormTitleButton = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Modal.Title,
                 null,
-                'Edit form title'
+                'Open a form'
               )
             ),
             _react2.default.createElement(
@@ -120,13 +112,16 @@ var EditFormTitleButton = function (_Component) {
                 _react2.default.createElement(
                   _reactBootstrap.FormGroup,
                   null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'formTitle',
-                    name: 'formTitle',
-                    label: 'Enter title of the form',
-                    onChange: this.onChange,
-                    placeholder: title,
-                    value: this.state.formTitle
+                  _react2.default.createElement('label', {
+                    htmlFor: 'jsonUpload'
+                  }),
+                  _react2.default.createElement('input', {
+                    name: 'schema',
+                    id: 'jsonUpload',
+                    type: 'file',
+                    onChange: function onChange(e) {
+                      return _this3.onChange(e);
+                    }
                   })
                 )
               )
@@ -139,7 +134,7 @@ var EditFormTitleButton = function (_Component) {
                 {
                   bsStyle: 'danger',
                   onClick: function onClick() {
-                    _this2.setState({ showModal: false });
+                    _this3.setState({ showModal: false });
                   }
                 },
                 'Cancel'
@@ -148,9 +143,9 @@ var EditFormTitleButton = function (_Component) {
                 _reactBootstrap.Button,
                 {
                   bsStyle: 'primary',
-                  onClick: this.onFormUpdate
+                  onClick: this.onJSONUpload
                 },
-                'Save changes'
+                'Upload'
               )
             )
           )
@@ -163,31 +158,30 @@ var EditFormTitleButton = function (_Component) {
             {
               className: 'btn btn-block btn-info',
               onClick: function onClick() {
-                _this2.setState({ showModal: true });
+                _this3.setState({ showModal: true });
               }
             },
-            'edit form title'
+            'open form'
           )
         )
       );
     }
   }]);
-  return EditFormTitleButton;
+  return UploadJSONButton;
 }(_react.Component);
 
-EditFormTitleButton.propTypes = {
-  editFormTitle: _propTypes2.default.func.isRequired,
-  title: _propTypes2.default.string.isRequired
+UploadJSONButton.propTypes = {
+  uploadJSON: _propTypes2.default.func.isRequired
 };
 
 
 function mapStateToProps(state) {
   return {
-    title: state.getIn(['form', 'title'])
+    title: state.getIn(['form', 'currentForm', 'title'])
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { editFormTitle: _winterfellFormBuilderActions.editFormTitle })(EditFormTitleButton);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { uploadJSON: _winterfellFormBuilderActions.uploadJSON })(UploadJSONButton);
 
 exports.default = _default;
 ;
@@ -197,11 +191,11 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(EditFormTitleButton, 'EditFormTitleButton', 'src/components/FormMenu/EditFormTitleButton.js');
+  __REACT_HOT_LOADER__.register(UploadJSONButton, 'UploadJSONButton', 'src/components/FormMenu/UploadJSONButton.js');
 
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/EditFormTitleButton.js');
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/UploadJSONButton.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/EditFormTitleButton.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/UploadJSONButton.js');
 }();
 
 ;
