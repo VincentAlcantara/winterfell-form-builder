@@ -24,6 +24,7 @@ exports.addPage = addPage;
 exports.addQuestion = addQuestion;
 exports.changeCurrentEditingField = changeCurrentEditingField;
 exports.updateQuestion = updateQuestion;
+exports.uploadJSON = uploadJSON;
 
 var _constants = require('../common/constants');
 
@@ -185,6 +186,13 @@ function updateQuestion(currentQuestionSetIndex, currentQuestionIndex, question,
     payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, question: question, questionText: questionText }
   };
 }
+
+function uploadJSON(schema) {
+  return {
+    type: _constants.UPLOAD_JSON_SUCCESS,
+    payload: { schema: schema }
+  };
+}
 ;
 
 var _temp = function () {
@@ -233,6 +241,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(changeCurrentEditingField, 'changeCurrentEditingField', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(updateQuestion, 'updateQuestion', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(uploadJSON, 'uploadJSON', 'src/actions/winterfellFormBuilderActions.js');
 }();
 
 ;

@@ -147,6 +147,11 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 2 },
+                _react2.default.createElement(_FormMenu.UploadJSONButton, null)
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 2 },
                 _react2.default.createElement(_FormMenu.EditFormTitleButton, null)
               ),
               _react2.default.createElement(
@@ -157,26 +162,12 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 2 },
-                _react2.default.createElement(_FormMenu.EditSchemaButton, null)
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Col,
-                { xs: 2 },
                 _react2.default.createElement(_FormMenu.AddQuestionButton, null)
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 2, className: 'text-right' },
-                formPanels && _react2.default.createElement(_Pagination2.default, {
-                  formPanels: formPanels.toJS(),
-                  currentPanelId: currentPanelId,
-                  onClick: this.props.goToPage
-                }),
-                !formPanels && _react2.default.createElement(
-                  'span',
-                  null,
-                  'No form loaded'
-                )
+                { xs: 2 },
+                _react2.default.createElement(_FormMenu.EditSchemaButton, null)
               )
             ),
             _react2.default.createElement('hr', null),
@@ -186,12 +177,34 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 4, className: 'winterfell-form-builder-field-editor' },
-                typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_FieldEditor2.default, {
-                  currentPanelIndex: currentPanelIndex,
-                  currentEditingField: currentEditingField,
-                  currentQuestionSetIndex: currentQuestionSetIndex,
-                  currentQuestionIndex: currentQuestionIndex
-                })
+                _react2.default.createElement(
+                  _reactBootstrap.Row,
+                  null,
+                  _react2.default.createElement(
+                    _reactBootstrap.Col,
+                    { xs: 12, className: 'text-left' },
+                    formPanels && _react2.default.createElement(_Pagination2.default, {
+                      formPanels: formPanels.toJS(),
+                      currentPanelId: currentPanelId,
+                      onClick: this.props.goToPage
+                    }),
+                    !formPanels && _react2.default.createElement(
+                      'span',
+                      null,
+                      'No form loaded'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    _reactBootstrap.Col,
+                    { xs: 12 },
+                    typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_FieldEditor2.default, {
+                      currentPanelIndex: currentPanelIndex,
+                      currentEditingField: currentEditingField,
+                      currentQuestionSetIndex: currentQuestionSetIndex,
+                      currentQuestionIndex: currentQuestionIndex
+                    })
+                  )
+                )
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,
@@ -208,6 +221,11 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 12 },
+                _react2.default.createElement(
+                  'h3',
+                  null,
+                  'Preview:'
+                ),
                 schema && _react2.default.createElement(_Previewer2.default, {
                   schema: schema.toJS(),
                   currentPanelId: currentPanelId

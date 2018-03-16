@@ -78,7 +78,7 @@ var FormQuestionEditor = exports.FormQuestionEditor = function FormQuestionEdito
   return _react2.default.createElement(
     'div',
     null,
-    displayQuestionButtons()
+    questions && displayQuestionButtons()
   );
 };
 

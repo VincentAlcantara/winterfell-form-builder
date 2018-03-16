@@ -1,7 +1,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, DropdownButton, MenuItem } from 'react-bootstrap';
+import { Row, Col, DropdownButton, MenuItem, FormGroup } from 'react-bootstrap';
 
 function Pagination(props) {
   const { currentPanelId, formPanels, onClick } = props;
@@ -11,6 +11,7 @@ function Pagination(props) {
       onClick={() => {
         onClick(panel.panelId);
       }}
+      className="btn-block"
     >
       {panel.panelId}
     </MenuItem>
@@ -19,12 +20,20 @@ function Pagination(props) {
   return (
     <Row>
       <Col xs={12}>
-        <DropdownButton
-          id="pagination"
-          title={currentPanelId || 'Select Page'}
-        >
-          { formPanels && getPages() }
-        </DropdownButton>
+        <p>
+          <FormGroup>
+            <label htmlFor="pagination" style={{ display: 'block' }}>
+              Page
+            </label>
+            <DropdownButton
+              id="pagination"
+              title={currentPanelId || 'Select Page'}
+              className="btn-block"
+            >
+              { formPanels && getPages() }
+            </DropdownButton>
+          </FormGroup>
+        </p>
       </Col>
     </Row>
   );

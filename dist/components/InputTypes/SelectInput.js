@@ -61,10 +61,11 @@ var SelectInput = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var options = this.props.options.map(function (opt) {
+      var options = this.props.options.map(function (opt, index) {
         return _react2.default.createElement(
           'option',
           {
+            key: index,
             value: opt.value
           },
           opt.text

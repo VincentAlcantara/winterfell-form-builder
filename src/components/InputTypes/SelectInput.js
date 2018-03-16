@@ -39,8 +39,9 @@ class SelectInput extends React.Component {
   }
 
   render() {
-    const options = this.props.options.map(opt =>
+    const options = this.props.options.map((opt, index) =>
       <option
+        key={index}
         value={opt.value}
       >
         {opt.text}

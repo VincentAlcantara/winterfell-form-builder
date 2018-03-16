@@ -23,6 +23,7 @@ import {
   EDIT_QUESTION_OPTION_TEXT_SUCCESS,
   EDIT_QUESTION_OPTION_VALUE_SUCCESS,
   DELETE_QUESTION_OPTION_SUCCESS,
+  UPLOAD_JSON_SUCCESS,
 } from '../common/constants';
 
 const initialState = fromJS({
@@ -52,6 +53,11 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .set('currentPanelId', action.payload.panelId);
     }
     case LOAD_FORM_SUCCESS: {
+      return state
+        .set('currentPanelId', 'Select Page')
+        .set('schema', fromJS(action.payload.schema));
+    }
+    case UPLOAD_JSON_SUCCESS: {
       return state
         .set('currentPanelId', 'Select Page')
         .set('schema', fromJS(action.payload.schema));

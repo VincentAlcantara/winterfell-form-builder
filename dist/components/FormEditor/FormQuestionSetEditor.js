@@ -70,7 +70,7 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
   return _react2.default.createElement(
     'div',
     null,
-    displayQuestionSet()
+    currentQuestionSets && displayQuestionSet()
   );
 };
 

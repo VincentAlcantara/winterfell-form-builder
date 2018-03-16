@@ -38,7 +38,7 @@ export const FormQuestionSetEditor = (props) => {
 
   return (
     <div>
-      {displayQuestionSet()}
+      {currentQuestionSets && displayQuestionSet()}
     </div>
   );
 };

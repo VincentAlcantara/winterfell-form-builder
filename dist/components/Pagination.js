@@ -29,7 +29,8 @@ function Pagination(props) {
           key: index + '-' + panel.panelId,
           onClick: function onClick() {
             _onClick(panel.panelId);
-          }
+          },
+          className: 'btn-block'
         },
         panel.panelId
       );
@@ -43,12 +44,26 @@ function Pagination(props) {
       _reactBootstrap.Col,
       { xs: 12 },
       _react2.default.createElement(
-        _reactBootstrap.DropdownButton,
-        {
-          id: 'pagination',
-          title: currentPanelId || 'Select Page'
-        },
-        formPanels && getPages()
+        'p',
+        null,
+        _react2.default.createElement(
+          _reactBootstrap.FormGroup,
+          null,
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'pagination', style: { display: 'block' } },
+            'Page'
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.DropdownButton,
+            {
+              id: 'pagination',
+              title: currentPanelId || 'Select Page',
+              className: 'btn-block'
+            },
+            formPanels && getPages()
+          )
+        )
       )
     )
   );

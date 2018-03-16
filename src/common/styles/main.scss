@@ -14,7 +14,22 @@
 
 .winterfell-form-builder-field-editor {
   background: #eee;
+  padding-top: 10px;
 }
 
-
-
+.winterfell-form-builder-field-editor {
+  .dropdown.btn-group {
+    display: block;
+  }
+  #pagination {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  .dropdown-menu {
+    width: 100%;
+  }
+  .btn .caret {
+    float: right;
+    margin-top: 8px;
+  }
+}
