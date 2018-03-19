@@ -60,6 +60,12 @@ var _AddQuestionOptionButton = require('../FormMenu/AddQuestionOptionButton');
 
 var _AddQuestionOptionButton2 = _interopRequireDefault(_AddQuestionOptionButton);
 
+var _SelectInput = require('../InputTypes/SelectInput');
+
+var _SelectInput2 = _interopRequireDefault(_SelectInput);
+
+var _constants = require('../../common/constants');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var QuestionEditor = function (_Component) {
@@ -97,13 +103,14 @@ var QuestionEditor = function (_Component) {
   (0, _createClass3.default)(QuestionEditor, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      this.state = {
+      this.setState({
         questionId: nextProps.questionId,
         question: nextProps.question,
         questionText: nextProps.questionText,
         questionPostText: nextProps.questionPostText,
+        questionInputType: nextProps.questionInputType,
         questionInputOptions: nextProps.questionInputOptions.toJS()
-      };
+      });
     }
   }, {
     key: 'onChange',
@@ -330,6 +337,22 @@ var QuestionEditor = function (_Component) {
             placeholder: questionPostText,
             onChange: this.onChange,
             value: this.state.questionPostText
+          })
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.FormGroup,
+          null,
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'questionInputType' },
+            'Change question type'
+          ),
+          _react2.default.createElement(_SelectInput2.default, {
+            id: 'questionInputType',
+            labelId: 'questionInputType',
+            options: _constants.INPUT_TYPE_OPTIONS,
+            onSelect: this.onSelect,
+            initialValue: this.props.questionInputType
           })
         ),
         (questionInputType === 'checkboxOptionsInput' || questionInputType === 'selectInput' || questionInputType === 'radioOptionsInput') && questionInputOptions && this.getQuestionOptions()

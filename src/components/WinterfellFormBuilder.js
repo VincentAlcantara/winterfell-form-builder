@@ -82,9 +82,6 @@ class WinterfellFormBuilder extends Component {
           <Col xs={12}>
             <Row>
               <Col xs={12}>
-                <h2>Winterfell Form Builder</h2>
-              </Col>
-              <Col xs={10}>
                 <h3>Form: {title}</h3>
               </Col>
             </Row>

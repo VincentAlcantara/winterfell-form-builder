@@ -50,6 +50,10 @@ var _SelectInput = require('../InputTypes/SelectInput');
 
 var _SelectInput2 = _interopRequireDefault(_SelectInput);
 
+var _constants = require('../../common/constants');
+
+var _constants2 = _interopRequireDefault(_constants);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AddQuestionButton = function (_Component) {
@@ -104,20 +108,6 @@ var AddQuestionButton = function (_Component) {
     key: 'render',
     value: function render() {
       var _this2 = this;
-
-      var inputTypeOptions = [{
-        text: 'text',
-        value: 'inputText'
-      }, {
-        text: 'select',
-        value: 'selectInput'
-      }, {
-        text: 'checkbox',
-        value: 'checkboxOptionsInput'
-      }, {
-        text: 'radio button',
-        value: 'radioOptionsInput'
-      }];
 
       return _react2.default.createElement(
         _reactBootstrap.Row,
@@ -214,7 +204,7 @@ var AddQuestionButton = function (_Component) {
                   _react2.default.createElement(_SelectInput2.default, {
                     id: 'questionType',
                     labelId: 'questionType',
-                    options: inputTypeOptions,
+                    options: _constants2.default,
                     onSelect: this.onSelect,
                     value: this.state.questionType
                   })

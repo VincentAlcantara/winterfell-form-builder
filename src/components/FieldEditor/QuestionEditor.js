@@ -16,6 +16,8 @@ import {
 import FieldGroup from '../UI/FieldGroup';
 import DeleteQuestionOptionButton from '../FormMenu/DeleteQuestionOptionButton';
 import AddQuestionOptionButton from '../FormMenu/AddQuestionOptionButton';
+import SelectInput from '../InputTypes/SelectInput';
+import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
 class QuestionEditor extends Component {
   static propTypes = {
@@ -44,6 +46,7 @@ class QuestionEditor extends Component {
     questionInputType: '',
     questionInputOptions: fromJS([]),
   }
+
   constructor(props) {
     super(props);
     const {
@@ -71,13 +74,14 @@ class QuestionEditor extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.state = {
+    this.setState({
       questionId: nextProps.questionId,
       question: nextProps.question,
       questionText: nextProps.questionText,
       questionPostText: nextProps.questionPostText,
+      questionInputType: nextProps.questionInputType,
       questionInputOptions: nextProps.questionInputOptions.toJS(),
-    };
+    });
   }
 
   onChange(event) {
@@ -238,6 +242,18 @@ class QuestionEditor extends Component {
             placeholder={questionPostText}
             onChange={this.onChange}
             value={this.state.questionPostText}
+          />
+        </FormGroup>
+        <FormGroup>
+          <label htmlFor="questionInputType">
+            Change question type
+          </label>
+          <SelectInput
+            id="questionInputType"
+            labelId="questionInputType"
+            options={INPUT_TYPE_OPTIONS}
+            onSelect={this.onSelect}
+            initialValue={this.props.questionInputType}
           />
         </FormGroup>
         {

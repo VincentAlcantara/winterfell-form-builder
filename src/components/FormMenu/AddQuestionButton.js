@@ -5,6 +5,7 @@ import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
 import { addQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
 import SelectInput from '../InputTypes/SelectInput';
+import INPUT_TYPE_OPTIONS from '../../common/constants';
 
 
 class AddQuestionButton extends Component {
@@ -60,20 +61,6 @@ class AddQuestionButton extends Component {
   }
 
   render() {
-    const inputTypeOptions = [{
-      text: 'text',
-      value: 'inputText',
-    }, {
-      text: 'select',
-      value: 'selectInput',
-    }, {
-      text: 'checkbox',
-      value: 'checkboxOptionsInput',
-    }, {
-      text: 'radio button',
-      value: 'radioOptionsInput',
-    }];
-
     return (
       <Row>
         <div className="static-modal">
@@ -140,7 +127,7 @@ class AddQuestionButton extends Component {
                   <SelectInput
                     id="questionType"
                     labelId="questionType"
-                    options={inputTypeOptions}
+                    options={INPUT_TYPE_OPTIONS}
                     onSelect={this.onSelect}
                     value={this.state.questionType}
                   />

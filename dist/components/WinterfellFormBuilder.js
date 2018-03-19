@@ -119,15 +119,6 @@ var WinterfellFormBuilder = function (_Component) {
                 _reactBootstrap.Col,
                 { xs: 12 },
                 _react2.default.createElement(
-                  'h2',
-                  null,
-                  'Winterfell Form Builder'
-                )
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Col,
-                { xs: 10 },
-                _react2.default.createElement(
                   'h3',
                   null,
                   'Form: ',

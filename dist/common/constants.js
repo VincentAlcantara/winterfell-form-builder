@@ -79,6 +79,20 @@ var BOOTSTRAP_CLASSES = exports.BOOTSTRAP_CLASSES = {
   questionPostText: 'push-top',
   buttonBar: 'button-bar'
 };
+
+var INPUT_TYPE_OPTIONS = exports.INPUT_TYPE_OPTIONS = [{
+  text: 'text',
+  value: 'inputText'
+}, {
+  text: 'select',
+  value: 'selectInput'
+}, {
+  text: 'checkbox',
+  value: 'checkboxOptionsInput'
+}, {
+  text: 'radio button',
+  value: 'radioOptionsInput'
+}];
 ;
 
 var _temp = function () {
@@ -193,6 +207,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(UPLOAD_JSON_SUCCESS, 'UPLOAD_JSON_SUCCESS', 'src/common/constants.js');
 
   __REACT_HOT_LOADER__.register(BOOTSTRAP_CLASSES, 'BOOTSTRAP_CLASSES', 'src/common/constants.js');
+
+  __REACT_HOT_LOADER__.register(INPUT_TYPE_OPTIONS, 'INPUT_TYPE_OPTIONS', 'src/common/constants.js');
 }();
 
 ;

@@ -75,3 +75,17 @@ export const BOOTSTRAP_CLASSES = {
   buttonBar: 'button-bar',
 };
 
+export const INPUT_TYPE_OPTIONS = [{
+  text: 'text',
+  value: 'inputText',
+}, {
+  text: 'select',
+  value: 'selectInput',
+}, {
+  text: 'checkbox',
+  value: 'checkboxOptionsInput',
+}, {
+  text: 'radio button',
+  value: 'radioOptionsInput',
+}];
+

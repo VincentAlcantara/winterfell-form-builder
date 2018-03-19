@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import intformat from 'biguint-format';
+import FlakeIdGen from 'flake-idgen';
+
 import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
 import { uploadJSON } from '../../actions/winterfellFormBuilderActions';
+
 
 class UploadJSONButton extends Component {
   static propTypes = {
@@ -35,6 +39,8 @@ class UploadJSONButton extends Component {
 
   onJSONUpload(e) {
     e.preventDefault();
+    const idGenerator = new FlakeIdGen();
+    console.log('new flakeId: ', intformat(idGenerator.next(), 'dec').toString());
     this.props.uploadJSON(this.state.schema);
     this.setState({ showModal: false });
   }

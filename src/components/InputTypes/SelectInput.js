@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class SelectInput extends React.Component {
   static propTypes = {
-    value: PropTypes.array.isRequired,
+    initialValue: PropTypes.string.isRequired,
     options: PropTypes.array.isRequired,
     classes: PropTypes.object,
     name: PropTypes.string,
@@ -27,12 +27,17 @@ class SelectInput extends React.Component {
     super(props);
 
     this.state = {
-      value: this.props.value.length > 0 ? this.props.value : [],
+      value: this.props.initialValue,
     };
 
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      value: nextProps.initialValue,
+    });
+  }
   handleChange(e) {
     this.setState({ value: e.target.value });
     this.props.onSelect(e.target.value);
@@ -57,6 +62,7 @@ class SelectInput extends React.Component {
           : undefined}
         onChange={this.handleChange}
         onSelect={() => this.onSelect}
+        initialValue={this.props.initialValue}
       >
         {options}
       </select>
