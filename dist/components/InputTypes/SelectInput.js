@@ -68,7 +68,7 @@ var SelectInput = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var options = this.props.options.map(function (opt, index) {
+      var options = this.props.options && this.props.options.map(function (opt, index) {
         return _react2.default.createElement(
           'option',
           {
@@ -99,7 +99,7 @@ var SelectInput = function (_React$Component) {
 }(_react2.default.Component);
 
 SelectInput.propTypes = {
-  initialValue: _propTypes2.default.string.isRequired,
+  initialValue: _propTypes2.default.string,
   options: _propTypes2.default.array.isRequired,
   classes: _propTypes2.default.object,
   name: _propTypes2.default.string,
@@ -116,7 +116,8 @@ SelectInput.defaultProps = {
   options: [],
   onChange: function onChange() {},
   onSelect: function onSelect() {},
-  required: false
+  required: false,
+  initialValue: ''
 };
 var _default = SelectInput;
 exports.default = _default;

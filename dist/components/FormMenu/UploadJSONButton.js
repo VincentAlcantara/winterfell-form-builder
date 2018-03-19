@@ -68,7 +68,6 @@ var UploadJSONButton = function (_Component) {
       var reader = new FileReader();
       reader.onload = function (e) {
         var contents = e.target.result;
-        console.log('contents', JSON.parse(contents));
         _this2.setState({ schema: JSON.parse(contents) });
       };
       reader.readAsText(file);

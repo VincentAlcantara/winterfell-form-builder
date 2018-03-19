@@ -99,7 +99,6 @@ var FormEditorContainer = function (_Component) {
 
       var questionPanelsArray = questionPanels && questionPanels.toJS();
       var questionSetsArray = questionSets && questionSets.toJS();
-      console.log('panelHeader, panelText: ', panelHeader, panelText);
       return _react2.default.createElement(
         _reactBootstrap.Row,
         null,

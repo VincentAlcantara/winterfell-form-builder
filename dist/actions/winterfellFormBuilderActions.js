@@ -14,6 +14,7 @@ exports.editQuestionId = editQuestionId;
 exports.editQuestion = editQuestion;
 exports.editQuestionText = editQuestionText;
 exports.editQuestionPostText = editQuestionPostText;
+exports.changeQuestionType = changeQuestionType;
 exports.addQuestionOption = addQuestionOption;
 exports.editQuestionOptionText = editQuestionOptionText;
 exports.editQuestionOptionValue = editQuestionOptionValue;
@@ -102,6 +103,13 @@ function editQuestionPostText(currentQuestionSetIndex, currentQuestionIndex, tex
   return {
     type: _constants.EDIT_QUESTION_POST_TEXT_SUCCESS,
     payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, text: text }
+  };
+}
+
+function changeQuestionType(currentQuestionSetIndex, currentQuestionIndex, questionType) {
+  return {
+    type: _constants.CHANGE_QUESTION_TYPE_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, questionType: questionType }
   };
 }
 
@@ -221,6 +229,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(editQuestionText, 'editQuestionText', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(editQuestionPostText, 'editQuestionPostText', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(changeQuestionType, 'changeQuestionType', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(addQuestionOption, 'addQuestionOption', 'src/actions/winterfellFormBuilderActions.js');
 

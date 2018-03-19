@@ -42,10 +42,6 @@ var _reactBootstrap = require('react-bootstrap');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
-var _FieldGroup = require('../UI/FieldGroup');
-
-var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AddQuestionOptionButton = function (_Component) {
@@ -57,13 +53,13 @@ var AddQuestionOptionButton = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (AddQuestionOptionButton.__proto__ || (0, _getPrototypeOf2.default)(AddQuestionOptionButton)).call(this, props));
 
     _this.state = {
-      showModal: false,
+      showConfirm: false,
       questionOptionText: '',
       questionOptionValue: ''
     };
 
     _this.onChange = _this.onChange.bind(_this);
-    _this.onConfirmAddOption = _this.onConfirmAddOption.bind(_this);
+    _this.onAddOption = _this.onAddOption.bind(_this);
     return _this;
   }
 
@@ -77,110 +73,83 @@ var AddQuestionOptionButton = function (_Component) {
     key: 'onClose',
     value: function onClose(e) {
       e.preventDefault();
-      this.setState({ showModal: true });
+      this.setState({ showConfirm: true });
     }
   }, {
-    key: 'onConfirmAddOption',
-    value: function onConfirmAddOption(e) {
+    key: 'onAddOption',
+    value: function onAddOption(e) {
       e.preventDefault();
       var _props = this.props,
           currentQuestionSetIndex = _props.currentQuestionSetIndex,
           currentQuestionIndex = _props.currentQuestionIndex;
 
       this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex, this.state.questionOptionText, this.state.questionOptionValue);
-      this.setState({ showModal: false });
+      this.setState({ questionOptionText: '', questionOptionValue: '' });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
       return _react2.default.createElement(
         _reactBootstrap.Row,
         null,
         _react2.default.createElement(
-          'div',
-          { className: 'static-modal' },
+          _reactBootstrap.Col,
+          { xs: 12 },
           _react2.default.createElement(
-            _reactBootstrap.Modal,
-            { show: this.state.showModal },
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Header,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Modal.Title,
-                null,
-                'Add new question option'
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Body,
-              null,
-              _react2.default.createElement(
-                'form',
-                null,
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionOptionText',
-                    name: 'questionOptionText',
-                    label: 'Enter option text',
-                    onChange: this.onChange,
-                    placeholder: 'Enter text',
-                    value: this.state.questionOptionText
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionOptionValue',
-                    name: 'questionOptionValue',
-                    label: 'Enter option value',
-                    onChange: this.onChange,
-                    placeholder: 'Enter value',
-                    value: this.state.questionOptionValue
-                  })
-                )
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Footer,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'danger',
-                  onClick: function onClick() {
-                    _this2.setState({ showModal: false });
-                  }
-                },
-                'Cancel'
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'primary',
-                  onClick: this.onConfirmAddOption
-                },
-                'Save changes'
-              )
-            )
+            'label',
+            {
+              htmlFor: 'addOption'
+            },
+            'Add Option'
           )
         ),
         _react2.default.createElement(
           _reactBootstrap.Col,
           { xs: 12 },
           _react2.default.createElement(
-            _reactBootstrap.Button,
-            {
-              className: 'btn btn-block btn-success',
-              onClick: function onClick() {
-                _this2.setState({ showModal: true });
-              }
-            },
-            'Add Option'
+            'table',
+            null,
+            _react2.default.createElement(
+              'tbody',
+              { id: 'addOption' },
+              _react2.default.createElement(
+                'tr',
+                null,
+                _react2.default.createElement(
+                  'td',
+                  null,
+                  _react2.default.createElement(_reactBootstrap.FormControl, {
+                    type: 'text',
+                    name: 'questionOptionText',
+                    value: this.state.questionOptionText,
+                    onChange: this.onChange
+                  })
+                ),
+                _react2.default.createElement(
+                  'td',
+                  null,
+                  _react2.default.createElement(_reactBootstrap.FormControl, {
+                    type: 'text',
+                    name: 'questionOptionValue',
+                    value: this.state.questionOptionValue,
+                    onChange: this.onChange
+                  })
+                ),
+                _react2.default.createElement(
+                  'td',
+                  null,
+                  _react2.default.createElement(
+                    _reactBootstrap.Button,
+                    {
+                      className: 'btn btn-block btn-success',
+                      onClick: this.onAddOption,
+                      disabled: !this.state.questionOptionValue || !this.state.questionOptionText
+                    },
+                    '+'
+                  )
+                )
+              )
+            )
           )
         )
       );
@@ -196,10 +165,11 @@ AddQuestionOptionButton.propTypes = {
 };
 
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
-    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex'])
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
+    questionInputOptions: ownProps.questionInputOptions
   };
 }
 
