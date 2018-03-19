@@ -12,6 +12,7 @@ import {
   editQuestionOptionValue,
   addQuestionOption,
   deleteQuestionOption,
+  changeQuestionType,
 } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
 import DeleteQuestionOptionButton from '../FormMenu/DeleteQuestionOptionButton';
@@ -27,6 +28,7 @@ class QuestionEditor extends Component {
     editQuestionPostText: PropTypes.func.isRequired,
     editQuestionOptionText: PropTypes.func.isRequired,
     editQuestionOptionValue: PropTypes.func.isRequired,
+    changeQuestionType: PropTypes.func.isRequired,
     addQuestionOption: PropTypes.func.isRequired,
     questionId: PropTypes.string,
     question: PropTypes.string,
@@ -68,6 +70,7 @@ class QuestionEditor extends Component {
     };
 
     this.onChange = this.onChange.bind(this);
+    this.onSelect = this.onSelect.bind(this);
     this.onOptionTextChange = this.onOptionTextChange.bind(this);
     this.onOptionValueChange = this.onOptionValueChange.bind(this);
     this.onAddQuestionOptionClick = this.onAddQuestionOptionClick.bind(this);
@@ -103,6 +106,12 @@ class QuestionEditor extends Component {
         break;
       default:
     }
+  }
+
+  onSelect(questionType) {
+    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
+    this.setState({ questionInputType: questionType });
+    this.props.changeQuestionType(currentQuestionSetIndex, currentQuestionIndex, questionType);
   }
 
   onOptionTextChange(event, index) {
@@ -184,7 +193,9 @@ class QuestionEditor extends Component {
             </tr>
             <tr>
               <td colSpan={3}>
-                <AddQuestionOptionButton />
+                <AddQuestionOptionButton
+                  questionInputOptions={this.state.questionInputOptions}
+                />
               </td>
             </tr>
           </tbody>
@@ -246,7 +257,7 @@ class QuestionEditor extends Component {
         </FormGroup>
         <FormGroup>
           <label htmlFor="questionInputType">
-            Change question type
+            Change Question Type
           </label>
           <SelectInput
             id="questionInputType"
@@ -298,5 +309,6 @@ export default connect(
     editQuestionOptionValue,
     addQuestionOption,
     deleteQuestionOption,
+    changeQuestionType,
   })(QuestionEditor);
 

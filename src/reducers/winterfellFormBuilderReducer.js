@@ -19,6 +19,7 @@ import {
   EDIT_QUESTION_SUCCESS,
   EDIT_QUESTION_TEXT_SUCCESS,
   EDIT_QUESTION_POST_TEXT_SUCCESS,
+  CHANGE_QUESTION_TYPE_SUCCESS,
   ADD_QUESTION_OPTION_SUCCESS,
   EDIT_QUESTION_OPTION_TEXT_SUCCESS,
   EDIT_QUESTION_OPTION_VALUE_SUCCESS,
@@ -114,10 +115,22 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         questionOptionValue,
       } = action.payload;
       const newOption = fromJS({ text: questionOptionText, value: questionOptionValue });
+      if (state.getIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+        currentQuestionIndex, 'input', 'options'])) {
+        return state
+          .updateIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+            currentQuestionIndex, 'input', 'options'], arr =>
+            arr.push(newOption));
+      }
       return state
-        .updateIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
-          currentQuestionIndex, 'input', 'options'], arr =>
-          arr.push(newOption));
+      .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+        currentQuestionIndex, 'input', 'options'], fromJS([newOption]));
+    }
+    case CHANGE_QUESTION_TYPE_SUCCESS: {
+      const { currentQuestionSetIndex, currentQuestionIndex, questionType } = action.payload;
+      return state
+      .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+        currentQuestionIndex, 'input', 'type'], questionType);
     }
     case EDIT_QUESTION_OPTION_TEXT_SUCCESS: {
       const {

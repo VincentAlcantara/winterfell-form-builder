@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class SelectInput extends React.Component {
   static propTypes = {
-    initialValue: PropTypes.string.isRequired,
+    initialValue: PropTypes.string,
     options: PropTypes.array.isRequired,
     classes: PropTypes.object,
     name: PropTypes.string,
@@ -22,6 +22,7 @@ class SelectInput extends React.Component {
     onChange: () => {},
     onSelect: () => {},
     required: false,
+    initialValue: '',
   };
   constructor(props) {
     super(props);
@@ -44,7 +45,7 @@ class SelectInput extends React.Component {
   }
 
   render() {
-    const options = this.props.options.map((opt, index) =>
+    const options = this.props.options && this.props.options.map((opt, index) =>
       <option
         key={index}
         value={opt.value}

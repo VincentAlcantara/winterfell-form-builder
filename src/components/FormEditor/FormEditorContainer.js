@@ -59,7 +59,6 @@ class FormEditorContainer extends Component {
     const { currentPanelIndex, questionPanels, questionSets, panelHeader, panelText } = this.props;
     const questionPanelsArray = questionPanels && questionPanels.toJS();
     const questionSetsArray = questionSets && questionSets.toJS();
-    console.log('panelHeader, panelText: ', panelHeader, panelText);
     return (
       <Row>
         <Col xs={12}>
