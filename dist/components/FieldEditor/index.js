@@ -44,13 +44,17 @@ function FieldEditor(props) {
       currentEditingField === 'page' && _react2.default.createElement(_PageEditor2.default, {
         currentPanelIndex: currentPanelIndex
       }),
-      currentEditingField === 'questionSet' && _react2.default.createElement(_QuestionSetEditor2.default, {
-        currentQuestionSetIndex: currentQuestionSetIndex
-      }),
-      currentEditingField === 'question' && _react2.default.createElement(_QuestionEditor2.default, {
-        currentQuestionSetIndex: currentQuestionSetIndex,
-        currentQuestionIndex: currentQuestionIndex
-      })
+      (currentEditingField === 'questionSet' || currentEditingField === 'question') && _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_QuestionSetEditor2.default, {
+          currentQuestionSetIndex: currentQuestionSetIndex
+        }),
+        _react2.default.createElement(_QuestionEditor2.default, {
+          currentQuestionSetIndex: currentQuestionSetIndex,
+          currentQuestionIndex: currentQuestionIndex
+        })
+      )
     )
   );
 }

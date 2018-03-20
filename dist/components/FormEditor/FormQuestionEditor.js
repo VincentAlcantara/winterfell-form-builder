@@ -49,7 +49,12 @@ var FormQuestionEditor = exports.FormQuestionEditor = function FormQuestionEdito
             null,
             question.text
           ),
-          question.input && (question.input.type === 'textInput' || question.input.type === 'emailInput') && _react2.default.createElement('input', { id: question.questionId, type: 'text', className: 'form-control' }),
+          question.input && (question.input.type === 'textInput' || question.input.type === 'emailInput') && _react2.default.createElement('input', {
+            id: question.questionId,
+            type: 'text',
+            className: 'form-control',
+            autoComplete: question.questionId
+          }),
           question.input && question.input.type === 'radioOptionsInput' && _react2.default.createElement(_InputTypes.RadioButtonOptionsInput, {
             id: question.questionId,
             labelId: question.questionId,

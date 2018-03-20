@@ -22,7 +22,9 @@ exports.deleteQuestionOption = deleteQuestionOption;
 exports.goToPage = goToPage;
 exports.updateForm = updateForm;
 exports.addPage = addPage;
+exports.deletePage = deletePage;
 exports.addQuestion = addQuestion;
+exports.deleteQuestion = deleteQuestion;
 exports.changeCurrentEditingField = changeCurrentEditingField;
 exports.updateQuestion = updateQuestion;
 exports.uploadJSON = uploadJSON;
@@ -167,6 +169,13 @@ function addPage(panelId, panelHeader, panelText) {
   };
 }
 
+function deletePage(panelId) {
+  return {
+    type: _constants.DELETE_PAGE_SUCCESS,
+    payload: { panelId: panelId }
+  };
+}
+
 function addQuestion(currentPanelId, questionSetId, questionSetHeader, questionSetText, question, questionText, questionType) {
   return {
     type: _constants.ADD_QUESTION_SUCCESS,
@@ -178,6 +187,13 @@ function addQuestion(currentPanelId, questionSetId, questionSetHeader, questionS
       question: question,
       questionText: questionText,
       questionType: questionType }
+  };
+}
+
+function deleteQuestion(currentQuestionSetIndex, currentQuestionIndex) {
+  return {
+    type: _constants.DELETE_QUESTION_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex }
   };
 }
 
@@ -246,7 +262,11 @@ var _temp = function () {
 
   __REACT_HOT_LOADER__.register(addPage, 'addPage', 'src/actions/winterfellFormBuilderActions.js');
 
+  __REACT_HOT_LOADER__.register(deletePage, 'deletePage', 'src/actions/winterfellFormBuilderActions.js');
+
   __REACT_HOT_LOADER__.register(addQuestion, 'addQuestion', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(deleteQuestion, 'deleteQuestion', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(changeCurrentEditingField, 'changeCurrentEditingField', 'src/actions/winterfellFormBuilderActions.js');
 

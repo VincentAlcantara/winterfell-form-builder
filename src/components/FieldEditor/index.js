@@ -24,17 +24,16 @@ function FieldEditor(props) {
           />
         }
         {
-          currentEditingField === 'questionSet' &&
-          <QuestionSetEditor
-            currentQuestionSetIndex={currentQuestionSetIndex}
-          />
-        }
-        {
-          currentEditingField === 'question' &&
-          <QuestionEditor
-            currentQuestionSetIndex={currentQuestionSetIndex}
-            currentQuestionIndex={currentQuestionIndex}
-          />
+          (currentEditingField === 'questionSet' || currentEditingField === 'question') &&
+          <div>
+            <QuestionSetEditor
+              currentQuestionSetIndex={currentQuestionSetIndex}
+            />
+            <QuestionEditor
+              currentQuestionSetIndex={currentQuestionSetIndex}
+              currentQuestionIndex={currentQuestionIndex}
+            />
+          </div>
         }
       </Col>
     </Row>

@@ -152,7 +152,7 @@ class AddQuestionButton extends Component {
             onClick={() => {
               this.setState({ showModal: true });
             }}
-          >add question
+          >add question set
           </Button>
         </Col>
       </Row>

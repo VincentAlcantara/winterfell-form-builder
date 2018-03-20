@@ -246,7 +246,7 @@ var AddQuestionButton = function (_Component) {
                 _this2.setState({ showModal: true });
               }
             },
-            'add question'
+            'add question set'
           )
         )
       );

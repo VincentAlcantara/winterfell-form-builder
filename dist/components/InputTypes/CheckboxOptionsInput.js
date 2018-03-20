@@ -96,7 +96,8 @@ var CheckboxOptionsInput = function (_React$Component) {
                 checked: _this2.state.value.indexOf(opt.value) > -1,
                 className: _this2.props.classes.checkbox,
                 required: _this2.props.required ? 'required' : undefined,
-                onChange: _this2.handleChange
+                onChange: _this2.handleChange,
+                autoComplete: _this2.props.name + '-' + opt.value
               }),
               opt.text
             )

@@ -89,7 +89,8 @@ var SelectInput = function (_React$Component) {
           onSelect: function onSelect() {
             return _this2.onSelect;
           },
-          initialValue: this.props.initialValue
+          initialValue: this.props.initialValue,
+          autoComplete: this.props.name
         },
         options
       );

@@ -5,7 +5,9 @@ import {
   UPDATE_FORM_SUCCESS,
   GOTO_PAGE_SUCCESS,
   ADD_PAGE_SUCCESS,
+  DELETE_PAGE_SUCCESS,
   ADD_QUESTION_SUCCESS,
+  DELETE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
   CHANGE_EDITING_FIELD_SUCCESS,
   EDIT_PAGE_HEADER_SUCCESS,
@@ -166,6 +168,13 @@ export function addPage(panelId, panelHeader, panelText) {
   };
 }
 
+export function deletePage(panelId) {
+  return {
+    type: DELETE_PAGE_SUCCESS,
+    payload: { panelId },
+  };
+}
+
 export function addQuestion(
   currentPanelId,
   questionSetId,
@@ -184,6 +193,13 @@ export function addQuestion(
       question,
       questionText,
       questionType },
+  };
+}
+
+export function deleteQuestion(currentQuestionSetIndex, currentQuestionIndex) {
+  return {
+    type: DELETE_QUESTION_SUCCESS,
+    payload: { currentQuestionSetIndex, currentQuestionIndex },
   };
 }
 
