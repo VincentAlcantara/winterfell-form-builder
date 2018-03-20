@@ -285,6 +285,7 @@ class QuestionEditor extends Component {
               labelId="questionInputType"
               options={INPUT_TYPE_OPTIONS}
               onSelect={this.onSelect}
+              initialValue={this.props.questionInputType}
             />
           </FormGroup>
         </div>

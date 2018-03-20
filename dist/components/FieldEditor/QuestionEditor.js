@@ -392,7 +392,8 @@ var QuestionEditor = function (_Component) {
               id: 'questionInputType',
               labelId: 'questionInputType',
               options: _constants.INPUT_TYPE_OPTIONS,
-              onSelect: this.onSelect
+              onSelect: this.onSelect,
+              initialValue: this.props.questionInputType
             })
           )
         ),
