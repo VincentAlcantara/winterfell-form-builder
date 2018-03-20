@@ -121,9 +121,9 @@ var QuestionSetEditor = function (_Component) {
             id: 'questionSetId',
             name: 'questionSetId',
             label: 'Question Set ID',
-            onChange: this.onChangeQuestionSetId,
             placeholder: this.props.questionSetId,
-            value: this.state.questionSetId
+            value: this.state.questionSetId,
+            disabled: true
           }),
           _react2.default.createElement(_FieldGroup2.default, {
             id: 'questionSetHeader',
@@ -155,13 +155,14 @@ var QuestionSetEditor = function (_Component) {
             'Questions:'
           ),
           _react2.default.createElement(
-            _reactBootstrap.Nav,
-            { id: 'questionList', bsStyle: 'pills' },
+            'div',
+            { id: 'questionList' },
             questionsArray.map(function (question, index) {
               return _react2.default.createElement(
-                _reactBootstrap.NavItem,
+                _reactBootstrap.Button,
                 {
-                  key: index,
+                  key: 'question-' + index,
+                  className: 'btn-block text-left',
                   onClick: function onClick() {
                     return _this2.props.changeCurrentEditingField('question', currentQuestionSetIndex, index);
                   }

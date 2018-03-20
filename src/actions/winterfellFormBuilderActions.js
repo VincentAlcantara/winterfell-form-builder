@@ -7,6 +7,7 @@ import {
   ADD_PAGE_SUCCESS,
   DELETE_PAGE_SUCCESS,
   ADD_QUESTION_SUCCESS,
+  ADD_QUESTION_SET_SUCCESS,
   DELETE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
   CHANGE_EDITING_FIELD_SUCCESS,
@@ -175,7 +176,7 @@ export function deletePage(panelId) {
   };
 }
 
-export function addQuestion(
+export function addQuestionSet(
   currentPanelId,
   questionSetId,
   questionSetHeader,
@@ -184,12 +185,31 @@ export function addQuestion(
   questionText,
   questionType) {
   return {
-    type: ADD_QUESTION_SUCCESS,
+    type: ADD_QUESTION_SET_SUCCESS,
     payload: {
       currentPanelId,
       questionSetId,
       questionSetHeader,
       questionSetText,
+      question,
+      questionText,
+      questionType },
+  };
+}
+
+export function addQuestion(
+  currentQuestionSetIndex,
+  questionSetId,
+  questionId,
+  question,
+  questionText,
+  questionType) {
+  return {
+    type: ADD_QUESTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex,
+      questionSetId,
+      questionId,
       question,
       questionText,
       questionType },
@@ -219,9 +239,9 @@ export function updateQuestion(
   };
 }
 
-export function uploadJSON(schema) {
+export function uploadJSON(schema, fileName) {
   return {
     type: UPLOAD_JSON_SUCCESS,
-    payload: { schema },
+    payload: { schema, fileName },
   };
 }

@@ -38,7 +38,7 @@ function winterfellFormBuilderReducer() {
     case _constants.ADD_PAGE_SUCCESS:
     case _constants.UPDATE_PAGE_SUCCESS:
     case _constants.DELETE_PAGE_SUCCESS:
-    case _constants.ADD_QUESTION_SUCCESS:
+    case _constants.ADD_QUESTION_SET_SUCCESS:
     case _constants.UPDATE_QUESTION_SUCCESS:
     case _constants.DELETE_QUESTION_SUCCESS:
       return state.set('message', '');

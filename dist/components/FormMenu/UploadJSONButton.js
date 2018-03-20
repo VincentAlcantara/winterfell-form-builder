@@ -50,7 +50,8 @@ var UploadJSONButton = function (_Component) {
 
     _this.state = {
       showModal: false,
-      schema: ''
+      schema: '',
+      fileName: ''
     };
 
     _this.onChange = _this.onChange.bind(_this);
@@ -68,7 +69,10 @@ var UploadJSONButton = function (_Component) {
       var reader = new FileReader();
       reader.onload = function (e) {
         var contents = e.target.result;
-        _this2.setState({ schema: JSON.parse(contents) });
+        _this2.setState({
+          schema: JSON.parse(contents),
+          fileName: file.name
+        });
       };
       reader.readAsText(file);
     }
@@ -76,7 +80,7 @@ var UploadJSONButton = function (_Component) {
     key: 'onJSONUpload',
     value: function onJSONUpload(e) {
       e.preventDefault();
-      this.props.uploadJSON(this.state.schema);
+      this.props.uploadJSON(this.state.schema, this.state.fileName);
       this.setState({ showModal: false });
     }
   }, {
@@ -155,7 +159,7 @@ var UploadJSONButton = function (_Component) {
           _react2.default.createElement(
             _reactBootstrap.Button,
             {
-              className: 'btn btn-block btn-info',
+              className: 'btn btn-block btn-primary',
               onClick: function onClick() {
                 _this3.setState({ showModal: true });
               }

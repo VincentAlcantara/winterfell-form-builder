@@ -52,8 +52,6 @@ var _SelectInput2 = _interopRequireDefault(_SelectInput);
 
 var _constants = require('../../common/constants');
 
-var _constants2 = _interopRequireDefault(_constants);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AddQuestionButton = function (_Component) {
@@ -66,9 +64,8 @@ var AddQuestionButton = function (_Component) {
 
     _this.state = {
       showModal: false,
-      questionSetId: '',
-      questionSetHeader: '',
-      questionSetText: '',
+      questionSetId: _this.props.questionSetId,
+      questionId: '',
       question: '',
       questionText: '',
       questionType: ''
@@ -101,7 +98,7 @@ var AddQuestionButton = function (_Component) {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
-      this.props.addQuestion(this.props.currentPanelId, this.state.questionSetId, this.state.questionSetHeader, this.state.questionSetText, this.state.question, this.state.questionText, this.state.questionType);
+      this.props.addQuestion(this.props.currentQuestionSetIndex, this.state.questionSetId, this.state.questionId, this.state.question, this.state.questionText, this.state.questionType);
       this.setState({ showModal: false });
     }
   }, {
@@ -124,7 +121,7 @@ var AddQuestionButton = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Modal.Title,
                 null,
-                'Add a new question to the page'
+                'Add a new question to the question set'
               )
             ),
             _react2.default.createElement(
@@ -149,24 +146,12 @@ var AddQuestionButton = function (_Component) {
                   _reactBootstrap.FormGroup,
                   null,
                   _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionSetHeader',
-                    name: 'questionSetHeader',
-                    label: 'Question Set Title',
+                    id: 'questionId',
+                    name: 'questionId',
+                    label: 'Question ID',
                     onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.questionSetHeader
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionSetText',
-                    name: 'questionSetText',
-                    label: 'Enter Question Set Description',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.questionSetText
+                    placeholder: '(optional)',
+                    value: this.state.questionId
                   })
                 ),
                 _react2.default.createElement(
@@ -199,14 +184,13 @@ var AddQuestionButton = function (_Component) {
                   _react2.default.createElement(
                     'label',
                     { htmlFor: 'questionType' },
-                    'Select question type'
+                    'Select Question Type'
                   ),
                   _react2.default.createElement(_SelectInput2.default, {
                     id: 'questionType',
                     labelId: 'questionType',
-                    options: _constants2.default,
-                    onSelect: this.onSelect,
-                    value: this.state.questionType
+                    options: _constants.INPUT_TYPE_OPTIONS,
+                    onSelect: this.onSelect
                   })
                 )
               )
@@ -241,12 +225,12 @@ var AddQuestionButton = function (_Component) {
           _react2.default.createElement(
             _reactBootstrap.Button,
             {
-              className: 'btn btn-block btn-info',
+              className: 'btn btn-block btn-success',
               onClick: function onClick() {
                 _this2.setState({ showModal: true });
               }
             },
-            'add question set'
+            'add question'
           )
         )
       );
@@ -257,17 +241,11 @@ var AddQuestionButton = function (_Component) {
 
 AddQuestionButton.propTypes = {
   addQuestion: _propTypes2.default.func.isRequired,
-  currentPanelId: _propTypes2.default.string.isRequired
+  questionSetId: _propTypes2.default.string.isRequired,
+  currentQuestionSetIndex: _propTypes2.default.number.isRequired
 };
 
-
-function mapStateToProps(state) {
-  return {
-    currentPanelId: state.getIn(['form', 'currentPanelId'])
-  };
-}
-
-var _default = (0, _reactRedux.connect)(mapStateToProps, { addQuestion: _winterfellFormBuilderActions.addQuestion })(AddQuestionButton);
+var _default = (0, _reactRedux.connect)(null, { addQuestion: _winterfellFormBuilderActions.addQuestion })(AddQuestionButton);
 
 exports.default = _default;
 ;
@@ -278,8 +256,6 @@ var _temp = function () {
   }
 
   __REACT_HOT_LOADER__.register(AddQuestionButton, 'AddQuestionButton', 'src/components/FormMenu/AddQuestionButton.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/AddQuestionButton.js');
 
   __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/AddQuestionButton.js');
 }();

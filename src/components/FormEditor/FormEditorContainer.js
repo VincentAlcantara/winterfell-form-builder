@@ -12,6 +12,8 @@ class FormEditorContainer extends Component {
     editFormTitle: PropTypes.func.isRequired,
     changeCurrentEditingField: PropTypes.func.isRequired,
     currentPanelIndex: PropTypes.number.isRequired,
+    currentQuestionSetIndex: PropTypes.number,
+    currentQuestionIndex: PropTypes.number,
     questionSets: PropTypes.object,
     questionPanels: PropTypes.object,
     panelHeader: PropTypes.string,
@@ -25,6 +27,8 @@ class FormEditorContainer extends Component {
     questionSets: null,
     panelHeader: '',
     panelText: '',
+    currentQuestionSetIndex: 0,
+    currentQuestionIndex: 0,
   }
 
   constructor(props) {
@@ -56,7 +60,15 @@ class FormEditorContainer extends Component {
   }
 
   render() {
-    const { currentPanelIndex, questionPanels, questionSets, panelHeader, panelText } = this.props;
+    const {
+      currentPanelIndex,
+      questionPanels,
+      questionSets,
+      panelHeader,
+      panelText,
+      currentQuestionSetIndex,
+      currentQuestionIndex,
+    } = this.props;
     const questionPanelsArray = questionPanels && questionPanels.toJS();
     const questionSetsArray = questionSets && questionSets.toJS();
     return (
@@ -66,7 +78,7 @@ class FormEditorContainer extends Component {
             <FormPageEditor
               panelHeader={panelHeader}
               panelText={panelText}
-              onClick={() => this.props.changeCurrentEditingField('page')}
+              onClick={() => this.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex)}
             />
           }
           { typeof currentPanelIndex !== 'undefined' &&
@@ -75,6 +87,7 @@ class FormEditorContainer extends Component {
               currentQuestionSets={questionPanelsArray[currentPanelIndex].questionSets}
               questionSets={questionSetsArray}
               onClick={this.props.changeCurrentEditingField}
+              currentQuestionIndex={this.props.currentQuestionIndex}
             />
           }
         </Col>
@@ -93,6 +106,8 @@ function mapStateToProps(state, ownProps) {
     schema: state.getIn(['form', 'schema']),
     panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelHeader']),
     panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelText']),
+    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
   };
 }
 

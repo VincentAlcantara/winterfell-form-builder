@@ -23,6 +23,7 @@ exports.goToPage = goToPage;
 exports.updateForm = updateForm;
 exports.addPage = addPage;
 exports.deletePage = deletePage;
+exports.addQuestionSet = addQuestionSet;
 exports.addQuestion = addQuestion;
 exports.deleteQuestion = deleteQuestion;
 exports.changeCurrentEditingField = changeCurrentEditingField;
@@ -176,14 +177,27 @@ function deletePage(panelId) {
   };
 }
 
-function addQuestion(currentPanelId, questionSetId, questionSetHeader, questionSetText, question, questionText, questionType) {
+function addQuestionSet(currentPanelId, questionSetId, questionSetHeader, questionSetText, question, questionText, questionType) {
   return {
-    type: _constants.ADD_QUESTION_SUCCESS,
+    type: _constants.ADD_QUESTION_SET_SUCCESS,
     payload: {
       currentPanelId: currentPanelId,
       questionSetId: questionSetId,
       questionSetHeader: questionSetHeader,
       questionSetText: questionSetText,
+      question: question,
+      questionText: questionText,
+      questionType: questionType }
+  };
+}
+
+function addQuestion(currentQuestionSetIndex, questionSetId, questionId, question, questionText, questionType) {
+  return {
+    type: _constants.ADD_QUESTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex: currentQuestionSetIndex,
+      questionSetId: questionSetId,
+      questionId: questionId,
       question: question,
       questionText: questionText,
       questionType: questionType }
@@ -211,10 +225,10 @@ function updateQuestion(currentQuestionSetIndex, currentQuestionIndex, question,
   };
 }
 
-function uploadJSON(schema) {
+function uploadJSON(schema, fileName) {
   return {
     type: _constants.UPLOAD_JSON_SUCCESS,
-    payload: { schema: schema }
+    payload: { schema: schema, fileName: fileName }
   };
 }
 ;
@@ -263,6 +277,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(addPage, 'addPage', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(deletePage, 'deletePage', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(addQuestionSet, 'addQuestionSet', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(addQuestion, 'addQuestion', 'src/actions/winterfellFormBuilderActions.js');
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, Nav, NavItem } from 'react-bootstrap';
+import { FormGroup, Button } from 'react-bootstrap';
 import { editQuestionSetHeader, editQuestionSetText, changeCurrentEditingField } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
 
@@ -69,9 +69,9 @@ class QuestionSetEditor extends Component {
             id="questionSetId"
             name="questionSetId"
             label="Question Set ID"
-            onChange={this.onChangeQuestionSetId}
             placeholder={this.props.questionSetId}
             value={this.state.questionSetId}
+            disabled
           />
           <FieldGroup
             id="questionSetHeader"
@@ -96,17 +96,19 @@ class QuestionSetEditor extends Component {
         <FormGroup>
           <label htmlFor="questionList">Questions:
           </label>
-          <Nav id="questionList" bsStyle="pills">
+          <div id="questionList">
             { questionsArray.map((question, index) => (
-              <NavItem
-                key={index}
+              <Button
+                key={`question-${index}`}
+                className="btn-block text-left"
                 onClick={() =>
                   this.props.changeCurrentEditingField('question', currentQuestionSetIndex, index)
                 }
               >{question.questionId}
-              </NavItem>))
+              </Button>
+              ))
             }
-          </Nav>
+          </div>
         </FormGroup>
         }
       </form>

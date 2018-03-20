@@ -63,7 +63,6 @@ class SelectInput extends React.Component {
           : undefined}
         onChange={this.handleChange}
         onSelect={() => this.onSelect}
-        initialValue={this.props.initialValue}
         autoComplete={this.props.name}
       >
         {options}

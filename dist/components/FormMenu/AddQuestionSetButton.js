@@ -46,33 +46,48 @@ var _FieldGroup = require('../UI/FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
+var _SelectInput = require('../InputTypes/SelectInput');
+
+var _SelectInput2 = _interopRequireDefault(_SelectInput);
+
+var _constants = require('../../common/constants');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var AddPageButton = function (_Component) {
-  (0, _inherits3.default)(AddPageButton, _Component);
+var AddQuestionButton = function (_Component) {
+  (0, _inherits3.default)(AddQuestionButton, _Component);
 
-  function AddPageButton(props) {
-    (0, _classCallCheck3.default)(this, AddPageButton);
+  function AddQuestionButton(props) {
+    (0, _classCallCheck3.default)(this, AddQuestionButton);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AddPageButton.__proto__ || (0, _getPrototypeOf2.default)(AddPageButton)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (AddQuestionButton.__proto__ || (0, _getPrototypeOf2.default)(AddQuestionButton)).call(this, props));
 
     _this.state = {
       showModal: false,
-      panelId: '',
-      panelHeader: '',
-      panelText: ''
+      questionSetId: '',
+      questionSetHeader: '',
+      questionSetText: '',
+      question: '',
+      questionText: '',
+      questionType: ''
     };
 
     _this.onChange = _this.onChange.bind(_this);
+    _this.onSelect = _this.onSelect.bind(_this);
     _this.onFormUpdate = _this.onFormUpdate.bind(_this);
     return _this;
   }
 
-  (0, _createClass3.default)(AddPageButton, [{
+  (0, _createClass3.default)(AddQuestionButton, [{
     key: 'onChange',
     value: function onChange(event) {
       event.preventDefault();
       this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
+    }
+  }, {
+    key: 'onSelect',
+    value: function onSelect(type) {
+      this.setState({ questionType: type });
     }
   }, {
     key: 'onClose',
@@ -84,7 +99,7 @@ var AddPageButton = function (_Component) {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
-      this.props.addPage(this.state.panelId, this.state.panelHeader, this.state.panelText);
+      this.props.addQuestionSet(this.props.currentPanelId, this.state.questionSetId, this.state.questionSetHeader, this.state.questionSetText, this.state.question, this.state.questionText, this.state.questionType);
       this.setState({ showModal: false });
     }
   }, {
@@ -107,7 +122,7 @@ var AddPageButton = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Modal.Title,
                 null,
-                'Add a new page to the form'
+                'Add a new question set'
               )
             ),
             _react2.default.createElement(
@@ -120,36 +135,76 @@ var AddPageButton = function (_Component) {
                   _reactBootstrap.FormGroup,
                   null,
                   _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'panelId',
-                    name: 'panelId',
-                    label: 'Page ID',
+                    id: 'questionSetId',
+                    name: 'questionSetId',
+                    label: 'Question Set ID',
                     onChange: this.onChange,
                     placeholder: '(optional)',
-                    value: this.state.panelId
+                    value: this.state.questionSetId
                   })
                 ),
                 _react2.default.createElement(
                   _reactBootstrap.FormGroup,
                   null,
                   _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'panelHeader',
-                    name: 'panelHeader',
-                    label: 'Page Title',
+                    id: 'questionSetHeader',
+                    name: 'questionSetHeader',
+                    label: 'Question Set Title',
                     onChange: this.onChange,
                     placeholder: '',
-                    value: this.state.panelHeader
+                    value: this.state.questionSetHeader
                   })
                 ),
                 _react2.default.createElement(
                   _reactBootstrap.FormGroup,
                   null,
                   _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'panelText',
-                    name: 'panelText',
-                    label: 'Enter Page Description',
+                    id: 'questionSetText',
+                    name: 'questionSetText',
+                    label: 'Enter Question Set Description',
                     onChange: this.onChange,
                     placeholder: '',
-                    value: this.state.panelText
+                    value: this.state.questionSetText
+                  })
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.FormGroup,
+                  null,
+                  _react2.default.createElement(_FieldGroup2.default, {
+                    id: 'question',
+                    name: 'question',
+                    label: 'Enter Question',
+                    onChange: this.onChange,
+                    placeholder: '',
+                    value: this.state.question
+                  })
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.FormGroup,
+                  null,
+                  _react2.default.createElement(_FieldGroup2.default, {
+                    id: 'questionText',
+                    name: 'questionText',
+                    label: 'Enter Question Text',
+                    onChange: this.onChange,
+                    placeholder: '',
+                    value: this.state.questionText
+                  })
+                ),
+                _react2.default.createElement(
+                  _reactBootstrap.FormGroup,
+                  null,
+                  _react2.default.createElement(
+                    'label',
+                    { htmlFor: 'questionType' },
+                    'Select Question Type'
+                  ),
+                  _react2.default.createElement(_SelectInput2.default, {
+                    id: 'questionType',
+                    labelId: 'questionType',
+                    options: _constants.INPUT_TYPE_OPTIONS,
+                    onSelect: this.onSelect,
+                    value: this.state.questionType
                   })
                 )
               )
@@ -189,27 +244,28 @@ var AddPageButton = function (_Component) {
                 _this2.setState({ showModal: true });
               }
             },
-            'add page'
+            'add question set'
           )
         )
       );
     }
   }]);
-  return AddPageButton;
+  return AddQuestionButton;
 }(_react.Component);
 
-AddPageButton.propTypes = {
-  addPage: _propTypes2.default.func.isRequired
+AddQuestionButton.propTypes = {
+  addQuestionSet: _propTypes2.default.func.isRequired,
+  currentPanelId: _propTypes2.default.string.isRequired
 };
 
 
 function mapStateToProps(state) {
   return {
-    title: state.getIn(['form', 'currentForm', 'title'])
+    currentPanelId: state.getIn(['form', 'currentPanelId'])
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { addPage: _winterfellFormBuilderActions.addPage })(AddPageButton);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { addQuestionSet: _winterfellFormBuilderActions.addQuestionSet })(AddQuestionButton);
 
 exports.default = _default;
 ;
@@ -219,11 +275,11 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(AddPageButton, 'AddPageButton', 'src/components/FormMenu/AddPageButton.js');
+  __REACT_HOT_LOADER__.register(AddQuestionButton, 'AddQuestionButton', 'src/components/FormMenu/AddQuestionSetButton.js');
 
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/AddPageButton.js');
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/AddQuestionSetButton.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/AddPageButton.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/AddQuestionSetButton.js');
 }();
 
 ;

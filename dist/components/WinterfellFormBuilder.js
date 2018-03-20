@@ -153,7 +153,7 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 2 },
-                _react2.default.createElement(_FormMenu.AddQuestionButton, null)
+                _react2.default.createElement(_FormMenu.AddQuestionSetButton, null)
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,

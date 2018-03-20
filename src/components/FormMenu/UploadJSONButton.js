@@ -17,6 +17,7 @@ class UploadJSONButton extends Component {
     this.state = {
       showModal: false,
       schema: '',
+      fileName: '',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -29,14 +30,17 @@ class UploadJSONButton extends Component {
     const reader = new FileReader();
     reader.onload = (e) => {
       const contents = e.target.result;
-      this.setState({ schema: JSON.parse(contents) });
+      this.setState({
+        schema: JSON.parse(contents),
+        fileName: file.name,
+      });
     };
     reader.readAsText(file);
   }
 
   onJSONUpload(e) {
     e.preventDefault();
-    this.props.uploadJSON(this.state.schema);
+    this.props.uploadJSON(this.state.schema, this.state.fileName);
     this.setState({ showModal: false });
   }
 
@@ -77,7 +81,7 @@ class UploadJSONButton extends Component {
         </div>
         <Col xs={12}>
           <Button
-            className="btn btn-block btn-info"
+            className="btn btn-block btn-primary"
             onClick={() => {
               this.setState({ showModal: true });
             }}
