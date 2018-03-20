@@ -1,0 +1,97 @@
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
+import fileDownload from 'react-file-download';
+import { saveJSON } from '../../actions/winterfellFormBuilderActions';
+import FieldGroup from '../UI/FieldGroup';
+
+
+class SaveFormButton extends Component {
+  static propTypes = {
+    saveJSON: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    schema: PropTypes.object.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showModal: false,
+      filename: this.props.title,
+    };
+
+    this.onChange = this.onChange.bind(this);
+    this.onJSONSave = this.onJSONSave.bind(this);
+  }
+
+  onChange(event) {
+    event.preventDefault();
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  onJSONSave(e) {
+    e.preventDefault();
+    fileDownload(JSON.stringify(this.props.schema.toJS()), this.state.filename);
+    this.props.saveJSON(this.props.schema.toJS(), this.state.filename);
+    this.setState({ showModal: false });
+  }
+
+  render() {
+    return (
+      <Row>
+        <div className="static-modal">
+          <Modal show={this.state.showModal}>
+            <Modal.Header>
+              <Modal.Title>Save form</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <form>
+                <FormGroup>
+                  <FieldGroup
+                    id="filename"
+                    name="filename"
+                    label="Enter title of the form"
+                    onChange={this.onChange}
+                    placeholder={this.props.title}
+                    value={this.state.filename}
+                  />
+                </FormGroup>
+              </form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                bsStyle="danger"
+                onClick={() => { this.setState({ showModal: false }); }}
+              >Cancel</Button>
+              <Button
+                bsStyle="primary"
+                onClick={this.onJSONSave}
+                disabled={!this.state.filename}
+              >Save</Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
+        <Col xs={12}>
+          <Button
+            className="btn btn-block btn-primary"
+            onClick={() => {
+              this.setState({ showModal: true });
+            }}
+          >save form
+          </Button>
+        </Col>
+      </Row>
+    );
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    title: state.getIn(['form', 'title']),
+    schema: state.getIn(['form', 'schema']),
+  };
+}
+export default connect(mapStateToProps, { saveJSON })(SaveFormButton);
+

@@ -9,7 +9,7 @@ import {
   CreateFormButton,
   EditFormTitleButton,
   AddPageButton,
-  EditSchemaButton,
+  SaveFormButton,
   AddQuestionSetButton,
   UploadJSONButton,
 } from './FormMenu';
@@ -103,7 +103,7 @@ class WinterfellFormBuilder extends Component {
                 <AddQuestionSetButton />
               </Col>
               <Col xs={2}>
-                <EditSchemaButton />
+                <SaveFormButton />
               </Col>
             </Row>
             <hr />

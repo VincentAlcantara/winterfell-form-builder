@@ -25,6 +25,7 @@ import {
   DELETE_QUESTION_OPTION_SUCCESS,
   UPLOAD_JSON_SUCCESS,
   CHANGE_QUESTION_TYPE_SUCCESS,
+  SAVE_FORM_SUCCESS,
 } from '../common/constants';
 
 export function loadForm(schema) {
@@ -38,6 +39,20 @@ export function createForm(title) {
   return {
     type: CREATE_FORM_SUCCESS,
     payload: { title },
+  };
+}
+
+export function uploadJSON(schema, fileName) {
+  return {
+    type: UPLOAD_JSON_SUCCESS,
+    payload: { schema, fileName },
+  };
+}
+
+export function saveJSON(schema, fileName) {
+  return {
+    type: SAVE_FORM_SUCCESS,
+    payload: { schema, fileName },
   };
 }
 
@@ -236,12 +251,5 @@ export function updateQuestion(
   return {
     type: UPDATE_QUESTION_SUCCESS,
     payload: { currentQuestionSetIndex, currentQuestionIndex, question, questionText },
-  };
-}
-
-export function uploadJSON(schema, fileName) {
-  return {
-    type: UPLOAD_JSON_SUCCESS,
-    payload: { schema, fileName },
   };
 }

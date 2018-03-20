@@ -158,7 +158,7 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 2 },
-                _react2.default.createElement(_FormMenu.EditSchemaButton, null)
+                _react2.default.createElement(_FormMenu.SaveFormButton, null)
               )
             ),
             _react2.default.createElement('hr', null),

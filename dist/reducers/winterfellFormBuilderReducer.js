@@ -43,6 +43,10 @@ function winterfellFormBuilderReducer() {
       {
         return state.set('currentPanelId', 'Select Page').set('title', action.payload.fileName).set('schema', (0, _immutable.fromJS)(action.payload.schema));
       }
+    case _constants.SAVE_FORM_SUCCESS:
+      {
+        return state.set('currentPanelId', 'Select Page').set('title', action.payload.fileName).set('schema', (0, _immutable.fromJS)(action.payload.schema));
+      }
     case _constants.EDIT_PAGE_HEADER_SUCCESS:
       {
         var _action$payload = action.payload,

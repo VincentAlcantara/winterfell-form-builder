@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.loadForm = loadForm;
 exports.createForm = createForm;
+exports.uploadJSON = uploadJSON;
+exports.saveJSON = saveJSON;
 exports.editFormTitle = editFormTitle;
 exports.editPageHeader = editPageHeader;
 exports.editPageText = editPageText;
@@ -28,7 +30,6 @@ exports.addQuestion = addQuestion;
 exports.deleteQuestion = deleteQuestion;
 exports.changeCurrentEditingField = changeCurrentEditingField;
 exports.updateQuestion = updateQuestion;
-exports.uploadJSON = uploadJSON;
 
 var _constants = require('../common/constants');
 
@@ -43,6 +44,20 @@ function createForm(title) {
   return {
     type: _constants.CREATE_FORM_SUCCESS,
     payload: { title: title }
+  };
+}
+
+function uploadJSON(schema, fileName) {
+  return {
+    type: _constants.UPLOAD_JSON_SUCCESS,
+    payload: { schema: schema, fileName: fileName }
+  };
+}
+
+function saveJSON(schema, fileName) {
+  return {
+    type: _constants.SAVE_FORM_SUCCESS,
+    payload: { schema: schema, fileName: fileName }
   };
 }
 
@@ -224,13 +239,6 @@ function updateQuestion(currentQuestionSetIndex, currentQuestionIndex, question,
     payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, question: question, questionText: questionText }
   };
 }
-
-function uploadJSON(schema, fileName) {
-  return {
-    type: _constants.UPLOAD_JSON_SUCCESS,
-    payload: { schema: schema, fileName: fileName }
-  };
-}
 ;
 
 var _temp = function () {
@@ -241,6 +249,10 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(loadForm, 'loadForm', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(createForm, 'createForm', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(uploadJSON, 'uploadJSON', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(saveJSON, 'saveJSON', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(editFormTitle, 'editFormTitle', 'src/actions/winterfellFormBuilderActions.js');
 
@@ -287,8 +299,6 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(changeCurrentEditingField, 'changeCurrentEditingField', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(updateQuestion, 'updateQuestion', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(uploadJSON, 'uploadJSON', 'src/actions/winterfellFormBuilderActions.js');
 }();
 
 ;
