@@ -10,6 +10,13 @@
     border: 1px dotted #ccc;
     background: #eee;
   }
+  &:hover:before {
+    content:"\270f";
+    position: absolute;
+    font-family: "Glyphicons Halflings";
+    right: 20px;
+    font-size: 12px;
+  }
 }
 
 .winterfell-form-builder-field-editor {
