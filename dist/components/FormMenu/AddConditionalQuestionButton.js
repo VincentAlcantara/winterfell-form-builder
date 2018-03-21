@@ -64,7 +64,6 @@ var AddConditionalQuestionButton = function (_Component) {
 
     _this.state = {
       showModal: false,
-      questionSetId: _this.props.questionSetId,
       questionId: '',
       question: '',
       questionText: '',
@@ -140,18 +139,6 @@ var AddConditionalQuestionButton = function (_Component) {
               _react2.default.createElement(
                 'form',
                 null,
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionSetId',
-                    name: 'questionSetId',
-                    label: 'Question Set ID',
-                    onChange: this.onChange,
-                    placeholder: '(optional)',
-                    value: this.state.questionSetId
-                  })
-                ),
                 _react2.default.createElement(
                   _reactBootstrap.FormGroup,
                   null,
@@ -240,7 +227,7 @@ var AddConditionalQuestionButton = function (_Component) {
                 _this2.setState({ showModal: true });
               }
             },
-            'cond'
+            _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-random' })
           )
         )
       );
@@ -251,7 +238,6 @@ var AddConditionalQuestionButton = function (_Component) {
 
 AddConditionalQuestionButton.propTypes = {
   addConditionalQuestion: _propTypes2.default.func.isRequired,
-  questionSetId: _propTypes2.default.string.isRequired,
   currentQuestionSetIndex: _propTypes2.default.number.isRequired,
   currentQuestionIndex: _propTypes2.default.number.isRequired,
   questionOptionIndex: _propTypes2.default.number.isRequired

@@ -145,7 +145,7 @@ var AddQuestionOptionButton = function (_Component) {
                       onClick: this.onAddOption,
                       disabled: !this.state.questionOptionValue || !this.state.questionOptionText
                     },
-                    '+'
+                    _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-plus-sign' })
                   )
                 )
               )
