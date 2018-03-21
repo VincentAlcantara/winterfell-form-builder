@@ -54,13 +54,13 @@ var _constants = require('../../common/constants');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var AddQuestionButton = function (_Component) {
-  (0, _inherits3.default)(AddQuestionButton, _Component);
+var AddQuestionSetButton = function (_Component) {
+  (0, _inherits3.default)(AddQuestionSetButton, _Component);
 
-  function AddQuestionButton(props) {
-    (0, _classCallCheck3.default)(this, AddQuestionButton);
+  function AddQuestionSetButton(props) {
+    (0, _classCallCheck3.default)(this, AddQuestionSetButton);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AddQuestionButton.__proto__ || (0, _getPrototypeOf2.default)(AddQuestionButton)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (AddQuestionSetButton.__proto__ || (0, _getPrototypeOf2.default)(AddQuestionSetButton)).call(this, props));
 
     _this.state = {
       showModal: false,
@@ -78,7 +78,7 @@ var AddQuestionButton = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(AddQuestionButton, [{
+  (0, _createClass3.default)(AddQuestionSetButton, [{
     key: 'onChange',
     value: function onChange(event) {
       event.preventDefault();
@@ -240,6 +240,7 @@ var AddQuestionButton = function (_Component) {
             _reactBootstrap.Button,
             {
               className: 'btn btn-block btn-primary',
+              disabled: !this.props.currentPanelId || this.props.currentPanelId === 'Select Page',
               onClick: function onClick() {
                 _this2.setState({ showModal: true });
               }
@@ -250,12 +251,15 @@ var AddQuestionButton = function (_Component) {
       );
     }
   }]);
-  return AddQuestionButton;
+  return AddQuestionSetButton;
 }(_react.Component);
 
-AddQuestionButton.propTypes = {
+AddQuestionSetButton.propTypes = {
   addQuestionSet: _propTypes2.default.func.isRequired,
-  currentPanelId: _propTypes2.default.string.isRequired
+  currentPanelId: _propTypes2.default.string
+};
+AddQuestionSetButton.defaultProps = {
+  currentPanelId: ''
 };
 
 
@@ -265,7 +269,7 @@ function mapStateToProps(state) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { addQuestionSet: _winterfellFormBuilderActions.addQuestionSet })(AddQuestionButton);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { addQuestionSet: _winterfellFormBuilderActions.addQuestionSet })(AddQuestionSetButton);
 
 exports.default = _default;
 ;
@@ -275,7 +279,7 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(AddQuestionButton, 'AddQuestionButton', 'src/components/FormMenu/AddQuestionSetButton.js');
+  __REACT_HOT_LOADER__.register(AddQuestionSetButton, 'AddQuestionSetButton', 'src/components/FormMenu/AddQuestionSetButton.js');
 
   __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/AddQuestionSetButton.js');
 

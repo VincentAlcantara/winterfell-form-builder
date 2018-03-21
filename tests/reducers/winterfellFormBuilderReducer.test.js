@@ -13,9 +13,7 @@ describe('wintefellFormBuilderReducer', () => {
 
   const initialState = fromJS({
     title: '',
-    schema: {
-      classes,
-    },
+    schema: {},
     currentPanelId: null,
     currentPanelIndex: 0,
   });
@@ -61,9 +59,7 @@ describe('wintefellFormBuilderReducer', () => {
 
     const expectedState = fromJS({
       title: '',
-      schema: {
-        classes,
-      },
+      schema: {},
       currentPanelId: null,
       currentPanelIndex: 0,
     });

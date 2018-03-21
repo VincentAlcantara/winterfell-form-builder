@@ -8,11 +8,15 @@ import SelectInput from '../InputTypes/SelectInput';
 import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
 
-class AddQuestionButton extends Component {
+class AddQuestionSetButton extends Component {
   static propTypes = {
     addQuestionSet: PropTypes.func.isRequired,
-    currentPanelId: PropTypes.string.isRequired,
+    currentPanelId: PropTypes.string,
   }
+
+  static defaultProps = {
+    currentPanelId: '',
+  };
 
   constructor(props) {
     super(props);
@@ -149,6 +153,7 @@ class AddQuestionButton extends Component {
         <Col xs={12}>
           <Button
             className="btn btn-block btn-primary"
+            disabled={!this.props.currentPanelId || this.props.currentPanelId === 'Select Page'}
             onClick={() => {
               this.setState({ showModal: true });
             }}
@@ -165,5 +170,5 @@ function mapStateToProps(state) {
     currentPanelId: state.getIn(['form', 'currentPanelId']),
   };
 }
-export default connect(mapStateToProps, { addQuestionSet })(AddQuestionButton);
+export default connect(mapStateToProps, { addQuestionSet })(AddQuestionSetButton);
 

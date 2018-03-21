@@ -10,9 +10,7 @@ var _constants = require('../common/constants');
 
 var initialState = (0, _immutable.fromJS)({
   title: '',
-  schema: {
-    classes: _constants.BOOTSTRAP_CLASSES
-  },
+  schema: {},
   currentPanelId: null,
   currentPanelIndex: 0
 });
@@ -35,17 +33,13 @@ function winterfellFormBuilderReducer() {
 
         return state.set('currentPanelIndex', currentPanelIndex).set('currentEditingField', 'page').set('currentPanelId', action.payload.panelId);
       }
-    case _constants.LOAD_FORM_SUCCESS:
-      {
-        return state.set('currentPanelId', 'Select Page').set('schema', (0, _immutable.fromJS)(action.payload.schema));
-      }
     case _constants.UPLOAD_JSON_SUCCESS:
       {
         return state.set('currentPanelId', 'Select Page').set('title', action.payload.fileName).set('schema', (0, _immutable.fromJS)(action.payload.schema));
       }
     case _constants.SAVE_FORM_SUCCESS:
       {
-        return state.set('currentPanelId', 'Select Page').set('title', action.payload.fileName).set('schema', (0, _immutable.fromJS)(action.payload.schema));
+        return state.set('title', action.payload.fileName);
       }
     case _constants.EDIT_PAGE_HEADER_SUCCESS:
       {

@@ -42,6 +42,8 @@ var _reactBootstrap = require('react-bootstrap');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
+var _FormMenu = require('../FormMenu');
+
 var _FieldGroup = require('../UI/FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
@@ -121,6 +123,11 @@ var PageEditor = function (_Component) {
             onChange: this.onChangePageText,
             value: this.state.panelText
           })
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.FormGroup,
+          null,
+          _react2.default.createElement(_FormMenu.AddQuestionSetButton, null)
         )
       );
     }

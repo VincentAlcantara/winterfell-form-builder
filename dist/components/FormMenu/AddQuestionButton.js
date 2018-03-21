@@ -225,7 +225,7 @@ var AddQuestionButton = function (_Component) {
           _react2.default.createElement(
             _reactBootstrap.Button,
             {
-              className: 'btn btn-block btn-success',
+              className: 'btn btn-block btn-primary',
               onClick: function onClick() {
                 _this2.setState({ showModal: true });
               }

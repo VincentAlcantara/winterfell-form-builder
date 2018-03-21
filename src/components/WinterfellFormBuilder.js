@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
-import { loadForm, goToPage } from '../actions/winterfellFormBuilderActions';
+import { Grid, Row, Col, Alert } from 'react-bootstrap';
+import { goToPage } from '../actions/winterfellFormBuilderActions';
 import Pagination from './Pagination';
 import Previewer from './Previewer';
 import {
@@ -10,7 +10,7 @@ import {
   EditFormTitleButton,
   AddPageButton,
   SaveFormButton,
-  AddQuestionSetButton,
+  EditSchemaButton,
   UploadJSONButton,
 } from './FormMenu';
 import FormEditor from './FormEditor';
@@ -18,14 +18,12 @@ import FieldEditor from './FieldEditor';
 
 class WinterfellFormBuilder extends Component {
   static propTypes = {
-    inputSchema: PropTypes.object,
     title: PropTypes.string,
     schema: PropTypes.object,
     currentPanelId: PropTypes.string,
     currentPanelIndex: PropTypes.number,
     currentQuestionSetIndex: PropTypes.number,
     currentQuestionIndex: PropTypes.number,
-    loadForm: PropTypes.func.isRequired,
     formPanels: PropTypes.object,
     goToPage: PropTypes.func.isRequired,
     currentEditingField: PropTypes.string,
@@ -46,18 +44,7 @@ class WinterfellFormBuilder extends Component {
   constructor(props) {
     super(props);
 
-    this.onDomChange = this.onDomChange.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
-  }
-
-  componentWillMount() {
-    const { inputSchema } = this.props;
-    this.props.loadForm(inputSchema);
-  }
-
-  onDomChange(e) {
-    e.preventDefault();
-    this.setState({ schema: JSON.parse(e.target.value) });
   }
 
   onFormUpdate(e) {
@@ -76,6 +63,7 @@ class WinterfellFormBuilder extends Component {
       currentQuestionSetIndex,
       currentQuestionIndex,
     } = this.props;
+
     return (
       <Grid>
         <Row>
@@ -100,7 +88,7 @@ class WinterfellFormBuilder extends Component {
                 <AddPageButton />
               </Col>
               <Col xs={2}>
-                <AddQuestionSetButton />
+                <EditSchemaButton />
               </Col>
               <Col xs={2}>
                 <SaveFormButton />
@@ -119,12 +107,6 @@ class WinterfellFormBuilder extends Component {
                         onClick={this.props.goToPage}
                       />
                     }
-                    {
-                      !formPanels &&
-                      <span>
-                        No form loaded
-                      </span>
-                    }
                   </Col>
                   <Col xs={12}>
                     { typeof currentPanelIndex !== 'undefined' &&
@@ -139,9 +121,17 @@ class WinterfellFormBuilder extends Component {
                 </Row>
               </Col>
               <Col xs={8}>
-                <FormEditor
-                  currentPanelIndex={currentPanelIndex}
-                />
+                { this.props.schema.size !== 0 &&
+                  <FormEditor
+                    currentPanelIndex={currentPanelIndex}
+                  />
+                }
+                { this.props.schema.size === 0 &&
+                  <Alert bsStyle="info">
+                    No form loaded.  Click on &#39;new form&#39; to create a new form,
+                    or &#39;open form&#39; to load an existing form.
+                  </Alert>
+                }
               </Col>
             </Row>
             <hr />
@@ -151,8 +141,8 @@ class WinterfellFormBuilder extends Component {
                 {
                   schema &&
                   <Previewer
-                    schema={schema.toJS()}
                     currentPanelId={currentPanelId}
+                    schema={schema.toJS()}
                   />
                 }
               </Col>
@@ -178,4 +168,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { loadForm, goToPage })(WinterfellFormBuilder);
+export default connect(mapStateToProps, { goToPage })(WinterfellFormBuilder);

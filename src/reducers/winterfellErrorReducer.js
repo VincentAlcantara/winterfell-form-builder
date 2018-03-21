@@ -2,8 +2,6 @@ import { fromJS } from 'immutable';
 
 import {
   RETRIEVE_FORMLIST_ERROR,
-  LOAD_FORM_SUCCESS,
-  LOAD_FORM_ERROR,
   CREATE_FORM_SUCCESS,
   CREATE_FORM_ERROR,
   EDIT_FORM_TITLE_SUCCESS,
@@ -33,7 +31,6 @@ const initialState = fromJS({
 function winterfellFormBuilderReducer(state = initialState, action) {
   switch (action.type) {
     case RETRIEVE_FORMLIST_ERROR:
-    case LOAD_FORM_ERROR:
     case CREATE_FORM_ERROR:
     case UPDATE_FORM_ERROR:
     case DELETE_FORM_ERROR:
@@ -46,7 +43,6 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       return state
         .set('message', `${action.type}`);
     case GOTO_PAGE_SUCCESS:
-    case LOAD_FORM_SUCCESS:
     case CREATE_FORM_SUCCESS:
     case EDIT_FORM_TITLE_SUCCESS:
     case UPDATE_FORM_SUCCESS:

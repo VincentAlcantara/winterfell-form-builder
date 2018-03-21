@@ -1,5 +1,4 @@
 import {
-  LOAD_FORM_SUCCESS,
   CREATE_FORM_SUCCESS,
   EDIT_FORM_TITLE_SUCCESS,
   UPDATE_FORM_SUCCESS,
@@ -27,13 +26,6 @@ import {
   CHANGE_QUESTION_TYPE_SUCCESS,
   SAVE_FORM_SUCCESS,
 } from '../common/constants';
-
-export function loadForm(schema) {
-  return {
-    type: LOAD_FORM_SUCCESS,
-    payload: { schema },
-  };
-}
 
 export function createForm(title) {
   return {

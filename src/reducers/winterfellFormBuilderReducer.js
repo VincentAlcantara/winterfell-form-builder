@@ -2,7 +2,6 @@ import { fromJS } from 'immutable';
 
 import {
   BOOTSTRAP_CLASSES,
-  LOAD_FORM_SUCCESS,
   CREATE_FORM_SUCCESS,
   EDIT_FORM_TITLE_SUCCESS,
   GOTO_PAGE_SUCCESS,
@@ -32,9 +31,7 @@ import {
 
 const initialState = fromJS({
   title: '',
-  schema: {
-    classes: BOOTSTRAP_CLASSES,
-  },
+  schema: {},
   currentPanelId: null,
   currentPanelIndex: 0,
 });
@@ -56,11 +53,6 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .set('currentEditingField', 'page')
         .set('currentPanelId', action.payload.panelId);
     }
-    case LOAD_FORM_SUCCESS: {
-      return state
-        .set('currentPanelId', 'Select Page')
-        .set('schema', fromJS(action.payload.schema));
-    }
     case UPLOAD_JSON_SUCCESS: {
       return state
         .set('currentPanelId', 'Select Page')
@@ -69,9 +61,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     }
     case SAVE_FORM_SUCCESS: {
       return state
-        .set('currentPanelId', 'Select Page')
-        .set('title', action.payload.fileName)
-        .set('schema', fromJS(action.payload.schema));
+        .set('title', action.payload.fileName);
     }
     case EDIT_PAGE_HEADER_SUCCESS: {
       const { questionPanelIndex, header } = action.payload;

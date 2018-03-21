@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FormGroup } from 'react-bootstrap';
+
 import { editPageHeader, editPageText } from '../../actions/winterfellFormBuilderActions';
+import { AddQuestionSetButton } from '../FormMenu';
 import FieldGroup from '../UI/FieldGroup';
 
 class PageEditor extends Component {
@@ -73,6 +75,9 @@ class PageEditor extends Component {
             onChange={this.onChangePageText}
             value={this.state.panelText}
           />
+        </FormGroup>
+        <FormGroup>
+          <AddQuestionSetButton />
         </FormGroup>
       </form>
     );

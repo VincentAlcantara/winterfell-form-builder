@@ -66,25 +66,11 @@ var WinterfellFormBuilder = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (WinterfellFormBuilder.__proto__ || (0, _getPrototypeOf2.default)(WinterfellFormBuilder)).call(this, props));
 
-    _this.onDomChange = _this.onDomChange.bind(_this);
     _this.onFormUpdate = _this.onFormUpdate.bind(_this);
     return _this;
   }
 
   (0, _createClass3.default)(WinterfellFormBuilder, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      var inputSchema = this.props.inputSchema;
-
-      this.props.loadForm(inputSchema);
-    }
-  }, {
-    key: 'onDomChange',
-    value: function onDomChange(e) {
-      e.preventDefault();
-      this.setState({ schema: JSON.parse(e.target.value) });
-    }
-  }, {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
@@ -102,6 +88,7 @@ var WinterfellFormBuilder = function (_Component) {
           currentPanelIndex = _props.currentPanelIndex,
           currentQuestionSetIndex = _props.currentQuestionSetIndex,
           currentQuestionIndex = _props.currentQuestionIndex;
+
 
       return _react2.default.createElement(
         _reactBootstrap.Grid,
@@ -153,7 +140,7 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 2 },
-                _react2.default.createElement(_FormMenu.AddQuestionSetButton, null)
+                _react2.default.createElement(_FormMenu.EditSchemaButton, null)
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,
@@ -178,12 +165,7 @@ var WinterfellFormBuilder = function (_Component) {
                       formPanels: formPanels.toJS(),
                       currentPanelId: currentPanelId,
                       onClick: this.props.goToPage
-                    }),
-                    !formPanels && _react2.default.createElement(
-                      'span',
-                      null,
-                      'No form loaded'
-                    )
+                    })
                   ),
                   _react2.default.createElement(
                     _reactBootstrap.Col,
@@ -200,9 +182,14 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 8 },
-                _react2.default.createElement(_FormEditor2.default, {
+                this.props.schema.size !== 0 && _react2.default.createElement(_FormEditor2.default, {
                   currentPanelIndex: currentPanelIndex
-                })
+                }),
+                this.props.schema.size === 0 && _react2.default.createElement(
+                  _reactBootstrap.Alert,
+                  { bsStyle: 'info' },
+                  'No form loaded.  Click on \'new form\' to create a new form, or \'open form\' to load an existing form.'
+                )
               )
             ),
             _react2.default.createElement('hr', null),
@@ -218,8 +205,8 @@ var WinterfellFormBuilder = function (_Component) {
                   'Preview:'
                 ),
                 schema && _react2.default.createElement(_Previewer2.default, {
-                  schema: schema.toJS(),
-                  currentPanelId: currentPanelId
+                  currentPanelId: currentPanelId,
+                  schema: schema.toJS()
                 })
               )
             )
@@ -232,14 +219,12 @@ var WinterfellFormBuilder = function (_Component) {
 }(_react.Component);
 
 WinterfellFormBuilder.propTypes = {
-  inputSchema: _propTypes2.default.object,
   title: _propTypes2.default.string,
   schema: _propTypes2.default.object,
   currentPanelId: _propTypes2.default.string,
   currentPanelIndex: _propTypes2.default.number,
   currentQuestionSetIndex: _propTypes2.default.number,
   currentQuestionIndex: _propTypes2.default.number,
-  loadForm: _propTypes2.default.func.isRequired,
   formPanels: _propTypes2.default.object,
   goToPage: _propTypes2.default.func.isRequired,
   currentEditingField: _propTypes2.default.string
@@ -271,7 +256,7 @@ function mapStateToProps(state) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { loadForm: _winterfellFormBuilderActions.loadForm, goToPage: _winterfellFormBuilderActions.goToPage })(WinterfellFormBuilder);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { goToPage: _winterfellFormBuilderActions.goToPage })(WinterfellFormBuilder);
 
 exports.default = _default;
 ;

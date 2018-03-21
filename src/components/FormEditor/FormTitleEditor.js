@@ -48,7 +48,7 @@ class FormTitleEditor extends Component {
         <div className="static-modal">
           <Modal show={this.state.showModal}>
             <Modal.Header>
-              <Modal.Title>Edit form title</Modal.Title>
+              <Modal.Title>Edit form filename</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <form>
@@ -82,7 +82,7 @@ class FormTitleEditor extends Component {
             onClick={() => {
               this.setState({ showModal: true });
             }}
-          >edit form title
+          >edit form filename
           </Button>
         </Col>
       </Row>
