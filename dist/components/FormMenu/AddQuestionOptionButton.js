@@ -141,7 +141,7 @@ var AddQuestionOptionButton = function (_Component) {
                   _react2.default.createElement(
                     _reactBootstrap.Button,
                     {
-                      className: 'btn btn-block btn-primary',
+                      className: 'btn alert-info',
                       onClick: this.onAddOption,
                       disabled: !this.state.questionOptionValue || !this.state.questionOptionText
                     },

@@ -222,7 +222,7 @@ var AddConditionalQuestionButton = function (_Component) {
           _react2.default.createElement(
             _reactBootstrap.Button,
             {
-              className: 'btn btn-block btn-primary',
+              className: 'btn alert-info',
               onClick: function onClick() {
                 _this2.setState({ showModal: true });
               }
