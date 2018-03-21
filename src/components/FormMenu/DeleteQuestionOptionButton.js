@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Glyphicon } from 'react-bootstrap';
 import { deleteQuestionOption } from '../../actions/winterfellFormBuilderActions';
 
 class DeleteQuestionOptionButton extends Component {
@@ -64,7 +64,7 @@ class DeleteQuestionOptionButton extends Component {
           onClick={() => {
             this.setState({ showModal: true });
           }}
-        >-
+        ><Glyphicon glyph="glyphicon glyphicon-minus" />
         </Button>
       </span>
     );

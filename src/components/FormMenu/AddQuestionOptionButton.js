@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, FormControl } from 'react-bootstrap';
+import { Row, Col, Button, FormControl, Glyphicon } from 'react-bootstrap';
 import { addQuestionOption } from '../../actions/winterfellFormBuilderActions';
 
 class AddQuestionOptionButton extends Component {
@@ -77,7 +77,7 @@ class AddQuestionOptionButton extends Component {
                     className="btn btn-block btn-primary"
                     onClick={this.onAddOption}
                     disabled={!this.state.questionOptionValue || !this.state.questionOptionText}
-                  >+
+                  ><Glyphicon glyph="glyphicon glyphicon-plus-sign" />
                   </Button>
                 </td>
               </tr>

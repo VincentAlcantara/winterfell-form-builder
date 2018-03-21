@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
+import { Row, Col, Button, Modal, FormGroup, Glyphicon } from 'react-bootstrap';
 import { addConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
 import SelectInput from '../InputTypes/SelectInput';
@@ -11,7 +11,6 @@ import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 class AddConditionalQuestionButton extends Component {
   static propTypes = {
     addConditionalQuestion: PropTypes.func.isRequired,
-    questionSetId: PropTypes.string.isRequired,
     currentQuestionSetIndex: PropTypes.number.isRequired,
     currentQuestionIndex: PropTypes.number.isRequired,
     questionOptionIndex: PropTypes.number.isRequired,
@@ -22,7 +21,6 @@ class AddConditionalQuestionButton extends Component {
 
     this.state = {
       showModal: false,
-      questionSetId: this.props.questionSetId,
       questionId: '',
       question: '',
       questionText: '',
@@ -74,16 +72,6 @@ class AddConditionalQuestionButton extends Component {
             </Modal.Header>
             <Modal.Body>
               <form>
-                <FormGroup>
-                  <FieldGroup
-                    id="questionSetId"
-                    name="questionSetId"
-                    label="Question Set ID"
-                    onChange={this.onChange}
-                    placeholder="(optional)"
-                    value={this.state.questionSetId}
-                  />
-                </FormGroup>
                 <FormGroup>
                   <FieldGroup
                     id="questionId"
@@ -145,7 +133,7 @@ class AddConditionalQuestionButton extends Component {
             onClick={() => {
               this.setState({ showModal: true });
             }}
-          >cond
+          ><Glyphicon glyph="glyphicon glyphicon-random" />
           </Button>
         </Col>
       </Row>
