@@ -6,6 +6,7 @@ import {
   ADD_PAGE_SUCCESS,
   DELETE_PAGE_SUCCESS,
   ADD_QUESTION_SUCCESS,
+  ADD_CONDITIONAL_QUESTION_SUCCESS,
   ADD_QUESTION_SET_SUCCESS,
   DELETE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
@@ -216,6 +217,27 @@ export function addQuestion(
     payload: {
       currentQuestionSetIndex,
       questionSetId,
+      questionId,
+      question,
+      questionText,
+      questionType },
+  };
+}
+
+export function addConditionalQuestion(
+  currentQuestionSetIndex,
+  currentQuestionIndex,
+  questionOptionIndex,
+  questionId,
+  question,
+  questionText,
+  questionType) {
+  return {
+    type: ADD_CONDITIONAL_QUESTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex,
+      currentQuestionIndex,
+      questionOptionIndex,
       questionId,
       question,
       questionText,

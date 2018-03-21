@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col, Alert } from 'react-bootstrap';
-import { goToPage } from '../actions/winterfellFormBuilderActions';
+import { Grid, Row, Col, Alert, Breadcrumb } from 'react-bootstrap';
+import { goToPage, changeCurrentEditingField } from '../actions/winterfellFormBuilderActions';
 import Pagination from './Pagination';
 import Previewer from './Previewer';
 import {
@@ -25,8 +25,10 @@ class WinterfellFormBuilder extends Component {
     currentQuestionSetIndex: PropTypes.number,
     currentQuestionIndex: PropTypes.number,
     formPanels: PropTypes.object,
+    questionSets: PropTypes.object,
     goToPage: PropTypes.func.isRequired,
     currentEditingField: PropTypes.string,
+    changeCurrentEditingField: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -35,6 +37,7 @@ class WinterfellFormBuilder extends Component {
     currentPanelId: null,
     inputSchema: {},
     formPanels: null,
+    questionSets: null,
     currentPanelIndex: 0, // first page by default
     currentQuestionSetIndex: null,
     currentQuestionIndex: null,
@@ -62,6 +65,7 @@ class WinterfellFormBuilder extends Component {
       currentPanelIndex,
       currentQuestionSetIndex,
       currentQuestionIndex,
+      questionSets,
     } = this.props;
 
     return (
@@ -95,6 +99,34 @@ class WinterfellFormBuilder extends Component {
               </Col>
             </Row>
             <hr />
+            <Row>
+              <Col xs={12}>
+                <Breadcrumb>
+                  <Breadcrumb.Item
+                    href="#"
+                    active={currentEditingField === 'page'}
+                    onClick={() => this.props.changeCurrentEditingField('page')}
+                  >
+                    {currentPanelId}
+                  </Breadcrumb.Item>
+                  {(currentEditingField === 'questionSet' || currentEditingField === 'question') &&
+                    <Breadcrumb.Item
+                      href=""
+                      active={currentEditingField === 'questionSet'}
+                      onClick={() => this.props.changeCurrentEditingField('questionSet', currentQuestionSetIndex)}
+                    >{questionSets.getIn([currentQuestionSetIndex, 'questionSetId'])}
+                    </Breadcrumb.Item>
+                  }
+                  {(currentEditingField === 'question') &&
+                    <Breadcrumb.Item
+                      active={currentEditingField === 'question'}
+                    >
+                      {questionSets.getIn([currentQuestionSetIndex, 'questions', currentQuestionIndex, 'questionId'])}
+                    </Breadcrumb.Item>
+                  }
+                </Breadcrumb>
+              </Col>
+            </Row>
             <Row>
               <Col xs={4} className="winterfell-form-builder-field-editor">
                 <Row>
@@ -160,7 +192,7 @@ function mapStateToProps(state) {
     schema: state.getIn(['form', 'schema']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
     formPanels: state.getIn(['form', 'schema', 'formPanels']),
-    questionSet: state.getIn(['form', 'schema', 'questionSets', 0]),
+    questionSets: state.getIn(['form', 'schema', 'questionSets']),
     currentEditingField: state.getIn(['form', 'currentEditingField']),
     currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
@@ -168,4 +200,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { goToPage })(WinterfellFormBuilder);
+export default connect(
+  mapStateToProps,
+  { goToPage, changeCurrentEditingField },
+)(WinterfellFormBuilder);

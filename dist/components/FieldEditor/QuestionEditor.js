@@ -56,6 +56,10 @@ var _DeleteQuestionOptionButton = require('../FormMenu/DeleteQuestionOptionButto
 
 var _DeleteQuestionOptionButton2 = _interopRequireDefault(_DeleteQuestionOptionButton);
 
+var _AddConditionalQuestionButton = require('../FormMenu/AddConditionalQuestionButton');
+
+var _AddConditionalQuestionButton2 = _interopRequireDefault(_AddConditionalQuestionButton);
+
 var _DeleteQuestionButton = require('../FormMenu/DeleteQuestionButton');
 
 var _DeleteQuestionButton2 = _interopRequireDefault(_DeleteQuestionButton);
@@ -273,6 +277,13 @@ var QuestionEditor = function (_Component) {
                   _react2.default.createElement(_DeleteQuestionOptionButton2.default, {
                     questionOptionIndex: ix
                   })
+                ),
+                _react2.default.createElement(
+                  'td',
+                  null,
+                  _react2.default.createElement(_AddConditionalQuestionButton2.default, {
+                    questionOptionIndex: ix
+                  })
                 )
               );
             }),
@@ -303,8 +314,6 @@ var QuestionEditor = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
-
       var _props7 = this.props,
           questionSetId = _props7.questionSetId,
           questionId = _props7.questionId,
@@ -413,19 +422,6 @@ var QuestionEditor = function (_Component) {
             questionSetId: this.props.questionSetId,
             currentQuestionSetIndex: this.props.currentQuestionSetIndex
           })
-        ),
-        _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
-          _react2.default.createElement(
-            _reactBootstrap.Button,
-            {
-              onClick: function onClick() {
-                return _this3.props.changeCurrentEditingField('questionSet', _this3.props.currentQuestionSetIndex);
-              }
-            },
-            'edit question set'
-          )
         )
       );
     }
@@ -450,8 +446,7 @@ QuestionEditor.propTypes = {
   questionInputType: _propTypes2.default.string,
   questionInputOptions: _propTypes2.default.object,
   currentQuestionSetIndex: _propTypes2.default.number.isRequired,
-  currentQuestionIndex: _propTypes2.default.number.isRequired,
-  changeCurrentEditingField: _propTypes2.default.func.isRequired
+  currentQuestionIndex: _propTypes2.default.number.isRequired
 };
 QuestionEditor.defaultProps = {
   questionId: '',

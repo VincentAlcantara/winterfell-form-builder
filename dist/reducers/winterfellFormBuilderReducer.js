@@ -267,7 +267,7 @@ function winterfellFormBuilderReducer() {
         var _newQuestion = {
           questionId: action.payload.questionId || 'question-id-' + questionCount,
           question: action.payload.question || 'question-' + questionCount,
-          text: action.payload.questionText || 'question-text-' + questionCount,
+          text: action.payload.questionText,
           input: {
             type: action.payload.questionType || 'textInput',
             placeholder: action.payload.questionPlaceholder || '',
@@ -279,15 +279,41 @@ function winterfellFormBuilderReducer() {
           return arr.push((0, _immutable.fromJS)(_newQuestion));
         });
       }
-    case _constants.UPDATE_QUESTION_SUCCESS:
+    case _constants.ADD_CONDITIONAL_QUESTION_SUCCESS:
       {
         var _action$payload16 = action.payload,
-            questionSetIndex = _action$payload16.questionSetIndex,
-            questionIndex = _action$payload16.questionIndex,
+            _currentQuestionSetIndex14 = _action$payload16.currentQuestionSetIndex,
+            _currentQuestionIndex11 = _action$payload16.currentQuestionIndex,
+            _questionOptionIndex = _action$payload16.questionOptionIndex,
+            questionId = _action$payload16.questionId,
             question = _action$payload16.question,
-            questionText = _action$payload16.questionText;
+            questionText = _action$payload16.questionText,
+            _questionType = _action$payload16.questionType;
 
-        return state.setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'question'], question).setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'text'], questionText);
+
+        var _questionCount = state.getIn(['schema', 'questionSets', _currentQuestionSetIndex14, 'questions']).count() + 1;
+
+        var _newQuestion2 = {
+          questionId: questionId || 'question-id-' + _questionCount,
+          question: question || 'question-' + _questionCount,
+          text: questionText,
+          input: {
+            type: _questionType || 'textInput',
+            options: _questionType !== 'textInput' ? [] : undefined
+          }
+        };
+
+        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex14, 'questions', _currentQuestionIndex11, 'input', 'options', _questionOptionIndex, 'conditionalQuestions'], (0, _immutable.fromJS)([_newQuestion2]));
+      }
+    case _constants.UPDATE_QUESTION_SUCCESS:
+      {
+        var _action$payload17 = action.payload,
+            questionSetIndex = _action$payload17.questionSetIndex,
+            questionIndex = _action$payload17.questionIndex,
+            _question = _action$payload17.question,
+            _questionText = _action$payload17.questionText;
+
+        return state.setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'question'], _question).setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'text'], _questionText);
       }
 
     default:

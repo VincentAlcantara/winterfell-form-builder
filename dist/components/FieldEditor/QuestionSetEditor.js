@@ -152,7 +152,7 @@ var QuestionSetEditor = function (_Component) {
           _react2.default.createElement(
             'label',
             { htmlFor: 'questionList' },
-            'Questions:'
+            'Questions'
           ),
           _react2.default.createElement(
             'div',
@@ -162,7 +162,7 @@ var QuestionSetEditor = function (_Component) {
                 _reactBootstrap.Button,
                 {
                   key: 'question-' + index,
-                  className: 'btn-block text-left',
+                  bsStyle: 'link',
                   onClick: function onClick() {
                     return _this2.props.changeCurrentEditingField('question', currentQuestionSetIndex, index);
                   }

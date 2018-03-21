@@ -8,6 +8,7 @@ import {
   UPDATE_FORM_SUCCESS,
   ADD_PAGE_SUCCESS,
   ADD_QUESTION_SUCCESS,
+  ADD_CONDITIONAL_QUESTION_SUCCESS,
   ADD_QUESTION_SET_SUCCESS,
   DELETE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
@@ -268,7 +269,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       const newQuestion = {
         questionId: action.payload.questionId || `question-id-${questionCount}`,
         question: action.payload.question || `question-${questionCount}`,
-        text: action.payload.questionText || `question-text-${questionCount}`,
+        text: action.payload.questionText,
         input: {
           type: action.payload.questionType || 'textInput',
           placeholder: action.payload.questionPlaceholder || '',
@@ -279,6 +280,33 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       return state
         .updateIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions'], arr =>
           arr.push(fromJS(newQuestion)));
+    }
+    case ADD_CONDITIONAL_QUESTION_SUCCESS: {
+      const {
+        currentQuestionSetIndex,
+        currentQuestionIndex,
+        questionOptionIndex,
+        questionId,
+        question,
+        questionText,
+        questionType,
+      } = action.payload;
+
+      const questionCount = state.getIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions']).count() + 1;
+
+      const newQuestion = {
+        questionId: questionId || `question-id-${questionCount}`,
+        question: question || `question-${questionCount}`,
+        text: questionText,
+        input: {
+          type: questionType || 'textInput',
+          options: questionType !== 'textInput' ? [] : undefined,
+        },
+      };
+
+      return state
+        .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'input', 'options', questionOptionIndex, 'conditionalQuestions'], fromJS([newQuestion]));
     }
     case UPDATE_QUESTION_SUCCESS: {
       const { questionSetIndex, questionIndex, question, questionText } = action.payload;

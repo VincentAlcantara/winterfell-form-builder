@@ -130,6 +130,7 @@ var DeleteQuestionOptionButton = function (_Component) {
           _reactBootstrap.Button,
           {
             className: 'btn btn-block btn-danger',
+            title: 'delete this option',
             onClick: function onClick() {
               _this2.setState({ showModal: true });
             }

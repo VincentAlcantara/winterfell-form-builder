@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, FormControl } from 'react-bootstrap';
 import { fromJS } from 'immutable';
 import {
   editQuestionId,
@@ -18,6 +18,7 @@ import {
 } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
 import DeleteQuestionOptionButton from '../FormMenu/DeleteQuestionOptionButton';
+import AddConditionalQuestionButton from '../FormMenu/AddConditionalQuestionButton';
 import DeleteQuestionButton from '../FormMenu/DeleteQuestionButton';
 import AddQuestionButton from '../FormMenu/AddQuestionButton';
 import AddQuestionOptionButton from '../FormMenu/AddQuestionOptionButton';
@@ -43,7 +44,6 @@ class QuestionEditor extends Component {
     questionInputOptions: PropTypes.object,
     currentQuestionSetIndex: PropTypes.number.isRequired,
     currentQuestionIndex: PropTypes.number.isRequired,
-    changeCurrentEditingField: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -192,6 +192,11 @@ class QuestionEditor extends Component {
                       questionOptionIndex={ix}
                     />
                   </td>
+                  <td>
+                    <AddConditionalQuestionButton
+                      questionOptionIndex={ix}
+                    />
+                  </td>
                 </tr>))
             }
             <tr>
@@ -314,12 +319,6 @@ class QuestionEditor extends Component {
           />
         </FormGroup>
         }
-        <FormGroup>
-          <Button
-            onClick={() => this.props.changeCurrentEditingField('questionSet', this.props.currentQuestionSetIndex)}
-          >edit question set
-          </Button>
-        </FormGroup>
       </form>
     );
   }

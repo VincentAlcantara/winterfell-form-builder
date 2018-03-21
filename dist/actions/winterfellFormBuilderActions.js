@@ -26,6 +26,7 @@ exports.addPage = addPage;
 exports.deletePage = deletePage;
 exports.addQuestionSet = addQuestionSet;
 exports.addQuestion = addQuestion;
+exports.addConditionalQuestion = addConditionalQuestion;
 exports.deleteQuestion = deleteQuestion;
 exports.changeCurrentEditingField = changeCurrentEditingField;
 exports.updateQuestion = updateQuestion;
@@ -211,6 +212,20 @@ function addQuestion(currentQuestionSetIndex, questionSetId, questionId, questio
   };
 }
 
+function addConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, questionId, question, questionText, questionType) {
+  return {
+    type: _constants.ADD_CONDITIONAL_QUESTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex: currentQuestionSetIndex,
+      currentQuestionIndex: currentQuestionIndex,
+      questionOptionIndex: questionOptionIndex,
+      questionId: questionId,
+      question: question,
+      questionText: questionText,
+      questionType: questionType }
+  };
+}
+
 function deleteQuestion(currentQuestionSetIndex, currentQuestionIndex) {
   return {
     type: _constants.DELETE_QUESTION_SUCCESS,
@@ -283,6 +298,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(addQuestionSet, 'addQuestionSet', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(addQuestion, 'addQuestion', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(addConditionalQuestion, 'addConditionalQuestion', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(deleteQuestion, 'deleteQuestion', 'src/actions/winterfellFormBuilderActions.js');
 

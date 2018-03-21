@@ -74,7 +74,7 @@ class AddQuestionOptionButton extends Component {
                 </td>
                 <td>
                   <Button
-                    className="btn btn-block btn-success"
+                    className="btn btn-block btn-primary"
                     onClick={this.onAddOption}
                     disabled={!this.state.questionOptionValue || !this.state.questionOptionText}
                   >+

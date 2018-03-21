@@ -79,6 +79,8 @@ var WinterfellFormBuilder = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       var _props = this.props,
           title = _props.title,
           schema = _props.schema,
@@ -87,7 +89,8 @@ var WinterfellFormBuilder = function (_Component) {
           currentEditingField = _props.currentEditingField,
           currentPanelIndex = _props.currentPanelIndex,
           currentQuestionSetIndex = _props.currentQuestionSetIndex,
-          currentQuestionIndex = _props.currentQuestionIndex;
+          currentQuestionIndex = _props.currentQuestionIndex,
+          questionSets = _props.questionSets;
 
 
       return _react2.default.createElement(
@@ -149,6 +152,47 @@ var WinterfellFormBuilder = function (_Component) {
               )
             ),
             _react2.default.createElement('hr', null),
+            _react2.default.createElement(
+              _reactBootstrap.Row,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 12 },
+                _react2.default.createElement(
+                  _reactBootstrap.Breadcrumb,
+                  null,
+                  _react2.default.createElement(
+                    _reactBootstrap.Breadcrumb.Item,
+                    {
+                      href: '#',
+                      active: currentEditingField === 'page',
+                      onClick: function onClick() {
+                        return _this2.props.changeCurrentEditingField('page');
+                      }
+                    },
+                    currentPanelId
+                  ),
+                  (currentEditingField === 'questionSet' || currentEditingField === 'question') && _react2.default.createElement(
+                    _reactBootstrap.Breadcrumb.Item,
+                    {
+                      href: '',
+                      active: currentEditingField === 'questionSet',
+                      onClick: function onClick() {
+                        return _this2.props.changeCurrentEditingField('questionSet', currentQuestionSetIndex);
+                      }
+                    },
+                    questionSets.getIn([currentQuestionSetIndex, 'questionSetId'])
+                  ),
+                  currentEditingField === 'question' && _react2.default.createElement(
+                    _reactBootstrap.Breadcrumb.Item,
+                    {
+                      active: currentEditingField === 'question'
+                    },
+                    questionSets.getIn([currentQuestionSetIndex, 'questions', currentQuestionIndex, 'questionId'])
+                  )
+                )
+              )
+            ),
             _react2.default.createElement(
               _reactBootstrap.Row,
               null,
@@ -226,8 +270,10 @@ WinterfellFormBuilder.propTypes = {
   currentQuestionSetIndex: _propTypes2.default.number,
   currentQuestionIndex: _propTypes2.default.number,
   formPanels: _propTypes2.default.object,
+  questionSets: _propTypes2.default.object,
   goToPage: _propTypes2.default.func.isRequired,
-  currentEditingField: _propTypes2.default.string
+  currentEditingField: _propTypes2.default.string,
+  changeCurrentEditingField: _propTypes2.default.func.isRequired
 };
 WinterfellFormBuilder.defaultProps = {
   title: '',
@@ -235,6 +281,7 @@ WinterfellFormBuilder.defaultProps = {
   currentPanelId: null,
   inputSchema: {},
   formPanels: null,
+  questionSets: null,
   currentPanelIndex: 0, // first page by default
   currentQuestionSetIndex: null,
   currentQuestionIndex: null,
@@ -248,7 +295,7 @@ function mapStateToProps(state) {
     schema: state.getIn(['form', 'schema']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
     formPanels: state.getIn(['form', 'schema', 'formPanels']),
-    questionSet: state.getIn(['form', 'schema', 'questionSets', 0]),
+    questionSets: state.getIn(['form', 'schema', 'questionSets']),
     currentEditingField: state.getIn(['form', 'currentEditingField']),
     currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
@@ -256,7 +303,7 @@ function mapStateToProps(state) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { goToPage: _winterfellFormBuilderActions.goToPage })(WinterfellFormBuilder);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { goToPage: _winterfellFormBuilderActions.goToPage, changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField })(WinterfellFormBuilder);
 
 exports.default = _default;
 ;

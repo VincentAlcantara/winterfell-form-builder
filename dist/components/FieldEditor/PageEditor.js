@@ -40,6 +40,8 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactBootstrap = require('react-bootstrap');
 
+var _immutable = require('immutable');
+
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 var _FormMenu = require('../FormMenu');
@@ -69,6 +71,7 @@ var PageEditor = function (_Component) {
 
     _this.onChangePageHeader = _this.onChangePageHeader.bind(_this);
     _this.onChangePageText = _this.onChangePageText.bind(_this);
+    _this.onClick = _this.onClick.bind(_this);
     return _this;
   }
 
@@ -95,8 +98,19 @@ var PageEditor = function (_Component) {
       this.props.editPageText(this.props.currentPanelIndex, event.target.value);
     }
   }, {
+    key: 'onClick',
+    value: function onClick(questionSetId) {
+      var questionSetIndex = this.props.questionSets.findIndex(function (questionSet) {
+        return questionSet.get('questionSetId') === questionSetId;
+      });
+      this.props.changeCurrentEditingField('questionSet', questionSetIndex);
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
+      var questionSetsArray = this.props.currentQuestionSets.toJS();
       return _react2.default.createElement(
         'form',
         null,
@@ -128,6 +142,32 @@ var PageEditor = function (_Component) {
           _reactBootstrap.FormGroup,
           null,
           _react2.default.createElement(_FormMenu.AddQuestionSetButton, null)
+        ),
+        questionSetsArray && questionSetsArray.length > 0 && _react2.default.createElement(
+          _reactBootstrap.FormGroup,
+          null,
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'questionSetList' },
+            'Question Sets'
+          ),
+          _react2.default.createElement(
+            'div',
+            { id: 'questionSetList' },
+            questionSetsArray.map(function (questionSet, index) {
+              return _react2.default.createElement(
+                _reactBootstrap.Button,
+                {
+                  key: 'questionSet-' + index,
+                  bsStyle: 'link',
+                  onClick: function onClick() {
+                    return _this2.onClick(questionSet.questionSetId);
+                  }
+                },
+                questionSet.questionSetId
+              );
+            })
+          )
         )
       );
     }
@@ -138,14 +178,19 @@ var PageEditor = function (_Component) {
 PageEditor.propTypes = {
   editPageHeader: _propTypes2.default.func.isRequired,
   editPageText: _propTypes2.default.func.isRequired,
+  changeCurrentEditingField: _propTypes2.default.func.isRequired,
   panelHeader: _propTypes2.default.string,
   panelText: _propTypes2.default.string,
+  currentQuestionSets: _propTypes2.default.object,
+  questionSets: _propTypes2.default.object,
   currentPanelIndex: _propTypes2.default.number.isRequired
 };
 PageEditor.defaultProps = {
   currentPanelIndex: 0,
   panelHeader: '',
-  panelText: ''
+  panelText: '',
+  questionSets: (0, _immutable.fromJS)({}),
+  currentQuestionSets: (0, _immutable.fromJS)({})
 };
 
 
@@ -153,11 +198,16 @@ function mapStateToProps(state, ownProps) {
   return {
     panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelHeader']),
     panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelText']),
-    currentPanelIndex: ownProps.currentPanelIndex
+    currentQuestionSets: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'questionSets']),
+    questionSets: state.getIn(['form', 'schema', 'questionSets'])
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { editPageHeader: _winterfellFormBuilderActions.editPageHeader, editPageText: _winterfellFormBuilderActions.editPageText })(PageEditor);
+var _default = (0, _reactRedux.connect)(mapStateToProps, {
+  editPageHeader: _winterfellFormBuilderActions.editPageHeader,
+  editPageText: _winterfellFormBuilderActions.editPageText,
+  changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField
+})(PageEditor);
 
 exports.default = _default;
 ;

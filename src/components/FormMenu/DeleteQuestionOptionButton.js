@@ -60,6 +60,7 @@ class DeleteQuestionOptionButton extends Component {
         </div>
         <Button
           className="btn btn-block btn-danger"
+          title="delete this option"
           onClick={() => {
             this.setState({ showModal: true });
           }}

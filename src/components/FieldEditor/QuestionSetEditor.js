@@ -94,13 +94,13 @@ class QuestionSetEditor extends Component {
         </FormGroup>
         { questionsArray && questionsArray.length > 0 &&
         <FormGroup>
-          <label htmlFor="questionList">Questions:
+          <label htmlFor="questionList">Questions
           </label>
           <div id="questionList">
             { questionsArray.map((question, index) => (
               <Button
                 key={`question-${index}`}
-                className="btn-block text-left"
+                bsStyle="link"
                 onClick={() =>
                   this.props.changeCurrentEditingField('question', currentQuestionSetIndex, index)
                 }
