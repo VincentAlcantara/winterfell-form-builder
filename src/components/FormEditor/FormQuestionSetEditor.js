@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { FormQuestionEditor } from './FormQuestionEditor';
 
 export const FormQuestionSetEditor = (props) => {
-  const { currentQuestionSets, questionSets, onClick } = props;
+  const { currentQuestionSets, questionSets, onClick, currentQuestionIndex } = props;
 
   const displayQuestionSet = () => currentQuestionSets.map(
     currentQuestionSet => (
@@ -15,7 +15,7 @@ export const FormQuestionSetEditor = (props) => {
               <div>
                 <Button
                   className="winterfell-field-editor btn-block"
-                  onClick={() => onClick('questionSet', questionSetIndex)}
+                  onClick={() => onClick('questionSet', questionSetIndex, currentQuestionIndex)}
                 >
                   <div>
                     <h4>{questionSet.questionSetHeader}</h4>
@@ -26,6 +26,7 @@ export const FormQuestionSetEditor = (props) => {
                   questionSetIndex={questionSetIndex}
                   questions={questionSet.questions}
                   onClick={onClick}
+                  currentQuestionIndex={currentQuestionIndex}
                 />
               </div>
             );
@@ -47,12 +48,14 @@ FormQuestionSetEditor.propTypes = {
   onClick: PropTypes.func.isRequired,
   questionSets: PropTypes.array,
   currentQuestionSets: PropTypes.array,
+  currentQuestionIndex: PropTypes.number,
 };
 
 FormQuestionSetEditor.defaultProps = {
   questionSetIndex: 0,
   questionSets: null,
   currentQuestionSets: null,
+  currentQuestionIndex: 0,
 };
 
 export default FormQuestionSetEditor;

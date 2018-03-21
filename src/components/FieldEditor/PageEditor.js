@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup } from 'react-bootstrap';
-import { editPageHeader, editPageText } from '../../actions/winterfellFormBuilderActions';
+import { FormGroup, Button } from 'react-bootstrap';
+import { fromJS } from 'immutable';
+
+import { editPageHeader, editPageText, changeCurrentEditingField } from '../../actions/winterfellFormBuilderActions';
+import { AddQuestionSetButton } from '../FormMenu';
 import FieldGroup from '../UI/FieldGroup';
 
 class PageEditor extends Component {
   static propTypes = {
     editPageHeader: PropTypes.func.isRequired,
     editPageText: PropTypes.func.isRequired,
+    changeCurrentEditingField: PropTypes.func.isRequired,
     panelHeader: PropTypes.string,
     panelText: PropTypes.string,
+    currentQuestionSets: PropTypes.object,
+    questionSets: PropTypes.object,
     currentPanelIndex: PropTypes.number.isRequired,
   }
 
@@ -18,6 +24,8 @@ class PageEditor extends Component {
     currentPanelIndex: 0,
     panelHeader: '',
     panelText: '',
+    questionSets: fromJS({}),
+    currentQuestionSets: fromJS({}),
   }
   constructor(props) {
     super(props);
@@ -30,6 +38,7 @@ class PageEditor extends Component {
 
     this.onChangePageHeader = this.onChangePageHeader.bind(this);
     this.onChangePageText = this.onChangePageText.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -51,7 +60,13 @@ class PageEditor extends Component {
     this.props.editPageText(this.props.currentPanelIndex, event.target.value);
   }
 
+  onClick(questionSetId) {
+    const questionSetIndex = this.props.questionSets.findIndex(questionSet => questionSet.get('questionSetId') === questionSetId);
+    this.props.changeCurrentEditingField('questionSet', questionSetIndex);
+  }
+
   render() {
+    const questionSetsArray = this.props.currentQuestionSets.toJS();
     return (
       <form>
         <FormGroup>
@@ -74,6 +89,25 @@ class PageEditor extends Component {
             value={this.state.panelText}
           />
         </FormGroup>
+        <FormGroup>
+          <AddQuestionSetButton />
+        </FormGroup>
+        { questionSetsArray && questionSetsArray.length > 0 &&
+        <FormGroup>
+          <label htmlFor="questionSetList">Question Sets</label>
+          <div id="questionSetList">
+            { questionSetsArray.map((questionSet, index) => (
+              <Button
+                key={`questionSet-${index}`}
+                bsStyle="link"
+                onClick={() => this.onClick(questionSet.questionSetId)}
+              >{questionSet.questionSetId}
+              </Button>
+              ))
+            }
+          </div>
+        </FormGroup>
+        }
       </form>
     );
   }
@@ -85,8 +119,15 @@ function mapStateToProps(state, ownProps) {
       ownProps.currentPanelIndex, 'panelHeader']),
     panelText: state.getIn(['form', 'schema', 'questionPanels',
       ownProps.currentPanelIndex, 'panelText']),
-    currentPanelIndex: ownProps.currentPanelIndex,
+    currentQuestionSets: state.getIn(['form', 'schema', 'questionPanels',
+      ownProps.currentPanelIndex, 'questionSets']),
+    questionSets: state.getIn(['form', 'schema', 'questionSets']),
   };
 }
-export default connect(mapStateToProps, { editPageHeader, editPageText })(PageEditor);
+
+export default connect(mapStateToProps, {
+  editPageHeader,
+  editPageText,
+  changeCurrentEditingField,
+})(PageEditor);
 

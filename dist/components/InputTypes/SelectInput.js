@@ -43,7 +43,7 @@ var SelectInput = function (_React$Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (SelectInput.__proto__ || (0, _getPrototypeOf2.default)(SelectInput)).call(this, props));
 
     _this.state = {
-      value: _this.props.value.length > 0 ? _this.props.value : []
+      value: _this.props.initialValue
     };
 
     _this.handleChange = _this.handleChange.bind(_this);
@@ -51,6 +51,13 @@ var SelectInput = function (_React$Component) {
   }
 
   (0, _createClass3.default)(SelectInput, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({
+        value: nextProps.initialValue
+      });
+    }
+  }, {
     key: 'handleChange',
     value: function handleChange(e) {
       this.setState({ value: e.target.value });
@@ -61,7 +68,7 @@ var SelectInput = function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var options = this.props.options.map(function (opt, index) {
+      var options = this.props.options && this.props.options.map(function (opt, index) {
         return _react2.default.createElement(
           'option',
           {
@@ -81,7 +88,8 @@ var SelectInput = function (_React$Component) {
           onChange: this.handleChange,
           onSelect: function onSelect() {
             return _this2.onSelect;
-          }
+          },
+          autoComplete: this.props.name
         },
         options
       );
@@ -91,7 +99,7 @@ var SelectInput = function (_React$Component) {
 }(_react2.default.Component);
 
 SelectInput.propTypes = {
-  value: _propTypes2.default.array.isRequired,
+  initialValue: _propTypes2.default.string,
   options: _propTypes2.default.array.isRequired,
   classes: _propTypes2.default.object,
   name: _propTypes2.default.string,
@@ -108,7 +116,8 @@ SelectInput.defaultProps = {
   options: [],
   onChange: function onChange() {},
   onSelect: function onSelect() {},
-  required: false
+  required: false,
+  initialValue: ''
 };
 var _default = SelectInput;
 exports.default = _default;

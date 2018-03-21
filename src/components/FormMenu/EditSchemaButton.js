@@ -68,9 +68,8 @@ class EditSchemaButton extends Component {
           </Modal>
         </div>
         <Col xs={12}>
-
           <Button
-            className="btn btn-block btn-info"
+            className="btn btn-block btn-primary"
             onClick={() => {
               this.setState({
                 schema: this.props.schema.toJS(),

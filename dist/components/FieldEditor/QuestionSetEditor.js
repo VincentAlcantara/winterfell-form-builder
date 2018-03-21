@@ -56,13 +56,17 @@ var QuestionSetEditor = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (QuestionSetEditor.__proto__ || (0, _getPrototypeOf2.default)(QuestionSetEditor)).call(this, props));
 
-    var questionSetHeader = props.questionSetHeader,
-        questionSetText = props.questionSetText;
+    var questionSetId = props.questionSetId,
+        questionSetHeader = props.questionSetHeader,
+        questionSetText = props.questionSetText,
+        questions = props.questions;
 
 
     _this.state = {
+      questionSetId: questionSetId,
       questionSetHeader: questionSetHeader,
-      questionSetText: questionSetText
+      questionSetText: questionSetText,
+      questions: questions
     };
 
     _this.onChangeQuestionSetHeader = _this.onChangeQuestionSetHeader.bind(_this);
@@ -73,34 +77,54 @@ var QuestionSetEditor = function (_Component) {
   (0, _createClass3.default)(QuestionSetEditor, [{
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
+      var questionSetId = nextProps.questionSetId,
+          questionSetHeader = nextProps.questionSetHeader,
+          questionSetText = nextProps.questionSetText,
+          questions = nextProps.questions;
+
       this.state = {
-        questionSetHeader: nextProps.questionSetHeader,
-        questionSetText: nextProps.questionSetText
+        questionSetId: questionSetId,
+        questionSetHeader: questionSetHeader,
+        questionSetText: questionSetText,
+        questions: questions
       };
     }
   }, {
     key: 'onChangeQuestionSetHeader',
     value: function onChangeQuestionSetHeader(event) {
-      event.preventDefault();
       this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
       this.props.editQuestionSetHeader(this.props.currentQuestionSetIndex, event.target.value);
     }
   }, {
     key: 'onChangeQuestionSetText',
     value: function onChangeQuestionSetText(event) {
-      event.preventDefault();
       this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
       this.props.editQuestionSetText(this.props.currentQuestionSetIndex, event.target.value);
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
+      var _props = this.props,
+          currentQuestionSetIndex = _props.currentQuestionSetIndex,
+          questions = _props.questions;
+
+      var questionsArray = questions.toJS();
       return _react2.default.createElement(
         'form',
         null,
         _react2.default.createElement(
           _reactBootstrap.FormGroup,
           null,
+          _react2.default.createElement(_FieldGroup2.default, {
+            id: 'questionSetId',
+            name: 'questionSetId',
+            label: 'Question Set ID',
+            placeholder: this.props.questionSetId,
+            value: this.state.questionSetId,
+            disabled: true
+          }),
           _react2.default.createElement(_FieldGroup2.default, {
             id: 'questionSetHeader',
             name: 'questionSetHeader',
@@ -121,6 +145,32 @@ var QuestionSetEditor = function (_Component) {
             onChange: this.onChangeQuestionSetText,
             value: this.state.questionSetText
           })
+        ),
+        questionsArray && questionsArray.length > 0 && _react2.default.createElement(
+          _reactBootstrap.FormGroup,
+          null,
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'questionList' },
+            'Questions'
+          ),
+          _react2.default.createElement(
+            'div',
+            { id: 'questionList' },
+            questionsArray.map(function (question, index) {
+              return _react2.default.createElement(
+                _reactBootstrap.Button,
+                {
+                  key: 'question-' + index,
+                  bsStyle: 'link',
+                  onClick: function onClick() {
+                    return _this2.props.changeCurrentEditingField('question', currentQuestionSetIndex, index);
+                  }
+                },
+                question.questionId
+              );
+            })
+          )
         )
       );
     }
@@ -131,26 +181,36 @@ var QuestionSetEditor = function (_Component) {
 QuestionSetEditor.propTypes = {
   editQuestionSetHeader: _propTypes2.default.func.isRequired,
   editQuestionSetText: _propTypes2.default.func.isRequired,
+  changeCurrentEditingField: _propTypes2.default.func.isRequired,
+  questionSetId: _propTypes2.default.string,
   questionSetHeader: _propTypes2.default.string,
   questionSetText: _propTypes2.default.string,
-  currentQuestionSetIndex: _propTypes2.default.number.isRequired
+  currentQuestionSetIndex: _propTypes2.default.number.isRequired,
+  questions: _propTypes2.default.object
 };
 QuestionSetEditor.defaultProps = {
   currentQuestionSetIndex: 0,
+  questionSetId: '',
   questionSetHeader: '',
-  questionSetText: ''
+  questionSetText: '',
+  questions: []
 };
 
 
 function mapStateToProps(state, ownProps) {
   return {
+    questionSetId: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questionSetId']),
     questionSetHeader: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questionSetHeader']),
     questionSetText: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questionSetText']),
+    questions: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions']),
     currentQuestionSetIndex: ownProps.currentQuestionSetIndex
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { editQuestionSetHeader: _winterfellFormBuilderActions.editQuestionSetHeader, editQuestionSetText: _winterfellFormBuilderActions.editQuestionSetText })(QuestionSetEditor);
+var _default = (0, _reactRedux.connect)(mapStateToProps, {
+  editQuestionSetHeader: _winterfellFormBuilderActions.editQuestionSetHeader,
+  editQuestionSetText: _winterfellFormBuilderActions.editQuestionSetText,
+  changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField })(QuestionSetEditor);
 
 exports.default = _default;
 ;

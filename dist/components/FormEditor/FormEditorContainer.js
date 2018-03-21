@@ -95,11 +95,12 @@ var FormEditorContainer = function (_Component) {
           questionPanels = _props.questionPanels,
           questionSets = _props.questionSets,
           panelHeader = _props.panelHeader,
-          panelText = _props.panelText;
+          panelText = _props.panelText,
+          currentQuestionSetIndex = _props.currentQuestionSetIndex,
+          currentQuestionIndex = _props.currentQuestionIndex;
 
       var questionPanelsArray = questionPanels && questionPanels.toJS();
       var questionSetsArray = questionSets && questionSets.toJS();
-      console.log('panelHeader, panelText: ', panelHeader, panelText);
       return _react2.default.createElement(
         _reactBootstrap.Row,
         null,
@@ -110,13 +111,14 @@ var FormEditorContainer = function (_Component) {
             panelHeader: panelHeader,
             panelText: panelText,
             onClick: function onClick() {
-              return _this2.props.changeCurrentEditingField('page');
+              return _this2.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex);
             }
           }),
           typeof currentPanelIndex !== 'undefined' && questionPanelsArray && _react2.default.createElement(_FormQuestionSetEditor.FormQuestionSetEditor, {
             currentQuestionSets: questionPanelsArray[currentPanelIndex].questionSets,
             questionSets: questionSetsArray,
-            onClick: this.props.changeCurrentEditingField
+            onClick: this.props.changeCurrentEditingField,
+            currentQuestionIndex: this.props.currentQuestionIndex
           })
         )
       );
@@ -129,6 +131,8 @@ FormEditorContainer.propTypes = {
   editFormTitle: _propTypes2.default.func.isRequired,
   changeCurrentEditingField: _propTypes2.default.func.isRequired,
   currentPanelIndex: _propTypes2.default.number.isRequired,
+  currentQuestionSetIndex: _propTypes2.default.number,
+  currentQuestionIndex: _propTypes2.default.number,
   questionSets: _propTypes2.default.object,
   questionPanels: _propTypes2.default.object,
   panelHeader: _propTypes2.default.string,
@@ -140,7 +144,9 @@ FormEditorContainer.defaultProps = {
   questionPanels: null,
   questionSets: null,
   panelHeader: '',
-  panelText: ''
+  panelText: '',
+  currentQuestionSetIndex: 0,
+  currentQuestionIndex: 0
 };
 
 
@@ -153,7 +159,9 @@ function mapStateToProps(state, ownProps) {
     questionSets: state.getIn(['form', 'schema', 'questionSets']),
     schema: state.getIn(['form', 'schema']),
     panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelHeader']),
-    panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelText'])
+    panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelText']),
+    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex'])
   };
 }
 

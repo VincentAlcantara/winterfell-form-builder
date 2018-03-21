@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-bootstrap';
-import { loadForm, goToPage } from '../actions/winterfellFormBuilderActions';
+import { Grid, Row, Col, Alert, Breadcrumb } from 'react-bootstrap';
+import { goToPage, changeCurrentEditingField } from '../actions/winterfellFormBuilderActions';
 import Pagination from './Pagination';
 import Previewer from './Previewer';
 import {
   CreateFormButton,
   EditFormTitleButton,
   AddPageButton,
+  SaveFormButton,
   EditSchemaButton,
-  AddQuestionButton,
   UploadJSONButton,
 } from './FormMenu';
 import FormEditor from './FormEditor';
@@ -18,17 +18,17 @@ import FieldEditor from './FieldEditor';
 
 class WinterfellFormBuilder extends Component {
   static propTypes = {
-    inputSchema: PropTypes.object,
     title: PropTypes.string,
     schema: PropTypes.object,
     currentPanelId: PropTypes.string,
     currentPanelIndex: PropTypes.number,
     currentQuestionSetIndex: PropTypes.number,
     currentQuestionIndex: PropTypes.number,
-    loadForm: PropTypes.func.isRequired,
     formPanels: PropTypes.object,
+    questionSets: PropTypes.object,
     goToPage: PropTypes.func.isRequired,
     currentEditingField: PropTypes.string,
+    changeCurrentEditingField: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -37,6 +37,7 @@ class WinterfellFormBuilder extends Component {
     currentPanelId: null,
     inputSchema: {},
     formPanels: null,
+    questionSets: null,
     currentPanelIndex: 0, // first page by default
     currentQuestionSetIndex: null,
     currentQuestionIndex: null,
@@ -46,18 +47,7 @@ class WinterfellFormBuilder extends Component {
   constructor(props) {
     super(props);
 
-    this.onDomChange = this.onDomChange.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
-  }
-
-  componentWillMount() {
-    const { inputSchema } = this.props;
-    this.props.loadForm(inputSchema);
-  }
-
-  onDomChange(e) {
-    e.preventDefault();
-    this.setState({ schema: JSON.parse(e.target.value) });
   }
 
   onFormUpdate(e) {
@@ -75,16 +65,15 @@ class WinterfellFormBuilder extends Component {
       currentPanelIndex,
       currentQuestionSetIndex,
       currentQuestionIndex,
+      questionSets,
     } = this.props;
+
     return (
       <Grid>
         <Row>
           <Col xs={12}>
             <Row>
               <Col xs={12}>
-                <h2>Winterfell Form Builder</h2>
-              </Col>
-              <Col xs={10}>
                 <h3>Form: {title}</h3>
               </Col>
             </Row>
@@ -103,13 +92,41 @@ class WinterfellFormBuilder extends Component {
                 <AddPageButton />
               </Col>
               <Col xs={2}>
-                <AddQuestionButton />
+                <EditSchemaButton />
               </Col>
               <Col xs={2}>
-                <EditSchemaButton />
+                <SaveFormButton />
               </Col>
             </Row>
             <hr />
+            <Row>
+              <Col xs={12}>
+                <Breadcrumb>
+                  <Breadcrumb.Item
+                    href="#"
+                    active={currentEditingField === 'page'}
+                    onClick={() => this.props.changeCurrentEditingField('page')}
+                  >
+                    {currentPanelId}
+                  </Breadcrumb.Item>
+                  {(currentEditingField === 'questionSet' || currentEditingField === 'question') &&
+                    <Breadcrumb.Item
+                      href=""
+                      active={currentEditingField === 'questionSet'}
+                      onClick={() => this.props.changeCurrentEditingField('questionSet', currentQuestionSetIndex)}
+                    >{questionSets.getIn([currentQuestionSetIndex, 'questionSetId'])}
+                    </Breadcrumb.Item>
+                  }
+                  {(currentEditingField === 'question') &&
+                    <Breadcrumb.Item
+                      active={currentEditingField === 'question'}
+                    >
+                      {questionSets.getIn([currentQuestionSetIndex, 'questions', currentQuestionIndex, 'questionId'])}
+                    </Breadcrumb.Item>
+                  }
+                </Breadcrumb>
+              </Col>
+            </Row>
             <Row>
               <Col xs={4} className="winterfell-form-builder-field-editor">
                 <Row>
@@ -121,12 +138,6 @@ class WinterfellFormBuilder extends Component {
                         currentPanelId={currentPanelId}
                         onClick={this.props.goToPage}
                       />
-                    }
-                    {
-                      !formPanels &&
-                      <span>
-                        No form loaded
-                      </span>
                     }
                   </Col>
                   <Col xs={12}>
@@ -142,9 +153,17 @@ class WinterfellFormBuilder extends Component {
                 </Row>
               </Col>
               <Col xs={8}>
-                <FormEditor
-                  currentPanelIndex={currentPanelIndex}
-                />
+                { this.props.schema.size !== 0 &&
+                  <FormEditor
+                    currentPanelIndex={currentPanelIndex}
+                  />
+                }
+                { this.props.schema.size === 0 &&
+                  <Alert bsStyle="info">
+                    No form loaded.  Click on &#39;new form&#39; to create a new form,
+                    or &#39;open form&#39; to load an existing form.
+                  </Alert>
+                }
               </Col>
             </Row>
             <hr />
@@ -154,8 +173,8 @@ class WinterfellFormBuilder extends Component {
                 {
                   schema &&
                   <Previewer
-                    schema={schema.toJS()}
                     currentPanelId={currentPanelId}
+                    schema={schema.toJS()}
                   />
                 }
               </Col>
@@ -173,7 +192,7 @@ function mapStateToProps(state) {
     schema: state.getIn(['form', 'schema']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
     formPanels: state.getIn(['form', 'schema', 'formPanels']),
-    questionSet: state.getIn(['form', 'schema', 'questionSets', 0]),
+    questionSets: state.getIn(['form', 'schema', 'questionSets']),
     currentEditingField: state.getIn(['form', 'currentEditingField']),
     currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
@@ -181,4 +200,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { loadForm, goToPage })(WinterfellFormBuilder);
+export default connect(
+  mapStateToProps,
+  { goToPage, changeCurrentEditingField },
+)(WinterfellFormBuilder);

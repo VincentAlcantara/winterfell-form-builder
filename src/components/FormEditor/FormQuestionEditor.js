@@ -22,7 +22,12 @@ export const FormQuestionEditor = (props) => {
           question.input &&
           (question.input.type === 'textInput' ||
           question.input.type === 'emailInput') &&
-          <input id={question.questionId} type="text" className="form-control" />
+          <input
+            id={question.questionId}
+            type="text"
+            className="form-control"
+            autoComplete={question.questionId}
+          />
         }
         {
           question.input &&

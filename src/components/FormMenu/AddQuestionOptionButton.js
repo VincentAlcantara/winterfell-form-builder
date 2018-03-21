@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
+import { Row, Col, Button, FormControl, Glyphicon } from 'react-bootstrap';
 import { addQuestionOption } from '../../actions/winterfellFormBuilderActions';
-import FieldGroup from '../UI/FieldGroup';
-
 
 class AddQuestionOptionButton extends Component {
   static propTypes = {
@@ -17,13 +15,13 @@ class AddQuestionOptionButton extends Component {
     super(props);
 
     this.state = {
-      showModal: false,
+      showConfirm: false,
       questionOptionText: '',
       questionOptionValue: '',
     };
 
     this.onChange = this.onChange.bind(this);
-    this.onConfirmAddOption = this.onConfirmAddOption.bind(this);
+    this.onAddOption = this.onAddOption.bind(this);
   }
 
   onChange(event) {
@@ -33,79 +31,69 @@ class AddQuestionOptionButton extends Component {
 
   onClose(e) {
     e.preventDefault();
-    this.setState({ showModal: true });
+    this.setState({ showConfirm: true });
   }
 
-  onConfirmAddOption(e) {
+  onAddOption(e) {
     e.preventDefault();
     const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
     this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex,
       this.state.questionOptionText, this.state.questionOptionValue);
-    this.setState({ showModal: false });
+    this.setState({ questionOptionText: '', questionOptionValue: '' });
   }
 
   render() {
     return (
       <Row>
-        <div className="static-modal">
-          <Modal show={this.state.showModal}>
-            <Modal.Header>
-              <Modal.Title>Add new question option</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <form>
-                <FormGroup>
-                  <FieldGroup
-                    id="questionOptionText"
-                    name="questionOptionText"
-                    label="Enter option text"
-                    onChange={this.onChange}
-                    placeholder="Enter text"
-                    value={this.state.questionOptionText}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <FieldGroup
-                    id="questionOptionValue"
-                    name="questionOptionValue"
-                    label="Enter option value"
-                    onChange={this.onChange}
-                    placeholder="Enter value"
-                    value={this.state.questionOptionValue}
-                  />
-                </FormGroup>
-              </form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                bsStyle="danger"
-                onClick={() => { this.setState({ showModal: false }); }}
-              >Cancel</Button>
-              <Button
-                bsStyle="primary"
-                onClick={this.onConfirmAddOption}
-              >Save changes</Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
         <Col xs={12}>
-          <Button
-            className="btn btn-block btn-success"
-            onClick={() => {
-              this.setState({ showModal: true });
-            }}
-          >Add Option
-          </Button>
+          <label
+            htmlFor="addOption"
+          >
+            Add Option
+          </label>
+        </Col>
+        <Col xs={12}>
+          <table>
+            <tbody id="addOption">
+              <tr>
+                <td>
+                  <FormControl
+                    type="text"
+                    name="questionOptionText"
+                    value={this.state.questionOptionText}
+                    onChange={this.onChange}
+                  />
+                </td>
+                <td>
+                  <FormControl
+                    type="text"
+                    name="questionOptionValue"
+                    value={this.state.questionOptionValue}
+                    onChange={this.onChange}
+                  />
+                </td>
+                <td>
+                  <Button
+                    className="btn btn-block btn-primary"
+                    onClick={this.onAddOption}
+                    disabled={!this.state.questionOptionValue || !this.state.questionOptionText}
+                  ><Glyphicon glyph="glyphicon glyphicon-plus-sign" />
+                  </Button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </Col>
       </Row>
     );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
+    questionInputOptions: ownProps.questionInputOptions,
   };
 }
 export default connect(mapStateToProps, { addQuestionOption })(AddQuestionOptionButton);

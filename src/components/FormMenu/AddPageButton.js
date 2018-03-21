@@ -97,7 +97,7 @@ class AddPageButton extends Component {
         </div>
         <Col xs={12}>
           <Button
-            className="btn btn-block btn-info"
+            className="btn btn-block btn-primary"
             onClick={() => {
               this.setState({ showModal: true });
             }}

@@ -20,20 +20,18 @@ function Pagination(props) {
   return (
     <Row>
       <Col xs={12}>
-        <p>
-          <FormGroup>
-            <label htmlFor="pagination" style={{ display: 'block' }}>
-              Page
-            </label>
-            <DropdownButton
-              id="pagination"
-              title={currentPanelId || 'Select Page'}
-              className="btn-block"
-            >
-              { formPanels && getPages() }
-            </DropdownButton>
-          </FormGroup>
-        </p>
+        <FormGroup>
+          <label htmlFor="pagination" style={{ display: 'block' }}>
+            Page
+          </label>
+          <DropdownButton
+            id="pagination"
+            title={currentPanelId || 'Select Page'}
+            className="btn-block"
+          >
+            { formPanels && getPages() }
+          </DropdownButton>
+        </FormGroup>
       </Col>
     </Row>
   );

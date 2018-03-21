@@ -10,9 +10,7 @@ var _constants = require('../common/constants');
 
 var initialState = (0, _immutable.fromJS)({
   title: '',
-  schema: {
-    classes: _constants.BOOTSTRAP_CLASSES
-  },
+  schema: {},
   currentPanelId: null,
   currentPanelIndex: 0
 });
@@ -35,13 +33,13 @@ function winterfellFormBuilderReducer() {
 
         return state.set('currentPanelIndex', currentPanelIndex).set('currentEditingField', 'page').set('currentPanelId', action.payload.panelId);
       }
-    case _constants.LOAD_FORM_SUCCESS:
-      {
-        return state.set('currentPanelId', 'Select Page').set('schema', (0, _immutable.fromJS)(action.payload.schema));
-      }
     case _constants.UPLOAD_JSON_SUCCESS:
       {
-        return state.set('currentPanelId', 'Select Page').set('schema', (0, _immutable.fromJS)(action.payload.schema));
+        return state.set('currentPanelId', 'Select Page').set('title', action.payload.fileName).set('schema', (0, _immutable.fromJS)(action.payload.schema));
+      }
+    case _constants.SAVE_FORM_SUCCESS:
+      {
+        return state.set('title', action.payload.fileName);
       }
     case _constants.EDIT_PAGE_HEADER_SUCCESS:
       {
@@ -120,47 +118,67 @@ function winterfellFormBuilderReducer() {
             questionOptionValue = _action$payload9.questionOptionValue;
 
         var newOption = (0, _immutable.fromJS)({ text: questionOptionText, value: questionOptionValue });
-        return state.updateIn(['schema', 'questionSets', _currentQuestionSetIndex6, 'questions', _currentQuestionIndex4, 'input', 'options'], function (arr) {
-          return arr.push(newOption);
-        });
+        if (state.getIn(['schema', 'questionSets', _currentQuestionSetIndex6, 'questions', _currentQuestionIndex4, 'input', 'options'])) {
+          return state.updateIn(['schema', 'questionSets', _currentQuestionSetIndex6, 'questions', _currentQuestionIndex4, 'input', 'options'], function (arr) {
+            return arr.push(newOption);
+          });
+        }
+        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex6, 'questions', _currentQuestionIndex4, 'input', 'options'], (0, _immutable.fromJS)([newOption]));
       }
-    case _constants.EDIT_QUESTION_OPTION_TEXT_SUCCESS:
+    case _constants.CHANGE_QUESTION_TYPE_SUCCESS:
       {
         var _action$payload10 = action.payload,
             _currentQuestionSetIndex7 = _action$payload10.currentQuestionSetIndex,
             _currentQuestionIndex5 = _action$payload10.currentQuestionIndex,
-            optionIndex = _action$payload10.optionIndex,
-            option = _action$payload10.option;
+            questionType = _action$payload10.questionType;
 
-        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex7, 'questions', _currentQuestionIndex5, 'input', 'options', optionIndex, 'text'], option);
+        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex7, 'questions', _currentQuestionIndex5, 'input', 'type'], questionType);
       }
-    case _constants.EDIT_QUESTION_OPTION_VALUE_SUCCESS:
+    case _constants.EDIT_QUESTION_OPTION_TEXT_SUCCESS:
       {
         var _action$payload11 = action.payload,
             _currentQuestionSetIndex8 = _action$payload11.currentQuestionSetIndex,
             _currentQuestionIndex6 = _action$payload11.currentQuestionIndex,
-            _optionIndex = _action$payload11.optionIndex,
-            value = _action$payload11.value;
+            optionIndex = _action$payload11.optionIndex,
+            option = _action$payload11.option;
 
-        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex8, 'questions', _currentQuestionIndex6, 'input', 'options', _optionIndex, 'value'], value);
+        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex8, 'questions', _currentQuestionIndex6, 'input', 'options', optionIndex, 'text'], option);
       }
-    case _constants.DELETE_QUESTION_OPTION_SUCCESS:
+    case _constants.EDIT_QUESTION_OPTION_VALUE_SUCCESS:
       {
         var _action$payload12 = action.payload,
             _currentQuestionSetIndex9 = _action$payload12.currentQuestionSetIndex,
             _currentQuestionIndex7 = _action$payload12.currentQuestionIndex,
-            questionOptionIndex = _action$payload12.questionOptionIndex;
+            _optionIndex = _action$payload12.optionIndex,
+            value = _action$payload12.value;
 
-        return state.deleteIn(['schema', 'questionSets', _currentQuestionSetIndex9, 'questions', _currentQuestionIndex7, 'input', 'options', questionOptionIndex]);
+        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex9, 'questions', _currentQuestionIndex7, 'input', 'options', _optionIndex, 'value'], value);
       }
-    case _constants.CHANGE_EDITING_FIELD_SUCCESS:
+    case _constants.DELETE_QUESTION_SUCCESS:
       {
         var _action$payload13 = action.payload,
-            currentEditingField = _action$payload13.currentEditingField,
             _currentQuestionSetIndex10 = _action$payload13.currentQuestionSetIndex,
             _currentQuestionIndex8 = _action$payload13.currentQuestionIndex;
 
-        return state.set('currentEditingField', currentEditingField).set('currentQuestionSetIndex', _currentQuestionSetIndex10).set('currentQuestionIndex', _currentQuestionIndex8);
+        return state.set('currentQuestionIndex', -1).deleteIn(['schema', 'questionSets', _currentQuestionSetIndex10, 'questions', _currentQuestionIndex8]);
+      }
+    case _constants.DELETE_QUESTION_OPTION_SUCCESS:
+      {
+        var _action$payload14 = action.payload,
+            _currentQuestionSetIndex11 = _action$payload14.currentQuestionSetIndex,
+            _currentQuestionIndex9 = _action$payload14.currentQuestionIndex,
+            questionOptionIndex = _action$payload14.questionOptionIndex;
+
+        return state.deleteIn(['schema', 'questionSets', _currentQuestionSetIndex11, 'questions', _currentQuestionIndex9, 'input', 'options', questionOptionIndex]);
+      }
+    case _constants.CHANGE_EDITING_FIELD_SUCCESS:
+      {
+        var _action$payload15 = action.payload,
+            currentEditingField = _action$payload15.currentEditingField,
+            _currentQuestionSetIndex12 = _action$payload15.currentQuestionSetIndex,
+            _currentQuestionIndex10 = _action$payload15.currentQuestionIndex;
+
+        return state.set('currentEditingField', currentEditingField).set('currentQuestionSetIndex', _currentQuestionSetIndex12).set('currentQuestionIndex', _currentQuestionIndex10 || 0);
       }
     case _constants.CREATE_FORM_SUCCESS:
       return state.set('title', action.payload.title).set('currentPanelIndex', 0).set('schema', (0, _immutable.fromJS)({
@@ -205,7 +223,7 @@ function winterfellFormBuilderReducer() {
           return arr.push((0, _immutable.fromJS)(newQuestionPanel));
         });
       }
-    case _constants.ADD_QUESTION_SUCCESS:
+    case _constants.ADD_QUESTION_SET_SUCCESS:
       {
         var _currentPanelIndex = state.get('currentPanelIndex');
 
@@ -240,15 +258,62 @@ function winterfellFormBuilderReducer() {
           return arr.push((0, _immutable.fromJS)(newQuestionSet));
         });
       }
+    case _constants.ADD_QUESTION_SUCCESS:
+      {
+        var _currentQuestionSetIndex13 = state.get('currentQuestionSetIndex');
+
+        var questionCount = state.getIn(['schema', 'questionSets', _currentQuestionSetIndex13, 'questions']).count() + 1;
+
+        var _newQuestion = {
+          questionId: action.payload.questionId || 'question-id-' + questionCount,
+          question: action.payload.question || 'question-' + questionCount,
+          text: action.payload.questionText,
+          input: {
+            type: action.payload.questionType || 'textInput',
+            placeholder: action.payload.questionPlaceholder || '',
+            options: action.payload.questionType !== 'textInput' ? [] : undefined
+          }
+        };
+
+        return state.updateIn(['schema', 'questionSets', _currentQuestionSetIndex13, 'questions'], function (arr) {
+          return arr.push((0, _immutable.fromJS)(_newQuestion));
+        });
+      }
+    case _constants.ADD_CONDITIONAL_QUESTION_SUCCESS:
+      {
+        var _action$payload16 = action.payload,
+            _currentQuestionSetIndex14 = _action$payload16.currentQuestionSetIndex,
+            _currentQuestionIndex11 = _action$payload16.currentQuestionIndex,
+            _questionOptionIndex = _action$payload16.questionOptionIndex,
+            questionId = _action$payload16.questionId,
+            question = _action$payload16.question,
+            questionText = _action$payload16.questionText,
+            _questionType = _action$payload16.questionType;
+
+
+        var _questionCount = state.getIn(['schema', 'questionSets', _currentQuestionSetIndex14, 'questions']).count() + 1;
+
+        var _newQuestion2 = {
+          questionId: questionId || 'question-id-' + _questionCount,
+          question: question || 'question-' + _questionCount,
+          text: questionText,
+          input: {
+            type: _questionType || 'textInput',
+            options: _questionType !== 'textInput' ? [] : undefined
+          }
+        };
+
+        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex14, 'questions', _currentQuestionIndex11, 'input', 'options', _questionOptionIndex, 'conditionalQuestions'], (0, _immutable.fromJS)([_newQuestion2]));
+      }
     case _constants.UPDATE_QUESTION_SUCCESS:
       {
-        var _action$payload14 = action.payload,
-            questionSetIndex = _action$payload14.questionSetIndex,
-            questionIndex = _action$payload14.questionIndex,
-            question = _action$payload14.question,
-            questionText = _action$payload14.questionText;
+        var _action$payload17 = action.payload,
+            questionSetIndex = _action$payload17.questionSetIndex,
+            questionIndex = _action$payload17.questionIndex,
+            _question = _action$payload17.question,
+            _questionText = _action$payload17.questionText;
 
-        return state.setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'question'], question).setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'text'], questionText);
+        return state.setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'question'], _question).setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'text'], _questionText);
       }
 
     default:

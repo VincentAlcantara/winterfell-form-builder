@@ -18,7 +18,6 @@ function winterfellFormBuilderReducer() {
 
   switch (action.type) {
     case _constants.RETRIEVE_FORMLIST_ERROR:
-    case _constants.LOAD_FORM_ERROR:
     case _constants.CREATE_FORM_ERROR:
     case _constants.UPDATE_FORM_ERROR:
     case _constants.DELETE_FORM_ERROR:
@@ -30,7 +29,6 @@ function winterfellFormBuilderReducer() {
     case _constants.DELETE_QUESTION_ERROR:
       return state.set('message', '' + action.type);
     case _constants.GOTO_PAGE_SUCCESS:
-    case _constants.LOAD_FORM_SUCCESS:
     case _constants.CREATE_FORM_SUCCESS:
     case _constants.EDIT_FORM_TITLE_SUCCESS:
     case _constants.UPDATE_FORM_SUCCESS:
@@ -38,7 +36,7 @@ function winterfellFormBuilderReducer() {
     case _constants.ADD_PAGE_SUCCESS:
     case _constants.UPDATE_PAGE_SUCCESS:
     case _constants.DELETE_PAGE_SUCCESS:
-    case _constants.ADD_QUESTION_SUCCESS:
+    case _constants.ADD_QUESTION_SET_SUCCESS:
     case _constants.UPDATE_QUESTION_SUCCESS:
     case _constants.DELETE_QUESTION_SUCCESS:
       return state.set('message', '');

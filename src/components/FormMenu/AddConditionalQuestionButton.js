@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
-import { addQuestion } from '../../actions/winterfellFormBuilderActions';
+import { Row, Col, Button, Modal, FormGroup, Glyphicon } from 'react-bootstrap';
+import { addConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
 import SelectInput from '../InputTypes/SelectInput';
 import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
 
-class AddQuestionButton extends Component {
+class AddConditionalQuestionButton extends Component {
   static propTypes = {
-    addQuestion: PropTypes.func.isRequired,
-    questionSetId: PropTypes.string.isRequired,
+    addConditionalQuestion: PropTypes.func.isRequired,
     currentQuestionSetIndex: PropTypes.number.isRequired,
+    currentQuestionIndex: PropTypes.number.isRequired,
+    questionOptionIndex: PropTypes.number.isRequired,
   }
 
   constructor(props) {
@@ -20,7 +21,6 @@ class AddQuestionButton extends Component {
 
     this.state = {
       showModal: false,
-      questionSetId: this.props.questionSetId,
       questionId: '',
       question: '',
       questionText: '',
@@ -48,13 +48,16 @@ class AddQuestionButton extends Component {
 
   onFormUpdate(e) {
     e.preventDefault();
-    this.props.addQuestion(
-      this.props.currentQuestionSetIndex,
-      this.state.questionSetId,
-      this.state.questionId,
-      this.state.question,
-      this.state.questionText,
-      this.state.questionType,
+    const { currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex } = this.props;
+    const { questionId, question, questionText, questionType } = this.state;
+    this.props.addConditionalQuestion(
+      currentQuestionSetIndex,
+      currentQuestionIndex,
+      questionOptionIndex,
+      questionId,
+      question,
+      questionText,
+      questionType,
     );
     this.setState({ showModal: false });
   }
@@ -65,20 +68,10 @@ class AddQuestionButton extends Component {
         <div className="static-modal">
           <Modal show={this.state.showModal}>
             <Modal.Header>
-              <Modal.Title>Add a new question to the question set</Modal.Title>
+              <Modal.Title>Add a new conditional question to this question</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <form>
-                <FormGroup>
-                  <FieldGroup
-                    id="questionSetId"
-                    name="questionSetId"
-                    label="Question Set ID"
-                    onChange={this.onChange}
-                    placeholder="(optional)"
-                    value={this.state.questionSetId}
-                  />
-                </FormGroup>
                 <FormGroup>
                   <FieldGroup
                     id="questionId"
@@ -140,7 +133,7 @@ class AddQuestionButton extends Component {
             onClick={() => {
               this.setState({ showModal: true });
             }}
-          >add question
+          ><Glyphicon glyph="glyphicon glyphicon-random" />
           </Button>
         </Col>
       </Row>
@@ -148,5 +141,12 @@ class AddQuestionButton extends Component {
   }
 }
 
-export default connect(null, { addQuestion })(AddQuestionButton);
+function mapStateToProps(state, ownProps) {
+  return {
+    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
+    questionOptionIndex: ownProps.questionOptionIndex,
+  };
+}
+export default connect(mapStateToProps, { addConditionalQuestion })(AddConditionalQuestionButton);
 

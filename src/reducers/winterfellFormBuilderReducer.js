@@ -2,13 +2,15 @@ import { fromJS } from 'immutable';
 
 import {
   BOOTSTRAP_CLASSES,
-  LOAD_FORM_SUCCESS,
   CREATE_FORM_SUCCESS,
   EDIT_FORM_TITLE_SUCCESS,
   GOTO_PAGE_SUCCESS,
   UPDATE_FORM_SUCCESS,
   ADD_PAGE_SUCCESS,
   ADD_QUESTION_SUCCESS,
+  ADD_CONDITIONAL_QUESTION_SUCCESS,
+  ADD_QUESTION_SET_SUCCESS,
+  DELETE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
   CHANGE_EDITING_FIELD_SUCCESS,
   EDIT_PAGE_HEADER_SUCCESS,
@@ -19,18 +21,18 @@ import {
   EDIT_QUESTION_SUCCESS,
   EDIT_QUESTION_TEXT_SUCCESS,
   EDIT_QUESTION_POST_TEXT_SUCCESS,
+  CHANGE_QUESTION_TYPE_SUCCESS,
   ADD_QUESTION_OPTION_SUCCESS,
   EDIT_QUESTION_OPTION_TEXT_SUCCESS,
   EDIT_QUESTION_OPTION_VALUE_SUCCESS,
   DELETE_QUESTION_OPTION_SUCCESS,
   UPLOAD_JSON_SUCCESS,
+  SAVE_FORM_SUCCESS,
 } from '../common/constants';
 
 const initialState = fromJS({
   title: '',
-  schema: {
-    classes: BOOTSTRAP_CLASSES,
-  },
+  schema: {},
   currentPanelId: null,
   currentPanelIndex: 0,
 });
@@ -52,15 +54,15 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .set('currentEditingField', 'page')
         .set('currentPanelId', action.payload.panelId);
     }
-    case LOAD_FORM_SUCCESS: {
-      return state
-        .set('currentPanelId', 'Select Page')
-        .set('schema', fromJS(action.payload.schema));
-    }
     case UPLOAD_JSON_SUCCESS: {
       return state
         .set('currentPanelId', 'Select Page')
+        .set('title', action.payload.fileName)
         .set('schema', fromJS(action.payload.schema));
+    }
+    case SAVE_FORM_SUCCESS: {
+      return state
+        .set('title', action.payload.fileName);
     }
     case EDIT_PAGE_HEADER_SUCCESS: {
       const { questionPanelIndex, header } = action.payload;
@@ -114,10 +116,22 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         questionOptionValue,
       } = action.payload;
       const newOption = fromJS({ text: questionOptionText, value: questionOptionValue });
+      if (state.getIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+        currentQuestionIndex, 'input', 'options'])) {
+        return state
+          .updateIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+            currentQuestionIndex, 'input', 'options'], arr =>
+            arr.push(newOption));
+      }
       return state
-        .updateIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
-          currentQuestionIndex, 'input', 'options'], arr =>
-          arr.push(newOption));
+      .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+        currentQuestionIndex, 'input', 'options'], fromJS([newOption]));
+    }
+    case CHANGE_QUESTION_TYPE_SUCCESS: {
+      const { currentQuestionSetIndex, currentQuestionIndex, questionType } = action.payload;
+      return state
+      .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+        currentQuestionIndex, 'input', 'type'], questionType);
     }
     case EDIT_QUESTION_OPTION_TEXT_SUCCESS: {
       const {
@@ -141,6 +155,16 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
           currentQuestionIndex, 'input', 'options', optionIndex, 'value'], value);
     }
+    case DELETE_QUESTION_SUCCESS: {
+      const {
+        currentQuestionSetIndex,
+        currentQuestionIndex,
+      } = action.payload;
+      return state
+        .set('currentQuestionIndex', -1)
+        .deleteIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex]);
+    }
     case DELETE_QUESTION_OPTION_SUCCESS: {
       const {
         currentQuestionSetIndex,
@@ -156,7 +180,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       return state
         .set('currentEditingField', currentEditingField)
         .set('currentQuestionSetIndex', currentQuestionSetIndex)
-        .set('currentQuestionIndex', currentQuestionIndex);
+        .set('currentQuestionIndex', currentQuestionIndex || 0);
     }
     case CREATE_FORM_SUCCESS:
       return state
@@ -203,7 +227,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .updateIn(['schema', 'questionPanels'], arr =>
           arr.push(fromJS(newQuestionPanel)));
     }
-    case ADD_QUESTION_SUCCESS: {
+    case ADD_QUESTION_SET_SUCCESS: {
       const currentPanelIndex = state.get('currentPanelIndex');
 
       const questionSetCount = state.getIn(['schema', 'questionPanels', currentPanelIndex, 'questionSets']).size;
@@ -236,6 +260,53 @@ function winterfellFormBuilderReducer(state = initialState, action) {
           arr.push(fromJS(newQuestionSetId)))
         .updateIn(['schema', 'questionSets'], arr =>
           arr.push(fromJS(newQuestionSet)));
+    }
+    case ADD_QUESTION_SUCCESS: {
+      const currentQuestionSetIndex = state.get('currentQuestionSetIndex');
+
+      const questionCount = state.getIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions']).count() + 1;
+
+      const newQuestion = {
+        questionId: action.payload.questionId || `question-id-${questionCount}`,
+        question: action.payload.question || `question-${questionCount}`,
+        text: action.payload.questionText,
+        input: {
+          type: action.payload.questionType || 'textInput',
+          placeholder: action.payload.questionPlaceholder || '',
+          options: action.payload.questionType !== 'textInput' ? [] : undefined,
+        },
+      };
+
+      return state
+        .updateIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions'], arr =>
+          arr.push(fromJS(newQuestion)));
+    }
+    case ADD_CONDITIONAL_QUESTION_SUCCESS: {
+      const {
+        currentQuestionSetIndex,
+        currentQuestionIndex,
+        questionOptionIndex,
+        questionId,
+        question,
+        questionText,
+        questionType,
+      } = action.payload;
+
+      const questionCount = state.getIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions']).count() + 1;
+
+      const newQuestion = {
+        questionId: questionId || `question-id-${questionCount}`,
+        question: question || `question-${questionCount}`,
+        text: questionText,
+        input: {
+          type: questionType || 'textInput',
+          options: questionType !== 'textInput' ? [] : undefined,
+        },
+      };
+
+      return state
+        .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'input', 'options', questionOptionIndex, 'conditionalQuestions'], fromJS([newQuestion]));
     }
     case UPDATE_QUESTION_SUCCESS: {
       const { questionSetIndex, questionIndex, question, questionText } = action.payload;

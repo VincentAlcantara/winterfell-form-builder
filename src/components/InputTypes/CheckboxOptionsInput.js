@@ -69,6 +69,7 @@ class CheckboxOptionsInput extends React.Component {
                 className={this.props.classes.checkbox}
                 required={this.props.required ? 'required' : undefined}
                 onChange={this.handleChange}
+                autoComplete={`${this.props.name}-${opt.value}`}
               />
               {opt.text}
             </label>

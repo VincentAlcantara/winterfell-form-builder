@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _stringify = require('babel-runtime/core-js/json/stringify');
+
+var _stringify2 = _interopRequireDefault(_stringify);
+
 var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
@@ -40,6 +44,10 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactBootstrap = require('react-bootstrap');
 
+var _reactFileDownload = require('react-file-download');
+
+var _reactFileDownload2 = _interopRequireDefault(_reactFileDownload);
+
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 var _FieldGroup = require('../UI/FieldGroup');
@@ -48,41 +56,36 @@ var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CreateFormButton = function (_Component) {
-  (0, _inherits3.default)(CreateFormButton, _Component);
+var SaveFormButton = function (_Component) {
+  (0, _inherits3.default)(SaveFormButton, _Component);
 
-  function CreateFormButton(props) {
-    (0, _classCallCheck3.default)(this, CreateFormButton);
+  function SaveFormButton(props) {
+    (0, _classCallCheck3.default)(this, SaveFormButton);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (CreateFormButton.__proto__ || (0, _getPrototypeOf2.default)(CreateFormButton)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (SaveFormButton.__proto__ || (0, _getPrototypeOf2.default)(SaveFormButton)).call(this, props));
 
     _this.state = {
       showModal: false,
-      formTitle: ''
+      filename: _this.props.title
     };
 
     _this.onChange = _this.onChange.bind(_this);
-    _this.onFormUpdate = _this.onFormUpdate.bind(_this);
+    _this.onJSONSave = _this.onJSONSave.bind(_this);
     return _this;
   }
 
-  (0, _createClass3.default)(CreateFormButton, [{
+  (0, _createClass3.default)(SaveFormButton, [{
     key: 'onChange',
     value: function onChange(event) {
       event.preventDefault();
       this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
     }
   }, {
-    key: 'onClose',
-    value: function onClose(e) {
+    key: 'onJSONSave',
+    value: function onJSONSave(e) {
       e.preventDefault();
-      this.setState({ showModal: true });
-    }
-  }, {
-    key: 'onFormUpdate',
-    value: function onFormUpdate(e) {
-      e.preventDefault();
-      this.props.createForm(this.state.formTitle);
+      (0, _reactFileDownload2.default)((0, _stringify2.default)(this.props.schema.toJS()), this.state.filename);
+      this.props.saveJSON(this.props.schema.toJS(), this.state.filename);
       this.setState({ showModal: false });
     }
   }, {
@@ -105,7 +108,7 @@ var CreateFormButton = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Modal.Title,
                 null,
-                'Create a new form'
+                'Save form'
               )
             ),
             _react2.default.createElement(
@@ -118,12 +121,12 @@ var CreateFormButton = function (_Component) {
                   _reactBootstrap.FormGroup,
                   null,
                   _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'formTitle',
-                    name: 'formTitle',
+                    id: 'filename',
+                    name: 'filename',
                     label: 'Enter title of the form',
                     onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.formTitle
+                    placeholder: this.props.title,
+                    value: this.state.filename
                   })
                 )
               )
@@ -145,9 +148,10 @@ var CreateFormButton = function (_Component) {
                 _reactBootstrap.Button,
                 {
                   bsStyle: 'primary',
-                  onClick: this.onFormUpdate
+                  onClick: this.onJSONSave,
+                  disabled: !this.state.filename
                 },
-                'Save changes'
+                'Save'
               )
             )
           )
@@ -163,27 +167,30 @@ var CreateFormButton = function (_Component) {
                 _this2.setState({ showModal: true });
               }
             },
-            'new form'
+            'save form'
           )
         )
       );
     }
   }]);
-  return CreateFormButton;
+  return SaveFormButton;
 }(_react.Component);
 
-CreateFormButton.propTypes = {
-  createForm: _propTypes2.default.func.isRequired
+SaveFormButton.propTypes = {
+  saveJSON: _propTypes2.default.func.isRequired,
+  title: _propTypes2.default.string.isRequired,
+  schema: _propTypes2.default.object.isRequired
 };
 
 
 function mapStateToProps(state) {
   return {
-    title: state.getIn(['form', 'title'])
+    title: state.getIn(['form', 'title']),
+    schema: state.getIn(['form', 'schema'])
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { createForm: _winterfellFormBuilderActions.createForm })(CreateFormButton);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { saveJSON: _winterfellFormBuilderActions.saveJSON })(SaveFormButton);
 
 exports.default = _default;
 ;
@@ -193,11 +200,11 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(CreateFormButton, 'CreateFormButton', 'src/components/FormMenu/CreateFormButton.js');
+  __REACT_HOT_LOADER__.register(SaveFormButton, 'SaveFormButton', 'src/components/FormMenu/SaveFormButton.js');
 
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/CreateFormButton.js');
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/SaveFormButton.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/CreateFormButton.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/SaveFormButton.js');
 }();
 
 ;

@@ -22,7 +22,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestionSetEditor(props) {
   var currentQuestionSets = props.currentQuestionSets,
       questionSets = props.questionSets,
-      _onClick = props.onClick;
+      _onClick = props.onClick,
+      currentQuestionIndex = props.currentQuestionIndex;
 
 
   var displayQuestionSet = function displayQuestionSet() {
@@ -37,7 +38,7 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
               {
                 className: 'winterfell-field-editor btn-block',
                 onClick: function onClick() {
-                  return _onClick('questionSet', questionSetIndex);
+                  return _onClick('questionSet', questionSetIndex, currentQuestionIndex);
                 }
               },
               _react2.default.createElement(
@@ -58,7 +59,8 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
             _react2.default.createElement(_FormQuestionEditor.FormQuestionEditor, {
               questionSetIndex: questionSetIndex,
               questions: questionSet.questions,
-              onClick: _onClick
+              onClick: _onClick,
+              currentQuestionIndex: currentQuestionIndex
             })
           );
         }
@@ -77,13 +79,15 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
 FormQuestionSetEditor.propTypes = {
   onClick: _propTypes2.default.func.isRequired,
   questionSets: _propTypes2.default.array,
-  currentQuestionSets: _propTypes2.default.array
+  currentQuestionSets: _propTypes2.default.array,
+  currentQuestionIndex: _propTypes2.default.number
 };
 
 FormQuestionSetEditor.defaultProps = {
   questionSetIndex: 0,
   questionSets: null,
-  currentQuestionSets: null
+  currentQuestionSets: null,
+  currentQuestionIndex: 0
 };
 
 var _default = FormQuestionSetEditor;

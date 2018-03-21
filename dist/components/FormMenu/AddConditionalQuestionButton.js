@@ -54,17 +54,16 @@ var _constants = require('../../common/constants');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var AddQuestionButton = function (_Component) {
-  (0, _inherits3.default)(AddQuestionButton, _Component);
+var AddConditionalQuestionButton = function (_Component) {
+  (0, _inherits3.default)(AddConditionalQuestionButton, _Component);
 
-  function AddQuestionButton(props) {
-    (0, _classCallCheck3.default)(this, AddQuestionButton);
+  function AddConditionalQuestionButton(props) {
+    (0, _classCallCheck3.default)(this, AddConditionalQuestionButton);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (AddQuestionButton.__proto__ || (0, _getPrototypeOf2.default)(AddQuestionButton)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (AddConditionalQuestionButton.__proto__ || (0, _getPrototypeOf2.default)(AddConditionalQuestionButton)).call(this, props));
 
     _this.state = {
       showModal: false,
-      questionSetId: _this.props.questionSetId,
       questionId: '',
       question: '',
       questionText: '',
@@ -77,7 +76,7 @@ var AddQuestionButton = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(AddQuestionButton, [{
+  (0, _createClass3.default)(AddConditionalQuestionButton, [{
     key: 'onChange',
     value: function onChange(event) {
       event.preventDefault();
@@ -98,7 +97,17 @@ var AddQuestionButton = function (_Component) {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
-      this.props.addQuestion(this.props.currentQuestionSetIndex, this.state.questionSetId, this.state.questionId, this.state.question, this.state.questionText, this.state.questionType);
+      var _props = this.props,
+          currentQuestionSetIndex = _props.currentQuestionSetIndex,
+          currentQuestionIndex = _props.currentQuestionIndex,
+          questionOptionIndex = _props.questionOptionIndex;
+      var _state = this.state,
+          questionId = _state.questionId,
+          question = _state.question,
+          questionText = _state.questionText,
+          questionType = _state.questionType;
+
+      this.props.addConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, questionId, question, questionText, questionType);
       this.setState({ showModal: false });
     }
   }, {
@@ -121,7 +130,7 @@ var AddQuestionButton = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Modal.Title,
                 null,
-                'Add a new question to the question set'
+                'Add a new conditional question to this question'
               )
             ),
             _react2.default.createElement(
@@ -130,18 +139,6 @@ var AddQuestionButton = function (_Component) {
               _react2.default.createElement(
                 'form',
                 null,
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionSetId',
-                    name: 'questionSetId',
-                    label: 'Question Set ID',
-                    onChange: this.onChange,
-                    placeholder: '(optional)',
-                    value: this.state.questionSetId
-                  })
-                ),
                 _react2.default.createElement(
                   _reactBootstrap.FormGroup,
                   null,
@@ -230,22 +227,32 @@ var AddQuestionButton = function (_Component) {
                 _this2.setState({ showModal: true });
               }
             },
-            'add question'
+            _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-random' })
           )
         )
       );
     }
   }]);
-  return AddQuestionButton;
+  return AddConditionalQuestionButton;
 }(_react.Component);
 
-AddQuestionButton.propTypes = {
-  addQuestion: _propTypes2.default.func.isRequired,
-  questionSetId: _propTypes2.default.string.isRequired,
-  currentQuestionSetIndex: _propTypes2.default.number.isRequired
+AddConditionalQuestionButton.propTypes = {
+  addConditionalQuestion: _propTypes2.default.func.isRequired,
+  currentQuestionSetIndex: _propTypes2.default.number.isRequired,
+  currentQuestionIndex: _propTypes2.default.number.isRequired,
+  questionOptionIndex: _propTypes2.default.number.isRequired
 };
 
-var _default = (0, _reactRedux.connect)(null, { addQuestion: _winterfellFormBuilderActions.addQuestion })(AddQuestionButton);
+
+function mapStateToProps(state, ownProps) {
+  return {
+    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
+    questionOptionIndex: ownProps.questionOptionIndex
+  };
+}
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, { addConditionalQuestion: _winterfellFormBuilderActions.addConditionalQuestion })(AddConditionalQuestionButton);
 
 exports.default = _default;
 ;
@@ -255,9 +262,11 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(AddQuestionButton, 'AddQuestionButton', 'src/components/FormMenu/AddQuestionButton.js');
+  __REACT_HOT_LOADER__.register(AddConditionalQuestionButton, 'AddConditionalQuestionButton', 'src/components/FormMenu/AddConditionalQuestionButton.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/AddQuestionButton.js');
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/AddConditionalQuestionButton.js');
+
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/AddConditionalQuestionButton.js');
 }();
 
 ;

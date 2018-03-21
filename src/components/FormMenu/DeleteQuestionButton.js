@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Modal, Glyphicon } from 'react-bootstrap';
-import { deleteQuestionOption } from '../../actions/winterfellFormBuilderActions';
+import { Button, Modal } from 'react-bootstrap';
+import { deleteQuestion } from '../../actions/winterfellFormBuilderActions';
 
-class DeleteQuestionOptionButton extends Component {
+class DeleteQuestionButton extends Component {
   static propTypes = {
-    deleteQuestionOption: PropTypes.func.isRequired,
+    deleteQuestion: PropTypes.func.isRequired,
     currentQuestionSetIndex: PropTypes.number.isRequired,
     currentQuestionIndex: PropTypes.number.isRequired,
-    questionOptionIndex: PropTypes.number.isRequired,
   }
 
   constructor(props) {
@@ -28,11 +27,11 @@ class DeleteQuestionOptionButton extends Component {
   }
 
   onConfirmDelete(e) {
-    const { currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex } = this.props;
+    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
     e.preventDefault();
     this.setState({ showModal: false });
-    this.props.deleteQuestionOption(
-      currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex);
+    this.props.deleteQuestion(
+      currentQuestionSetIndex, currentQuestionIndex);
   }
 
   render() {
@@ -44,7 +43,7 @@ class DeleteQuestionOptionButton extends Component {
               <Modal.Title>Delete Option Confirmation</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              Are you sure you want to delete this option?
+              Are you sure you want to delete this question?
             </Modal.Body>
             <Modal.Footer>
               <Button
@@ -60,23 +59,21 @@ class DeleteQuestionOptionButton extends Component {
         </div>
         <Button
           className="btn btn-block btn-danger"
-          title="delete this option"
           onClick={() => {
             this.setState({ showModal: true });
           }}
-        ><Glyphicon glyph="glyphicon glyphicon-minus" />
+        >delete question
         </Button>
       </span>
     );
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
-    questionOptionIndex: ownProps.questionOptionIndex,
   };
 }
-export default connect(mapStateToProps, { deleteQuestionOption })(DeleteQuestionOptionButton);
+export default connect(mapStateToProps, { deleteQuestion })(DeleteQuestionButton);
 

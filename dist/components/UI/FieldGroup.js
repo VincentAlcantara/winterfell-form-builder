@@ -34,7 +34,7 @@ function FieldGroup(props) {
       null,
       label
     ),
-    _react2.default.createElement(_reactBootstrap.FormControl, (0, _extends3.default)({ value: value }, props))
+    _react2.default.createElement(_reactBootstrap.FormControl, (0, _extends3.default)({ value: value }, props, { autoComplete: id }))
   );
 }
 

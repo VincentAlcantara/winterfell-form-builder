@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
-import { uploadJSON } from '../../actions/winterfellFormBuilderActions';
+import fileDownload from 'react-file-download';
+import { saveJSON } from '../../actions/winterfellFormBuilderActions';
+import FieldGroup from '../UI/FieldGroup';
 
 
-class UploadJSONButton extends Component {
+class SaveFormButton extends Component {
   static propTypes = {
-    uploadJSON: PropTypes.func.isRequired,
+    saveJSON: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    schema: PropTypes.object.isRequired,
   }
 
   constructor(props) {
@@ -16,31 +19,22 @@ class UploadJSONButton extends Component {
 
     this.state = {
       showModal: false,
-      schema: '',
-      fileName: '',
+      filename: this.props.title,
     };
 
     this.onChange = this.onChange.bind(this);
-    this.onJSONUpload = this.onJSONUpload.bind(this);
+    this.onJSONSave = this.onJSONSave.bind(this);
   }
 
   onChange(event) {
     event.preventDefault();
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const contents = e.target.result;
-      this.setState({
-        schema: JSON.parse(contents),
-        fileName: file.name,
-      });
-    };
-    reader.readAsText(file);
+    this.setState({ [event.target.name]: event.target.value });
   }
 
-  onJSONUpload(e) {
+  onJSONSave(e) {
     e.preventDefault();
-    this.props.uploadJSON(this.state.schema, this.state.fileName);
+    fileDownload(JSON.stringify(this.props.schema.toJS()), this.state.filename);
+    this.props.saveJSON(this.props.schema.toJS(), this.state.filename);
     this.setState({ showModal: false });
   }
 
@@ -50,19 +44,18 @@ class UploadJSONButton extends Component {
         <div className="static-modal">
           <Modal show={this.state.showModal}>
             <Modal.Header>
-              <Modal.Title>Open a form</Modal.Title>
+              <Modal.Title>Save form</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <form>
                 <FormGroup>
-                  <label
-                    htmlFor="jsonUpload"
-                  />
-                  <input
-                    name="schema"
-                    id="jsonUpload"
-                    type="file"
-                    onChange={e => this.onChange(e)}
+                  <FieldGroup
+                    id="filename"
+                    name="filename"
+                    label="Enter title of the form"
+                    onChange={this.onChange}
+                    placeholder={this.props.title}
+                    value={this.state.filename}
                   />
                 </FormGroup>
               </form>
@@ -74,8 +67,9 @@ class UploadJSONButton extends Component {
               >Cancel</Button>
               <Button
                 bsStyle="primary"
-                onClick={this.onJSONUpload}
-              >Upload</Button>
+                onClick={this.onJSONSave}
+                disabled={!this.state.filename}
+              >Save</Button>
             </Modal.Footer>
           </Modal>
         </div>
@@ -85,7 +79,7 @@ class UploadJSONButton extends Component {
             onClick={() => {
               this.setState({ showModal: true });
             }}
-          >open form
+          >save form
           </Button>
         </Col>
       </Row>
@@ -95,8 +89,9 @@ class UploadJSONButton extends Component {
 
 function mapStateToProps(state) {
   return {
-    title: state.getIn(['form', 'currentForm', 'title']),
+    title: state.getIn(['form', 'title']),
+    schema: state.getIn(['form', 'schema']),
   };
 }
-export default connect(mapStateToProps, { uploadJSON })(UploadJSONButton);
+export default connect(mapStateToProps, { saveJSON })(SaveFormButton);
 

@@ -44,25 +44,21 @@ function Pagination(props) {
       _reactBootstrap.Col,
       { xs: 12 },
       _react2.default.createElement(
-        'p',
+        _reactBootstrap.FormGroup,
         null,
         _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
-          _react2.default.createElement(
-            'label',
-            { htmlFor: 'pagination', style: { display: 'block' } },
-            'Page'
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.DropdownButton,
-            {
-              id: 'pagination',
-              title: currentPanelId || 'Select Page',
-              className: 'btn-block'
-            },
-            formPanels && getPages()
-          )
+          'label',
+          { htmlFor: 'pagination', style: { display: 'block' } },
+          'Page'
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.DropdownButton,
+          {
+            id: 'pagination',
+            title: currentPanelId || 'Select Page',
+            className: 'btn-block'
+          },
+          formPanels && getPages()
         )
       )
     )

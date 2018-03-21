@@ -144,7 +144,7 @@ var EditSchemaButton = function (_Component) {
           _react2.default.createElement(
             _reactBootstrap.Button,
             {
-              className: 'btn btn-block btn-info',
+              className: 'btn btn-block btn-primary',
               onClick: function onClick() {
                 _this2.setState({
                   schema: _this2.props.schema.toJS(),

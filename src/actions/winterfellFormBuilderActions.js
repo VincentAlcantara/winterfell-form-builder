@@ -1,39 +1,15 @@
 import {
-  // RETRIEVE_FORMLIST_REQUEST,
-  // RETRIEVE_FORMLIST_SUCCESS,
-  // RETRIEVE_FORMLIST_ERROR,
-  // LOAD_FORM_REQUEST,
-  LOAD_FORM_SUCCESS,
-  // LOAD_FORM_ERROR,
-  // CREATE_FORM_REQUEST,
   CREATE_FORM_SUCCESS,
-  // CREATE_FORM_ERROR,
-  // UPDATE_FORM_REQUEST,
   EDIT_FORM_TITLE_SUCCESS,
   UPDATE_FORM_SUCCESS,
   GOTO_PAGE_SUCCESS,
-  // UPDATE_FORM_ERROR,
-  // DELETE_FORM_REQUEST,
-  // DELETE_FORM_SUCCESS,
-  // DELETE_FORM_ERROR,
-  // ADD_PAGE_REQUEST,
   ADD_PAGE_SUCCESS,
-  // ADD_PAGE_ERROR,
-  // UPDATE_PAGE_REQUEST,
-  // UPDATE_PAGE_SUCCESS,
-  // UPDATE_PAGE_ERROR,
-  // DELETE_PAGE_REQUEST,
-  // DELETE_PAGE_SUCCESS,
-  // DELETE_PAGE_ERROR,
-  // ADD_QUESTION_REQUEST,
+  DELETE_PAGE_SUCCESS,
   ADD_QUESTION_SUCCESS,
-  // ADD_QUESTION_ERROR,
-  // UPDATE_QUESTION_REQUEST,
+  ADD_CONDITIONAL_QUESTION_SUCCESS,
+  ADD_QUESTION_SET_SUCCESS,
+  DELETE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
-  // UPDATE_QUESTION_ERROR,
-  // DELETE_QUESTION_REQUEST,
-  // DELETE_QUESTION_SUCCESS,
-  // DELETE_QUESTION_ERROR,
   CHANGE_EDITING_FIELD_SUCCESS,
   EDIT_PAGE_HEADER_SUCCESS,
   EDIT_PAGE_TEXT_SUCCESS,
@@ -48,19 +24,28 @@ import {
   EDIT_QUESTION_OPTION_VALUE_SUCCESS,
   DELETE_QUESTION_OPTION_SUCCESS,
   UPLOAD_JSON_SUCCESS,
+  CHANGE_QUESTION_TYPE_SUCCESS,
+  SAVE_FORM_SUCCESS,
 } from '../common/constants';
-
-export function loadForm(schema) {
-  return {
-    type: LOAD_FORM_SUCCESS,
-    payload: { schema },
-  };
-}
 
 export function createForm(title) {
   return {
     type: CREATE_FORM_SUCCESS,
     payload: { title },
+  };
+}
+
+export function uploadJSON(schema, fileName) {
+  return {
+    type: UPLOAD_JSON_SUCCESS,
+    payload: { schema, fileName },
+  };
+}
+
+export function saveJSON(schema, fileName) {
+  return {
+    type: SAVE_FORM_SUCCESS,
+    payload: { schema, fileName },
   };
 }
 
@@ -127,6 +112,13 @@ export function editQuestionPostText(currentQuestionSetIndex, currentQuestionInd
   };
 }
 
+export function changeQuestionType(currentQuestionSetIndex, currentQuestionIndex, questionType) {
+  return {
+    type: CHANGE_QUESTION_TYPE_SUCCESS,
+    payload: { currentQuestionSetIndex, currentQuestionIndex, questionType },
+  };
+}
+
 export function addQuestionOption(
   currentQuestionSetIndex, currentQuestionIndex, questionOptionText, questionOptionValue) {
   return {
@@ -185,7 +177,14 @@ export function addPage(panelId, panelHeader, panelText) {
   };
 }
 
-export function addQuestion(
+export function deletePage(panelId) {
+  return {
+    type: DELETE_PAGE_SUCCESS,
+    payload: { panelId },
+  };
+}
+
+export function addQuestionSet(
   currentPanelId,
   questionSetId,
   questionSetHeader,
@@ -194,7 +193,7 @@ export function addQuestion(
   questionText,
   questionType) {
   return {
-    type: ADD_QUESTION_SUCCESS,
+    type: ADD_QUESTION_SET_SUCCESS,
     payload: {
       currentPanelId,
       questionSetId,
@@ -203,6 +202,53 @@ export function addQuestion(
       question,
       questionText,
       questionType },
+  };
+}
+
+export function addQuestion(
+  currentQuestionSetIndex,
+  questionSetId,
+  questionId,
+  question,
+  questionText,
+  questionType) {
+  return {
+    type: ADD_QUESTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex,
+      questionSetId,
+      questionId,
+      question,
+      questionText,
+      questionType },
+  };
+}
+
+export function addConditionalQuestion(
+  currentQuestionSetIndex,
+  currentQuestionIndex,
+  questionOptionIndex,
+  questionId,
+  question,
+  questionText,
+  questionType) {
+  return {
+    type: ADD_CONDITIONAL_QUESTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex,
+      currentQuestionIndex,
+      questionOptionIndex,
+      questionId,
+      question,
+      questionText,
+      questionType },
+  };
+}
+
+export function deleteQuestion(currentQuestionSetIndex, currentQuestionIndex) {
+  return {
+    type: DELETE_QUESTION_SUCCESS,
+    payload: { currentQuestionSetIndex, currentQuestionIndex },
   };
 }
 
@@ -219,12 +265,5 @@ export function updateQuestion(
   return {
     type: UPDATE_QUESTION_SUCCESS,
     payload: { currentQuestionSetIndex, currentQuestionIndex, question, questionText },
-  };
-}
-
-export function uploadJSON(schema) {
-  return {
-    type: UPLOAD_JSON_SUCCESS,
-    payload: { schema },
   };
 }

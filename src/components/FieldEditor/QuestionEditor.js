@@ -11,11 +11,19 @@ import {
   editQuestionOptionText,
   editQuestionOptionValue,
   addQuestionOption,
+  deleteQuestion,
   deleteQuestionOption,
+  changeQuestionType,
+  changeCurrentEditingField,
 } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../UI/FieldGroup';
 import DeleteQuestionOptionButton from '../FormMenu/DeleteQuestionOptionButton';
+import AddConditionalQuestionButton from '../FormMenu/AddConditionalQuestionButton';
+import DeleteQuestionButton from '../FormMenu/DeleteQuestionButton';
+import AddQuestionButton from '../FormMenu/AddQuestionButton';
 import AddQuestionOptionButton from '../FormMenu/AddQuestionOptionButton';
+import SelectInput from '../InputTypes/SelectInput';
+import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
 class QuestionEditor extends Component {
   static propTypes = {
@@ -25,7 +33,9 @@ class QuestionEditor extends Component {
     editQuestionPostText: PropTypes.func.isRequired,
     editQuestionOptionText: PropTypes.func.isRequired,
     editQuestionOptionValue: PropTypes.func.isRequired,
+    changeQuestionType: PropTypes.func.isRequired,
     addQuestionOption: PropTypes.func.isRequired,
+    questionSetId: PropTypes.string.isRequired,
     questionId: PropTypes.string,
     question: PropTypes.string,
     questionText: PropTypes.string,
@@ -44,6 +54,7 @@ class QuestionEditor extends Component {
     questionInputType: '',
     questionInputOptions: fromJS([]),
   }
+
   constructor(props) {
     super(props);
     const {
@@ -65,19 +76,21 @@ class QuestionEditor extends Component {
     };
 
     this.onChange = this.onChange.bind(this);
+    this.onSelect = this.onSelect.bind(this);
     this.onOptionTextChange = this.onOptionTextChange.bind(this);
     this.onOptionValueChange = this.onOptionValueChange.bind(this);
     this.onAddQuestionOptionClick = this.onAddQuestionOptionClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    this.state = {
+    this.setState({
       questionId: nextProps.questionId,
       question: nextProps.question,
       questionText: nextProps.questionText,
       questionPostText: nextProps.questionPostText,
+      questionInputType: nextProps.questionInputType,
       questionInputOptions: nextProps.questionInputOptions.toJS(),
-    };
+    });
   }
 
   onChange(event) {
@@ -99,6 +112,12 @@ class QuestionEditor extends Component {
         break;
       default:
     }
+  }
+
+  onSelect(questionType) {
+    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
+    this.setState({ questionInputType: questionType });
+    this.props.changeQuestionType(currentQuestionSetIndex, currentQuestionIndex, questionType);
   }
 
   onOptionTextChange(event, index) {
@@ -169,7 +188,14 @@ class QuestionEditor extends Component {
                     />
                   </td>
                   <td>
-                    <DeleteQuestionOptionButton questionOptionIndex={ix} />
+                    <DeleteQuestionOptionButton
+                      questionOptionIndex={ix}
+                    />
+                  </td>
+                  <td>
+                    <AddConditionalQuestionButton
+                      questionOptionIndex={ix}
+                    />
                   </td>
                 </tr>))
             }
@@ -180,7 +206,9 @@ class QuestionEditor extends Component {
             </tr>
             <tr>
               <td colSpan={3}>
-                <AddQuestionOptionButton />
+                <AddQuestionOptionButton
+                  questionInputOptions={this.state.questionInputOptions}
+                />
               </td>
             </tr>
           </tbody>
@@ -191,6 +219,7 @@ class QuestionEditor extends Component {
 
   render() {
     const {
+      questionSetId,
       questionId,
       question,
       questionText,
@@ -200,52 +229,95 @@ class QuestionEditor extends Component {
     } = this.props;
     return (
       <form>
-        <FormGroup>
-          <FieldGroup
-            id="questionId"
-            name="questionId"
-            label="Question ID"
-            onChange={this.onChange}
-            placeholder={questionId}
-            value={this.state.questionId}
-          />
-        </FormGroup>
-        <FormGroup>
-          <FieldGroup
-            id="question"
-            name="question"
-            label="Question"
-            onChange={this.onChange}
-            placeholder={question}
-            value={this.state.question}
-          />
-        </FormGroup>
-        <FormGroup>
-          <FieldGroup
-            id="questionText"
-            name="questionText"
-            label="Question Text"
-            placeholder={questionText}
-            onChange={this.onChange}
-            value={this.state.questionText}
-          />
-        </FormGroup>
-        <FormGroup>
-          <FieldGroup
-            id="questionPostText"
-            name="questionPostText"
-            label="Question Post Text"
-            placeholder={questionPostText}
-            onChange={this.onChange}
-            value={this.state.questionPostText}
-          />
-        </FormGroup>
+        { this.props.currentQuestionIndex > -1 &&
+        <div>
+          <FormGroup>
+            <FieldGroup
+              id="questionSetId"
+              name="questionId"
+              label="Question Set ID"
+              onChange={this.onChange}
+              placeholder={questionSetId}
+              disabled
+            />
+          </FormGroup>
+          <FormGroup>
+            <FieldGroup
+              id="questionId"
+              name="questionId"
+              label="Question ID"
+              onChange={this.onChange}
+              placeholder={questionId}
+              value={this.state.questionId}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FieldGroup
+              id="question"
+              name="question"
+              label="Question"
+              onChange={this.onChange}
+              placeholder={question}
+              value={this.state.question}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FieldGroup
+              id="questionText"
+              name="questionText"
+              label="Question Text"
+              placeholder={questionText}
+              onChange={this.onChange}
+              value={this.state.questionText}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FieldGroup
+              id="questionPostText"
+              name="questionPostText"
+              label="Question Post Text"
+              placeholder={questionPostText}
+              onChange={this.onChange}
+              value={this.state.questionPostText}
+            />
+          </FormGroup>
+          <FormGroup>
+            <label htmlFor="questionInputType">
+              Change Question Type
+            </label>
+            <SelectInput
+              id="questionInputType"
+              labelId="questionInputType"
+              options={INPUT_TYPE_OPTIONS}
+              onSelect={this.onSelect}
+              initialValue={this.props.questionInputType}
+            />
+          </FormGroup>
+        </div>
+        }
         {
           (questionInputType === 'checkboxOptionsInput' ||
           questionInputType === 'selectInput' ||
           questionInputType === 'radioOptionsInput') &&
           questionInputOptions &&
+          this.props.currentQuestionIndex > -1 &&
           this.getQuestionOptions()
+        }
+        { this.props.currentQuestionIndex > -1 &&
+          <FormGroup>
+            <DeleteQuestionButton
+              currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+              currentQuestionIndex={this.props.currentQuestionIndex}
+            />
+          </FormGroup>
+        }
+        { this.props.currentQuestionIndex > -1 &&
+        <FormGroup>
+          <AddQuestionButton
+            questionSetId={this.props.questionSetId}
+            currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+          />
+        </FormGroup>
         }
       </form>
     );
@@ -254,6 +326,8 @@ class QuestionEditor extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
+    questionSetId: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex,
+      'questionSetId']),
     questionId: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex,
       'questions', ownProps.currentQuestionIndex, 'questionId']),
     question: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex,
@@ -281,6 +355,9 @@ export default connect(
     editQuestionOptionText,
     editQuestionOptionValue,
     addQuestionOption,
+    deleteQuestion,
     deleteQuestionOption,
+    changeQuestionType,
+    changeCurrentEditingField,
   })(QuestionEditor);
 

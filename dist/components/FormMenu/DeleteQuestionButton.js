@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
-
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -42,48 +38,40 @@ var _reactBootstrap = require('react-bootstrap');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
-var _FieldGroup = require('../UI/FieldGroup');
-
-var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var CreateFormButton = function (_Component) {
-  (0, _inherits3.default)(CreateFormButton, _Component);
+var DeleteQuestionButton = function (_Component) {
+  (0, _inherits3.default)(DeleteQuestionButton, _Component);
 
-  function CreateFormButton(props) {
-    (0, _classCallCheck3.default)(this, CreateFormButton);
+  function DeleteQuestionButton(props) {
+    (0, _classCallCheck3.default)(this, DeleteQuestionButton);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (CreateFormButton.__proto__ || (0, _getPrototypeOf2.default)(CreateFormButton)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (DeleteQuestionButton.__proto__ || (0, _getPrototypeOf2.default)(DeleteQuestionButton)).call(this, props));
 
     _this.state = {
-      showModal: false,
-      formTitle: ''
+      showModal: false
     };
 
-    _this.onChange = _this.onChange.bind(_this);
-    _this.onFormUpdate = _this.onFormUpdate.bind(_this);
+    _this.onConfirmDelete = _this.onConfirmDelete.bind(_this);
     return _this;
   }
 
-  (0, _createClass3.default)(CreateFormButton, [{
-    key: 'onChange',
-    value: function onChange(event) {
-      event.preventDefault();
-      this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
-    }
-  }, {
+  (0, _createClass3.default)(DeleteQuestionButton, [{
     key: 'onClose',
     value: function onClose(e) {
       e.preventDefault();
-      this.setState({ showModal: true });
+      this.setState({ showModal: false });
     }
   }, {
-    key: 'onFormUpdate',
-    value: function onFormUpdate(e) {
+    key: 'onConfirmDelete',
+    value: function onConfirmDelete(e) {
+      var _props = this.props,
+          currentQuestionSetIndex = _props.currentQuestionSetIndex,
+          currentQuestionIndex = _props.currentQuestionIndex;
+
       e.preventDefault();
-      this.props.createForm(this.state.formTitle);
       this.setState({ showModal: false });
+      this.props.deleteQuestion(currentQuestionSetIndex, currentQuestionIndex);
     }
   }, {
     key: 'render',
@@ -91,7 +79,7 @@ var CreateFormButton = function (_Component) {
       var _this2 = this;
 
       return _react2.default.createElement(
-        _reactBootstrap.Row,
+        'span',
         null,
         _react2.default.createElement(
           'div',
@@ -105,28 +93,13 @@ var CreateFormButton = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Modal.Title,
                 null,
-                'Create a new form'
+                'Delete Option Confirmation'
               )
             ),
             _react2.default.createElement(
               _reactBootstrap.Modal.Body,
               null,
-              _react2.default.createElement(
-                'form',
-                null,
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'formTitle',
-                    name: 'formTitle',
-                    label: 'Enter title of the form',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.formTitle
-                  })
-                )
-              )
+              'Are you sure you want to delete this question?'
             ),
             _react2.default.createElement(
               _reactBootstrap.Modal.Footer,
@@ -145,45 +118,44 @@ var CreateFormButton = function (_Component) {
                 _reactBootstrap.Button,
                 {
                   bsStyle: 'primary',
-                  onClick: this.onFormUpdate
+                  onClick: this.onConfirmDelete
                 },
-                'Save changes'
+                'Confirm Delete'
               )
             )
           )
         ),
         _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
-          _react2.default.createElement(
-            _reactBootstrap.Button,
-            {
-              className: 'btn btn-block btn-primary',
-              onClick: function onClick() {
-                _this2.setState({ showModal: true });
-              }
-            },
-            'new form'
-          )
+          _reactBootstrap.Button,
+          {
+            className: 'btn btn-block btn-danger',
+            onClick: function onClick() {
+              _this2.setState({ showModal: true });
+            }
+          },
+          'delete question'
         )
       );
     }
   }]);
-  return CreateFormButton;
+  return DeleteQuestionButton;
 }(_react.Component);
 
-CreateFormButton.propTypes = {
-  createForm: _propTypes2.default.func.isRequired
+DeleteQuestionButton.propTypes = {
+  deleteQuestion: _propTypes2.default.func.isRequired,
+  currentQuestionSetIndex: _propTypes2.default.number.isRequired,
+  currentQuestionIndex: _propTypes2.default.number.isRequired
 };
 
 
 function mapStateToProps(state) {
   return {
-    title: state.getIn(['form', 'title'])
+    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex'])
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { createForm: _winterfellFormBuilderActions.createForm })(CreateFormButton);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { deleteQuestion: _winterfellFormBuilderActions.deleteQuestion })(DeleteQuestionButton);
 
 exports.default = _default;
 ;
@@ -193,11 +165,11 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(CreateFormButton, 'CreateFormButton', 'src/components/FormMenu/CreateFormButton.js');
+  __REACT_HOT_LOADER__.register(DeleteQuestionButton, 'DeleteQuestionButton', 'src/components/FormMenu/DeleteQuestionButton.js');
 
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/CreateFormButton.js');
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/DeleteQuestionButton.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/CreateFormButton.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/DeleteQuestionButton.js');
 }();
 
 ;

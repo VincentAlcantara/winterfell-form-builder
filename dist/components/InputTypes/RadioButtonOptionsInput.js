@@ -111,7 +111,8 @@ var RadioButtonOptionsInput = function (_React$Component) {
                 className: _this2.props.classes.checkbox,
                 required: _this2.props.required ? 'required' : undefined,
                 onChange: _this2.handleChange,
-                onBlur: _this2.onBlur
+                onBlur: _this2.onBlur,
+                autoComplete: _this2.props.name + '-' + opt.value
               }),
               opt.text
             )

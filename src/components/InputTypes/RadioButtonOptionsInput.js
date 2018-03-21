@@ -82,6 +82,7 @@ class RadioButtonOptionsInput extends React.Component {
                 required={this.props.required ? 'required' : undefined}
                 onChange={this.handleChange}
                 onBlur={this.onBlur}
+                autoComplete={`${this.props.name}-${opt.value}`}
               />
               {opt.text}
             </label>

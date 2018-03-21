@@ -3,8 +3,9 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.loadForm = loadForm;
 exports.createForm = createForm;
+exports.uploadJSON = uploadJSON;
+exports.saveJSON = saveJSON;
 exports.editFormTitle = editFormTitle;
 exports.editPageHeader = editPageHeader;
 exports.editPageText = editPageText;
@@ -14,6 +15,7 @@ exports.editQuestionId = editQuestionId;
 exports.editQuestion = editQuestion;
 exports.editQuestionText = editQuestionText;
 exports.editQuestionPostText = editQuestionPostText;
+exports.changeQuestionType = changeQuestionType;
 exports.addQuestionOption = addQuestionOption;
 exports.editQuestionOptionText = editQuestionOptionText;
 exports.editQuestionOptionValue = editQuestionOptionValue;
@@ -21,24 +23,34 @@ exports.deleteQuestionOption = deleteQuestionOption;
 exports.goToPage = goToPage;
 exports.updateForm = updateForm;
 exports.addPage = addPage;
+exports.deletePage = deletePage;
+exports.addQuestionSet = addQuestionSet;
 exports.addQuestion = addQuestion;
+exports.addConditionalQuestion = addConditionalQuestion;
+exports.deleteQuestion = deleteQuestion;
 exports.changeCurrentEditingField = changeCurrentEditingField;
 exports.updateQuestion = updateQuestion;
-exports.uploadJSON = uploadJSON;
 
 var _constants = require('../common/constants');
-
-function loadForm(schema) {
-  return {
-    type: _constants.LOAD_FORM_SUCCESS,
-    payload: { schema: schema }
-  };
-}
 
 function createForm(title) {
   return {
     type: _constants.CREATE_FORM_SUCCESS,
     payload: { title: title }
+  };
+}
+
+function uploadJSON(schema, fileName) {
+  return {
+    type: _constants.UPLOAD_JSON_SUCCESS,
+    payload: { schema: schema, fileName: fileName }
+  };
+}
+
+function saveJSON(schema, fileName) {
+  return {
+    type: _constants.SAVE_FORM_SUCCESS,
+    payload: { schema: schema, fileName: fileName }
   };
 }
 
@@ -105,6 +117,13 @@ function editQuestionPostText(currentQuestionSetIndex, currentQuestionIndex, tex
   };
 }
 
+function changeQuestionType(currentQuestionSetIndex, currentQuestionIndex, questionType) {
+  return {
+    type: _constants.CHANGE_QUESTION_TYPE_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, questionType: questionType }
+  };
+}
+
 function addQuestionOption(currentQuestionSetIndex, currentQuestionIndex, questionOptionText, questionOptionValue) {
   return {
     type: _constants.ADD_QUESTION_OPTION_SUCCESS,
@@ -159,9 +178,16 @@ function addPage(panelId, panelHeader, panelText) {
   };
 }
 
-function addQuestion(currentPanelId, questionSetId, questionSetHeader, questionSetText, question, questionText, questionType) {
+function deletePage(panelId) {
   return {
-    type: _constants.ADD_QUESTION_SUCCESS,
+    type: _constants.DELETE_PAGE_SUCCESS,
+    payload: { panelId: panelId }
+  };
+}
+
+function addQuestionSet(currentPanelId, questionSetId, questionSetHeader, questionSetText, question, questionText, questionType) {
+  return {
+    type: _constants.ADD_QUESTION_SET_SUCCESS,
     payload: {
       currentPanelId: currentPanelId,
       questionSetId: questionSetId,
@@ -170,6 +196,40 @@ function addQuestion(currentPanelId, questionSetId, questionSetHeader, questionS
       question: question,
       questionText: questionText,
       questionType: questionType }
+  };
+}
+
+function addQuestion(currentQuestionSetIndex, questionSetId, questionId, question, questionText, questionType) {
+  return {
+    type: _constants.ADD_QUESTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex: currentQuestionSetIndex,
+      questionSetId: questionSetId,
+      questionId: questionId,
+      question: question,
+      questionText: questionText,
+      questionType: questionType }
+  };
+}
+
+function addConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, questionId, question, questionText, questionType) {
+  return {
+    type: _constants.ADD_CONDITIONAL_QUESTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex: currentQuestionSetIndex,
+      currentQuestionIndex: currentQuestionIndex,
+      questionOptionIndex: questionOptionIndex,
+      questionId: questionId,
+      question: question,
+      questionText: questionText,
+      questionType: questionType }
+  };
+}
+
+function deleteQuestion(currentQuestionSetIndex, currentQuestionIndex) {
+  return {
+    type: _constants.DELETE_QUESTION_SUCCESS,
+    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex }
   };
 }
 
@@ -186,13 +246,6 @@ function updateQuestion(currentQuestionSetIndex, currentQuestionIndex, question,
     payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, question: question, questionText: questionText }
   };
 }
-
-function uploadJSON(schema) {
-  return {
-    type: _constants.UPLOAD_JSON_SUCCESS,
-    payload: { schema: schema }
-  };
-}
 ;
 
 var _temp = function () {
@@ -200,9 +253,11 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(loadForm, 'loadForm', 'src/actions/winterfellFormBuilderActions.js');
-
   __REACT_HOT_LOADER__.register(createForm, 'createForm', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(uploadJSON, 'uploadJSON', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(saveJSON, 'saveJSON', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(editFormTitle, 'editFormTitle', 'src/actions/winterfellFormBuilderActions.js');
 
@@ -222,6 +277,8 @@ var _temp = function () {
 
   __REACT_HOT_LOADER__.register(editQuestionPostText, 'editQuestionPostText', 'src/actions/winterfellFormBuilderActions.js');
 
+  __REACT_HOT_LOADER__.register(changeQuestionType, 'changeQuestionType', 'src/actions/winterfellFormBuilderActions.js');
+
   __REACT_HOT_LOADER__.register(addQuestionOption, 'addQuestionOption', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(editQuestionOptionText, 'editQuestionOptionText', 'src/actions/winterfellFormBuilderActions.js');
@@ -236,13 +293,19 @@ var _temp = function () {
 
   __REACT_HOT_LOADER__.register(addPage, 'addPage', 'src/actions/winterfellFormBuilderActions.js');
 
+  __REACT_HOT_LOADER__.register(deletePage, 'deletePage', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(addQuestionSet, 'addQuestionSet', 'src/actions/winterfellFormBuilderActions.js');
+
   __REACT_HOT_LOADER__.register(addQuestion, 'addQuestion', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(addConditionalQuestion, 'addConditionalQuestion', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(deleteQuestion, 'deleteQuestion', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(changeCurrentEditingField, 'changeCurrentEditingField', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(updateQuestion, 'updateQuestion', 'src/actions/winterfellFormBuilderActions.js');
-
-  __REACT_HOT_LOADER__.register(uploadJSON, 'uploadJSON', 'src/actions/winterfellFormBuilderActions.js');
 }();
 
 ;
