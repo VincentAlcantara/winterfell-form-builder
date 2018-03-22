@@ -129,13 +129,13 @@ var DeleteQuestionOptionButton = function (_Component) {
         _react2.default.createElement(
           _reactBootstrap.Button,
           {
-            className: 'btn alert-danger',
+            className: 'btn btn-danger',
             title: 'delete this option',
             onClick: function onClick() {
               _this2.setState({ showModal: true });
             }
           },
-          _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-minus-sign', className: 'alert-danger' })
+          _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-minus-sign' })
         )
       );
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, FormControl } from 'react-bootstrap';
+import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import { fromJS } from 'immutable';
 import {
   editQuestionId,
@@ -16,7 +16,7 @@ import {
   changeQuestionType,
   changeCurrentEditingField,
 } from '../../actions/winterfellFormBuilderActions';
-import FieldGroup from '../UI/FieldGroup';
+import FieldGroup from '../InputTypes/FieldGroup';
 import DeleteQuestionOptionButton from '../FormMenu/DeleteQuestionOptionButton';
 import AddConditionalQuestionButton from '../FormMenu/AddConditionalQuestionButton';
 import DeleteQuestionButton from '../FormMenu/DeleteQuestionButton';
@@ -58,6 +58,7 @@ class QuestionEditor extends Component {
   constructor(props) {
     super(props);
     const {
+      questionSetId,
       questionId,
       question,
       questionText,
@@ -67,12 +68,14 @@ class QuestionEditor extends Component {
     } = props;
 
     this.state = {
+      questionSetId,
       questionId,
       question,
       questionText,
       questionPostText,
       questionInputType,
       questionInputOptions: questionInputOptions.toJS(),
+      editQuestionId: true,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -80,6 +83,7 @@ class QuestionEditor extends Component {
     this.onOptionTextChange = this.onOptionTextChange.bind(this);
     this.onOptionValueChange = this.onOptionValueChange.bind(this);
     this.onAddQuestionOptionClick = this.onAddQuestionOptionClick.bind(this);
+    this.onEditQuestionIdClick = this.onEditQuestionIdClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -159,15 +163,25 @@ class QuestionEditor extends Component {
     this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex);
   }
 
+  onEditQuestionIdClick() {
+    this.setState({ editQuestionId: !this.state.editQuestionId });
+  }
+
+
   getQuestionOptions() {
     return (
       <FormGroup>
         <table>
           <tbody>
-            <tr>
-              <th>Options</th>
-              <th>Values</th>
-            </tr>
+            { this.props.questionInputOptions &&
+              this.props.questionInputOptions.size > 0 &&
+              <tr>
+                <th>Options</th>
+                <th>Values</th>
+                <th>Del</th>
+                <th>Flow</th>
+              </tr>
+            }
             { this.props.questionInputOptions &&
               this.props.questionInputOptions.toJS().map((option, ix) => (
                 <tr key={`${ix}`}>
@@ -199,6 +213,10 @@ class QuestionEditor extends Component {
                   </td>
                 </tr>))
             }
+          </tbody>
+        </table>
+        <table>
+          <tbody>
             <tr>
               <td colSpan={3}>
                 &nbsp;
@@ -234,10 +252,11 @@ class QuestionEditor extends Component {
           <FormGroup>
             <FieldGroup
               id="questionSetId"
-              name="questionId"
+              name="questionSetId"
               label="Question Set ID"
               onChange={this.onChange}
               placeholder={questionSetId}
+              value={this.state.questionSetId}
               disabled
             />
           </FormGroup>
@@ -249,7 +268,18 @@ class QuestionEditor extends Component {
               onChange={this.onChange}
               placeholder={questionId}
               value={this.state.questionId}
+              disabled={this.state.editQuestionId}
             />
+          </FormGroup>
+          <FormGroup>
+            <label htmlFor="edit-question-id" id="edit-question-id-label">
+              <input
+                id="edit-question-id"
+                type="checkbox"
+                onClick={this.onEditQuestionIdClick}
+              />
+              &nbsp;edit question id (not recommended)
+            </label>
           </FormGroup>
           <FormGroup>
             <FieldGroup
@@ -265,7 +295,7 @@ class QuestionEditor extends Component {
             <FieldGroup
               id="questionText"
               name="questionText"
-              label="Question Text"
+              label="Question Pre Text"
               placeholder={questionText}
               onChange={this.onChange}
               value={this.state.questionText}
@@ -319,6 +349,14 @@ class QuestionEditor extends Component {
           />
         </FormGroup>
         }
+        <FormGroup>
+          <Button
+            className="btn btn-block"
+            onClick={this.onEditQuestionIdClick}
+          >toggle edit question id (not recommended)
+          </Button>
+
+        </FormGroup>
       </form>
     );
   }

@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 
 import { changeCurrentEditingField, editFormTitle } from '../../actions/winterfellFormBuilderActions';
-import { FormPageEditor } from './FormPageEditor';
-import { FormQuestionSetEditor } from './FormQuestionSetEditor';
+import PageSelector from './PageSelector';
+import QuestionSetSelector from './QuestionSetSelector';
+import ButtonBarSelector from './ButtonBarSelector';
 
-class FormEditorContainer extends Component {
+
+class FieldSelectorContainer extends Component {
   static propTypes = {
     editFormTitle: PropTypes.func.isRequired,
     changeCurrentEditingField: PropTypes.func.isRequired,
@@ -18,6 +20,8 @@ class FormEditorContainer extends Component {
     questionPanels: PropTypes.object,
     panelHeader: PropTypes.string,
     panelText: PropTypes.string,
+    backButton: PropTypes.string,
+    nextButton: PropTypes.string,
   };
 
   static defaultProps = {
@@ -27,6 +31,8 @@ class FormEditorContainer extends Component {
     questionSets: null,
     panelHeader: '',
     panelText: '',
+    backButton: '',
+    nextButton: '',
     currentQuestionSetIndex: 0,
     currentQuestionIndex: 0,
   }
@@ -68,28 +74,39 @@ class FormEditorContainer extends Component {
       panelText,
       currentQuestionSetIndex,
       currentQuestionIndex,
+      backButton,
+      nextButton,
     } = this.props;
     const questionPanelsArray = questionPanels && questionPanels.toJS();
     const questionSetsArray = questionSets && questionSets.toJS();
     return (
       <Row>
         <Col xs={12}>
-          { typeof currentPanelIndex !== 'undefined' &&
-            <FormPageEditor
+          <form>
+            { typeof currentPanelIndex !== 'undefined' &&
+            <PageSelector
               panelHeader={panelHeader}
               panelText={panelText}
               onClick={() => this.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex)}
             />
-          }
-          { typeof currentPanelIndex !== 'undefined' &&
-            questionPanelsArray &&
-            <FormQuestionSetEditor
-              currentQuestionSets={questionPanelsArray[currentPanelIndex].questionSets}
-              questionSets={questionSetsArray}
-              onClick={this.props.changeCurrentEditingField}
-              currentQuestionIndex={this.props.currentQuestionIndex}
-            />
-          }
+            }
+            { typeof currentPanelIndex !== 'undefined' &&
+              questionPanelsArray &&
+              <QuestionSetSelector
+                currentQuestionSets={questionPanelsArray[currentPanelIndex].questionSets}
+                questionSets={questionSetsArray}
+                onClick={this.props.changeCurrentEditingField}
+                currentQuestionIndex={this.props.currentQuestionIndex}
+              />
+            }
+            { typeof currentPanelIndex !== 'undefined' &&
+              <ButtonBarSelector
+                backButton={backButton}
+                nextButton={nextButton}
+                onClick={() => this.props.changeCurrentEditingField('buttons', currentQuestionSetIndex, currentQuestionIndex)}
+              />
+            }
+          </form>
         </Col>
       </Row>
     );
@@ -108,11 +125,13 @@ function mapStateToProps(state, ownProps) {
     panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelText']),
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
+    nextButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'button', 'text']),
+    backButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'backButton', 'text']),
   };
 }
 
 export default connect(
   mapStateToProps,
   { changeCurrentEditingField, editFormTitle },
-)(FormEditorContainer);
+)(FieldSelectorContainer);
 

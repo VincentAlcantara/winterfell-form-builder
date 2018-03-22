@@ -32,6 +32,8 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _reactBootstrap = require('react-bootstrap');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var CheckboxOptionsInput = function (_React$Component) {
@@ -81,25 +83,29 @@ var CheckboxOptionsInput = function (_React$Component) {
               className: _this2.props.classes.checkboxListItem
             },
             _react2.default.createElement(
-              'label',
-              {
-                className: _this2.props.classes.checkboxLabel,
-                htmlFor: _this2.props.name + '-' + opt.value,
-                id: _this2.props.labelId
-              },
-              _react2.default.createElement('input', {
-                type: 'checkbox',
-                id: _this2.props.name + '-' + opt.value,
-                name: _this2.props.name,
-                'aria-labelledby': _this2.props.labelId,
-                value: opt.value,
-                checked: _this2.state.value.indexOf(opt.value) > -1,
-                className: _this2.props.classes.checkbox,
-                required: _this2.props.required ? 'required' : undefined,
-                onChange: _this2.handleChange,
-                autoComplete: _this2.props.name + '-' + opt.value
-              }),
-              opt.text
+              _reactBootstrap.FormGroup,
+              null,
+              _react2.default.createElement(
+                'label',
+                {
+                  className: _this2.props.classes.checkboxLabel,
+                  htmlFor: _this2.props.name + '-' + opt.value,
+                  id: _this2.props.labelId
+                },
+                _react2.default.createElement('input', {
+                  type: 'checkbox',
+                  id: _this2.props.name + '-' + opt.value,
+                  name: _this2.props.name,
+                  'aria-labelledby': _this2.props.labelId,
+                  value: opt.value,
+                  checked: _this2.state.value.indexOf(opt.value) > -1,
+                  className: _this2.props.classes.checkbox,
+                  required: _this2.props.required ? 'required' : undefined,
+                  onChange: _this2.handleChange,
+                  autoComplete: _this2.props.name + '-' + opt.value
+                }),
+                opt.text
+              )
             )
           );
         })

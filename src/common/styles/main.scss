@@ -22,6 +22,9 @@
 .winterfell-form-builder-field-editor {
   background: #eee;
   padding-top: 10px;
+  #edit-question-id-label {
+    font-weight: normal;
+  }
 }
 
 .winterfell-form-builder-field-editor {
@@ -39,4 +42,36 @@
     float: right;
     margin-top: 8px;
   }
+  td input, td button {
+    border-radius: 0;
+  }
+  tr:nth-child(2) {
+    td:first-child {
+      input {
+        border-top-left-radius: 4px
+      }
+    }
+    td:last-child  {
+      button {
+        border-top-right-radius: 4px;
+      }
+    }
+  }
+
+  tr:last-child {
+    td:first-child {
+      input {
+        border-bottom-left-radius: 4px;
+      }
+    }
+    td:last-child  {
+      button {
+        border-bottom-right-radius: 4px;
+      }
+    }
+  }
+}
+
+.winterfell-form-builder-question-set {
+  margin-top: -15px;
 }

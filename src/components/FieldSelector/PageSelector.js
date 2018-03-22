@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
-export const FormPageEditor = (props) => {
+const PageSelector = (props) => {
   const { panelHeader, panelText, onClick } = props;
   return (
     <Button
@@ -17,16 +17,16 @@ export const FormPageEditor = (props) => {
   );
 };
 
-FormPageEditor.propTypes = {
+PageSelector.propTypes = {
   onClick: PropTypes.func.isRequired,
   panelHeader: PropTypes.string,
   panelText: PropTypes.string,
 };
 
-FormPageEditor.defaultProps = {
+PageSelector.defaultProps = {
   panelHeader: '',
   panelText: '',
 };
 
-export default FormPageEditor;
+export default PageSelector;
 

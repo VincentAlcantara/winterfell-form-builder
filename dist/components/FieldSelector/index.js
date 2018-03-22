@@ -42,19 +42,27 @@ var _reactBootstrap = require('react-bootstrap');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
-var _FormPageEditor = require('./FormPageEditor');
+var _PageSelector = require('./PageSelector');
 
-var _FormQuestionSetEditor = require('./FormQuestionSetEditor');
+var _PageSelector2 = _interopRequireDefault(_PageSelector);
+
+var _QuestionSetSelector = require('./QuestionSetSelector');
+
+var _QuestionSetSelector2 = _interopRequireDefault(_QuestionSetSelector);
+
+var _ButtonBarSelector = require('./ButtonBarSelector');
+
+var _ButtonBarSelector2 = _interopRequireDefault(_ButtonBarSelector);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var FormEditorContainer = function (_Component) {
-  (0, _inherits3.default)(FormEditorContainer, _Component);
+var FieldSelectorContainer = function (_Component) {
+  (0, _inherits3.default)(FieldSelectorContainer, _Component);
 
-  function FormEditorContainer(props) {
-    (0, _classCallCheck3.default)(this, FormEditorContainer);
+  function FieldSelectorContainer(props) {
+    (0, _classCallCheck3.default)(this, FieldSelectorContainer);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (FormEditorContainer.__proto__ || (0, _getPrototypeOf2.default)(FormEditorContainer)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (FieldSelectorContainer.__proto__ || (0, _getPrototypeOf2.default)(FieldSelectorContainer)).call(this, props));
 
     _this.state = {
       currentPanel: null,
@@ -66,7 +74,7 @@ var FormEditorContainer = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(FormEditorContainer, [{
+  (0, _createClass3.default)(FieldSelectorContainer, [{
     key: 'onChange',
     value: function onChange(event) {
       event.preventDefault();
@@ -97,7 +105,9 @@ var FormEditorContainer = function (_Component) {
           panelHeader = _props.panelHeader,
           panelText = _props.panelText,
           currentQuestionSetIndex = _props.currentQuestionSetIndex,
-          currentQuestionIndex = _props.currentQuestionIndex;
+          currentQuestionIndex = _props.currentQuestionIndex,
+          backButton = _props.backButton,
+          nextButton = _props.nextButton;
 
       var questionPanelsArray = questionPanels && questionPanels.toJS();
       var questionSetsArray = questionSets && questionSets.toJS();
@@ -107,27 +117,38 @@ var FormEditorContainer = function (_Component) {
         _react2.default.createElement(
           _reactBootstrap.Col,
           { xs: 12 },
-          typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_FormPageEditor.FormPageEditor, {
-            panelHeader: panelHeader,
-            panelText: panelText,
-            onClick: function onClick() {
-              return _this2.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex);
-            }
-          }),
-          typeof currentPanelIndex !== 'undefined' && questionPanelsArray && _react2.default.createElement(_FormQuestionSetEditor.FormQuestionSetEditor, {
-            currentQuestionSets: questionPanelsArray[currentPanelIndex].questionSets,
-            questionSets: questionSetsArray,
-            onClick: this.props.changeCurrentEditingField,
-            currentQuestionIndex: this.props.currentQuestionIndex
-          })
+          _react2.default.createElement(
+            'form',
+            null,
+            typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_PageSelector2.default, {
+              panelHeader: panelHeader,
+              panelText: panelText,
+              onClick: function onClick() {
+                return _this2.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex);
+              }
+            }),
+            typeof currentPanelIndex !== 'undefined' && questionPanelsArray && _react2.default.createElement(_QuestionSetSelector2.default, {
+              currentQuestionSets: questionPanelsArray[currentPanelIndex].questionSets,
+              questionSets: questionSetsArray,
+              onClick: this.props.changeCurrentEditingField,
+              currentQuestionIndex: this.props.currentQuestionIndex
+            }),
+            typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_ButtonBarSelector2.default, {
+              backButton: backButton,
+              nextButton: nextButton,
+              onClick: function onClick() {
+                return _this2.props.changeCurrentEditingField('buttons', currentQuestionSetIndex, currentQuestionIndex);
+              }
+            })
+          )
         )
       );
     }
   }]);
-  return FormEditorContainer;
+  return FieldSelectorContainer;
 }(_react.Component);
 
-FormEditorContainer.propTypes = {
+FieldSelectorContainer.propTypes = {
   editFormTitle: _propTypes2.default.func.isRequired,
   changeCurrentEditingField: _propTypes2.default.func.isRequired,
   currentPanelIndex: _propTypes2.default.number.isRequired,
@@ -136,15 +157,19 @@ FormEditorContainer.propTypes = {
   questionSets: _propTypes2.default.object,
   questionPanels: _propTypes2.default.object,
   panelHeader: _propTypes2.default.string,
-  panelText: _propTypes2.default.string
+  panelText: _propTypes2.default.string,
+  backButton: _propTypes2.default.string,
+  nextButton: _propTypes2.default.string
 };
-FormEditorContainer.defaultProps = {
+FieldSelectorContainer.defaultProps = {
   currentPanelId: 'Select Page',
   currentPanelIndex: 0,
   questionPanels: null,
   questionSets: null,
   panelHeader: '',
   panelText: '',
+  backButton: '',
+  nextButton: '',
   currentQuestionSetIndex: 0,
   currentQuestionIndex: 0
 };
@@ -161,11 +186,13 @@ function mapStateToProps(state, ownProps) {
     panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelHeader']),
     panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelText']),
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
-    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex'])
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
+    nextButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'button', 'text']),
+    backButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'backButton', 'text'])
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField, editFormTitle: _winterfellFormBuilderActions.editFormTitle })(FormEditorContainer);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField, editFormTitle: _winterfellFormBuilderActions.editFormTitle })(FieldSelectorContainer);
 
 exports.default = _default;
 ;
@@ -175,11 +202,11 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(FormEditorContainer, 'FormEditorContainer', 'src/components/FormEditor/FormEditorContainer.js');
+  __REACT_HOT_LOADER__.register(FieldSelectorContainer, 'FieldSelectorContainer', 'src/components/FieldSelector/index.js');
 
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormEditor/FormEditorContainer.js');
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FieldSelector/index.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormEditor/FormEditorContainer.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldSelector/index.js');
 }();
 
 ;

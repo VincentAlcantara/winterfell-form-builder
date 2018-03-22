@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FormQuestionSetEditor = undefined;
 
 var _react = require('react');
 
@@ -15,11 +14,13 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactBootstrap = require('react-bootstrap');
 
-var _FormQuestionEditor = require('./FormQuestionEditor');
+var _QuestionSelector = require('./QuestionSelector');
+
+var _QuestionSelector2 = _interopRequireDefault(_QuestionSelector);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestionSetEditor(props) {
+var QuestionSetSelector = function QuestionSetSelector(props) {
   var currentQuestionSets = props.currentQuestionSets,
       questionSets = props.questionSets,
       _onClick = props.onClick,
@@ -33,7 +34,7 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
           return _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement(
+            questionSet.questionSetHeader && _react2.default.createElement(
               _reactBootstrap.Button,
               {
                 className: 'winterfell-field-editor btn-block',
@@ -56,7 +57,7 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
                 )
               )
             ),
-            _react2.default.createElement(_FormQuestionEditor.FormQuestionEditor, {
+            _react2.default.createElement(_QuestionSelector2.default, {
               questionSetIndex: questionSetIndex,
               questions: questionSet.questions,
               onClick: _onClick,
@@ -71,26 +72,26 @@ var FormQuestionSetEditor = exports.FormQuestionSetEditor = function FormQuestio
 
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'winterfell-form-builder-question-set' },
     currentQuestionSets && displayQuestionSet()
   );
 };
 
-FormQuestionSetEditor.propTypes = {
+QuestionSetSelector.propTypes = {
   onClick: _propTypes2.default.func.isRequired,
   questionSets: _propTypes2.default.array,
   currentQuestionSets: _propTypes2.default.array,
   currentQuestionIndex: _propTypes2.default.number
 };
 
-FormQuestionSetEditor.defaultProps = {
+QuestionSetSelector.defaultProps = {
   questionSetIndex: 0,
   questionSets: null,
   currentQuestionSets: null,
   currentQuestionIndex: 0
 };
 
-var _default = FormQuestionSetEditor;
+var _default = QuestionSetSelector;
 exports.default = _default;
 ;
 
@@ -99,9 +100,9 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(FormQuestionSetEditor, 'FormQuestionSetEditor', 'src/components/FormEditor/FormQuestionSetEditor.js');
+  __REACT_HOT_LOADER__.register(QuestionSetSelector, 'QuestionSetSelector', 'src/components/FieldSelector/QuestionSetSelector.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormEditor/FormQuestionSetEditor.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldSelector/QuestionSetSelector.js');
 }();
 
 ;

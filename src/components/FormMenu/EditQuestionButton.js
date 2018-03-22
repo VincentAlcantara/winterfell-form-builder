@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
 import { updateQuestion } from '../../actions/winterfellFormBuilderActions';
-import FieldGroup from '../UI/FieldGroup';
+import FieldGroup from '../InputTypes/FieldGroup';
 
 
 class updateQuestionButton extends Component {

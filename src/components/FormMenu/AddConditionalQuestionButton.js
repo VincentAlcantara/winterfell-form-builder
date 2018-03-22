@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Row, Col, Button, Modal, FormGroup, Glyphicon } from 'react-bootstrap';
 import { addConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
-import FieldGroup from '../UI/FieldGroup';
+import FieldGroup from '../InputTypes/FieldGroup';
 import SelectInput from '../InputTypes/SelectInput';
 import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
@@ -129,7 +129,7 @@ class AddConditionalQuestionButton extends Component {
         </div>
         <Col xs={12}>
           <Button
-            className="btn alert-info"
+            className="btn btn-primary"
             onClick={() => {
               this.setState({ showModal: true });
             }}

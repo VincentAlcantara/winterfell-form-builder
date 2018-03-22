@@ -1,10 +1,12 @@
-import RadioButtonOptionsInput from '../InputTypes/RadioButtonOptionsInput';
-import CheckboxOptionsInput from '../InputTypes/CheckboxOptionsInput';
-import SelectInput from '../InputTypes/SelectInput';
+import RadioButtonOptionsInput from './RadioButtonOptionsInput';
+import CheckboxOptionsInput from './CheckboxOptionsInput';
+import SelectInput from './SelectInput';
+import FieldGroup from './FieldGroup';
 
 
 export {
   RadioButtonOptionsInput,
   CheckboxOptionsInput,
   SelectInput,
+  FieldGroup,
 };

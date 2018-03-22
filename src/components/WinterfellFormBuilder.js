@@ -13,7 +13,7 @@ import {
   EditSchemaButton,
   UploadJSONButton,
 } from './FormMenu';
-import FormEditor from './FormEditor';
+import FieldSelector from './FieldSelector';
 import FieldEditor from './FieldEditor';
 
 class WinterfellFormBuilder extends Component {
@@ -152,9 +152,9 @@ class WinterfellFormBuilder extends Component {
                   </Col>
                 </Row>
               </Col>
-              <Col xs={8}>
+              <Col xs={8} className="winterfell-form-builder-page-editor">
                 { this.props.schema.size !== 0 &&
-                  <FormEditor
+                  <FieldSelector
                     currentPanelIndex={currentPanelIndex}
                   />
                 }

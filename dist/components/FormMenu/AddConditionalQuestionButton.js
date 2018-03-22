@@ -42,7 +42,7 @@ var _reactBootstrap = require('react-bootstrap');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
-var _FieldGroup = require('../UI/FieldGroup');
+var _FieldGroup = require('../InputTypes/FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
@@ -222,7 +222,7 @@ var AddConditionalQuestionButton = function (_Component) {
           _react2.default.createElement(
             _reactBootstrap.Button,
             {
-              className: 'btn alert-info',
+              className: 'btn btn-primary',
               onClick: function onClick() {
                 _this2.setState({ showModal: true });
               }

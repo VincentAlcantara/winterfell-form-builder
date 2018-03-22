@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FormQuestionEditor = undefined;
 
 var _react = require('react');
 
@@ -19,7 +18,7 @@ var _InputTypes = require('../InputTypes/');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var FormQuestionEditor = exports.FormQuestionEditor = function FormQuestionEditor(props) {
+var FormQuestionEditor = function FormQuestionEditor(props) {
   var questionSetIndex = props.questionSetIndex,
       questions = props.questions,
       _onClick = props.onClick;
@@ -37,7 +36,7 @@ var FormQuestionEditor = exports.FormQuestionEditor = function FormQuestionEdito
           key: '' + question.questionId
         },
         _react2.default.createElement(
-          'div',
+          _reactBootstrap.FormGroup,
           null,
           _react2.default.createElement(
             'label',
@@ -107,9 +106,9 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(FormQuestionEditor, 'FormQuestionEditor', 'src/components/FormEditor/FormQuestionEditor.js');
+  __REACT_HOT_LOADER__.register(FormQuestionEditor, 'FormQuestionEditor', 'src/components/FieldSelector/QuestionSelector.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormEditor/FormQuestionEditor.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldSelector/QuestionSelector.js');
 }();
 
 ;

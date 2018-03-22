@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
 import fileDownload from 'react-file-download';
 import { saveJSON } from '../../actions/winterfellFormBuilderActions';
-import FieldGroup from '../UI/FieldGroup';
+import FieldGroup from '../InputTypes/FieldGroup';
 
 
 class SaveFormButton extends Component {
