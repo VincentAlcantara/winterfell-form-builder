@@ -32,7 +32,7 @@ var QuestionSetSelector = function QuestionSetSelector(props) {
       return questionSets.map(function (questionSet, questionSetIndex) {
         if (currentQuestionSet.questionSetId === questionSet.questionSetId) {
           return _react2.default.createElement(
-            'div',
+            'span',
             null,
             questionSet.questionSetHeader && _react2.default.createElement(
               _reactBootstrap.Button,

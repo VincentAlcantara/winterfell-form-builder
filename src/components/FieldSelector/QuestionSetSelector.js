@@ -13,7 +13,7 @@ const QuestionSetSelector = (props) => {
           if (currentQuestionSet.questionSetId === questionSet.questionSetId
           ) {
             return (
-              <div>
+              <span>
                 { questionSet.questionSetHeader &&
                 <Button
                   className="winterfell-field-editor btn-block"
@@ -31,7 +31,7 @@ const QuestionSetSelector = (props) => {
                   onClick={onClick}
                   currentQuestionIndex={currentQuestionIndex}
                 />
-              </div>
+              </span>
             );
           }
           return null;

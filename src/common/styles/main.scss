@@ -5,6 +5,7 @@
   padding-top: 0;
   padding-bottom: 0;
   white-space: normal;
+  margin-top: 0;
   &:hover {
     text-align: left;
     border: 1px dotted #ccc;
@@ -73,5 +74,7 @@
 }
 
 .winterfell-form-builder-question-set {
-  margin-top: -15px;
+  h4 {
+    margin-top: 2px;
+  }
 }
