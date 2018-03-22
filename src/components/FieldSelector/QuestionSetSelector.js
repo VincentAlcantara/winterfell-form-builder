@@ -1,18 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import { FormQuestionEditor } from './FormQuestionEditor';
+import QuestionSelector from './QuestionSelector';
 
-export const FormQuestionSetEditor = (props) => {
+const QuestionSetSelector = (props) => {
   const { currentQuestionSets, questionSets, onClick, currentQuestionIndex } = props;
 
   const displayQuestionSet = () => currentQuestionSets.map(
     currentQuestionSet => (
       questionSets.map(
         (questionSet, questionSetIndex) => {
-          if (currentQuestionSet.questionSetId === questionSet.questionSetId) {
+          if (currentQuestionSet.questionSetId === questionSet.questionSetId
+          ) {
             return (
-              <div>
+              <span>
+                { questionSet.questionSetHeader &&
                 <Button
                   className="winterfell-field-editor btn-block"
                   onClick={() => onClick('questionSet', questionSetIndex, currentQuestionIndex)}
@@ -22,13 +24,14 @@ export const FormQuestionSetEditor = (props) => {
                     <p>{questionSet.questionSetText}</p>
                   </div>
                 </Button>
-                <FormQuestionEditor
+                }
+                <QuestionSelector
                   questionSetIndex={questionSetIndex}
                   questions={questionSet.questions}
                   onClick={onClick}
                   currentQuestionIndex={currentQuestionIndex}
                 />
-              </div>
+              </span>
             );
           }
           return null;
@@ -38,25 +41,25 @@ export const FormQuestionSetEditor = (props) => {
     );
 
   return (
-    <div>
+    <div className="winterfell-form-builder-question-set">
       {currentQuestionSets && displayQuestionSet()}
     </div>
   );
 };
 
-FormQuestionSetEditor.propTypes = {
+QuestionSetSelector.propTypes = {
   onClick: PropTypes.func.isRequired,
   questionSets: PropTypes.array,
   currentQuestionSets: PropTypes.array,
   currentQuestionIndex: PropTypes.number,
 };
 
-FormQuestionSetEditor.defaultProps = {
+QuestionSetSelector.defaultProps = {
   questionSetIndex: 0,
   questionSets: null,
   currentQuestionSets: null,
   currentQuestionIndex: 0,
 };
 
-export default FormQuestionSetEditor;
+export default QuestionSetSelector;
 

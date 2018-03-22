@@ -50,7 +50,7 @@ var _reactFileDownload2 = _interopRequireDefault(_reactFileDownload);
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
-var _FieldGroup = require('../UI/FieldGroup');
+var _FieldGroup = require('../InputTypes/FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 

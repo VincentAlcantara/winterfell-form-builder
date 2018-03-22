@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
+import { Button, FormGroup } from 'react-bootstrap';
 import { RadioButtonOptionsInput, CheckboxOptionsInput, SelectInput } from '../InputTypes/';
 
-export const FormQuestionEditor = (props) => {
+const FormQuestionEditor = (props) => {
   const { questionSetIndex, questions, onClick } = props;
 
   const displayQuestionButtons = () => questions.map((question, questionIndex) => (
@@ -12,7 +12,7 @@ export const FormQuestionEditor = (props) => {
       onClick={() => onClick('question', questionSetIndex, questionIndex)}
       key={`${question.questionId}`}
     >
-      <div>
+      <FormGroup>
         <label htmlFor={question.questionId}>{question.question}</label>
         {
           question.text &&
@@ -60,7 +60,7 @@ export const FormQuestionEditor = (props) => {
           question.postText &&
           <p>{question.postText}</p>
         }
-      </div>
+      </FormGroup>
     </Button>
   ));
 

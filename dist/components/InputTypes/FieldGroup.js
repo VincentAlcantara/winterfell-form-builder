@@ -59,9 +59,9 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(FieldGroup, 'FieldGroup', 'src/components/UI/FieldGroup.js');
+  __REACT_HOT_LOADER__.register(FieldGroup, 'FieldGroup', 'src/components/InputTypes/FieldGroup.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/UI/FieldGroup.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/InputTypes/FieldGroup.js');
 }();
 
 ;

@@ -6,7 +6,7 @@ import { fromJS } from 'immutable';
 
 import { editPageHeader, editPageText, changeCurrentEditingField } from '../../actions/winterfellFormBuilderActions';
 import { AddQuestionSetButton } from '../FormMenu';
-import FieldGroup from '../UI/FieldGroup';
+import FieldGroup from '../InputTypes/FieldGroup';
 
 class PageEditor extends Component {
   static propTypes = {

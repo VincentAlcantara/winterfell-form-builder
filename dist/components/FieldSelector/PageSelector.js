@@ -3,7 +3,6 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FormPageEditor = undefined;
 
 var _react = require('react');
 
@@ -17,7 +16,7 @@ var _reactBootstrap = require('react-bootstrap');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var FormPageEditor = exports.FormPageEditor = function FormPageEditor(props) {
+var PageSelector = function PageSelector(props) {
   var panelHeader = props.panelHeader,
       panelText = props.panelText,
       onClick = props.onClick;
@@ -45,18 +44,18 @@ var FormPageEditor = exports.FormPageEditor = function FormPageEditor(props) {
   );
 };
 
-FormPageEditor.propTypes = {
+PageSelector.propTypes = {
   onClick: _propTypes2.default.func.isRequired,
   panelHeader: _propTypes2.default.string,
   panelText: _propTypes2.default.string
 };
 
-FormPageEditor.defaultProps = {
+PageSelector.defaultProps = {
   panelHeader: '',
   panelText: ''
 };
 
-var _default = FormPageEditor;
+var _default = PageSelector;
 exports.default = _default;
 ;
 
@@ -65,9 +64,9 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(FormPageEditor, 'FormPageEditor', 'src/components/FormEditor/FormPageEditor.js');
+  __REACT_HOT_LOADER__.register(PageSelector, 'PageSelector', 'src/components/FieldSelector/PageSelector.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormEditor/FormPageEditor.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldSelector/PageSelector.js');
 }();
 
 ;

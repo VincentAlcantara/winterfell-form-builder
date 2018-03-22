@@ -48,9 +48,9 @@ var _Previewer2 = _interopRequireDefault(_Previewer);
 
 var _FormMenu = require('./FormMenu');
 
-var _FormEditor = require('./FormEditor');
+var _FieldSelector = require('./FieldSelector');
 
-var _FormEditor2 = _interopRequireDefault(_FormEditor);
+var _FieldSelector2 = _interopRequireDefault(_FieldSelector);
 
 var _FieldEditor = require('./FieldEditor');
 
@@ -225,8 +225,8 @@ var WinterfellFormBuilder = function (_Component) {
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 8 },
-                this.props.schema.size !== 0 && _react2.default.createElement(_FormEditor2.default, {
+                { xs: 8, className: 'winterfell-form-builder-page-editor' },
+                this.props.schema.size !== 0 && _react2.default.createElement(_FieldSelector2.default, {
                   currentPanelIndex: currentPanelIndex
                 }),
                 this.props.schema.size === 0 && _react2.default.createElement(

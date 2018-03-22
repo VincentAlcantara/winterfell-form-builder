@@ -48,7 +48,7 @@ var _immutable = require('immutable');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
-var _FieldGroup = require('../UI/FieldGroup');
+var _FieldGroup = require('../InputTypes/FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
@@ -88,7 +88,8 @@ var QuestionEditor = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (QuestionEditor.__proto__ || (0, _getPrototypeOf2.default)(QuestionEditor)).call(this, props));
 
-    var questionId = props.questionId,
+    var questionSetId = props.questionSetId,
+        questionId = props.questionId,
         question = props.question,
         questionText = props.questionText,
         questionPostText = props.questionPostText,
@@ -97,12 +98,14 @@ var QuestionEditor = function (_Component) {
 
 
     _this.state = {
+      questionSetId: questionSetId,
       questionId: questionId,
       question: question,
       questionText: questionText,
       questionPostText: questionPostText,
       questionInputType: questionInputType,
-      questionInputOptions: questionInputOptions.toJS()
+      questionInputOptions: questionInputOptions.toJS(),
+      editQuestionId: true
     };
 
     _this.onChange = _this.onChange.bind(_this);
@@ -110,6 +113,7 @@ var QuestionEditor = function (_Component) {
     _this.onOptionTextChange = _this.onOptionTextChange.bind(_this);
     _this.onOptionValueChange = _this.onOptionValueChange.bind(_this);
     _this.onAddQuestionOptionClick = _this.onAddQuestionOptionClick.bind(_this);
+    _this.onEditQuestionIdClick = _this.onEditQuestionIdClick.bind(_this);
     return _this;
   }
 
@@ -216,6 +220,11 @@ var QuestionEditor = function (_Component) {
       this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex);
     }
   }, {
+    key: 'onEditQuestionIdClick',
+    value: function onEditQuestionIdClick() {
+      this.setState({ editQuestionId: !this.state.editQuestionId });
+    }
+  }, {
     key: 'getQuestionOptions',
     value: function getQuestionOptions() {
       var _this2 = this;
@@ -229,7 +238,7 @@ var QuestionEditor = function (_Component) {
           _react2.default.createElement(
             'tbody',
             null,
-            _react2.default.createElement(
+            this.props.questionInputOptions && this.props.questionInputOptions.size > 0 && _react2.default.createElement(
               'tr',
               null,
               _react2.default.createElement(
@@ -241,6 +250,16 @@ var QuestionEditor = function (_Component) {
                 'th',
                 null,
                 'Values'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Del'
+              ),
+              _react2.default.createElement(
+                'th',
+                null,
+                'Flow'
               )
             ),
             this.props.questionInputOptions && this.props.questionInputOptions.toJS().map(function (option, ix) {
@@ -286,7 +305,15 @@ var QuestionEditor = function (_Component) {
                   })
                 )
               );
-            }),
+            })
+          )
+        ),
+        _react2.default.createElement(
+          'table',
+          null,
+          _react2.default.createElement(
+            'tbody',
+            null,
             _react2.default.createElement(
               'tr',
               null,
@@ -334,10 +361,11 @@ var QuestionEditor = function (_Component) {
             null,
             _react2.default.createElement(_FieldGroup2.default, {
               id: 'questionSetId',
-              name: 'questionId',
+              name: 'questionSetId',
               label: 'Question Set ID',
               onChange: this.onChange,
               placeholder: questionSetId,
+              value: this.state.questionSetId,
               disabled: true
             })
           ),
@@ -350,8 +378,23 @@ var QuestionEditor = function (_Component) {
               label: 'Question ID',
               onChange: this.onChange,
               placeholder: questionId,
-              value: this.state.questionId
+              value: this.state.questionId,
+              disabled: this.state.editQuestionId
             })
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.FormGroup,
+            null,
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'edit-question-id', id: 'edit-question-id-label' },
+              _react2.default.createElement('input', {
+                id: 'edit-question-id',
+                type: 'checkbox',
+                onClick: this.onEditQuestionIdClick
+              }),
+              '\xA0edit question id (not recommended)'
+            )
           ),
           _react2.default.createElement(
             _reactBootstrap.FormGroup,
@@ -371,7 +414,7 @@ var QuestionEditor = function (_Component) {
             _react2.default.createElement(_FieldGroup2.default, {
               id: 'questionText',
               name: 'questionText',
-              label: 'Question Text',
+              label: 'Question Pre Text',
               placeholder: questionText,
               onChange: this.onChange,
               value: this.state.questionText
@@ -422,6 +465,18 @@ var QuestionEditor = function (_Component) {
             questionSetId: this.props.questionSetId,
             currentQuestionSetIndex: this.props.currentQuestionSetIndex
           })
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.FormGroup,
+          null,
+          _react2.default.createElement(
+            _reactBootstrap.Button,
+            {
+              className: 'btn btn-block',
+              onClick: this.onEditQuestionIdClick
+            },
+            'toggle edit question id (not recommended)'
+          )
         )
       );
     }

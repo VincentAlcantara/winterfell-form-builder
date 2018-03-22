@@ -59,12 +59,12 @@ class DeleteQuestionOptionButton extends Component {
           </Modal>
         </div>
         <Button
-          className="btn alert-danger"
+          className="btn btn-danger"
           title="delete this option"
           onClick={() => {
             this.setState({ showModal: true });
           }}
-        ><Glyphicon glyph="glyphicon glyphicon-minus-sign" className="alert-danger" />
+        ><Glyphicon glyph="glyphicon glyphicon-minus-sign" />
         </Button>
       </span>
     );

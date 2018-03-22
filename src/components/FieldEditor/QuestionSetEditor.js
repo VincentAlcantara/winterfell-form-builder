@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FormGroup, Button } from 'react-bootstrap';
 import { editQuestionSetHeader, editQuestionSetText, changeCurrentEditingField } from '../../actions/winterfellFormBuilderActions';
-import FieldGroup from '../UI/FieldGroup';
+import FieldGroup from '../InputTypes/FieldGroup';
 
 class QuestionSetEditor extends Component {
   static propTypes = {

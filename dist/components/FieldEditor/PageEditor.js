@@ -46,7 +46,7 @@ var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilder
 
 var _FormMenu = require('../FormMenu');
 
-var _FieldGroup = require('../UI/FieldGroup');
+var _FieldGroup = require('../InputTypes/FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
