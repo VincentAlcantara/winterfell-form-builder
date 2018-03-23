@@ -4,12 +4,13 @@ import { Row, Col } from 'react-bootstrap';
 import PageEditor from './PageEditor';
 import QuestionSetEditor from './QuestionSetEditor';
 import QuestionEditor from './QuestionEditor';
+import ButtonBarEditor from './ButtonBarEditor';
 
 
 function FieldEditor(props) {
   const {
     currentEditingField,
-    currentPanelIndex,
+    currentQuestionPanelIndex,
     currentQuestionSetIndex,
     currentQuestionIndex,
   } = props;
@@ -20,7 +21,7 @@ function FieldEditor(props) {
         {
           currentEditingField === 'page' &&
           <PageEditor
-            currentPanelIndex={currentPanelIndex}
+            currentQuestionPanelIndex={currentQuestionPanelIndex}
           />
         }
         {
@@ -35,6 +36,11 @@ function FieldEditor(props) {
             currentQuestionIndex={currentQuestionIndex}
           />
         }
+        { currentEditingField === 'buttons' &&
+          <ButtonBarEditor
+            currentQuestionPanelIndex={currentQuestionPanelIndex}
+          />
+        }
       </Col>
     </Row>
   );
@@ -42,7 +48,7 @@ function FieldEditor(props) {
 
 FieldEditor.propTypes = {
   currentEditingField: PropTypes.string.isRequired,
-  currentPanelIndex: PropTypes.number.isRequired,
+  currentQuestionPanelIndex: PropTypes.number.isRequired,
   currentQuestionSetIndex: PropTypes.number,
   currentQuestionIndex: PropTypes.number,
 };

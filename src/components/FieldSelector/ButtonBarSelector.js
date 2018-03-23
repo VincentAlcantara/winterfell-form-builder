@@ -7,7 +7,7 @@ const ButtonBarSelector = (props) => {
 
   return (
     <Button
-      className="winterfell-field-editor btn-block"
+      className="winterfell-form-builder-selector btn-block"
       onClick={onClick}
     >
       <div className="button-bar">

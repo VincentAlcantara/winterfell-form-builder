@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FormGroup, FormControl, Button } from 'react-bootstrap';
@@ -25,7 +25,7 @@ import AddQuestionOptionButton from '../FormMenu/AddQuestionOptionButton';
 import SelectInput from '../InputTypes/SelectInput';
 import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
-class QuestionEditor extends Component {
+class QuestionEditor extends PureComponent {
   static propTypes = {
     editQuestionId: PropTypes.func.isRequired,
     editQuestion: PropTypes.func.isRequired,

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FormGroup, Button } from 'react-bootstrap';
@@ -8,7 +8,7 @@ import { editPageHeader, editPageText, changeCurrentEditingField } from '../../a
 import { AddQuestionSetButton } from '../FormMenu';
 import FieldGroup from '../InputTypes/FieldGroup';
 
-class PageEditor extends Component {
+class PageEditor extends PureComponent {
   static propTypes = {
     editPageHeader: PropTypes.func.isRequired,
     editPageText: PropTypes.func.isRequired,
@@ -17,11 +17,11 @@ class PageEditor extends Component {
     panelText: PropTypes.string,
     currentQuestionSets: PropTypes.object,
     questionSets: PropTypes.object,
-    currentPanelIndex: PropTypes.number.isRequired,
+    currentQuestionPanelIndex: PropTypes.number.isRequired,
   }
 
   static defaultProps = {
-    currentPanelIndex: 0,
+    currentQuestionPanelIndex: 0,
     panelHeader: '',
     panelText: '',
     questionSets: fromJS({}),
@@ -51,13 +51,13 @@ class PageEditor extends Component {
   onChangePageHeader(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
-    this.props.editPageHeader(this.props.currentPanelIndex, event.target.value);
+    this.props.editPageHeader(this.props.currentQuestionPanelIndex, event.target.value);
   }
 
   onChangePageText(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
-    this.props.editPageText(this.props.currentPanelIndex, event.target.value);
+    this.props.editPageText(this.props.currentQuestionPanelIndex, event.target.value);
   }
 
   onClick(questionSetId) {
@@ -116,11 +116,11 @@ class PageEditor extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     panelHeader: state.getIn(['form', 'schema', 'questionPanels',
-      ownProps.currentPanelIndex, 'panelHeader']),
+      ownProps.currentQuestionPanelIndex, 'panelHeader']),
     panelText: state.getIn(['form', 'schema', 'questionPanels',
-      ownProps.currentPanelIndex, 'panelText']),
+      ownProps.currentQuestionPanelIndex, 'panelText']),
     currentQuestionSets: state.getIn(['form', 'schema', 'questionPanels',
-      ownProps.currentPanelIndex, 'questionSets']),
+      ownProps.currentQuestionPanelIndex, 'questionSets']),
     questionSets: state.getIn(['form', 'schema', 'questionSets']),
   };
 }

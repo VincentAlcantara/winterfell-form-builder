@@ -6,7 +6,7 @@ const PageSelector = (props) => {
   const { panelHeader, panelText, onClick } = props;
   return (
     <Button
-      className="winterfell-field-editor btn-block"
+      className="winterfell-form-builder-selector btn-block"
       onClick={onClick}
     >
       <div>

@@ -13,7 +13,7 @@ class FieldSelectorContainer extends Component {
   static propTypes = {
     editFormTitle: PropTypes.func.isRequired,
     changeCurrentEditingField: PropTypes.func.isRequired,
-    currentPanelIndex: PropTypes.number.isRequired,
+    currentQuestionPanelIndex: PropTypes.number.isRequired,
     currentQuestionSetIndex: PropTypes.number,
     currentQuestionIndex: PropTypes.number,
     questionSets: PropTypes.object,
@@ -26,7 +26,7 @@ class FieldSelectorContainer extends Component {
 
   static defaultProps = {
     currentPanelId: 'Select Page',
-    currentPanelIndex: 0,
+    currentQuestionPanelIndex: 0,
     questionPanels: null,
     questionSets: null,
     panelHeader: '',
@@ -67,7 +67,7 @@ class FieldSelectorContainer extends Component {
 
   render() {
     const {
-      currentPanelIndex,
+      currentQuestionPanelIndex,
       questionPanels,
       questionSets,
       panelHeader,
@@ -83,23 +83,23 @@ class FieldSelectorContainer extends Component {
       <Row>
         <Col xs={12}>
           <form>
-            { typeof currentPanelIndex !== 'undefined' &&
+            { typeof currentQuestionPanelIndex !== 'undefined' &&
             <PageSelector
               panelHeader={panelHeader}
               panelText={panelText}
               onClick={() => this.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex)}
             />
             }
-            { typeof currentPanelIndex !== 'undefined' &&
+            { typeof currentQuestionPanelIndex !== 'undefined' &&
               questionPanelsArray &&
               <QuestionSetSelector
-                currentQuestionSets={questionPanelsArray[currentPanelIndex].questionSets}
+                currentQuestionSets={questionPanelsArray[currentQuestionPanelIndex].questionSets}
                 questionSets={questionSetsArray}
                 onClick={this.props.changeCurrentEditingField}
                 currentQuestionIndex={this.props.currentQuestionIndex}
               />
             }
-            { typeof currentPanelIndex !== 'undefined' &&
+            { typeof currentQuestionPanelIndex !== 'undefined' &&
               <ButtonBarSelector
                 backButton={backButton}
                 nextButton={nextButton}
@@ -117,16 +117,16 @@ function mapStateToProps(state, ownProps) {
   return {
     title: state.getIn(['form', 'title']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
-    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
+    currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
     questionPanels: state.getIn(['form', 'schema', 'questionPanels']),
     questionSets: state.getIn(['form', 'schema', 'questionSets']),
     schema: state.getIn(['form', 'schema']),
-    panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelHeader']),
-    panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelText']),
+    panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'panelHeader']),
+    panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'panelText']),
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
-    nextButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'button', 'text']),
-    backButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'backButton', 'text']),
+    nextButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'button', 'text']),
+    backButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'backButton', 'text']),
   };
 }
 

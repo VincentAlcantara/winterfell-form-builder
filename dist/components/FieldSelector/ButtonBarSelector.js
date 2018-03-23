@@ -25,7 +25,7 @@ var ButtonBarSelector = function ButtonBarSelector(props) {
   return _react2.default.createElement(
     _reactBootstrap.Button,
     {
-      className: 'winterfell-field-editor btn-block',
+      className: 'winterfell-form-builder-selector btn-block',
       onClick: onClick
     },
     _react2.default.createElement(

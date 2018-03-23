@@ -52,8 +52,8 @@ var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var PageEditor = function (_Component) {
-  (0, _inherits3.default)(PageEditor, _Component);
+var PageEditor = function (_PureComponent) {
+  (0, _inherits3.default)(PageEditor, _PureComponent);
 
   function PageEditor(props) {
     (0, _classCallCheck3.default)(this, PageEditor);
@@ -88,14 +88,14 @@ var PageEditor = function (_Component) {
     value: function onChangePageHeader(event) {
       event.preventDefault();
       this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
-      this.props.editPageHeader(this.props.currentPanelIndex, event.target.value);
+      this.props.editPageHeader(this.props.currentQuestionPanelIndex, event.target.value);
     }
   }, {
     key: 'onChangePageText',
     value: function onChangePageText(event) {
       event.preventDefault();
       this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
-      this.props.editPageText(this.props.currentPanelIndex, event.target.value);
+      this.props.editPageText(this.props.currentQuestionPanelIndex, event.target.value);
     }
   }, {
     key: 'onClick',
@@ -173,7 +173,7 @@ var PageEditor = function (_Component) {
     }
   }]);
   return PageEditor;
-}(_react.Component);
+}(_react.PureComponent);
 
 PageEditor.propTypes = {
   editPageHeader: _propTypes2.default.func.isRequired,
@@ -183,10 +183,10 @@ PageEditor.propTypes = {
   panelText: _propTypes2.default.string,
   currentQuestionSets: _propTypes2.default.object,
   questionSets: _propTypes2.default.object,
-  currentPanelIndex: _propTypes2.default.number.isRequired
+  currentQuestionPanelIndex: _propTypes2.default.number.isRequired
 };
 PageEditor.defaultProps = {
-  currentPanelIndex: 0,
+  currentQuestionPanelIndex: 0,
   panelHeader: '',
   panelText: '',
   questionSets: (0, _immutable.fromJS)({}),
@@ -196,9 +196,9 @@ PageEditor.defaultProps = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelHeader']),
-    panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelText']),
-    currentQuestionSets: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'questionSets']),
+    panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'panelHeader']),
+    panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'panelText']),
+    currentQuestionSets: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'questionSets']),
     questionSets: state.getIn(['form', 'schema', 'questionSets'])
   };
 }

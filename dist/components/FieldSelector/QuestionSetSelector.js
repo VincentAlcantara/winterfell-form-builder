@@ -37,9 +37,9 @@ var QuestionSetSelector = function QuestionSetSelector(props) {
             questionSet.questionSetHeader && _react2.default.createElement(
               _reactBootstrap.Button,
               {
-                className: 'winterfell-field-editor btn-block',
+                className: 'winterfell-form-builder-selector btn-block',
                 onClick: function onClick() {
-                  return _onClick('questionSet', questionSetIndex, currentQuestionIndex);
+                  return _onClick('button', questionSetIndex, currentQuestionIndex);
                 }
               },
               _react2.default.createElement(

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { FormGroup, Button } from 'react-bootstrap';
 import { editQuestionSetHeader, editQuestionSetText, changeCurrentEditingField } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
-class QuestionSetEditor extends Component {
+class QuestionSetEditor extends PureComponent {
   static propTypes = {
     editQuestionSetHeader: PropTypes.func.isRequired,
     editQuestionSetText: PropTypes.func.isRequired,

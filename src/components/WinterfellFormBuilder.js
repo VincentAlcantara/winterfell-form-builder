@@ -21,7 +21,7 @@ class WinterfellFormBuilder extends Component {
     title: PropTypes.string,
     schema: PropTypes.object,
     currentPanelId: PropTypes.string,
-    currentPanelIndex: PropTypes.number,
+    currentQuestionPanelIndex: PropTypes.number,
     currentQuestionSetIndex: PropTypes.number,
     currentQuestionIndex: PropTypes.number,
     formPanels: PropTypes.object,
@@ -38,7 +38,7 @@ class WinterfellFormBuilder extends Component {
     inputSchema: {},
     formPanels: null,
     questionSets: null,
-    currentPanelIndex: 0, // first page by default
+    currentQuestionPanelIndex: 0, // first page by default
     currentQuestionSetIndex: null,
     currentQuestionIndex: null,
     currentEditingField: 'page',
@@ -62,7 +62,7 @@ class WinterfellFormBuilder extends Component {
       currentPanelId,
       formPanels,
       currentEditingField,
-      currentPanelIndex,
+      currentQuestionPanelIndex,
       currentQuestionSetIndex,
       currentQuestionIndex,
       questionSets,
@@ -141,9 +141,9 @@ class WinterfellFormBuilder extends Component {
                     }
                   </Col>
                   <Col xs={12}>
-                    { typeof currentPanelIndex !== 'undefined' &&
+                    { typeof currentQuestionPanelIndex !== 'undefined' &&
                       <FieldEditor
-                        currentPanelIndex={currentPanelIndex}
+                        currentQuestionPanelIndex={currentQuestionPanelIndex}
                         currentEditingField={currentEditingField}
                         currentQuestionSetIndex={currentQuestionSetIndex}
                         currentQuestionIndex={currentQuestionIndex}
@@ -155,7 +155,7 @@ class WinterfellFormBuilder extends Component {
               <Col xs={8} className="winterfell-form-builder-page-editor">
                 { this.props.schema.size !== 0 &&
                   <FieldSelector
-                    currentPanelIndex={currentPanelIndex}
+                    currentQuestionPanelIndex={currentQuestionPanelIndex}
                   />
                 }
                 { this.props.schema.size === 0 &&
@@ -194,7 +194,7 @@ function mapStateToProps(state) {
     formPanels: state.getIn(['form', 'schema', 'formPanels']),
     questionSets: state.getIn(['form', 'schema', 'questionSets']),
     currentEditingField: state.getIn(['form', 'currentEditingField']),
-    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
+    currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
   };

@@ -19,6 +19,9 @@ import {
   EDIT_QUESTION_SUCCESS,
   EDIT_QUESTION_TEXT_SUCCESS,
   EDIT_QUESTION_POST_TEXT_SUCCESS,
+  EDIT_NEXT_BUTTON_TEXT_SUCCESS,
+  EDIT_NEXT_BUTTON_ACTION_SUCCESS,
+  EDIT_NEXT_BUTTON_TARGET_SUCCESS,
   ADD_QUESTION_OPTION_SUCCESS,
   EDIT_QUESTION_OPTION_TEXT_SUCCESS,
   EDIT_QUESTION_OPTION_VALUE_SUCCESS,
@@ -109,6 +112,27 @@ export function editQuestionPostText(currentQuestionSetIndex, currentQuestionInd
   return {
     type: EDIT_QUESTION_POST_TEXT_SUCCESS,
     payload: { currentQuestionSetIndex, currentQuestionIndex, text },
+  };
+}
+
+export function editNextButtonText(currentQuestionPanelIndex, text) {
+  return {
+    type: EDIT_NEXT_BUTTON_TEXT_SUCCESS,
+    payload: { currentQuestionPanelIndex, text },
+  };
+}
+
+export function onSelectNextButtonAction(currentQuestionPanelIndex, text) {
+  return {
+    type: EDIT_NEXT_BUTTON_ACTION_SUCCESS,
+    payload: { currentQuestionPanelIndex, text },
+  };
+}
+
+export function onSelectNextButtonTarget(currentQuestionPanelIndex, text) {
+  return {
+    type: EDIT_NEXT_BUTTON_TARGET_SUCCESS,
+    payload: { currentQuestionPanelIndex, text },
   };
 }
 

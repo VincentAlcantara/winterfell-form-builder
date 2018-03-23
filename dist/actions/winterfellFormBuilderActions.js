@@ -15,6 +15,9 @@ exports.editQuestionId = editQuestionId;
 exports.editQuestion = editQuestion;
 exports.editQuestionText = editQuestionText;
 exports.editQuestionPostText = editQuestionPostText;
+exports.editNextButtonText = editNextButtonText;
+exports.onSelectNextButtonAction = onSelectNextButtonAction;
+exports.onSelectNextButtonTarget = onSelectNextButtonTarget;
 exports.changeQuestionType = changeQuestionType;
 exports.addQuestionOption = addQuestionOption;
 exports.editQuestionOptionText = editQuestionOptionText;
@@ -114,6 +117,27 @@ function editQuestionPostText(currentQuestionSetIndex, currentQuestionIndex, tex
   return {
     type: _constants.EDIT_QUESTION_POST_TEXT_SUCCESS,
     payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, text: text }
+  };
+}
+
+function editNextButtonText(currentQuestionPanelIndex, text) {
+  return {
+    type: _constants.EDIT_NEXT_BUTTON_TEXT_SUCCESS,
+    payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, text: text }
+  };
+}
+
+function onSelectNextButtonAction(currentQuestionPanelIndex, text) {
+  return {
+    type: _constants.EDIT_NEXT_BUTTON_ACTION_SUCCESS,
+    payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, text: text }
+  };
+}
+
+function onSelectNextButtonTarget(currentQuestionPanelIndex, text) {
+  return {
+    type: _constants.EDIT_NEXT_BUTTON_TARGET_SUCCESS,
+    payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, text: text }
   };
 }
 
@@ -276,6 +300,12 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(editQuestionText, 'editQuestionText', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(editQuestionPostText, 'editQuestionPostText', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(editNextButtonText, 'editNextButtonText', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(onSelectNextButtonAction, 'onSelectNextButtonAction', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(onSelectNextButtonTarget, 'onSelectNextButtonTarget', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(changeQuestionType, 'changeQuestionType', 'src/actions/winterfellFormBuilderActions.js');
 

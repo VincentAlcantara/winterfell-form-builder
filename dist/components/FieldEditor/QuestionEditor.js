@@ -80,8 +80,8 @@ var _constants = require('../../common/constants');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var QuestionEditor = function (_Component) {
-  (0, _inherits3.default)(QuestionEditor, _Component);
+var QuestionEditor = function (_PureComponent) {
+  (0, _inherits3.default)(QuestionEditor, _PureComponent);
 
   function QuestionEditor(props) {
     (0, _classCallCheck3.default)(this, QuestionEditor);
@@ -482,7 +482,7 @@ var QuestionEditor = function (_Component) {
     }
   }]);
   return QuestionEditor;
-}(_react.Component);
+}(_react.PureComponent);
 
 QuestionEditor.propTypes = {
   editQuestionId: _propTypes2.default.func.isRequired,

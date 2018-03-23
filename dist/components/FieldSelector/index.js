@@ -99,7 +99,7 @@ var FieldSelectorContainer = function (_Component) {
       var _this2 = this;
 
       var _props = this.props,
-          currentPanelIndex = _props.currentPanelIndex,
+          currentQuestionPanelIndex = _props.currentQuestionPanelIndex,
           questionPanels = _props.questionPanels,
           questionSets = _props.questionSets,
           panelHeader = _props.panelHeader,
@@ -120,20 +120,20 @@ var FieldSelectorContainer = function (_Component) {
           _react2.default.createElement(
             'form',
             null,
-            typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_PageSelector2.default, {
+            typeof currentQuestionPanelIndex !== 'undefined' && _react2.default.createElement(_PageSelector2.default, {
               panelHeader: panelHeader,
               panelText: panelText,
               onClick: function onClick() {
                 return _this2.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex);
               }
             }),
-            typeof currentPanelIndex !== 'undefined' && questionPanelsArray && _react2.default.createElement(_QuestionSetSelector2.default, {
-              currentQuestionSets: questionPanelsArray[currentPanelIndex].questionSets,
+            typeof currentQuestionPanelIndex !== 'undefined' && questionPanelsArray && _react2.default.createElement(_QuestionSetSelector2.default, {
+              currentQuestionSets: questionPanelsArray[currentQuestionPanelIndex].questionSets,
               questionSets: questionSetsArray,
               onClick: this.props.changeCurrentEditingField,
               currentQuestionIndex: this.props.currentQuestionIndex
             }),
-            typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_ButtonBarSelector2.default, {
+            typeof currentQuestionPanelIndex !== 'undefined' && _react2.default.createElement(_ButtonBarSelector2.default, {
               backButton: backButton,
               nextButton: nextButton,
               onClick: function onClick() {
@@ -151,7 +151,7 @@ var FieldSelectorContainer = function (_Component) {
 FieldSelectorContainer.propTypes = {
   editFormTitle: _propTypes2.default.func.isRequired,
   changeCurrentEditingField: _propTypes2.default.func.isRequired,
-  currentPanelIndex: _propTypes2.default.number.isRequired,
+  currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
   currentQuestionSetIndex: _propTypes2.default.number,
   currentQuestionIndex: _propTypes2.default.number,
   questionSets: _propTypes2.default.object,
@@ -163,7 +163,7 @@ FieldSelectorContainer.propTypes = {
 };
 FieldSelectorContainer.defaultProps = {
   currentPanelId: 'Select Page',
-  currentPanelIndex: 0,
+  currentQuestionPanelIndex: 0,
   questionPanels: null,
   questionSets: null,
   panelHeader: '',
@@ -179,16 +179,16 @@ function mapStateToProps(state, ownProps) {
   return {
     title: state.getIn(['form', 'title']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
-    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
+    currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
     questionPanels: state.getIn(['form', 'schema', 'questionPanels']),
     questionSets: state.getIn(['form', 'schema', 'questionSets']),
     schema: state.getIn(['form', 'schema']),
-    panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelHeader']),
-    panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'panelText']),
+    panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'panelHeader']),
+    panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'panelText']),
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
-    nextButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'button', 'text']),
-    backButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentPanelIndex, 'backButton', 'text'])
+    nextButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'button', 'text']),
+    backButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'backButton', 'text'])
   };
 }
 
