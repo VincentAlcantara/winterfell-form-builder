@@ -95,7 +95,7 @@ var WinterfellFormBuilder = function (_Component) {
 
       return _react2.default.createElement(
         _reactBootstrap.Grid,
-        null,
+        { className: 'winterfell-form-builder' },
         _react2.default.createElement(
           _reactBootstrap.Row,
           null,
@@ -116,7 +116,6 @@ var WinterfellFormBuilder = function (_Component) {
                 )
               )
             ),
-            _react2.default.createElement('hr', null),
             _react2.default.createElement(
               _reactBootstrap.Row,
               null,
@@ -151,7 +150,7 @@ var WinterfellFormBuilder = function (_Component) {
                 _react2.default.createElement(_FormMenu.SaveFormButton, null)
               )
             ),
-            _react2.default.createElement('hr', null),
+            _react2.default.createElement('br', null),
             _react2.default.createElement(
               _reactBootstrap.Row,
               null,
@@ -195,7 +194,7 @@ var WinterfellFormBuilder = function (_Component) {
             ),
             _react2.default.createElement(
               _reactBootstrap.Row,
-              null,
+              { className: 'winterfell-form-builder-editor' },
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 4, className: 'winterfell-form-builder-field-editor' },
@@ -236,10 +235,9 @@ var WinterfellFormBuilder = function (_Component) {
                 )
               )
             ),
-            _react2.default.createElement('hr', null),
             _react2.default.createElement(
               _reactBootstrap.Row,
-              null,
+              { className: 'winterfell-form-builder-previewer' },
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 12 },
