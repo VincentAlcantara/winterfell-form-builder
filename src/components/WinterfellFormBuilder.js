@@ -69,7 +69,7 @@ class WinterfellFormBuilder extends Component {
     } = this.props;
 
     return (
-      <Grid>
+      <Grid className="winterfell-form-builder">
         <Row>
           <Col xs={12}>
             <Row>
@@ -77,7 +77,6 @@ class WinterfellFormBuilder extends Component {
                 <h3>Form: {title}</h3>
               </Col>
             </Row>
-            <hr />
             <Row>
               <Col xs={2}>
                 <CreateFormButton />
@@ -98,7 +97,7 @@ class WinterfellFormBuilder extends Component {
                 <SaveFormButton />
               </Col>
             </Row>
-            <hr />
+            <br />
             <Row>
               <Col xs={12}>
                 <Breadcrumb>
@@ -127,7 +126,7 @@ class WinterfellFormBuilder extends Component {
                 </Breadcrumb>
               </Col>
             </Row>
-            <Row>
+            <Row className="winterfell-form-builder-editor">
               <Col xs={4} className="winterfell-form-builder-field-editor">
                 <Row>
                   <Col xs={12} className="text-left">
@@ -166,8 +165,7 @@ class WinterfellFormBuilder extends Component {
                 }
               </Col>
             </Row>
-            <hr />
-            <Row>
+            <Row className="winterfell-form-builder-previewer">
               <Col xs={12}>
                 <h3>Preview:</h3>
                 {

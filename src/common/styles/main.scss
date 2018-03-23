@@ -1,6 +1,9 @@
+.winterfell-form-builder-editor {
+  border: 1px solid #eee;
+}
 .winterfell-form-builder-field-editor {
-  background: #eee;
   padding-top: 10px;
+  border-right: 1px solid #eee;
   #edit-question-id-label {
     font-weight: normal;
   }
@@ -47,7 +50,11 @@
     }
   }
 }
-
+.winterfell-form-builder-page-editor {
+  border-left: 1px solid #eee;
+  margin-left: -1px;
+  padding-left: 16px;
+}
 .winterfell-form-builder-question-set {
   h4 {
     margin-top: 2px;
