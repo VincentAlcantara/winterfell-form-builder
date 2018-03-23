@@ -87,7 +87,7 @@ var WinterfellFormBuilder = function (_Component) {
           currentPanelId = _props.currentPanelId,
           formPanels = _props.formPanels,
           currentEditingField = _props.currentEditingField,
-          currentPanelIndex = _props.currentPanelIndex,
+          currentQuestionPanelIndex = _props.currentQuestionPanelIndex,
           currentQuestionSetIndex = _props.currentQuestionSetIndex,
           currentQuestionIndex = _props.currentQuestionIndex,
           questionSets = _props.questionSets;
@@ -214,8 +214,8 @@ var WinterfellFormBuilder = function (_Component) {
                   _react2.default.createElement(
                     _reactBootstrap.Col,
                     { xs: 12 },
-                    typeof currentPanelIndex !== 'undefined' && _react2.default.createElement(_FieldEditor2.default, {
-                      currentPanelIndex: currentPanelIndex,
+                    typeof currentQuestionPanelIndex !== 'undefined' && _react2.default.createElement(_FieldEditor2.default, {
+                      currentQuestionPanelIndex: currentQuestionPanelIndex,
                       currentEditingField: currentEditingField,
                       currentQuestionSetIndex: currentQuestionSetIndex,
                       currentQuestionIndex: currentQuestionIndex
@@ -227,7 +227,7 @@ var WinterfellFormBuilder = function (_Component) {
                 _reactBootstrap.Col,
                 { xs: 8, className: 'winterfell-form-builder-page-editor' },
                 this.props.schema.size !== 0 && _react2.default.createElement(_FieldSelector2.default, {
-                  currentPanelIndex: currentPanelIndex
+                  currentQuestionPanelIndex: currentQuestionPanelIndex
                 }),
                 this.props.schema.size === 0 && _react2.default.createElement(
                   _reactBootstrap.Alert,
@@ -266,7 +266,7 @@ WinterfellFormBuilder.propTypes = {
   title: _propTypes2.default.string,
   schema: _propTypes2.default.object,
   currentPanelId: _propTypes2.default.string,
-  currentPanelIndex: _propTypes2.default.number,
+  currentQuestionPanelIndex: _propTypes2.default.number,
   currentQuestionSetIndex: _propTypes2.default.number,
   currentQuestionIndex: _propTypes2.default.number,
   formPanels: _propTypes2.default.object,
@@ -282,7 +282,7 @@ WinterfellFormBuilder.defaultProps = {
   inputSchema: {},
   formPanels: null,
   questionSets: null,
-  currentPanelIndex: 0, // first page by default
+  currentQuestionPanelIndex: 0, // first page by default
   currentQuestionSetIndex: null,
   currentQuestionIndex: null,
   currentEditingField: 'page'
@@ -297,7 +297,7 @@ function mapStateToProps(state) {
     formPanels: state.getIn(['form', 'schema', 'formPanels']),
     questionSets: state.getIn(['form', 'schema', 'questionSets']),
     currentEditingField: state.getIn(['form', 'currentEditingField']),
-    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
+    currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex'])
   };

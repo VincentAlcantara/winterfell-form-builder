@@ -1,34 +1,9 @@
-.winterfell-field-editor.btn-default {
-  text-align: left;
-  border: 1px solid transparent;
-  border-radius: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  white-space: normal;
-  margin-top: 0;
-  &:hover {
-    text-align: left;
-    border: 1px dotted #ccc;
-    background: #eee;
-  }
-  &:hover:before {
-    content:"\270f";
-    position: absolute;
-    font-family: "Glyphicons Halflings";
-    right: 20px;
-    font-size: 12px;
-  }
-}
-
 .winterfell-form-builder-field-editor {
   background: #eee;
   padding-top: 10px;
   #edit-question-id-label {
     font-weight: normal;
   }
-}
-
-.winterfell-form-builder-field-editor {
   .dropdown.btn-group {
     display: block;
   }
@@ -76,5 +51,27 @@
 .winterfell-form-builder-question-set {
   h4 {
     margin-top: 2px;
+  }
+}
+
+.winterfell-form-builder-selector.btn-default {
+  text-align: left;
+  border: 1px solid transparent;
+  border-radius: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  white-space: normal;
+  margin-top: 0;
+  &:hover {
+    text-align: left;
+    border: 1px dotted #ccc;
+    background: #eee;
+  }
+  &:hover:before {
+    content:"\270f";
+    position: absolute;
+    font-family: "Glyphicons Halflings";
+    right: 20px;
+    font-size: 12px;
   }
 }

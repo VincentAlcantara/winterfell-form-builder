@@ -48,8 +48,8 @@ var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var QuestionSetEditor = function (_Component) {
-  (0, _inherits3.default)(QuestionSetEditor, _Component);
+var QuestionSetEditor = function (_PureComponent) {
+  (0, _inherits3.default)(QuestionSetEditor, _PureComponent);
 
   function QuestionSetEditor(props) {
     (0, _classCallCheck3.default)(this, QuestionSetEditor);
@@ -176,7 +176,7 @@ var QuestionSetEditor = function (_Component) {
     }
   }]);
   return QuestionSetEditor;
-}(_react.Component);
+}(_react.PureComponent);
 
 QuestionSetEditor.propTypes = {
   editQuestionSetHeader: _propTypes2.default.func.isRequired,

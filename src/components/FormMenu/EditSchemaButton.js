@@ -18,7 +18,7 @@ class EditSchemaButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      schema: this.props.schema,
+      schemaObject: this.props.schema.toJS(),
     };
 
     this.onChange = this.onChange.bind(this);
@@ -36,6 +36,8 @@ class EditSchemaButton extends Component {
   }
 
   render() {
+    const schemaObject = this.props.schema.toJS();
+
     return (
       <Row>
         <div className="static-modal">
@@ -72,7 +74,7 @@ class EditSchemaButton extends Component {
             className="btn btn-block btn-primary"
             onClick={() => {
               this.setState({
-                schema: this.props.schema.toJS(),
+                schema: schemaObject,
                 showModal: true,
               });
             }}
@@ -86,7 +88,7 @@ class EditSchemaButton extends Component {
 
 function mapStateToProps(state) {
   return {
-    schema: state.getIn(['form', 'schema']) && state.getIn(['form', 'schema']),
+    schema: state.getIn(['form', 'schema']),
   };
 }
 export default connect(mapStateToProps, { updateForm })(EditSchemaButton);

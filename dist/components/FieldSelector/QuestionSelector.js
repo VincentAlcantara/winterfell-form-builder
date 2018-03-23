@@ -29,7 +29,7 @@ var FormQuestionEditor = function FormQuestionEditor(props) {
       return _react2.default.createElement(
         _reactBootstrap.Button,
         {
-          className: 'winterfell-field-editor btn-block',
+          className: 'winterfell-form-builder-selector btn-block',
           onClick: function onClick() {
             return _onClick('question', questionSetIndex, questionIndex);
           },

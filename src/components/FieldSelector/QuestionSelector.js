@@ -8,7 +8,7 @@ const FormQuestionEditor = (props) => {
 
   const displayQuestionButtons = () => questions.map((question, questionIndex) => (
     <Button
-      className="winterfell-field-editor btn-block"
+      className="winterfell-form-builder-selector btn-block"
       onClick={() => onClick('question', questionSetIndex, questionIndex)}
       key={`${question.questionId}`}
     >

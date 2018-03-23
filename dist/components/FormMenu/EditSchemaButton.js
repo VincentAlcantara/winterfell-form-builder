@@ -53,7 +53,7 @@ var EditSchemaButton = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (EditSchemaButton.__proto__ || (0, _getPrototypeOf2.default)(EditSchemaButton)).call(this, props));
 
     _this.state = {
-      schema: _this.props.schema
+      schemaObject: _this.props.schema.toJS()
     };
 
     _this.onChange = _this.onChange.bind(_this);
@@ -77,6 +77,8 @@ var EditSchemaButton = function (_Component) {
     key: 'render',
     value: function render() {
       var _this2 = this;
+
+      var schemaObject = this.props.schema.toJS();
 
       return _react2.default.createElement(
         _reactBootstrap.Row,
@@ -147,7 +149,7 @@ var EditSchemaButton = function (_Component) {
               className: 'btn btn-block btn-primary',
               onClick: function onClick() {
                 _this2.setState({
-                  schema: _this2.props.schema.toJS(),
+                  schema: schemaObject,
                   showModal: true
                 });
               }
@@ -172,7 +174,7 @@ EditSchemaButton.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    schema: state.getIn(['form', 'schema']) && state.getIn(['form', 'schema'])
+    schema: state.getIn(['form', 'schema'])
   };
 }
 

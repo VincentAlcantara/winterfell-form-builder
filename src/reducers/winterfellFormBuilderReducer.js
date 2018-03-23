@@ -21,6 +21,11 @@ import {
   EDIT_QUESTION_SUCCESS,
   EDIT_QUESTION_TEXT_SUCCESS,
   EDIT_QUESTION_POST_TEXT_SUCCESS,
+  EDIT_NEXT_BUTTON_TEXT_SUCCESS,
+  EDIT_BACK_BUTTON_TEXT_SUCCESS,
+  EDIT_NEXT_BUTTON_ACTION_SUCCESS,
+  EDIT_NEXT_BUTTON_TARGET_SUCCESS,
+  // EDIT_BACK_BUTTON_ACTION_SUCCESS,
   CHANGE_QUESTION_TYPE_SUCCESS,
   ADD_QUESTION_OPTION_SUCCESS,
   EDIT_QUESTION_OPTION_TEXT_SUCCESS,
@@ -34,7 +39,7 @@ const initialState = fromJS({
   title: '',
   schema: {},
   currentPanelId: null,
-  currentPanelIndex: 0,
+  currentQuestionPanelIndex: 0,
 });
 
 function winterfellFormBuilderReducer(state = initialState, action) {
@@ -42,15 +47,15 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     case GOTO_PAGE_SUCCESS: {
       const questionPanels = state.getIn(['schema', 'questionPanels']).toJS();
       const currentPanelId = action.payload.panelId;
-      let currentPanelIndex = -1;
+      let currentQuestionPanelIndex = -1;
       for (let i = 0; i < questionPanels.length; i += 1) {
         if (questionPanels[i].panelId === currentPanelId) {
-          currentPanelIndex = i;
+          currentQuestionPanelIndex = i;
         }
       }
 
       return state
-        .set('currentPanelIndex', currentPanelIndex)
+        .set('currentQuestionPanelIndex', currentQuestionPanelIndex)
         .set('currentEditingField', 'page')
         .set('currentPanelId', action.payload.panelId);
     }
@@ -107,6 +112,26 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       return state
         .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
           currentQuestionIndex, 'postText'], text);
+    }
+    case EDIT_NEXT_BUTTON_TEXT_SUCCESS: {
+      const { currentQuestionPanelIndex, text } = action.payload;
+      return state
+        .setIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'button', 'text'], text);
+    }
+    case EDIT_BACK_BUTTON_TEXT_SUCCESS: {
+      const { currentQuestionPanelIndex, text } = action.payload;
+      return state
+        .setIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'backButton', 'text'], text);
+    }
+    case EDIT_NEXT_BUTTON_ACTION_SUCCESS: {
+      const { currentQuestionPanelIndex, text } = action.payload;
+      return state
+        .setIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'action', 'default', 'action'], text);
+    }
+    case EDIT_NEXT_BUTTON_TARGET_SUCCESS: {
+      const { currentQuestionPanelIndex, text } = action.payload;
+      return state
+        .setIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'action', 'default', 'target'], text);
     }
     case ADD_QUESTION_OPTION_SUCCESS: {
       const {
@@ -185,7 +210,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     case CREATE_FORM_SUCCESS:
       return state
         .set('title', action.payload.title)
-        .set('currentPanelIndex', 0)
+        .set('currentQuestionPanelIndex', 0)
         .set('schema', fromJS({
           classes: BOOTSTRAP_CLASSES,
           formPanels: [{
@@ -228,9 +253,9 @@ function winterfellFormBuilderReducer(state = initialState, action) {
           arr.push(fromJS(newQuestionPanel)));
     }
     case ADD_QUESTION_SET_SUCCESS: {
-      const currentPanelIndex = state.get('currentPanelIndex');
+      const currentQuestionPanelIndex = state.get('currentQuestionPanelIndex');
 
-      const questionSetCount = state.getIn(['schema', 'questionPanels', currentPanelIndex, 'questionSets']).size;
+      const questionSetCount = state.getIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'questionSets']).size;
 
       const newQuestionSetId = {
         index: questionSetCount,
@@ -256,7 +281,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       };
 
       return state
-        .updateIn(['schema', 'questionPanels', currentPanelIndex, 'questionSets'], arr =>
+        .updateIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'questionSets'], arr =>
           arr.push(fromJS(newQuestionSetId)))
         .updateIn(['schema', 'questionSets'], arr =>
           arr.push(fromJS(newQuestionSet)));

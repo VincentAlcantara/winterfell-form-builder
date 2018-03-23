@@ -26,11 +26,15 @@ var _QuestionEditor = require('./QuestionEditor');
 
 var _QuestionEditor2 = _interopRequireDefault(_QuestionEditor);
 
+var _ButtonBarEditor = require('./ButtonBarEditor');
+
+var _ButtonBarEditor2 = _interopRequireDefault(_ButtonBarEditor);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function FieldEditor(props) {
   var currentEditingField = props.currentEditingField,
-      currentPanelIndex = props.currentPanelIndex,
+      currentQuestionPanelIndex = props.currentQuestionPanelIndex,
       currentQuestionSetIndex = props.currentQuestionSetIndex,
       currentQuestionIndex = props.currentQuestionIndex;
 
@@ -42,7 +46,7 @@ function FieldEditor(props) {
       _reactBootstrap.Col,
       { xs: 12 },
       currentEditingField === 'page' && _react2.default.createElement(_PageEditor2.default, {
-        currentPanelIndex: currentPanelIndex
+        currentQuestionPanelIndex: currentQuestionPanelIndex
       }),
       currentEditingField === 'questionSet' && _react2.default.createElement(_QuestionSetEditor2.default, {
         currentQuestionSetIndex: currentQuestionSetIndex
@@ -50,6 +54,9 @@ function FieldEditor(props) {
       currentEditingField === 'question' && _react2.default.createElement(_QuestionEditor2.default, {
         currentQuestionSetIndex: currentQuestionSetIndex,
         currentQuestionIndex: currentQuestionIndex
+      }),
+      currentEditingField === 'buttons' && _react2.default.createElement(_ButtonBarEditor2.default, {
+        currentQuestionPanelIndex: currentQuestionPanelIndex
       })
     )
   );
@@ -57,7 +64,7 @@ function FieldEditor(props) {
 
 FieldEditor.propTypes = {
   currentEditingField: _propTypes2.default.string.isRequired,
-  currentPanelIndex: _propTypes2.default.number.isRequired,
+  currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
   currentQuestionSetIndex: _propTypes2.default.number,
   currentQuestionIndex: _propTypes2.default.number
 };
