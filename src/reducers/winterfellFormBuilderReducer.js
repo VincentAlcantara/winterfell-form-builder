@@ -13,6 +13,7 @@ import {
   DELETE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
   CHANGE_EDITING_FIELD_SUCCESS,
+  EDIT_PAGE_ID_SUCCESS,
   EDIT_PAGE_HEADER_SUCCESS,
   EDIT_PAGE_TEXT_SUCCESS,
   EDIT_QUESTION_SET_HEADER_SUCCESS,
@@ -68,6 +69,13 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     case SAVE_FORM_SUCCESS: {
       return state
         .set('title', action.payload.fileName);
+    }
+    case EDIT_PAGE_ID_SUCCESS: {
+      const { questionPanelIndex, text } = action.payload;
+      return state
+        .setIn(['schema', 'formPanels', questionPanelIndex, 'panelId'], text)
+        .set('currentPanelId', text)
+        .setIn(['schema', 'questionPanels', questionPanelIndex, 'panelId'], text);
     }
     case EDIT_PAGE_HEADER_SUCCESS: {
       const { questionPanelIndex, header } = action.payload;

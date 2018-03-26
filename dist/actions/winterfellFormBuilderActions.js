@@ -3,10 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.updateErrorMessage = updateErrorMessage;
+exports.clearErrorMessage = clearErrorMessage;
 exports.createForm = createForm;
 exports.uploadJSON = uploadJSON;
 exports.saveJSON = saveJSON;
 exports.editFormTitle = editFormTitle;
+exports.editPageId = editPageId;
 exports.editPageHeader = editPageHeader;
 exports.editPageText = editPageText;
 exports.editQuestionSetHeader = editQuestionSetHeader;
@@ -36,6 +39,19 @@ exports.updateQuestion = updateQuestion;
 
 var _constants = require('../common/constants');
 
+function updateErrorMessage(message) {
+  return {
+    type: _constants.UPDATE_FORM_ERROR,
+    payload: { message: message }
+  };
+}
+
+function clearErrorMessage() {
+  return {
+    type: _constants.CLEAR_FORM_ERROR
+  };
+}
+
 function createForm(title) {
   return {
     type: _constants.CREATE_FORM_SUCCESS,
@@ -64,6 +80,12 @@ function editFormTitle(title) {
   };
 }
 
+function editPageId(questionPanelIndex, text) {
+  return {
+    type: _constants.EDIT_PAGE_ID_SUCCESS,
+    payload: { questionPanelIndex: questionPanelIndex, text: text }
+  };
+}
 function editPageHeader(questionPanelIndex, header) {
   return {
     type: _constants.EDIT_PAGE_HEADER_SUCCESS,
@@ -277,6 +299,10 @@ var _temp = function () {
     return;
   }
 
+  __REACT_HOT_LOADER__.register(updateErrorMessage, 'updateErrorMessage', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(clearErrorMessage, 'clearErrorMessage', 'src/actions/winterfellFormBuilderActions.js');
+
   __REACT_HOT_LOADER__.register(createForm, 'createForm', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(uploadJSON, 'uploadJSON', 'src/actions/winterfellFormBuilderActions.js');
@@ -284,6 +310,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(saveJSON, 'saveJSON', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(editFormTitle, 'editFormTitle', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(editPageId, 'editPageId', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(editPageHeader, 'editPageHeader', 'src/actions/winterfellFormBuilderActions.js');
 

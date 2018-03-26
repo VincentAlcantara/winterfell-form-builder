@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col, Alert, Breadcrumb } from 'react-bootstrap';
-import { goToPage, changeCurrentEditingField } from '../actions/winterfellFormBuilderActions';
+import { Grid, Row, Col, Alert, Breadcrumb, Modal, Button } from 'react-bootstrap';
+import { goToPage, changeCurrentEditingField, clearErrorMessage } from '../actions/winterfellFormBuilderActions';
 import Pagination from './Pagination';
 import Previewer from './Previewer';
 import {
@@ -29,6 +29,8 @@ class WinterfellFormBuilder extends Component {
     goToPage: PropTypes.func.isRequired,
     currentEditingField: PropTypes.string,
     changeCurrentEditingField: PropTypes.func.isRequired,
+    clearErrorMessage: PropTypes.func.isRequired,
+    errorMessage: PropTypes.string,
   }
 
   static defaultProps = {
@@ -42,6 +44,7 @@ class WinterfellFormBuilder extends Component {
     currentQuestionSetIndex: null,
     currentQuestionIndex: null,
     currentEditingField: 'page',
+    errorMessage: '',
   }
 
   constructor(props) {
@@ -66,10 +69,27 @@ class WinterfellFormBuilder extends Component {
       currentQuestionSetIndex,
       currentQuestionIndex,
       questionSets,
+      errorMessage,
     } = this.props;
 
     return (
       <Grid className="winterfell-form-builder">
+        <div className="static-modal">
+          <Modal show={errorMessage !== ''}>
+            <Modal.Header>
+              <Modal.Title>Error</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {errorMessage}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                bsStyle="primary"
+                onClick={this.props.clearErrorMessage}
+              >Ok</Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
         <Row>
           <Col xs={12}>
             <Row>
@@ -133,7 +153,7 @@ class WinterfellFormBuilder extends Component {
                     {
                       formPanels &&
                       <Pagination
-                        formPanels={formPanels.toJS()}
+                        formPanels={formPanels.map(panel => panel.get('panelId'))}
                         currentPanelId={currentPanelId}
                         onClick={this.props.goToPage}
                       />
@@ -195,10 +215,11 @@ function mapStateToProps(state) {
     currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
+    errorMessage: state.getIn(['error', 'message']),
   };
 }
 
 export default connect(
   mapStateToProps,
-  { goToPage, changeCurrentEditingField },
+  { goToPage, changeCurrentEditingField, clearErrorMessage },
 )(WinterfellFormBuilder);

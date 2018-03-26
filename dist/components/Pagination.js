@@ -26,13 +26,13 @@ function Pagination(props) {
       return _react2.default.createElement(
         _reactBootstrap.MenuItem,
         {
-          key: index + '-' + panel.panelId,
+          key: index + '-' + panel,
           onClick: function onClick() {
-            _onClick(panel.panelId);
+            _onClick(panel);
           },
           className: 'btn-block'
         },
-        panel.panelId
+        panel
       );
     });
   };
@@ -66,7 +66,7 @@ function Pagination(props) {
 }
 
 Pagination.propTypes = {
-  formPanels: _propTypes2.default.array.isRequired,
+  formPanels: _propTypes2.default.object.isRequired,
   currentPanelId: _propTypes2.default.string,
   onClick: _propTypes2.default.func.isRequired
 };

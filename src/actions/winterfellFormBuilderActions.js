@@ -11,6 +11,7 @@ import {
   DELETE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
   CHANGE_EDITING_FIELD_SUCCESS,
+  EDIT_PAGE_ID_SUCCESS,
   EDIT_PAGE_HEADER_SUCCESS,
   EDIT_PAGE_TEXT_SUCCESS,
   EDIT_QUESTION_SET_HEADER_SUCCESS,
@@ -29,7 +30,22 @@ import {
   UPLOAD_JSON_SUCCESS,
   CHANGE_QUESTION_TYPE_SUCCESS,
   SAVE_FORM_SUCCESS,
+  UPDATE_FORM_ERROR,
+  CLEAR_FORM_ERROR,
 } from '../common/constants';
+
+export function updateErrorMessage(message) {
+  return {
+    type: UPDATE_FORM_ERROR,
+    payload: { message },
+  };
+}
+
+export function clearErrorMessage() {
+  return {
+    type: CLEAR_FORM_ERROR,
+  };
+}
 
 export function createForm(title) {
   return {
@@ -59,6 +75,12 @@ export function editFormTitle(title) {
   };
 }
 
+export function editPageId(questionPanelIndex, text) {
+  return {
+    type: EDIT_PAGE_ID_SUCCESS,
+    payload: { questionPanelIndex, text },
+  };
+}
 export function editPageHeader(questionPanelIndex, header) {
   return {
     type: EDIT_PAGE_HEADER_SUCCESS,
