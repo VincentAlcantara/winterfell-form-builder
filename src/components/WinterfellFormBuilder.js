@@ -10,7 +10,7 @@ import {
   EditFormTitleButton,
   AddPageButton,
   SaveFormButton,
-  EditSchemaButton,
+  PageSortButton,
   UploadJSONButton,
 } from './FormMenu';
 import FieldSelector from './FieldSelector';
@@ -111,7 +111,9 @@ class WinterfellFormBuilder extends Component {
                 <AddPageButton />
               </Col>
               <Col xs={2}>
-                <EditSchemaButton />
+                <PageSortButton
+                  onClick={() => this.props.changeCurrentEditingField('pageSort')}
+                />
               </Col>
               <Col xs={2}>
                 <SaveFormButton />

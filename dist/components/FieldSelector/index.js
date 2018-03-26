@@ -54,6 +54,10 @@ var _ButtonBarSelector = require('./ButtonBarSelector');
 
 var _ButtonBarSelector2 = _interopRequireDefault(_ButtonBarSelector);
 
+var _PageSortSelector = require('./PageSortSelector');
+
+var _PageSortSelector2 = _interopRequireDefault(_PageSortSelector);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var FieldSelectorContainer = function (_Component) {
@@ -107,7 +111,8 @@ var FieldSelectorContainer = function (_Component) {
           currentQuestionSetIndex = _props.currentQuestionSetIndex,
           currentQuestionIndex = _props.currentQuestionIndex,
           backButton = _props.backButton,
-          nextButton = _props.nextButton;
+          nextButton = _props.nextButton,
+          currentEditingField = _props.currentEditingField;
 
       var questionPanelsArray = questionPanels && questionPanels.toJS();
       var questionSetsArray = questionSets && questionSets.toJS();
@@ -117,7 +122,8 @@ var FieldSelectorContainer = function (_Component) {
         _react2.default.createElement(
           _reactBootstrap.Col,
           { xs: 12 },
-          _react2.default.createElement(
+          currentEditingField === 'pageSort' && _react2.default.createElement(_PageSortSelector2.default, null),
+          currentEditingField !== 'pageSort' && _react2.default.createElement(
             'form',
             null,
             typeof currentQuestionPanelIndex !== 'undefined' && _react2.default.createElement(_PageSelector2.default, {
@@ -152,6 +158,7 @@ FieldSelectorContainer.propTypes = {
   editFormTitle: _propTypes2.default.func.isRequired,
   changeCurrentEditingField: _propTypes2.default.func.isRequired,
   currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
+  currentEditingField: _propTypes2.default.string.isRequired,
   currentQuestionSetIndex: _propTypes2.default.number,
   currentQuestionIndex: _propTypes2.default.number,
   questionSets: _propTypes2.default.object,
@@ -179,6 +186,7 @@ function mapStateToProps(state, ownProps) {
   return {
     title: state.getIn(['form', 'title']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
+    currentEditingField: state.getIn(['form', 'currentEditingField']),
     currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
     questionPanels: state.getIn(['form', 'schema', 'questionPanels']),
     questionSets: state.getIn(['form', 'schema', 'questionSets']),

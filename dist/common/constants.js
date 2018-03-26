@@ -69,6 +69,7 @@ var DELETE_QUESTION_OPTION_SUCCESS = exports.DELETE_QUESTION_OPTION_SUCCESS = 'D
 
 var UPLOAD_JSON_SUCCESS = exports.UPLOAD_JSON_SUCCESS = 'UPLOAD_JSON_SUCCESS';
 var CLEAR_FORM_ERROR = exports.CLEAR_FORM_ERROR = 'CLEAR_FORM_ERROR';
+var MOVE_PAGE_SUCCESS = exports.MOVE_PAGE_SUCCESS = 'MOVE_PAGE_SUCCESS';
 
 var BOOTSTRAP_CLASSES = exports.BOOTSTRAP_CLASSES = {
   input: 'form-control',
@@ -223,6 +224,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(UPLOAD_JSON_SUCCESS, 'UPLOAD_JSON_SUCCESS', 'src/common/constants.js');
 
   __REACT_HOT_LOADER__.register(CLEAR_FORM_ERROR, 'CLEAR_FORM_ERROR', 'src/common/constants.js');
+
+  __REACT_HOT_LOADER__.register(MOVE_PAGE_SUCCESS, 'MOVE_PAGE_SUCCESS', 'src/common/constants.js');
 
   __REACT_HOT_LOADER__.register(BOOTSTRAP_CLASSES, 'BOOTSTRAP_CLASSES', 'src/common/constants.js');
 

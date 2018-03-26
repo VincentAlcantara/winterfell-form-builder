@@ -177,7 +177,11 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 2 },
-                _react2.default.createElement(_FormMenu.EditSchemaButton, null)
+                _react2.default.createElement(_FormMenu.PageSortButton, {
+                  onClick: function onClick() {
+                    return _this2.props.changeCurrentEditingField('pageSort');
+                  }
+                })
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,

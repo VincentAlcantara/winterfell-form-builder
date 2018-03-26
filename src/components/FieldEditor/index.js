@@ -19,7 +19,7 @@ function FieldEditor(props) {
     <Row>
       <Col xs={12}>
         {
-          currentEditingField === 'page' &&
+          (currentEditingField === 'page' || currentEditingField === 'pageSort') &&
           <PageEditor
             currentQuestionPanelIndex={currentQuestionPanelIndex}
           />

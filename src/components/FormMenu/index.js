@@ -8,6 +8,7 @@ import AddQuestionSetButton from './AddQuestionSetButton';
 import EditQuestionButton from './EditQuestionButton';
 import UploadJSONButton from './UploadJSONButton';
 import SaveFormButton from './SaveFormButton';
+import PageSortButton from './PageSortButton';
 
 export {
   AddPageButton,
@@ -20,4 +21,5 @@ export {
   EditQuestionButton,
   UploadJSONButton,
   SaveFormButton,
+  PageSortButton,
 };
