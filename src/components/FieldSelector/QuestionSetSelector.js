@@ -17,7 +17,7 @@ const QuestionSetSelector = (props) => {
                 { questionSet.questionSetHeader &&
                 <Button
                   className="winterfell-form-builder-selector btn-block"
-                  onClick={() => onClick('button', questionSetIndex, currentQuestionIndex)}
+                  onClick={() => onClick('questionSet', questionSetIndex, currentQuestionIndex)}
                 >
                   <div>
                     <h4>{questionSet.questionSetHeader}</h4>
