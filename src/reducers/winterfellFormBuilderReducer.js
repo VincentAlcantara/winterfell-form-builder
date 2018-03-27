@@ -34,6 +34,7 @@ import {
   DELETE_QUESTION_OPTION_SUCCESS,
   UPLOAD_JSON_SUCCESS,
   SAVE_FORM_SUCCESS,
+  MOVE_PAGE_SUCCESS,
 } from '../common/constants';
 
 const initialState = fromJS({
@@ -349,7 +350,37 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .setIn(['schema', 'questionSets', questionSetIndex,
           'questions', questionIndex, 'text'], questionText);
     }
+    case MOVE_PAGE_SUCCESS: {
+      const { oldIndex, newIndex } = action.payload;
+      if (oldIndex === newIndex) {
+        return state;
+      }
+      const oldFormPanels = [...state.getIn(['schema', 'formPanels']).toJS()];
+      const oldQuestionPanels = [...state.getIn(['schema', 'questionPanels']).toJS()];
+      const oldFormPanelId = state.getIn(['schema', 'formPanels', oldIndex, 'panelId']);
+      const oldQuestionPanel = state.getIn(['schema', 'questionPanels', oldIndex]).toJS();
 
+      if (oldIndex < newIndex) { // moving page down
+        for (let i = oldIndex; i < newIndex; i += 1) {
+          oldFormPanels[i].panelId = oldFormPanels[i + 1].panelId;
+          oldQuestionPanels[i] = oldQuestionPanels[i + 1];
+        }
+      }
+      if (oldIndex > newIndex) {  // moving page up
+        for (let i = oldIndex; i > newIndex; i -= 1) {
+          oldFormPanels[i].panelId = oldFormPanels[i - 1].panelId;
+          oldQuestionPanels[i] = oldQuestionPanels[i - 1];
+        }
+      }
+      oldFormPanels[newIndex].panelId = oldFormPanelId;
+      oldQuestionPanels[newIndex] = oldQuestionPanel;
+      return state
+        .setIn(['schema', 'formPanels'], fromJS(oldFormPanels))
+        .setIn(['schema', 'questionPanels'], fromJS(oldQuestionPanels))
+        .set('currentPanelId', oldFormPanelId)
+        .set('currentPanelIndexd', newIndex)
+        .set('currentQuestionPanelIndex', newIndex);
+    }
     default:
       return state;
   }

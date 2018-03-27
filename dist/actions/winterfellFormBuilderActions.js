@@ -36,6 +36,7 @@ exports.addConditionalQuestion = addConditionalQuestion;
 exports.deleteQuestion = deleteQuestion;
 exports.changeCurrentEditingField = changeCurrentEditingField;
 exports.updateQuestion = updateQuestion;
+exports.movePage = movePage;
 
 var _constants = require('../common/constants');
 
@@ -292,6 +293,13 @@ function updateQuestion(currentQuestionSetIndex, currentQuestionIndex, question,
     payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, question: question, questionText: questionText }
   };
 }
+
+function movePage(oldIndex, newIndex) {
+  return {
+    type: _constants.MOVE_PAGE_SUCCESS,
+    payload: { oldIndex: oldIndex, newIndex: newIndex }
+  };
+}
 ;
 
 var _temp = function () {
@@ -364,6 +372,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(changeCurrentEditingField, 'changeCurrentEditingField', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(updateQuestion, 'updateQuestion', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(movePage, 'movePage', 'src/actions/winterfellFormBuilderActions.js');
 }();
 
 ;

@@ -32,6 +32,7 @@ import {
   SAVE_FORM_SUCCESS,
   UPDATE_FORM_ERROR,
   CLEAR_FORM_ERROR,
+  MOVE_PAGE_SUCCESS,
 } from '../common/constants';
 
 export function updateErrorMessage(message) {
@@ -311,5 +312,12 @@ export function updateQuestion(
   return {
     type: UPDATE_QUESTION_SUCCESS,
     payload: { currentQuestionSetIndex, currentQuestionIndex, question, questionText },
+  };
+}
+
+export function movePage(oldIndex, newIndex) {
+  return {
+    type: MOVE_PAGE_SUCCESS,
+    payload: { oldIndex, newIndex },
   };
 }

@@ -4,9 +4,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
 var _immutable = require('immutable');
 
 var _constants = require('../common/constants');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var initialState = (0, _immutable.fromJS)({
   title: '',
@@ -355,7 +361,38 @@ function winterfellFormBuilderReducer() {
 
         return state.setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'question'], _question).setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'text'], _questionText);
       }
+    case _constants.MOVE_PAGE_SUCCESS:
+      {
+        var _action$payload23 = action.payload,
+            oldIndex = _action$payload23.oldIndex,
+            newIndex = _action$payload23.newIndex;
 
+        if (oldIndex === newIndex) {
+          return state;
+        }
+        var oldFormPanels = [].concat((0, _toConsumableArray3.default)(state.getIn(['schema', 'formPanels']).toJS()));
+        var oldQuestionPanels = [].concat((0, _toConsumableArray3.default)(state.getIn(['schema', 'questionPanels']).toJS()));
+        var oldFormPanelId = state.getIn(['schema', 'formPanels', oldIndex, 'panelId']);
+        var oldQuestionPanel = state.getIn(['schema', 'questionPanels', oldIndex]).toJS();
+
+        if (oldIndex < newIndex) {
+          // moving page down
+          for (var _i = oldIndex; _i < newIndex; _i += 1) {
+            oldFormPanels[_i].panelId = oldFormPanels[_i + 1].panelId;
+            oldQuestionPanels[_i] = oldQuestionPanels[_i + 1];
+          }
+        }
+        if (oldIndex > newIndex) {
+          // moving page up
+          for (var _i2 = oldIndex; _i2 > newIndex; _i2 -= 1) {
+            oldFormPanels[_i2].panelId = oldFormPanels[_i2 - 1].panelId;
+            oldQuestionPanels[_i2] = oldQuestionPanels[_i2 - 1];
+          }
+        }
+        oldFormPanels[newIndex].panelId = oldFormPanelId;
+        oldQuestionPanels[newIndex] = oldQuestionPanel;
+        return state.setIn(['schema', 'formPanels'], (0, _immutable.fromJS)(oldFormPanels)).setIn(['schema', 'questionPanels'], (0, _immutable.fromJS)(oldQuestionPanels)).set('currentPanelId', oldFormPanelId).set('currentPanelIndexd', newIndex).set('currentQuestionPanelIndex', newIndex);
+      }
     default:
       return state;
   }
