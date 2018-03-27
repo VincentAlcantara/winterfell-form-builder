@@ -32,6 +32,7 @@ function FieldEditor(props) {
         }
         { currentEditingField === 'question' &&
           <QuestionEditor
+            currentQuestionPanelIndex={currentQuestionPanelIndex}
             currentQuestionSetIndex={currentQuestionSetIndex}
             currentQuestionIndex={currentQuestionIndex}
           />

@@ -26,7 +26,7 @@ import {
   EDIT_BACK_BUTTON_TEXT_SUCCESS,
   EDIT_NEXT_BUTTON_ACTION_SUCCESS,
   EDIT_NEXT_BUTTON_TARGET_SUCCESS,
-  // EDIT_BACK_BUTTON_ACTION_SUCCESS,
+  DISABLE_BACK_BUTTON_SUCCESS,
   CHANGE_QUESTION_TYPE_SUCCESS,
   ADD_QUESTION_OPTION_SUCCESS,
   EDIT_QUESTION_OPTION_TEXT_SUCCESS,
@@ -35,6 +35,7 @@ import {
   UPLOAD_JSON_SUCCESS,
   SAVE_FORM_SUCCESS,
   MOVE_PAGE_SUCCESS,
+  UPDATE_NEXT_QUESTION_TARGET_SUCCESS,
 } from '../common/constants';
 
 const initialState = fromJS({
@@ -131,6 +132,11 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       const { currentQuestionPanelIndex, text } = action.payload;
       return state
         .setIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'backButton', 'text'], text);
+    }
+    case DISABLE_BACK_BUTTON_SUCCESS: {
+      const { currentQuestionPanelIndex, disabled } = action.payload;
+      return state
+        .setIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'backButton', 'disabled'], disabled);
     }
     case EDIT_NEXT_BUTTON_ACTION_SUCCESS: {
       const { currentQuestionPanelIndex, text } = action.payload;
@@ -380,6 +386,17 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .set('currentPanelId', oldFormPanelId)
         .set('currentPanelIndexd', newIndex)
         .set('currentQuestionPanelIndex', newIndex);
+    }
+    case UPDATE_NEXT_QUESTION_TARGET_SUCCESS: {
+      const newQuestionCondition = {
+        questionId: action.payload.questionId,
+        value: action.payload.value,
+        target: action.payload.target,
+        action: 'GOTO',
+      };
+      return state
+        .setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', 0],
+          fromJS(newQuestionCondition));
     }
     default:
       return state;

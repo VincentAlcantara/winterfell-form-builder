@@ -19,6 +19,8 @@ exports.editQuestion = editQuestion;
 exports.editQuestionText = editQuestionText;
 exports.editQuestionPostText = editQuestionPostText;
 exports.editNextButtonText = editNextButtonText;
+exports.editBackButtonText = editBackButtonText;
+exports.disableBackButton = disableBackButton;
 exports.onSelectNextButtonAction = onSelectNextButtonAction;
 exports.onSelectNextButtonTarget = onSelectNextButtonTarget;
 exports.changeQuestionType = changeQuestionType;
@@ -37,6 +39,7 @@ exports.deleteQuestion = deleteQuestion;
 exports.changeCurrentEditingField = changeCurrentEditingField;
 exports.updateQuestion = updateQuestion;
 exports.movePage = movePage;
+exports.updateNextQuestionTarget = updateNextQuestionTarget;
 
 var _constants = require('../common/constants');
 
@@ -147,6 +150,20 @@ function editNextButtonText(currentQuestionPanelIndex, text) {
   return {
     type: _constants.EDIT_NEXT_BUTTON_TEXT_SUCCESS,
     payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, text: text }
+  };
+}
+
+function editBackButtonText(currentQuestionPanelIndex, text) {
+  return {
+    type: _constants.EDIT_BACK_BUTTON_TEXT_SUCCESS,
+    payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, text: text }
+  };
+}
+
+function disableBackButton(currentQuestionPanelIndex, disabled) {
+  return {
+    type: _constants.DISABLE_BACK_BUTTON_SUCCESS,
+    payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, disabled: disabled }
   };
 }
 
@@ -300,6 +317,13 @@ function movePage(oldIndex, newIndex) {
     payload: { oldIndex: oldIndex, newIndex: newIndex }
   };
 }
+
+function updateNextQuestionTarget(currentQuestionPanelIndex, questionId, value, target) {
+  return {
+    type: _constants.UPDATE_NEXT_QUESTION_TARGET_SUCCESS,
+    payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, questionId: questionId, value: value, target: target }
+  };
+}
 ;
 
 var _temp = function () {
@@ -339,6 +363,10 @@ var _temp = function () {
 
   __REACT_HOT_LOADER__.register(editNextButtonText, 'editNextButtonText', 'src/actions/winterfellFormBuilderActions.js');
 
+  __REACT_HOT_LOADER__.register(editBackButtonText, 'editBackButtonText', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(disableBackButton, 'disableBackButton', 'src/actions/winterfellFormBuilderActions.js');
+
   __REACT_HOT_LOADER__.register(onSelectNextButtonAction, 'onSelectNextButtonAction', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(onSelectNextButtonTarget, 'onSelectNextButtonTarget', 'src/actions/winterfellFormBuilderActions.js');
@@ -374,6 +402,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(updateQuestion, 'updateQuestion', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(movePage, 'movePage', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(updateNextQuestionTarget, 'updateNextQuestionTarget', 'src/actions/winterfellFormBuilderActions.js');
 }();
 
 ;

@@ -111,6 +111,7 @@ var FieldSelectorContainer = function (_Component) {
           currentQuestionSetIndex = _props.currentQuestionSetIndex,
           currentQuestionIndex = _props.currentQuestionIndex,
           backButton = _props.backButton,
+          backButtonDisabled = _props.backButtonDisabled,
           nextButton = _props.nextButton,
           currentEditingField = _props.currentEditingField;
 
@@ -141,6 +142,7 @@ var FieldSelectorContainer = function (_Component) {
             }),
             typeof currentQuestionPanelIndex !== 'undefined' && _react2.default.createElement(_ButtonBarSelector2.default, {
               backButton: backButton,
+              backButtonDisabled: backButtonDisabled,
               nextButton: nextButton,
               onClick: function onClick() {
                 return _this2.props.changeCurrentEditingField('buttons', currentQuestionSetIndex, currentQuestionIndex);
@@ -166,6 +168,7 @@ FieldSelectorContainer.propTypes = {
   panelHeader: _propTypes2.default.string,
   panelText: _propTypes2.default.string,
   backButton: _propTypes2.default.string,
+  backButtonDisabled: _propTypes2.default.bool,
   nextButton: _propTypes2.default.string
 };
 FieldSelectorContainer.defaultProps = {
@@ -176,6 +179,7 @@ FieldSelectorContainer.defaultProps = {
   panelHeader: '',
   panelText: '',
   backButton: '',
+  backButtonDisabled: false,
   nextButton: '',
   currentQuestionSetIndex: 0,
   currentQuestionIndex: 0
@@ -196,7 +200,8 @@ function mapStateToProps(state, ownProps) {
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
     nextButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'button', 'text']),
-    backButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'backButton', 'text'])
+    backButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'backButton', 'text']),
+    backButtonDisabled: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'backButton', 'disabled'])
   };
 }
 

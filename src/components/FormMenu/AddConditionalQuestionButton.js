@@ -133,7 +133,7 @@ class AddConditionalQuestionButton extends Component {
             onClick={() => {
               this.setState({ showModal: true });
             }}
-          ><Glyphicon glyph="glyphicon glyphicon-random" />
+          ><Glyphicon glyph="glyphicon glyphicon-menu-hamburger" />
           </Button>
         </Col>
       </Row>

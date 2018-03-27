@@ -23,6 +23,7 @@ class FieldSelectorContainer extends Component {
     panelHeader: PropTypes.string,
     panelText: PropTypes.string,
     backButton: PropTypes.string,
+    backButtonDisabled: PropTypes.bool,
     nextButton: PropTypes.string,
   };
 
@@ -34,6 +35,7 @@ class FieldSelectorContainer extends Component {
     panelHeader: '',
     panelText: '',
     backButton: '',
+    backButtonDisabled: false,
     nextButton: '',
     currentQuestionSetIndex: 0,
     currentQuestionIndex: 0,
@@ -77,6 +79,7 @@ class FieldSelectorContainer extends Component {
       currentQuestionSetIndex,
       currentQuestionIndex,
       backButton,
+      backButtonDisabled,
       nextButton,
       currentEditingField,
     } = this.props;
@@ -111,6 +114,7 @@ class FieldSelectorContainer extends Component {
               { typeof currentQuestionPanelIndex !== 'undefined' &&
                 <ButtonBarSelector
                   backButton={backButton}
+                  backButtonDisabled={backButtonDisabled}
                   nextButton={nextButton}
                   onClick={() => this.props.changeCurrentEditingField('buttons', currentQuestionSetIndex, currentQuestionIndex)}
                 />
@@ -138,6 +142,7 @@ function mapStateToProps(state, ownProps) {
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
     nextButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'button', 'text']),
     backButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'backButton', 'text']),
+    backButtonDisabled: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'backButton', 'disabled']),
   };
 }
 

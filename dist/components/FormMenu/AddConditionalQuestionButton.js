@@ -227,7 +227,7 @@ var AddConditionalQuestionButton = function (_Component) {
                 _this2.setState({ showModal: true });
               }
             },
-            _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-random' })
+            _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-menu-hamburger' })
           )
         )
       );

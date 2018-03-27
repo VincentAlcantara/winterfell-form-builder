@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
 const ButtonBarSelector = (props) => {
-  const { nextButton, backButton, onClick } = props;
+  const { nextButton, backButton, backButtonDisabled, onClick } = props;
 
   return (
     <Button
@@ -11,7 +11,7 @@ const ButtonBarSelector = (props) => {
       onClick={onClick}
     >
       <div className="button-bar">
-        { backButton &&
+        { backButton && !backButtonDisabled &&
           <button className="btn btn-default pull-left">
             {backButton}
           </button>
@@ -34,12 +34,14 @@ const ButtonBarSelector = (props) => {
 ButtonBarSelector.propTypes = {
   nextButton: PropTypes.string,
   backButton: PropTypes.string,
+  backButtonDisabled: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
 };
 
 ButtonBarSelector.defaultProps = {
   nextButton: null,
   backButton: null,
+  backButtonDisabled: false,
   onClick: PropTypes.func.isRequired,
 };
 

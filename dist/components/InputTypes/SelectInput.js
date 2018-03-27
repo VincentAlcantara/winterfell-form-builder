@@ -91,6 +91,11 @@ var SelectInput = function (_React$Component) {
           },
           autoComplete: this.props.name
         },
+        _react2.default.createElement(
+          'option',
+          { value: '', disabled: this.props.disableEmpty, selected: true },
+          '\xA0'
+        ),
         options
       );
     }
@@ -104,7 +109,8 @@ SelectInput.propTypes = {
   classes: _propTypes2.default.object,
   name: _propTypes2.default.string,
   onSelect: _propTypes2.default.func,
-  required: _propTypes2.default.bool
+  required: _propTypes2.default.bool,
+  disableEmpty: _propTypes2.default.bool
 };
 SelectInput.defaultProps = {
   classes: {
@@ -117,7 +123,8 @@ SelectInput.defaultProps = {
   onChange: function onChange() {},
   onSelect: function onSelect() {},
   required: false,
-  initialValue: ''
+  initialValue: '',
+  disableEmpty: true
 };
 var _default = SelectInput;
 exports.default = _default;

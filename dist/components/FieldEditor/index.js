@@ -52,6 +52,7 @@ function FieldEditor(props) {
         currentQuestionSetIndex: currentQuestionSetIndex
       }),
       currentEditingField === 'question' && _react2.default.createElement(_QuestionEditor2.default, {
+        currentQuestionPanelIndex: currentQuestionPanelIndex,
         currentQuestionSetIndex: currentQuestionSetIndex,
         currentQuestionIndex: currentQuestionIndex
       }),

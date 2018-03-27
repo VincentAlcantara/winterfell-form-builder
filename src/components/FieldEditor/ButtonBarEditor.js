@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FormGroup } from 'react-bootstrap';
 import { fromJS } from 'immutable';
 
-import { editNextButtonText, editBackButtonText, onSelectNextButtonAction, onSelectNextButtonTarget } from '../../actions/winterfellFormBuilderActions';
+import { editNextButtonText, disableBackButton, editBackButtonText, onSelectNextButtonAction, onSelectNextButtonTarget } from '../../actions/winterfellFormBuilderActions';
 import SelectInput from '../InputTypes/SelectInput';
 
 import FieldGroup from '../InputTypes/FieldGroup';
@@ -12,7 +12,9 @@ import FieldGroup from '../InputTypes/FieldGroup';
 class ButtonBarEditor extends PureComponent {
   static propTypes = {
     editNextButtonText: PropTypes.func.isRequired,
+    backButtonDisabled: PropTypes.bool.isRequired,
     editBackButtonText: PropTypes.func.isRequired,
+    disableBackButton: PropTypes.func.isRequired,
     onSelectNextButtonAction: PropTypes.func.isRequired,
     onSelectNextButtonTarget: PropTypes.func.isRequired,
     backButtonText: PropTypes.string,
@@ -48,6 +50,7 @@ class ButtonBarEditor extends PureComponent {
     this.onClick = this.onClick.bind(this);
     this.onSelectDefaultAction = this.onSelectDefaultAction.bind(this);
     this.onSelectDefaultTarget = this.onSelectDefaultTarget.bind(this);
+    this.onDisableBackButtonClick = this.onDisableBackButtonClick.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -89,6 +92,11 @@ class ButtonBarEditor extends PureComponent {
     this.props.onSelectNextButtonTarget(this.props.currentQuestionPanelIndex, target);
   }
 
+  onDisableBackButtonClick() {
+    this.props.disableBackButton(this.props.currentQuestionPanelIndex,
+      !this.props.backButtonDisabled);
+  }
+
   render() {
     const formPanelIds = this.props.formPanels.toJS().map(formPanel => ({
       text: formPanel.panelId,
@@ -106,6 +114,17 @@ class ButtonBarEditor extends PureComponent {
             placeholder={this.props.backButtonText}
             value={this.state.backButtonText}
           />
+        </FormGroup>
+        <FormGroup>
+          <span htmlFor="disable-back-button" id="disable-back-button-label">
+            <input
+              id="disable-back-button"
+              type="checkbox"
+              onClick={this.onDisableBackButtonClick}
+              checked={this.props.backButtonDisabled}
+            />
+            &nbsp;disable back button
+          </span>
         </FormGroup>
         <FormGroup>
           <FieldGroup
@@ -167,6 +186,7 @@ class ButtonBarEditor extends PureComponent {
 function mapStateToProps(state, ownProps) {
   return {
     backButtonText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'backButton', 'text']),
+    backButtonDisabled: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'backButton', 'disabled']),
     nextButtonText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'button', 'text']),
     defaultAction: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'action', 'default']),
     conditionalActions: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'action', 'conditions']),
@@ -181,5 +201,6 @@ export default connect(mapStateToProps, {
   editBackButtonText,
   onSelectNextButtonAction,
   onSelectNextButtonTarget,
+  disableBackButton,
 })(ButtonBarEditor);
 
