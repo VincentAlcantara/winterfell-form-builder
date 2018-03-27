@@ -401,28 +401,29 @@ class QuestionEditor extends PureComponent {
           />
         </FormGroup>
         }
-        <b>Next Question Target</b>
         <FormGroup>
-          <SelectInput
-            id="questionTarget"
-            labelId="questionTarget"
-            options={nextButtonTargetOptions}
-            onSelect={e => this.setState({ questionTarget: e })}
-            initialValue={this.state.questionTarget}
-            disableEmpty={false}           
-          />
-        </FormGroup>
-        <FormGroup>
-          <FieldGroup         
+          <FieldGroup
             id="questionTargetMatch"
             name="questionTargetMatch"
-            label="Question Value Must Match"
+            label="If Answer Matches"
             placeholder={this.props.questionTargetMatch}
             onChange={this.onChange}
             value={this.state.questionTargetMatch}
             disableEmpty={false}
           />
         </FormGroup>
+        <FormGroup>
+          <label htmlFor="questionTarget">Go to page</label>
+          <SelectInput
+            id="questionTarget"
+            labelId="questionTarget"
+            options={nextButtonTargetOptions}
+            onSelect={e => this.setState({ questionTarget: e })}
+            initialValue={this.state.questionTarget}
+            disableEmpty={false}
+          />
+        </FormGroup>
+
         <FormGroup>
           <Button
             label="find"
