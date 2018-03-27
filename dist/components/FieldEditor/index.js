@@ -45,13 +45,14 @@ function FieldEditor(props) {
     _react2.default.createElement(
       _reactBootstrap.Col,
       { xs: 12 },
-      currentEditingField === 'page' && _react2.default.createElement(_PageEditor2.default, {
+      (currentEditingField === 'page' || currentEditingField === 'pageSort') && _react2.default.createElement(_PageEditor2.default, {
         currentQuestionPanelIndex: currentQuestionPanelIndex
       }),
       currentEditingField === 'questionSet' && _react2.default.createElement(_QuestionSetEditor2.default, {
         currentQuestionSetIndex: currentQuestionSetIndex
       }),
       currentEditingField === 'question' && _react2.default.createElement(_QuestionEditor2.default, {
+        currentQuestionPanelIndex: currentQuestionPanelIndex,
         currentQuestionSetIndex: currentQuestionSetIndex,
         currentQuestionIndex: currentQuestionIndex
       }),

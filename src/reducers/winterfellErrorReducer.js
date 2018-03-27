@@ -22,6 +22,7 @@ import {
   UPDATE_QUESTION_ERROR,
   DELETE_QUESTION_SUCCESS,
   DELETE_QUESTION_ERROR,
+  CLEAR_FORM_ERROR,
 } from '../common/constants';
 
 const initialState = fromJS({
@@ -41,7 +42,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     case UPDATE_QUESTION_ERROR:
     case DELETE_QUESTION_ERROR:
       return state
-        .set('message', `${action.type}`);
+        .set('message', `${action.payload.message}`);
     case GOTO_PAGE_SUCCESS:
     case CREATE_FORM_SUCCESS:
     case EDIT_FORM_TITLE_SUCCESS:
@@ -53,6 +54,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     case ADD_QUESTION_SET_SUCCESS:
     case UPDATE_QUESTION_SUCCESS:
     case DELETE_QUESTION_SUCCESS:
+    case CLEAR_FORM_ERROR:
       return state
       .set('message', '');
     default: {

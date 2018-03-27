@@ -3,10 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.updateErrorMessage = updateErrorMessage;
+exports.clearErrorMessage = clearErrorMessage;
 exports.createForm = createForm;
 exports.uploadJSON = uploadJSON;
 exports.saveJSON = saveJSON;
 exports.editFormTitle = editFormTitle;
+exports.editPageId = editPageId;
 exports.editPageHeader = editPageHeader;
 exports.editPageText = editPageText;
 exports.editQuestionSetHeader = editQuestionSetHeader;
@@ -16,6 +19,8 @@ exports.editQuestion = editQuestion;
 exports.editQuestionText = editQuestionText;
 exports.editQuestionPostText = editQuestionPostText;
 exports.editNextButtonText = editNextButtonText;
+exports.editBackButtonText = editBackButtonText;
+exports.disableBackButton = disableBackButton;
 exports.onSelectNextButtonAction = onSelectNextButtonAction;
 exports.onSelectNextButtonTarget = onSelectNextButtonTarget;
 exports.changeQuestionType = changeQuestionType;
@@ -33,8 +38,23 @@ exports.addConditionalQuestion = addConditionalQuestion;
 exports.deleteQuestion = deleteQuestion;
 exports.changeCurrentEditingField = changeCurrentEditingField;
 exports.updateQuestion = updateQuestion;
+exports.movePage = movePage;
+exports.updateNextQuestionTarget = updateNextQuestionTarget;
 
 var _constants = require('../common/constants');
+
+function updateErrorMessage(message) {
+  return {
+    type: _constants.UPDATE_FORM_ERROR,
+    payload: { message: message }
+  };
+}
+
+function clearErrorMessage() {
+  return {
+    type: _constants.CLEAR_FORM_ERROR
+  };
+}
 
 function createForm(title) {
   return {
@@ -64,6 +84,12 @@ function editFormTitle(title) {
   };
 }
 
+function editPageId(questionPanelIndex, text) {
+  return {
+    type: _constants.EDIT_PAGE_ID_SUCCESS,
+    payload: { questionPanelIndex: questionPanelIndex, text: text }
+  };
+}
 function editPageHeader(questionPanelIndex, header) {
   return {
     type: _constants.EDIT_PAGE_HEADER_SUCCESS,
@@ -124,6 +150,20 @@ function editNextButtonText(currentQuestionPanelIndex, text) {
   return {
     type: _constants.EDIT_NEXT_BUTTON_TEXT_SUCCESS,
     payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, text: text }
+  };
+}
+
+function editBackButtonText(currentQuestionPanelIndex, text) {
+  return {
+    type: _constants.EDIT_BACK_BUTTON_TEXT_SUCCESS,
+    payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, text: text }
+  };
+}
+
+function disableBackButton(currentQuestionPanelIndex, disabled) {
+  return {
+    type: _constants.DISABLE_BACK_BUTTON_SUCCESS,
+    payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, disabled: disabled }
   };
 }
 
@@ -270,12 +310,30 @@ function updateQuestion(currentQuestionSetIndex, currentQuestionIndex, question,
     payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, question: question, questionText: questionText }
   };
 }
+
+function movePage(oldIndex, newIndex) {
+  return {
+    type: _constants.MOVE_PAGE_SUCCESS,
+    payload: { oldIndex: oldIndex, newIndex: newIndex }
+  };
+}
+
+function updateNextQuestionTarget(currentQuestionPanelIndex, questionId, value, target) {
+  return {
+    type: _constants.UPDATE_NEXT_QUESTION_TARGET_SUCCESS,
+    payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, questionId: questionId, value: value, target: target }
+  };
+}
 ;
 
 var _temp = function () {
   if (typeof __REACT_HOT_LOADER__ === 'undefined') {
     return;
   }
+
+  __REACT_HOT_LOADER__.register(updateErrorMessage, 'updateErrorMessage', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(clearErrorMessage, 'clearErrorMessage', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(createForm, 'createForm', 'src/actions/winterfellFormBuilderActions.js');
 
@@ -284,6 +342,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(saveJSON, 'saveJSON', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(editFormTitle, 'editFormTitle', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(editPageId, 'editPageId', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(editPageHeader, 'editPageHeader', 'src/actions/winterfellFormBuilderActions.js');
 
@@ -302,6 +362,10 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(editQuestionPostText, 'editQuestionPostText', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(editNextButtonText, 'editNextButtonText', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(editBackButtonText, 'editBackButtonText', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(disableBackButton, 'disableBackButton', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(onSelectNextButtonAction, 'onSelectNextButtonAction', 'src/actions/winterfellFormBuilderActions.js');
 
@@ -336,6 +400,10 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(changeCurrentEditingField, 'changeCurrentEditingField', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(updateQuestion, 'updateQuestion', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(movePage, 'movePage', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(updateNextQuestionTarget, 'updateNextQuestionTarget', 'src/actions/winterfellFormBuilderActions.js');
 }();
 
 ;

@@ -11,6 +11,7 @@ import {
   DELETE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
   CHANGE_EDITING_FIELD_SUCCESS,
+  EDIT_PAGE_ID_SUCCESS,
   EDIT_PAGE_HEADER_SUCCESS,
   EDIT_PAGE_TEXT_SUCCESS,
   EDIT_QUESTION_SET_HEADER_SUCCESS,
@@ -20,6 +21,8 @@ import {
   EDIT_QUESTION_TEXT_SUCCESS,
   EDIT_QUESTION_POST_TEXT_SUCCESS,
   EDIT_NEXT_BUTTON_TEXT_SUCCESS,
+  EDIT_BACK_BUTTON_TEXT_SUCCESS,
+  DISABLE_BACK_BUTTON_SUCCESS,
   EDIT_NEXT_BUTTON_ACTION_SUCCESS,
   EDIT_NEXT_BUTTON_TARGET_SUCCESS,
   ADD_QUESTION_OPTION_SUCCESS,
@@ -29,7 +32,24 @@ import {
   UPLOAD_JSON_SUCCESS,
   CHANGE_QUESTION_TYPE_SUCCESS,
   SAVE_FORM_SUCCESS,
+  UPDATE_FORM_ERROR,
+  CLEAR_FORM_ERROR,
+  MOVE_PAGE_SUCCESS,
+  UPDATE_NEXT_QUESTION_TARGET_SUCCESS,
 } from '../common/constants';
+
+export function updateErrorMessage(message) {
+  return {
+    type: UPDATE_FORM_ERROR,
+    payload: { message },
+  };
+}
+
+export function clearErrorMessage() {
+  return {
+    type: CLEAR_FORM_ERROR,
+  };
+}
 
 export function createForm(title) {
   return {
@@ -59,6 +79,12 @@ export function editFormTitle(title) {
   };
 }
 
+export function editPageId(questionPanelIndex, text) {
+  return {
+    type: EDIT_PAGE_ID_SUCCESS,
+    payload: { questionPanelIndex, text },
+  };
+}
 export function editPageHeader(questionPanelIndex, header) {
   return {
     type: EDIT_PAGE_HEADER_SUCCESS,
@@ -121,6 +147,21 @@ export function editNextButtonText(currentQuestionPanelIndex, text) {
     payload: { currentQuestionPanelIndex, text },
   };
 }
+
+export function editBackButtonText(currentQuestionPanelIndex, text) {
+  return {
+    type: EDIT_BACK_BUTTON_TEXT_SUCCESS,
+    payload: { currentQuestionPanelIndex, text },
+  };
+}
+
+export function disableBackButton(currentQuestionPanelIndex, disabled) {
+  return {
+    type: DISABLE_BACK_BUTTON_SUCCESS,
+    payload: { currentQuestionPanelIndex, disabled },
+  };
+}
+
 
 export function onSelectNextButtonAction(currentQuestionPanelIndex, text) {
   return {
@@ -289,5 +330,19 @@ export function updateQuestion(
   return {
     type: UPDATE_QUESTION_SUCCESS,
     payload: { currentQuestionSetIndex, currentQuestionIndex, question, questionText },
+  };
+}
+
+export function movePage(oldIndex, newIndex) {
+  return {
+    type: MOVE_PAGE_SUCCESS,
+    payload: { oldIndex, newIndex },
+  };
+}
+
+export function updateNextQuestionTarget(currentQuestionPanelIndex, questionId, value, target) {
+  return {
+    type: UPDATE_NEXT_QUESTION_TARGET_SUCCESS,
+    payload: { currentQuestionPanelIndex, questionId, value, target },
   };
 }

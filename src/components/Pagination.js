@@ -7,13 +7,13 @@ function Pagination(props) {
   const { currentPanelId, formPanels, onClick } = props;
   const getPages = () => formPanels.map((panel, index) => (
     <MenuItem
-      key={`${index}-${panel.panelId}`}
+      key={`${index}-${panel}`}
       onClick={() => {
-        onClick(panel.panelId);
+        onClick(panel);
       }}
       className="btn-block"
     >
-      {panel.panelId}
+      {panel}
     </MenuItem>
   ));
 
@@ -38,7 +38,7 @@ function Pagination(props) {
 }
 
 Pagination.propTypes = {
-  formPanels: PropTypes.array.isRequired,
+  formPanels: PropTypes.object.isRequired,
   currentPanelId: PropTypes.string,
   onClick: PropTypes.func.isRequired,
 };

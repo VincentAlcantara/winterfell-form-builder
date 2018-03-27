@@ -13,6 +13,7 @@ import {
   DELETE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
   CHANGE_EDITING_FIELD_SUCCESS,
+  EDIT_PAGE_ID_SUCCESS,
   EDIT_PAGE_HEADER_SUCCESS,
   EDIT_PAGE_TEXT_SUCCESS,
   EDIT_QUESTION_SET_HEADER_SUCCESS,
@@ -25,7 +26,7 @@ import {
   EDIT_BACK_BUTTON_TEXT_SUCCESS,
   EDIT_NEXT_BUTTON_ACTION_SUCCESS,
   EDIT_NEXT_BUTTON_TARGET_SUCCESS,
-  // EDIT_BACK_BUTTON_ACTION_SUCCESS,
+  DISABLE_BACK_BUTTON_SUCCESS,
   CHANGE_QUESTION_TYPE_SUCCESS,
   ADD_QUESTION_OPTION_SUCCESS,
   EDIT_QUESTION_OPTION_TEXT_SUCCESS,
@@ -33,6 +34,8 @@ import {
   DELETE_QUESTION_OPTION_SUCCESS,
   UPLOAD_JSON_SUCCESS,
   SAVE_FORM_SUCCESS,
+  MOVE_PAGE_SUCCESS,
+  UPDATE_NEXT_QUESTION_TARGET_SUCCESS,
 } from '../common/constants';
 
 const initialState = fromJS({
@@ -68,6 +71,13 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     case SAVE_FORM_SUCCESS: {
       return state
         .set('title', action.payload.fileName);
+    }
+    case EDIT_PAGE_ID_SUCCESS: {
+      const { questionPanelIndex, text } = action.payload;
+      return state
+        .setIn(['schema', 'formPanels', questionPanelIndex, 'panelId'], text)
+        .set('currentPanelId', text)
+        .setIn(['schema', 'questionPanels', questionPanelIndex, 'panelId'], text);
     }
     case EDIT_PAGE_HEADER_SUCCESS: {
       const { questionPanelIndex, header } = action.payload;
@@ -122,6 +132,11 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       const { currentQuestionPanelIndex, text } = action.payload;
       return state
         .setIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'backButton', 'text'], text);
+    }
+    case DISABLE_BACK_BUTTON_SUCCESS: {
+      const { currentQuestionPanelIndex, disabled } = action.payload;
+      return state
+        .setIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'backButton', 'disabled'], disabled);
     }
     case EDIT_NEXT_BUTTON_ACTION_SUCCESS: {
       const { currentQuestionPanelIndex, text } = action.payload;
@@ -341,7 +356,48 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .setIn(['schema', 'questionSets', questionSetIndex,
           'questions', questionIndex, 'text'], questionText);
     }
+    case MOVE_PAGE_SUCCESS: {
+      const { oldIndex, newIndex } = action.payload;
+      if (oldIndex === newIndex) {
+        return state;
+      }
+      const oldFormPanels = [...state.getIn(['schema', 'formPanels']).toJS()];
+      const oldQuestionPanels = [...state.getIn(['schema', 'questionPanels']).toJS()];
+      const oldFormPanelId = state.getIn(['schema', 'formPanels', oldIndex, 'panelId']);
+      const oldQuestionPanel = state.getIn(['schema', 'questionPanels', oldIndex]).toJS();
 
+      if (oldIndex < newIndex) { // moving page down
+        for (let i = oldIndex; i < newIndex; i += 1) {
+          oldFormPanels[i].panelId = oldFormPanels[i + 1].panelId;
+          oldQuestionPanels[i] = oldQuestionPanels[i + 1];
+        }
+      }
+      if (oldIndex > newIndex) {  // moving page up
+        for (let i = oldIndex; i > newIndex; i -= 1) {
+          oldFormPanels[i].panelId = oldFormPanels[i - 1].panelId;
+          oldQuestionPanels[i] = oldQuestionPanels[i - 1];
+        }
+      }
+      oldFormPanels[newIndex].panelId = oldFormPanelId;
+      oldQuestionPanels[newIndex] = oldQuestionPanel;
+      return state
+        .setIn(['schema', 'formPanels'], fromJS(oldFormPanels))
+        .setIn(['schema', 'questionPanels'], fromJS(oldQuestionPanels))
+        .set('currentPanelId', oldFormPanelId)
+        .set('currentPanelIndexd', newIndex)
+        .set('currentQuestionPanelIndex', newIndex);
+    }
+    case UPDATE_NEXT_QUESTION_TARGET_SUCCESS: {
+      const newQuestionCondition = {
+        questionId: action.payload.questionId,
+        value: action.payload.value,
+        target: action.payload.target,
+        action: 'GOTO',
+      };
+      return state
+        .setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', 0],
+          fromJS(newQuestionCondition));
+    }
     default:
       return state;
   }

@@ -7,6 +7,7 @@ import { changeCurrentEditingField, editFormTitle } from '../../actions/winterfe
 import PageSelector from './PageSelector';
 import QuestionSetSelector from './QuestionSetSelector';
 import ButtonBarSelector from './ButtonBarSelector';
+import PageSortSelector from './PageSortSelector';
 
 
 class FieldSelectorContainer extends Component {
@@ -14,6 +15,7 @@ class FieldSelectorContainer extends Component {
     editFormTitle: PropTypes.func.isRequired,
     changeCurrentEditingField: PropTypes.func.isRequired,
     currentQuestionPanelIndex: PropTypes.number.isRequired,
+    currentEditingField: PropTypes.string.isRequired,
     currentQuestionSetIndex: PropTypes.number,
     currentQuestionIndex: PropTypes.number,
     questionSets: PropTypes.object,
@@ -21,6 +23,7 @@ class FieldSelectorContainer extends Component {
     panelHeader: PropTypes.string,
     panelText: PropTypes.string,
     backButton: PropTypes.string,
+    backButtonDisabled: PropTypes.bool,
     nextButton: PropTypes.string,
   };
 
@@ -32,6 +35,7 @@ class FieldSelectorContainer extends Component {
     panelHeader: '',
     panelText: '',
     backButton: '',
+    backButtonDisabled: false,
     nextButton: '',
     currentQuestionSetIndex: 0,
     currentQuestionIndex: 0,
@@ -75,38 +79,48 @@ class FieldSelectorContainer extends Component {
       currentQuestionSetIndex,
       currentQuestionIndex,
       backButton,
+      backButtonDisabled,
       nextButton,
+      currentEditingField,
     } = this.props;
     const questionPanelsArray = questionPanels && questionPanels.toJS();
     const questionSetsArray = questionSets && questionSets.toJS();
     return (
       <Row>
         <Col xs={12}>
-          <form>
-            { typeof currentQuestionPanelIndex !== 'undefined' &&
-            <PageSelector
-              panelHeader={panelHeader}
-              panelText={panelText}
-              onClick={() => this.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex)}
-            />
-            }
-            { typeof currentQuestionPanelIndex !== 'undefined' &&
-              questionPanelsArray &&
-              <QuestionSetSelector
-                currentQuestionSets={questionPanelsArray[currentQuestionPanelIndex].questionSets}
-                questionSets={questionSetsArray}
-                onClick={this.props.changeCurrentEditingField}
-                currentQuestionIndex={this.props.currentQuestionIndex}
+          {
+            currentEditingField === 'pageSort' &&
+            <PageSortSelector />
+          }
+          {
+            currentEditingField !== 'pageSort' &&
+            <form>
+              { typeof currentQuestionPanelIndex !== 'undefined' &&
+              <PageSelector
+                panelHeader={panelHeader}
+                panelText={panelText}
+                onClick={() => this.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex)}
               />
-            }
-            { typeof currentQuestionPanelIndex !== 'undefined' &&
-              <ButtonBarSelector
-                backButton={backButton}
-                nextButton={nextButton}
-                onClick={() => this.props.changeCurrentEditingField('buttons', currentQuestionSetIndex, currentQuestionIndex)}
-              />
-            }
-          </form>
+              }
+              { typeof currentQuestionPanelIndex !== 'undefined' &&
+                questionPanelsArray &&
+                <QuestionSetSelector
+                  currentQuestionSets={questionPanelsArray[currentQuestionPanelIndex].questionSets}
+                  questionSets={questionSetsArray}
+                  onClick={this.props.changeCurrentEditingField}
+                  currentQuestionIndex={this.props.currentQuestionIndex}
+                />
+              }
+              { typeof currentQuestionPanelIndex !== 'undefined' &&
+                <ButtonBarSelector
+                  backButton={backButton}
+                  backButtonDisabled={backButtonDisabled}
+                  nextButton={nextButton}
+                  onClick={() => this.props.changeCurrentEditingField('buttons', currentQuestionSetIndex, currentQuestionIndex)}
+                />
+              }
+            </form>
+          }
         </Col>
       </Row>
     );
@@ -117,6 +131,7 @@ function mapStateToProps(state, ownProps) {
   return {
     title: state.getIn(['form', 'title']),
     currentPanelId: state.getIn(['form', 'currentPanelId']),
+    currentEditingField: state.getIn(['form', 'currentEditingField']),
     currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
     questionPanels: state.getIn(['form', 'schema', 'questionPanels']),
     questionSets: state.getIn(['form', 'schema', 'questionSets']),
@@ -127,6 +142,7 @@ function mapStateToProps(state, ownProps) {
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
     nextButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'button', 'text']),
     backButton: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'backButton', 'text']),
+    backButtonDisabled: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'backButton', 'disabled']),
   };
 }
 

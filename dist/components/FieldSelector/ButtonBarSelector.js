@@ -19,6 +19,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var ButtonBarSelector = function ButtonBarSelector(props) {
   var nextButton = props.nextButton,
       backButton = props.backButton,
+      backButtonDisabled = props.backButtonDisabled,
       onClick = props.onClick;
 
 
@@ -31,7 +32,7 @@ var ButtonBarSelector = function ButtonBarSelector(props) {
     _react2.default.createElement(
       'div',
       { className: 'button-bar' },
-      backButton && _react2.default.createElement(
+      backButton && !backButtonDisabled && _react2.default.createElement(
         'button',
         { className: 'btn btn-default pull-left' },
         backButton
@@ -53,12 +54,14 @@ var ButtonBarSelector = function ButtonBarSelector(props) {
 ButtonBarSelector.propTypes = {
   nextButton: _propTypes2.default.string,
   backButton: _propTypes2.default.string,
+  backButtonDisabled: _propTypes2.default.bool,
   onClick: _propTypes2.default.func.isRequired
 };
 
 ButtonBarSelector.defaultProps = {
   nextButton: null,
   backButton: null,
+  backButtonDisabled: false,
   onClick: _propTypes2.default.func.isRequired
 };
 

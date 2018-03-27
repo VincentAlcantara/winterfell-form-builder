@@ -90,12 +90,47 @@ var WinterfellFormBuilder = function (_Component) {
           currentQuestionPanelIndex = _props.currentQuestionPanelIndex,
           currentQuestionSetIndex = _props.currentQuestionSetIndex,
           currentQuestionIndex = _props.currentQuestionIndex,
-          questionSets = _props.questionSets;
+          questionSets = _props.questionSets,
+          errorMessage = _props.errorMessage;
 
 
       return _react2.default.createElement(
         _reactBootstrap.Grid,
-        null,
+        { className: 'winterfell-form-builder' },
+        _react2.default.createElement(
+          'div',
+          { className: 'static-modal' },
+          _react2.default.createElement(
+            _reactBootstrap.Modal,
+            { show: errorMessage !== '' },
+            _react2.default.createElement(
+              _reactBootstrap.Modal.Header,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.Modal.Title,
+                null,
+                'Error'
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Modal.Body,
+              null,
+              errorMessage
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Modal.Footer,
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.Button,
+                {
+                  bsStyle: 'primary',
+                  onClick: this.props.clearErrorMessage
+                },
+                'Ok'
+              )
+            )
+          )
+        ),
         _react2.default.createElement(
           _reactBootstrap.Row,
           null,
@@ -116,7 +151,6 @@ var WinterfellFormBuilder = function (_Component) {
                 )
               )
             ),
-            _react2.default.createElement('hr', null),
             _react2.default.createElement(
               _reactBootstrap.Row,
               null,
@@ -143,7 +177,11 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 2 },
-                _react2.default.createElement(_FormMenu.EditSchemaButton, null)
+                _react2.default.createElement(_FormMenu.PageSortButton, {
+                  onClick: function onClick() {
+                    return _this2.props.changeCurrentEditingField('pageSort');
+                  }
+                })
               ),
               _react2.default.createElement(
                 _reactBootstrap.Col,
@@ -151,7 +189,7 @@ var WinterfellFormBuilder = function (_Component) {
                 _react2.default.createElement(_FormMenu.SaveFormButton, null)
               )
             ),
-            _react2.default.createElement('hr', null),
+            _react2.default.createElement('br', null),
             _react2.default.createElement(
               _reactBootstrap.Row,
               null,
@@ -195,7 +233,7 @@ var WinterfellFormBuilder = function (_Component) {
             ),
             _react2.default.createElement(
               _reactBootstrap.Row,
-              null,
+              { className: 'winterfell-form-builder-editor' },
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 4, className: 'winterfell-form-builder-field-editor' },
@@ -206,7 +244,9 @@ var WinterfellFormBuilder = function (_Component) {
                     _reactBootstrap.Col,
                     { xs: 12, className: 'text-left' },
                     formPanels && _react2.default.createElement(_Pagination2.default, {
-                      formPanels: formPanels.toJS(),
+                      formPanels: formPanels.map(function (panel) {
+                        return panel.get('panelId');
+                      }),
                       currentPanelId: currentPanelId,
                       onClick: this.props.goToPage
                     })
@@ -236,10 +276,9 @@ var WinterfellFormBuilder = function (_Component) {
                 )
               )
             ),
-            _react2.default.createElement('hr', null),
             _react2.default.createElement(
               _reactBootstrap.Row,
-              null,
+              { className: 'winterfell-form-builder-previewer' },
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 12 },
@@ -273,7 +312,9 @@ WinterfellFormBuilder.propTypes = {
   questionSets: _propTypes2.default.object,
   goToPage: _propTypes2.default.func.isRequired,
   currentEditingField: _propTypes2.default.string,
-  changeCurrentEditingField: _propTypes2.default.func.isRequired
+  changeCurrentEditingField: _propTypes2.default.func.isRequired,
+  clearErrorMessage: _propTypes2.default.func.isRequired,
+  errorMessage: _propTypes2.default.string
 };
 WinterfellFormBuilder.defaultProps = {
   title: '',
@@ -285,7 +326,8 @@ WinterfellFormBuilder.defaultProps = {
   currentQuestionPanelIndex: 0, // first page by default
   currentQuestionSetIndex: null,
   currentQuestionIndex: null,
-  currentEditingField: 'page'
+  currentEditingField: 'page',
+  errorMessage: ''
 };
 
 
@@ -299,11 +341,12 @@ function mapStateToProps(state) {
     currentEditingField: state.getIn(['form', 'currentEditingField']),
     currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
-    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex'])
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
+    errorMessage: state.getIn(['error', 'message'])
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { goToPage: _winterfellFormBuilderActions.goToPage, changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField })(WinterfellFormBuilder);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { goToPage: _winterfellFormBuilderActions.goToPage, changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField, clearErrorMessage: _winterfellFormBuilderActions.clearErrorMessage })(WinterfellFormBuilder);
 
 exports.default = _default;
 ;

@@ -81,6 +81,7 @@ var ButtonBarEditor = function (_PureComponent) {
     _this.onClick = _this.onClick.bind(_this);
     _this.onSelectDefaultAction = _this.onSelectDefaultAction.bind(_this);
     _this.onSelectDefaultTarget = _this.onSelectDefaultTarget.bind(_this);
+    _this.onDisableBackButtonClick = _this.onDisableBackButtonClick.bind(_this);
     return _this;
   }
 
@@ -133,6 +134,11 @@ var ButtonBarEditor = function (_PureComponent) {
       this.props.onSelectNextButtonTarget(this.props.currentQuestionPanelIndex, target);
     }
   }, {
+    key: 'onDisableBackButtonClick',
+    value: function onDisableBackButtonClick() {
+      this.props.disableBackButton(this.props.currentQuestionPanelIndex, !this.props.backButtonDisabled);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var formPanelIds = this.props.formPanels.toJS().map(function (formPanel) {
@@ -156,6 +162,21 @@ var ButtonBarEditor = function (_PureComponent) {
             placeholder: this.props.backButtonText,
             value: this.state.backButtonText
           })
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.FormGroup,
+          null,
+          _react2.default.createElement(
+            'span',
+            { htmlFor: 'disable-back-button', id: 'disable-back-button-label' },
+            _react2.default.createElement('input', {
+              id: 'disable-back-button',
+              type: 'checkbox',
+              onClick: this.onDisableBackButtonClick,
+              checked: this.props.backButtonDisabled
+            }),
+            '\xA0disable back button'
+          )
         ),
         _react2.default.createElement(
           _reactBootstrap.FormGroup,
@@ -223,7 +244,9 @@ var ButtonBarEditor = function (_PureComponent) {
 
 ButtonBarEditor.propTypes = {
   editNextButtonText: _propTypes2.default.func.isRequired,
+  backButtonDisabled: _propTypes2.default.bool.isRequired,
   editBackButtonText: _propTypes2.default.func.isRequired,
+  disableBackButton: _propTypes2.default.func.isRequired,
   onSelectNextButtonAction: _propTypes2.default.func.isRequired,
   onSelectNextButtonTarget: _propTypes2.default.func.isRequired,
   backButtonText: _propTypes2.default.string,
@@ -246,6 +269,7 @@ ButtonBarEditor.defaultProps = {
 function mapStateToProps(state, ownProps) {
   return {
     backButtonText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'backButton', 'text']),
+    backButtonDisabled: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'backButton', 'disabled']),
     nextButtonText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'button', 'text']),
     defaultAction: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'action', 'default']),
     conditionalActions: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'action', 'conditions']),
@@ -259,7 +283,8 @@ var _default = (0, _reactRedux.connect)(mapStateToProps, {
   editNextButtonText: _winterfellFormBuilderActions.editNextButtonText,
   editBackButtonText: _winterfellFormBuilderActions.editBackButtonText,
   onSelectNextButtonAction: _winterfellFormBuilderActions.onSelectNextButtonAction,
-  onSelectNextButtonTarget: _winterfellFormBuilderActions.onSelectNextButtonTarget
+  onSelectNextButtonTarget: _winterfellFormBuilderActions.onSelectNextButtonTarget,
+  disableBackButton: _winterfellFormBuilderActions.disableBackButton
 })(ButtonBarEditor);
 
 exports.default = _default;
