@@ -127,20 +127,20 @@ var FieldSelectorContainer = function (_Component) {
           currentEditingField !== 'pageSort' && _react2.default.createElement(
             'form',
             null,
-            typeof currentQuestionPanelIndex !== 'undefined' && _react2.default.createElement(_PageSelector2.default, {
+            currentQuestionPanelIndex >= 0 && _react2.default.createElement(_PageSelector2.default, {
               panelHeader: panelHeader,
               panelText: panelText,
               onClick: function onClick() {
                 return _this2.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex);
               }
             }),
-            typeof currentQuestionPanelIndex !== 'undefined' && questionPanelsArray && _react2.default.createElement(_QuestionSetSelector2.default, {
+            currentQuestionPanelIndex >= 0 && questionPanelsArray && _react2.default.createElement(_QuestionSetSelector2.default, {
               currentQuestionSets: questionPanelsArray[currentQuestionPanelIndex].questionSets,
               questionSets: questionSetsArray,
               onClick: this.props.changeCurrentEditingField,
               currentQuestionIndex: this.props.currentQuestionIndex
             }),
-            typeof currentQuestionPanelIndex !== 'undefined' && _react2.default.createElement(_ButtonBarSelector2.default, {
+            currentQuestionPanelIndex >= 0 && _react2.default.createElement(_ButtonBarSelector2.default, {
               backButton: backButton,
               backButtonDisabled: backButtonDisabled,
               nextButton: nextButton,
