@@ -409,7 +409,7 @@ function winterfellFormBuilderReducer() {
           target: action.payload.target,
           action: 'GOTO'
         };
-        return state.setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', 0], (0, _immutable.fromJS)(newQuestionCondition));
+        return state.setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', action.payload.optionIndex], (0, _immutable.fromJS)(newQuestionCondition));
       }
     default:
       return state;

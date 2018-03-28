@@ -38,12 +38,12 @@ class DeleteQuestionOptionButton extends Component {
   render() {
     return (
       <Button
-        className="btn alert-danger"
+        className="btn btn-danger"
         title="delete this option"
         onClick={() => {
           this.setState({ showModal: true });
         }}
-      ><Glyphicon glyph="glyphicon glyphicon-remove-circle" />
+      ><Glyphicon glyph="glyphicon glyphicon-remove" />
         <Modal show={this.state.showModal}>
           <Modal.Header>
             <Modal.Title>Delete Option Confirmation</Modal.Title>

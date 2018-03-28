@@ -72,12 +72,12 @@ class AddQuestionOptionButton extends Component {
                     onChange={this.onChange}
                   />
                 </td>
-                <td>
+                <td colSpan={2}>
                   <Button
-                    className="btn alert-info"
+                    className="btn btn-primary"
                     onClick={this.onAddOption}
                     disabled={!this.state.questionOptionValue || !this.state.questionOptionText}
-                  ><Glyphicon glyph="glyphicon glyphicon-plus-sign" />
+                  ><Glyphicon glyph="glyphicon glyphicon-plus" />
                   </Button>
                 </td>
               </tr>

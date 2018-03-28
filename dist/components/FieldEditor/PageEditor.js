@@ -158,9 +158,10 @@ var PageEditor = function (_PureComponent) {
                 _reactBootstrap.Button,
                 {
                   onClick: this.onUpdatePageId,
-                  className: 'btn alert-success'
+                  className: 'btn btn-primary',
+                  title: 'Click to update page title'
                 },
-                _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-ok-circle' })
+                'save'
               )
             )
           )
@@ -258,7 +259,7 @@ function mapStateToProps(state, ownProps) {
     panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'panelText']),
     currentQuestionSets: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'questionSets']),
     questionSets: state.getIn(['form', 'schema', 'questionSets']),
-    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
+    currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
     formPanels: state.getIn(['form', 'schema', 'formPanels'])
   };
 }

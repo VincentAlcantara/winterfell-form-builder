@@ -8,6 +8,14 @@
         margin-top: 8px;
       }
     }
+    .form-control {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+  .input-group .form-control:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
   #pagination {
     margin-bottom: 15px;
@@ -37,7 +45,7 @@
   td input, td button {
     border-radius: 0;
   }
-  tr:nth-child(2) {
+  /*tr:nth-child(2) {
     td:first-child {
       input {
         border-top-left-radius: 4px
@@ -62,6 +70,7 @@
       }
     }
   }
+  */
   .btn {
     font-size: 12px;
   }

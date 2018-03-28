@@ -100,8 +100,9 @@ class PageEditor extends PureComponent {
             <InputGroup.Button>
               <Button
                 onClick={this.onUpdatePageId}
-                className="btn alert-success"
-              ><Glyphicon glyph="glyphicon glyphicon-ok-circle" />
+                className="btn btn-primary"
+                title="Click to update page title"
+              >save
               </Button>
             </InputGroup.Button>
           </InputGroup>
@@ -161,7 +162,7 @@ function mapStateToProps(state, ownProps) {
     currentQuestionSets: state.getIn(['form', 'schema', 'questionPanels',
       ownProps.currentQuestionPanelIndex, 'questionSets']),
     questionSets: state.getIn(['form', 'schema', 'questionSets']),
-    currentPanelIndex: state.getIn(['form', 'currentPanelIndex']),
+    currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
     formPanels: state.getIn(['form', 'schema', 'formPanels']),
   };
 }
