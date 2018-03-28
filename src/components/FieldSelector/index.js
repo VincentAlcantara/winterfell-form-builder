@@ -95,14 +95,14 @@ class FieldSelectorContainer extends Component {
           {
             currentEditingField !== 'pageSort' &&
             <form>
-              { typeof currentQuestionPanelIndex !== 'undefined' &&
+              { currentQuestionPanelIndex >= 0 &&
               <PageSelector
                 panelHeader={panelHeader}
                 panelText={panelText}
                 onClick={() => this.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex)}
               />
               }
-              { typeof currentQuestionPanelIndex !== 'undefined' &&
+              { currentQuestionPanelIndex >= 0 &&
                 questionPanelsArray &&
                 <QuestionSetSelector
                   currentQuestionSets={questionPanelsArray[currentQuestionPanelIndex].questionSets}
@@ -111,7 +111,7 @@ class FieldSelectorContainer extends Component {
                   currentQuestionIndex={this.props.currentQuestionIndex}
                 />
               }
-              { typeof currentQuestionPanelIndex !== 'undefined' &&
+              { currentQuestionPanelIndex >= 0 &&
                 <ButtonBarSelector
                   backButton={backButton}
                   backButtonDisabled={backButtonDisabled}
