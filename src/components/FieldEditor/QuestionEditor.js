@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, FormControl, Button, Glyphicon } from 'react-bootstrap';
+import { FormGroup, FormControl, Button, ButtonGroup, Glyphicon } from 'react-bootstrap';
 import { fromJS } from 'immutable';
 import {
   editQuestionId,
@@ -24,6 +24,7 @@ import AddQuestionButton from '../FormMenu/AddQuestionButton';
 import AddQuestionOptionButton from '../FormMenu/AddQuestionOptionButton';
 import ConditionalQuestionForm from '../FormMenu/ConditionalQuestionForm';
 import SelectInput from '../InputTypes/SelectInput';
+import ButtonBarEditor from './ButtonBarEditor';
 import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
 class QuestionEditor extends PureComponent {
@@ -139,7 +140,9 @@ class QuestionEditor extends PureComponent {
   onSelect(questionType) {
     const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
     this.setState({ questionInputType: questionType });
-    this.props.changeQuestionType(currentQuestionSetIndex, currentQuestionIndex, questionType);
+    if (questionType !== '') {
+      this.props.changeQuestionType(currentQuestionSetIndex, currentQuestionIndex, questionType);
+    }
   }
 
   onOptionTextChange(event, index) {
@@ -247,12 +250,12 @@ class QuestionEditor extends PureComponent {
                       </td>
                     </tr>
                     {
-                    this.state.showConditionalLogic[ix] &&
-                    <tr>
-                      <td colSpan={4}>
-                        <ConditionalQuestionForm questionOptionIndex={ix} />
-                      </td>
-                    </tr>
+                      this.state.showConditionalLogic[ix] &&
+                      <tr>
+                        <td colSpan={4}>
+                          <ConditionalQuestionForm questionOptionIndex={ix} />
+                        </td>
+                      </tr>
                     }
                   </tbody>
                 </table>))
@@ -289,6 +292,7 @@ class QuestionEditor extends PureComponent {
       questionInputType,
       questionInputOptions,
       formPanels,
+      currentQuestionPanelIndex,
     } = this.props;
 
     const nextButtonTargetOptions = formPanels && formPanels.toJS().map((formPanel) => {
@@ -365,7 +369,7 @@ class QuestionEditor extends PureComponent {
           </FormGroup>
           <FormGroup>
             <label htmlFor="questionInputType">
-              Change Question Type
+              Question Type
             </label>
             <SelectInput
               id="questionInputType"
@@ -385,44 +389,28 @@ class QuestionEditor extends PureComponent {
           this.props.currentQuestionIndex > -1 &&
           this.getQuestionOptions()
         }
-        { this.props.currentQuestionIndex > -1 &&
-          <FormGroup>
-            <DeleteQuestionButton
-              currentQuestionSetIndex={this.props.currentQuestionSetIndex}
-              currentQuestionIndex={this.props.currentQuestionIndex}
-            />
-          </FormGroup>
-        }
-        { this.props.currentQuestionIndex > -1 &&
+
         <FormGroup>
-          <AddQuestionButton
-            questionSetId={this.props.questionSetId}
-            currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+          <FieldGroup
+            id="questionTargetMatch"
+            name="questionTargetMatch"
+            label="If Answer Matches"
+            placeholder={this.props.questionTargetMatch}
+            onChange={this.onChange}
+            value={this.state.questionTargetMatch}
           />
         </FormGroup>
-        }
-        <b>Next Question Target</b>
         <FormGroup>
+          <label htmlFor="questionTarget">Go To Page</label>
           <SelectInput
             id="questionTarget"
             labelId="questionTarget"
             options={nextButtonTargetOptions}
             onSelect={e => this.setState({ questionTarget: e })}
             initialValue={this.state.questionTarget}
-            disableEmpty={false}           
           />
         </FormGroup>
-        <FormGroup>
-          <FieldGroup         
-            id="questionTargetMatch"
-            name="questionTargetMatch"
-            label="Question Value Must Match"
-            placeholder={this.props.questionTargetMatch}
-            onChange={this.onChange}
-            value={this.state.questionTargetMatch}
-            disableEmpty={false}
-          />
-        </FormGroup>
+
         <FormGroup>
           <Button
             label="find"
@@ -432,6 +420,23 @@ class QuestionEditor extends PureComponent {
           >Update Next Question Target
           </Button>
         </FormGroup>
+        <ButtonBarEditor
+          currentQuestionPanelIndex={currentQuestionPanelIndex}
+        />
+        <ButtonGroup>
+          { this.props.currentQuestionIndex > -1 &&
+            <DeleteQuestionButton
+              currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+              currentQuestionIndex={this.props.currentQuestionIndex}
+            />
+          }
+          { this.props.currentQuestionIndex > -1 &&
+          <AddQuestionButton
+            questionSetId={this.props.questionSetId}
+            currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+          />
+          }
+        </ButtonGroup>
       </form>
     );
   }
@@ -460,6 +465,7 @@ function mapStateToProps(state, ownProps) {
     questionTargetMatch: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex,
       'action', 'conditions', 0, 'value']),
     formPanels: state.getIn(['form', 'schema', 'formPanels']),
+    currentQuestionPanelIndex: state.getIn(['form', 'currentPanelIndex']),
   };
 }
 

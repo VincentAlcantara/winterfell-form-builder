@@ -107,8 +107,13 @@ var AddQuestionButton = function (_Component) {
       var _this2 = this;
 
       return _react2.default.createElement(
-        _reactBootstrap.Row,
-        null,
+        _reactBootstrap.Button,
+        {
+          className: 'btn btn-primary',
+          onClick: function onClick() {
+            _this2.setState({ showModal: true });
+          }
+        },
         _react2.default.createElement(
           'div',
           { className: 'static-modal' },
@@ -219,20 +224,7 @@ var AddQuestionButton = function (_Component) {
             )
           )
         ),
-        _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
-          _react2.default.createElement(
-            _reactBootstrap.Button,
-            {
-              className: 'btn btn-block btn-primary',
-              onClick: function onClick() {
-                _this2.setState({ showModal: true });
-              }
-            },
-            'add question'
-          )
-        )
+        'add question'
       );
     }
   }]);

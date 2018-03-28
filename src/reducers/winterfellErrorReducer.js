@@ -56,7 +56,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     case DELETE_QUESTION_SUCCESS:
     case CLEAR_FORM_ERROR:
       return state
-      .set('message', '');
+        .set('message', '');
     default: {
       return state;
     }

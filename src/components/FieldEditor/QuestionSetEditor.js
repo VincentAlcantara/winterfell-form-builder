@@ -106,7 +106,7 @@ class QuestionSetEditor extends PureComponent {
                 }
               >{question.questionId}
               </Button>
-              ))
+            ))
             }
           </div>
         </FormGroup>

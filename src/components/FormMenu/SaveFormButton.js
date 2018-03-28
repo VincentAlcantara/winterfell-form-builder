@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, Modal, FormGroup } from 'react-bootstrap';
 import fileDownload from 'react-file-download';
 import { saveJSON } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
@@ -40,49 +40,43 @@ class SaveFormButton extends Component {
 
   render() {
     return (
-      <Row>
-        <div className="static-modal">
-          <Modal show={this.state.showModal}>
-            <Modal.Header>
-              <Modal.Title>Save form</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <form>
-                <FormGroup>
-                  <FieldGroup
-                    id="filename"
-                    name="filename"
-                    label="Enter title of the form"
-                    onChange={this.onChange}
-                    placeholder={this.props.title}
-                    value={this.state.filename}
-                  />
-                </FormGroup>
-              </form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                bsStyle="danger"
-                onClick={() => { this.setState({ showModal: false }); }}
-              >Cancel</Button>
-              <Button
-                bsStyle="primary"
-                onClick={this.onJSONSave}
-                disabled={!this.state.filename}
-              >Save</Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-        <Col xs={12}>
-          <Button
-            className="btn btn-block btn-primary"
-            onClick={() => {
-              this.setState({ showModal: true });
-            }}
-          >save form
-          </Button>
-        </Col>
-      </Row>
+      <Button
+        className="btn btn-block btn-primary"
+        onClick={() => {
+          this.setState({ showModal: true });
+        }}
+      >save form
+        <Modal show={this.state.showModal}>
+          <Modal.Header>
+            <Modal.Title>Save form</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form>
+              <FormGroup>
+                <FieldGroup
+                  id="filename"
+                  name="filename"
+                  label="Enter title of the form"
+                  onChange={this.onChange}
+                  placeholder={this.props.title}
+                  value={this.state.filename}
+                />
+              </FormGroup>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              bsStyle="danger"
+              onClick={() => { this.setState({ showModal: false }); }}
+            >Cancel</Button>
+            <Button
+              bsStyle="primary"
+              onClick={this.onJSONSave}
+              disabled={!this.state.filename}
+            >Save</Button>
+          </Modal.Footer>
+        </Modal>
+      </Button>
     );
   }
 }

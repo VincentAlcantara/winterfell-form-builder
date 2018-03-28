@@ -149,7 +149,7 @@ var ButtonBarEditor = function (_PureComponent) {
       });
 
       return _react2.default.createElement(
-        'form',
+        'div',
         null,
         _react2.default.createElement(
           _reactBootstrap.FormGroup,
@@ -244,7 +244,7 @@ var ButtonBarEditor = function (_PureComponent) {
 
 ButtonBarEditor.propTypes = {
   editNextButtonText: _propTypes2.default.func.isRequired,
-  backButtonDisabled: _propTypes2.default.bool.isRequired,
+  backButtonDisabled: _propTypes2.default.bool,
   editBackButtonText: _propTypes2.default.func.isRequired,
   disableBackButton: _propTypes2.default.func.isRequired,
   onSelectNextButtonAction: _propTypes2.default.func.isRequired,
@@ -259,6 +259,7 @@ ButtonBarEditor.propTypes = {
 ButtonBarEditor.defaultProps = {
   currentQuestionPanelIndex: 0,
   backButtonText: '',
+  backButtonDisabled: false,
   nextButtonText: '',
   formPanels: (0, _immutable.fromJS)({}),
   defaultGoToAction: '',

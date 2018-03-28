@@ -1,14 +1,13 @@
-.winterfell-form-builder-editor {
-  border: 1px solid #eee;
-}
-.winterfell-form-builder-field-editor {
-  padding-top: 10px;
-  border-right: 1px solid #eee;
-  #edit-question-id-label {
-    font-weight: normal;
-  }
-  .dropdown.btn-group {
-    display: block;
+.winterfell-form-builder {
+  .btn-group {
+    display: flex;
+    .btn {
+      flex: 1;
+      .caret {
+        float: right;
+        margin-top: 8px;
+      }
+    }
   }
   #pagination {
     margin-bottom: 15px;
@@ -17,10 +16,24 @@
   .dropdown-menu {
     width: 100%;
   }
-  .btn .caret {
-    float: right;
-    margin-top: 8px;
+  .btn-block+.btn-block {
+    margin-top: 0
   }
+}
+.winterfell-form-builder-editor {
+  border: 1px solid #eee;
+}
+.winterfell-form-builder-field-editor {
+  padding-top: 10px;
+  border-right: 1px solid #eee;
+  font-size: 0.9em;
+  #edit-question-id-label {
+    font-weight: normal;
+  }
+  .dropdown.btn-group {
+    display: block;
+  }
+  
   td input, td button {
     border-radius: 0;
   }
@@ -49,7 +62,15 @@
       }
     }
   }
+  .btn {
+    font-size: 12px;
+  }
+  .form-control {
+    font-size: 12px;
+    height: 31px;
+  }
 }
+
 .winterfell-form-builder-page-editor {
   border-left: 1px solid #eee;
   margin-left: -1px;

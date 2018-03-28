@@ -48,6 +48,11 @@ var FormQuestionEditor = function FormQuestionEditor(props) {
             null,
             question.text
           ),
+          question.input && question.input.type === '' && _react2.default.createElement(
+            'p',
+            null,
+            'No question type selected'
+          ),
           question.input && (question.input.type === 'textInput' || question.input.type === 'emailInput') && _react2.default.createElement('input', {
             id: question.questionId,
             type: 'text',

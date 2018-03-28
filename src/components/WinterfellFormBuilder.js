@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col, Alert, Breadcrumb, Modal, Button } from 'react-bootstrap';
+import { Grid, Row, Col, Alert, Breadcrumb, Modal, Button, ButtonGroup } from 'react-bootstrap';
 import { goToPage, changeCurrentEditingField, clearErrorMessage } from '../actions/winterfellFormBuilderActions';
 import Pagination from './Pagination';
 import Previewer from './Previewer';
@@ -12,6 +12,7 @@ import {
   SaveFormButton,
   PageSortButton,
   UploadJSONButton,
+  EditSchemaButton,
 } from './FormMenu';
 import FieldSelector from './FieldSelector';
 import FieldEditor from './FieldEditor';
@@ -98,30 +99,31 @@ class WinterfellFormBuilder extends Component {
               </Col>
             </Row>
             <Row>
-              <Col xs={2}>
+              <ButtonGroup>
                 <CreateFormButton />
-              </Col>
-              <Col xs={2}>
                 <UploadJSONButton />
-              </Col>
-              <Col xs={2}>
                 <EditFormTitleButton />
-              </Col>
-              <Col xs={2}>
                 <AddPageButton />
-              </Col>
-              <Col xs={2}>
                 <PageSortButton
                   onClick={() => this.props.changeCurrentEditingField('pageSort')}
                 />
-              </Col>
-              <Col xs={2}>
                 <SaveFormButton />
-              </Col>
+                <EditSchemaButton />
+              </ButtonGroup>
             </Row>
             <br />
             <Row>
-              <Col xs={12}>
+              <Col xs={4} className="text-left">
+                {
+                  formPanels &&
+                  <Pagination
+                    formPanels={formPanels.map(panel => panel.get('panelId'))}
+                    currentPanelId={currentPanelId}
+                    onClick={this.props.goToPage}
+                  />
+                }
+              </Col>
+              <Col xs={8}>
                 <Breadcrumb>
                   <Breadcrumb.Item
                     href="#"
@@ -151,16 +153,6 @@ class WinterfellFormBuilder extends Component {
             <Row className="winterfell-form-builder-editor">
               <Col xs={4} className="winterfell-form-builder-field-editor">
                 <Row>
-                  <Col xs={12} className="text-left">
-                    {
-                      formPanels &&
-                      <Pagination
-                        formPanels={formPanels.map(panel => panel.get('panelId'))}
-                        currentPanelId={currentPanelId}
-                        onClick={this.props.goToPage}
-                      />
-                    }
-                  </Col>
                   <Col xs={12}>
                     { typeof currentQuestionPanelIndex !== 'undefined' &&
                       <FieldEditor

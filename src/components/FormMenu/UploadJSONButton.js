@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, Modal, FormGroup } from 'react-bootstrap';
 import { uploadJSON } from '../../actions/winterfellFormBuilderActions';
 
 
@@ -46,49 +46,43 @@ class UploadJSONButton extends Component {
 
   render() {
     return (
-      <Row>
-        <div className="static-modal">
-          <Modal show={this.state.showModal}>
-            <Modal.Header>
-              <Modal.Title>Open a form</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <form>
-                <FormGroup>
-                  <label
-                    htmlFor="jsonUpload"
-                  />
-                  <input
-                    name="schema"
-                    id="jsonUpload"
-                    type="file"
-                    onChange={e => this.onChange(e)}
-                  />
-                </FormGroup>
-              </form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                bsStyle="danger"
-                onClick={() => { this.setState({ showModal: false }); }}
-              >Cancel</Button>
-              <Button
-                bsStyle="primary"
-                onClick={this.onJSONUpload}
-              >Upload</Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-        <Col xs={12}>
-          <Button
-            className="btn btn-block btn-primary"
-            onClick={() => {
-              this.setState({ showModal: true });
-            }}
-          >open form
-          </Button>
-        </Col>
-      </Row>
+      <Button
+        className="btn btn-block btn-primary"
+        onClick={() => {
+          this.setState({ showModal: true });
+        }}
+      >open form
+        <Modal show={this.state.showModal}>
+          <Modal.Header>
+            <Modal.Title>Open a form</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form>
+              <FormGroup>
+                <label
+                  htmlFor="jsonUpload"
+                />
+                <input
+                  name="schema"
+                  id="jsonUpload"
+                  type="file"
+                  onChange={e => this.onChange(e)}
+                />
+              </FormGroup>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              bsStyle="danger"
+              onClick={() => { this.setState({ showModal: false }); }}
+            >Cancel</Button>
+            <Button
+              bsStyle="primary"
+              onClick={this.onJSONUpload}
+            >Upload</Button>
+          </Modal.Footer>
+        </Modal>
+      </Button>
     );
   }
 }

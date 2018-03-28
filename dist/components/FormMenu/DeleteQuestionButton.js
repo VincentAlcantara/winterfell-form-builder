@@ -79,8 +79,13 @@ var DeleteQuestionButton = function (_Component) {
       var _this2 = this;
 
       return _react2.default.createElement(
-        'span',
-        null,
+        _reactBootstrap.Button,
+        {
+          className: 'btn btn-danger',
+          onClick: function onClick() {
+            _this2.setState({ showModal: true });
+          }
+        },
         _react2.default.createElement(
           'div',
           { className: 'static-modal' },
@@ -125,16 +130,7 @@ var DeleteQuestionButton = function (_Component) {
             )
           )
         ),
-        _react2.default.createElement(
-          _reactBootstrap.Button,
-          {
-            className: 'btn btn-block btn-danger',
-            onClick: function onClick() {
-              _this2.setState({ showModal: true });
-            }
-          },
-          'delete question'
-        )
+        'delete question'
       );
     }
   }]);

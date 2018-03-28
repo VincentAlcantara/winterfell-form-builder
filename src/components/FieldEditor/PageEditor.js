@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, InputGroup, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, InputGroup, FormControl, Button, Glyphicon } from 'react-bootstrap';
 import { fromJS } from 'immutable';
 
 import { editPageId, editPageHeader, editPageText, changeCurrentEditingField, updateErrorMessage, clearErrorMessage } from '../../actions/winterfellFormBuilderActions';
@@ -100,7 +100,8 @@ class PageEditor extends PureComponent {
             <InputGroup.Button>
               <Button
                 onClick={this.onUpdatePageId}
-              >Update
+                className="btn alert-success"
+              ><Glyphicon glyph="glyphicon glyphicon-ok-circle" />
               </Button>
             </InputGroup.Button>
           </InputGroup>
@@ -139,7 +140,7 @@ class PageEditor extends PureComponent {
                 onClick={() => this.onClick(questionSet.questionSetId)}
               >{questionSet.questionSetId}
               </Button>
-              ))
+            ))
             }
           </div>
         </FormGroup>

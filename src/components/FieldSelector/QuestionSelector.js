@@ -19,6 +19,10 @@ const FormQuestionEditor = (props) => {
           <p>{question.text}</p>
         }
         {
+          question.input && question.input.type === '' &&
+          <p>No question type selected</p>
+        }
+        {
           question.input &&
           (question.input.type === 'textInput' ||
           question.input.type === 'emailInput') &&

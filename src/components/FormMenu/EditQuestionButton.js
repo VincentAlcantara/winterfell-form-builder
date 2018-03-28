@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, Modal, FormGroup } from 'react-bootstrap';
 import { updateQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
@@ -59,58 +59,52 @@ class updateQuestionButton extends Component {
 
   render() {
     return (
-      <Row>
-        <div className="static-modal">
-          <Modal show={this.state.showModal}>
-            <Modal.Header>
-              <Modal.Title>Add a new question to the page</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <form>
-                <FormGroup>
-                  <FieldGroup
-                    id="question"
-                    name="question"
-                    label="Enter Question"
-                    onChange={this.onChange}
-                    placeholder=""
-                    value={this.state.question}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <FieldGroup
-                    id="questionText"
-                    name="questionText"
-                    label="Enter Question Text"
-                    onChange={this.onChange}
-                    placeholder=""
-                    value={this.state.questionText}
-                  />
-                </FormGroup>
-              </form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                bsStyle="danger"
-                onClick={() => { this.setState({ showModal: false }); }}
-              >Cancel</Button>
-              <Button
-                bsStyle="primary"
-                onClick={this.onFormUpdate}
-              >Save changes</Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-        <Col xs={12}>
-          <Button
-            className="btn"
-            onClick={() => {
-              this.setState({ showModal: true });
-            }}
-          >edit
-          </Button>
-        </Col>
-      </Row>
+      <Button
+        className="btn"
+        onClick={() => {
+          this.setState({ showModal: true });
+        }}
+      >edit
+        <Modal show={this.state.showModal}>
+          <Modal.Header>
+            <Modal.Title>Add a new question to the page</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form>
+              <FormGroup>
+                <FieldGroup
+                  id="question"
+                  name="question"
+                  label="Enter Question"
+                  onChange={this.onChange}
+                  placeholder=""
+                  value={this.state.question}
+                />
+              </FormGroup>
+              <FormGroup>
+                <FieldGroup
+                  id="questionText"
+                  name="questionText"
+                  label="Enter Question Text"
+                  onChange={this.onChange}
+                  placeholder=""
+                  value={this.state.questionText}
+                />
+              </FormGroup>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              bsStyle="danger"
+              onClick={() => { this.setState({ showModal: false }); }}
+            >Cancel</Button>
+            <Button
+              bsStyle="primary"
+              onClick={this.onFormUpdate}
+            >Save changes</Button>
+          </Modal.Footer>
+        </Modal>
+      </Button>
     );
   }
 }

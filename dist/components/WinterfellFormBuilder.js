@@ -155,38 +155,19 @@ var WinterfellFormBuilder = function (_Component) {
               _reactBootstrap.Row,
               null,
               _react2.default.createElement(
-                _reactBootstrap.Col,
-                { xs: 2 },
-                _react2.default.createElement(_FormMenu.CreateFormButton, null)
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Col,
-                { xs: 2 },
-                _react2.default.createElement(_FormMenu.UploadJSONButton, null)
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Col,
-                { xs: 2 },
-                _react2.default.createElement(_FormMenu.EditFormTitleButton, null)
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Col,
-                { xs: 2 },
-                _react2.default.createElement(_FormMenu.AddPageButton, null)
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Col,
-                { xs: 2 },
+                _reactBootstrap.ButtonGroup,
+                null,
+                _react2.default.createElement(_FormMenu.CreateFormButton, null),
+                _react2.default.createElement(_FormMenu.UploadJSONButton, null),
+                _react2.default.createElement(_FormMenu.EditFormTitleButton, null),
+                _react2.default.createElement(_FormMenu.AddPageButton, null),
                 _react2.default.createElement(_FormMenu.PageSortButton, {
                   onClick: function onClick() {
                     return _this2.props.changeCurrentEditingField('pageSort');
                   }
-                })
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Col,
-                { xs: 2 },
-                _react2.default.createElement(_FormMenu.SaveFormButton, null)
+                }),
+                _react2.default.createElement(_FormMenu.SaveFormButton, null),
+                _react2.default.createElement(_FormMenu.EditSchemaButton, null)
               )
             ),
             _react2.default.createElement('br', null),
@@ -195,7 +176,18 @@ var WinterfellFormBuilder = function (_Component) {
               null,
               _react2.default.createElement(
                 _reactBootstrap.Col,
-                { xs: 12 },
+                { xs: 4, className: 'text-left' },
+                formPanels && _react2.default.createElement(_Pagination2.default, {
+                  formPanels: formPanels.map(function (panel) {
+                    return panel.get('panelId');
+                  }),
+                  currentPanelId: currentPanelId,
+                  onClick: this.props.goToPage
+                })
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 8 },
                 _react2.default.createElement(
                   _reactBootstrap.Breadcrumb,
                   null,
@@ -240,17 +232,6 @@ var WinterfellFormBuilder = function (_Component) {
                 _react2.default.createElement(
                   _reactBootstrap.Row,
                   null,
-                  _react2.default.createElement(
-                    _reactBootstrap.Col,
-                    { xs: 12, className: 'text-left' },
-                    formPanels && _react2.default.createElement(_Pagination2.default, {
-                      formPanels: formPanels.map(function (panel) {
-                        return panel.get('panelId');
-                      }),
-                      currentPanelId: currentPanelId,
-                      onClick: this.props.goToPage
-                    })
-                  ),
                   _react2.default.createElement(
                     _reactBootstrap.Col,
                     { xs: 12 },
