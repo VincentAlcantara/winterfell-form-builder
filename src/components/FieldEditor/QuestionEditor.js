@@ -49,7 +49,6 @@ class QuestionEditor extends PureComponent {
     currentQuestionIndex: PropTypes.number.isRequired,
     questionTarget: PropTypes.string,
     questionTargetMatch: PropTypes.string,
-    formPanels: PropTypes.object,
     currentQuestionPanelIndex: PropTypes.number.isRequired,
   }
 
@@ -62,7 +61,6 @@ class QuestionEditor extends PureComponent {
     questionInputOptions: fromJS([]),
     questionTarget: '',
     questionTargetMatch: '',
-    formPanels: fromJS([]),
   }
 
   constructor(props) {
@@ -217,8 +215,8 @@ class QuestionEditor extends PureComponent {
             }
             { this.props.questionInputOptions &&
               this.props.questionInputOptions.toJS().map((option, ix) => (
-                <table key={`${ix}`}>
-                  <tbody>
+                <tr key={`${ix}`}>
+                  <td>
                     <tr>
                       <td>
                         <FormControl
@@ -244,33 +242,36 @@ class QuestionEditor extends PureComponent {
                       <td>
                         <Button
                           onClick={() => this.onShowConditonalLogicClick(ix)}
+                          className="btn btn-primary"
                         >
-                          <Glyphicon glyph="glyphicon glyphicon-menu-hamburger" />
+                          <Glyphicon glyph="glyphicon glyphicon-share-alt" />
                         </Button>
                       </td>
                     </tr>
-                    {
-                      this.state.showConditionalLogic[ix] &&
-                      <tr>
+                    <tr>
+                      {this.state.showConditionalLogic[ix] &&
                         <td colSpan={4}>
-                          <ConditionalQuestionForm questionOptionIndex={ix} />
+                          <ConditionalQuestionForm
+                            questionOptionIndex={ix}
+                            text={this.state.questionInputOptions[ix].text}
+                            questionId={this.props.questionId}
+                            currentQuestionPanelIndex={this.props.currentQuestionPanelIndex}
+                            currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+                            currentQuestionIndex={this.props.currentQuestionIndex}
+                          />
                         </td>
-                      </tr>
-                    }
-                  </tbody>
-                </table>))
+                      }
+                    </tr>
+                  </td>
+                </tr>))
             }
           </tbody>
         </table>
+        <br />
         <table>
           <tbody>
             <tr>
-              <td colSpan={3}>
-                &nbsp;
-              </td>
-            </tr>
-            <tr>
-              <td colSpan={3}>
+              <td colSpan={4}>
                 <AddQuestionOptionButton
                   questionInputOptions={this.state.questionInputOptions}
                 />
@@ -291,16 +292,9 @@ class QuestionEditor extends PureComponent {
       questionPostText,
       questionInputType,
       questionInputOptions,
-      formPanels,
       currentQuestionPanelIndex,
     } = this.props;
 
-    const nextButtonTargetOptions = formPanels && formPanels.toJS().map((formPanel) => {
-      const option = {};
-      option.text = formPanel.panelId;
-      option.value = formPanel.panelId;
-      return option;
-    });
     return (
       <form>
         { this.props.currentQuestionIndex > -1 &&
@@ -389,37 +383,6 @@ class QuestionEditor extends PureComponent {
           this.props.currentQuestionIndex > -1 &&
           this.getQuestionOptions()
         }
-
-        <FormGroup>
-          <FieldGroup
-            id="questionTargetMatch"
-            name="questionTargetMatch"
-            label="If Answer Matches"
-            placeholder={this.props.questionTargetMatch}
-            onChange={this.onChange}
-            value={this.state.questionTargetMatch}
-          />
-        </FormGroup>
-        <FormGroup>
-          <label htmlFor="questionTarget">Go To Page</label>
-          <SelectInput
-            id="questionTarget"
-            labelId="questionTarget"
-            options={nextButtonTargetOptions}
-            onSelect={e => this.setState({ questionTarget: e })}
-            initialValue={this.state.questionTarget}
-          />
-        </FormGroup>
-
-        <FormGroup>
-          <Button
-            label="find"
-            className="btn btn-primary btn-block"
-            onClick={this.onUpdateNextQuestionTarget}
-            disabled={!this.state.questionTarget}
-          >Update Next Question Target
-          </Button>
-        </FormGroup>
         <ButtonBarEditor
           currentQuestionPanelIndex={currentQuestionPanelIndex}
         />
@@ -464,8 +427,6 @@ function mapStateToProps(state, ownProps) {
       'action', 'conditions', 0, 'target']),
     questionTargetMatch: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex,
       'action', 'conditions', 0, 'value']),
-    formPanels: state.getIn(['form', 'schema', 'formPanels']),
-    currentQuestionPanelIndex: state.getIn(['form', 'currentPanelIndex']),
   };
 }
 

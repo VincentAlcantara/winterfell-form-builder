@@ -12,7 +12,7 @@
     "prepublish": "npm run clean && npm run build"
   },
   "pre-commit": [
-    "build",
+    "prepublish",
     "test"
   ],
   "keywords": [

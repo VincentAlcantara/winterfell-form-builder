@@ -384,7 +384,6 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .setIn(['schema', 'formPanels'], fromJS(oldFormPanels))
         .setIn(['schema', 'questionPanels'], fromJS(oldQuestionPanels))
         .set('currentPanelId', oldFormPanelId)
-        .set('currentPanelIndex', newIndex)
         .set('currentQuestionPanelIndex', newIndex);
     }
     case UPDATE_NEXT_QUESTION_TARGET_SUCCESS: {
@@ -395,7 +394,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         action: 'GOTO',
       };
       return state
-        .setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', 0],
+        .setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', action.payload.optionIndex],
           fromJS(newQuestionCondition));
     }
     default:

@@ -340,9 +340,10 @@ export function movePage(oldIndex, newIndex) {
   };
 }
 
-export function updateNextQuestionTarget(currentQuestionPanelIndex, questionId, value, target) {
+export function updateNextQuestionTarget(
+  currentQuestionPanelIndex, questionId, value, target, optionIndex) {
   return {
     type: UPDATE_NEXT_QUESTION_TARGET_SUCCESS,
-    payload: { currentQuestionPanelIndex, questionId, value, target },
+    payload: { currentQuestionPanelIndex, questionId, value, target, optionIndex },
   };
 }

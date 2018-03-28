@@ -399,7 +399,7 @@ function winterfellFormBuilderReducer() {
         }
         oldFormPanels[newIndex].panelId = oldFormPanelId;
         oldQuestionPanels[newIndex] = oldQuestionPanel;
-        return state.setIn(['schema', 'formPanels'], (0, _immutable.fromJS)(oldFormPanels)).setIn(['schema', 'questionPanels'], (0, _immutable.fromJS)(oldQuestionPanels)).set('currentPanelId', oldFormPanelId).set('currentPanelIndex', newIndex).set('currentQuestionPanelIndex', newIndex);
+        return state.setIn(['schema', 'formPanels'], (0, _immutable.fromJS)(oldFormPanels)).setIn(['schema', 'questionPanels'], (0, _immutable.fromJS)(oldQuestionPanels)).set('currentPanelId', oldFormPanelId).set('currentQuestionPanelIndex', newIndex);
       }
     case _constants.UPDATE_NEXT_QUESTION_TARGET_SUCCESS:
       {
@@ -409,7 +409,7 @@ function winterfellFormBuilderReducer() {
           target: action.payload.target,
           action: 'GOTO'
         };
-        return state.setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', 0], (0, _immutable.fromJS)(newQuestionCondition));
+        return state.setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', action.payload.optionIndex], (0, _immutable.fromJS)(newQuestionCondition));
       }
     default:
       return state;

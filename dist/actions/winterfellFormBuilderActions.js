@@ -318,10 +318,10 @@ function movePage(oldIndex, newIndex) {
   };
 }
 
-function updateNextQuestionTarget(currentQuestionPanelIndex, questionId, value, target) {
+function updateNextQuestionTarget(currentQuestionPanelIndex, questionId, value, target, optionIndex) {
   return {
     type: _constants.UPDATE_NEXT_QUESTION_TARGET_SUCCESS,
-    payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, questionId: questionId, value: value, target: target }
+    payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, questionId: questionId, value: value, target: target, optionIndex: optionIndex }
   };
 }
 ;

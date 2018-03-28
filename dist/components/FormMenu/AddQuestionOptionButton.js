@@ -137,15 +137,15 @@ var AddQuestionOptionButton = function (_Component) {
                 ),
                 _react2.default.createElement(
                   'td',
-                  null,
+                  { colSpan: 2 },
                   _react2.default.createElement(
                     _reactBootstrap.Button,
                     {
-                      className: 'btn alert-info',
+                      className: 'btn btn-primary',
                       onClick: this.onAddOption,
                       disabled: !this.state.questionOptionValue || !this.state.questionOptionText
                     },
-                    _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-plus-sign' })
+                    _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-plus' })
                   )
                 )
               )
