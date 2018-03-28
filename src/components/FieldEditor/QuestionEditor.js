@@ -465,7 +465,7 @@ function mapStateToProps(state, ownProps) {
     questionTargetMatch: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex,
       'action', 'conditions', 0, 'value']),
     formPanels: state.getIn(['form', 'schema', 'formPanels']),
-    currentQuestionPanelIndex: state.getIn(['form', 'currentPanelIndex']),
+    currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
   };
 }
 
