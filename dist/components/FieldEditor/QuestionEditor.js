@@ -348,7 +348,9 @@ var QuestionEditor = function (_PureComponent) {
                         questionOptionIndex: ix,
                         text: _this2.state.questionInputOptions[ix].text,
                         questionId: _this2.props.questionId,
-                        currentQuestionPanelIndex: _this2.props.currentQuestionPanelIndex
+                        currentQuestionPanelIndex: _this2.props.currentQuestionPanelIndex,
+                        currentQuestionSetIndex: _this2.props.currentQuestionSetIndex,
+                        currentQuestionIndex: _this2.props.currentQuestionIndex
                       })
                     )
                   )
@@ -390,16 +392,9 @@ var QuestionEditor = function (_PureComponent) {
           questionPostText = _props8.questionPostText,
           questionInputType = _props8.questionInputType,
           questionInputOptions = _props8.questionInputOptions,
-          formPanels = _props8.formPanels,
           currentQuestionPanelIndex = _props8.currentQuestionPanelIndex;
 
 
-      var nextButtonTargetOptions = formPanels && formPanels.toJS().map(function (formPanel) {
-        var option = {};
-        option.text = formPanel.panelId;
-        option.value = formPanel.panelId;
-        return option;
-      });
       return _react2.default.createElement(
         'form',
         null,
@@ -542,7 +537,6 @@ QuestionEditor.propTypes = {
   currentQuestionIndex: _propTypes2.default.number.isRequired,
   questionTarget: _propTypes2.default.string,
   questionTargetMatch: _propTypes2.default.string,
-  formPanels: _propTypes2.default.object,
   currentQuestionPanelIndex: _propTypes2.default.number.isRequired
 };
 QuestionEditor.defaultProps = {
@@ -553,8 +547,7 @@ QuestionEditor.defaultProps = {
   questionInputType: '',
   questionInputOptions: (0, _immutable.fromJS)([]),
   questionTarget: '',
-  questionTargetMatch: '',
-  formPanels: (0, _immutable.fromJS)([])
+  questionTargetMatch: ''
 };
 
 
@@ -570,8 +563,7 @@ function mapStateToProps(state, ownProps) {
     currentQuestionSetIndex: ownProps.currentQuestionSetIndex,
     currentQuestionIndex: ownProps.currentQuestionIndex,
     questionTarget: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'action', 'conditions', 0, 'target']),
-    questionTargetMatch: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'action', 'conditions', 0, 'value']),
-    formPanels: state.getIn(['form', 'schema', 'formPanels'])
+    questionTargetMatch: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'action', 'conditions', 0, 'value'])
   };
 }
 

@@ -38,6 +38,8 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _immutable = require('immutable');
+
 var _reactBootstrap = require('react-bootstrap');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
@@ -66,13 +68,14 @@ var ConditionalQuestionForm = function (_Component) {
       return _this.__nextButtonTargetOptions__REACT_HOT_LOADER__.apply(_this, arguments);
     };
 
+    var conditionalQuestionsArray = props.conditionalQuestions.toJS();
     _this.state = {
       showModal: false,
-      questionId: '',
-      question: '',
-      questionText: '',
-      questionType: '',
-      questionTarget: ''
+      questionId: conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionId || '',
+      question: conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].question || '',
+      questionText: conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionText || '',
+      questionInputType: conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionInputType || '',
+      questionTarget: conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionTarget || ''
     };
 
     _this.onChange = _this.onChange.bind(_this);
@@ -89,6 +92,18 @@ var ConditionalQuestionForm = function (_Component) {
       return this.__nextButtonTargetOptions__REACT_HOT_LOADER__.apply(this, arguments);
     }
   }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var conditionalQuestionsArray = nextProps.conditionalQuestions.toJS();
+      this.state = {
+        questionId: conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionId || '',
+        question: conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].question || '',
+        questionText: conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionText || '',
+        questionInputType: conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionInputType || '',
+        questionTarget: conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionTarget || ''
+      };
+    }
+  }, {
     key: 'onChange',
     value: function onChange(event) {
       event.preventDefault();
@@ -97,7 +112,7 @@ var ConditionalQuestionForm = function (_Component) {
   }, {
     key: 'onSelect',
     value: function onSelect(type) {
-      this.setState({ questionType: type });
+      this.setState({ questionInputType: type });
     }
   }, {
     key: 'onClose',
@@ -117,9 +132,9 @@ var ConditionalQuestionForm = function (_Component) {
           questionId = _state.questionId,
           question = _state.question,
           questionText = _state.questionText,
-          questionType = _state.questionType;
+          questionInputType = _state.questionInputType;
 
-      this.props.addConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, questionId, question, questionText, questionType);
+      this.props.addConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, questionId, question, questionText, questionInputType);
       this.setState({ showModal: false });
     }
   }, {
@@ -248,14 +263,15 @@ var ConditionalQuestionForm = function (_Component) {
             null,
             _react2.default.createElement(
               'label',
-              { htmlFor: 'questionType' },
+              { htmlFor: 'questionInputType' },
               'Select Question Type'
             ),
             _react2.default.createElement(_SelectInput2.default, {
-              id: 'questionType',
-              labelId: 'questionType',
+              id: 'questionInputType',
+              labelId: 'questionInputType',
               options: _constants.INPUT_TYPE_OPTIONS,
-              onSelect: this.onSelect
+              onSelect: this.onSelect,
+              initialValue: this.state.questionInputType
             })
           ),
           _react2.default.createElement(
@@ -293,23 +309,26 @@ ConditionalQuestionForm.propTypes = {
   formPanels: _propTypes2.default.object.isRequired,
   currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
   questionId: _propTypes2.default.string.isRequired,
-  questionTarget: _propTypes2.default.string
+  questionTarget: _propTypes2.default.string,
+  conditionalQuestions: _propTypes2.default.object
 };
 ConditionalQuestionForm.defaultProps = {
-  questionTarget: ''
+  questionTarget: '',
+  conditionalQuestions: (0, _immutable.fromJS)([])
 };
 
 
 function mapStateToProps(state, ownProps) {
   return {
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
-    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
+    currentQuestionIndex: ownProps.currentQuestionIndex,
     questionOptionIndex: ownProps.questionOptionIndex,
     text: ownProps.text,
     formPanels: state.getIn(['form', 'schema', 'formPanels']),
     currentQuestionPanelIndex: ownProps.currentQuestionPanelIndex,
     questionId: ownProps.questionId,
-    questionTarget: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'action', 'conditions', ownProps.questionOptionIndex, 'target'])
+    questionTarget: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'action', 'conditions', ownProps.questionOptionIndex, 'target']),
+    conditionalQuestions: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'input', 'options', ownProps.questionOptionIndex, 'conditionalQuestions'])
   };
 }
 

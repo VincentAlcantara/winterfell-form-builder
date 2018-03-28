@@ -49,7 +49,6 @@ class QuestionEditor extends PureComponent {
     currentQuestionIndex: PropTypes.number.isRequired,
     questionTarget: PropTypes.string,
     questionTargetMatch: PropTypes.string,
-    formPanels: PropTypes.object,
     currentQuestionPanelIndex: PropTypes.number.isRequired,
   }
 
@@ -62,7 +61,6 @@ class QuestionEditor extends PureComponent {
     questionInputOptions: fromJS([]),
     questionTarget: '',
     questionTargetMatch: '',
-    formPanels: fromJS([]),
   }
 
   constructor(props) {
@@ -258,6 +256,8 @@ class QuestionEditor extends PureComponent {
                             text={this.state.questionInputOptions[ix].text}
                             questionId={this.props.questionId}
                             currentQuestionPanelIndex={this.props.currentQuestionPanelIndex}
+                            currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+                            currentQuestionIndex={this.props.currentQuestionIndex}
                           />
                         </td>
                       }
@@ -292,16 +292,9 @@ class QuestionEditor extends PureComponent {
       questionPostText,
       questionInputType,
       questionInputOptions,
-      formPanels,
       currentQuestionPanelIndex,
     } = this.props;
 
-    const nextButtonTargetOptions = formPanels && formPanels.toJS().map((formPanel) => {
-      const option = {};
-      option.text = formPanel.panelId;
-      option.value = formPanel.panelId;
-      return option;
-    });
     return (
       <form>
         { this.props.currentQuestionIndex > -1 &&
@@ -434,7 +427,6 @@ function mapStateToProps(state, ownProps) {
       'action', 'conditions', 0, 'target']),
     questionTargetMatch: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex,
       'action', 'conditions', 0, 'value']),
-    formPanels: state.getIn(['form', 'schema', 'formPanels']),
   };
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { fromJS } from 'immutable';
 import { Row, Col, Button, InputGroup, FormGroup } from 'react-bootstrap';
 import { addConditionalQuestion, updateNextQuestionTarget } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
@@ -20,22 +21,24 @@ class ConditionalQuestionForm extends Component {
     currentQuestionPanelIndex: PropTypes.number.isRequired,
     questionId: PropTypes.string.isRequired,
     questionTarget: PropTypes.string,
+    conditionalQuestions: PropTypes.object,
   }
 
   static defaultProps = {
     questionTarget: '',
+    conditionalQuestions: fromJS([]),
   };
 
   constructor(props) {
     super(props);
-
+    const conditionalQuestionsArray = props.conditionalQuestions.toJS();
     this.state = {
       showModal: false,
-      questionId: '',
-      question: '',
-      questionText: '',
-      questionType: '',
-      questionTarget: '',
+      questionId: (conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionId) || '',
+      question: (conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].question) || '',
+      questionText: (conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionText) || '',
+      questionInputType: (conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionInputType) || '',
+      questionTarget: (conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionTarget) || '',
     };
 
     this.onChange = this.onChange.bind(this);
@@ -45,13 +48,24 @@ class ConditionalQuestionForm extends Component {
     this.onUpdateNextQuestionTarget = this.onUpdateNextQuestionTarget.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const conditionalQuestionsArray = nextProps.conditionalQuestions.toJS();
+    this.state = {
+      questionId: (conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionId) || '',
+      question: (conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].question) || '',
+      questionText: (conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionText) || '',
+      questionInputType: (conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionInputType) || '',
+      questionTarget: (conditionalQuestionsArray.length > 0 && conditionalQuestionsArray[0].questionTarget) || '',
+    };
+  }
+
   onChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
   }
 
   onSelect(type) {
-    this.setState({ questionType: type });
+    this.setState({ questionInputType: type });
   }
 
   onClose(e) {
@@ -62,7 +76,7 @@ class ConditionalQuestionForm extends Component {
   onFormUpdate(e) {
     e.preventDefault();
     const { currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex } = this.props;
-    const { questionId, question, questionText, questionType } = this.state;
+    const { questionId, question, questionText, questionInputType } = this.state;
     this.props.addConditionalQuestion(
       currentQuestionSetIndex,
       currentQuestionIndex,
@@ -70,7 +84,7 @@ class ConditionalQuestionForm extends Component {
       questionId,
       question,
       questionText,
-      questionType,
+      questionInputType,
     );
     this.setState({ showModal: false });
   }
@@ -158,14 +172,15 @@ class ConditionalQuestionForm extends Component {
             />
           </FormGroup>
           <FormGroup>
-            <label htmlFor="questionType">
+            <label htmlFor="questionInputType">
               Select Question Type
             </label>
             <SelectInput
-              id="questionType"
-              labelId="questionType"
+              id="questionInputType"
+              labelId="questionInputType"
               options={INPUT_TYPE_OPTIONS}
               onSelect={this.onSelect}
+              initialValue={this.state.questionInputType}
             />
           </FormGroup>
           <Button
@@ -185,7 +200,7 @@ class ConditionalQuestionForm extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
-    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
+    currentQuestionIndex: ownProps.currentQuestionIndex,
     questionOptionIndex: ownProps.questionOptionIndex,
     text: ownProps.text,
     formPanels: state.getIn(['form', 'schema', 'formPanels']),
@@ -193,6 +208,8 @@ function mapStateToProps(state, ownProps) {
     questionId: ownProps.questionId,
     questionTarget: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex,
       'action', 'conditions', ownProps.questionOptionIndex, 'target']),
+    conditionalQuestions: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex,
+      'questions', ownProps.currentQuestionIndex, 'input', 'options', ownProps.questionOptionIndex, 'conditionalQuestions']),
   };
 }
 
