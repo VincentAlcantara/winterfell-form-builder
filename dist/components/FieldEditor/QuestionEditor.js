@@ -80,6 +80,10 @@ var _SelectInput = require('../InputTypes/SelectInput');
 
 var _SelectInput2 = _interopRequireDefault(_SelectInput);
 
+var _ButtonBarEditor = require('./ButtonBarEditor');
+
+var _ButtonBarEditor2 = _interopRequireDefault(_ButtonBarEditor);
+
 var _constants = require('../../common/constants');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -177,7 +181,9 @@ var QuestionEditor = function (_PureComponent) {
           currentQuestionIndex = _props2.currentQuestionIndex;
 
       this.setState({ questionInputType: questionType });
-      this.props.changeQuestionType(currentQuestionSetIndex, currentQuestionIndex, questionType);
+      if (questionType !== '') {
+        this.props.changeQuestionType(currentQuestionSetIndex, currentQuestionIndex, questionType);
+      }
     }
   }, {
     key: 'onOptionTextChange',
@@ -388,7 +394,8 @@ var QuestionEditor = function (_PureComponent) {
           questionPostText = _props8.questionPostText,
           questionInputType = _props8.questionInputType,
           questionInputOptions = _props8.questionInputOptions,
-          formPanels = _props8.formPanels;
+          formPanels = _props8.formPanels,
+          currentQuestionPanelIndex = _props8.currentQuestionPanelIndex;
 
 
       var nextButtonTargetOptions = formPanels && formPanels.toJS().map(function (formPanel) {
@@ -485,7 +492,7 @@ var QuestionEditor = function (_PureComponent) {
             _react2.default.createElement(
               'label',
               { htmlFor: 'questionInputType' },
-              'Change Question Type'
+              'Question Type'
             ),
             _react2.default.createElement(_SelectInput2.default, {
               id: 'questionInputType',
@@ -497,30 +504,26 @@ var QuestionEditor = function (_PureComponent) {
           )
         ),
         (questionInputType === 'checkboxOptionsInput' || questionInputType === 'selectInput' || questionInputType === 'radioOptionsInput') && questionInputOptions && this.props.currentQuestionIndex > -1 && this.getQuestionOptions(),
-        this.props.currentQuestionIndex > -1 && _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
-          _react2.default.createElement(_DeleteQuestionButton2.default, {
-            currentQuestionSetIndex: this.props.currentQuestionSetIndex,
-            currentQuestionIndex: this.props.currentQuestionIndex
-          })
-        ),
-        this.props.currentQuestionIndex > -1 && _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
-          _react2.default.createElement(_AddQuestionButton2.default, {
-            questionSetId: this.props.questionSetId,
-            currentQuestionSetIndex: this.props.currentQuestionSetIndex
-          })
-        ),
-        _react2.default.createElement(
-          'b',
-          null,
-          'Next Question Target'
-        ),
         _react2.default.createElement(
           _reactBootstrap.FormGroup,
           null,
+          _react2.default.createElement(_FieldGroup2.default, {
+            id: 'questionTargetMatch',
+            name: 'questionTargetMatch',
+            label: 'If Answer Matches',
+            placeholder: this.props.questionTargetMatch,
+            onChange: this.onChange,
+            value: this.state.questionTargetMatch
+          })
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.FormGroup,
+          null,
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'questionTarget' },
+            'Go To Page'
+          ),
           _react2.default.createElement(_SelectInput2.default, {
             id: 'questionTarget',
             labelId: 'questionTarget',
@@ -528,21 +531,7 @@ var QuestionEditor = function (_PureComponent) {
             onSelect: function onSelect(e) {
               return _this3.setState({ questionTarget: e });
             },
-            initialValue: this.state.questionTarget,
-            disableEmpty: false
-          })
-        ),
-        _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
-          _react2.default.createElement(_FieldGroup2.default, {
-            id: 'questionTargetMatch',
-            name: 'questionTargetMatch',
-            label: 'Question Value Must Match',
-            placeholder: this.props.questionTargetMatch,
-            onChange: this.onChange,
-            value: this.state.questionTargetMatch,
-            disableEmpty: false
+            initialValue: this.state.questionTarget
           })
         ),
         _react2.default.createElement(
@@ -558,6 +547,21 @@ var QuestionEditor = function (_PureComponent) {
             },
             'Update Next Question Target'
           )
+        ),
+        _react2.default.createElement(_ButtonBarEditor2.default, {
+          currentQuestionPanelIndex: currentQuestionPanelIndex
+        }),
+        _react2.default.createElement(
+          _reactBootstrap.ButtonGroup,
+          null,
+          this.props.currentQuestionIndex > -1 && _react2.default.createElement(_DeleteQuestionButton2.default, {
+            currentQuestionSetIndex: this.props.currentQuestionSetIndex,
+            currentQuestionIndex: this.props.currentQuestionIndex
+          }),
+          this.props.currentQuestionIndex > -1 && _react2.default.createElement(_AddQuestionButton2.default, {
+            questionSetId: this.props.questionSetId,
+            currentQuestionSetIndex: this.props.currentQuestionSetIndex
+          })
         )
       );
     }
@@ -615,7 +619,8 @@ function mapStateToProps(state, ownProps) {
     currentQuestionIndex: ownProps.currentQuestionIndex,
     questionTarget: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'action', 'conditions', 0, 'target']),
     questionTargetMatch: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'action', 'conditions', 0, 'value']),
-    formPanels: state.getIn(['form', 'schema', 'formPanels'])
+    formPanels: state.getIn(['form', 'schema', 'formPanels']),
+    currentQuestionPanelIndex: state.getIn(['form', 'currentPanelIndex'])
   };
 }
 

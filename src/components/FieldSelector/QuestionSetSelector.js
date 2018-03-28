@@ -36,9 +36,9 @@ const QuestionSetSelector = (props) => {
           }
           return null;
         },
-        )
-      ),
-    );
+      )
+    ),
+  );
 
   return (
     <div className="winterfell-form-builder-question-set">

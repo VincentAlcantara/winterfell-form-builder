@@ -33,17 +33,17 @@ var ButtonBarSelector = function ButtonBarSelector(props) {
       'div',
       { className: 'button-bar' },
       backButton && !backButtonDisabled && _react2.default.createElement(
-        'button',
-        { className: 'btn btn-default pull-left' },
+        'a',
+        { className: 'btn btn-danger pull-left' },
         backButton
       ),
       nextButton && _react2.default.createElement(
-        'button',
+        'a',
         { className: 'btn btn-primary pull-right' },
         nextButton
       ),
       !nextButton && _react2.default.createElement(
-        'button',
+        'a',
         { className: 'btn btn-primary pull-right' },
         'Submit'
       )

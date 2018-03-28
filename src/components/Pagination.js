@@ -21,9 +21,6 @@ function Pagination(props) {
     <Row>
       <Col xs={12}>
         <FormGroup>
-          <label htmlFor="pagination" style={{ display: 'block' }}>
-            Page
-          </label>
           <DropdownButton
             id="pagination"
             title={currentPanelId || 'Select Page'}

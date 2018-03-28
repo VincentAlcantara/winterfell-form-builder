@@ -12,20 +12,20 @@ const ButtonBarSelector = (props) => {
     >
       <div className="button-bar">
         { backButton && !backButtonDisabled &&
-          <button className="btn btn-default pull-left">
+          <a className="btn btn-danger pull-left">
             {backButton}
-          </button>
+          </a>
         }
         { nextButton &&
-          <button className="btn btn-primary pull-right">
+          <a className="btn btn-primary pull-right">
             {nextButton}
-          </button>
-         }
+          </a>
+        }
         { !nextButton &&
-          <button className="btn btn-primary pull-right">
+          <a className="btn btn-primary pull-right">
             Submit
-          </button>
-         }
+          </a>
+        }
       </div>
     </Button>
   );

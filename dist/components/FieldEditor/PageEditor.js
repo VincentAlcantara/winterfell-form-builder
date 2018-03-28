@@ -157,9 +157,10 @@ var PageEditor = function (_PureComponent) {
               _react2.default.createElement(
                 _reactBootstrap.Button,
                 {
-                  onClick: this.onUpdatePageId
+                  onClick: this.onUpdatePageId,
+                  className: 'btn alert-success'
                 },
-                'Update'
+                _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-ok-circle' })
               )
             )
           )

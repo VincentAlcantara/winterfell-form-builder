@@ -116,118 +116,106 @@ var AddConditionalQuestionButton = function (_Component) {
       var _this2 = this;
 
       return _react2.default.createElement(
-        _reactBootstrap.Row,
-        null,
+        _reactBootstrap.Button,
+        {
+          className: 'btn btn-primary',
+          onClick: function onClick() {
+            _this2.setState({ showModal: true });
+          }
+        },
+        _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-menu-hamburger' }),
         _react2.default.createElement(
-          'div',
-          { className: 'static-modal' },
+          _reactBootstrap.Modal,
+          { show: this.state.showModal },
           _react2.default.createElement(
-            _reactBootstrap.Modal,
-            { show: this.state.showModal },
+            _reactBootstrap.Modal.Header,
+            null,
             _react2.default.createElement(
-              _reactBootstrap.Modal.Header,
+              _reactBootstrap.Modal.Title,
+              null,
+              'Add a new conditional question to this question'
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Modal.Body,
+            null,
+            _react2.default.createElement(
+              'form',
               null,
               _react2.default.createElement(
-                _reactBootstrap.Modal.Title,
+                _reactBootstrap.FormGroup,
                 null,
-                'Add a new conditional question to this question'
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Body,
-              null,
-              _react2.default.createElement(
-                'form',
-                null,
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionId',
-                    name: 'questionId',
-                    label: 'Question ID',
-                    onChange: this.onChange,
-                    placeholder: '(optional)',
-                    value: this.state.questionId
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'question',
-                    name: 'question',
-                    label: 'Enter Question',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.question
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionText',
-                    name: 'questionText',
-                    label: 'Enter Question Text',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.questionText
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'questionType' },
-                    'Select Question Type'
-                  ),
-                  _react2.default.createElement(_SelectInput2.default, {
-                    id: 'questionType',
-                    labelId: 'questionType',
-                    options: _constants.INPUT_TYPE_OPTIONS,
-                    onSelect: this.onSelect
-                  })
-                )
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Footer,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'danger',
-                  onClick: function onClick() {
-                    _this2.setState({ showModal: false });
-                  }
-                },
-                'Cancel'
+                _react2.default.createElement(_FieldGroup2.default, {
+                  id: 'questionId',
+                  name: 'questionId',
+                  label: 'Question ID',
+                  onChange: this.onChange,
+                  placeholder: '(optional)',
+                  value: this.state.questionId
+                })
               ),
               _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'primary',
-                  onClick: this.onFormUpdate
-                },
-                'Save changes'
+                _reactBootstrap.FormGroup,
+                null,
+                _react2.default.createElement(_FieldGroup2.default, {
+                  id: 'question',
+                  name: 'question',
+                  label: 'Enter Question',
+                  onChange: this.onChange,
+                  placeholder: '',
+                  value: this.state.question
+                })
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.FormGroup,
+                null,
+                _react2.default.createElement(_FieldGroup2.default, {
+                  id: 'questionText',
+                  name: 'questionText',
+                  label: 'Enter Question Text',
+                  onChange: this.onChange,
+                  placeholder: '',
+                  value: this.state.questionText
+                })
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.FormGroup,
+                null,
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'questionType' },
+                  'Select Question Type'
+                ),
+                _react2.default.createElement(_SelectInput2.default, {
+                  id: 'questionType',
+                  labelId: 'questionType',
+                  options: _constants.INPUT_TYPE_OPTIONS,
+                  onSelect: this.onSelect
+                })
               )
             )
-          )
-        ),
-        _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
+          ),
           _react2.default.createElement(
-            _reactBootstrap.Button,
-            {
-              className: 'btn btn-primary',
-              onClick: function onClick() {
-                _this2.setState({ showModal: true });
-              }
-            },
-            _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-menu-hamburger' })
+            _reactBootstrap.Modal.Footer,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                bsStyle: 'danger',
+                onClick: function onClick() {
+                  _this2.setState({ showModal: false });
+                }
+              },
+              'Cancel'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                bsStyle: 'primary',
+                onClick: this.onFormUpdate
+              },
+              'Save changes'
+            )
           )
         )
       );

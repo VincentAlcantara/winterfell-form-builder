@@ -37,14 +37,14 @@ class PageSortSelector extends Component {
 
   render() {
     const SortableItem = SortableElement(({ value }) =>
-      <div>
+      (<div>
         <a
           href=""
           onClick={() =>
             this.props.changeCurrentEditingField('page')}
         >{value}
         </a>
-      </div>);
+      </div>));
 
     const SortableList = SortableContainer(({ items }) => (
       <div>
@@ -52,7 +52,7 @@ class PageSortSelector extends Component {
           <SortableItem key={`item-${index}`} index={index} value={value} />
         ))}
       </div>
-      ),
+    ),
     );
     return (
       <Row className="winterfell-form-builder-page-sorter">

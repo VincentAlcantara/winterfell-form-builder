@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, Modal, FormGroup } from 'react-bootstrap';
 import { editFormTitle } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
@@ -44,48 +44,42 @@ class EditFormTitleButton extends Component {
     const { title } = this.props;
 
     return (
-      <Row>
-        <div className="static-modal">
-          <Modal show={this.state.showModal}>
-            <Modal.Header>
-              <Modal.Title>Edit form filename</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <form>
-                <FormGroup>
-                  <FieldGroup
-                    id="formTitle"
-                    name="formTitle"
-                    label="Enter title of the form"
-                    onChange={this.onChange}
-                    placeholder={title}
-                    value={this.state.formTitle}
-                  />
-                </FormGroup>
-              </form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                bsStyle="danger"
-                onClick={() => { this.setState({ showModal: false }); }}
-              >Cancel</Button>
-              <Button
-                bsStyle="primary"
-                onClick={this.onFormUpdate}
-              >Save changes</Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-        <Col xs={12}>
-          <Button
-            className="btn btn-block btn-primary"
-            onClick={() => {
-              this.setState({ showModal: true });
-            }}
-          >edit form filename
-          </Button>
-        </Col>
-      </Row>
+      <Button
+        className="btn btn-block btn-primary"
+        onClick={() => {
+          this.setState({ showModal: true });
+        }}
+      >edit form filename
+        <Modal show={this.state.showModal}>
+          <Modal.Header>
+            <Modal.Title>Edit form filename</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form>
+              <FormGroup>
+                <FieldGroup
+                  id="formTitle"
+                  name="formTitle"
+                  label="Enter title of the form"
+                  onChange={this.onChange}
+                  placeholder={title}
+                  value={this.state.formTitle}
+                />
+              </FormGroup>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              bsStyle="danger"
+              onClick={() => { this.setState({ showModal: false }); }}
+            >Cancel</Button>
+            <Button
+              bsStyle="primary"
+              onClick={this.onFormUpdate}
+            >Save changes</Button>
+          </Modal.Footer>
+        </Modal>
+      </Button>
     );
   }
 }

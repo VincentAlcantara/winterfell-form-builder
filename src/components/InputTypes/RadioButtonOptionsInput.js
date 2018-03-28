@@ -62,7 +62,7 @@ class RadioButtonOptionsInput extends React.Component {
     return (
       <ul className={this.props.classes.checkboxList}>
         {this.props.options.map(opt =>
-          <li
+          (<li
             key={opt.value}
             className={this.props.classes.checkboxListItem}
           >
@@ -86,7 +86,7 @@ class RadioButtonOptionsInput extends React.Component {
               />
               {opt.text}
             </label>
-          </li>,
+          </li>),
         )}
       </ul>
     );

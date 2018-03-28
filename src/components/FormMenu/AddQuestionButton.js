@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, Modal, FormGroup } from 'react-bootstrap';
 import { addQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 import SelectInput from '../InputTypes/SelectInput';
@@ -61,7 +61,12 @@ class AddQuestionButton extends Component {
 
   render() {
     return (
-      <Row>
+      <Button
+        className="btn btn-primary"
+        onClick={() => {
+          this.setState({ showModal: true });
+        }}
+      >
         <div className="static-modal">
           <Modal show={this.state.showModal}>
             <Modal.Header>
@@ -134,16 +139,8 @@ class AddQuestionButton extends Component {
             </Modal.Footer>
           </Modal>
         </div>
-        <Col xs={12}>
-          <Button
-            className="btn btn-block btn-primary"
-            onClick={() => {
-              this.setState({ showModal: true });
-            }}
-          >add question
-          </Button>
-        </Col>
-      </Row>
+      add question
+      </Button>
     );
   }
 }

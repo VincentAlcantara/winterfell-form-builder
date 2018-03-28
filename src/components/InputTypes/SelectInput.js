@@ -9,7 +9,6 @@ class SelectInput extends React.Component {
     name: PropTypes.string,
     onSelect: PropTypes.func,
     required: PropTypes.bool,
-    disableEmpty: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -18,13 +17,12 @@ class SelectInput extends React.Component {
     },
     id: '',
     name: '',
-    value: [],
+    value: [{ text: '', value: '' }],
     options: [],
     onChange: () => {},
     onSelect: () => {},
     required: false,
     initialValue: '',
-    disableEmpty: true,
   };
   constructor(props) {
     super(props);
@@ -48,12 +46,12 @@ class SelectInput extends React.Component {
 
   render() {
     const options = this.props.options && this.props.options.map((opt, index) =>
-      <option
+      (<option
         key={index}
         value={opt.value}
       >
         {opt.text}
-      </option>,
+      </option>),
     );
     return (
       <select
@@ -67,7 +65,7 @@ class SelectInput extends React.Component {
         onSelect={() => this.onSelect}
         autoComplete={this.props.name}
       >
-        <option value="" disabled={this.props.disableEmpty} selected>&nbsp;</option>
+        <option value="">&nbsp;</option>
         {options}
       </select>
     );

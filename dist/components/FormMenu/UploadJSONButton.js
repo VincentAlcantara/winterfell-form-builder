@@ -89,82 +89,70 @@ var UploadJSONButton = function (_Component) {
       var _this3 = this;
 
       return _react2.default.createElement(
-        _reactBootstrap.Row,
-        null,
+        _reactBootstrap.Button,
+        {
+          className: 'btn btn-block btn-primary',
+          onClick: function onClick() {
+            _this3.setState({ showModal: true });
+          }
+        },
+        'open form',
         _react2.default.createElement(
-          'div',
-          { className: 'static-modal' },
+          _reactBootstrap.Modal,
+          { show: this.state.showModal },
           _react2.default.createElement(
-            _reactBootstrap.Modal,
-            { show: this.state.showModal },
+            _reactBootstrap.Modal.Header,
+            null,
             _react2.default.createElement(
-              _reactBootstrap.Modal.Header,
+              _reactBootstrap.Modal.Title,
+              null,
+              'Open a form'
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Modal.Body,
+            null,
+            _react2.default.createElement(
+              'form',
               null,
               _react2.default.createElement(
-                _reactBootstrap.Modal.Title,
+                _reactBootstrap.FormGroup,
                 null,
-                'Open a form'
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Body,
-              null,
-              _react2.default.createElement(
-                'form',
-                null,
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement('label', {
-                    htmlFor: 'jsonUpload'
-                  }),
-                  _react2.default.createElement('input', {
-                    name: 'schema',
-                    id: 'jsonUpload',
-                    type: 'file',
-                    onChange: function onChange(e) {
-                      return _this3.onChange(e);
-                    }
-                  })
-                )
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Footer,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'danger',
-                  onClick: function onClick() {
-                    _this3.setState({ showModal: false });
+                _react2.default.createElement('label', {
+                  htmlFor: 'jsonUpload'
+                }),
+                _react2.default.createElement('input', {
+                  name: 'schema',
+                  id: 'jsonUpload',
+                  type: 'file',
+                  onChange: function onChange(e) {
+                    return _this3.onChange(e);
                   }
-                },
-                'Cancel'
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'primary',
-                  onClick: this.onJSONUpload
-                },
-                'Upload'
+                })
               )
             )
-          )
-        ),
-        _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
+          ),
           _react2.default.createElement(
-            _reactBootstrap.Button,
-            {
-              className: 'btn btn-block btn-primary',
-              onClick: function onClick() {
-                _this3.setState({ showModal: true });
-              }
-            },
-            'open form'
+            _reactBootstrap.Modal.Footer,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                bsStyle: 'danger',
+                onClick: function onClick() {
+                  _this3.setState({ showModal: false });
+                }
+              },
+              'Cancel'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                bsStyle: 'primary',
+                onClick: this.onJSONUpload
+              },
+              'Upload'
+            )
           )
         )
       );

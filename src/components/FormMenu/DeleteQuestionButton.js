@@ -36,7 +36,12 @@ class DeleteQuestionButton extends Component {
 
   render() {
     return (
-      <span>
+      <Button
+        className="btn btn-danger"
+        onClick={() => {
+          this.setState({ showModal: true });
+        }}
+      >
         <div className="static-modal">
           <Modal show={this.state.showModal}>
             <Modal.Header>
@@ -57,14 +62,8 @@ class DeleteQuestionButton extends Component {
             </Modal.Footer>
           </Modal>
         </div>
-        <Button
-          className="btn btn-block btn-danger"
-          onClick={() => {
-            this.setState({ showModal: true });
-          }}
-        >delete question
-        </Button>
-      </span>
+        delete question
+      </Button>
     );
   }
 }

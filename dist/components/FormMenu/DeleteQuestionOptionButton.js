@@ -80,62 +80,54 @@ var DeleteQuestionOptionButton = function (_Component) {
       var _this2 = this;
 
       return _react2.default.createElement(
-        'span',
-        null,
+        _reactBootstrap.Button,
+        {
+          className: 'btn alert-danger',
+          title: 'delete this option',
+          onClick: function onClick() {
+            _this2.setState({ showModal: true });
+          }
+        },
+        _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-remove-circle' }),
         _react2.default.createElement(
-          'div',
-          { className: 'static-modal' },
+          _reactBootstrap.Modal,
+          { show: this.state.showModal },
           _react2.default.createElement(
-            _reactBootstrap.Modal,
-            { show: this.state.showModal },
+            _reactBootstrap.Modal.Header,
+            null,
             _react2.default.createElement(
-              _reactBootstrap.Modal.Header,
+              _reactBootstrap.Modal.Title,
               null,
-              _react2.default.createElement(
-                _reactBootstrap.Modal.Title,
-                null,
-                'Delete Option Confirmation'
-              )
+              'Delete Option Confirmation'
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Modal.Body,
+            null,
+            'Are you sure you want to delete this option?'
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Modal.Footer,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                bsStyle: 'danger',
+                onClick: function onClick() {
+                  _this2.setState({ showModal: false });
+                }
+              },
+              'Cancel'
             ),
             _react2.default.createElement(
-              _reactBootstrap.Modal.Body,
-              null,
-              'Are you sure you want to delete this option?'
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Footer,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'danger',
-                  onClick: function onClick() {
-                    _this2.setState({ showModal: false });
-                  }
-                },
-                'Cancel'
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'primary',
-                  onClick: this.onConfirmDelete
-                },
-                'Confirm Delete'
-              )
+              _reactBootstrap.Button,
+              {
+                bsStyle: 'primary',
+                onClick: this.onConfirmDelete
+              },
+              'Confirm Delete'
             )
           )
-        ),
-        _react2.default.createElement(
-          _reactBootstrap.Button,
-          {
-            className: 'btn btn-danger',
-            title: 'delete this option',
-            onClick: function onClick() {
-              _this2.setState({ showModal: true });
-            }
-          },
-          _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-minus-sign' })
         )
       );
     }

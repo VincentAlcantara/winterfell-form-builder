@@ -164,14 +164,14 @@ function winterfellFormBuilderReducer(state = initialState, action) {
             arr.push(newOption));
       }
       return state
-      .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
-        currentQuestionIndex, 'input', 'options'], fromJS([newOption]));
+        .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'input', 'options'], fromJS([newOption]));
     }
     case CHANGE_QUESTION_TYPE_SUCCESS: {
       const { currentQuestionSetIndex, currentQuestionIndex, questionType } = action.payload;
       return state
-      .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
-        currentQuestionIndex, 'input', 'type'], questionType);
+        .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'input', 'type'], questionType);
     }
     case EDIT_QUESTION_OPTION_TEXT_SUCCESS: {
       const {
@@ -372,7 +372,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
           oldQuestionPanels[i] = oldQuestionPanels[i + 1];
         }
       }
-      if (oldIndex > newIndex) {  // moving page up
+      if (oldIndex > newIndex) { // moving page up
         for (let i = oldIndex; i > newIndex; i -= 1) {
           oldFormPanels[i].panelId = oldFormPanels[i - 1].panelId;
           oldQuestionPanels[i] = oldQuestionPanels[i - 1];
@@ -384,7 +384,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .setIn(['schema', 'formPanels'], fromJS(oldFormPanels))
         .setIn(['schema', 'questionPanels'], fromJS(oldQuestionPanels))
         .set('currentPanelId', oldFormPanelId)
-        .set('currentPanelIndexd', newIndex)
+        .set('currentPanelIndex', newIndex)
         .set('currentQuestionPanelIndex', newIndex);
     }
     case UPDATE_NEXT_QUESTION_TARGET_SUCCESS: {

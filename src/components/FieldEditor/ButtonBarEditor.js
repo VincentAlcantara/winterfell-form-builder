@@ -12,7 +12,7 @@ import FieldGroup from '../InputTypes/FieldGroup';
 class ButtonBarEditor extends PureComponent {
   static propTypes = {
     editNextButtonText: PropTypes.func.isRequired,
-    backButtonDisabled: PropTypes.bool.isRequired,
+    backButtonDisabled: PropTypes.bool,
     editBackButtonText: PropTypes.func.isRequired,
     disableBackButton: PropTypes.func.isRequired,
     onSelectNextButtonAction: PropTypes.func.isRequired,
@@ -28,6 +28,7 @@ class ButtonBarEditor extends PureComponent {
   static defaultProps = {
     currentQuestionPanelIndex: 0,
     backButtonText: '',
+    backButtonDisabled: false,
     nextButtonText: '',
     formPanels: fromJS({}),
     defaultGoToAction: '',
@@ -104,7 +105,7 @@ class ButtonBarEditor extends PureComponent {
     }));
 
     return (
-      <form>
+      <div>
         <FormGroup>
           <FieldGroup
             id="backButtonText"
@@ -178,7 +179,7 @@ class ButtonBarEditor extends PureComponent {
             value={this.state.defaultGoToTarget}
           />
         }
-      </form>
+      </div>
     );
   }
 }
