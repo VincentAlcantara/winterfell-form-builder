@@ -154,7 +154,7 @@ class WinterfellFormBuilder extends Component {
               <Col xs={4} className="winterfell-form-builder-field-editor">
                 <Row>
                   <Col xs={12}>
-                    { typeof currentQuestionPanelIndex >= 0 &&
+                    { currentQuestionPanelIndex >= 0 &&
                       <FieldEditor
                         currentQuestionPanelIndex={currentQuestionPanelIndex}
                         currentEditingField={currentEditingField}
