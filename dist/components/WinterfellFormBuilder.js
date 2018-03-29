@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _typeof2 = require('babel-runtime/helpers/typeof');
-
-var _typeof3 = _interopRequireDefault(_typeof2);
-
 var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
@@ -239,7 +235,7 @@ var WinterfellFormBuilder = function (_Component) {
                   _react2.default.createElement(
                     _reactBootstrap.Col,
                     { xs: 12 },
-                    (typeof currentQuestionPanelIndex === 'undefined' ? 'undefined' : (0, _typeof3.default)(currentQuestionPanelIndex)) >= 0 && _react2.default.createElement(_FieldEditor2.default, {
+                    currentQuestionPanelIndex >= 0 && _react2.default.createElement(_FieldEditor2.default, {
                       currentQuestionPanelIndex: currentQuestionPanelIndex,
                       currentEditingField: currentEditingField,
                       currentQuestionSetIndex: currentQuestionSetIndex,
