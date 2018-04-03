@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
-import { Row, Col, Button, InputGroup, FormGroup } from 'react-bootstrap';
+import { Row, Col, Button, FormGroup } from 'react-bootstrap';
 import { addConditionalQuestion, updateNextQuestionTarget } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 import SelectInput from '../InputTypes/SelectInput';
@@ -20,7 +20,6 @@ class ConditionalQuestionForm extends Component {
     formPanels: PropTypes.object.isRequired,
     currentQuestionPanelIndex: PropTypes.number.isRequired,
     questionId: PropTypes.string.isRequired,
-    questionTarget: PropTypes.string,
     conditionalQuestions: PropTypes.object,
   }
 
@@ -111,32 +110,6 @@ class ConditionalQuestionForm extends Component {
   render() {
     return (
       <Row className="winterfell-form-builder-conditional-questions">
-        <Col xs={12}>
-          <h5>
-            Add Conditional Logic for Option &#34;{this.props.text}&#34;&#58;
-          </h5>
-          <FormGroup>
-            <label htmlFor="questionTarget">Go To Page</label>
-            <InputGroup>
-              <SelectInput
-                id="questionTarget"
-                labelId="questionTarget"
-                options={this.nextButtonTargetOptions()}
-                onSelect={e => this.setState({ questionTarget: e })}
-                initialValue={this.props.questionTarget}
-              />
-              <InputGroup.Button>
-                <Button
-                  label="find"
-                  className="btn btn-primary btn-block"
-                  onClick={this.onUpdateNextQuestionTarget}
-                  disabled={!this.state.questionTarget}
-                >save
-                </Button>
-              </InputGroup.Button>
-            </InputGroup>
-          </FormGroup>
-        </Col>
         <Col xs={12}>
           <h5>
             Conditional Questions for Option &#34;{this.props.text}&#34;

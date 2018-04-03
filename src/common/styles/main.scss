@@ -32,6 +32,7 @@
   border: 1px solid #eee;
 }
 .winterfell-form-builder-field-editor {
+  background: #eee;
   padding-top: 10px;
   border-right: 1px solid #eee;
   font-size: 0.9em;
@@ -45,34 +46,10 @@
   td input, td button {
     border-radius: 0;
   }
-  /*tr:nth-child(2) {
-    td:first-child {
-      input {
-        border-top-left-radius: 4px
-      }
-    }
-    td:last-child  {
-      button {
-        border-top-right-radius: 4px;
-      }
-    }
-  }
 
-  tr:last-child {
-    td:first-child {
-      input {
-        border-bottom-left-radius: 4px;
-      }
-    }
-    td:last-child  {
-      button {
-        border-bottom-right-radius: 4px;
-      }
-    }
-  }
-  */
   .btn {
     font-size: 12px;
+    padding: 6px;
   }
   .form-control {
     font-size: 12px;
@@ -119,7 +96,10 @@
 .winterfell-form-builder-conditional-questions {
   padding-top: 10px;
   padding-bottom: 10px;
-  background: #eee;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  margin: 0;
   .btn {
     border-radius: 4px;
   }

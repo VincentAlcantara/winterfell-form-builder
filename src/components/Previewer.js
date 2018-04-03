@@ -96,14 +96,6 @@ class Previewer extends Component {
             displayWinterFellForm()
           }
         </Col>
-        <Col xs={12}>
-          <h3>Winterfell Schema:</h3>
-        </Col>
-        <Col xs={12}>
-          <pre>
-            {JSON.stringify(schema, undefined, 2)}
-          </pre>
-        </Col>
       </Row>
     );
   }

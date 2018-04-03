@@ -22,6 +22,7 @@ import DeleteQuestionOptionButton from '../FormMenu/DeleteQuestionOptionButton';
 import DeleteQuestionButton from '../FormMenu/DeleteQuestionButton';
 import AddQuestionButton from '../FormMenu/AddQuestionButton';
 import AddQuestionOptionButton from '../FormMenu/AddQuestionOptionButton';
+import ConditionalPageForm from '../FormMenu/ConditionalPageForm';
 import ConditionalQuestionForm from '../FormMenu/ConditionalQuestionForm';
 import SelectInput from '../InputTypes/SelectInput';
 import ButtonBarEditor from './ButtonBarEditor';
@@ -86,7 +87,8 @@ class QuestionEditor extends PureComponent {
       questionInputType,
       questionInputOptions: questionInputOptions.toJS(),
       editQuestionId: true,
-      showConditionalLogic: new Array(questionInputOptions.count()),
+      showConditionalPage: new Array(questionInputOptions.count()),
+      showConditionalQuestions: new Array(questionInputOptions.count()),
       questionTarget,
       questionTargetMatch,
     };
@@ -97,7 +99,8 @@ class QuestionEditor extends PureComponent {
     this.onOptionValueChange = this.onOptionValueChange.bind(this);
     this.onAddQuestionOptionClick = this.onAddQuestionOptionClick.bind(this);
     this.onEditQuestionIdClick = this.onEditQuestionIdClick.bind(this);
-    this.onShowConditonalLogicClick = this.onShowConditonalLogicClick.bind(this);
+    this.onShowConditonalPageClick = this.onShowConditonalPageClick.bind(this);
+    this.onShowConditonalQuestionClick = this.onShowConditonalQuestionClick.bind(this);
     this.onUpdateNextQuestionTarget = this.onUpdateNextQuestionTarget.bind(this);
   }
 
@@ -173,11 +176,18 @@ class QuestionEditor extends PureComponent {
     this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex);
   }
 
-  onShowConditonalLogicClick(index) {
-    const showConditionalLogicCopy = [...this.state.showConditionalLogic];
-    showConditionalLogicCopy[index] = !showConditionalLogicCopy[index];
-    this.setState({ showConditionalLogic: showConditionalLogicCopy });
+  onShowConditonalPageClick(index) {
+    const showConditionalPageCopy = [...this.state.showConditionalPage];
+    showConditionalPageCopy[index] = !showConditionalPageCopy[index];
+    this.setState({ showConditionalPage: showConditionalPageCopy });
   }
+
+  onShowConditonalQuestionClick(index) {
+    const showConditionalQuestionsCopy = [...this.state.showConditionalQuestions];
+    showConditionalQuestionsCopy[index] = !showConditionalQuestionsCopy[index];
+    this.setState({ showConditionalQuestions: showConditionalQuestionsCopy });
+  }
+
 
   onDeleteOptionClick() {
     const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
@@ -241,16 +251,37 @@ class QuestionEditor extends PureComponent {
                       </td>
                       <td>
                         <Button
-                          onClick={() => this.onShowConditonalLogicClick(ix)}
+                          onClick={() => this.onShowConditonalPageClick(ix)}
                           className="btn btn-primary"
                         >
                           <Glyphicon glyph="glyphicon glyphicon-share-alt" />
                         </Button>
                       </td>
+                      <td>
+                        <Button
+                          onClick={() => this.onShowConditonalQuestionClick(ix)}
+                          className="btn btn-primary"
+                        >
+                          <Glyphicon glyph="glyphicon glyphicon-menu-hamburger" />
+                        </Button>
+                      </td>
                     </tr>
                     <tr>
-                      {this.state.showConditionalLogic[ix] &&
-                        <td colSpan={4}>
+                      {this.state.showConditionalPage[ix] &&
+                        <td colSpan={5}>
+                          <ConditionalPageForm
+                            questionOptionIndex={ix}
+                            questionId={this.props.questionId}
+                            currentQuestionPanelIndex={this.props.currentQuestionPanelIndex}
+                            currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+                            currentQuestionIndex={this.props.currentQuestionIndex}
+                          />
+                        </td>
+                      }
+                    </tr>
+                    <tr>
+                      {this.state.showConditionalQuestions[ix] &&
+                        <td colSpan={5}>
                           <ConditionalQuestionForm
                             questionOptionIndex={ix}
                             text={this.state.questionInputOptions[ix].text}

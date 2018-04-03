@@ -36,6 +36,7 @@ import {
   SAVE_FORM_SUCCESS,
   MOVE_PAGE_SUCCESS,
   UPDATE_NEXT_QUESTION_TARGET_SUCCESS,
+  RESET_NEXT_QUESTION_TARGET_SUCCESS,
 } from '../common/constants';
 
 const initialState = fromJS({
@@ -393,9 +394,21 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         target: action.payload.target,
         action: 'GOTO',
       };
+      const currentConditions = state.getIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions']);
+      const optionIndex = currentConditions.findIndex(condition => condition.get('value') === action.payload.value);
+      if (optionIndex !== -1) {
+        return state
+          .setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', optionIndex],
+            fromJS(newQuestionCondition));
+      }
       return state
-        .setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', action.payload.optionIndex],
-          fromJS(newQuestionCondition));
+        .updateIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions'], arr =>
+          arr.push(fromJS(newQuestionCondition)));
+    }
+    case RESET_NEXT_QUESTION_TARGET_SUCCESS: {
+      return state
+        .setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions'],
+          state.getIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions']).filter(o => o.get('value') !== action.payload.value));
     }
     default:
       return state;

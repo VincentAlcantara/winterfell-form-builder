@@ -36,6 +36,7 @@ import {
   CLEAR_FORM_ERROR,
   MOVE_PAGE_SUCCESS,
   UPDATE_NEXT_QUESTION_TARGET_SUCCESS,
+  RESET_NEXT_QUESTION_TARGET_SUCCESS,
 } from '../common/constants';
 
 export function updateErrorMessage(message) {
@@ -345,5 +346,13 @@ export function updateNextQuestionTarget(
   return {
     type: UPDATE_NEXT_QUESTION_TARGET_SUCCESS,
     payload: { currentQuestionPanelIndex, questionId, value, target, optionIndex },
+  };
+}
+
+export function resetNextQuestionTarget(
+  currentQuestionPanelIndex, value) {
+  return {
+    type: RESET_NEXT_QUESTION_TARGET_SUCCESS,
+    payload: { currentQuestionPanelIndex, value },
   };
 }
