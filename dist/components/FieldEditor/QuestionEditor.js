@@ -72,6 +72,10 @@ var _AddQuestionOptionButton = require('../FormMenu/AddQuestionOptionButton');
 
 var _AddQuestionOptionButton2 = _interopRequireDefault(_AddQuestionOptionButton);
 
+var _ConditionalPageForm = require('../FormMenu/ConditionalPageForm');
+
+var _ConditionalPageForm2 = _interopRequireDefault(_ConditionalPageForm);
+
 var _ConditionalQuestionForm = require('../FormMenu/ConditionalQuestionForm');
 
 var _ConditionalQuestionForm2 = _interopRequireDefault(_ConditionalQuestionForm);
@@ -116,7 +120,8 @@ var QuestionEditor = function (_PureComponent) {
       questionInputType: questionInputType,
       questionInputOptions: questionInputOptions.toJS(),
       editQuestionId: true,
-      showConditionalLogic: new Array(questionInputOptions.count()),
+      showConditionalPage: new Array(questionInputOptions.count()),
+      showConditionalQuestions: new Array(questionInputOptions.count()),
       questionTarget: questionTarget,
       questionTargetMatch: questionTargetMatch
     };
@@ -127,7 +132,8 @@ var QuestionEditor = function (_PureComponent) {
     _this.onOptionValueChange = _this.onOptionValueChange.bind(_this);
     _this.onAddQuestionOptionClick = _this.onAddQuestionOptionClick.bind(_this);
     _this.onEditQuestionIdClick = _this.onEditQuestionIdClick.bind(_this);
-    _this.onShowConditonalLogicClick = _this.onShowConditonalLogicClick.bind(_this);
+    _this.onShowConditonalPageClick = _this.onShowConditonalPageClick.bind(_this);
+    _this.onShowConditonalQuestionClick = _this.onShowConditonalQuestionClick.bind(_this);
     _this.onUpdateNextQuestionTarget = _this.onUpdateNextQuestionTarget.bind(_this);
     return _this;
   }
@@ -226,11 +232,18 @@ var QuestionEditor = function (_PureComponent) {
       this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex);
     }
   }, {
-    key: 'onShowConditonalLogicClick',
-    value: function onShowConditonalLogicClick(index) {
-      var showConditionalLogicCopy = [].concat((0, _toConsumableArray3.default)(this.state.showConditionalLogic));
-      showConditionalLogicCopy[index] = !showConditionalLogicCopy[index];
-      this.setState({ showConditionalLogic: showConditionalLogicCopy });
+    key: 'onShowConditonalPageClick',
+    value: function onShowConditonalPageClick(index) {
+      var showConditionalPageCopy = [].concat((0, _toConsumableArray3.default)(this.state.showConditionalPage));
+      showConditionalPageCopy[index] = !showConditionalPageCopy[index];
+      this.setState({ showConditionalPage: showConditionalPageCopy });
+    }
+  }, {
+    key: 'onShowConditonalQuestionClick',
+    value: function onShowConditonalQuestionClick(index) {
+      var showConditionalQuestionsCopy = [].concat((0, _toConsumableArray3.default)(this.state.showConditionalQuestions));
+      showConditionalQuestionsCopy[index] = !showConditionalQuestionsCopy[index];
+      this.setState({ showConditionalQuestions: showConditionalQuestionsCopy });
     }
   }, {
     key: 'onDeleteOptionClick',
@@ -330,20 +343,51 @@ var QuestionEditor = function (_PureComponent) {
                         _reactBootstrap.Button,
                         {
                           onClick: function onClick() {
-                            return _this2.onShowConditonalLogicClick(ix);
+                            return _this2.onShowConditonalPageClick(ix);
                           },
                           className: 'btn btn-primary'
                         },
-                        _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-share-alt' })
+                        _this2.state.showConditionalPage && !_this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-share-alt' }),
+                        _this2.state.showConditionalPage && _this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon glyphicon-minus-sign' })
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'td',
+                      null,
+                      _react2.default.createElement(
+                        _reactBootstrap.Button,
+                        {
+                          onClick: function onClick() {
+                            return _this2.onShowConditonalQuestionClick(ix);
+                          },
+                          className: 'btn btn-primary'
+                        },
+                        _this2.state.showConditionalQuestions && !_this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-menu-hamburger' }),
+                        _this2.state.showConditionalQuestions && _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon glyphicon-minus-sign' })
                       )
                     )
                   ),
                   _react2.default.createElement(
                     'tr',
                     null,
-                    _this2.state.showConditionalLogic[ix] && _react2.default.createElement(
+                    _this2.state.showConditionalPage[ix] && _react2.default.createElement(
                       'td',
-                      { colSpan: 4 },
+                      { colSpan: 5 },
+                      _react2.default.createElement(_ConditionalPageForm2.default, {
+                        questionOptionIndex: ix,
+                        questionId: _this2.props.questionId,
+                        currentQuestionPanelIndex: _this2.props.currentQuestionPanelIndex,
+                        currentQuestionSetIndex: _this2.props.currentQuestionSetIndex,
+                        currentQuestionIndex: _this2.props.currentQuestionIndex
+                      })
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'tr',
+                    null,
+                    _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(
+                      'td',
+                      { colSpan: 5 },
                       _react2.default.createElement(_ConditionalQuestionForm2.default, {
                         questionOptionIndex: ix,
                         text: _this2.state.questionInputOptions[ix].text,

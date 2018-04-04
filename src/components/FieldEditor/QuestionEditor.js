@@ -254,7 +254,8 @@ class QuestionEditor extends PureComponent {
                           onClick={() => this.onShowConditonalPageClick(ix)}
                           className="btn btn-primary"
                         >
-                          <Glyphicon glyph="glyphicon glyphicon-share-alt" />
+                          {this.state.showConditionalPage && !this.state.showConditionalPage[ix] && <Glyphicon glyph="glyphicon glyphicon-share-alt" />}
+                          {this.state.showConditionalPage && this.state.showConditionalPage[ix] && <Glyphicon glyph="glyphicon glyphicon glyphicon-minus-sign" />}
                         </Button>
                       </td>
                       <td>
@@ -262,7 +263,9 @@ class QuestionEditor extends PureComponent {
                           onClick={() => this.onShowConditonalQuestionClick(ix)}
                           className="btn btn-primary"
                         >
-                          <Glyphicon glyph="glyphicon glyphicon-menu-hamburger" />
+                          {this.state.showConditionalQuestions && !this.state.showConditionalQuestions[ix] && <Glyphicon glyph="glyphicon glyphicon-menu-hamburger" />}
+                          {this.state.showConditionalQuestions && this.state.showConditionalQuestions[ix] && <Glyphicon glyph="glyphicon glyphicon glyphicon-minus-sign" />}
+                          
                         </Button>
                       </td>
                     </tr>

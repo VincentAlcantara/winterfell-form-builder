@@ -11,7 +11,6 @@ class ConditionalPageForm extends Component {
     updateNextQuestionTarget: PropTypes.func.isRequired,
     resetNextQuestionTarget: PropTypes.func.isRequired,
     questionOptionIndex: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
     formPanels: PropTypes.object.isRequired,
     currentQuestionPanelIndex: PropTypes.number.isRequired,
     questionId: PropTypes.string.isRequired,
@@ -86,7 +85,7 @@ class ConditionalPageForm extends Component {
       <Row className="winterfell-form-builder-conditional-questions">
         <Col xs={12}>
           <h5>
-            Conditional Page for Option &#34;{this.props.text}&#34;&#58;
+            Conditional Page for Option &#34;{this.props.value}&#34;&#58;
           </h5>
           <FormGroup>
             <p><b>If question <i>{this.props.question}</i> is: <i>{this.props.value}</i></b>,</p>

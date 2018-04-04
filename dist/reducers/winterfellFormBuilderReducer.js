@@ -409,7 +409,22 @@ function winterfellFormBuilderReducer() {
           target: action.payload.target,
           action: 'GOTO'
         };
-        return state.setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', action.payload.optionIndex], (0, _immutable.fromJS)(newQuestionCondition));
+        var currentConditions = state.getIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions']);
+        var _optionIndex2 = currentConditions.findIndex(function (condition) {
+          return condition.get('value') === action.payload.value;
+        });
+        if (_optionIndex2 !== -1) {
+          return state.setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', _optionIndex2], (0, _immutable.fromJS)(newQuestionCondition));
+        }
+        return state.updateIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions'], function (arr) {
+          return arr.push((0, _immutable.fromJS)(newQuestionCondition));
+        });
+      }
+    case _constants.RESET_NEXT_QUESTION_TARGET_SUCCESS:
+      {
+        return state.setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions'], state.getIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions']).filter(function (o) {
+          return o.get('value') !== action.payload.value;
+        }));
       }
     default:
       return state;

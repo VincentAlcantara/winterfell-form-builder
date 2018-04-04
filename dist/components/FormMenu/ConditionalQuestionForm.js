@@ -171,53 +171,6 @@ var ConditionalQuestionForm = function (_Component) {
           _react2.default.createElement(
             'h5',
             null,
-            'Add Conditional Logic for Option "',
-            this.props.text,
-            '":'
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            null,
-            _react2.default.createElement(
-              'label',
-              { htmlFor: 'questionTarget' },
-              'Go To Page'
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.InputGroup,
-              null,
-              _react2.default.createElement(_SelectInput2.default, {
-                id: 'questionTarget',
-                labelId: 'questionTarget',
-                options: this.nextButtonTargetOptions(),
-                onSelect: function onSelect(e) {
-                  return _this2.setState({ questionTarget: e });
-                },
-                initialValue: this.props.questionTarget
-              }),
-              _react2.default.createElement(
-                _reactBootstrap.InputGroup.Button,
-                null,
-                _react2.default.createElement(
-                  _reactBootstrap.Button,
-                  {
-                    label: 'find',
-                    className: 'btn btn-primary btn-block',
-                    onClick: this.onUpdateNextQuestionTarget,
-                    disabled: !this.state.questionTarget
-                  },
-                  'save'
-                )
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
-          _react2.default.createElement(
-            'h5',
-            null,
             'Conditional Questions for Option "',
             this.props.text,
             '"'
@@ -275,22 +228,34 @@ var ConditionalQuestionForm = function (_Component) {
             })
           ),
           _react2.default.createElement(
-            _reactBootstrap.Button,
-            {
-              className: 'btn-danger',
-              onClick: function onClick() {
-                _this2.setState({ showModal: false });
-              }
-            },
-            'Delete'
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Button,
-            {
-              className: 'primary pull-right',
-              onClick: this.onFormUpdate
-            },
-            'Save'
+            _reactBootstrap.ButtonGroup,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                className: 'btn-danger',
+                onClick: function onClick() {
+                  _this2.setState({ showModal: false });
+                }
+              },
+              'Delete'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                className: 'btn-success',
+                onClick: this.onFormUpdate
+              },
+              'add'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                className: 'btn-primary',
+                onClick: this.onFormUpdate
+              },
+              'save'
+            )
           )
         )
       );
@@ -309,7 +274,6 @@ ConditionalQuestionForm.propTypes = {
   formPanels: _propTypes2.default.object.isRequired,
   currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
   questionId: _propTypes2.default.string.isRequired,
-  questionTarget: _propTypes2.default.string,
   conditionalQuestions: _propTypes2.default.object
 };
 ConditionalQuestionForm.defaultProps = {

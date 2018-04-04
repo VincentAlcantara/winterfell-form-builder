@@ -16,6 +16,7 @@
   .input-group .form-control:first-child {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    -webkit-appearance: none;
   }
   #pagination {
     margin-bottom: 15px;

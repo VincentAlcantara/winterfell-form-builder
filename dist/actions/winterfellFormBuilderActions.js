@@ -40,6 +40,7 @@ exports.changeCurrentEditingField = changeCurrentEditingField;
 exports.updateQuestion = updateQuestion;
 exports.movePage = movePage;
 exports.updateNextQuestionTarget = updateNextQuestionTarget;
+exports.resetNextQuestionTarget = resetNextQuestionTarget;
 
 var _constants = require('../common/constants');
 
@@ -324,6 +325,13 @@ function updateNextQuestionTarget(currentQuestionPanelIndex, questionId, value, 
     payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, questionId: questionId, value: value, target: target, optionIndex: optionIndex }
   };
 }
+
+function resetNextQuestionTarget(currentQuestionPanelIndex, value) {
+  return {
+    type: _constants.RESET_NEXT_QUESTION_TARGET_SUCCESS,
+    payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, value: value }
+  };
+}
 ;
 
 var _temp = function () {
@@ -404,6 +412,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(movePage, 'movePage', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(updateNextQuestionTarget, 'updateNextQuestionTarget', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(resetNextQuestionTarget, 'resetNextQuestionTarget', 'src/actions/winterfellFormBuilderActions.js');
 }();
 
 ;

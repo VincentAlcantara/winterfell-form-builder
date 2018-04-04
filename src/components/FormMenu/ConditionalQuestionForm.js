@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
-import { Row, Col, Button, FormGroup } from 'react-bootstrap';
+import { Row, Col, Button, ButtonGroup, FormGroup } from 'react-bootstrap';
 import { addConditionalQuestion, updateNextQuestionTarget } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 import SelectInput from '../InputTypes/SelectInput';
@@ -156,14 +156,20 @@ class ConditionalQuestionForm extends Component {
               initialValue={this.state.questionInputType}
             />
           </FormGroup>
-          <Button
-            className="btn-danger"
-            onClick={() => { this.setState({ showModal: false }); }}
-          >Delete</Button>
-          <Button
-            className="primary pull-right"
-            onClick={this.onFormUpdate}
-          >Save</Button>
+          <ButtonGroup>
+            <Button
+              className="btn-danger"
+              onClick={() => { this.setState({ showModal: false }); }}
+            >Delete</Button>
+            <Button
+              className="btn-success"
+              onClick={this.onFormUpdate}
+            >add</Button>
+            <Button
+              className="btn-primary"
+              onClick={this.onFormUpdate}
+            >save</Button>
+          </ButtonGroup>
         </Col>
       </Row>
     );
