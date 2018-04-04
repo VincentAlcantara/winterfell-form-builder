@@ -71,7 +71,6 @@ var AddConditionalQuestionButton = function (_Component) {
     };
 
     _this.onChange = _this.onChange.bind(_this);
-    _this.onSelect = _this.onSelect.bind(_this);
     _this.onFormUpdate = _this.onFormUpdate.bind(_this);
     return _this;
   }
@@ -81,11 +80,6 @@ var AddConditionalQuestionButton = function (_Component) {
     value: function onChange(event) {
       event.preventDefault();
       this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
-    }
-  }, {
-    key: 'onSelect',
-    value: function onSelect(type) {
-      this.setState({ questionType: type });
     }
   }, {
     key: 'onClose',
@@ -118,12 +112,12 @@ var AddConditionalQuestionButton = function (_Component) {
       return _react2.default.createElement(
         _reactBootstrap.Button,
         {
-          className: 'btn btn-primary',
+          className: 'btn btn-primary btn-block',
           onClick: function onClick() {
             _this2.setState({ showModal: true });
           }
         },
-        _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-menu-hamburger' }),
+        'add conditional question',
         _react2.default.createElement(
           _reactBootstrap.Modal,
           { show: this.state.showModal },
@@ -176,21 +170,6 @@ var AddConditionalQuestionButton = function (_Component) {
                   onChange: this.onChange,
                   placeholder: '',
                   value: this.state.questionText
-                })
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.FormGroup,
-                null,
-                _react2.default.createElement(
-                  'label',
-                  { htmlFor: 'questionType' },
-                  'Select Question Type'
-                ),
-                _react2.default.createElement(_SelectInput2.default, {
-                  id: 'questionType',
-                  labelId: 'questionType',
-                  options: _constants.INPUT_TYPE_OPTIONS,
-                  onSelect: this.onSelect
                 })
               )
             )

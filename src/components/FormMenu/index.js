@@ -9,7 +9,6 @@ import EditQuestionButton from './EditQuestionButton';
 import UploadJSONButton from './UploadJSONButton';
 import SaveFormButton from './SaveFormButton';
 import PageSortButton from './PageSortButton';
-import ConditionalQuestionForm from './ConditionalQuestionForm';
 
 export {
   AddPageButton,
@@ -23,5 +22,4 @@ export {
   UploadJSONButton,
   SaveFormButton,
   PageSortButton,
-  ConditionalQuestionForm,
 };

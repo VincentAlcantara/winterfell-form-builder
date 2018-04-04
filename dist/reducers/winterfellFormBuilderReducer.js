@@ -345,19 +345,24 @@ function winterfellFormBuilderReducer() {
             _questionType = _action$payload22.questionType;
 
 
-        var _questionCount = state.getIn(['schema', 'questionSets', _currentQuestionSetIndex14, 'questions']).count() + 1;
+        var conditionalQuestions = state.getIn(['schema', 'questionSets', _currentQuestionSetIndex14, 'questions', _currentQuestionIndex11, 'input', 'options', _questionOptionIndex, 'conditionalQuestions']);
 
-        var _newQuestion2 = {
-          questionId: questionId || 'question-id-' + _questionCount,
-          question: question || 'question-' + _questionCount,
+        var conditionalQuestionCount = conditionalQuestions ? conditionalQuestions.count() + 1 : 0;
+        var newConditionalQuestion = {
+          questionId: questionId || 'question-id-' + conditionalQuestionCount,
+          question: question || 'question-' + conditionalQuestionCount,
           text: questionText,
           input: {
             type: _questionType || 'textInput',
             options: _questionType !== 'textInput' ? [] : undefined
           }
         };
-
-        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex14, 'questions', _currentQuestionIndex11, 'input', 'options', _questionOptionIndex, 'conditionalQuestions'], (0, _immutable.fromJS)([_newQuestion2]));
+        if (conditionalQuestionCount === 0) {
+          return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex14, 'questions', _currentQuestionIndex11, 'input', 'options', _questionOptionIndex, 'conditionalQuestions'], (0, _immutable.fromJS)([newConditionalQuestion]));
+        }
+        return state.updateIn(['schema', 'questionSets', _currentQuestionSetIndex14, 'questions', _currentQuestionIndex11, 'input', 'options', _questionOptionIndex, 'conditionalQuestions'], function (arr) {
+          return arr.push((0, _immutable.fromJS)(newConditionalQuestion));
+        });
       }
     case _constants.UPDATE_QUESTION_SUCCESS:
       {

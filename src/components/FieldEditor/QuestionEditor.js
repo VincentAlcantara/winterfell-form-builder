@@ -22,8 +22,8 @@ import DeleteQuestionOptionButton from '../FormMenu/DeleteQuestionOptionButton';
 import DeleteQuestionButton from '../FormMenu/DeleteQuestionButton';
 import AddQuestionButton from '../FormMenu/AddQuestionButton';
 import AddQuestionOptionButton from '../FormMenu/AddQuestionOptionButton';
-import ConditionalPageForm from '../FormMenu/ConditionalPageForm';
-import ConditionalQuestionForm from '../FormMenu/ConditionalQuestionForm';
+import ConditionalPageEditor from './ConditionalPageEditor';
+import ConditionalQuestionEditor from './ConditionalQuestionEditor';
 import SelectInput from '../InputTypes/SelectInput';
 import ButtonBarEditor from './ButtonBarEditor';
 import { INPUT_TYPE_OPTIONS } from '../../common/constants';
@@ -252,7 +252,7 @@ class QuestionEditor extends PureComponent {
                       <td>
                         <Button
                           onClick={() => this.onShowConditonalPageClick(ix)}
-                          className="btn btn-primary"
+                          className="btn btn-warning"
                         >
                           {this.state.showConditionalPage && !this.state.showConditionalPage[ix] && <Glyphicon glyph="glyphicon glyphicon-share-alt" />}
                           {this.state.showConditionalPage && this.state.showConditionalPage[ix] && <Glyphicon glyph="glyphicon glyphicon glyphicon-minus-sign" />}
@@ -265,14 +265,13 @@ class QuestionEditor extends PureComponent {
                         >
                           {this.state.showConditionalQuestions && !this.state.showConditionalQuestions[ix] && <Glyphicon glyph="glyphicon glyphicon-menu-hamburger" />}
                           {this.state.showConditionalQuestions && this.state.showConditionalQuestions[ix] && <Glyphicon glyph="glyphicon glyphicon glyphicon-minus-sign" />}
-                          
                         </Button>
                       </td>
                     </tr>
                     <tr>
                       {this.state.showConditionalPage[ix] &&
                         <td colSpan={5}>
-                          <ConditionalPageForm
+                          <ConditionalPageEditor
                             questionOptionIndex={ix}
                             questionId={this.props.questionId}
                             currentQuestionPanelIndex={this.props.currentQuestionPanelIndex}
@@ -285,13 +284,10 @@ class QuestionEditor extends PureComponent {
                     <tr>
                       {this.state.showConditionalQuestions[ix] &&
                         <td colSpan={5}>
-                          <ConditionalQuestionForm
-                            questionOptionIndex={ix}
-                            text={this.state.questionInputOptions[ix].text}
-                            questionId={this.props.questionId}
-                            currentQuestionPanelIndex={this.props.currentQuestionPanelIndex}
+                          <ConditionalQuestionEditor
                             currentQuestionSetIndex={this.props.currentQuestionSetIndex}
                             currentQuestionIndex={this.props.currentQuestionIndex}
+                            questionOptionIndex={ix}
                           />
                         </td>
                       }

@@ -72,13 +72,13 @@ var _AddQuestionOptionButton = require('../FormMenu/AddQuestionOptionButton');
 
 var _AddQuestionOptionButton2 = _interopRequireDefault(_AddQuestionOptionButton);
 
-var _ConditionalPageForm = require('../FormMenu/ConditionalPageForm');
+var _ConditionalPageEditor = require('./ConditionalPageEditor');
 
-var _ConditionalPageForm2 = _interopRequireDefault(_ConditionalPageForm);
+var _ConditionalPageEditor2 = _interopRequireDefault(_ConditionalPageEditor);
 
-var _ConditionalQuestionForm = require('../FormMenu/ConditionalQuestionForm');
+var _ConditionalQuestionEditor = require('./ConditionalQuestionEditor');
 
-var _ConditionalQuestionForm2 = _interopRequireDefault(_ConditionalQuestionForm);
+var _ConditionalQuestionEditor2 = _interopRequireDefault(_ConditionalQuestionEditor);
 
 var _SelectInput = require('../InputTypes/SelectInput');
 
@@ -345,7 +345,7 @@ var QuestionEditor = function (_PureComponent) {
                           onClick: function onClick() {
                             return _this2.onShowConditonalPageClick(ix);
                           },
-                          className: 'btn btn-primary'
+                          className: 'btn btn-warning'
                         },
                         _this2.state.showConditionalPage && !_this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-share-alt' }),
                         _this2.state.showConditionalPage && _this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon glyphicon-minus-sign' })
@@ -373,7 +373,7 @@ var QuestionEditor = function (_PureComponent) {
                     _this2.state.showConditionalPage[ix] && _react2.default.createElement(
                       'td',
                       { colSpan: 5 },
-                      _react2.default.createElement(_ConditionalPageForm2.default, {
+                      _react2.default.createElement(_ConditionalPageEditor2.default, {
                         questionOptionIndex: ix,
                         questionId: _this2.props.questionId,
                         currentQuestionPanelIndex: _this2.props.currentQuestionPanelIndex,
@@ -388,13 +388,10 @@ var QuestionEditor = function (_PureComponent) {
                     _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(
                       'td',
                       { colSpan: 5 },
-                      _react2.default.createElement(_ConditionalQuestionForm2.default, {
-                        questionOptionIndex: ix,
-                        text: _this2.state.questionInputOptions[ix].text,
-                        questionId: _this2.props.questionId,
-                        currentQuestionPanelIndex: _this2.props.currentQuestionPanelIndex,
+                      _react2.default.createElement(_ConditionalQuestionEditor2.default, {
                         currentQuestionSetIndex: _this2.props.currentQuestionSetIndex,
-                        currentQuestionIndex: _this2.props.currentQuestionIndex
+                        currentQuestionIndex: _this2.props.currentQuestionIndex,
+                        questionOptionIndex: ix
                       })
                     )
                   )

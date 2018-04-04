@@ -46,13 +46,13 @@ var _SelectInput2 = _interopRequireDefault(_SelectInput);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ConditionalPageForm = function (_Component) {
-  (0, _inherits3.default)(ConditionalPageForm, _Component);
+var ConditionalPageEditor = function (_Component) {
+  (0, _inherits3.default)(ConditionalPageEditor, _Component);
 
-  function ConditionalPageForm(props) {
-    (0, _classCallCheck3.default)(this, ConditionalPageForm);
+  function ConditionalPageEditor(props) {
+    (0, _classCallCheck3.default)(this, ConditionalPageEditor);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ConditionalPageForm.__proto__ || (0, _getPrototypeOf2.default)(ConditionalPageForm)).call(this, props));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (ConditionalPageEditor.__proto__ || (0, _getPrototypeOf2.default)(ConditionalPageEditor)).call(this, props));
 
     _this.nextButtonTargetOptions = function () {
       return _this.__nextButtonTargetOptions__REACT_HOT_LOADER__.apply(_this, arguments);
@@ -69,7 +69,7 @@ var ConditionalPageForm = function (_Component) {
     return _this;
   }
 
-  (0, _createClass3.default)(ConditionalPageForm, [{
+  (0, _createClass3.default)(ConditionalPageEditor, [{
     key: '__nextButtonTargetOptions__REACT_HOT_LOADER__',
     value: function __nextButtonTargetOptions__REACT_HOT_LOADER__() {
       return this.__nextButtonTargetOptions__REACT_HOT_LOADER__.apply(this, arguments);
@@ -130,16 +130,14 @@ var ConditionalPageForm = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         _reactBootstrap.Row,
-        { className: 'winterfell-form-builder-conditional-questions' },
+        { className: 'winterfell-form-builder-conditional-page alert-warning' },
         _react2.default.createElement(
           _reactBootstrap.Col,
           { xs: 12 },
           _react2.default.createElement(
-            'h5',
+            'h6',
             null,
-            'Conditional Page for Option "',
-            this.props.value,
-            '":'
+            'Conditional Page:'
           ),
           _react2.default.createElement(
             _reactBootstrap.FormGroup,
@@ -200,10 +198,10 @@ var ConditionalPageForm = function (_Component) {
       );
     }
   }]);
-  return ConditionalPageForm;
+  return ConditionalPageEditor;
 }(_react.Component);
 
-ConditionalPageForm.propTypes = {
+ConditionalPageEditor.propTypes = {
   updateNextQuestionTarget: _propTypes2.default.func.isRequired,
   resetNextQuestionTarget: _propTypes2.default.func.isRequired,
   questionOptionIndex: _propTypes2.default.number.isRequired,
@@ -214,7 +212,7 @@ ConditionalPageForm.propTypes = {
   value: _propTypes2.default.string,
   conditions: _propTypes2.default.object
 };
-ConditionalPageForm.defaultProps = {
+ConditionalPageEditor.defaultProps = {
   question: '',
   value: '',
   questionTarget: '',
@@ -238,7 +236,7 @@ var _default = (0, _reactRedux.connect)(mapStateToProps, {
   addConditionalQuestion: _winterfellFormBuilderActions.addConditionalQuestion,
   updateNextQuestionTarget: _winterfellFormBuilderActions.updateNextQuestionTarget,
   resetNextQuestionTarget: _winterfellFormBuilderActions.resetNextQuestionTarget
-})(ConditionalPageForm);
+})(ConditionalPageEditor);
 
 exports.default = _default;
 ;
@@ -248,11 +246,11 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(ConditionalPageForm, 'ConditionalPageForm', 'src/components/FormMenu/ConditionalPageForm.js');
+  __REACT_HOT_LOADER__.register(ConditionalPageEditor, 'ConditionalPageEditor', 'src/components/FieldEditor/ConditionalPageEditor.js');
 
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/ConditionalPageForm.js');
+  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FieldEditor/ConditionalPageEditor.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/ConditionalPageForm.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldEditor/ConditionalPageEditor.js');
 }();
 
 ;

@@ -6,7 +6,7 @@ import { Row, Col, Button, InputGroup, FormGroup } from 'react-bootstrap';
 import { addConditionalQuestion, updateNextQuestionTarget, resetNextQuestionTarget } from '../../actions/winterfellFormBuilderActions';
 import SelectInput from '../InputTypes/SelectInput';
 
-class ConditionalPageForm extends Component {
+class ConditionalPageEditor extends Component {
   static propTypes = {
     updateNextQuestionTarget: PropTypes.func.isRequired,
     resetNextQuestionTarget: PropTypes.func.isRequired,
@@ -82,11 +82,11 @@ class ConditionalPageForm extends Component {
 
   render() {
     return (
-      <Row className="winterfell-form-builder-conditional-questions">
+      <Row className="winterfell-form-builder-conditional-page alert-warning">
         <Col xs={12}>
-          <h5>
-            Conditional Page for Option &#34;{this.props.value}&#34;&#58;
-          </h5>
+          <h6>
+            Conditional Page:
+          </h6>
           <FormGroup>
             <p><b>If question <i>{this.props.question}</i> is: <i>{this.props.value}</i></b>,</p>
             <label htmlFor="questionTarget">Go To Page</label>
@@ -136,4 +136,4 @@ export default connect(
     addConditionalQuestion,
     updateNextQuestionTarget,
     resetNextQuestionTarget,
-  })(ConditionalPageForm);
+  })(ConditionalPageEditor);
