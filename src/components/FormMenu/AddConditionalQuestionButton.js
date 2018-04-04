@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Modal, FormGroup, Glyphicon } from 'react-bootstrap';
+import { Button, Modal, FormGroup } from 'react-bootstrap';
 import { addConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
-import SelectInput from '../InputTypes/SelectInput';
-import { INPUT_TYPE_OPTIONS } from '../../common/constants';
-
 
 class AddConditionalQuestionButton extends Component {
   static propTypes = {
@@ -28,17 +25,12 @@ class AddConditionalQuestionButton extends Component {
     };
 
     this.onChange = this.onChange.bind(this);
-    this.onSelect = this.onSelect.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
   }
 
   onChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
-  }
-
-  onSelect(type) {
-    this.setState({ questionType: type });
   }
 
   onClose(e) {
@@ -65,11 +57,11 @@ class AddConditionalQuestionButton extends Component {
   render() {
     return (
       <Button
-        className="btn btn-primary"
+        className="btn btn-primary btn-block"
         onClick={() => {
           this.setState({ showModal: true });
         }}
-      ><Glyphicon glyph="glyphicon glyphicon-menu-hamburger" />
+      >add conditional question
         <Modal show={this.state.showModal}>
           <Modal.Header>
             <Modal.Title>Add a new conditional question to this question</Modal.Title>
@@ -104,17 +96,6 @@ class AddConditionalQuestionButton extends Component {
                   onChange={this.onChange}
                   placeholder=""
                   value={this.state.questionText}
-                />
-              </FormGroup>
-              <FormGroup>
-                <label htmlFor="questionType">
-                  Select Question Type
-                </label>
-                <SelectInput
-                  id="questionType"
-                  labelId="questionType"
-                  options={INPUT_TYPE_OPTIONS}
-                  onSelect={this.onSelect}
                 />
               </FormGroup>
             </form>
