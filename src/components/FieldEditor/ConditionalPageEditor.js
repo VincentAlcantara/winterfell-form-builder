@@ -88,7 +88,12 @@ class ConditionalPageEditor extends Component {
             Conditional Page:
           </h6>
           <FormGroup>
-            <p><b>If question <i>{this.props.question}</i> is: <i>{this.props.value}</i></b>,</p>
+            <p>
+              <b>
+                Go to page below if question <i>&#34;{this.props.question}&#34;</i>
+                &nbsp;is: <i>&#34;{this.props.value}&#34;,</i>
+              </b>
+            </p>
             <label htmlFor="questionTarget">Go To Page</label>
             <InputGroup>
               <SelectInput
