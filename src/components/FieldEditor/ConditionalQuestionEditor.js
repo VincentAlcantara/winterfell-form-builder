@@ -1,24 +1,11 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, Button, Glyphicon, ButtonGroup, Row, Col } from 'react-bootstrap';
+import { FormGroup, Button, ButtonGroup, Row, Col } from 'react-bootstrap';
 import { fromJS } from 'immutable';
-import {
-  editQuestionId,
-  editQuestion,
-  editQuestionText,
-  editQuestionPostText,
-  editQuestionOptionText,
-  editQuestionOptionValue,
-  addQuestionOption,
-  deleteQuestion,
-  deleteQuestionOption,
-  changeQuestionType,
-  changeCurrentEditingField,
-  updateNextQuestionTarget,
-} from '../../actions/winterfellFormBuilderActions';
+import { saveConditionalQuestion, deleteConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
-import { AddConditionalQuestionButton } from '../FormMenu/';
+import { AddConditionalQuestionButton, DeleteConditionalQuestionButton } from '../FormMenu/';
 
 class ConditionalQuestionEditor extends PureComponent {
   static propTypes = {
@@ -26,6 +13,8 @@ class ConditionalQuestionEditor extends PureComponent {
     currentQuestionSetIndex: PropTypes.number.isRequired,
     currentQuestionIndex: PropTypes.number.isRequired,
     questionOptionIndex: PropTypes.number.isRequired,
+    saveConditionalQuestion: PropTypes.func.isRequired,
+    deleteConditionalQuestion: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -44,6 +33,8 @@ class ConditionalQuestionEditor extends PureComponent {
     };
 
     this.onChange = this.onChange.bind(this);
+    this.onSaveConditionalQuestion = this.onSaveConditionalQuestion.bind(this);
+    this.onDeleteConditionalQuestion = this.onDeleteConditionalQuestion.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -57,6 +48,48 @@ class ConditionalQuestionEditor extends PureComponent {
     const copyConditionalQuestions = Object.assign({}, this.state.conditionalQuestions);
     copyConditionalQuestions[index][name] = value;
     this.setState({ conditionalQuestions: copyConditionalQuestions });
+  }
+
+  onSaveConditionalQuestion(conditionalQuestionIndex) {
+    const {
+      currentQuestionSetIndex,
+      currentQuestionIndex,
+      questionOptionIndex,
+    } = this.props;
+    const {
+      questionId,
+      question,
+      text,
+      postText,
+      type,
+    } = this.state.conditionalQuestions[conditionalQuestionIndex];
+
+    this.props.saveConditionalQuestion(
+      currentQuestionSetIndex,
+      currentQuestionIndex,
+      questionOptionIndex,
+      conditionalQuestionIndex,
+      questionId,
+      question,
+      text,
+      postText,
+      type,
+    );
+  }
+
+  onDeleteConditionalQuestion(conditionalQuestionIndex) {
+    const {
+      currentQuestionSetIndex,
+      currentQuestionIndex,
+      questionOptionIndex,
+    } = this.props;
+
+    this.props.deleteConditionalQuestion(
+      currentQuestionSetIndex,
+      currentQuestionIndex,
+      questionOptionIndex,
+      conditionalQuestionIndex,
+    );
   }
 
   getConditionalQuestions() {
@@ -92,28 +125,24 @@ class ConditionalQuestionEditor extends PureComponent {
         </FormGroup>
         <FormGroup>
           <FieldGroup
-            id="post"
-            name="post"
+            id="postText"
+            name="postText"
             label={`Conditional Question Post Text ${ix + 1}:`}
             onChange={e => this.onChange(e, ix)}
-            value={this.state.conditionalQuestions[ix].post}
+            value={this.state.conditionalQuestions[ix].postText}
           />
         </FormGroup>
         <ButtonGroup>
-          <Button
-            className="btn btn-danger"
-            title="delete this conditional question"
-            onClick={() => {
-              this.setState({ showModal: true });
-            }}
-          >delete
-          </Button>
+          <DeleteConditionalQuestionButton
+            currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+            currentQuestionIndex={this.props.currentQuestionIndex}
+            questionOptionIndex={this.props.questionOptionIndex}
+            conditionalQuestionIndex={ix}
+          />
           <Button
             className="btn btn-warning"
             title="save this conditional question"
-            onClick={() => {
-              this.setState({ showModal: true });
-            }}
+            onClick={() => this.onSaveConditionalQuestion(ix)}
           >save
           </Button>
         </ButtonGroup>
@@ -133,11 +162,13 @@ class ConditionalQuestionEditor extends PureComponent {
           { this.getConditionalQuestions() }
         </Col>
         <Col xs={12}>
+          <br />
           <AddConditionalQuestionButton
             currentQuestionSetIndex={this.props.currentQuestionSetIndex}
             currentQuestionIndex={this.props.currentQuestionIndex}
             questionOptionIndex={this.props.questionOptionIndex}
           />
+          <br />
         </Col>
       </Row>
     );
@@ -153,18 +184,5 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(
   mapStateToProps,
-  {
-    editQuestionId,
-    editQuestion,
-    editQuestionText,
-    editQuestionPostText,
-    editQuestionOptionText,
-    editQuestionOptionValue,
-    addQuestionOption,
-    deleteQuestion,
-    deleteQuestionOption,
-    changeQuestionType,
-    changeCurrentEditingField,
-    updateNextQuestionTarget,
-  })(ConditionalQuestionEditor);
+  { saveConditionalQuestion, deleteConditionalQuestion })(ConditionalQuestionEditor);
 

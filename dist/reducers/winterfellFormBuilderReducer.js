@@ -364,21 +364,58 @@ function winterfellFormBuilderReducer() {
           return arr.push((0, _immutable.fromJS)(newConditionalQuestion));
         });
       }
-    case _constants.UPDATE_QUESTION_SUCCESS:
+    case _constants.SAVE_CONDITIONAL_QUESTION_SUCCESS:
       {
         var _action$payload23 = action.payload,
-            questionSetIndex = _action$payload23.questionSetIndex,
-            questionIndex = _action$payload23.questionIndex,
+            _currentQuestionSetIndex15 = _action$payload23.currentQuestionSetIndex,
+            _currentQuestionIndex12 = _action$payload23.currentQuestionIndex,
+            _questionOptionIndex2 = _action$payload23.questionOptionIndex,
+            conditionalQuestionIndex = _action$payload23.conditionalQuestionIndex,
+            _questionId = _action$payload23.questionId,
             _question = _action$payload23.question,
-            _questionText = _action$payload23.questionText;
+            _text11 = _action$payload23.text,
+            postText = _action$payload23.postText,
+            type = _action$payload23.type;
 
-        return state.setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'question'], _question).setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'text'], _questionText);
+
+        var _newConditionalQuestion = {
+          questionId: _questionId,
+          question: _question,
+          text: _text11,
+          postText: postText,
+          input: {
+            type: type || 'textInput',
+            options: type !== 'textInput' ? [] : undefined
+          }
+        };
+        return state.setIn(['schema', 'questionSets', _currentQuestionSetIndex15, 'questions', _currentQuestionIndex12, 'input', 'options', _questionOptionIndex2, 'conditionalQuestions', conditionalQuestionIndex], (0, _immutable.fromJS)(_newConditionalQuestion));
+      }
+    case _constants.DELETE_CONDITIONAL_QUESTION_SUCCESS:
+      {
+        var _action$payload24 = action.payload,
+            _currentQuestionSetIndex16 = _action$payload24.currentQuestionSetIndex,
+            _currentQuestionIndex13 = _action$payload24.currentQuestionIndex,
+            _questionOptionIndex3 = _action$payload24.questionOptionIndex,
+            _conditionalQuestionIndex = _action$payload24.conditionalQuestionIndex;
+
+
+        return state.deleteIn(['schema', 'questionSets', _currentQuestionSetIndex16, 'questions', _currentQuestionIndex13, 'input', 'options', _questionOptionIndex3, 'conditionalQuestions', _conditionalQuestionIndex]);
+      }
+    case _constants.UPDATE_QUESTION_SUCCESS:
+      {
+        var _action$payload25 = action.payload,
+            questionSetIndex = _action$payload25.questionSetIndex,
+            questionIndex = _action$payload25.questionIndex,
+            _question2 = _action$payload25.question,
+            _questionText = _action$payload25.questionText;
+
+        return state.setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'question'], _question2).setIn(['schema', 'questionSets', questionSetIndex, 'questions', questionIndex, 'text'], _questionText);
       }
     case _constants.MOVE_PAGE_SUCCESS:
       {
-        var _action$payload24 = action.payload,
-            oldIndex = _action$payload24.oldIndex,
-            newIndex = _action$payload24.newIndex;
+        var _action$payload26 = action.payload,
+            oldIndex = _action$payload26.oldIndex,
+            newIndex = _action$payload26.newIndex;
 
         if (oldIndex === newIndex) {
           return state;

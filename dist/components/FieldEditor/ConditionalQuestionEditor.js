@@ -68,6 +68,8 @@ var ConditionalQuestionEditor = function (_PureComponent) {
     };
 
     _this.onChange = _this.onChange.bind(_this);
+    _this.onSaveConditionalQuestion = _this.onSaveConditionalQuestion.bind(_this);
+    _this.onDeleteConditionalQuestion = _this.onDeleteConditionalQuestion.bind(_this);
     return _this;
   }
 
@@ -88,6 +90,34 @@ var ConditionalQuestionEditor = function (_PureComponent) {
       var copyConditionalQuestions = (0, _assign2.default)({}, this.state.conditionalQuestions);
       copyConditionalQuestions[index][name] = value;
       this.setState({ conditionalQuestions: copyConditionalQuestions });
+    }
+  }, {
+    key: 'onSaveConditionalQuestion',
+    value: function onSaveConditionalQuestion(conditionalQuestionIndex) {
+      var _props = this.props,
+          currentQuestionSetIndex = _props.currentQuestionSetIndex,
+          currentQuestionIndex = _props.currentQuestionIndex,
+          questionOptionIndex = _props.questionOptionIndex;
+      var _state$conditionalQue = this.state.conditionalQuestions[conditionalQuestionIndex],
+          questionId = _state$conditionalQue.questionId,
+          question = _state$conditionalQue.question,
+          text = _state$conditionalQue.text,
+          postText = _state$conditionalQue.postText,
+          type = _state$conditionalQue.type;
+
+
+      this.props.saveConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, conditionalQuestionIndex, questionId, question, text, postText, type);
+    }
+  }, {
+    key: 'onDeleteConditionalQuestion',
+    value: function onDeleteConditionalQuestion(conditionalQuestionIndex) {
+      var _props2 = this.props,
+          currentQuestionSetIndex = _props2.currentQuestionSetIndex,
+          currentQuestionIndex = _props2.currentQuestionIndex,
+          questionOptionIndex = _props2.questionOptionIndex;
+
+
+      this.props.deleteConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, conditionalQuestionIndex);
     }
   }, {
     key: 'getConditionalQuestions',
@@ -142,36 +172,31 @@ var ConditionalQuestionEditor = function (_PureComponent) {
             _reactBootstrap.FormGroup,
             null,
             _react2.default.createElement(_FieldGroup2.default, {
-              id: 'post',
-              name: 'post',
+              id: 'postText',
+              name: 'postText',
               label: 'Conditional Question Post Text ' + (ix + 1) + ':',
               onChange: function onChange(e) {
                 return _this2.onChange(e, ix);
               },
-              value: _this2.state.conditionalQuestions[ix].post
+              value: _this2.state.conditionalQuestions[ix].postText
             })
           ),
           _react2.default.createElement(
             _reactBootstrap.ButtonGroup,
             null,
-            _react2.default.createElement(
-              _reactBootstrap.Button,
-              {
-                className: 'btn btn-danger',
-                title: 'delete this conditional question',
-                onClick: function onClick() {
-                  _this2.setState({ showModal: true });
-                }
-              },
-              'delete'
-            ),
+            _react2.default.createElement(_FormMenu.DeleteConditionalQuestionButton, {
+              currentQuestionSetIndex: _this2.props.currentQuestionSetIndex,
+              currentQuestionIndex: _this2.props.currentQuestionIndex,
+              questionOptionIndex: _this2.props.questionOptionIndex,
+              conditionalQuestionIndex: ix
+            }),
             _react2.default.createElement(
               _reactBootstrap.Button,
               {
                 className: 'btn btn-warning',
                 title: 'save this conditional question',
                 onClick: function onClick() {
-                  _this2.setState({ showModal: true });
+                  return _this2.onSaveConditionalQuestion(ix);
                 }
               },
               'save'
@@ -208,11 +233,13 @@ var ConditionalQuestionEditor = function (_PureComponent) {
         _react2.default.createElement(
           _reactBootstrap.Col,
           { xs: 12 },
+          _react2.default.createElement('br', null),
           _react2.default.createElement(_FormMenu.AddConditionalQuestionButton, {
             currentQuestionSetIndex: this.props.currentQuestionSetIndex,
             currentQuestionIndex: this.props.currentQuestionIndex,
             questionOptionIndex: this.props.questionOptionIndex
-          })
+          }),
+          _react2.default.createElement('br', null)
         )
       );
     }
@@ -224,7 +251,9 @@ ConditionalQuestionEditor.propTypes = {
   conditionalQuestions: _propTypes2.default.object,
   currentQuestionSetIndex: _propTypes2.default.number.isRequired,
   currentQuestionIndex: _propTypes2.default.number.isRequired,
-  questionOptionIndex: _propTypes2.default.number.isRequired
+  questionOptionIndex: _propTypes2.default.number.isRequired,
+  saveConditionalQuestion: _propTypes2.default.func.isRequired,
+  deleteConditionalQuestion: _propTypes2.default.func.isRequired
 };
 ConditionalQuestionEditor.defaultProps = {
   conditionalQuestions: (0, _immutable.fromJS)([])
@@ -237,20 +266,7 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, {
-  editQuestionId: _winterfellFormBuilderActions.editQuestionId,
-  editQuestion: _winterfellFormBuilderActions.editQuestion,
-  editQuestionText: _winterfellFormBuilderActions.editQuestionText,
-  editQuestionPostText: _winterfellFormBuilderActions.editQuestionPostText,
-  editQuestionOptionText: _winterfellFormBuilderActions.editQuestionOptionText,
-  editQuestionOptionValue: _winterfellFormBuilderActions.editQuestionOptionValue,
-  addQuestionOption: _winterfellFormBuilderActions.addQuestionOption,
-  deleteQuestion: _winterfellFormBuilderActions.deleteQuestion,
-  deleteQuestionOption: _winterfellFormBuilderActions.deleteQuestionOption,
-  changeQuestionType: _winterfellFormBuilderActions.changeQuestionType,
-  changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField,
-  updateNextQuestionTarget: _winterfellFormBuilderActions.updateNextQuestionTarget
-})(ConditionalQuestionEditor);
+var _default = (0, _reactRedux.connect)(mapStateToProps, { saveConditionalQuestion: _winterfellFormBuilderActions.saveConditionalQuestion, deleteConditionalQuestion: _winterfellFormBuilderActions.deleteConditionalQuestion })(ConditionalQuestionEditor);
 
 exports.default = _default;
 ;

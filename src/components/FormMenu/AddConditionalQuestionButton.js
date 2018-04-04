@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 import { Button, Modal, FormGroup } from 'react-bootstrap';
 import { addConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
-import SelectInput from '../InputTypes/SelectInput';
-import { INPUT_TYPE_OPTIONS } from '../../common/constants';
-
 
 class AddConditionalQuestionButton extends Component {
   static propTypes = {

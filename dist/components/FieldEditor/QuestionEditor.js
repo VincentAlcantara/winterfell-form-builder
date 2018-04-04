@@ -303,96 +303,104 @@ var QuestionEditor = function (_PureComponent) {
                   'td',
                   null,
                   _react2.default.createElement(
-                    'tr',
+                    'table',
                     null,
                     _react2.default.createElement(
-                      'td',
-                      null,
-                      _react2.default.createElement(_reactBootstrap.FormControl, {
-                        type: 'text',
-                        name: _this2.state.questionInputOptions[ix].text,
-                        value: _this2.state.questionInputOptions[ix].text,
-                        onChange: function onChange(event) {
-                          return _this2.onOptionTextChange(event, ix);
-                        }
-                      })
-                    ),
-                    _react2.default.createElement(
-                      'td',
-                      null,
-                      _react2.default.createElement(_reactBootstrap.FormControl, {
-                        type: 'text',
-                        name: _this2.state.questionInputOptions[ix].value,
-                        value: _this2.state.questionInputOptions[ix].value,
-                        onChange: function onChange(event) {
-                          return _this2.onOptionValueChange(event, ix);
-                        }
-                      })
-                    ),
-                    _react2.default.createElement(
-                      'td',
-                      null,
-                      _react2.default.createElement(_DeleteQuestionOptionButton2.default, {
-                        questionOptionIndex: ix
-                      })
-                    ),
-                    _react2.default.createElement(
-                      'td',
+                      'tbody',
                       null,
                       _react2.default.createElement(
-                        _reactBootstrap.Button,
-                        {
-                          onClick: function onClick() {
-                            return _this2.onShowConditonalPageClick(ix);
-                          },
-                          className: 'btn btn-warning'
-                        },
-                        _this2.state.showConditionalPage && !_this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-share-alt' }),
-                        _this2.state.showConditionalPage && _this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon glyphicon-minus-sign' })
-                      )
-                    ),
-                    _react2.default.createElement(
-                      'td',
-                      null,
+                        'tr',
+                        null,
+                        _react2.default.createElement(
+                          'td',
+                          null,
+                          _react2.default.createElement(_reactBootstrap.FormControl, {
+                            type: 'text',
+                            name: _this2.state.questionInputOptions[ix].text,
+                            value: _this2.state.questionInputOptions[ix].text,
+                            onChange: function onChange(event) {
+                              return _this2.onOptionTextChange(event, ix);
+                            }
+                          })
+                        ),
+                        _react2.default.createElement(
+                          'td',
+                          null,
+                          _react2.default.createElement(_reactBootstrap.FormControl, {
+                            type: 'text',
+                            name: _this2.state.questionInputOptions[ix].value,
+                            value: _this2.state.questionInputOptions[ix].value,
+                            onChange: function onChange(event) {
+                              return _this2.onOptionValueChange(event, ix);
+                            }
+                          })
+                        ),
+                        _react2.default.createElement(
+                          'td',
+                          null,
+                          _react2.default.createElement(_DeleteQuestionOptionButton2.default, {
+                            questionOptionIndex: ix
+                          })
+                        ),
+                        _react2.default.createElement(
+                          'td',
+                          null,
+                          _react2.default.createElement(
+                            _reactBootstrap.Button,
+                            {
+                              onClick: function onClick() {
+                                return _this2.onShowConditonalPageClick(ix);
+                              },
+                              className: 'btn btn-warning'
+                            },
+                            _this2.state.showConditionalPage && !_this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-share-alt' }),
+                            _this2.state.showConditionalPage && _this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon glyphicon-minus-sign' })
+                          )
+                        ),
+                        _react2.default.createElement(
+                          'td',
+                          null,
+                          _react2.default.createElement(
+                            _reactBootstrap.Button,
+                            {
+                              onClick: function onClick() {
+                                return _this2.onShowConditonalQuestionClick(ix);
+                              },
+                              className: 'btn btn-primary'
+                            },
+                            _this2.state.showConditionalQuestions && !_this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-menu-hamburger' }),
+                            _this2.state.showConditionalQuestions && _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon glyphicon-minus-sign' })
+                          )
+                        )
+                      ),
                       _react2.default.createElement(
-                        _reactBootstrap.Button,
-                        {
-                          onClick: function onClick() {
-                            return _this2.onShowConditonalQuestionClick(ix);
-                          },
-                          className: 'btn btn-primary'
-                        },
-                        _this2.state.showConditionalQuestions && !_this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-menu-hamburger' }),
-                        _this2.state.showConditionalQuestions && _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon glyphicon-minus-sign' })
+                        'tr',
+                        null,
+                        _this2.state.showConditionalPage[ix] && _react2.default.createElement(
+                          'td',
+                          { colSpan: 5 },
+                          _react2.default.createElement(_ConditionalPageEditor2.default, {
+                            questionOptionIndex: ix,
+                            questionId: _this2.props.questionId,
+                            currentQuestionPanelIndex: _this2.props.currentQuestionPanelIndex,
+                            currentQuestionSetIndex: _this2.props.currentQuestionSetIndex,
+                            currentQuestionIndex: _this2.props.currentQuestionIndex
+                          })
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'tr',
+                        null,
+                        _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(
+                          'td',
+                          { colSpan: 5 },
+                          _react2.default.createElement(_ConditionalQuestionEditor2.default, {
+                            currentQuestionSetIndex: _this2.props.currentQuestionSetIndex,
+                            currentQuestionIndex: _this2.props.currentQuestionIndex,
+                            questionOptionIndex: ix
+                          })
+                        )
                       )
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'tr',
-                    null,
-                    _this2.state.showConditionalPage[ix] && _react2.default.createElement(
-                      'td',
-                      { colSpan: 5 },
-                      _react2.default.createElement(_ConditionalPageEditor2.default, {
-                        questionOptionIndex: ix,
-                        questionId: _this2.props.questionId,
-                        currentQuestionPanelIndex: _this2.props.currentQuestionPanelIndex,
-                        currentQuestionSetIndex: _this2.props.currentQuestionSetIndex,
-                        currentQuestionIndex: _this2.props.currentQuestionIndex
-                      })
-                    )
-                  ),
-                  _react2.default.createElement(
-                    'tr',
-                    null,
-                    _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(
-                      'td',
-                      { colSpan: 5 },
-                      _react2.default.createElement(_ConditionalQuestionEditor2.default, {
-                        currentQuestionSetIndex: _this2.props.currentQuestionSetIndex,
-                        currentQuestionIndex: _this2.props.currentQuestionIndex,
-                        questionOptionIndex: ix
-                      })
                     )
                   )
                 )
@@ -550,7 +558,8 @@ var QuestionEditor = function (_PureComponent) {
             questionSetId: this.props.questionSetId,
             currentQuestionSetIndex: this.props.currentQuestionSetIndex
           })
-        )
+        ),
+        _react2.default.createElement('br', null)
       );
     }
   }]);

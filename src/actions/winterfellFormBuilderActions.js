@@ -7,6 +7,8 @@ import {
   DELETE_PAGE_SUCCESS,
   ADD_QUESTION_SUCCESS,
   ADD_CONDITIONAL_QUESTION_SUCCESS,
+  SAVE_CONDITIONAL_QUESTION_SUCCESS,
+  DELETE_CONDITIONAL_QUESTION_SUCCESS,
   ADD_QUESTION_SET_SUCCESS,
   DELETE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
@@ -349,10 +351,50 @@ export function updateNextQuestionTarget(
   };
 }
 
-export function resetNextQuestionTarget(
-  currentQuestionPanelIndex, value) {
+export function resetNextQuestionTarget(currentQuestionPanelIndex, value) {
   return {
     type: RESET_NEXT_QUESTION_TARGET_SUCCESS,
     payload: { currentQuestionPanelIndex, value },
+  };
+}
+
+export function saveConditionalQuestion(
+  currentQuestionSetIndex,
+  currentQuestionIndex,
+  questionOptionIndex,
+  conditionalQuestionIndex,
+  questionId,
+  question,
+  text,
+  postText,
+  type) {
+  return {
+    type: SAVE_CONDITIONAL_QUESTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex,
+      currentQuestionIndex,
+      questionOptionIndex,
+      conditionalQuestionIndex,
+      questionId,
+      question,
+      text,
+      postText,
+      type },
+  };
+}
+
+export function deleteConditionalQuestion(
+  currentQuestionSetIndex,
+  currentQuestionIndex,
+  questionOptionIndex,
+  conditionalQuestionIndex) {
+  return {
+    type: DELETE_CONDITIONAL_QUESTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex,
+      currentQuestionIndex,
+      questionOptionIndex,
+      conditionalQuestionIndex,
+    },
   };
 }

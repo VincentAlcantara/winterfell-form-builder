@@ -41,6 +41,8 @@ exports.updateQuestion = updateQuestion;
 exports.movePage = movePage;
 exports.updateNextQuestionTarget = updateNextQuestionTarget;
 exports.resetNextQuestionTarget = resetNextQuestionTarget;
+exports.saveConditionalQuestion = saveConditionalQuestion;
+exports.deleteConditionalQuestion = deleteConditionalQuestion;
 
 var _constants = require('../common/constants');
 
@@ -332,6 +334,34 @@ function resetNextQuestionTarget(currentQuestionPanelIndex, value) {
     payload: { currentQuestionPanelIndex: currentQuestionPanelIndex, value: value }
   };
 }
+
+function saveConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, conditionalQuestionIndex, questionId, question, text, postText, type) {
+  return {
+    type: _constants.SAVE_CONDITIONAL_QUESTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex: currentQuestionSetIndex,
+      currentQuestionIndex: currentQuestionIndex,
+      questionOptionIndex: questionOptionIndex,
+      conditionalQuestionIndex: conditionalQuestionIndex,
+      questionId: questionId,
+      question: question,
+      text: text,
+      postText: postText,
+      type: type }
+  };
+}
+
+function deleteConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, conditionalQuestionIndex) {
+  return {
+    type: _constants.DELETE_CONDITIONAL_QUESTION_SUCCESS,
+    payload: {
+      currentQuestionSetIndex: currentQuestionSetIndex,
+      currentQuestionIndex: currentQuestionIndex,
+      questionOptionIndex: questionOptionIndex,
+      conditionalQuestionIndex: conditionalQuestionIndex
+    }
+  };
+}
 ;
 
 var _temp = function () {
@@ -414,6 +444,10 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(updateNextQuestionTarget, 'updateNextQuestionTarget', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(resetNextQuestionTarget, 'resetNextQuestionTarget', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(saveConditionalQuestion, 'saveConditionalQuestion', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(deleteConditionalQuestion, 'deleteConditionalQuestion', 'src/actions/winterfellFormBuilderActions.js');
 }();
 
 ;

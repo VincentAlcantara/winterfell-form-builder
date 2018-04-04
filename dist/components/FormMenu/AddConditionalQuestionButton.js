@@ -46,12 +46,6 @@ var _FieldGroup = require('../InputTypes/FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
-var _SelectInput = require('../InputTypes/SelectInput');
-
-var _SelectInput2 = _interopRequireDefault(_SelectInput);
-
-var _constants = require('../../common/constants');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AddConditionalQuestionButton = function (_Component) {

@@ -9,6 +9,8 @@ import {
   ADD_PAGE_SUCCESS,
   ADD_QUESTION_SUCCESS,
   ADD_CONDITIONAL_QUESTION_SUCCESS,
+  SAVE_CONDITIONAL_QUESTION_SUCCESS,
+  DELETE_CONDITIONAL_QUESTION_SUCCESS,
   ADD_QUESTION_SET_SUCCESS,
   DELETE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
@@ -355,6 +357,46 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         .updateIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
           currentQuestionIndex, 'input', 'options', questionOptionIndex, 'conditionalQuestions'], arr =>
           arr.push(fromJS(newConditionalQuestion)));
+    }
+    case SAVE_CONDITIONAL_QUESTION_SUCCESS: {
+      const {
+        currentQuestionSetIndex,
+        currentQuestionIndex,
+        questionOptionIndex,
+        conditionalQuestionIndex,
+        questionId,
+        question,
+        text,
+        postText,
+        type,
+      } = action.payload;
+
+      const newConditionalQuestion = {
+        questionId,
+        question,
+        text,
+        postText,
+        input: {
+          type: type || 'textInput',
+          options: type !== 'textInput' ? [] : undefined,
+        },
+      };
+      return state
+        .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'input', 'options', questionOptionIndex, 'conditionalQuestions', conditionalQuestionIndex],
+          fromJS(newConditionalQuestion));
+    }
+    case DELETE_CONDITIONAL_QUESTION_SUCCESS: {
+      const {
+        currentQuestionSetIndex,
+        currentQuestionIndex,
+        questionOptionIndex,
+        conditionalQuestionIndex,
+      } = action.payload;
+
+      return state
+        .deleteIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+          currentQuestionIndex, 'input', 'options', questionOptionIndex, 'conditionalQuestions', conditionalQuestionIndex]);
     }
     case UPDATE_QUESTION_SUCCESS: {
       const { questionSetIndex, questionIndex, question, questionText } = action.payload;
