@@ -13,11 +13,9 @@ describe('wintefellFormBuilderReducer', () => {
 
   const initialState = fromJS({
     title: '',
-    schema: {
-      classes,
-    },
-    error: '',
+    schema: {},
     currentPanelId: null,
+    currentQuestionPanelIndex: 0,
   });
 
   it('should return the initial state', () => {
@@ -40,12 +38,14 @@ describe('wintefellFormBuilderReducer', () => {
         }],
         questionPanels: [{
           panelId: 'page-1',
-          panelHeader: 'My Awesome Form - page 1',
-          panelText: 'Let\'s grab some of your details',
+          panelHeader: 'My Awesome Form - page-1',
+          panelText: 'page-1 text',
+          questionSets: [],
         }],
+        questionSets: [],
       },
-      error: '',
       currentPanelId: null,
+      currentQuestionPanelIndex: 0,
     });
 
     expect(winterfellFormBuilderReducer(initialState, currentAction)).toEqual(expectedState);
@@ -59,11 +59,9 @@ describe('wintefellFormBuilderReducer', () => {
 
     const expectedState = fromJS({
       title: '',
-      schema: {
-        classes,
-      },
-      error: 'An error occurred.',
-      currentPanelId: null,      
+      schema: {},
+      currentPanelId: null,
+      currentQuestionPanelIndex: 0,
     });
 
     expect(winterfellFormBuilderReducer(initialState, currentAction)).toEqual(expectedState);
@@ -89,10 +87,12 @@ describe('wintefellFormBuilderReducer', () => {
             panelId: 'page-1',
             panelHeader: 'Survey Page 1',
             panelText: 'Let\'s grab some of your details',
+            questionSets: [],
           },
         ],
+        questionSets: [],
       },
-      error: '',
+
       currentPanelId: null,
     });
 
@@ -114,14 +114,17 @@ describe('wintefellFormBuilderReducer', () => {
             panelId: 'page-1',
             panelHeader: 'Survey Page 1',
             panelText: 'Let\'s grab some of your details',
+            questionSets: [],
           }, {
             panelId: 'page-2',
-            panelHeader: 'Heading-2',
-            panelText: 'Text-2',
+            panelHeader: 'Page-Heading-2',
+            panelText: 'Page-Text-2',
+            questionSets: [],
           },
         ],
+        questionSets: [],
       },
-      error: '',
+
       currentPanelId: null,
     });
 
@@ -152,10 +155,12 @@ describe('wintefellFormBuilderReducer', () => {
             panelId: 'page-1',
             panelHeader: 'Survey Page 1',
             panelText: 'Let\'s grab some of your details',
+            questionSets: [],
           },
         ],
+        questionSets: [],
       },
-      error: '',
+
       currentPanelId: null,
     });
 
@@ -177,14 +182,17 @@ describe('wintefellFormBuilderReducer', () => {
             panelId: 'page-1',
             panelHeader: 'Survey Page 1',
             panelText: 'Let\'s grab some of your details',
+            questionSets: [],
           }, {
             panelId: 'page-2',
             panelHeader: 'A New Page 2',
             panelText: 'This is a new page',
+            questionSets: [],
           },
         ],
+        questionSets: [],
       },
-      error: '',
+
       currentPanelId: null,
     });
 

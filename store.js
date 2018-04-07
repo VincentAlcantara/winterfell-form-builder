@@ -44,7 +44,6 @@ export default function configureStore(initialState = {}, history) {
     module.hot.accept('./reducers.js', () => {
       require.ensure(['./reducers'], () => {
         const reducerModule = require('./src/reducers/winterfellFormBuilderReducer'); // eslint-disable-line global-require
-
         const createReducers = reducerModule.default;
         const nextReducers = createReducers(store.asyncReducers);
         store.replaceReducer(nextReducers);

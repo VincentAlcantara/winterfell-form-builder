@@ -8,7 +8,7 @@ function FieldGroup(props) {
   return (
     <FormGroup controlId={id}>
       <ControlLabel>{label}</ControlLabel>
-      <FormControl value={value} {...props} />
+      <FormControl value={value} {...props} autoComplete={id} />
     </FormGroup>
   );
 }

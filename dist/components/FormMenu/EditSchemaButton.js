@@ -52,9 +52,8 @@ var EditSchemaButton = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (EditSchemaButton.__proto__ || (0, _getPrototypeOf2.default)(EditSchemaButton)).call(this, props));
 
-    console.log('schema1:', _this.props.schema);
     _this.state = {
-      schema: _this.props.schema
+      schemaObject: _this.props.schema.toJS()
     };
 
     _this.onChange = _this.onChange.bind(_this);
@@ -79,81 +78,71 @@ var EditSchemaButton = function (_Component) {
     value: function render() {
       var _this2 = this;
 
+      var schemaObject = this.props.schema.toJS();
+
       return _react2.default.createElement(
-        _reactBootstrap.Row,
-        null,
+        _reactBootstrap.Button,
+        {
+          className: 'btn btn-block btn-primary',
+          onClick: function onClick() {
+            _this2.setState({
+              schema: schemaObject,
+              showModal: true
+            });
+          }
+        },
+        'edit schema',
         _react2.default.createElement(
-          'div',
-          { className: 'static-modal' },
+          _reactBootstrap.Modal,
+          { show: this.state.showModal },
           _react2.default.createElement(
-            _reactBootstrap.Modal,
-            { show: this.state.showModal },
+            _reactBootstrap.Modal.Header,
+            null,
             _react2.default.createElement(
-              _reactBootstrap.Modal.Header,
+              _reactBootstrap.Modal.Title,
+              null,
+              'Edit Schema'
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Modal.Body,
+            null,
+            _react2.default.createElement(
+              'form',
               null,
               _react2.default.createElement(
-                _reactBootstrap.Modal.Title,
+                _reactBootstrap.FormGroup,
                 null,
-                'Edit Schema'
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Body,
-              null,
-              _react2.default.createElement(
-                'form',
-                null,
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement('textarea', {
-                    rows: '30',
-                    cols: '78',
-                    value: (0, _stringify2.default)(this.state.schema, undefined, 2),
-                    onChange: this.onChange
-                  })
-                )
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Footer,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'danger',
-                  onClick: function onClick() {
-                    _this2.setState({ showModal: false });
-                  }
-                },
-                'Cancel'
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'primary',
-                  onClick: this.onFormUpdate
-                },
-                'Save changes'
+                _react2.default.createElement('textarea', {
+                  rows: '30',
+                  cols: '78',
+                  value: (0, _stringify2.default)(this.state.schema, undefined, 2),
+                  onChange: this.onChange
+                })
               )
             )
-          )
-        ),
-        _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
+          ),
           _react2.default.createElement(
-            _reactBootstrap.Button,
-            {
-              className: 'btn btn-block btn-info',
-              onClick: function onClick() {
-                _this2.setState({
-                  schema: _this2.props.schema,
-                  showModal: true
-                });
-              }
-            },
-            'edit schema'
+            _reactBootstrap.Modal.Footer,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                bsStyle: 'danger',
+                onClick: function onClick() {
+                  _this2.setState({ showModal: false });
+                }
+              },
+              'Cancel'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                bsStyle: 'primary',
+                onClick: this.onFormUpdate
+              },
+              'Save changes'
+            )
           )
         )
       );
@@ -173,7 +162,7 @@ EditSchemaButton.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    schema: state.getIn(['form', 'schema']).toJS()
+    schema: state.getIn(['form', 'schema'])
   };
 }
 

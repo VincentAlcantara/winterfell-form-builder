@@ -46,6 +46,11 @@ For more information refer to the [documentation](https://github.com/andrewhatha
       "formPanels": []
     }
     ```
+
+1. LoadForm(*schema*)
+
+   Given a schema, this will be loaded in to the form builder.
+   
 1. AddPage(*panelId, panelHeader*)
 
    This button will add an entry to the formPanels array and the qustionPanels array.  Note the panelId in the formPanel and questionPanel are identical.
@@ -64,7 +69,10 @@ For more information refer to the [documentation](https://github.com/andrewhatha
     }
     ``` 
 
-3. AddQuestion(**panelId, question, type**)
+1. AddQuestion(**panelId, question, type**)
+  
+    Given a panelId (page), and a question object, and type add these to the questionPanels and questionSets.
+    
     ```
     {
       "formPanels": [{
@@ -75,16 +83,39 @@ For more information refer to the [documentation](https://github.com/andrewhatha
         "panelId": "page-1",
         "panelHeader": "Survey Page 1",
         "panelText": "Let's grab some of your details",
-        "questionSet": [
-          
-        ]
+        "questionSet": [{
+          "index": 1,
+          "questionSetId": "question-set-1"
+        }]
+      }],
+      "questionSets": [{
+        "questionSetId": "question-set-1",
+        "questionSetHeader": "Survey Page 1",
+        "questionSetText": "Let's grab some of your details",
+        "questions": [{
+          "questionId": "reg-first-name",
+          "question": "First Name",
+          "text": "Its nice to accompany a question with some extra text, is it not?",
+          "input": {
+            "type": "textInput",
+            "placeholder": "First Name"
+          },
+          "validations": [
+            {
+              "type": "isLength",
+              "params": [
+                1
+              ]
+            }
+          ]
+        }]
       }]
     }
     ``` 
 
-4. Edit Question
+1. Edit Question
 
-5. Add Dependency
+1. Add Dependency
 
 ## Test
 For testing we're using Jest.  In the spirit of Test Driven Design, the tests will be written first.

@@ -1,0 +1,378 @@
+{
+  "classes": {
+    "input": "form-control",
+    "select": "form-control",
+    "question": "form-group",
+    "radioListItem": "radio",
+    "radioList": "clean-list",
+    "checkboxInput": "checkbox",
+    "checkboxListItem": "checkbox",
+    "checkboxList": "clean-list",
+    "controlButton": "btn btn-primary pull-right",
+    "backButton": "btn btn-red pull-left",
+    "errorMessage": "alert alert-danger",
+    "questionPostText": "push-top",
+    "buttonBar": "button-bar"
+  },
+  "formPanels": [{
+    "index": 1,
+    "panelId": "intro-panel"
+  }, {
+    "index": 2,
+    "panelId": "name-panel"
+  }, {
+    "index": 3,
+    "panelId": "address-panel"
+  }, {
+    "index": 4,
+    "panelId": "final-panel"
+  }],
+  "questionPanels": [{
+    "panelId": "intro-panel",
+    "panelHeader": "Non-Disclosure Agreement (One Way)",
+    "panelText": "A Non-Disclosure Agreement is a legal document that you can use to disclose confidential information to another party, while legally forbidding the other party from disclosing that information to any person or entity. This document is only enforceable if it is signed by you and the other party, therefore it is crucial that it is signed before you share any confidential information. If you are seeking to protect the information of both parties, see our Non-Disclosure Agreement (Mutual).",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "name-panel"
+      }
+    },
+    "button": {
+      "text": "Begin"
+    }
+  }, {
+    "panelId": "name-panel",
+    "panelHeader": "Non-Disclosure Agreement (One Way)",
+    "panelText": "Progress: 1 of 5",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "address-panel"
+      }
+    },
+    "button": {
+      "text": "Next"
+    },
+    "questionSets": [{
+      "index": 1,
+      "questionSetId": "register-set"
+    }]
+  }, {
+    "panelId": "address-panel",
+    "panelHeader": "Non-Disclosure Agreement (One Way)",
+    "panelText": "Progress: 2 of 5",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "GOTO",
+        "target": "final-panel"
+      }
+    },
+    "button": {
+      "text": "Next"
+    },
+    "questionSets": [{
+      "index": 2,
+      "questionSetId": "address-set"
+    }]
+  }, {
+    "panelId": "final-panel",
+    "panelHeader": "My Awesome Form - Final",
+    "panelText": "Do you even check the console yet? Keep going though!",
+    "action": {
+      "conditions": [],
+      "default": {
+        "action": "SUBMIT",
+        "target": "http://google.com"
+      }
+    },
+    "button": {
+      "text": "Submit"
+    },
+    "questionSets": [{
+      "index": 1,
+      "questionSetId": "info-set"
+    }, {
+      "index": 2,
+      "questionSetId": "survey-set"
+    }]
+  }],
+  "questionSets": [{
+    "questionSetId": "intro-set",
+    "questions": []
+  }, {
+    "questionSetId": "register-set",
+    "questions": [{
+      "questionId": "Discloser_Name",
+      "question": "1.  What is the full name of the legal party disclosing the information?",
+      "input": {
+        "type": "textInput",
+        "placeholder": "e.g. John Smith"
+      },
+      "validations": [{
+        "type": "isLength",
+        "params": [1]
+      }]
+    }, {
+      "questionId": "Condition: Discloser_ABN or ACN",
+      "question": "2.  Do you know the ABN or ACN of the legal party disclosing the information",
+      "validations": [{
+        "type": "isIn",
+        "params": [["yes", "no"]]
+      }],
+      "input": {
+        "type": "radioOptionsInput",
+        "options": [{
+          "text": "Yes",
+          "value": "yes",
+          "conditionalQuestions": [{
+            "questionId": "Discloser_ABN or ACN",
+            "question": "3. What is the ABN or ACN of the legal party disclosing the information?",
+            "input": {
+              "type": "textInput",
+              "placeholder": "eg. 20 222 022 022"
+            },
+            "validateOn": "blur",
+            "validations": [{
+              "type": "isLength",
+              "params": [1]
+            }]
+          }],
+          "validations": [{
+            "type": "isLength",
+            "params": [1]
+          }]
+        }, {
+          "text": "No",
+          "value": "no",
+          "conditionalQuestions": []
+        }]
+      }
+    }]
+  }, {
+    "questionSetId": "address-set",
+    "questions": [{
+      "questionId": "discloser-address-known",
+      "question": "5.  Do you know the Address of the Party Disclosing the information?",
+      "validations": [{
+        "type": "isIn",
+        "params": [["yes", "no"]]
+      }],
+      "input": {
+        "type": "radioOptionsInput",
+        "options": [{
+          "text": "Yes",
+          "value": "yes",
+          "conditionalQuestions": [{
+            "questionId": "Discloser Street Number and Street Name",
+            "question": "6.  What is the street number and street name?",
+            "input": {
+              "type": "textInput",
+              "placeholder": "e.g 60 Smith Street"
+            },
+            "validateOn": "blur",
+            "validations": [{
+              "type": "isLength",
+              "params": [1]
+            }]
+          }, {
+            "questionId": "Discloser Suburb, Town or City",
+            "question": "7.  What is the surburb town or city?",
+            "input": {
+              "type": "textInput",
+              "placeholder": "e.g Surry Hills"
+            },
+            "validateOn": "blur",
+            "validations": [{
+              "type": "isLength",
+              "params": [1]
+            }]
+          }, {
+            "questionId": "Discloser State or Territory",
+            "question": "8.  What is the state or territory?",
+            "input": {
+              "type": "selectInput",
+              "options": [{
+                "text": "Australian Capital Territory",
+                "value": "ACT"
+              }, {
+                "text": "New South Wales",
+                "value": "NSW"
+              }, {
+                "text": "Northern Territory",
+                "value": "NT"
+              }, {
+                "text": "Queensland",
+                "value": "QLD"
+              }, {
+                "text": "South Australia",
+                "value": "SA"
+              }, {
+                "text": "Tasmania",
+                "value": "TAS"
+              }, {
+                "text": "Victoria",
+                "value": "VIC"
+              }, {
+                "text": "Western Australia",
+                "value": "WA"
+              }]
+            },
+            "validateOn": "blur",
+            "validations": [{
+              "type": "isLength",
+              "params": [1]
+            }]
+          }, {
+            "questionId": "Discloser Postcode",
+            "question": "9.  What is the postcode?",
+            "input": {
+              "type": "textInput",
+              "placeholder": "e.g Surry Hills"
+            },
+            "validateOn": "blur",
+            "validations": [{
+              "type": "isLength",
+              "params": [1]
+            }]
+          }],
+          "validations": [{
+            "type": "isLength",
+            "params": [1]
+          }]
+        }, {
+          "text": "No",
+          "value": "no",
+          "conditionalQuestions": []
+        }]
+      }
+    }]
+  }, {
+    "questionSetId": "info-set",
+    "questions": [{
+      "questionId": "gender",
+      "question": "Gender",
+      "input": {
+        "type": "selectInput",
+        "options": [{
+          "text": "Male",
+          "value": "male"
+        }, {
+          "text": "Female",
+          "value": "female"
+        }]
+      }
+    }]
+  }, {
+    "questionSetId": "survey-set",
+    "questions": [{
+      "questionId": "survey-hours-spent",
+      "question": "How many hours do you spend on a computer weekly?",
+      "input": {
+        "type": "radioOptionsInput",
+        "options": [{
+          "text": "0-10 Hours",
+          "value": "1"
+        }, {
+          "text": "11-20 Hours",
+          "value": "2"
+        }, {
+          "text": "21-30 Hours",
+          "value": "3"
+        }, {
+          "text": "31+ Hours",
+          "value": "4"
+        }]
+      },
+      "validations": [{
+        "type": "isIn",
+        "params": [
+          [1, 2, 3, 4]
+        ]
+      }]
+    }, {
+      "questionId": "survey-devices-owned",
+      "question": "Which of the following devices do you own?",
+      "text": "Try playing around the the laptop or none options!",
+      "input": {
+        "type": "checkboxOptionsInput",
+        "options": [{
+          "text": "Laptop",
+          "value": "laptop",
+          "conditionalQuestions": [{
+            "questionId": "laptop-os",
+            "question": "What is your preferred operation system?",
+            "text": "Awesome, you found me. ",
+            "postText": "The other option will also open up a textInput",
+            "input": {
+              "type": "radioOptionsInput",
+              "options": [{
+                "text": "OS X",
+                "value": "osx"
+              }, {
+                "text": "Windows",
+                "value": "windows"
+              }, {
+                "text": "Any Linux Distro",
+                "value": "linux"
+              }, {
+                "text": "Other",
+                "value": "other",
+                "conditionalQuestions": [{
+                  "questionId": "laptop-os-other-text",
+                  "question": "Please name the other OS",
+                  "input": {
+                    "type": "textInput",
+                    "placeholder": "Other Operating System"
+                  },
+                  "validations": [{
+                    "type": "isLength",
+                    "params": [1]
+                  }]
+                }]
+              }]
+            }
+          }]
+        }, {
+          "text": "Desktop Computer",
+          "value": "desktop"
+        }, {
+          "text": "Tablet",
+          "value": "tablet"
+        }, {
+          "text": "Mobile",
+          "value": "mobile"
+        }, {
+          "text": "Smart Watch",
+          "value": "watch"
+        }, {
+          "text": "None",
+          "value": "none",
+          "conditionalQuestions": [{
+            "questionId": "no-devices-how",
+            "question": "How are you accessing this form then?",
+            "input": {
+              "type": "textInput",
+              "placeholder": "Form access"
+            }
+          }]
+        }]
+      },
+      "validations": [{
+        "type": "isAllIn",
+        "params": [
+          [
+            "laptop",
+            "desktop",
+            "tablet",
+            "mobile",
+            "watch",
+            "none"
+          ]
+        ]
+      }]
+    }]
+  }]
+}

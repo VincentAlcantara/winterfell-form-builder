@@ -42,7 +42,7 @@ var _reactBootstrap = require('react-bootstrap');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
-var _FieldGroup = require('../UI/FieldGroup');
+var _FieldGroup = require('../InputTypes/FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
@@ -93,103 +93,91 @@ var AddPageButton = function (_Component) {
       var _this2 = this;
 
       return _react2.default.createElement(
-        _reactBootstrap.Row,
-        null,
+        _reactBootstrap.Button,
+        {
+          className: 'btn btn-block btn-primary',
+          onClick: function onClick() {
+            _this2.setState({ showModal: true });
+          }
+        },
+        'add page',
         _react2.default.createElement(
-          'div',
-          { className: 'static-modal' },
+          _reactBootstrap.Modal,
+          { show: this.state.showModal },
           _react2.default.createElement(
-            _reactBootstrap.Modal,
-            { show: this.state.showModal },
+            _reactBootstrap.Modal.Header,
+            null,
             _react2.default.createElement(
-              _reactBootstrap.Modal.Header,
+              _reactBootstrap.Modal.Title,
+              null,
+              'Add a new page to the form'
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Modal.Body,
+            null,
+            _react2.default.createElement(
+              'form',
               null,
               _react2.default.createElement(
-                _reactBootstrap.Modal.Title,
+                _reactBootstrap.FormGroup,
                 null,
-                'Add a new page to the form'
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Body,
-              null,
-              _react2.default.createElement(
-                'form',
-                null,
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'panelId',
-                    name: 'panelId',
-                    label: 'Page ID',
-                    onChange: this.onChange,
-                    placeholder: '(optional)',
-                    value: this.state.panelId
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'panelHeader',
-                    name: 'panelHeader',
-                    label: 'Page Title',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.panelHeader
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'panelText',
-                    name: 'panelText',
-                    label: 'Enter Page Description',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.panelText
-                  })
-                )
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Footer,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'danger',
-                  onClick: function onClick() {
-                    _this2.setState({ showModal: false });
-                  }
-                },
-                'Cancel'
+                _react2.default.createElement(_FieldGroup2.default, {
+                  id: 'panelId',
+                  name: 'panelId',
+                  label: 'Page ID',
+                  onChange: this.onChange,
+                  placeholder: '(optional)',
+                  value: this.state.panelId
+                })
               ),
               _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'primary',
-                  onClick: this.onFormUpdate
-                },
-                'Save changes'
+                _reactBootstrap.FormGroup,
+                null,
+                _react2.default.createElement(_FieldGroup2.default, {
+                  id: 'panelHeader',
+                  name: 'panelHeader',
+                  label: 'Page Title',
+                  onChange: this.onChange,
+                  placeholder: '',
+                  value: this.state.panelHeader
+                })
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.FormGroup,
+                null,
+                _react2.default.createElement(_FieldGroup2.default, {
+                  id: 'panelText',
+                  name: 'panelText',
+                  label: 'Enter Page Description',
+                  onChange: this.onChange,
+                  placeholder: '',
+                  value: this.state.panelText
+                })
               )
             )
-          )
-        ),
-        _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
+          ),
           _react2.default.createElement(
-            _reactBootstrap.Button,
-            {
-              className: 'btn btn-block btn-info',
-              onClick: function onClick() {
-                _this2.setState({ showModal: true });
-              }
-            },
-            'add page'
+            _reactBootstrap.Modal.Footer,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                bsStyle: 'danger',
+                onClick: function onClick() {
+                  _this2.setState({ showModal: false });
+                }
+              },
+              'Cancel'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                bsStyle: 'primary',
+                onClick: this.onFormUpdate
+              },
+              'Save changes'
+            )
           )
         )
       );

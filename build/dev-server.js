@@ -1,6 +1,6 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.dev.config');
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const config = require('./webpack.dev.config');
 
 new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
@@ -19,12 +19,12 @@ new WebpackDevServer(webpack(config), {
     hash: false,
     timings: false,
     chunks: false,
-    chunkModules: false
+    chunkModules: false,
+  },
+}).listen(3001, 'localhost', (err) => {
+  if (err) {
+    console.log(err);
   }
-}).listen(3000, 'localhost', function (err) {
-    if (err) {
-        console.log(err);
-    }
 
-  console.log('Listening at localhost:3000');
+  console.log('Listening at localhost:3001');
 });

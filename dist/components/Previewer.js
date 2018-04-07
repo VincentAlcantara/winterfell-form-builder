@@ -36,6 +36,8 @@ var _winterfell = require('winterfell');
 
 var _winterfell2 = _interopRequireDefault(_winterfell);
 
+var _reactBootstrap = require('react-bootstrap');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var onRenderDefault = function onRenderDefault() {
@@ -93,14 +95,26 @@ var Previewer = function (_Component) {
             questionAnswers: questionAnswers,
             panelId: currentPanelId,
             key: index
+          }) || currentPanelId === 'Select Page' && _react2.default.createElement(_winterfell2.default, {
+            schema: schema,
+            disableSubmit: true,
+            onRender: onRender,
+            onUpdate: onUpdate,
+            onSwitchPanel: onSwitchPanel,
+            onSubmit: onSubmit,
+            questionAnswers: questionAnswers
           });
         });
       };
 
       return _react2.default.createElement(
-        'div',
-        { className: 'winterfell-form-builer-previewer col-xs-12' },
-        schema && schema.formPanels && schema.formPanels.length > 0 && displayWinterFellForm()
+        _reactBootstrap.Row,
+        { className: 'winterfell-form-builer-previewer' },
+        _react2.default.createElement(
+          _reactBootstrap.Col,
+          { xs: 12 },
+          schema && schema.formPanels && schema.formPanels.length > 0 && currentPanelId && currentPanelId !== 'Select Page' && displayWinterFellForm()
+        )
       );
     }
   }]);

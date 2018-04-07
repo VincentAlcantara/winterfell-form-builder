@@ -34,7 +34,7 @@ function FieldGroup(props) {
       null,
       label
     ),
-    _react2.default.createElement(_reactBootstrap.FormControl, (0, _extends3.default)({ value: value }, props))
+    _react2.default.createElement(_reactBootstrap.FormControl, (0, _extends3.default)({ value: value }, props, { autoComplete: id }))
   );
 }
 
@@ -59,9 +59,9 @@ var _temp = function () {
     return;
   }
 
-  __REACT_HOT_LOADER__.register(FieldGroup, 'FieldGroup', 'src/components/UI/FieldGroup.js');
+  __REACT_HOT_LOADER__.register(FieldGroup, 'FieldGroup', 'src/components/InputTypes/FieldGroup.js');
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/UI/FieldGroup.js');
+  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/InputTypes/FieldGroup.js');
 }();
 
 ;

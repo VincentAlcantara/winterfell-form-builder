@@ -42,7 +42,7 @@ var _reactBootstrap = require('react-bootstrap');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
-var _FieldGroup = require('../UI/FieldGroup');
+var _FieldGroup = require('../InputTypes/FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
@@ -91,79 +91,67 @@ var CreateFormButton = function (_Component) {
       var _this2 = this;
 
       return _react2.default.createElement(
-        _reactBootstrap.Row,
-        null,
+        _reactBootstrap.Button,
+        {
+          className: 'btn btn-block btn-primary',
+          onClick: function onClick() {
+            _this2.setState({ showModal: true });
+          }
+        },
+        'new form',
         _react2.default.createElement(
-          'div',
-          { className: 'static-modal' },
+          _reactBootstrap.Modal,
+          { show: this.state.showModal },
           _react2.default.createElement(
-            _reactBootstrap.Modal,
-            { show: this.state.showModal },
+            _reactBootstrap.Modal.Header,
+            null,
             _react2.default.createElement(
-              _reactBootstrap.Modal.Header,
+              _reactBootstrap.Modal.Title,
+              null,
+              'Create a new form'
+            )
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.Modal.Body,
+            null,
+            _react2.default.createElement(
+              'form',
               null,
               _react2.default.createElement(
-                _reactBootstrap.Modal.Title,
+                _reactBootstrap.FormGroup,
                 null,
-                'Create a new form'
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Body,
-              null,
-              _react2.default.createElement(
-                'form',
-                null,
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'formTitle',
-                    name: 'formTitle',
-                    label: 'Enter title of the form',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.formTitle
-                  })
-                )
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Footer,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'danger',
-                  onClick: function onClick() {
-                    _this2.setState({ showModal: false });
-                  }
-                },
-                'Cancel'
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'primary',
-                  onClick: this.onFormUpdate
-                },
-                'Save changes'
+                _react2.default.createElement(_FieldGroup2.default, {
+                  id: 'formTitle',
+                  name: 'formTitle',
+                  label: 'Enter title of the form',
+                  onChange: this.onChange,
+                  placeholder: '',
+                  value: this.state.formTitle
+                })
               )
             )
-          )
-        ),
-        _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
+          ),
           _react2.default.createElement(
-            _reactBootstrap.Button,
-            {
-              className: 'btn btn-block btn-info',
-              onClick: function onClick() {
-                _this2.setState({ showModal: true });
-              }
-            },
-            'new form'
+            _reactBootstrap.Modal.Footer,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                bsStyle: 'danger',
+                onClick: function onClick() {
+                  _this2.setState({ showModal: false });
+                }
+              },
+              'Cancel'
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Button,
+              {
+                bsStyle: 'primary',
+                onClick: this.onFormUpdate
+              },
+              'Save changes'
+            )
           )
         )
       );

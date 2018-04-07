@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Winterfell from 'winterfell';
+import { Row, Col } from 'react-bootstrap';
 
 const onRenderDefault = () => {
   console.log('Great news! Winterfell rendered successfully');
@@ -58,7 +59,7 @@ class Previewer extends Component {
 
     const displayWinterFellForm = () => (
       schema.formPanels.map((formPanel, index) => (
-        formPanel.panelId === currentPanelId) &&
+        (formPanel.panelId === currentPanelId &&
           <Winterfell
             schema={schema}
             disableSubmit
@@ -69,18 +70,33 @@ class Previewer extends Component {
             questionAnswers={questionAnswers}
             panelId={currentPanelId}
             key={index}
-          />,
-      )
+          />)
+          ||
+        (currentPanelId === 'Select Page' &&
+          <Winterfell
+            schema={schema}
+            disableSubmit
+            onRender={onRender}
+            onUpdate={onUpdate}
+            onSwitchPanel={onSwitchPanel}
+            onSubmit={onSubmit}
+            questionAnswers={questionAnswers}
+          />)
+      ))
     );
 
     return (
-      <div className="winterfell-form-builer-previewer col-xs-12" >
-        {(schema &&
-          schema.formPanels &&
-          schema.formPanels.length > 0) &&
-          displayWinterFellForm()
-        }
-      </div>
+      <Row className="winterfell-form-builer-previewer" >
+        <Col xs={12}>
+          {(schema &&
+            schema.formPanels &&
+            schema.formPanels.length > 0) &&
+            currentPanelId &&
+            currentPanelId !== 'Select Page' &&
+            displayWinterFellForm()
+          }
+        </Col>
+      </Row>
     );
   }
 }

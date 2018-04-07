@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, Modal, FormGroup } from 'react-bootstrap';
 import { createForm } from '../../actions/winterfellFormBuilderActions';
-import FieldGroup from '../UI/FieldGroup';
+import FieldGroup from '../InputTypes/FieldGroup';
 
 
 class CreateFormButton extends Component {
@@ -41,48 +41,42 @@ class CreateFormButton extends Component {
 
   render() {
     return (
-      <Row>
-        <div className="static-modal">
-          <Modal show={this.state.showModal}>
-            <Modal.Header>
-              <Modal.Title>Create a new form</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <form>
-                <FormGroup>
-                  <FieldGroup
-                    id="formTitle"
-                    name="formTitle"
-                    label="Enter title of the form"
-                    onChange={this.onChange}
-                    placeholder=""
-                    value={this.state.formTitle}
-                  />
-                </FormGroup>
-              </form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                bsStyle="danger"
-                onClick={() => { this.setState({ showModal: false }); }}
-              >Cancel</Button>
-              <Button
-                bsStyle="primary"
-                onClick={this.onFormUpdate}
-              >Save changes</Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-        <Col xs={12}>
-          <Button
-            className="btn btn-block btn-info"
-            onClick={() => {
-              this.setState({ showModal: true });
-            }}
-          >new form
-          </Button>
-        </Col>
-      </Row>
+      <Button
+        className="btn btn-block btn-primary"
+        onClick={() => {
+          this.setState({ showModal: true });
+        }}
+      >new form
+        <Modal show={this.state.showModal}>
+          <Modal.Header>
+            <Modal.Title>Create a new form</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form>
+              <FormGroup>
+                <FieldGroup
+                  id="formTitle"
+                  name="formTitle"
+                  label="Enter title of the form"
+                  onChange={this.onChange}
+                  placeholder=""
+                  value={this.state.formTitle}
+                />
+              </FormGroup>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              bsStyle="danger"
+              onClick={() => { this.setState({ showModal: false }); }}
+            >Cancel</Button>
+            <Button
+              bsStyle="primary"
+              onClick={this.onFormUpdate}
+            >Save changes</Button>
+          </Modal.Footer>
+        </Modal>
+      </Button>
     );
   }
 }

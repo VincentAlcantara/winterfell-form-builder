@@ -1,0 +1,105 @@
+.winterfell-form-builder {
+  .btn-group {
+    display: flex;
+    .btn {
+      flex: 1;
+      .caret {
+        float: right;
+        margin-top: 8px;
+      }
+    }
+    .form-control {
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+  .input-group .form-control:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    -webkit-appearance: none;
+  }
+  #pagination {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  .dropdown-menu {
+    width: 100%;
+  }
+  .btn-block+.btn-block {
+    margin-top: 0
+  }
+}
+.winterfell-form-builder-editor {
+  border: 1px solid #eee;
+}
+.winterfell-form-builder-field-editor {
+  background: #eee;
+  padding-top: 10px;
+  border-right: 1px solid #eee;
+  font-size: 0.9em;
+  #edit-question-id-label {
+    font-weight: normal;
+  }
+  .dropdown.btn-group {
+    display: block;
+  }
+  
+  td input, td button {
+    border-radius: 0;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 6px;
+  }
+  .form-control {
+    font-size: 12px;
+    height: 31px;
+  }
+}
+
+.winterfell-form-builder-page-editor {
+  border-left: 1px solid #eee;
+  margin-left: -1px;
+  padding-left: 16px;
+}
+.winterfell-form-builder-question-set {
+  h4 {
+    margin-top: 2px;
+  }
+}
+
+.winterfell-form-builder-selector.btn-default {
+  text-align: left;
+  border: 1px solid transparent;
+  border-radius: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  white-space: normal;
+  margin-top: 0;
+  &:hover {
+    text-align: left;
+    border: 1px dotted #ccc;
+    background: #eee;
+  }
+  &:hover:before {
+    content:"\270f";
+    position: absolute;
+    font-family: "Glyphicons Halflings";
+    right: 20px;
+    font-size: 12px;
+  }
+}
+
+.winterfell-form-builder-page-sorter {
+  padding-top: 10px;
+}
+.winterfell-form-builder-conditional-page, .winterfell-form-builder-conditional-questions {
+  padding-top: 10px 5px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  margin: 0;
+  .btn {
+    border-radius: 4px;
+  }
+}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Row, Col, Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, Modal, FormGroup } from 'react-bootstrap';
 
 import { updateForm } from '../../actions/winterfellFormBuilderActions';
 
@@ -17,9 +17,8 @@ class EditSchemaButton extends Component {
 
   constructor(props) {
     super(props);
-    console.log('schema1:', this.props.schema);
     this.state = {
-      schema: this.props.schema,
+      schemaObject: this.props.schema.toJS(),
     };
 
     this.onChange = this.onChange.bind(this);
@@ -37,58 +36,53 @@ class EditSchemaButton extends Component {
   }
 
   render() {
-    return (
-      <Row>
-        <div className="static-modal">
-          <Modal show={this.state.showModal}>
-            <Modal.Header>
-              <Modal.Title>Edit Schema</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <form>
-                <FormGroup>
-                  <textarea
-                    rows="30"
-                    cols="78"
-                    value={JSON.stringify(this.state.schema, undefined, 2)}
-                    onChange={this.onChange}
-                  />
-                </FormGroup>
-              </form>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button
-                bsStyle="danger"
-                onClick={() => { this.setState({ showModal: false }); }}
-              >Cancel</Button>
-              <Button
-                bsStyle="primary"
-                onClick={this.onFormUpdate}
-              >Save changes</Button>
-            </Modal.Footer>
-          </Modal>
-        </div>
-        <Col xs={12}>
+    const schemaObject = this.props.schema.toJS();
 
-          <Button
-            className="btn btn-block btn-info"
-            onClick={() => {
-              this.setState({
-                schema: this.props.schema,
-                showModal: true,
-              });
-            }}
-          >edit schema
-          </Button>
-        </Col>
-      </Row>
+    return (
+      <Button
+        className="btn btn-block btn-primary"
+        onClick={() => {
+          this.setState({
+            schema: schemaObject,
+            showModal: true,
+          });
+        }}
+      >edit schema
+        <Modal show={this.state.showModal}>
+          <Modal.Header>
+            <Modal.Title>Edit Schema</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form>
+              <FormGroup>
+                <textarea
+                  rows="30"
+                  cols="78"
+                  value={JSON.stringify(this.state.schema, undefined, 2)}
+                  onChange={this.onChange}
+                />
+              </FormGroup>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              bsStyle="danger"
+              onClick={() => { this.setState({ showModal: false }); }}
+            >Cancel</Button>
+            <Button
+              bsStyle="primary"
+              onClick={this.onFormUpdate}
+            >Save changes</Button>
+          </Modal.Footer>
+        </Modal>
+      </Button>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    schema: state.getIn(['form', 'schema']).toJS(),
+    schema: state.getIn(['form', 'schema']),
   };
 }
 export default connect(mapStateToProps, { updateForm })(EditSchemaButton);
