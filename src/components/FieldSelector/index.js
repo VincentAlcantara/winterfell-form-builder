@@ -15,7 +15,7 @@ class FieldSelectorContainer extends Component {
     editFormTitle: PropTypes.func.isRequired,
     changeCurrentEditingField: PropTypes.func.isRequired,
     currentQuestionPanelIndex: PropTypes.number.isRequired,
-    currentEditingField: PropTypes.string.isRequired,
+    currentEditingField: PropTypes.string,
     currentQuestionSetIndex: PropTypes.number,
     currentQuestionIndex: PropTypes.number,
     questionSets: PropTypes.object,
@@ -30,6 +30,7 @@ class FieldSelectorContainer extends Component {
   static defaultProps = {
     currentPanelId: 'Select Page',
     currentQuestionPanelIndex: 0,
+    currentEditingField: 'page',
     questionPanels: null,
     questionSets: null,
     panelHeader: '',

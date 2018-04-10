@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button, Modal, FormGroup } from 'react-bootstrap';
-import fileDownload from 'react-file-download';
+import fileDownload from 'js-file-download';
 import { saveJSON } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
@@ -26,6 +26,12 @@ class SaveFormButton extends Component {
     this.onJSONSave = this.onJSONSave.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.state = {
+      filename: nextProps.title,
+    };
+  }
+
   onChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
@@ -45,10 +51,10 @@ class SaveFormButton extends Component {
         onClick={() => {
           this.setState({ showModal: true });
         }}
-      >save form
+      >download
         <Modal show={this.state.showModal}>
           <Modal.Header>
-            <Modal.Title>Save form</Modal.Title>
+            <Modal.Title>Download Form</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <form>
@@ -56,7 +62,7 @@ class SaveFormButton extends Component {
                 <FieldGroup
                   id="filename"
                   name="filename"
-                  label="Enter title of the form"
+                  label="Filename"
                   onChange={this.onChange}
                   placeholder={this.props.title}
                   value={this.state.filename}
@@ -73,7 +79,7 @@ class SaveFormButton extends Component {
               bsStyle="primary"
               onClick={this.onJSONSave}
               disabled={!this.state.filename}
-            >Save</Button>
+            >Continue</Button>
           </Modal.Footer>
         </Modal>
       </Button>

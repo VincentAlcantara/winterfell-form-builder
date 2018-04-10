@@ -51,12 +51,13 @@ class UploadJSONButton extends Component {
         onClick={() => {
           this.setState({ showModal: true });
         }}
-      >open form
+      >upload
         <Modal show={this.state.showModal}>
           <Modal.Header>
-            <Modal.Title>Open a form</Modal.Title>
+            <Modal.Title>Upload a form</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            Upload a form.  Note this will replace the current form.
             <form>
               <FormGroup>
                 <label
@@ -79,7 +80,7 @@ class UploadJSONButton extends Component {
             <Button
               bsStyle="primary"
               onClick={this.onJSONUpload}
-            >Upload</Button>
+            >Continue</Button>
           </Modal.Footer>
         </Modal>
       </Button>

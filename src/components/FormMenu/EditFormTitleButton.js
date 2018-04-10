@@ -49,7 +49,7 @@ class EditFormTitleButton extends Component {
         onClick={() => {
           this.setState({ showModal: true });
         }}
-      >edit form filename
+      >edit filename
         <Modal show={this.state.showModal}>
           <Modal.Header>
             <Modal.Title>Edit form filename</Modal.Title>

@@ -102,13 +102,13 @@ class WinterfellFormBuilder extends Component {
               <ButtonGroup>
                 <CreateFormButton />
                 <UploadJSONButton />
-                <EditFormTitleButton />
+                <SaveFormButton />
                 <AddPageButton />
                 <PageSortButton
                   onClick={() => this.props.changeCurrentEditingField('pageSort')}
                 />
-                <SaveFormButton />
                 <EditSchemaButton />
+                <EditFormTitleButton />
               </ButtonGroup>
             </Row>
             <br />
