@@ -159,15 +159,15 @@ var WinterfellFormBuilder = function (_Component) {
                 null,
                 _react2.default.createElement(_FormMenu.CreateFormButton, null),
                 _react2.default.createElement(_FormMenu.UploadJSONButton, null),
-                _react2.default.createElement(_FormMenu.EditFormTitleButton, null),
+                _react2.default.createElement(_FormMenu.SaveFormButton, null),
                 _react2.default.createElement(_FormMenu.AddPageButton, null),
                 _react2.default.createElement(_FormMenu.PageSortButton, {
                   onClick: function onClick() {
                     return _this2.props.changeCurrentEditingField('pageSort');
                   }
                 }),
-                _react2.default.createElement(_FormMenu.SaveFormButton, null),
-                _react2.default.createElement(_FormMenu.EditSchemaButton, null)
+                _react2.default.createElement(_FormMenu.EditSchemaButton, null),
+                _react2.default.createElement(_FormMenu.EditFormTitleButton, null)
               )
             ),
             _react2.default.createElement('br', null),
@@ -202,7 +202,7 @@ var WinterfellFormBuilder = function (_Component) {
                     },
                     currentPanelId
                   ),
-                  (currentEditingField === 'questionSet' || currentEditingField === 'question') && _react2.default.createElement(
+                  (currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets && _react2.default.createElement(
                     _reactBootstrap.Breadcrumb.Item,
                     {
                       href: '',
@@ -213,7 +213,7 @@ var WinterfellFormBuilder = function (_Component) {
                     },
                     questionSets.getIn([currentQuestionSetIndex, 'questionSetId'])
                   ),
-                  currentEditingField === 'question' && _react2.default.createElement(
+                  currentEditingField === 'question' && questionSets && _react2.default.createElement(
                     _reactBootstrap.Breadcrumb.Item,
                     {
                       active: currentEditingField === 'question'

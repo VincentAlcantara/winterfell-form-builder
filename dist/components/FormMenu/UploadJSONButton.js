@@ -96,7 +96,7 @@ var UploadJSONButton = function (_Component) {
             _this3.setState({ showModal: true });
           }
         },
-        'open form',
+        'upload',
         _react2.default.createElement(
           _reactBootstrap.Modal,
           { show: this.state.showModal },
@@ -106,12 +106,13 @@ var UploadJSONButton = function (_Component) {
             _react2.default.createElement(
               _reactBootstrap.Modal.Title,
               null,
-              'Open a form'
+              'Upload a form'
             )
           ),
           _react2.default.createElement(
             _reactBootstrap.Modal.Body,
             null,
+            'Upload a form.  Note this will replace the current form.',
             _react2.default.createElement(
               'form',
               null,
@@ -151,7 +152,7 @@ var UploadJSONButton = function (_Component) {
                 bsStyle: 'primary',
                 onClick: this.onJSONUpload
               },
-              'Upload'
+              'Continue'
             )
           )
         )

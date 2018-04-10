@@ -44,6 +44,7 @@
     "autoprefixer": "^6.7.0",
     "babelify": "^6.3.0",
     "css-loader": "^0.28.10",
+    "eslint-plugin-json": "^1.2.0",
     "html-webpack-plugin": "^2.30.1",
     "immutable": "^3.8.2",
     "jest": "^22.4.2",

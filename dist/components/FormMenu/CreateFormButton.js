@@ -98,7 +98,7 @@ var CreateFormButton = function (_Component) {
             _this2.setState({ showModal: true });
           }
         },
-        'new form',
+        'new',
         _react2.default.createElement(
           _reactBootstrap.Modal,
           { show: this.state.showModal },

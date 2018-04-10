@@ -160,7 +160,7 @@ FieldSelectorContainer.propTypes = {
   editFormTitle: _propTypes2.default.func.isRequired,
   changeCurrentEditingField: _propTypes2.default.func.isRequired,
   currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
-  currentEditingField: _propTypes2.default.string.isRequired,
+  currentEditingField: _propTypes2.default.string,
   currentQuestionSetIndex: _propTypes2.default.number,
   currentQuestionIndex: _propTypes2.default.number,
   questionSets: _propTypes2.default.object,
@@ -174,6 +174,7 @@ FieldSelectorContainer.propTypes = {
 FieldSelectorContainer.defaultProps = {
   currentPanelId: 'Select Page',
   currentQuestionPanelIndex: 0,
+  currentEditingField: 'page',
   questionPanels: null,
   questionSets: null,
   panelHeader: '',

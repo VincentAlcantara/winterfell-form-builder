@@ -148,20 +148,23 @@ var ConditionalPageEditor = function (_Component) {
               _react2.default.createElement(
                 'b',
                 null,
-                'If question ',
+                'Go to page below if question ',
                 _react2.default.createElement(
                   'i',
                   null,
-                  this.props.question
+                  '"',
+                  this.props.question,
+                  '"'
                 ),
-                ' is: ',
+                '\xA0is: ',
                 _react2.default.createElement(
                   'i',
                   null,
-                  this.props.value
+                  '"',
+                  this.props.value,
+                  '",'
                 )
-              ),
-              ','
+              )
             ),
             _react2.default.createElement(
               'label',
