@@ -132,7 +132,7 @@ class WinterfellFormBuilder extends Component {
                   >
                     {currentPanelId}
                   </Breadcrumb.Item>
-                  {(currentEditingField === 'questionSet' || currentEditingField === 'question') &&
+                  {(currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets &&
                     <Breadcrumb.Item
                       href=""
                       active={currentEditingField === 'questionSet'}
@@ -140,7 +140,7 @@ class WinterfellFormBuilder extends Component {
                     >{questionSets.getIn([currentQuestionSetIndex, 'questionSetId'])}
                     </Breadcrumb.Item>
                   }
-                  {(currentEditingField === 'question') &&
+                  {(currentEditingField === 'question') && questionSets &&
                     <Breadcrumb.Item
                       active={currentEditingField === 'question'}
                     >
