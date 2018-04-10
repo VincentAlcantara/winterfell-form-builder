@@ -247,10 +247,10 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 8, className: 'winterfell-form-builder-page-editor' },
-                this.props.schema.size !== 0 && _react2.default.createElement(_FieldSelector2.default, {
+                this.props.schema && currentQuestionPanelIndex >= 0 && _react2.default.createElement(_FieldSelector2.default, {
                   currentQuestionPanelIndex: currentQuestionPanelIndex
                 }),
-                this.props.schema.size === 0 && _react2.default.createElement(
+                (!this.props.schema || this.props.schema.size === 0) && _react2.default.createElement(
                   _reactBootstrap.Alert,
                   { bsStyle: 'info' },
                   'No form loaded.  Click on \'new form\' to create a new form, or \'open form\' to load an existing form.'

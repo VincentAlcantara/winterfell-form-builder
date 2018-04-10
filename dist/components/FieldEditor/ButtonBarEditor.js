@@ -139,15 +139,19 @@ var ButtonBarEditor = function (_PureComponent) {
       this.props.disableBackButton(this.props.currentQuestionPanelIndex, !this.props.backButtonDisabled);
     }
   }, {
-    key: 'render',
-    value: function render() {
-      var formPanelIds = this.props.formPanels.toJS().map(function (formPanel) {
+    key: 'formPanelIds',
+    value: function formPanelIds() {
+      var formPanelsArray = this.props.formPanels.toJS();
+      return formPanelsArray.map(function (formPanel) {
         return {
           text: formPanel.panelId,
           value: formPanel.panelId
         };
       });
-
+    }
+  }, {
+    key: 'render',
+    value: function render() {
       return _react2.default.createElement(
         'div',
         null,
@@ -223,7 +227,7 @@ var ButtonBarEditor = function (_PureComponent) {
           _react2.default.createElement(_SelectInput2.default, {
             id: 'goToPanel',
             labelId: 'goToPanel',
-            options: formPanelIds,
+            options: this.formPanelIds(),
             onSelect: this.onSelectDefaultTarget,
             initialValue: this.props.defaultGoToTarget
           })

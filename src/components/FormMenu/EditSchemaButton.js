@@ -12,13 +12,13 @@ class EditSchemaButton extends Component {
   };
 
   static defaultProps = {
-    schema: {},
+    schema: null,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      schemaObject: this.props.schema.toJS(),
+      schemaObject: null,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -36,7 +36,7 @@ class EditSchemaButton extends Component {
   }
 
   render() {
-    const schemaObject = this.props.schema.toJS();
+    const schemaObject = this.props.schema && this.props.schema.toJS();
 
     return (
       <Button

@@ -11,9 +11,13 @@ import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 class AddQuestionButton extends Component {
   static propTypes = {
     addQuestion: PropTypes.func.isRequired,
-    questionSetId: PropTypes.string.isRequired,
+    questionSetId: PropTypes.string,
     currentQuestionSetIndex: PropTypes.number.isRequired,
-  }
+  };
+
+  static defaultProps = {
+    questionSetId: '',
+  };
 
   constructor(props) {
     super(props);

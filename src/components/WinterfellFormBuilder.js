@@ -166,12 +166,12 @@ class WinterfellFormBuilder extends Component {
                 </Row>
               </Col>
               <Col xs={8} className="winterfell-form-builder-page-editor">
-                { this.props.schema.size !== 0 &&
+                { (this.props.schema && currentQuestionPanelIndex >= 0) &&
                   <FieldSelector
                     currentQuestionPanelIndex={currentQuestionPanelIndex}
                   />
                 }
-                { this.props.schema.size === 0 &&
+                { (!this.props.schema || this.props.schema.size === 0) &&
                   <Alert bsStyle="info">
                     No form loaded.  Click on &#39;new form&#39; to create a new form,
                     or &#39;open form&#39; to load an existing form.

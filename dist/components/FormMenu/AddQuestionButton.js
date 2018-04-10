@@ -233,8 +233,11 @@ var AddQuestionButton = function (_Component) {
 
 AddQuestionButton.propTypes = {
   addQuestion: _propTypes2.default.func.isRequired,
-  questionSetId: _propTypes2.default.string.isRequired,
+  questionSetId: _propTypes2.default.string,
   currentQuestionSetIndex: _propTypes2.default.number.isRequired
+};
+AddQuestionButton.defaultProps = {
+  questionSetId: ''
 };
 
 var _default = (0, _reactRedux.connect)(null, { addQuestion: _winterfellFormBuilderActions.addQuestion })(AddQuestionButton);
