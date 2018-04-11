@@ -94,11 +94,6 @@ class WinterfellFormBuilder extends Component {
         <Row>
           <Col xs={12}>
             <Row>
-              <Col xs={12}>
-                <h3>Form: {title}</h3>
-              </Col>
-            </Row>
-            <Row>
               <ButtonGroup>
                 <CreateFormButton />
                 <UploadJSONButton />
@@ -181,7 +176,7 @@ class WinterfellFormBuilder extends Component {
             </Row>
             <Row className="winterfell-form-builder-previewer">
               <Col xs={12}>
-                <h3>Preview:</h3>
+                <h3>Form Preview:</h3>
                 {
                   schema &&
                   <Previewer

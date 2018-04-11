@@ -141,20 +141,6 @@ var WinterfellFormBuilder = function (_Component) {
               _reactBootstrap.Row,
               null,
               _react2.default.createElement(
-                _reactBootstrap.Col,
-                { xs: 12 },
-                _react2.default.createElement(
-                  'h3',
-                  null,
-                  'Form: ',
-                  title
-                )
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Row,
-              null,
-              _react2.default.createElement(
                 _reactBootstrap.ButtonGroup,
                 null,
                 _react2.default.createElement(_FormMenu.CreateFormButton, null),
@@ -266,7 +252,7 @@ var WinterfellFormBuilder = function (_Component) {
                 _react2.default.createElement(
                   'h3',
                   null,
-                  'Preview:'
+                  'Form Preview:'
                 ),
                 schema && _react2.default.createElement(_Previewer2.default, {
                   currentPanelId: currentPanelId,

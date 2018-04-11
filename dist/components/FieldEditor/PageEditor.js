@@ -60,12 +60,14 @@ var PageEditor = function (_PureComponent) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (PageEditor.__proto__ || (0, _getPrototypeOf2.default)(PageEditor)).call(this, props));
 
-    var panelId = props.panelId,
+    var title = props.title,
+        panelId = props.panelId,
         panelHeader = props.panelHeader,
         panelText = props.panelText;
 
 
     _this.state = {
+      title: title,
       panelId: panelId,
       panelHeader: panelHeader,
       panelText: panelText
@@ -133,6 +135,20 @@ var PageEditor = function (_PureComponent) {
       return _react2.default.createElement(
         'form',
         null,
+        _react2.default.createElement(
+          _reactBootstrap.FormGroup,
+          null,
+          _react2.default.createElement(
+            'label',
+            { htmlFor: 'filename' },
+            'Filename'
+          ),
+          _react2.default.createElement(
+            'p',
+            { disabled: true, id: 'filename' },
+            this.props.title
+          )
+        ),
         _react2.default.createElement(
           _reactBootstrap.FormGroup,
           null,
@@ -233,6 +249,7 @@ PageEditor.propTypes = {
   editPageText: _propTypes2.default.func.isRequired,
   updateErrorMessage: _propTypes2.default.func.isRequired,
   changeCurrentEditingField: _propTypes2.default.func.isRequired,
+  title: _propTypes2.default.string,
   panelId: _propTypes2.default.string,
   panelHeader: _propTypes2.default.string,
   panelText: _propTypes2.default.string,
@@ -243,6 +260,7 @@ PageEditor.propTypes = {
 };
 PageEditor.defaultProps = {
   currentQuestionPanelIndex: 0,
+  title: '',
   panelId: '',
   panelHeader: '',
   panelText: '',
@@ -254,6 +272,7 @@ PageEditor.defaultProps = {
 
 function mapStateToProps(state, ownProps) {
   return {
+    title: state.getIn(['form', 'title']),
     panelId: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'panelId']),
     panelHeader: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'panelHeader']),
     panelText: state.getIn(['form', 'schema', 'questionPanels', ownProps.currentQuestionPanelIndex, 'panelText']),
