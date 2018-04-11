@@ -76,7 +76,7 @@
     "vinyl-source-stream": "^1.1.0",
     "webpack": "1.14.0",
     "webpack-dev-server": "1.16.2",
-    "winterfell": "git@github.com:marianocarpentier/Winterfell.git"
+    "winterfell": "github.com:marianocarpentier/Winterfell.git"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
