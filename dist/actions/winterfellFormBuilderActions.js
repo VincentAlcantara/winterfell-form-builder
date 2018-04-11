@@ -43,6 +43,7 @@ exports.updateNextQuestionTarget = updateNextQuestionTarget;
 exports.resetNextQuestionTarget = resetNextQuestionTarget;
 exports.saveConditionalQuestion = saveConditionalQuestion;
 exports.deleteConditionalQuestion = deleteConditionalQuestion;
+exports.updateQuestionAnswers = updateQuestionAnswers;
 
 var _constants = require('../common/constants');
 
@@ -362,6 +363,13 @@ function deleteConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex
     }
   };
 }
+
+function updateQuestionAnswers(questionAnswers) {
+  return {
+    type: _constants.UPDATE_QUESTION_ANSWERS_SUCCESS,
+    payload: { questionAnswers: questionAnswers }
+  };
+}
 ;
 
 var _temp = function () {
@@ -448,6 +456,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(saveConditionalQuestion, 'saveConditionalQuestion', 'src/actions/winterfellFormBuilderActions.js');
 
   __REACT_HOT_LOADER__.register(deleteConditionalQuestion, 'deleteConditionalQuestion', 'src/actions/winterfellFormBuilderActions.js');
+
+  __REACT_HOT_LOADER__.register(updateQuestionAnswers, 'updateQuestionAnswers', 'src/actions/winterfellFormBuilderActions.js');
 }();
 
 ;

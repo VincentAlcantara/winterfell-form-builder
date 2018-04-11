@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Winterfell from 'winterfell';
 import { Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
+
+import { updateQuestionAnswers } from '../actions/winterfellFormBuilderActions';
 
 const onRenderDefault = () => {
   console.log('Great news! Winterfell rendered successfully');
 };
 
-const onUpdateDefault = (questionAndAnswers) => {
-  console.log('Question Updated! The current set of answers is: ', questionAndAnswers);
-};
+
 
 const onSwitchPanelDefault = (panel) => {
   console.log(`Moving on to the panel that is identified as ${panel.panelId}`);
@@ -31,6 +32,7 @@ class Previewer extends Component {
     schema: PropTypes.object.isRequired,
     onRender: PropTypes.func,
     onUpdate: PropTypes.func,
+    updateQuestionAnswers: PropTypes.func,
     onSubmit: PropTypes.func,
     onSwitchPanel: PropTypes.func,
     questionAnswers: PropTypes.object,
@@ -40,10 +42,21 @@ class Previewer extends Component {
     currentPanelId: null,
     schema: {},
     onRender: onRenderDefault,
-    onUpdate: onUpdateDefault,
     onSubmit: onSubmitDefault,
     onSwitchPanel: onSwitchPanelDefault,
     questionAnswers: {},
+    onUpdate: () => {},
+    updateQuestionAnswers: () => {},
+  };
+
+  constructor(props) {
+    super(props);
+    this.onUpdateQuestionAnswers = this.onUpdateQuestionAnswers.bind(this);
+  }
+
+  onUpdateQuestionAnswers = (questionAndAnswers) => {
+    console.log('Question Updated! The current set of answers is: ', questionAndAnswers);
+    this.props.updateQuestionAnswers(questionAndAnswers);
   };
 
   render() {
@@ -51,7 +64,6 @@ class Previewer extends Component {
       schema,
       currentPanelId,
       onRender,
-      onUpdate,
       onSwitchPanel,
       onSubmit,
       questionAnswers,
@@ -64,7 +76,7 @@ class Previewer extends Component {
             schema={schema}
             disableSubmit
             onRender={onRender}
-            onUpdate={onUpdate}
+            onUpdate={this.onUpdateQuestionAnswers}
             onSwitchPanel={onSwitchPanel}
             onSubmit={onSubmit}
             questionAnswers={questionAnswers}
@@ -77,7 +89,7 @@ class Previewer extends Component {
             schema={schema}
             disableSubmit
             onRender={onRender}
-            onUpdate={onUpdate}
+            onUpdate={this.onUpdate}
             onSwitchPanel={onSwitchPanel}
             onSubmit={onSubmit}
             questionAnswers={questionAnswers}
@@ -101,5 +113,5 @@ class Previewer extends Component {
   }
 }
 
-export default Previewer;
+export default connect(null, { updateQuestionAnswers })(Previewer);
 

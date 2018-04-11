@@ -39,6 +39,7 @@ import {
   MOVE_PAGE_SUCCESS,
   UPDATE_NEXT_QUESTION_TARGET_SUCCESS,
   RESET_NEXT_QUESTION_TARGET_SUCCESS,
+  UPDATE_QUESTION_ANSWERS_SUCCESS,
 } from '../common/constants';
 
 const initialState = fromJS({
@@ -46,6 +47,7 @@ const initialState = fromJS({
   schema: {},
   currentPanelId: null,
   currentQuestionPanelIndex: 0,
+  questionAnswers: {},
 });
 
 function winterfellFormBuilderReducer(state = initialState, action) {
@@ -458,6 +460,10 @@ function winterfellFormBuilderReducer(state = initialState, action) {
       return state
         .setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions'],
           state.getIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions']).filter(o => o.get('value') !== action.payload.value));
+    }
+    case UPDATE_QUESTION_ANSWERS_SUCCESS: {
+      return state
+        .set('questionAnswers', fromJS(action.payload.questionAnswers));
     }
     default:
       return state;

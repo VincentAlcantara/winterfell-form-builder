@@ -18,7 +18,8 @@ var initialState = (0, _immutable.fromJS)({
   title: '',
   schema: {},
   currentPanelId: null,
-  currentQuestionPanelIndex: 0
+  currentQuestionPanelIndex: 0,
+  questionAnswers: {}
 });
 
 function winterfellFormBuilderReducer() {
@@ -467,6 +468,10 @@ function winterfellFormBuilderReducer() {
         return state.setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions'], state.getIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions']).filter(function (o) {
           return o.get('value') !== action.payload.value;
         }));
+      }
+    case _constants.UPDATE_QUESTION_ANSWERS_SUCCESS:
+      {
+        return state.set('questionAnswers', (0, _immutable.fromJS)(action.payload.questionAnswers));
       }
     default:
       return state;

@@ -16,6 +16,7 @@ describe('wintefellFormBuilderReducer', () => {
     schema: {},
     currentPanelId: null,
     currentQuestionPanelIndex: 0,
+    questionAnswers: {},
   });
 
   it('should return the initial state', () => {
@@ -46,6 +47,7 @@ describe('wintefellFormBuilderReducer', () => {
       },
       currentPanelId: null,
       currentQuestionPanelIndex: 0,
+      questionAnswers: {},
     });
 
     expect(winterfellFormBuilderReducer(initialState, currentAction)).toEqual(expectedState);
@@ -62,6 +64,7 @@ describe('wintefellFormBuilderReducer', () => {
       schema: {},
       currentPanelId: null,
       currentQuestionPanelIndex: 0,
+      questionAnswers: {},
     });
 
     expect(winterfellFormBuilderReducer(initialState, currentAction)).toEqual(expectedState);
@@ -92,7 +95,7 @@ describe('wintefellFormBuilderReducer', () => {
         ],
         questionSets: [],
       },
-
+      questionAnswers: {},
       currentPanelId: null,
     });
 
@@ -124,7 +127,7 @@ describe('wintefellFormBuilderReducer', () => {
         ],
         questionSets: [],
       },
-
+      questionAnswers: {},
       currentPanelId: null,
     });
 
@@ -160,7 +163,7 @@ describe('wintefellFormBuilderReducer', () => {
         ],
         questionSets: [],
       },
-
+      questionAnswers: {},
       currentPanelId: null,
     });
 
@@ -192,7 +195,7 @@ describe('wintefellFormBuilderReducer', () => {
         ],
         questionSets: [],
       },
-
+      questionAnswers: {},
       currentPanelId: null,
     });
 
