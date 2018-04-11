@@ -173,8 +173,8 @@ class WinterfellFormBuilder extends Component {
                 }
                 { (!this.props.schema || this.props.schema.size === 0) &&
                   <Alert bsStyle="info">
-                    No form loaded.  Click on &#39;new form&#39; to create a new form,
-                    or &#39;open form&#39; to load an existing form.
+                    No form loaded.  Click on &#39;new&#39; to create a new form,
+                    or &#39;upload&#39; to load an existing form.
                   </Alert>
                 }
               </Col>

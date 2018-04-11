@@ -253,7 +253,7 @@ var WinterfellFormBuilder = function (_Component) {
                 (!this.props.schema || this.props.schema.size === 0) && _react2.default.createElement(
                   _reactBootstrap.Alert,
                   { bsStyle: 'info' },
-                  'No form loaded.  Click on \'new form\' to create a new form, or \'open form\' to load an existing form.'
+                  'No form loaded.  Click on \'new\' to create a new form, or \'upload\' to load an existing form.'
                 )
               )
             ),
