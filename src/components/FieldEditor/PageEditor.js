@@ -15,6 +15,7 @@ class PageEditor extends PureComponent {
     editPageText: PropTypes.func.isRequired,
     updateErrorMessage: PropTypes.func.isRequired,
     changeCurrentEditingField: PropTypes.func.isRequired,
+    title: PropTypes.string,
     panelId: PropTypes.string,
     panelHeader: PropTypes.string,
     panelText: PropTypes.string,
@@ -26,6 +27,7 @@ class PageEditor extends PureComponent {
 
   static defaultProps = {
     currentQuestionPanelIndex: 0,
+    title: '',
     panelId: '',
     panelHeader: '',
     panelText: '',
@@ -35,9 +37,10 @@ class PageEditor extends PureComponent {
   }
   constructor(props) {
     super(props);
-    const { panelId, panelHeader, panelText } = props;
+    const { title, panelId, panelHeader, panelText } = props;
 
     this.state = {
+      title,
       panelId,
       panelHeader,
       panelText,
@@ -85,6 +88,14 @@ class PageEditor extends PureComponent {
     const questionSetsArray = this.props.currentQuestionSets.toJS();
     return (
       <form>
+        <FormGroup>
+          <label htmlFor="filename">
+            Filename
+          </label>
+          <p disabled id="filename" >
+            {this.props.title}
+          </p>
+        </FormGroup>
         <FormGroup>
           <label htmlFor="panelId">
               Page ID
@@ -153,6 +164,7 @@ class PageEditor extends PureComponent {
 
 function mapStateToProps(state, ownProps) {
   return {
+    title: state.getIn(['form', 'title']),
     panelId: state.getIn(['form', 'schema', 'questionPanels',
       ownProps.currentQuestionPanelIndex, 'panelId']),
     panelHeader: state.getIn(['form', 'schema', 'questionPanels',
