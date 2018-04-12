@@ -115,3 +115,21 @@
     padding: 0;
   }
 }
+
+
+.winterfell-form-builder-field-editor .winterfell-form-builder-conditional-page,
+.winterfell-form-builder-field-editor .winterfell-form-builder-conditional-questions  {
+  color: #36464e;
+  position: absolute;
+  left: 101%;
+  
+  z-index: 100;
+}
+
+.winterfell-form-builder .winterfell-form-builder-field-editor {
+  .input-group .form-control:first-child,
+  .input-group .form-control:not(:first-child):not(:last-child),
+  .input-group-addon:not(:first-child):not(:last-child){
+    width: 50%;
+  }
+}

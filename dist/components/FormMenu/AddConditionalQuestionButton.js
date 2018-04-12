@@ -46,6 +46,10 @@ var _FieldGroup = require('../InputTypes/FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
+var _QuestionEditor = require('../FieldEditor/QuestionEditor');
+
+var _QuestionEditor2 = _interopRequireDefault(_QuestionEditor);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AddConditionalQuestionButton = function (_Component) {
@@ -102,6 +106,11 @@ var AddConditionalQuestionButton = function (_Component) {
     key: 'render',
     value: function render() {
       var _this2 = this;
+
+      var _props2 = this.props,
+          currentQuestionPanelIndex = _props2.currentQuestionPanelIndex,
+          currentQuestionSetIndex = _props2.currentQuestionSetIndex,
+          currentQuestionIndex = _props2.currentQuestionIndex;
 
       return _react2.default.createElement(
         _reactBootstrap.Button,
@@ -165,7 +174,12 @@ var AddConditionalQuestionButton = function (_Component) {
                   placeholder: '',
                   value: this.state.questionText
                 })
-              )
+              ),
+              _react2.default.createElement(_QuestionEditor2.default, {
+                currentQuestionPanelIndex: currentQuestionPanelIndex,
+                currentQuestionSetIndex: currentQuestionSetIndex,
+                currentQuestionIndex: currentQuestionIndex + 1
+              })
             )
           ),
           _react2.default.createElement(
@@ -199,6 +213,7 @@ var AddConditionalQuestionButton = function (_Component) {
 
 AddConditionalQuestionButton.propTypes = {
   addConditionalQuestion: _propTypes2.default.func.isRequired,
+  currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
   currentQuestionSetIndex: _propTypes2.default.number.isRequired,
   currentQuestionIndex: _propTypes2.default.number.isRequired,
   questionOptionIndex: _propTypes2.default.number.isRequired
@@ -207,6 +222,7 @@ AddConditionalQuestionButton.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
+    currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
     questionOptionIndex: ownProps.questionOptionIndex

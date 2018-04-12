@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, FormControl, Button, ButtonGroup, Glyphicon } from 'react-bootstrap';
+import { FormGroup, FormControl, Button, ButtonGroup, Glyphicon, InputGroup } from 'react-bootstrap';
 import { fromJS } from 'immutable';
 import {
   editQuestionId,
@@ -214,9 +214,8 @@ class QuestionEditor extends PureComponent {
 
   getQuestionOptions() {
     return (
-      <FormGroup>
-        <table>
-          <tbody>
+      <div>
+
             { this.props.questionInputOptions &&
               this.props.questionInputOptions.size > 0 &&
               <tr>
@@ -225,82 +224,66 @@ class QuestionEditor extends PureComponent {
             }
             { this.props.questionInputOptions &&
               this.props.questionInputOptions.toJS().map((option, ix) => (
-                <tr key={`${ix}`}>
-                  <td>
-                    <table>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <FormControl
-                              type="text"
-                              name={this.state.questionInputOptions[ix].text}
-                              value={this.state.questionInputOptions[ix].text}
-                              onChange={event => this.onOptionTextChange(event, ix)}
-                            />
-                          </td>
-                          <td>
-                            <FormControl
-                              type="text"
-                              name={this.state.questionInputOptions[ix].value}
-                              value={this.state.questionInputOptions[ix].value}
-                              onChange={event => this.onOptionValueChange(event, ix)}
-                            />
-                          </td>
-                          <td>
-                            <DeleteQuestionOptionButton
-                              questionOptionIndex={ix}
-                            />
-                          </td>
-                          <td>
-                            <Button
-                              onClick={() => this.onShowConditonalPageClick(ix)}
-                              className="btn btn-warning"
-                            >
-                              {this.state.showConditionalPage && !this.state.showConditionalPage[ix] && <Glyphicon glyph="glyphicon glyphicon-share-alt" />}
-                              {this.state.showConditionalPage && this.state.showConditionalPage[ix] && <Glyphicon glyph="glyphicon glyphicon glyphicon-minus-sign" />}
-                            </Button>
-                          </td>
-                          <td>
-                            <Button
-                              onClick={() => this.onShowConditonalQuestionClick(ix)}
-                              className="btn btn-primary"
-                            >
-                              {this.state.showConditionalQuestions && !this.state.showConditionalQuestions[ix] && <Glyphicon glyph="glyphicon glyphicon-menu-hamburger" />}
-                              {this.state.showConditionalQuestions && this.state.showConditionalQuestions[ix] && <Glyphicon glyph="glyphicon glyphicon glyphicon-minus-sign" />}
-                            </Button>
-                          </td>
-                        </tr>
-                        <tr>
-                          {this.state.showConditionalPage[ix] &&
-                            <td colSpan={5}>
-                              <ConditionalPageEditor
-                                questionOptionIndex={ix}
-                                questionId={this.props.questionId}
-                                currentQuestionPanelIndex={this.props.currentQuestionPanelIndex}
-                                currentQuestionSetIndex={this.props.currentQuestionSetIndex}
-                                currentQuestionIndex={this.props.currentQuestionIndex}
-                              />
-                            </td>
-                          }
-                        </tr>
-                        <tr>
-                          {this.state.showConditionalQuestions[ix] &&
-                            <td colSpan={5}>
-                              <ConditionalQuestionEditor
-                                currentQuestionSetIndex={this.props.currentQuestionSetIndex}
-                                currentQuestionIndex={this.props.currentQuestionIndex}
-                                questionOptionIndex={ix}
-                              />
-                            </td>
-                          }
-                        </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                </tr>))
+                <div key={`${ix}`}>
+                  <InputGroup>
+                    <FormControl
+                      type="text"
+                      name={this.state.questionInputOptions[ix].text}
+                      value={this.state.questionInputOptions[ix].text}
+                      onChange={event => this.onOptionTextChange(event, ix)}
+                      inline
+                    />
+                    <FormControl
+                      type="text"
+                      name={this.state.questionInputOptions[ix].value}
+                      value={this.state.questionInputOptions[ix].value}
+                      onChange={event => this.onOptionValueChange(event, ix)}
+                      inline
+                    />
+                    <InputGroup.Button>
+                      <DeleteQuestionOptionButton
+                        questionOptionIndex={ix}
+                      />
+                    </InputGroup.Button>
+                    <InputGroup.Button>
+                      <Button
+                        onClick={() => this.onShowConditonalPageClick(ix)}
+                        className="btn btn-warning"
+                      >
+                        {this.state.showConditionalPage && !this.state.showConditionalPage[ix] && <Glyphicon glyph="glyphicon glyphicon-share-alt" />}
+                        {this.state.showConditionalPage && this.state.showConditionalPage[ix] && <Glyphicon glyph="glyphicon glyphicon glyphicon-minus-sign" />}
+                      </Button>
+                    </InputGroup.Button>
+                    <InputGroup.Button>
+                      <Button
+                        onClick={() => this.onShowConditonalQuestionClick(ix)}
+                        className="btn btn-primary"
+                      >
+                        {this.state.showConditionalQuestions && !this.state.showConditionalQuestions[ix] && <Glyphicon glyph="glyphicon glyphicon-menu-hamburger" />}
+                        {this.state.showConditionalQuestions && this.state.showConditionalQuestions[ix] && <Glyphicon glyph="glyphicon glyphicon glyphicon-minus-sign" />}
+                      </Button>
+                    </InputGroup.Button>
+
+                    {this.state.showConditionalPage[ix] &&
+                      <ConditionalPageEditor
+                        questionOptionIndex={ix}
+                        questionId={this.props.questionId}
+                        currentQuestionPanelIndex={this.props.currentQuestionPanelIndex}
+                        currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+                        currentQuestionIndex={this.props.currentQuestionIndex}
+                      />
+                    }
+                    {this.state.showConditionalQuestions[ix] &&
+                      <ConditionalQuestionEditor
+                        currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+                        currentQuestionIndex={this.props.currentQuestionIndex}
+                        questionOptionIndex={ix}
+                      />
+                    }
+                  </InputGroup>
+                </div>))
             }
-          </tbody>
-        </table>
+
         <br />
         <table>
           <tbody>
@@ -313,7 +296,7 @@ class QuestionEditor extends PureComponent {
             </tr>
           </tbody>
         </table>
-      </FormGroup>
+      </div>
     );
   }
 
