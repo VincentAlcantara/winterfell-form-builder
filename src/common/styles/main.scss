@@ -103,3 +103,15 @@
     border-radius: 4px;
   }
 }
+
+.winterfell-form-builder-tree-view {
+  overflow: overlay;
+  overflow-y: scroll;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  .btn-link {
+    padding: 0;
+  }
+}

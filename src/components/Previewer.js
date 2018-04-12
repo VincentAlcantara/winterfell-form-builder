@@ -10,8 +10,6 @@ const onRenderDefault = () => {
   console.log('Great news! Winterfell rendered successfully');
 };
 
-
-
 const onSwitchPanelDefault = (panel) => {
   console.log(`Moving on to the panel that is identified as ${panel.panelId}`);
 };
@@ -31,7 +29,6 @@ class Previewer extends Component {
     currentPanelId: PropTypes.string,
     schema: PropTypes.object.isRequired,
     onRender: PropTypes.func,
-    onUpdate: PropTypes.func,
     updateQuestionAnswers: PropTypes.func,
     onSubmit: PropTypes.func,
     onSwitchPanel: PropTypes.func,

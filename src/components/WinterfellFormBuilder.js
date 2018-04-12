@@ -19,7 +19,6 @@ import FieldEditor from './FieldEditor';
 
 class WinterfellFormBuilder extends Component {
   static propTypes = {
-    title: PropTypes.string,
     schema: PropTypes.object,
     currentPanelId: PropTypes.string,
     currentQuestionPanelIndex: PropTypes.number,
@@ -61,7 +60,6 @@ class WinterfellFormBuilder extends Component {
 
   render() {
     const {
-      title,
       schema,
       currentPanelId,
       formPanels,
@@ -125,7 +123,7 @@ class WinterfellFormBuilder extends Component {
                     active={currentEditingField === 'page'}
                     onClick={() => this.props.changeCurrentEditingField('page')}
                   >
-                    {currentPanelId}
+                    { currentPanelId !== 'Select Page' && currentPanelId}
                   </Breadcrumb.Item>
                   {(currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets &&
                     <Breadcrumb.Item
@@ -183,6 +181,12 @@ class WinterfellFormBuilder extends Component {
                     currentPanelId={currentPanelId}
                     schema={schema.toJS()}
                   />
+                }
+                {
+                  currentPanelId === 'Select Page' &&
+                  <Alert bsStyle="info">
+                    No page selected to preview.  Select a page from the dropdown above.
+                  </Alert>
                 }
               </Col>
             </Row>
