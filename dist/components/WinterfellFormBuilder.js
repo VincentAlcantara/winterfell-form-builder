@@ -82,7 +82,6 @@ var WinterfellFormBuilder = function (_Component) {
       var _this2 = this;
 
       var _props = this.props,
-          title = _props.title,
           schema = _props.schema,
           currentPanelId = _props.currentPanelId,
           formPanels = _props.formPanels,
@@ -186,7 +185,7 @@ var WinterfellFormBuilder = function (_Component) {
                         return _this2.props.changeCurrentEditingField('page');
                       }
                     },
-                    currentPanelId
+                    currentPanelId !== 'Select Page' && currentPanelId
                   ),
                   (currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets && _react2.default.createElement(
                     _reactBootstrap.Breadcrumb.Item,
@@ -257,7 +256,12 @@ var WinterfellFormBuilder = function (_Component) {
                 schema && _react2.default.createElement(_Previewer2.default, {
                   currentPanelId: currentPanelId,
                   schema: schema.toJS()
-                })
+                }),
+                currentPanelId === 'Select Page' && _react2.default.createElement(
+                  _reactBootstrap.Alert,
+                  { bsStyle: 'info' },
+                  'No page selected to preview.  Select a page from the dropdown above.'
+                )
               )
             )
           )
@@ -269,7 +273,6 @@ var WinterfellFormBuilder = function (_Component) {
 }(_react.Component);
 
 WinterfellFormBuilder.propTypes = {
-  title: _propTypes2.default.string,
   schema: _propTypes2.default.object,
   currentPanelId: _propTypes2.default.string,
   currentQuestionPanelIndex: _propTypes2.default.number,

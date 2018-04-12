@@ -145,7 +145,6 @@ Previewer.propTypes = {
   currentPanelId: _propTypes2.default.string,
   schema: _propTypes2.default.object.isRequired,
   onRender: _propTypes2.default.func,
-  onUpdate: _propTypes2.default.func,
   updateQuestionAnswers: _propTypes2.default.func,
   onSubmit: _propTypes2.default.func,
   onSwitchPanel: _propTypes2.default.func,
