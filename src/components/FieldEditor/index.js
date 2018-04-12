@@ -20,9 +20,10 @@ function FieldEditor(props) {
     <Row>
       <Col xs={12}>
         <label htmlFor="tree-view">
-          Navigation:
+          Navigation
         </label>
         <TreeView id="tree-view" />
+        <br />
         {
           (currentEditingField === 'page' || currentEditingField === 'pageSort') &&
           <PageEditor
