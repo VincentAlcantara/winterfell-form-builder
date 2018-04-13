@@ -155,7 +155,7 @@ class ButtonBarEditor extends PureComponent {
               value: 'GOTO',
             }]}
             onSelect={this.onSelectDefaultAction}
-            initialValue={this.props.defaultGoToAction}
+            displayValue={this.props.defaultGoToAction}
           />
         </FormGroup>
         { this.state.defaultGoToAction === 'GOTO' &&
@@ -168,7 +168,7 @@ class ButtonBarEditor extends PureComponent {
               labelId="goToPanel"
               options={this.formPanelIds()}
               onSelect={this.onSelectDefaultTarget}
-              initialValue={this.props.defaultGoToTarget}
+              displayValue={this.props.defaultGoToTarget}
             />
           </FormGroup>
         }

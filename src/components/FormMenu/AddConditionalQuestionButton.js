@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import { Button, Modal, FormGroup } from 'react-bootstrap';
 import { addConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
+import SelectInput from '../InputTypes/SelectInput';
+import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
 class AddConditionalQuestionButton extends Component {
   static propTypes = {
@@ -26,6 +28,7 @@ class AddConditionalQuestionButton extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
   onChange(event) {
@@ -36,6 +39,10 @@ class AddConditionalQuestionButton extends Component {
   onClose(e) {
     e.preventDefault();
     this.setState({ showModal: true });
+  }
+
+  onSelect(type) {
+    this.setState({ questionType: type });
   }
 
   onFormUpdate(e) {
@@ -89,13 +96,15 @@ class AddConditionalQuestionButton extends Component {
                 />
               </FormGroup>
               <FormGroup>
-                <FieldGroup
-                  id="questionText"
-                  name="questionText"
-                  label="Enter Question Text"
-                  onChange={this.onChange}
-                  placeholder=""
-                  value={this.state.questionText}
+                <label htmlFor="questionType">
+                  Select Question Type
+                </label>
+                <SelectInput
+                  id="questionType"
+                  labelId="questionType"
+                  options={INPUT_TYPE_OPTIONS}
+                  onSelect={this.onSelect}
+                  displayValue={this.state.questionType}
                 />
               </FormGroup>
             </form>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class SelectInput extends React.Component {
   static propTypes = {
-    initialValue: PropTypes.string,
+    displayValue: PropTypes.string,
     options: PropTypes.array.isRequired,
     classes: PropTypes.object,
     name: PropTypes.string,
@@ -17,18 +17,18 @@ class SelectInput extends React.Component {
     },
     id: '',
     name: '',
-    value: [{ text: '', value: '' }],
+    value: '',
     options: [],
     onChange: () => {},
     onSelect: () => {},
     required: false,
-    initialValue: '',
+    displayValue: '',
   };
   constructor(props) {
     super(props);
 
     this.state = {
-      value: this.props.initialValue,
+      value: this.props.displayValue,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -36,7 +36,7 @@ class SelectInput extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      value: nextProps.initialValue,
+      value: nextProps.displayValue,
     });
   }
   handleChange(e) {

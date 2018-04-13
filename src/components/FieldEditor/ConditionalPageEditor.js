@@ -95,7 +95,7 @@ class ConditionalPageEditor extends Component {
                 labelId="questionTarget"
                 options={this.nextButtonTargetOptions()}
                 onSelect={this.onSelect}
-                initialValue={this.initialTarget()}
+                displayValue={this.initialTarget()}
                 value={this.state.questionTarget}
               />
               <InputGroup.Button>

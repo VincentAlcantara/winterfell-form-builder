@@ -270,7 +270,10 @@ class QuestionEditor extends PureComponent {
                     {this.state.showConditionalPage && !this.state.showConditionalPage[ix] &&
                     <Glyphicon glyph="glyphicon glyphicon-share-alt" id="showConditionalPage" />}
                     {this.state.showConditionalPage && this.state.showConditionalPage[ix] &&
-                    <Glyphicon glyph="glyphicon glyphicon glyphicon-minus-sign" id="showConditionalPage" />}
+                    <Glyphicon
+                      glyph="glyphicon glyphicon glyphicon-minus-sign"
+                      id="showConditionalPage"
+                    />}
                   </Button>
                 </InputGroup.Button>
                 <InputGroup.Button>
@@ -279,10 +282,19 @@ class QuestionEditor extends PureComponent {
                     onClick={event => this.onShowConditonalClick(ix, event)}
                     className="btn btn-primary"
                   >
-                    {this.state.showConditionalQuestions && !this.state.showConditionalQuestions[ix] &&
-                    <Glyphicon glyph="glyphicon glyphicon-menu-hamburger" id="showConditionalQuestion" />}
-                    {this.state.showConditionalQuestions && this.state.showConditionalQuestions[ix] &&
-                    <Glyphicon glyph="glyphicon glyphicon glyphicon-minus-sign" id="showConditionalQuestion" />}
+                    {this.state.showConditionalQuestions &&
+                    !this.state.showConditionalQuestions[ix] &&
+                    <Glyphicon
+                      glyph="glyphicon glyphicon-menu-hamburger"
+                      id="showConditionalQuestion"
+                    />
+                    }
+                    {this.state.showConditionalQuestions &&
+                    this.state.showConditionalQuestions[ix] &&
+                    <Glyphicon
+                      glyph="glyphicon glyphicon glyphicon-minus-sign"
+                      id="showConditionalQuestion"
+                    />}
                   </Button>
                 </InputGroup.Button>
 
@@ -410,7 +422,7 @@ class QuestionEditor extends PureComponent {
               labelId="questionInputType"
               options={INPUT_TYPE_OPTIONS}
               onSelect={this.onSelect}
-              initialValue={this.props.questionInputType}
+              displayValue={this.props.questionInputType}
             />
           </FormGroup>
         </div>
