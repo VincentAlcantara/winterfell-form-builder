@@ -14,13 +14,13 @@ class ConditionalPageEditor extends Component {
     formPanels: PropTypes.object.isRequired,
     currentQuestionPanelIndex: PropTypes.number.isRequired,
     questionId: PropTypes.string.isRequired,
-    question: PropTypes.string,
+    text: PropTypes.string,
     value: PropTypes.string,
     conditions: PropTypes.object,
   }
 
   static defaultProps = {
-    question: '',
+    text: '',
     value: '',
     questionTarget: '',
     conditions: fromJS([]),
@@ -85,16 +85,10 @@ class ConditionalPageEditor extends Component {
       <Row className="winterfell-form-builder-conditional-page alert-warning">
         <Col xs={12}>
           <h6>
-            Conditional Page:
+            {`Option '${this.props.text}' Conditional Page:`}
           </h6>
+          <p><i>Go to this page if this is option selected.</i></p>
           <FormGroup>
-            <p>
-              <b>
-                Go to page below if question <i>&#34;{this.props.question}&#34;</i>
-                &nbsp;is: <i>&#34;{this.props.value}&#34;,</i>
-              </b>
-            </p>
-            <label htmlFor="questionTarget">Go To Page</label>
             <InputGroup>
               <SelectInput
                 id="questionTarget"

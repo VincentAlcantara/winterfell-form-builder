@@ -121,15 +121,37 @@
 .winterfell-form-builder-field-editor .winterfell-form-builder-conditional-questions  {
   color: #36464e;
   position: absolute;
-  left: 101%;
-  
-  z-index: 100;
+  left: 105%;
+  width: 100%;
+  z-index: 10;
+  border: 1px solid #337ab7;
+}
+.winterfell-form-builder-field-editor .winterfell-form-builder-conditional-page {
+  border: 1px solid #f0ad4e;
+}
+
+
+.winterfell-form-builder-field-editor .winterfell-form-builder-conditional-page::before,
+.winterfell-form-builder-field-editor .winterfell-form-builder-conditional-questions::before {
+  content: "";
+	width: 0px;
+	height: 0px;
+	border: 0.8em solid transparent;
+  position: absolute;
+  left: -20px;
+  top: 1px;
+	border-right: 10px solid #337ab7;
+}
+.winterfell-form-builder-field-editor .winterfell-form-builder-conditional-page::before {
+  border-right: 10px solid #f0ad4e;
 }
 
 .winterfell-form-builder .winterfell-form-builder-field-editor {
-  .input-group .form-control:first-child,
-  .input-group .form-control:not(:first-child):not(:last-child),
-  .input-group-addon:not(:first-child):not(:last-child){
-    width: 50%;
+  .winterfell-form-builder-conditional-question {
+    &.input-group >.form-control:first-child,
+    &.input-group >.form-control:not(:first-child):not(:last-child),
+    &.input-group-addon:not(:first-child):not(:last-child){
+      width: 50%;
+    }
   }
 }

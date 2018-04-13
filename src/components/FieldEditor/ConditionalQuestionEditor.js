@@ -11,6 +11,7 @@ class ConditionalQuestionEditor extends PureComponent {
   static propTypes = {
     conditionalQuestions: PropTypes.object,
     currentQuestionSetIndex: PropTypes.number.isRequired,
+    text: PropTypes.string.isRequired,
     currentQuestionIndex: PropTypes.number.isRequired,
     questionOptionIndex: PropTypes.number.isRequired,
     saveConditionalQuestion: PropTypes.func.isRequired,
@@ -95,7 +96,6 @@ class ConditionalQuestionEditor extends PureComponent {
   getConditionalQuestions() {
     return (this.props.conditionalQuestions.map((conditionalQuestion, ix) => (
       <div key={ix}>
-        <br />
         <FormGroup>
           <FieldGroup
             id="questionId"
@@ -132,6 +132,8 @@ class ConditionalQuestionEditor extends PureComponent {
             value={this.state.conditionalQuestions[ix].postText}
           />
         </FormGroup>
+        <br />
+        <br />
         <ButtonGroup>
           <DeleteConditionalQuestionButton
             currentQuestionSetIndex={this.props.currentQuestionSetIndex}
@@ -146,6 +148,7 @@ class ConditionalQuestionEditor extends PureComponent {
           >save
           </Button>
         </ButtonGroup>
+        <br />
       </div>
     ))
     );
@@ -156,9 +159,9 @@ class ConditionalQuestionEditor extends PureComponent {
       <Row className="winterfell-form-builder-conditional-questions alert-info">
         <Col xs={12}>
           <h6>
-            Conditional Questions:
+            {`Option '${this.props.text}' Conditional Questions:`}
           </h6>
-          <b><i>Display these questions if this option is selected</i></b>
+          <h6><i>Display these questions if this option is selected</i></h6>
           { this.getConditionalQuestions() }
         </Col>
         <Col xs={12}>
@@ -179,6 +182,8 @@ function mapStateToProps(state, ownProps) {
   return {
     conditionalQuestions: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex,
       'questions', ownProps.currentQuestionIndex, 'input', 'options', ownProps.questionOptionIndex, 'conditionalQuestions']),
+    text: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex,
+      'questions', ownProps.currentQuestionIndex, 'input', 'options', ownProps.questionOptionIndex, 'text']),
   };
 }
 
