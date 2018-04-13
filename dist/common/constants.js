@@ -100,11 +100,20 @@ var INPUT_TYPE_OPTIONS = exports.INPUT_TYPE_OPTIONS = [{
   text: 'select',
   value: 'selectInput'
 }, {
-  text: 'checkbox',
+  text: 'checkbox options',
   value: 'checkboxOptionsInput'
 }, {
   text: 'radio button',
   value: 'radioOptionsInput'
+}, {
+  text: 'address',
+  value: 'addressInput'
+}, {
+  text: 'date',
+  value: 'dateInput'
+}, {
+  text: 'checkbox',
+  value: 'checkboxInput'
 }];
 ;
 

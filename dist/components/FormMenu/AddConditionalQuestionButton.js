@@ -46,9 +46,11 @@ var _FieldGroup = require('../InputTypes/FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
-var _QuestionEditor = require('../FieldEditor/QuestionEditor');
+var _SelectInput = require('../InputTypes/SelectInput');
 
-var _QuestionEditor2 = _interopRequireDefault(_QuestionEditor);
+var _SelectInput2 = _interopRequireDefault(_SelectInput);
+
+var _constants = require('../../common/constants');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70,6 +72,7 @@ var AddConditionalQuestionButton = function (_Component) {
 
     _this.onChange = _this.onChange.bind(_this);
     _this.onFormUpdate = _this.onFormUpdate.bind(_this);
+    _this.onSelect = _this.onSelect.bind(_this);
     return _this;
   }
 
@@ -84,6 +87,11 @@ var AddConditionalQuestionButton = function (_Component) {
     value: function onClose(e) {
       e.preventDefault();
       this.setState({ showModal: true });
+    }
+  }, {
+    key: 'onSelect',
+    value: function onSelect(type) {
+      this.setState({ questionType: type });
     }
   }, {
     key: 'onFormUpdate',
@@ -106,11 +114,6 @@ var AddConditionalQuestionButton = function (_Component) {
     key: 'render',
     value: function render() {
       var _this2 = this;
-
-      var _props2 = this.props,
-          currentQuestionPanelIndex = _props2.currentQuestionPanelIndex,
-          currentQuestionSetIndex = _props2.currentQuestionSetIndex,
-          currentQuestionIndex = _props2.currentQuestionIndex;
 
       return _react2.default.createElement(
         _reactBootstrap.Button,
@@ -166,20 +169,19 @@ var AddConditionalQuestionButton = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.FormGroup,
                 null,
-                _react2.default.createElement(_FieldGroup2.default, {
-                  id: 'questionText',
-                  name: 'questionText',
-                  label: 'Enter Question Text',
-                  onChange: this.onChange,
-                  placeholder: '',
-                  value: this.state.questionText
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'questionType' },
+                  'Select Question Type'
+                ),
+                _react2.default.createElement(_SelectInput2.default, {
+                  id: 'questionType',
+                  labelId: 'questionType',
+                  options: _constants.INPUT_TYPE_OPTIONS,
+                  onSelect: this.onSelect,
+                  displayValue: this.state.questionType
                 })
-              ),
-              _react2.default.createElement(_QuestionEditor2.default, {
-                currentQuestionPanelIndex: currentQuestionPanelIndex,
-                currentQuestionSetIndex: currentQuestionSetIndex,
-                currentQuestionIndex: currentQuestionIndex + 1
-              })
+              )
             )
           ),
           _react2.default.createElement(
@@ -213,7 +215,6 @@ var AddConditionalQuestionButton = function (_Component) {
 
 AddConditionalQuestionButton.propTypes = {
   addConditionalQuestion: _propTypes2.default.func.isRequired,
-  currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
   currentQuestionSetIndex: _propTypes2.default.number.isRequired,
   currentQuestionIndex: _propTypes2.default.number.isRequired,
   questionOptionIndex: _propTypes2.default.number.isRequired
@@ -222,7 +223,6 @@ AddConditionalQuestionButton.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
     currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
     questionOptionIndex: ownProps.questionOptionIndex

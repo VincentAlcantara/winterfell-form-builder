@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, FormControl, Button, ButtonGroup, Glyphicon, InputGroup } from 'react-bootstrap';
+import { FormGroup, ButtonGroup } from 'react-bootstrap';
 import { fromJS } from 'immutable';
 import {
   editQuestionId,
@@ -18,15 +18,12 @@ import {
   updateNextQuestionTarget,
 } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
-import DeleteQuestionOptionButton from '../FormMenu/DeleteQuestionOptionButton';
 import DeleteQuestionButton from '../FormMenu/DeleteQuestionButton';
 import AddQuestionButton from '../FormMenu/AddQuestionButton';
-import AddQuestionOptionButton from '../FormMenu/AddQuestionOptionButton';
-import ConditionalPageEditor from './ConditionalPageEditor';
-import ConditionalQuestionEditor from './ConditionalQuestionEditor';
 import SelectInput from '../InputTypes/SelectInput';
 import ButtonBarEditor from './ButtonBarEditor';
 import { INPUT_TYPE_OPTIONS } from '../../common/constants';
+import QuestionOptionEditor from './QuestionOptionEditor';
 
 class QuestionEditor extends PureComponent {
   static propTypes = {
@@ -34,8 +31,6 @@ class QuestionEditor extends PureComponent {
     editQuestion: PropTypes.func.isRequired,
     editQuestionText: PropTypes.func.isRequired,
     editQuestionPostText: PropTypes.func.isRequired,
-    editQuestionOptionText: PropTypes.func.isRequired,
-    editQuestionOptionValue: PropTypes.func.isRequired,
     changeQuestionType: PropTypes.func.isRequired,
     addQuestionOption: PropTypes.func.isRequired,
     updateNextQuestionTarget: PropTypes.func.isRequired,
@@ -95,11 +90,8 @@ class QuestionEditor extends PureComponent {
 
     this.onChange = this.onChange.bind(this);
     this.onSelect = this.onSelect.bind(this);
-    this.onOptionTextChange = this.onOptionTextChange.bind(this);
-    this.onOptionValueChange = this.onOptionValueChange.bind(this);
     this.onAddQuestionOptionClick = this.onAddQuestionOptionClick.bind(this);
     this.onEditQuestionIdClick = this.onEditQuestionIdClick.bind(this);
-    this.onShowConditonalClick = this.onShowConditonalClick.bind(this);
     this.onUpdateNextQuestionTarget = this.onUpdateNextQuestionTarget.bind(this);
   }
 
@@ -145,24 +137,6 @@ class QuestionEditor extends PureComponent {
     }
   }
 
-  onOptionTextChange(event, index) {
-    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
-    const questionInputOptions = Object.assign({}, this.state.questionInputOptions);
-    questionInputOptions[index].text = event.target.value;
-    this.setState({ questionInputOptions });
-    this.props.editQuestionOptionText(currentQuestionSetIndex, currentQuestionIndex,
-      index, event.target.value);
-  }
-
-  onOptionValueChange(event, index) {
-    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
-    const questionInputOptions = Object.assign({}, this.state.questionInputOptions);
-    questionInputOptions[index].value = event.target.value;
-    this.setState({ questionInputOptions });
-    this.props.editQuestionOptionValue(currentQuestionSetIndex, currentQuestionIndex,
-      index, event.target.value);
-  }
-
   onAddQuestionOptionClick() {
     const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
     const questionInputOptions = [];
@@ -173,39 +147,6 @@ class QuestionEditor extends PureComponent {
 
     this.setState({ questionInputOptions });
     this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex);
-  }
-
-  onShowConditonalClick(index, event) {
-    const showConditionalPageCopy = [...this.state.showConditionalPage];
-    const showConditionalQuestionsCopy = [...this.state.showConditionalQuestions];
-    const currentConditionalPageSelected =
-      showConditionalPageCopy.findIndex(showCondition => showCondition);
-    const currentConditionalQuestionSelected =
-      showConditionalQuestionsCopy.findIndex(showCondition => showCondition);
-
-    // Turn off the existing choices
-    if (currentConditionalPageSelected !== -1) {
-      showConditionalPageCopy[currentConditionalPageSelected] =
-        !showConditionalPageCopy[currentConditionalPageSelected];
-    }
-    if (currentConditionalQuestionSelected !== -1) {
-      showConditionalQuestionsCopy[currentConditionalQuestionSelected] =
-        !showConditionalQuestionsCopy[currentConditionalQuestionSelected];
-    }
-    // Turn on the selected choice
-    if ((event.target.id === 'showConditionalQuestion' || event.target.id === 'showConditionalQuestionButton')
-      && index !== currentConditionalQuestionSelected) {
-      showConditionalQuestionsCopy[index] = !showConditionalQuestionsCopy[index];
-    }
-    if ((event.target.id === 'showConditionalPage' || event.target.id === 'showConditionalPageButton')
-      && index !== currentConditionalPageSelected) {
-      showConditionalPageCopy[index] = !showConditionalPageCopy[index];
-    }
-
-    this.setState({
-      showConditionalPage: showConditionalPageCopy,
-      showConditionalQuestions: showConditionalQuestionsCopy,
-    });
   }
 
   onDeleteOptionClick() {
@@ -228,110 +169,6 @@ class QuestionEditor extends PureComponent {
       questionId,
       this.state.questionTargetMatch,
       this.state.questionTarget,
-    );
-  }
-
-  getQuestionOptions() {
-    return (
-      <div>
-        { this.props.questionInputOptions &&
-          this.props.questionInputOptions.size > 0 &&
-          <tr>
-            <th>Options</th>
-          </tr>
-        }
-        { this.props.questionInputOptions &&
-          this.props.questionInputOptions.toJS().map((option, ix) => (
-            <div key={`${ix}`} >
-              <InputGroup className="winterfell-form-builder-conditional-question">
-                <FormControl
-                  type="text"
-                  name={this.state.questionInputOptions[ix].text}
-                  value={this.state.questionInputOptions[ix].text}
-                  onChange={event => this.onOptionTextChange(event, ix)}
-                />
-                <FormControl
-                  type="text"
-                  name={this.state.questionInputOptions[ix].value}
-                  value={this.state.questionInputOptions[ix].value}
-                  onChange={event => this.onOptionValueChange(event, ix)}
-                />
-                <InputGroup.Button>
-                  <DeleteQuestionOptionButton
-                    questionOptionIndex={ix}
-                  />
-                </InputGroup.Button>
-                <InputGroup.Button>
-                  <Button
-                    onClick={event => this.onShowConditonalClick(ix, event)}
-                    className="btn btn-warning"
-                    id="showConditionalPageButton"
-                  >
-                    {this.state.showConditionalPage && !this.state.showConditionalPage[ix] &&
-                    <Glyphicon glyph="glyphicon glyphicon-share-alt" id="showConditionalPage" />}
-                    {this.state.showConditionalPage && this.state.showConditionalPage[ix] &&
-                    <Glyphicon
-                      glyph="glyphicon glyphicon glyphicon-minus-sign"
-                      id="showConditionalPage"
-                    />}
-                  </Button>
-                </InputGroup.Button>
-                <InputGroup.Button>
-                  <Button
-                    id="showConditionalQuestionButton"
-                    onClick={event => this.onShowConditonalClick(ix, event)}
-                    className="btn btn-primary"
-                  >
-                    {this.state.showConditionalQuestions &&
-                    !this.state.showConditionalQuestions[ix] &&
-                    <Glyphicon
-                      glyph="glyphicon glyphicon-menu-hamburger"
-                      id="showConditionalQuestion"
-                    />
-                    }
-                    {this.state.showConditionalQuestions &&
-                    this.state.showConditionalQuestions[ix] &&
-                    <Glyphicon
-                      glyph="glyphicon glyphicon glyphicon-minus-sign"
-                      id="showConditionalQuestion"
-                    />}
-                  </Button>
-                </InputGroup.Button>
-
-                {this.state.showConditionalPage[ix] &&
-                  <ConditionalPageEditor
-                    questionOptionIndex={ix}
-                    questionId={this.props.questionId}
-                    currentQuestionPanelIndex={this.props.currentQuestionPanelIndex}
-                    currentQuestionSetIndex={this.props.currentQuestionSetIndex}
-                    currentQuestionIndex={this.props.currentQuestionIndex}
-                    text={this.state.questionInputOptions[ix].text}
-                  />
-                }
-                {this.state.showConditionalQuestions[ix] &&
-                  <ConditionalQuestionEditor
-                    currentQuestionSetIndex={this.props.currentQuestionSetIndex}
-                    currentQuestionIndex={this.props.currentQuestionIndex}
-                    questionOptionIndex={ix}
-                  />
-                }
-              </InputGroup>
-            </div>))
-            }
-
-        <br />
-        <table>
-          <tbody>
-            <tr>
-              <td colSpan={4}>
-                <AddQuestionOptionButton
-                  questionInputOptions={this.state.questionInputOptions}
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     );
   }
 
@@ -433,7 +270,14 @@ class QuestionEditor extends PureComponent {
           questionInputType === 'radioOptionsInput') &&
           questionInputOptions &&
           this.props.currentQuestionIndex > -1 &&
-          this.getQuestionOptions()
+          // this.getQuestionOptions()
+          <QuestionOptionEditor
+            questionInputOptions={this.props.questionInputOptions}
+            questionId={this.props.questionId}
+            currentQuestionPanelIndex={this.props.currentQuestionPanelIndex}
+            currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+            currentQuestionIndex={this.props.currentQuestionIndex}
+          />
         }
         <ButtonBarEditor
           currentQuestionPanelIndex={currentQuestionPanelIndex}

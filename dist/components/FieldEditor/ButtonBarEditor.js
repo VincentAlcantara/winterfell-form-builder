@@ -213,7 +213,7 @@ var ButtonBarEditor = function (_PureComponent) {
               value: 'GOTO'
             }],
             onSelect: this.onSelectDefaultAction,
-            initialValue: this.props.defaultGoToAction
+            displayValue: this.props.defaultGoToAction
           })
         ),
         this.state.defaultGoToAction === 'GOTO' && _react2.default.createElement(
@@ -229,7 +229,7 @@ var ButtonBarEditor = function (_PureComponent) {
             labelId: 'goToPanel',
             options: this.formPanelIds(),
             onSelect: this.onSelectDefaultTarget,
-            initialValue: this.props.defaultGoToTarget
+            displayValue: this.props.defaultGoToTarget
           })
         ),
         this.state.defaultGoToAction === 'SUBMIT' && _react2.default.createElement(_FieldGroup2.default, {

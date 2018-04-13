@@ -48,10 +48,12 @@ var FormQuestionEditor = function FormQuestionEditor(props) {
             null,
             question.text
           ),
-          question.input && question.input.type === '' && _react2.default.createElement(
-            'p',
+          question.input && question.input.type === 'checkboxInput' && _react2.default.createElement(
+            'span',
             null,
-            'No question type selected'
+            _react2.default.createElement('input', { type: 'checkbox' }),
+            '\xA0',
+            question.input.text
           ),
           question.input && (question.input.type === 'textInput' || question.input.type === 'emailInput') && _react2.default.createElement('input', {
             id: question.questionId,
@@ -74,6 +76,24 @@ var FormQuestionEditor = function FormQuestionEditor(props) {
             labelId: question.questionId,
             options: question.input.options
           }),
+          question.input && question.input.type === 'dateInput' && _react2.default.createElement(
+            'p',
+            null,
+            _react2.default.createElement(
+              'i',
+              null,
+              '(date input)'
+            )
+          ),
+          question.input && question.input.type === 'addressInput' && _react2.default.createElement(
+            'p',
+            null,
+            _react2.default.createElement(
+              'i',
+              null,
+              '(address input)'
+            )
+          ),
           question.postText && _react2.default.createElement(
             'p',
             null,

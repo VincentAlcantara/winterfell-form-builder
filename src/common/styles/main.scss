@@ -94,6 +94,7 @@
 .winterfell-form-builder-page-sorter {
   padding-top: 10px;
 }
+
 .winterfell-form-builder-conditional-page, .winterfell-form-builder-conditional-questions {
   padding-top: 10px 5px;
   border: 1px solid #eee;
@@ -155,3 +156,5 @@
     }
   }
 }
+
+@import '../../../node_modules/react-datepicker/dist/react-datepicker.css';

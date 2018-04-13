@@ -137,40 +137,20 @@ var ConditionalPageEditor = function (_Component) {
           _react2.default.createElement(
             'h6',
             null,
-            'Conditional Page:'
+            'Option \'' + this.props.text + '\' Conditional Page:'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            _react2.default.createElement(
+              'i',
+              null,
+              'Go to this page if this is option selected.'
+            )
           ),
           _react2.default.createElement(
             _reactBootstrap.FormGroup,
             null,
-            _react2.default.createElement(
-              'p',
-              null,
-              _react2.default.createElement(
-                'b',
-                null,
-                'Go to page below if question ',
-                _react2.default.createElement(
-                  'i',
-                  null,
-                  '"',
-                  this.props.question,
-                  '"'
-                ),
-                '\xA0is: ',
-                _react2.default.createElement(
-                  'i',
-                  null,
-                  '"',
-                  this.props.value,
-                  '",'
-                )
-              )
-            ),
-            _react2.default.createElement(
-              'label',
-              { htmlFor: 'questionTarget' },
-              'Go To Page'
-            ),
             _react2.default.createElement(
               _reactBootstrap.InputGroup,
               null,
@@ -179,7 +159,7 @@ var ConditionalPageEditor = function (_Component) {
                 labelId: 'questionTarget',
                 options: this.nextButtonTargetOptions(),
                 onSelect: this.onSelect,
-                initialValue: this.initialTarget(),
+                displayValue: this.initialTarget(),
                 value: this.state.questionTarget
               }),
               _react2.default.createElement(
@@ -211,12 +191,12 @@ ConditionalPageEditor.propTypes = {
   formPanels: _propTypes2.default.object.isRequired,
   currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
   questionId: _propTypes2.default.string.isRequired,
-  question: _propTypes2.default.string,
+  text: _propTypes2.default.string,
   value: _propTypes2.default.string,
   conditions: _propTypes2.default.object
 };
 ConditionalPageEditor.defaultProps = {
-  question: '',
+  text: '',
   value: '',
   questionTarget: '',
   conditions: (0, _immutable.fromJS)([])

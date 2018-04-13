@@ -19,8 +19,8 @@ const FormQuestionEditor = (props) => {
           <p>{question.text}</p>
         }
         {
-          question.input && question.input.type === '' &&
-          <p>No question type selected</p>
+          question.input && question.input.type === 'checkboxInput' &&
+          <span><input type="checkbox" />&nbsp;{question.input.text}</span>
         }
         {
           question.input &&
@@ -59,6 +59,12 @@ const FormQuestionEditor = (props) => {
             labelId={question.questionId}
             options={question.input.options}
           />
+        }
+        { question.input && question.input.type === 'dateInput' &&
+          <p><i>(date input)</i></p>
+        }
+        { question.input && question.input.type === 'addressInput' &&
+          <p><i>(address input)</i></p>
         }
         {
           question.postText &&
