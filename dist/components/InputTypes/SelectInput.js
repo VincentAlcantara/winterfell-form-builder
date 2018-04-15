@@ -43,7 +43,7 @@ var SelectInput = function (_React$Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (SelectInput.__proto__ || (0, _getPrototypeOf2.default)(SelectInput)).call(this, props));
 
     _this.state = {
-      value: _this.props.initialValue
+      value: _this.props.displayValue
     };
 
     _this.handleChange = _this.handleChange.bind(_this);
@@ -54,7 +54,7 @@ var SelectInput = function (_React$Component) {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       this.setState({
-        value: nextProps.initialValue
+        value: nextProps.displayValue
       });
     }
   }, {
@@ -104,7 +104,7 @@ var SelectInput = function (_React$Component) {
 }(_react2.default.Component);
 
 SelectInput.propTypes = {
-  initialValue: _propTypes2.default.string,
+  displayValue: _propTypes2.default.string,
   options: _propTypes2.default.array.isRequired,
   classes: _propTypes2.default.object,
   name: _propTypes2.default.string,
@@ -117,12 +117,12 @@ SelectInput.defaultProps = {
   },
   id: '',
   name: '',
-  value: [{ text: '', value: '' }],
+  value: '',
   options: [],
   onChange: function onChange() {},
   onSelect: function onSelect() {},
   required: false,
-  initialValue: ''
+  displayValue: ''
 };
 var _default = SelectInput;
 exports.default = _default;

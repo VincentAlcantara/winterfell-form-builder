@@ -70,6 +70,8 @@ export const MOVE_PAGE_SUCCESS = 'MOVE_PAGE_SUCCESS';
 export const DISABLE_BACK_BUTTON_SUCCESS = 'DISABLE_BACK_BUTTON_SUCCESS';
 export const UPDATE_NEXT_QUESTION_TARGET_SUCCESS = 'UPDATE_NEXT_QUESTION_TARGET_SUCCESS';
 export const RESET_NEXT_QUESTION_TARGET_SUCCESS = 'RESET_NEXT_QUESTION_TARGET_SUCCESS';
+export const UPDATE_QUESTION_ANSWERS_SUCCESS = 'UPDATE_QUESTION_ANSWERS_SUCCESS';
+
 export const BOOTSTRAP_CLASSES = {
   input: 'form-control',
   select: 'form-control',
@@ -93,10 +95,19 @@ export const INPUT_TYPE_OPTIONS = [{
   text: 'select',
   value: 'selectInput',
 }, {
-  text: 'checkbox',
+  text: 'checkbox options',
   value: 'checkboxOptionsInput',
 }, {
   text: 'radio button',
   value: 'radioOptionsInput',
+}, {
+  text: 'address',
+  value: 'addressInput',
+}, {
+  text: 'date',
+  value: 'dateInput',
+}, {
+  text: 'checkbox',
+  value: 'checkboxInput',
 }];
 

@@ -5,6 +5,7 @@ import PageEditor from './PageEditor';
 import QuestionSetEditor from './QuestionSetEditor';
 import QuestionEditor from './QuestionEditor';
 import ButtonBarEditor from './ButtonBarEditor';
+import TreeView from '../TreeView';
 
 
 function FieldEditor(props) {
@@ -18,6 +19,11 @@ function FieldEditor(props) {
   return (
     <Row>
       <Col xs={12}>
+        <label htmlFor="tree-view">
+          Navigation
+        </label>
+        <TreeView id="tree-view" />
+        <br />
         {
           (currentEditingField === 'page' || currentEditingField === 'pageSort') &&
           <PageEditor

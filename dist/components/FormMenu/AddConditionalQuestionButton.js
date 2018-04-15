@@ -46,6 +46,12 @@ var _FieldGroup = require('../InputTypes/FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
+var _SelectInput = require('../InputTypes/SelectInput');
+
+var _SelectInput2 = _interopRequireDefault(_SelectInput);
+
+var _constants = require('../../common/constants');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AddConditionalQuestionButton = function (_Component) {
@@ -66,6 +72,7 @@ var AddConditionalQuestionButton = function (_Component) {
 
     _this.onChange = _this.onChange.bind(_this);
     _this.onFormUpdate = _this.onFormUpdate.bind(_this);
+    _this.onSelect = _this.onSelect.bind(_this);
     return _this;
   }
 
@@ -80,6 +87,11 @@ var AddConditionalQuestionButton = function (_Component) {
     value: function onClose(e) {
       e.preventDefault();
       this.setState({ showModal: true });
+    }
+  }, {
+    key: 'onSelect',
+    value: function onSelect(type) {
+      this.setState({ questionType: type });
     }
   }, {
     key: 'onFormUpdate',
@@ -157,13 +169,17 @@ var AddConditionalQuestionButton = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.FormGroup,
                 null,
-                _react2.default.createElement(_FieldGroup2.default, {
-                  id: 'questionText',
-                  name: 'questionText',
-                  label: 'Enter Question Text',
-                  onChange: this.onChange,
-                  placeholder: '',
-                  value: this.state.questionText
+                _react2.default.createElement(
+                  'label',
+                  { htmlFor: 'questionType' },
+                  'Select Question Type'
+                ),
+                _react2.default.createElement(_SelectInput2.default, {
+                  id: 'questionType',
+                  labelId: 'questionType',
+                  options: _constants.INPUT_TYPE_OPTIONS,
+                  onSelect: this.onSelect,
+                  displayValue: this.state.questionType
                 })
               )
             )

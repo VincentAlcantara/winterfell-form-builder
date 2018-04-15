@@ -19,7 +19,6 @@ import FieldEditor from './FieldEditor';
 
 class WinterfellFormBuilder extends Component {
   static propTypes = {
-    title: PropTypes.string,
     schema: PropTypes.object,
     currentPanelId: PropTypes.string,
     currentQuestionPanelIndex: PropTypes.number,
@@ -61,7 +60,6 @@ class WinterfellFormBuilder extends Component {
 
   render() {
     const {
-      title,
       schema,
       currentPanelId,
       formPanels,
@@ -94,21 +92,16 @@ class WinterfellFormBuilder extends Component {
         <Row>
           <Col xs={12}>
             <Row>
-              <Col xs={12}>
-                <h3>Form: {title}</h3>
-              </Col>
-            </Row>
-            <Row>
               <ButtonGroup>
                 <CreateFormButton />
                 <UploadJSONButton />
-                <EditFormTitleButton />
+                <SaveFormButton />
                 <AddPageButton />
                 <PageSortButton
                   onClick={() => this.props.changeCurrentEditingField('pageSort')}
                 />
-                <SaveFormButton />
                 <EditSchemaButton />
+                <EditFormTitleButton />
               </ButtonGroup>
             </Row>
             <br />
@@ -130,9 +123,9 @@ class WinterfellFormBuilder extends Component {
                     active={currentEditingField === 'page'}
                     onClick={() => this.props.changeCurrentEditingField('page')}
                   >
-                    {currentPanelId}
+                    { currentPanelId !== 'Select Page' && currentPanelId}
                   </Breadcrumb.Item>
-                  {(currentEditingField === 'questionSet' || currentEditingField === 'question') &&
+                  {(currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets &&
                     <Breadcrumb.Item
                       href=""
                       active={currentEditingField === 'questionSet'}
@@ -140,7 +133,7 @@ class WinterfellFormBuilder extends Component {
                     >{questionSets.getIn([currentQuestionSetIndex, 'questionSetId'])}
                     </Breadcrumb.Item>
                   }
-                  {(currentEditingField === 'question') &&
+                  {(currentEditingField === 'question') && questionSets &&
                     <Breadcrumb.Item
                       active={currentEditingField === 'question'}
                     >
@@ -166,28 +159,34 @@ class WinterfellFormBuilder extends Component {
                 </Row>
               </Col>
               <Col xs={8} className="winterfell-form-builder-page-editor">
-                { this.props.schema.size !== 0 &&
+                { (this.props.schema && currentQuestionPanelIndex >= 0) &&
                   <FieldSelector
                     currentQuestionPanelIndex={currentQuestionPanelIndex}
                   />
                 }
-                { this.props.schema.size === 0 &&
+                { (!this.props.schema || this.props.schema.size === 0) &&
                   <Alert bsStyle="info">
-                    No form loaded.  Click on &#39;new form&#39; to create a new form,
-                    or &#39;open form&#39; to load an existing form.
+                    No form loaded.  Click on &#39;new&#39; to create a new form,
+                    or &#39;upload&#39; to load an existing form.
                   </Alert>
                 }
               </Col>
             </Row>
             <Row className="winterfell-form-builder-previewer">
               <Col xs={12}>
-                <h3>Preview:</h3>
+                <h3>Form Preview:</h3>
                 {
                   schema &&
                   <Previewer
                     currentPanelId={currentPanelId}
                     schema={schema.toJS()}
                   />
+                }
+                {
+                  currentPanelId === 'Select Page' &&
+                  <Alert bsStyle="info">
+                    No page selected to preview.  Select a page from the dropdown above.
+                  </Alert>
                 }
               </Col>
             </Row>

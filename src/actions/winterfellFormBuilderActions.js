@@ -39,6 +39,7 @@ import {
   MOVE_PAGE_SUCCESS,
   UPDATE_NEXT_QUESTION_TARGET_SUCCESS,
   RESET_NEXT_QUESTION_TARGET_SUCCESS,
+  UPDATE_QUESTION_ANSWERS_SUCCESS,
 } from '../common/constants';
 
 export function updateErrorMessage(message) {
@@ -396,5 +397,12 @@ export function deleteConditionalQuestion(
       questionOptionIndex,
       conditionalQuestionIndex,
     },
+  };
+}
+
+export function updateQuestionAnswers(questionAnswers) {
+  return {
+    type: UPDATE_QUESTION_ANSWERS_SUCCESS,
+    payload: { questionAnswers },
   };
 }

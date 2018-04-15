@@ -11,9 +11,13 @@ import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 class AddQuestionButton extends Component {
   static propTypes = {
     addQuestion: PropTypes.func.isRequired,
-    questionSetId: PropTypes.string.isRequired,
+    questionSetId: PropTypes.string,
     currentQuestionSetIndex: PropTypes.number.isRequired,
-  }
+  };
+
+  static defaultProps = {
+    questionSetId: '',
+  };
 
   constructor(props) {
     super(props);
@@ -76,16 +80,6 @@ class AddQuestionButton extends Component {
               <form>
                 <FormGroup>
                   <FieldGroup
-                    id="questionSetId"
-                    name="questionSetId"
-                    label="Question Set ID"
-                    onChange={this.onChange}
-                    placeholder="(optional)"
-                    value={this.state.questionSetId}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <FieldGroup
                     id="questionId"
                     name="questionId"
                     label="Question ID"
@@ -105,16 +99,6 @@ class AddQuestionButton extends Component {
                   />
                 </FormGroup>
                 <FormGroup>
-                  <FieldGroup
-                    id="questionText"
-                    name="questionText"
-                    label="Enter Question Text"
-                    onChange={this.onChange}
-                    placeholder=""
-                    value={this.state.questionText}
-                  />
-                </FormGroup>
-                <FormGroup>
                   <label htmlFor="questionType">
                     Select Question Type
                   </label>
@@ -123,6 +107,7 @@ class AddQuestionButton extends Component {
                     labelId="questionType"
                     options={INPUT_TYPE_OPTIONS}
                     onSelect={this.onSelect}
+                    displayValue={this.state.questionType}
                   />
                 </FormGroup>
               </form>

@@ -75,6 +75,8 @@ var MOVE_PAGE_SUCCESS = exports.MOVE_PAGE_SUCCESS = 'MOVE_PAGE_SUCCESS';
 var DISABLE_BACK_BUTTON_SUCCESS = exports.DISABLE_BACK_BUTTON_SUCCESS = 'DISABLE_BACK_BUTTON_SUCCESS';
 var UPDATE_NEXT_QUESTION_TARGET_SUCCESS = exports.UPDATE_NEXT_QUESTION_TARGET_SUCCESS = 'UPDATE_NEXT_QUESTION_TARGET_SUCCESS';
 var RESET_NEXT_QUESTION_TARGET_SUCCESS = exports.RESET_NEXT_QUESTION_TARGET_SUCCESS = 'RESET_NEXT_QUESTION_TARGET_SUCCESS';
+var UPDATE_QUESTION_ANSWERS_SUCCESS = exports.UPDATE_QUESTION_ANSWERS_SUCCESS = 'UPDATE_QUESTION_ANSWERS_SUCCESS';
+
 var BOOTSTRAP_CLASSES = exports.BOOTSTRAP_CLASSES = {
   input: 'form-control',
   select: 'form-control',
@@ -98,11 +100,20 @@ var INPUT_TYPE_OPTIONS = exports.INPUT_TYPE_OPTIONS = [{
   text: 'select',
   value: 'selectInput'
 }, {
-  text: 'checkbox',
+  text: 'checkbox options',
   value: 'checkboxOptionsInput'
 }, {
   text: 'radio button',
   value: 'radioOptionsInput'
+}, {
+  text: 'address',
+  value: 'addressInput'
+}, {
+  text: 'date',
+  value: 'dateInput'
+}, {
+  text: 'checkbox',
+  value: 'checkboxInput'
 }];
 ;
 
@@ -240,6 +251,8 @@ var _temp = function () {
   __REACT_HOT_LOADER__.register(UPDATE_NEXT_QUESTION_TARGET_SUCCESS, 'UPDATE_NEXT_QUESTION_TARGET_SUCCESS', 'src/common/constants.js');
 
   __REACT_HOT_LOADER__.register(RESET_NEXT_QUESTION_TARGET_SUCCESS, 'RESET_NEXT_QUESTION_TARGET_SUCCESS', 'src/common/constants.js');
+
+  __REACT_HOT_LOADER__.register(UPDATE_QUESTION_ANSWERS_SUCCESS, 'UPDATE_QUESTION_ANSWERS_SUCCESS', 'src/common/constants.js');
 
   __REACT_HOT_LOADER__.register(BOOTSTRAP_CLASSES, 'BOOTSTRAP_CLASSES', 'src/common/constants.js');
 

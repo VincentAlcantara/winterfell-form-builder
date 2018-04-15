@@ -139,18 +139,6 @@ var AddQuestionButton = function (_Component) {
                   _reactBootstrap.FormGroup,
                   null,
                   _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionSetId',
-                    name: 'questionSetId',
-                    label: 'Question Set ID',
-                    onChange: this.onChange,
-                    placeholder: '(optional)',
-                    value: this.state.questionSetId
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
-                  _react2.default.createElement(_FieldGroup2.default, {
                     id: 'questionId',
                     name: 'questionId',
                     label: 'Question ID',
@@ -174,18 +162,6 @@ var AddQuestionButton = function (_Component) {
                 _react2.default.createElement(
                   _reactBootstrap.FormGroup,
                   null,
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionText',
-                    name: 'questionText',
-                    label: 'Enter Question Text',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.questionText
-                  })
-                ),
-                _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
                   _react2.default.createElement(
                     'label',
                     { htmlFor: 'questionType' },
@@ -195,7 +171,8 @@ var AddQuestionButton = function (_Component) {
                     id: 'questionType',
                     labelId: 'questionType',
                     options: _constants.INPUT_TYPE_OPTIONS,
-                    onSelect: this.onSelect
+                    onSelect: this.onSelect,
+                    displayValue: this.state.questionType
                   })
                 )
               )
@@ -233,8 +210,11 @@ var AddQuestionButton = function (_Component) {
 
 AddQuestionButton.propTypes = {
   addQuestion: _propTypes2.default.func.isRequired,
-  questionSetId: _propTypes2.default.string.isRequired,
+  questionSetId: _propTypes2.default.string,
   currentQuestionSetIndex: _propTypes2.default.number.isRequired
+};
+AddQuestionButton.defaultProps = {
+  questionSetId: ''
 };
 
 var _default = (0, _reactRedux.connect)(null, { addQuestion: _winterfellFormBuilderActions.addQuestion })(AddQuestionButton);

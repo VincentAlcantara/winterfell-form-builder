@@ -82,7 +82,6 @@ var WinterfellFormBuilder = function (_Component) {
       var _this2 = this;
 
       var _props = this.props,
-          title = _props.title,
           schema = _props.schema,
           currentPanelId = _props.currentPanelId,
           formPanels = _props.formPanels,
@@ -141,33 +140,19 @@ var WinterfellFormBuilder = function (_Component) {
               _reactBootstrap.Row,
               null,
               _react2.default.createElement(
-                _reactBootstrap.Col,
-                { xs: 12 },
-                _react2.default.createElement(
-                  'h3',
-                  null,
-                  'Form: ',
-                  title
-                )
-              )
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Row,
-              null,
-              _react2.default.createElement(
                 _reactBootstrap.ButtonGroup,
                 null,
                 _react2.default.createElement(_FormMenu.CreateFormButton, null),
                 _react2.default.createElement(_FormMenu.UploadJSONButton, null),
-                _react2.default.createElement(_FormMenu.EditFormTitleButton, null),
+                _react2.default.createElement(_FormMenu.SaveFormButton, null),
                 _react2.default.createElement(_FormMenu.AddPageButton, null),
                 _react2.default.createElement(_FormMenu.PageSortButton, {
                   onClick: function onClick() {
                     return _this2.props.changeCurrentEditingField('pageSort');
                   }
                 }),
-                _react2.default.createElement(_FormMenu.SaveFormButton, null),
-                _react2.default.createElement(_FormMenu.EditSchemaButton, null)
+                _react2.default.createElement(_FormMenu.EditSchemaButton, null),
+                _react2.default.createElement(_FormMenu.EditFormTitleButton, null)
               )
             ),
             _react2.default.createElement('br', null),
@@ -200,9 +185,9 @@ var WinterfellFormBuilder = function (_Component) {
                         return _this2.props.changeCurrentEditingField('page');
                       }
                     },
-                    currentPanelId
+                    currentPanelId !== 'Select Page' && currentPanelId
                   ),
-                  (currentEditingField === 'questionSet' || currentEditingField === 'question') && _react2.default.createElement(
+                  (currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets && _react2.default.createElement(
                     _reactBootstrap.Breadcrumb.Item,
                     {
                       href: '',
@@ -213,7 +198,7 @@ var WinterfellFormBuilder = function (_Component) {
                     },
                     questionSets.getIn([currentQuestionSetIndex, 'questionSetId'])
                   ),
-                  currentEditingField === 'question' && _react2.default.createElement(
+                  currentEditingField === 'question' && questionSets && _react2.default.createElement(
                     _reactBootstrap.Breadcrumb.Item,
                     {
                       active: currentEditingField === 'question'
@@ -247,13 +232,13 @@ var WinterfellFormBuilder = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Col,
                 { xs: 8, className: 'winterfell-form-builder-page-editor' },
-                this.props.schema.size !== 0 && _react2.default.createElement(_FieldSelector2.default, {
+                this.props.schema && currentQuestionPanelIndex >= 0 && _react2.default.createElement(_FieldSelector2.default, {
                   currentQuestionPanelIndex: currentQuestionPanelIndex
                 }),
-                this.props.schema.size === 0 && _react2.default.createElement(
+                (!this.props.schema || this.props.schema.size === 0) && _react2.default.createElement(
                   _reactBootstrap.Alert,
                   { bsStyle: 'info' },
-                  'No form loaded.  Click on \'new form\' to create a new form, or \'open form\' to load an existing form.'
+                  'No form loaded.  Click on \'new\' to create a new form, or \'upload\' to load an existing form.'
                 )
               )
             ),
@@ -266,12 +251,17 @@ var WinterfellFormBuilder = function (_Component) {
                 _react2.default.createElement(
                   'h3',
                   null,
-                  'Preview:'
+                  'Form Preview:'
                 ),
                 schema && _react2.default.createElement(_Previewer2.default, {
                   currentPanelId: currentPanelId,
                   schema: schema.toJS()
-                })
+                }),
+                currentPanelId === 'Select Page' && _react2.default.createElement(
+                  _reactBootstrap.Alert,
+                  { bsStyle: 'info' },
+                  'No page selected to preview.  Select a page from the dropdown above.'
+                )
               )
             )
           )
@@ -283,7 +273,6 @@ var WinterfellFormBuilder = function (_Component) {
 }(_react.Component);
 
 WinterfellFormBuilder.propTypes = {
-  title: _propTypes2.default.string,
   schema: _propTypes2.default.object,
   currentPanelId: _propTypes2.default.string,
   currentQuestionPanelIndex: _propTypes2.default.number,

@@ -101,7 +101,7 @@ var EditFormTitleButton = function (_Component) {
             _this2.setState({ showModal: true });
           }
         },
-        'edit form filename',
+        'edit filename',
         _react2.default.createElement(
           _reactBootstrap.Modal,
           { show: this.state.showModal },

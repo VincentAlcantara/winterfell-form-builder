@@ -128,7 +128,6 @@ var ConditionalQuestionEditor = function (_PureComponent) {
         return _react2.default.createElement(
           'div',
           { key: ix },
-          _react2.default.createElement('br', null),
           _react2.default.createElement(
             _reactBootstrap.FormGroup,
             null,
@@ -181,6 +180,8 @@ var ConditionalQuestionEditor = function (_PureComponent) {
               value: _this2.state.conditionalQuestions[ix].postText
             })
           ),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
           _react2.default.createElement(
             _reactBootstrap.ButtonGroup,
             null,
@@ -201,7 +202,8 @@ var ConditionalQuestionEditor = function (_PureComponent) {
               },
               'save'
             )
-          )
+          ),
+          _react2.default.createElement('br', null)
         );
       });
     }
@@ -217,10 +219,10 @@ var ConditionalQuestionEditor = function (_PureComponent) {
           _react2.default.createElement(
             'h6',
             null,
-            'Conditional Questions:'
+            'Option \'' + this.props.text + '\' Conditional Questions:'
           ),
           _react2.default.createElement(
-            'b',
+            'h6',
             null,
             _react2.default.createElement(
               'i',
@@ -250,6 +252,7 @@ var ConditionalQuestionEditor = function (_PureComponent) {
 ConditionalQuestionEditor.propTypes = {
   conditionalQuestions: _propTypes2.default.object,
   currentQuestionSetIndex: _propTypes2.default.number.isRequired,
+  text: _propTypes2.default.string.isRequired,
   currentQuestionIndex: _propTypes2.default.number.isRequired,
   questionOptionIndex: _propTypes2.default.number.isRequired,
   saveConditionalQuestion: _propTypes2.default.func.isRequired,
@@ -262,7 +265,8 @@ ConditionalQuestionEditor.defaultProps = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    conditionalQuestions: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'input', 'options', ownProps.questionOptionIndex, 'conditionalQuestions'])
+    conditionalQuestions: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'input', 'options', ownProps.questionOptionIndex, 'conditionalQuestions']),
+    text: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'input', 'options', ownProps.questionOptionIndex, 'text'])
   };
 }
 

@@ -46,7 +46,7 @@ class CreateFormButton extends Component {
         onClick={() => {
           this.setState({ showModal: true });
         }}
-      >new form
+      >new
         <Modal show={this.state.showModal}>
           <Modal.Header>
             <Modal.Title>Create a new form</Modal.Title>

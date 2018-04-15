@@ -98,12 +98,15 @@ class ButtonBarEditor extends PureComponent {
       !this.props.backButtonDisabled);
   }
 
-  render() {
-    const formPanelIds = this.props.formPanels.toJS().map(formPanel => ({
+  formPanelIds() {
+    const formPanelsArray = this.props.formPanels.toJS();
+    return formPanelsArray.map(formPanel => ({
       text: formPanel.panelId,
       value: formPanel.panelId,
     }));
+  }
 
+  render() {
     return (
       <div>
         <FormGroup>
@@ -152,7 +155,7 @@ class ButtonBarEditor extends PureComponent {
               value: 'GOTO',
             }]}
             onSelect={this.onSelectDefaultAction}
-            initialValue={this.props.defaultGoToAction}
+            displayValue={this.props.defaultGoToAction}
           />
         </FormGroup>
         { this.state.defaultGoToAction === 'GOTO' &&
@@ -163,9 +166,9 @@ class ButtonBarEditor extends PureComponent {
             <SelectInput
               id="goToPanel"
               labelId="goToPanel"
-              options={formPanelIds}
+              options={this.formPanelIds()}
               onSelect={this.onSelectDefaultTarget}
-              initialValue={this.props.defaultGoToTarget}
+              displayValue={this.props.defaultGoToTarget}
             />
           </FormGroup>
         }

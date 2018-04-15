@@ -44,9 +44,9 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactBootstrap = require('react-bootstrap');
 
-var _reactFileDownload = require('react-file-download');
+var _jsFileDownload = require('js-file-download');
 
-var _reactFileDownload2 = _interopRequireDefault(_reactFileDownload);
+var _jsFileDownload2 = _interopRequireDefault(_jsFileDownload);
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
@@ -75,6 +75,13 @@ var SaveFormButton = function (_Component) {
   }
 
   (0, _createClass3.default)(SaveFormButton, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.state = {
+        filename: nextProps.title
+      };
+    }
+  }, {
     key: 'onChange',
     value: function onChange(event) {
       event.preventDefault();
@@ -84,7 +91,7 @@ var SaveFormButton = function (_Component) {
     key: 'onJSONSave',
     value: function onJSONSave(e) {
       e.preventDefault();
-      (0, _reactFileDownload2.default)((0, _stringify2.default)(this.props.schema.toJS()), this.state.filename);
+      (0, _jsFileDownload2.default)((0, _stringify2.default)(this.props.schema.toJS()), this.state.filename);
       this.props.saveJSON(this.props.schema.toJS(), this.state.filename);
       this.setState({ showModal: false });
     }
@@ -101,7 +108,7 @@ var SaveFormButton = function (_Component) {
             _this2.setState({ showModal: true });
           }
         },
-        'save form',
+        'download',
         _react2.default.createElement(
           _reactBootstrap.Modal,
           { show: this.state.showModal },
@@ -111,7 +118,7 @@ var SaveFormButton = function (_Component) {
             _react2.default.createElement(
               _reactBootstrap.Modal.Title,
               null,
-              'Save form'
+              'Download Form'
             )
           ),
           _react2.default.createElement(
@@ -126,7 +133,7 @@ var SaveFormButton = function (_Component) {
                 _react2.default.createElement(_FieldGroup2.default, {
                   id: 'filename',
                   name: 'filename',
-                  label: 'Enter title of the form',
+                  label: 'Filename',
                   onChange: this.onChange,
                   placeholder: this.props.title,
                   value: this.state.filename
@@ -154,7 +161,7 @@ var SaveFormButton = function (_Component) {
                 onClick: this.onJSONSave,
                 disabled: !this.state.filename
               },
-              'Save'
+              'Continue'
             )
           )
         )
