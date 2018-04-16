@@ -3,8 +3,6 @@ import DatePicker from 'react-datepicker';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 
-import 'react-datepicker/dist/react-datepicker.css';
-
 export default class DateInput extends React.Component {
 
   constructor(props) {
@@ -43,13 +41,13 @@ export default class DateInput extends React.Component {
 }
 
 DateInput.propTypes = {
-  value: PropTypes.number,
+  value: PropTypes.object,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
   name: PropTypes.string,
   id: PropTypes.string.isRequired,
   classes: PropTypes.object,
-  onFocus: PropTypes.bool,
+  onFocus: PropTypes.func,
   labelId: PropTypes.string.isRequired,
 };
 

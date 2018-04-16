@@ -144,7 +144,7 @@ AddressInput.propTypes = {
   name: PropTypes.string,
   id: PropTypes.string,
   classes: PropTypes.string,
-  required: PropTypes.bool.isRequired,
+  required: PropTypes.string,
   onFocus: PropTypes.func,
   placeholders: PropTypes.object,
   labelId: PropTypes.string.isRequired,
@@ -154,6 +154,7 @@ AddressInput.defaultProps = {
   classes: {},
   name: '',
   id: '',
+  required: undefined,
   value: {
     line1: '',
     line2: '',

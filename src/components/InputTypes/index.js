@@ -2,8 +2,8 @@ import RadioButtonOptionsInput from './RadioButtonOptionsInput';
 import CheckboxOptionsInput from './CheckboxOptionsInput';
 import SelectInput from './SelectInput';
 import FieldGroup from './FieldGroup';
-import DateInputType from './dateInputType';
-import AddressInputType from './addressInputType';
+import dateInputType from './dateInputType';
+import addressInputType from './addressInputType';
 
 
 export {
@@ -11,6 +11,6 @@ export {
   CheckboxOptionsInput,
   SelectInput,
   FieldGroup,
-  DateInputType,
-  AddressInputType,
+  dateInputType,
+  addressInputType,
 };

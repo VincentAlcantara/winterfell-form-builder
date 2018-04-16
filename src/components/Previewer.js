@@ -5,7 +5,8 @@ import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { updateQuestionAnswers } from '../actions/winterfellFormBuilderActions';
-import { DateInputType, AddressInputType } from '../components/InputTypes';
+import dateInputType from '../components/InputTypes/dateInputType';
+import addressInputType from '../components/InputTypes/addressInputType';
 
 const onRenderDefault = () => {
   console.log('Great news! Winterfell rendered successfully');
@@ -67,7 +68,7 @@ class Previewer extends Component {
       questionAnswers,
     } = this.props;
 
-    Winterfell.addInputTypes({ DateInputType, AddressInputType });
+    Winterfell.addInputTypes({ dateInput: dateInputType, addressInput: addressInputType });
     const displayWinterFellForm = () => (
       schema.formPanels.map((formPanel, index) => (
         (formPanel.panelId === currentPanelId &&

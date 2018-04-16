@@ -40,8 +40,6 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
-require('react-datepicker/dist/react-datepicker.css');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var DateInput = function (_React$Component) {
@@ -101,13 +99,13 @@ exports.default = _default;
 
 
 DateInput.propTypes = {
-  value: _propTypes2.default.number,
+  value: _propTypes2.default.object,
   onChange: _propTypes2.default.func.isRequired,
   onBlur: _propTypes2.default.func,
   name: _propTypes2.default.string,
   id: _propTypes2.default.string.isRequired,
   classes: _propTypes2.default.object,
-  onFocus: _propTypes2.default.bool,
+  onFocus: _propTypes2.default.func,
   labelId: _propTypes2.default.string.isRequired
 };
 
