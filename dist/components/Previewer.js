@@ -42,6 +42,8 @@ var _reactRedux = require('react-redux');
 
 var _winterfellFormBuilderActions = require('../actions/winterfellFormBuilderActions');
 
+var _InputTypes = require('../components/InputTypes');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var onRenderDefault = function onRenderDefault() {
@@ -103,6 +105,7 @@ var Previewer = function (_Component) {
           questionAnswers = _props.questionAnswers;
 
 
+      _winterfell2.default.addInputTypes({ DateInputType: _InputTypes.DateInputType, AddressInputType: _InputTypes.AddressInputType });
       var displayWinterFellForm = function displayWinterFellForm() {
         return schema.formPanels.map(function (formPanel, index) {
           return formPanel.panelId === currentPanelId && _react2.default.createElement(_winterfell2.default, {

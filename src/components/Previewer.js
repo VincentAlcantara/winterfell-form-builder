@@ -5,6 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { updateQuestionAnswers } from '../actions/winterfellFormBuilderActions';
+import { DateInputType, AddressInputType } from '../components/InputTypes';
 
 const onRenderDefault = () => {
   console.log('Great news! Winterfell rendered successfully');
@@ -66,6 +67,7 @@ class Previewer extends Component {
       questionAnswers,
     } = this.props;
 
+    Winterfell.addInputTypes({ DateInputType, AddressInputType });
     const displayWinterFellForm = () => (
       schema.formPanels.map((formPanel, index) => (
         (formPanel.panelId === currentPanelId &&

@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.FieldGroup = exports.SelectInput = exports.CheckboxOptionsInput = exports.RadioButtonOptionsInput = undefined;
+exports.AddressInputType = exports.DateInputType = exports.FieldGroup = exports.SelectInput = exports.CheckboxOptionsInput = exports.RadioButtonOptionsInput = undefined;
 
 var _RadioButtonOptionsInput = require('./RadioButtonOptionsInput');
 
@@ -21,12 +21,22 @@ var _FieldGroup = require('./FieldGroup');
 
 var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
+var _dateInputType = require('./dateInputType');
+
+var _dateInputType2 = _interopRequireDefault(_dateInputType);
+
+var _addressInputType = require('./addressInputType');
+
+var _addressInputType2 = _interopRequireDefault(_addressInputType);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.RadioButtonOptionsInput = _RadioButtonOptionsInput2.default;
 exports.CheckboxOptionsInput = _CheckboxOptionsInput2.default;
 exports.SelectInput = _SelectInput2.default;
 exports.FieldGroup = _FieldGroup2.default;
+exports.DateInputType = _dateInputType2.default;
+exports.AddressInputType = _addressInputType2.default;
 ;
 
 var _temp = function () {
