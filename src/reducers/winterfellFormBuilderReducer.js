@@ -371,6 +371,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         text,
         postText,
         type,
+        options,
       } = action.payload;
 
       const newConditionalQuestion = {
@@ -380,7 +381,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         postText,
         input: {
           type: type || 'textInput',
-          options: type !== 'textInput' ? [] : undefined,
+          options: type !== 'textInput' ? options : undefined,
         },
       };
       return state

@@ -40,6 +40,7 @@ class ConditionalQuestionEditor extends PureComponent {
     this.onChange = this.onChange.bind(this);
     this.onSaveConditionalQuestion = this.onSaveConditionalQuestion.bind(this);
     this.onDeleteConditionalQuestion = this.onDeleteConditionalQuestion.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,8 +51,14 @@ class ConditionalQuestionEditor extends PureComponent {
 
   onChange(event, index) {
     const { name, value } = event.target;
-    const copyConditionalQuestions = Object.assign({}, this.state.conditionalQuestions);
+    const copyConditionalQuestions = Object.assign([], this.state.conditionalQuestions);
     copyConditionalQuestions[index][name] = value;
+    this.setState({ conditionalQuestions: copyConditionalQuestions });
+  }
+
+  onSelect(questionType, index) {
+    const copyConditionalQuestions = Object.assign([], this.state.conditionalQuestions);
+    copyConditionalQuestions[index].input.type = questionType;
     this.setState({ conditionalQuestions: copyConditionalQuestions });
   }
 
@@ -66,7 +73,7 @@ class ConditionalQuestionEditor extends PureComponent {
       question,
       text,
       postText,
-      type,
+      input,
     } = this.state.conditionalQuestions[conditionalQuestionIndex];
 
     this.props.saveConditionalQuestion(
@@ -78,7 +85,8 @@ class ConditionalQuestionEditor extends PureComponent {
       question,
       text,
       postText,
-      type,
+      input.type,
+      input.options,
     );
   }
 
@@ -98,14 +106,14 @@ class ConditionalQuestionEditor extends PureComponent {
   }
 
   getConditionalQuestions() {
-    return (this.props.conditionalQuestions.map((conditionalQuestion, ix) => {
+    return (this.state.conditionalQuestions.map((conditionalQuestion, ix) => {
       const {
         questionId,
         question,
         text,
         postText,
         input,
-      } = conditionalQuestion.toJS();
+      } = conditionalQuestion;
       return ( // return #2
         <div key={ix}>
           <FormGroup>
@@ -152,7 +160,7 @@ class ConditionalQuestionEditor extends PureComponent {
               id="questionInputType"
               labelId="questionInputType"
               options={INPUT_TYPE_OPTIONS}
-              onSelect={this.onSelect}
+              onSelect={e => this.onSelect(e, ix)}
               displayValue={input.type}
             />
           </FormGroup>

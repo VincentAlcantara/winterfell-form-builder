@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, InputGroup, FormControl, Glyphicon, Row, Col } from 'react-bootstrap';
+import { Button, InputGroup, FormControl, Glyphicon } from 'react-bootstrap';
 import DeleteQuestionOptionButton from '../FormMenu/DeleteQuestionOptionButton';
 import ConditionalPageEditor from './ConditionalPageEditor';
 import ConditionalQuestionEditor from './ConditionalQuestionEditor';
+import AddQuestionOptionButton from '../FormMenu/AddQuestionOptionButton';
 import {
   editQuestionOptionText,
   editQuestionOptionValue,
@@ -113,9 +114,7 @@ class ConditionalQuestionOptionEditor extends PureComponent {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  onAddOption(e) {
-    e.preventDefault();
-
+  onAddOption() {
     const newOption = {
       text: this.state.questionOptionText,
       value: this.state.questionOptionValue,
@@ -124,6 +123,7 @@ class ConditionalQuestionOptionEditor extends PureComponent {
     const copyConditionalQuestions = Object.assign([], this.state.questionInputOptions);
     copyConditionalQuestions.push(newOption);
     this.setState({ questionInputOptions: copyConditionalQuestions });
+    this.props.addQuestionOption
   }
 
   onDeleteOption(index) {
@@ -228,47 +228,15 @@ class ConditionalQuestionOptionEditor extends PureComponent {
             </div>))
             }
         <br />
-        <Row>
-          <Col xs={12}>
-            <label
-              htmlFor="addOption"
-            >
-              Add Option
-            </label>
-          </Col>
-          <Col xs={12}>
-            <table>
-              <tbody id="addOption">
-                <tr>
-                  <td>
-                    <FormControl
-                      type="text"
-                      name="questionOptionText"
-                      value={this.state.questionOptionText}
-                      onChange={this.onAddOptionChange}
-                    />
-                  </td>
-                  <td>
-                    <FormControl
-                      type="text"
-                      name="questionOptionValue"
-                      value={this.state.questionOptionValue}
-                      onChange={this.onAddOptionChange}
-                    />
-                  </td>
-                  <td colSpan={2}>
-                    <Button
-                      className="btn btn-primary"
-                      onClick={this.onAddOption}
-                      disabled={!this.state.questionOptionValue || !this.state.questionOptionText}
-                    ><Glyphicon glyph="glyphicon glyphicon-plus" />
-                    </Button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </Col>
-        </Row>
+        <div>
+          <AddQuestionOptionButton
+            questionOptionText={this.state.questionOptionText}
+            questionOptionValue={this.state.questionOptionValue}
+            onChange={e => this.onAddOptionChange(e)}
+            onClick={() => this.onAddOption(currentQuestionSetIndex,
+              currentQuestionIndex, this.state.questionOptionText, this.state.questionOptionValue)}
+          />
+        </div>
       </div>
     );
   }

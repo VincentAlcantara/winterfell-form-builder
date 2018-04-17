@@ -49,6 +49,7 @@ class QuestionOptionEditor extends PureComponent {
     this.onOptionTextChange = this.onOptionTextChange.bind(this);
     this.onOptionValueChange = this.onOptionValueChange.bind(this);
     this.onShowConditonalClick = this.onShowConditonalClick.bind(this);
+    this.onAddOption = this.onAddOption.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -223,8 +224,7 @@ class QuestionOptionEditor extends PureComponent {
             questionOptionText={this.state.questionOptionText}
             questionOptionValue={this.state.questionOptionValue}
             onChange={e => this.onAddOptionChange(e)}
-            onClick={() => this.onAddOption(currentQuestionSetIndex,
-              currentQuestionIndex, this.state.questionOptionText, this.state.questionOptionValue)}
+            onClick={this.onAddOption}
           />
         </div>
       </div>

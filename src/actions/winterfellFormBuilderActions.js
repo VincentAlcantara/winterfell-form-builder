@@ -368,7 +368,9 @@ export function saveConditionalQuestion(
   question,
   text,
   postText,
-  type) {
+  type,
+  options,
+) {
   return {
     type: SAVE_CONDITIONAL_QUESTION_SUCCESS,
     payload: {
@@ -380,7 +382,9 @@ export function saveConditionalQuestion(
       question,
       text,
       postText,
-      type },
+      type,
+      options,
+    },
   };
 }
 
