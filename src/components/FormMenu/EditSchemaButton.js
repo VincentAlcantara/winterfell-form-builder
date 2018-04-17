@@ -85,4 +85,5 @@ function mapStateToProps(state) {
     schema: state.getIn(['form', 'schema']),
   };
 }
+
 export default connect(mapStateToProps, { updateForm })(EditSchemaButton);

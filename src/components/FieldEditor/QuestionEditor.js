@@ -270,7 +270,6 @@ class QuestionEditor extends PureComponent {
           questionInputType === 'radioOptionsInput') &&
           questionInputOptions &&
           this.props.currentQuestionIndex > -1 &&
-          // this.getQuestionOptions()
           <QuestionOptionEditor
             questionInputOptions={this.props.questionInputOptions}
             questionId={this.props.questionId}

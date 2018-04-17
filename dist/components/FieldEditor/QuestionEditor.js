@@ -323,9 +323,7 @@ var QuestionEditor = function (_PureComponent) {
             })
           )
         ),
-        (questionInputType === 'checkboxOptionsInput' || questionInputType === 'selectInput' || questionInputType === 'radioOptionsInput') && questionInputOptions && this.props.currentQuestionIndex > -1 &&
-        // this.getQuestionOptions()
-        _react2.default.createElement(_QuestionOptionEditor2.default, {
+        (questionInputType === 'checkboxOptionsInput' || questionInputType === 'selectInput' || questionInputType === 'radioOptionsInput') && questionInputOptions && this.props.currentQuestionIndex > -1 && _react2.default.createElement(_QuestionOptionEditor2.default, {
           questionInputOptions: this.props.questionInputOptions,
           questionId: this.props.questionId,
           currentQuestionPanelIndex: this.props.currentQuestionPanelIndex,

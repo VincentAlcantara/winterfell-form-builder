@@ -28,15 +28,11 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = require('react-redux');
-
 var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactBootstrap = require('react-bootstrap');
-
-var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -65,14 +61,9 @@ var DeleteQuestionOptionButton = function (_Component) {
   }, {
     key: 'onConfirmDelete',
     value: function onConfirmDelete(e) {
-      var _props = this.props,
-          currentQuestionSetIndex = _props.currentQuestionSetIndex,
-          currentQuestionIndex = _props.currentQuestionIndex,
-          questionOptionIndex = _props.questionOptionIndex;
-
       e.preventDefault();
       this.setState({ showModal: false });
-      this.props.deleteQuestionOption(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex);
+      this.props.onDeleteQuestionOption();
     }
   }, {
     key: 'render',
@@ -136,23 +127,9 @@ var DeleteQuestionOptionButton = function (_Component) {
 }(_react.Component);
 
 DeleteQuestionOptionButton.propTypes = {
-  deleteQuestionOption: _propTypes2.default.func.isRequired,
-  currentQuestionSetIndex: _propTypes2.default.number.isRequired,
-  currentQuestionIndex: _propTypes2.default.number.isRequired,
-  questionOptionIndex: _propTypes2.default.number.isRequired
+  onDeleteQuestionOption: _propTypes2.default.func.isRequired
 };
-
-
-function mapStateToProps(state, ownProps) {
-  return {
-    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
-    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
-    questionOptionIndex: ownProps.questionOptionIndex
-  };
-}
-
-var _default = (0, _reactRedux.connect)(mapStateToProps, { deleteQuestionOption: _winterfellFormBuilderActions.deleteQuestionOption })(DeleteQuestionOptionButton);
-
+var _default = DeleteQuestionOptionButton;
 exports.default = _default;
 ;
 
@@ -162,8 +139,6 @@ var _temp = function () {
   }
 
   __REACT_HOT_LOADER__.register(DeleteQuestionOptionButton, 'DeleteQuestionOptionButton', 'src/components/FormMenu/DeleteQuestionOptionButton.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/DeleteQuestionOptionButton.js');
 
   __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/DeleteQuestionOptionButton.js');
 }();

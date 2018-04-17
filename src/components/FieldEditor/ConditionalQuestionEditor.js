@@ -6,12 +6,16 @@ import { fromJS } from 'immutable';
 import { saveConditionalQuestion, deleteConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 import { AddConditionalQuestionButton, DeleteConditionalQuestionButton } from '../FormMenu/';
+import SelectInput from '../InputTypes/SelectInput';
+import ConditionalQuestionOptionEditor from './ConditionalQuestionOptionEditor';
+import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
 class ConditionalQuestionEditor extends PureComponent {
   static propTypes = {
     conditionalQuestions: PropTypes.object,
     currentQuestionSetIndex: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
+    currentQuestionPanelIndex: PropTypes.number.isRequired,
     currentQuestionIndex: PropTypes.number.isRequired,
     questionOptionIndex: PropTypes.number.isRequired,
     saveConditionalQuestion: PropTypes.func.isRequired,
@@ -94,64 +98,97 @@ class ConditionalQuestionEditor extends PureComponent {
   }
 
   getConditionalQuestions() {
-    return (this.props.conditionalQuestions.map((conditionalQuestion, ix) => (
-      <div key={ix}>
-        <FormGroup>
-          <FieldGroup
-            id="questionId"
-            name="questionId"
-            label={`Conditional Question ID ${ix + 1}:`}
-            onChange={e => this.onChange(e, ix)}
-            value={this.state.conditionalQuestions[ix].questionId}
-          />
-        </FormGroup>
-        <FormGroup>
-          <FieldGroup
-            id="question"
-            name="question"
-            label={`Conditional Question ${ix + 1}:`}
-            onChange={e => this.onChange(e, ix)}
-            value={this.state.conditionalQuestions[ix].question}
-          />
-        </FormGroup>
-        <FormGroup>
-          <FieldGroup
-            id="text"
-            name="text"
-            label={`Conditional Question Pre Text ${ix + 1}:`}
-            onChange={e => this.onChange(e, ix)}
-            value={this.state.conditionalQuestions[ix].text}
-          />
-        </FormGroup>
-        <FormGroup>
-          <FieldGroup
-            id="postText"
-            name="postText"
-            label={`Conditional Question Post Text ${ix + 1}:`}
-            onChange={e => this.onChange(e, ix)}
-            value={this.state.conditionalQuestions[ix].postText}
-          />
-        </FormGroup>
-        <br />
-        <br />
-        <ButtonGroup>
-          <DeleteConditionalQuestionButton
-            currentQuestionSetIndex={this.props.currentQuestionSetIndex}
-            currentQuestionIndex={this.props.currentQuestionIndex}
-            questionOptionIndex={this.props.questionOptionIndex}
-            conditionalQuestionIndex={ix}
-          />
-          <Button
-            className="btn btn-warning"
-            title="save this conditional question"
-            onClick={() => this.onSaveConditionalQuestion(ix)}
-          >save
-          </Button>
-        </ButtonGroup>
-        <br />
-      </div>
-    ))
-    );
+    return (this.props.conditionalQuestions.map((conditionalQuestion, ix) => {
+      const {
+        questionId,
+        question,
+        text,
+        postText,
+        input,
+      } = conditionalQuestion.toJS();
+      return ( // return #2
+        <div key={ix}>
+          <FormGroup>
+            <FieldGroup
+              id="questionId"
+              name="questionId"
+              label={`Conditional Question ID ${ix + 1}:`}
+              onChange={e => this.onChange(e, ix)}
+              value={questionId}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FieldGroup
+              id="question"
+              name="question"
+              label={`Conditional Question ${ix + 1}:`}
+              onChange={e => this.onChange(e, ix)}
+              value={question}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FieldGroup
+              id="text"
+              name="text"
+              label={`Conditional Question Pre Text ${ix + 1}:`}
+              onChange={e => this.onChange(e, ix)}
+              value={text}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FieldGroup
+              id="postText"
+              name="postText"
+              label={`Conditional Question Post Text ${ix + 1}:`}
+              onChange={e => this.onChange(e, ix)}
+              value={postText}
+            />
+          </FormGroup>
+          <FormGroup>
+            <label htmlFor="questionInputType">
+              Question Type
+            </label>
+            <SelectInput
+              id="questionInputType"
+              labelId="questionInputType"
+              options={INPUT_TYPE_OPTIONS}
+              onSelect={this.onSelect}
+              displayValue={input.type}
+            />
+          </FormGroup>
+          {
+            (input.type === 'checkboxOptionsInput' ||
+            input.type === 'selectInput' ||
+            input.type === 'radioOptionsInput') &&
+            input.options &&
+            this.props.currentQuestionIndex > -1 &&
+            <ConditionalQuestionOptionEditor
+              questionInputOptions={input.options}
+              questionId={questionId}
+              currentQuestionPanelIndex={this.props.currentQuestionPanelIndex}
+              currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+              currentQuestionIndex={this.props.currentQuestionIndex}
+            />
+          }
+          <br />
+          <br />
+          <ButtonGroup>
+            <DeleteConditionalQuestionButton
+              currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+              currentQuestionIndex={this.props.currentQuestionIndex}
+              questionOptionIndex={this.props.questionOptionIndex}
+              conditionalQuestionIndex={ix}
+            />
+            <Button
+              className="btn btn-warning"
+              title="save this conditional question"
+              onClick={() => this.onSaveConditionalQuestion(ix)}
+            >save
+            </Button>
+          </ButtonGroup>
+          <br />
+        </div>); // end of return #2
+    }));  // end of return #1
   }
 
   render() {
@@ -162,7 +199,7 @@ class ConditionalQuestionEditor extends PureComponent {
             {`Option '${this.props.text}' Conditional Questions:`}
           </h6>
           <h6><i>Display these questions if this option is selected</i></h6>
-          { this.getConditionalQuestions() }
+          { this.props.conditionalQuestions && this.getConditionalQuestions() }
         </Col>
         <Col xs={12}>
           <br />

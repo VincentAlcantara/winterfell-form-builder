@@ -276,6 +276,9 @@ AddressInput.defaultProps = {
     postcode: 'e.g 2000'
   },
   states: [{
+    text: 'Select state',
+    value: ''
+  }, {
     text: 'Australian Capital Territory',
     value: 'ACT'
   }, {
