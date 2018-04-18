@@ -26,6 +26,7 @@ class ConditionalQuestionOptionEditor extends PureComponent {
     currentQuestionIndex: PropTypes.number.isRequired,
     editQuestionOptionText: PropTypes.func.isRequired,
     editQuestionOptionValue: PropTypes.func.isRequired,
+    path: PropTypes.string.isRequired,
   };
 
   constructor(props) {
@@ -123,7 +124,7 @@ class ConditionalQuestionOptionEditor extends PureComponent {
     const copyConditionalQuestions = Object.assign([], this.state.questionInputOptions);
     copyConditionalQuestions.push(newOption);
     this.setState({ questionInputOptions: copyConditionalQuestions });
-    this.props.addQuestionOption
+    // this.props.addQuestionOption
   }
 
   onDeleteOption(index) {
@@ -138,8 +139,11 @@ class ConditionalQuestionOptionEditor extends PureComponent {
       currentQuestionPanelIndex,
       currentQuestionSetIndex,
       currentQuestionIndex,
+      path,
     } = this.props;
-
+    const newPath = Object.assign([], path);
+    newPath.push('input');
+    newPath.push('options');
     return (
       <div>
         { questionInputOptions &&
@@ -217,11 +221,13 @@ class ConditionalQuestionOptionEditor extends PureComponent {
                   />
                 }
                 {this.state.showConditionalQuestions[ix] &&
+                  newPath.push('conditionalQuestions') && newPath.push(ix) &&
                   <ConditionalQuestionEditor
                     currentQuestionPanelIndex={currentQuestionPanelIndex}
                     currentQuestionSetIndex={currentQuestionSetIndex}
                     currentQuestionIndex={currentQuestionIndex}
                     questionOptionIndex={ix}
+                    path={newPath}
                   />
                 }
               </InputGroup>

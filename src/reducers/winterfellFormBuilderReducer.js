@@ -79,8 +79,9 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     }
     case EDIT_PAGE_ID_SUCCESS: {
       const { questionPanelIndex, text } = action.payload;
+      const key = ['schema', 'formPanels', questionPanelIndex, 'panelId'];
       return state
-        .setIn(['schema', 'formPanels', questionPanelIndex, 'panelId'], text)
+        .setIn(key, text)
         .set('currentPanelId', text)
         .setIn(['schema', 'questionPanels', questionPanelIndex, 'panelId'], text);
     }
@@ -362,10 +363,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
     }
     case SAVE_CONDITIONAL_QUESTION_SUCCESS: {
       const {
-        currentQuestionSetIndex,
-        currentQuestionIndex,
-        questionOptionIndex,
-        conditionalQuestionIndex,
+        path,
         questionId,
         question,
         text,
@@ -385,9 +383,7 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         },
       };
       return state
-        .setIn(['schema', 'questionSets', currentQuestionSetIndex, 'questions',
-          currentQuestionIndex, 'input', 'options', questionOptionIndex, 'conditionalQuestions', conditionalQuestionIndex],
-          fromJS(newConditionalQuestion));
+        .setIn(path, fromJS(newConditionalQuestion));
     }
     case DELETE_CONDITIONAL_QUESTION_SUCCESS: {
       const {

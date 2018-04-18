@@ -360,10 +360,7 @@ export function resetNextQuestionTarget(currentQuestionPanelIndex, value) {
 }
 
 export function saveConditionalQuestion(
-  currentQuestionSetIndex,
-  currentQuestionIndex,
-  questionOptionIndex,
-  conditionalQuestionIndex,
+  path,
   questionId,
   question,
   text,
@@ -374,10 +371,7 @@ export function saveConditionalQuestion(
   return {
     type: SAVE_CONDITIONAL_QUESTION_SUCCESS,
     payload: {
-      currentQuestionSetIndex,
-      currentQuestionIndex,
-      questionOptionIndex,
-      conditionalQuestionIndex,
+      path,
       questionId,
       question,
       text,

@@ -20,6 +20,7 @@ class ConditionalQuestionEditor extends PureComponent {
     questionOptionIndex: PropTypes.number.isRequired,
     saveConditionalQuestion: PropTypes.func.isRequired,
     deleteConditionalQuestion: PropTypes.func.isRequired,
+    path: PropTypes.string.isRequired,
   }
 
   static defaultProps = {
@@ -62,12 +63,7 @@ class ConditionalQuestionEditor extends PureComponent {
     this.setState({ conditionalQuestions: copyConditionalQuestions });
   }
 
-  onSaveConditionalQuestion(conditionalQuestionIndex) {
-    const {
-      currentQuestionSetIndex,
-      currentQuestionIndex,
-      questionOptionIndex,
-    } = this.props;
+  onSaveConditionalQuestion(conditionalQuestionIndex, path) {
     const {
       questionId,
       question,
@@ -75,12 +71,10 @@ class ConditionalQuestionEditor extends PureComponent {
       postText,
       input,
     } = this.state.conditionalQuestions[conditionalQuestionIndex];
-
+    const newPath = Object.assign([], path);
+    newPath.push(conditionalQuestionIndex);
     this.props.saveConditionalQuestion(
-      currentQuestionSetIndex,
-      currentQuestionIndex,
-      questionOptionIndex,
-      conditionalQuestionIndex,
+      newPath,
       questionId,
       question,
       text,
@@ -176,6 +170,7 @@ class ConditionalQuestionEditor extends PureComponent {
               currentQuestionPanelIndex={this.props.currentQuestionPanelIndex}
               currentQuestionSetIndex={this.props.currentQuestionSetIndex}
               currentQuestionIndex={this.props.currentQuestionIndex}
+              path={this.props.path}
             />
           }
           <br />
@@ -190,7 +185,7 @@ class ConditionalQuestionEditor extends PureComponent {
             <Button
               className="btn btn-warning"
               title="save this conditional question"
-              onClick={() => this.onSaveConditionalQuestion(ix)}
+              onClick={() => this.onSaveConditionalQuestion(ix, this.props.path)}
             >save
             </Button>
           </ButtonGroup>
