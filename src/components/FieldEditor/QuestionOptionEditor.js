@@ -83,8 +83,10 @@ class QuestionOptionEditor extends PureComponent {
 
   onAddOption() {
     const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
-    this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex,
-      this.state.questionOptionText, this.state.questionOptionValue);
+    const { questionOptionText, questionOptionValue } = this.state;
+    const key = ['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+      currentQuestionIndex, 'input', 'options'];
+    this.props.addQuestionOption(key, questionOptionText, questionOptionValue);
     this.setState({ questionOptionText: '', questionOptionValue: '' });
   }
 
@@ -138,7 +140,7 @@ class QuestionOptionEditor extends PureComponent {
           questionInputOptions.toJS().map((option, ix) => ( */}
         {this.state.questionInputOptions &&
           this.state.questionInputOptions.map((option, ix) => {
-            const path = ['schema', 'questionSets', currentQuestionSetIndex, 'questions', currentQuestionIndex, 'input', 'options', ix, 'conditionalQuestions'];
+            const currentPath = ['schema', 'questionSets', currentQuestionSetIndex, 'questions', currentQuestionIndex, 'input', 'options', ix];
             return (
               <div key={`${ix}`} >
                 <InputGroup className="winterfell-form-builder-conditional-question">
@@ -210,11 +212,8 @@ class QuestionOptionEditor extends PureComponent {
                   }
                   {this.state.showConditionalQuestions[ix] &&
                     <ConditionalQuestionEditor
-                      currentQuestionPanelIndex={currentQuestionPanelIndex}
-                      currentQuestionSetIndex={currentQuestionSetIndex}
-                      currentQuestionIndex={currentQuestionIndex}
-                      questionOptionIndex={ix}
-                      path={path}
+                      parentPath={currentPath}
+                      parentOptionText={this.state.questionInputOptions[ix].text}
                     />
                   }
                 </InputGroup>

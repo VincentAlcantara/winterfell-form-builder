@@ -65,15 +65,11 @@ var DeleteConditionalQuestionButton = function (_Component) {
   }, {
     key: 'onConfirmDelete',
     value: function onConfirmDelete(e) {
-      var _props = this.props,
-          currentQuestionSetIndex = _props.currentQuestionSetIndex,
-          currentQuestionIndex = _props.currentQuestionIndex,
-          questionOptionIndex = _props.questionOptionIndex,
-          conditionalQuestionIndex = _props.conditionalQuestionIndex;
+      var path = this.props.path;
 
       e.preventDefault();
       this.setState({ showModal: false });
-      this.props.deleteConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, conditionalQuestionIndex);
+      this.props.deleteConditionalQuestion(path);
     }
   }, {
     key: 'render',
@@ -138,10 +134,7 @@ var DeleteConditionalQuestionButton = function (_Component) {
 
 DeleteConditionalQuestionButton.propTypes = {
   deleteConditionalQuestion: _propTypes2.default.func.isRequired,
-  currentQuestionSetIndex: _propTypes2.default.number.isRequired,
-  currentQuestionIndex: _propTypes2.default.number.isRequired,
-  questionOptionIndex: _propTypes2.default.number.isRequired,
-  conditionalQuestionIndex: _propTypes2.default.number.isRequired
+  path: _propTypes2.default.array.isRequired
 };
 
 var _default = (0, _reactRedux.connect)(null, { deleteConditionalQuestion: _winterfellFormBuilderActions.deleteConditionalQuestion })(DeleteConditionalQuestionButton);

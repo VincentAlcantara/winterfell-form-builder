@@ -19,14 +19,13 @@ import {
 
 class ConditionalQuestionOptionEditor extends PureComponent {
   static propTypes = {
-    questionInputOptions: PropTypes.object.isRequired,
+    questionInputOptions: PropTypes.array.isRequired,
     questionId: PropTypes.string.isRequired,
-    currentQuestionPanelIndex: PropTypes.number.isRequired,
-    currentQuestionSetIndex: PropTypes.number.isRequired,
-    currentQuestionIndex: PropTypes.number.isRequired,
     editQuestionOptionText: PropTypes.func.isRequired,
     editQuestionOptionValue: PropTypes.func.isRequired,
-    path: PropTypes.string.isRequired,
+    addQuestionOption: PropTypes.func.isRequired,
+    deleteQuestionOption: PropTypes.func.isRequired,
+    path: PropTypes.array.isRequired,
   };
 
   constructor(props) {
@@ -55,26 +54,24 @@ class ConditionalQuestionOptionEditor extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      questionInputOptions: nextProps.questionInputOptions.toJS(),
+      questionInputOptions: nextProps.questionInputOptions,
     });
   }
 
   onOptionTextChange(event, index) {
-    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
+    const { path } = this.props;
     const questionInputOptions = Object.assign({}, this.state.questionInputOptions);
     questionInputOptions[index].text = event.target.value;
     this.setState({ questionInputOptions });
-    this.props.editQuestionOptionText(currentQuestionSetIndex, currentQuestionIndex,
-      index, event.target.value);
+    this.props.editQuestionOptionText([...path, 'input', 'options', index], event.target.value);
   }
 
   onOptionValueChange(event, index) {
-    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
+    const { path } = this.props;
     const questionInputOptions = Object.assign({}, this.state.questionInputOptions);
     questionInputOptions[index].value = event.target.value;
     this.setState({ questionInputOptions });
-    this.props.editQuestionOptionValue(currentQuestionSetIndex, currentQuestionIndex,
-      index, event.target.value);
+    this.props.editQuestionOptionValue([...path, 'input', 'options', index], event.target.value);
   }
 
   onShowConditonalClick(index, event) {
@@ -116,15 +113,12 @@ class ConditionalQuestionOptionEditor extends PureComponent {
   }
 
   onAddOption() {
-    const newOption = {
-      text: this.state.questionOptionText,
-      value: this.state.questionOptionValue,
-    };
-
-    const copyConditionalQuestions = Object.assign([], this.state.questionInputOptions);
-    copyConditionalQuestions.push(newOption);
-    this.setState({ questionInputOptions: copyConditionalQuestions });
-    // this.props.addQuestionOption
+    const { questionOptionText, questionOptionValue } = this.state;
+    const key = Object.assign([], this.props.path);
+    key.push('input');
+    key.push('options');
+    this.props.addQuestionOption(key, questionOptionText, questionOptionValue);
+    this.setState({ questionOptionText: '', questionOptionValue: '' });
   }
 
   onDeleteOption(index) {
@@ -132,18 +126,14 @@ class ConditionalQuestionOptionEditor extends PureComponent {
     copyConditionalQuestions.splice(index, 1);
     this.setState({ questionInputOptions: copyConditionalQuestions });
   }
+  onDeleteQuestionOption
   render() {
     const {
       questionInputOptions,
       questionId,
-      currentQuestionPanelIndex,
-      currentQuestionSetIndex,
-      currentQuestionIndex,
       path,
     } = this.props;
-    const newPath = Object.assign([], path);
-    newPath.push('input');
-    newPath.push('options');
+
     return (
       <div>
         { questionInputOptions &&
@@ -170,7 +160,7 @@ class ConditionalQuestionOptionEditor extends PureComponent {
                 />
                 <InputGroup.Button>
                   <DeleteQuestionOptionButton
-                    questionOptionIndex={ix}
+                    onDeleteQuestionOption={() => this.props.deleteQuestionOption([...path, 'input', 'options', ix])}
                   />
                 </InputGroup.Button>
                 <InputGroup.Button>
@@ -214,20 +204,13 @@ class ConditionalQuestionOptionEditor extends PureComponent {
                   <ConditionalPageEditor
                     questionOptionIndex={ix}
                     questionId={questionId}
-                    currentQuestionPanelIndex={currentQuestionPanelIndex}
-                    currentQuestionSetIndex={currentQuestionSetIndex}
-                    currentQuestionIndex={currentQuestionIndex}
                     text={this.state.questionInputOptions[ix].text}
                   />
                 }
                 {this.state.showConditionalQuestions[ix] &&
-                  newPath.push('conditionalQuestions') && newPath.push(ix) &&
                   <ConditionalQuestionEditor
-                    currentQuestionPanelIndex={currentQuestionPanelIndex}
-                    currentQuestionSetIndex={currentQuestionSetIndex}
-                    currentQuestionIndex={currentQuestionIndex}
-                    questionOptionIndex={ix}
-                    path={newPath}
+                    parentPath={[...path, 'input', 'options', ix]}
+                    parentOptionText={this.state.questionInputOptions[ix].text}
                   />
                 }
               </InputGroup>
@@ -239,8 +222,7 @@ class ConditionalQuestionOptionEditor extends PureComponent {
             questionOptionText={this.state.questionOptionText}
             questionOptionValue={this.state.questionOptionValue}
             onChange={e => this.onAddOptionChange(e)}
-            onClick={() => this.onAddOption(currentQuestionSetIndex,
-              currentQuestionIndex, this.state.questionOptionText, this.state.questionOptionValue)}
+            onClick={this.onAddOption}
           />
         </div>
       </div>

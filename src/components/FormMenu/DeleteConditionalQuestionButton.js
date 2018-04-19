@@ -7,10 +7,7 @@ import { deleteConditionalQuestion } from '../../actions/winterfellFormBuilderAc
 class DeleteConditionalQuestionButton extends Component {
   static propTypes = {
     deleteConditionalQuestion: PropTypes.func.isRequired,
-    currentQuestionSetIndex: PropTypes.number.isRequired,
-    currentQuestionIndex: PropTypes.number.isRequired,
-    questionOptionIndex: PropTypes.number.isRequired,
-    conditionalQuestionIndex: PropTypes.number.isRequired,
+    path: PropTypes.array.isRequired,
   }
 
   constructor(props) {
@@ -29,12 +26,10 @@ class DeleteConditionalQuestionButton extends Component {
   }
 
   onConfirmDelete(e) {
-    const { currentQuestionSetIndex, currentQuestionIndex,
-      questionOptionIndex, conditionalQuestionIndex } = this.props;
+    const { path } = this.props;
     e.preventDefault();
     this.setState({ showModal: false });
-    this.props.deleteConditionalQuestion(
-      currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, conditionalQuestionIndex);
+    this.props.deleteConditionalQuestion(path);
   }
 
   render() {

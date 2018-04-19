@@ -14,13 +14,13 @@ class ConditionalQuestionEditor extends PureComponent {
   static propTypes = {
     conditionalQuestions: PropTypes.object,
     currentQuestionSetIndex: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
+    parentOptionText: PropTypes.string.isRequired,
     currentQuestionPanelIndex: PropTypes.number.isRequired,
     currentQuestionIndex: PropTypes.number.isRequired,
     questionOptionIndex: PropTypes.number.isRequired,
     saveConditionalQuestion: PropTypes.func.isRequired,
     deleteConditionalQuestion: PropTypes.func.isRequired,
-    path: PropTypes.string.isRequired,
+    parentPath: PropTypes.array.isRequired,
   }
 
   static defaultProps = {
@@ -72,6 +72,7 @@ class ConditionalQuestionEditor extends PureComponent {
       input,
     } = this.state.conditionalQuestions[conditionalQuestionIndex];
     const newPath = Object.assign([], path);
+    newPath.push('conditionalQuestions');
     newPath.push(conditionalQuestionIndex);
     this.props.saveConditionalQuestion(
       newPath,
@@ -108,8 +109,12 @@ class ConditionalQuestionEditor extends PureComponent {
         postText,
         input,
       } = conditionalQuestion;
+      const conditionalPath = Object.assign([], this.props.parentPath);
+      conditionalPath.push('conditionalQuestions');
+      conditionalPath.push(ix);
       return ( // return #2
         <div key={ix}>
+          <h6>path:{`${conditionalPath}`}</h6>
           <FormGroup>
             <FieldGroup
               id="questionId"
@@ -162,30 +167,25 @@ class ConditionalQuestionEditor extends PureComponent {
             (input.type === 'checkboxOptionsInput' ||
             input.type === 'selectInput' ||
             input.type === 'radioOptionsInput') &&
-            input.options &&
-            this.props.currentQuestionIndex > -1 &&
             <ConditionalQuestionOptionEditor
               questionInputOptions={input.options}
               questionId={questionId}
               currentQuestionPanelIndex={this.props.currentQuestionPanelIndex}
               currentQuestionSetIndex={this.props.currentQuestionSetIndex}
-              currentQuestionIndex={this.props.currentQuestionIndex}
-              path={this.props.path}
+              path={conditionalPath}
             />
           }
           <br />
           <br />
           <ButtonGroup>
             <DeleteConditionalQuestionButton
-              currentQuestionSetIndex={this.props.currentQuestionSetIndex}
-              currentQuestionIndex={this.props.currentQuestionIndex}
-              questionOptionIndex={this.props.questionOptionIndex}
-              conditionalQuestionIndex={ix}
+              path={conditionalPath}
+              deleteConditionalQuestion={this.props.deleteConditionalQuestion}
             />
             <Button
               className="btn btn-warning"
               title="save this conditional question"
-              onClick={() => this.onSaveConditionalQuestion(ix, this.props.path)}
+              onClick={() => this.onSaveConditionalQuestion(ix, this.props.parentPath)}
             >save
             </Button>
           </ButtonGroup>
@@ -199,7 +199,10 @@ class ConditionalQuestionEditor extends PureComponent {
       <Row className="winterfell-form-builder-conditional-questions alert-info">
         <Col xs={12}>
           <h6>
-            {`Option '${this.props.text}' Conditional Questions:`}
+            {`Option '${this.props.parentOptionText}' Conditional Questions:`}
+          </h6>
+          <h6>
+            {`path:${this.props.parentPath}`}
           </h6>
           <h6><i>Display these questions if this option is selected</i></h6>
           { this.props.conditionalQuestions && this.getConditionalQuestions() }
@@ -207,9 +210,7 @@ class ConditionalQuestionEditor extends PureComponent {
         <Col xs={12}>
           <br />
           <AddConditionalQuestionButton
-            currentQuestionSetIndex={this.props.currentQuestionSetIndex}
-            currentQuestionIndex={this.props.currentQuestionIndex}
-            questionOptionIndex={this.props.questionOptionIndex}
+            path={this.props.parentPath}
           />
           <br />
         </Col>
@@ -220,10 +221,7 @@ class ConditionalQuestionEditor extends PureComponent {
 
 function mapStateToProps(state, ownProps) {
   return {
-    conditionalQuestions: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex,
-      'questions', ownProps.currentQuestionIndex, 'input', 'options', ownProps.questionOptionIndex, 'conditionalQuestions']),
-    text: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex,
-      'questions', ownProps.currentQuestionIndex, 'input', 'options', ownProps.questionOptionIndex, 'text']),
+    conditionalQuestions: state.getIn(['form', ...ownProps.parentPath, 'conditionalQuestions']),
   };
 }
 

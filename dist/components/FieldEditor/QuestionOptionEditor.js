@@ -91,6 +91,7 @@ var QuestionOptionEditor = function (_PureComponent) {
     _this.onOptionTextChange = _this.onOptionTextChange.bind(_this);
     _this.onOptionValueChange = _this.onOptionValueChange.bind(_this);
     _this.onShowConditonalClick = _this.onShowConditonalClick.bind(_this);
+    _this.onAddOption = _this.onAddOption.bind(_this);
     return _this;
   }
 
@@ -137,8 +138,12 @@ var QuestionOptionEditor = function (_PureComponent) {
       var _props3 = this.props,
           currentQuestionSetIndex = _props3.currentQuestionSetIndex,
           currentQuestionIndex = _props3.currentQuestionIndex;
+      var _state = this.state,
+          questionOptionText = _state.questionOptionText,
+          questionOptionValue = _state.questionOptionValue;
 
-      this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex, this.state.questionOptionText, this.state.questionOptionValue);
+      var key = ['schema', 'questionSets', currentQuestionSetIndex, 'questions', currentQuestionIndex, 'input', 'options'];
+      this.props.addQuestionOption(key, questionOptionText, questionOptionValue);
       this.setState({ questionOptionText: '', questionOptionValue: '' });
     }
   }, {
@@ -185,7 +190,6 @@ var QuestionOptionEditor = function (_PureComponent) {
           currentQuestionSetIndex = _props4.currentQuestionSetIndex,
           currentQuestionIndex = _props4.currentQuestionIndex;
 
-
       return _react2.default.createElement(
         'div',
         null,
@@ -195,6 +199,7 @@ var QuestionOptionEditor = function (_PureComponent) {
           'Options'
         ),
         this.state.questionInputOptions && this.state.questionInputOptions.map(function (option, ix) {
+          var currentPath = ['schema', 'questionSets', currentQuestionSetIndex, 'questions', currentQuestionIndex, 'input', 'options', ix];
           return _react2.default.createElement(
             'div',
             { key: '' + ix },
@@ -277,10 +282,8 @@ var QuestionOptionEditor = function (_PureComponent) {
                 text: _this2.state.questionInputOptions[ix].text
               }),
               _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_ConditionalQuestionEditor2.default, {
-                currentQuestionPanelIndex: currentQuestionPanelIndex,
-                currentQuestionSetIndex: currentQuestionSetIndex,
-                currentQuestionIndex: currentQuestionIndex,
-                questionOptionIndex: ix
+                parentPath: currentPath,
+                parentOptionText: _this2.state.questionInputOptions[ix].text
               })
             )
           );
@@ -295,9 +298,7 @@ var QuestionOptionEditor = function (_PureComponent) {
             onChange: function onChange(e) {
               return _this2.onAddOptionChange(e);
             },
-            onClick: function onClick() {
-              return _this2.onAddOption(currentQuestionSetIndex, currentQuestionIndex, _this2.state.questionOptionText, _this2.state.questionOptionValue);
-            }
+            onClick: this.onAddOption
           })
         )
       );

@@ -60,6 +60,10 @@ var _ConditionalQuestionEditor = require('./ConditionalQuestionEditor');
 
 var _ConditionalQuestionEditor2 = _interopRequireDefault(_ConditionalQuestionEditor);
 
+var _AddQuestionOptionButton = require('../FormMenu/AddQuestionOptionButton');
+
+var _AddQuestionOptionButton2 = _interopRequireDefault(_AddQuestionOptionButton);
+
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -97,32 +101,28 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       this.setState({
-        questionInputOptions: nextProps.questionInputOptions.toJS()
+        questionInputOptions: nextProps.questionInputOptions
       });
     }
   }, {
     key: 'onOptionTextChange',
     value: function onOptionTextChange(event, index) {
-      var _props = this.props,
-          currentQuestionSetIndex = _props.currentQuestionSetIndex,
-          currentQuestionIndex = _props.currentQuestionIndex;
+      var path = this.props.path;
 
       var questionInputOptions = (0, _assign2.default)({}, this.state.questionInputOptions);
       questionInputOptions[index].text = event.target.value;
       this.setState({ questionInputOptions: questionInputOptions });
-      this.props.editQuestionOptionText(currentQuestionSetIndex, currentQuestionIndex, index, event.target.value);
+      this.props.editQuestionOptionText([].concat((0, _toConsumableArray3.default)(path), ['input', 'options', index]), event.target.value);
     }
   }, {
     key: 'onOptionValueChange',
     value: function onOptionValueChange(event, index) {
-      var _props2 = this.props,
-          currentQuestionSetIndex = _props2.currentQuestionSetIndex,
-          currentQuestionIndex = _props2.currentQuestionIndex;
+      var path = this.props.path;
 
       var questionInputOptions = (0, _assign2.default)({}, this.state.questionInputOptions);
       questionInputOptions[index].value = event.target.value;
       this.setState({ questionInputOptions: questionInputOptions });
-      this.props.editQuestionOptionValue(currentQuestionSetIndex, currentQuestionIndex, index, event.target.value);
+      this.props.editQuestionOptionValue([].concat((0, _toConsumableArray3.default)(path), ['input', 'options', index]), event.target.value);
     }
   }, {
     key: 'onShowConditonalClick',
@@ -164,17 +164,16 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
     }
   }, {
     key: 'onAddOption',
-    value: function onAddOption(e) {
-      e.preventDefault();
+    value: function onAddOption() {
+      var _state = this.state,
+          questionOptionText = _state.questionOptionText,
+          questionOptionValue = _state.questionOptionValue;
 
-      var newOption = {
-        text: this.state.questionOptionText,
-        value: this.state.questionOptionValue
-      };
-
-      var copyConditionalQuestions = (0, _assign2.default)([], this.state.questionInputOptions);
-      copyConditionalQuestions.push(newOption);
-      this.setState({ questionInputOptions: copyConditionalQuestions });
+      var key = (0, _assign2.default)([], this.props.path);
+      key.push('input');
+      key.push('options');
+      this.props.addQuestionOption(key, questionOptionText, questionOptionValue);
+      this.setState({ questionOptionText: '', questionOptionValue: '' });
     }
   }, {
     key: 'onDeleteOption',
@@ -188,12 +187,10 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
     value: function render() {
       var _this2 = this;
 
-      var _props3 = this.props,
-          questionInputOptions = _props3.questionInputOptions,
-          questionId = _props3.questionId,
-          currentQuestionPanelIndex = _props3.currentQuestionPanelIndex,
-          currentQuestionSetIndex = _props3.currentQuestionSetIndex,
-          currentQuestionIndex = _props3.currentQuestionIndex;
+      var _props = this.props,
+          questionInputOptions = _props.questionInputOptions,
+          questionId = _props.questionId,
+          path = _props.path;
 
 
       return _react2.default.createElement(
@@ -240,7 +237,9 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
                 _reactBootstrap.InputGroup.Button,
                 null,
                 _react2.default.createElement(_DeleteQuestionOptionButton2.default, {
-                  questionOptionIndex: ix
+                  onDeleteQuestionOption: function onDeleteQuestionOption() {
+                    return _this2.props.deleteQuestionOption([].concat((0, _toConsumableArray3.default)(path), ['input', 'options', ix]));
+                  }
                 })
               ),
               _react2.default.createElement(
@@ -287,84 +286,27 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
               _this2.state.showConditionalPage[ix] && _react2.default.createElement(_ConditionalPageEditor2.default, {
                 questionOptionIndex: ix,
                 questionId: questionId,
-                currentQuestionPanelIndex: currentQuestionPanelIndex,
-                currentQuestionSetIndex: currentQuestionSetIndex,
-                currentQuestionIndex: currentQuestionIndex,
                 text: _this2.state.questionInputOptions[ix].text
               }),
               _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_ConditionalQuestionEditor2.default, {
-                currentQuestionPanelIndex: currentQuestionPanelIndex,
-                currentQuestionSetIndex: currentQuestionSetIndex,
-                currentQuestionIndex: currentQuestionIndex,
-                questionOptionIndex: ix
+                parentPath: [].concat((0, _toConsumableArray3.default)(path), ['input', 'options', ix]),
+                parentOptionText: _this2.state.questionInputOptions[ix].text
               })
             )
           );
         }),
         _react2.default.createElement('br', null),
         _react2.default.createElement(
-          _reactBootstrap.Row,
+          'div',
           null,
-          _react2.default.createElement(
-            _reactBootstrap.Col,
-            { xs: 12 },
-            _react2.default.createElement(
-              'label',
-              {
-                htmlFor: 'addOption'
-              },
-              'Add Option'
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Col,
-            { xs: 12 },
-            _react2.default.createElement(
-              'table',
-              null,
-              _react2.default.createElement(
-                'tbody',
-                { id: 'addOption' },
-                _react2.default.createElement(
-                  'tr',
-                  null,
-                  _react2.default.createElement(
-                    'td',
-                    null,
-                    _react2.default.createElement(_reactBootstrap.FormControl, {
-                      type: 'text',
-                      name: 'questionOptionText',
-                      value: this.state.questionOptionText,
-                      onChange: this.onAddOptionChange
-                    })
-                  ),
-                  _react2.default.createElement(
-                    'td',
-                    null,
-                    _react2.default.createElement(_reactBootstrap.FormControl, {
-                      type: 'text',
-                      name: 'questionOptionValue',
-                      value: this.state.questionOptionValue,
-                      onChange: this.onAddOptionChange
-                    })
-                  ),
-                  _react2.default.createElement(
-                    'td',
-                    { colSpan: 2 },
-                    _react2.default.createElement(
-                      _reactBootstrap.Button,
-                      {
-                        className: 'btn btn-primary',
-                        onClick: this.onAddOption,
-                        disabled: !this.state.questionOptionValue || !this.state.questionOptionText
-                      },
-                      _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-plus' })
-                    )
-                  )
-                )
-              )
-            )
-          )
+          _react2.default.createElement(_AddQuestionOptionButton2.default, {
+            questionOptionText: this.state.questionOptionText,
+            questionOptionValue: this.state.questionOptionValue,
+            onChange: function onChange(e) {
+              return _this2.onAddOptionChange(e);
+            },
+            onClick: this.onAddOption
+          })
         )
       );
     }
@@ -373,13 +315,13 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
 }(_react.PureComponent);
 
 ConditionalQuestionOptionEditor.propTypes = {
-  questionInputOptions: _propTypes2.default.object.isRequired,
+  questionInputOptions: _propTypes2.default.array.isRequired,
   questionId: _propTypes2.default.string.isRequired,
-  currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
-  currentQuestionSetIndex: _propTypes2.default.number.isRequired,
-  currentQuestionIndex: _propTypes2.default.number.isRequired,
   editQuestionOptionText: _propTypes2.default.func.isRequired,
-  editQuestionOptionValue: _propTypes2.default.func.isRequired
+  editQuestionOptionValue: _propTypes2.default.func.isRequired,
+  addQuestionOption: _propTypes2.default.func.isRequired,
+  deleteQuestionOption: _propTypes2.default.func.isRequired,
+  path: _propTypes2.default.array.isRequired
 };
 
 var _default = (0, _reactRedux.connect)(null, {
