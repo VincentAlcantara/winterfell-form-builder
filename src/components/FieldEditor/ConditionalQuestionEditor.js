@@ -16,8 +16,6 @@ class ConditionalQuestionEditor extends PureComponent {
     currentQuestionSetIndex: PropTypes.number.isRequired,
     parentOptionText: PropTypes.string.isRequired,
     currentQuestionPanelIndex: PropTypes.number.isRequired,
-    currentQuestionIndex: PropTypes.number.isRequired,
-    questionOptionIndex: PropTypes.number.isRequired,
     saveConditionalQuestion: PropTypes.func.isRequired,
     deleteConditionalQuestion: PropTypes.func.isRequired,
     parentPath: PropTypes.array.isRequired,
@@ -40,7 +38,6 @@ class ConditionalQuestionEditor extends PureComponent {
 
     this.onChange = this.onChange.bind(this);
     this.onSaveConditionalQuestion = this.onSaveConditionalQuestion.bind(this);
-    this.onDeleteConditionalQuestion = this.onDeleteConditionalQuestion.bind(this);
     this.onSelect = this.onSelect.bind(this);
   }
 
@@ -85,21 +82,6 @@ class ConditionalQuestionEditor extends PureComponent {
     );
   }
 
-  onDeleteConditionalQuestion(conditionalQuestionIndex) {
-    const {
-      currentQuestionSetIndex,
-      currentQuestionIndex,
-      questionOptionIndex,
-    } = this.props;
-
-    this.props.deleteConditionalQuestion(
-      currentQuestionSetIndex,
-      currentQuestionIndex,
-      questionOptionIndex,
-      conditionalQuestionIndex,
-    );
-  }
-
   getConditionalQuestions() {
     return (this.state.conditionalQuestions.map((conditionalQuestion, ix) => {
       const {
@@ -114,7 +96,6 @@ class ConditionalQuestionEditor extends PureComponent {
       conditionalPath.push(ix);
       return ( // return #2
         <div key={ix}>
-          <h6>path:{`${conditionalPath}`}</h6>
           <FormGroup>
             <FieldGroup
               id="questionId"
@@ -200,9 +181,6 @@ class ConditionalQuestionEditor extends PureComponent {
         <Col xs={12}>
           <h6>
             {`Option '${this.props.parentOptionText}' Conditional Questions:`}
-          </h6>
-          <h6>
-            {`path:${this.props.parentPath}`}
           </h6>
           <h6><i>Display these questions if this option is selected</i></h6>
           { this.props.conditionalQuestions && this.getConditionalQuestions() }

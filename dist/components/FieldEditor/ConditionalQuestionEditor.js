@@ -83,7 +83,6 @@ var ConditionalQuestionEditor = function (_PureComponent) {
 
     _this.onChange = _this.onChange.bind(_this);
     _this.onSaveConditionalQuestion = _this.onSaveConditionalQuestion.bind(_this);
-    _this.onDeleteConditionalQuestion = _this.onDeleteConditionalQuestion.bind(_this);
     _this.onSelect = _this.onSelect.bind(_this);
     return _this;
   }
@@ -129,17 +128,6 @@ var ConditionalQuestionEditor = function (_PureComponent) {
       this.props.saveConditionalQuestion(newPath, questionId, question, text, postText, input.type, input.options);
     }
   }, {
-    key: 'onDeleteConditionalQuestion',
-    value: function onDeleteConditionalQuestion(conditionalQuestionIndex) {
-      var _props = this.props,
-          currentQuestionSetIndex = _props.currentQuestionSetIndex,
-          currentQuestionIndex = _props.currentQuestionIndex,
-          questionOptionIndex = _props.questionOptionIndex;
-
-
-      this.props.deleteConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, conditionalQuestionIndex);
-    }
-  }, {
     key: 'getConditionalQuestions',
     value: function getConditionalQuestions() {
       var _this2 = this;
@@ -158,12 +146,6 @@ var ConditionalQuestionEditor = function (_PureComponent) {
           _react2.default.createElement(
             'div',
             { key: ix },
-            _react2.default.createElement(
-              'h6',
-              null,
-              'path:',
-              '' + conditionalPath
-            ),
             _react2.default.createElement(
               _reactBootstrap.FormGroup,
               null,
@@ -284,11 +266,6 @@ var ConditionalQuestionEditor = function (_PureComponent) {
           _react2.default.createElement(
             'h6',
             null,
-            'path:' + this.props.parentPath
-          ),
-          _react2.default.createElement(
-            'h6',
-            null,
             _react2.default.createElement(
               'i',
               null,
@@ -317,8 +294,6 @@ ConditionalQuestionEditor.propTypes = {
   currentQuestionSetIndex: _propTypes2.default.number.isRequired,
   parentOptionText: _propTypes2.default.string.isRequired,
   currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
-  currentQuestionIndex: _propTypes2.default.number.isRequired,
-  questionOptionIndex: _propTypes2.default.number.isRequired,
   saveConditionalQuestion: _propTypes2.default.func.isRequired,
   deleteConditionalQuestion: _propTypes2.default.func.isRequired,
   parentPath: _propTypes2.default.array.isRequired
