@@ -346,7 +346,7 @@ function winterfellFormBuilderReducer() {
           text: questionText,
           input: {
             type: _questionType || 'textInput',
-            options: _questionType !== 'textInput' ? [] : undefined
+            options: _questionType === 'checkBoxOptions' || _questionType === 'radioOptions' || _questionType === 'select' ? [] : undefined
           }
         };
         if (conditionalQuestionCount === 0) {
