@@ -51,7 +51,7 @@ var DateInput = function (_React$Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (DateInput.__proto__ || (0, _getPrototypeOf2.default)(DateInput)).call(this, props));
 
     _this.state = {
-      value: _this.props.value.type ? _this.props.value.value : _this.props.value
+      value: _this.props.value.type ? _this.props.value.value : (0, _moment2.default)()
     };
 
     _this.handleChange = _this.handleChange.bind(_this);
@@ -99,7 +99,7 @@ exports.default = _default;
 
 
 DateInput.propTypes = {
-  value: _propTypes2.default.object,
+  value: _propTypes2.default.any,
   onChange: _propTypes2.default.func.isRequired,
   onBlur: _propTypes2.default.func,
   name: _propTypes2.default.string,

@@ -10,9 +10,7 @@ import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 class AddConditionalQuestionButton extends Component {
   static propTypes = {
     addConditionalQuestion: PropTypes.func.isRequired,
-    currentQuestionSetIndex: PropTypes.number.isRequired,
-    currentQuestionIndex: PropTypes.number.isRequired,
-    questionOptionIndex: PropTypes.number.isRequired,
+    path: PropTypes.array.isRequired,
   }
 
   constructor(props) {
@@ -47,12 +45,10 @@ class AddConditionalQuestionButton extends Component {
 
   onFormUpdate(e) {
     e.preventDefault();
-    const { currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex } = this.props;
+    const { path } = this.props;
     const { questionId, question, questionText, questionType } = this.state;
     this.props.addConditionalQuestion(
-      currentQuestionSetIndex,
-      currentQuestionIndex,
-      questionOptionIndex,
+      path,
       questionId,
       question,
       questionText,
@@ -127,9 +123,7 @@ class AddConditionalQuestionButton extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
-    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
-    questionOptionIndex: ownProps.questionOptionIndex,
+    path: ownProps.path,
   };
 }
 export default connect(mapStateToProps, { addConditionalQuestion })(AddConditionalQuestionButton);

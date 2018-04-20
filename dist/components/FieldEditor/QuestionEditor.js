@@ -108,7 +108,6 @@ var QuestionEditor = function (_PureComponent) {
 
     _this.onChange = _this.onChange.bind(_this);
     _this.onSelect = _this.onSelect.bind(_this);
-    _this.onAddQuestionOptionClick = _this.onAddQuestionOptionClick.bind(_this);
     _this.onEditQuestionIdClick = _this.onEditQuestionIdClick.bind(_this);
     _this.onUpdateNextQuestionTarget = _this.onUpdateNextQuestionTarget.bind(_this);
     return _this;
@@ -168,35 +167,6 @@ var QuestionEditor = function (_PureComponent) {
       }
     }
   }, {
-    key: 'onAddQuestionOptionClick',
-    value: function onAddQuestionOptionClick() {
-      var _props3 = this.props,
-          currentQuestionSetIndex = _props3.currentQuestionSetIndex,
-          currentQuestionIndex = _props3.currentQuestionIndex;
-
-      var questionInputOptions = [];
-      for (var i = 0; i < this.state.questionInputOptions.length; i += 1) {
-        questionInputOptions.push(this.state.questionInputOptions[i]);
-      }
-      questionInputOptions.push({ text: '', value: '' });
-
-      this.setState({ questionInputOptions: questionInputOptions });
-      this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex);
-    }
-  }, {
-    key: 'onDeleteOptionClick',
-    value: function onDeleteOptionClick() {
-      var _props4 = this.props,
-          currentQuestionSetIndex = _props4.currentQuestionSetIndex,
-          currentQuestionIndex = _props4.currentQuestionIndex;
-
-      var questionInputOptions = [];
-      for (var i = 0; i < this.state.questionInputOptions.length; i += 1) {
-        questionInputOptions.push(this.state.questionInputOptions[i]);
-      }
-      this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex);
-    }
-  }, {
     key: 'onEditQuestionIdClick',
     value: function onEditQuestionIdClick() {
       this.setState({ editQuestionId: !this.state.editQuestionId });
@@ -204,24 +174,24 @@ var QuestionEditor = function (_PureComponent) {
   }, {
     key: 'onUpdateNextQuestionTarget',
     value: function onUpdateNextQuestionTarget() {
-      var _props5 = this.props,
-          currentQuestionPanelIndex = _props5.currentQuestionPanelIndex,
-          questionId = _props5.questionId;
+      var _props3 = this.props,
+          currentQuestionPanelIndex = _props3.currentQuestionPanelIndex,
+          questionId = _props3.questionId;
 
       this.props.updateNextQuestionTarget(currentQuestionPanelIndex, questionId, this.state.questionTargetMatch, this.state.questionTarget);
     }
   }, {
     key: 'render',
     value: function render() {
-      var _props6 = this.props,
-          questionSetId = _props6.questionSetId,
-          questionId = _props6.questionId,
-          question = _props6.question,
-          questionText = _props6.questionText,
-          questionPostText = _props6.questionPostText,
-          questionInputType = _props6.questionInputType,
-          questionInputOptions = _props6.questionInputOptions,
-          currentQuestionPanelIndex = _props6.currentQuestionPanelIndex;
+      var _props4 = this.props,
+          questionSetId = _props4.questionSetId,
+          questionId = _props4.questionId,
+          question = _props4.question,
+          questionText = _props4.questionText,
+          questionPostText = _props4.questionPostText,
+          questionInputType = _props4.questionInputType,
+          questionInputOptions = _props4.questionInputOptions,
+          currentQuestionPanelIndex = _props4.currentQuestionPanelIndex;
 
 
       return _react2.default.createElement(
@@ -358,7 +328,6 @@ QuestionEditor.propTypes = {
   editQuestionText: _propTypes2.default.func.isRequired,
   editQuestionPostText: _propTypes2.default.func.isRequired,
   changeQuestionType: _propTypes2.default.func.isRequired,
-  addQuestionOption: _propTypes2.default.func.isRequired,
   updateNextQuestionTarget: _propTypes2.default.func.isRequired,
   questionSetId: _propTypes2.default.string.isRequired,
   questionId: _propTypes2.default.string,

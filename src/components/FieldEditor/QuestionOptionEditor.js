@@ -83,8 +83,10 @@ class QuestionOptionEditor extends PureComponent {
 
   onAddOption() {
     const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
-    this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex,
-      this.state.questionOptionText, this.state.questionOptionValue);
+    const { questionOptionText, questionOptionValue } = this.state;
+    const key = ['schema', 'questionSets', currentQuestionSetIndex, 'questions',
+      currentQuestionIndex, 'input', 'options'];
+    this.props.addQuestionOption(key, questionOptionText, questionOptionValue);
     this.setState({ questionOptionText: '', questionOptionValue: '' });
   }
 
@@ -129,7 +131,6 @@ class QuestionOptionEditor extends PureComponent {
       currentQuestionSetIndex,
       currentQuestionIndex,
     } = this.props;
-
     return (
       <div>
         { questionInputOptions &&
@@ -138,86 +139,87 @@ class QuestionOptionEditor extends PureComponent {
         {/* { questionInputOptions &&
           questionInputOptions.toJS().map((option, ix) => ( */}
         {this.state.questionInputOptions &&
-          this.state.questionInputOptions.map((option, ix) => (
-            <div key={`${ix}`} >
-              <InputGroup className="winterfell-form-builder-conditional-question">
-                <FormControl
-                  type="text"
-                  name={this.state.questionInputOptions[ix].text}
-                  value={this.state.questionInputOptions[ix].text}
-                  onChange={event => this.onOptionTextChange(event, ix)}
-                />
-                <FormControl
-                  type="text"
-                  name={this.state.questionInputOptions[ix].value}
-                  value={this.state.questionInputOptions[ix].value}
-                  onChange={event => this.onOptionValueChange(event, ix)}
-                />
-                <InputGroup.Button>
-                  <DeleteQuestionOptionButton
-                    questionOptionIndex={ix}
-                    onDeleteQuestionOption={() => this.props.deleteQuestionOption(
-                      currentQuestionSetIndex, currentQuestionIndex, ix)}
+          this.state.questionInputOptions.map((option, ix) => {
+            const currentPath = ['schema', 'questionSets', currentQuestionSetIndex, 'questions', currentQuestionIndex, 'input', 'options', ix];
+            return (
+              <div key={`${ix}`} >
+                <InputGroup className="winterfell-form-builder-conditional-question">
+                  <FormControl
+                    type="text"
+                    name={this.state.questionInputOptions[ix].text}
+                    value={this.state.questionInputOptions[ix].text}
+                    onChange={event => this.onOptionTextChange(event, ix)}
                   />
-                </InputGroup.Button>
-                <InputGroup.Button>
-                  <Button
-                    onClick={event => this.onShowConditonalClick(ix, event)}
-                    className="btn btn-warning"
-                    id="showConditionalPageButton"
-                  >
-                    {this.state.showConditionalPage && !this.state.showConditionalPage[ix] &&
-                    <Glyphicon glyph="glyphicon glyphicon-share-alt" id="showConditionalPage" />}
-                    {this.state.showConditionalPage && this.state.showConditionalPage[ix] &&
-                    <Glyphicon
-                      glyph="glyphicon glyphicon glyphicon-minus-sign"
-                      id="showConditionalPage"
-                    />}
-                  </Button>
-                </InputGroup.Button>
-                <InputGroup.Button>
-                  <Button
-                    id="showConditionalQuestionButton"
-                    onClick={event => this.onShowConditonalClick(ix, event)}
-                    className="btn btn-primary"
-                  >
-                    {this.state.showConditionalQuestions &&
-                    !this.state.showConditionalQuestions[ix] &&
-                    <Glyphicon
-                      glyph="glyphicon glyphicon-menu-hamburger"
-                      id="showConditionalQuestion"
+                  <FormControl
+                    type="text"
+                    name={this.state.questionInputOptions[ix].value}
+                    value={this.state.questionInputOptions[ix].value}
+                    onChange={event => this.onOptionValueChange(event, ix)}
+                  />
+                  <InputGroup.Button>
+                    <DeleteQuestionOptionButton
+                      questionOptionIndex={ix}
+                      onDeleteQuestionOption={() => this.props.deleteQuestionOption(
+                        currentQuestionSetIndex, currentQuestionIndex, ix)}
                     />
-                    }
-                    {this.state.showConditionalQuestions &&
-                    this.state.showConditionalQuestions[ix] &&
-                    <Glyphicon
-                      glyph="glyphicon glyphicon glyphicon-minus-sign"
-                      id="showConditionalQuestion"
-                    />}
-                  </Button>
-                </InputGroup.Button>
+                  </InputGroup.Button>
+                  <InputGroup.Button>
+                    <Button
+                      onClick={event => this.onShowConditonalClick(ix, event)}
+                      className="btn btn-warning"
+                      id="showConditionalPageButton"
+                    >
+                      {this.state.showConditionalPage && !this.state.showConditionalPage[ix] &&
+                      <Glyphicon glyph="glyphicon glyphicon-share-alt" id="showConditionalPage" />}
+                      {this.state.showConditionalPage && this.state.showConditionalPage[ix] &&
+                      <Glyphicon
+                        glyph="glyphicon glyphicon glyphicon-minus-sign"
+                        id="showConditionalPage"
+                      />}
+                    </Button>
+                  </InputGroup.Button>
+                  <InputGroup.Button>
+                    <Button
+                      id="showConditionalQuestionButton"
+                      onClick={event => this.onShowConditonalClick(ix, event)}
+                      className="btn btn-primary"
+                    >
+                      {this.state.showConditionalQuestions &&
+                      !this.state.showConditionalQuestions[ix] &&
+                      <Glyphicon
+                        glyph="glyphicon glyphicon-menu-hamburger"
+                        id="showConditionalQuestion"
+                      />
+                      }
+                      {this.state.showConditionalQuestions &&
+                      this.state.showConditionalQuestions[ix] &&
+                      <Glyphicon
+                        glyph="glyphicon glyphicon glyphicon-minus-sign"
+                        id="showConditionalQuestion"
+                      />}
+                    </Button>
+                  </InputGroup.Button>
 
-                {this.state.showConditionalPage[ix] &&
-                  <ConditionalPageEditor
-                    questionOptionIndex={ix}
-                    questionId={questionId}
-                    currentQuestionPanelIndex={currentQuestionPanelIndex}
-                    currentQuestionSetIndex={currentQuestionSetIndex}
-                    currentQuestionIndex={currentQuestionIndex}
-                    text={this.state.questionInputOptions[ix].text}
-                  />
-                }
-                {this.state.showConditionalQuestions[ix] &&
-                  <ConditionalQuestionEditor
-                    currentQuestionPanelIndex={currentQuestionPanelIndex}
-                    currentQuestionSetIndex={currentQuestionSetIndex}
-                    currentQuestionIndex={currentQuestionIndex}
-                    questionOptionIndex={ix}
-                  />
-                }
-              </InputGroup>
-            </div>))
-            }
+                  {this.state.showConditionalPage[ix] &&
+                    <ConditionalPageEditor
+                      questionOptionIndex={ix}
+                      questionId={questionId}
+                      currentQuestionPanelIndex={currentQuestionPanelIndex}
+                      currentQuestionSetIndex={currentQuestionSetIndex}
+                      currentQuestionIndex={currentQuestionIndex}
+                      text={this.state.questionInputOptions[ix].text}
+                    />
+                  }
+                  {this.state.showConditionalQuestions[ix] &&
+                    <ConditionalQuestionEditor
+                      parentPath={currentPath}
+                      parentOptionText={this.state.questionInputOptions[ix].text}
+                    />
+                  }
+                </InputGroup>
+              </div>);
+          })
+        }
         <br />
         <div>
           <AddQuestionOptionButton
