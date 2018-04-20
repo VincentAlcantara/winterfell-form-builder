@@ -324,7 +324,8 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         text: questionText,
         input: {
           type: questionType || 'textInput',
-          options: questionType !== 'textInput' ? [] : undefined,
+          options: questionType === 'checkBoxOptions' || questionType === 'radioOptions' ||
+            questionType === 'select' ? [] : undefined,
         },
       };
       if (conditionalQuestionCount === 0) {
