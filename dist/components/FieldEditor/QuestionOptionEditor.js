@@ -109,10 +109,11 @@ var QuestionOptionEditor = function (_PureComponent) {
           currentQuestionSetIndex = _props.currentQuestionSetIndex,
           currentQuestionIndex = _props.currentQuestionIndex;
 
-      var questionInputOptions = (0, _assign2.default)({}, this.state.questionInputOptions);
+      var questionInputOptions = (0, _assign2.default)([], this.state.questionInputOptions);
       questionInputOptions[index].text = event.target.value;
       this.setState({ questionInputOptions: questionInputOptions });
-      this.props.editQuestionOptionText(currentQuestionSetIndex, currentQuestionIndex, index, event.target.value);
+      var path = ['schema', 'questionSets', currentQuestionSetIndex, 'questions', currentQuestionIndex, 'input', 'options', index];
+      this.props.editQuestionOptionText(path, event.target.value);
     }
   }, {
     key: 'onOptionValueChange',
@@ -121,10 +122,11 @@ var QuestionOptionEditor = function (_PureComponent) {
           currentQuestionSetIndex = _props2.currentQuestionSetIndex,
           currentQuestionIndex = _props2.currentQuestionIndex;
 
-      var questionInputOptions = (0, _assign2.default)({}, this.state.questionInputOptions);
+      var questionInputOptions = (0, _assign2.default)([], this.state.questionInputOptions);
       questionInputOptions[index].value = event.target.value;
       this.setState({ questionInputOptions: questionInputOptions });
-      this.props.editQuestionOptionValue(currentQuestionSetIndex, currentQuestionIndex, index, event.target.value);
+      var path = ['schema', 'questionSets', currentQuestionSetIndex, 'questions', currentQuestionIndex, 'input', 'options', index];
+      this.props.editQuestionOptionValue(path, event.target.value);
     }
   }, {
     key: 'onAddOptionChange',

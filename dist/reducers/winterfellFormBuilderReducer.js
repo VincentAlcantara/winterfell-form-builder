@@ -437,20 +437,23 @@ function winterfellFormBuilderReducer() {
           target: action.payload.target,
           action: 'GOTO'
         };
-        var currentConditions = state.getIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions']);
+        var _currentQuestionPanelIndex7 = state.get('currentQuestionPanelIndex');
+        var currentConditions = state.getIn(['schema', 'questionPanels', _currentQuestionPanelIndex7, 'action', 'conditions']);
         var optionIndex = currentConditions.findIndex(function (condition) {
           return condition.get('value') === action.payload.value;
         });
         if (optionIndex !== -1) {
-          return state.setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', optionIndex], (0, _immutable.fromJS)(newQuestionCondition));
+          return state.setIn(['schema', 'questionPanels', _currentQuestionPanelIndex7, 'action', 'conditions', optionIndex], (0, _immutable.fromJS)(newQuestionCondition));
         }
-        return state.updateIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions'], function (arr) {
+        return state.updateIn(['schema', 'questionPanels', _currentQuestionPanelIndex7, 'action', 'conditions'], function (arr) {
           return arr.push((0, _immutable.fromJS)(newQuestionCondition));
         });
       }
     case _constants.RESET_NEXT_QUESTION_TARGET_SUCCESS:
       {
-        return state.setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions'], state.getIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions']).filter(function (o) {
+        var _currentQuestionPanelIndex8 = state.get('currentQuestionPanelIndex');
+
+        return state.setIn(['schema', 'questionPanels', _currentQuestionPanelIndex8, 'action', 'conditions'], state.getIn(['schema', 'questionPanels', _currentQuestionPanelIndex8, 'action', 'conditions']).filter(function (o) {
           return o.get('value') !== action.payload.value;
         }));
       }

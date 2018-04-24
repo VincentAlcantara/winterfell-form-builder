@@ -411,21 +411,24 @@ function winterfellFormBuilderReducer(state = initialState, action) {
         target: action.payload.target,
         action: 'GOTO',
       };
-      const currentConditions = state.getIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions']);
+      const currentQuestionPanelIndex = state.get('currentQuestionPanelIndex');
+      const currentConditions = state.getIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'action', 'conditions']);
       const optionIndex = currentConditions.findIndex(condition => condition.get('value') === action.payload.value);
       if (optionIndex !== -1) {
         return state
-          .setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions', optionIndex],
+          .setIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'action', 'conditions', optionIndex],
             fromJS(newQuestionCondition));
       }
       return state
-        .updateIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions'], arr =>
+        .updateIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'action', 'conditions'], arr =>
           arr.push(fromJS(newQuestionCondition)));
     }
     case RESET_NEXT_QUESTION_TARGET_SUCCESS: {
+      const currentQuestionPanelIndex = state.get('currentQuestionPanelIndex');
+
       return state
-        .setIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions'],
-          state.getIn(['schema', 'questionPanels', action.payload.currentQuestionPanelIndex, 'action', 'conditions']).filter(o => o.get('value') !== action.payload.value));
+        .setIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'action', 'conditions'],
+          state.getIn(['schema', 'questionPanels', currentQuestionPanelIndex, 'action', 'conditions']).filter(o => o.get('value') !== action.payload.value));
     }
     case UPDATE_QUESTION_ANSWERS_SUCCESS: {
       return state
