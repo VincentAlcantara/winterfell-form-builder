@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _toConsumableArray2 = require('babel-runtime/helpers/toConsumableArray');
+
+var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
+
 var _assign = require('babel-runtime/core-js/object/assign');
 
 var _assign2 = _interopRequireDefault(_assign);
@@ -50,6 +54,16 @@ var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
 
 var _FormMenu = require('../FormMenu/');
 
+var _SelectInput = require('../InputTypes/SelectInput');
+
+var _SelectInput2 = _interopRequireDefault(_SelectInput);
+
+var _ConditionalQuestionOptionEditor = require('./ConditionalQuestionOptionEditor');
+
+var _ConditionalQuestionOptionEditor2 = _interopRequireDefault(_ConditionalQuestionOptionEditor);
+
+var _constants = require('../../common/constants');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ConditionalQuestionEditor = function (_PureComponent) {
@@ -69,7 +83,7 @@ var ConditionalQuestionEditor = function (_PureComponent) {
 
     _this.onChange = _this.onChange.bind(_this);
     _this.onSaveConditionalQuestion = _this.onSaveConditionalQuestion.bind(_this);
-    _this.onDeleteConditionalQuestion = _this.onDeleteConditionalQuestion.bind(_this);
+    _this.onSelect = _this.onSelect.bind(_this);
     return _this;
   }
 
@@ -87,125 +101,153 @@ var ConditionalQuestionEditor = function (_PureComponent) {
           name = _event$target.name,
           value = _event$target.value;
 
-      var copyConditionalQuestions = (0, _assign2.default)({}, this.state.conditionalQuestions);
+      var copyConditionalQuestions = (0, _assign2.default)([], this.state.conditionalQuestions);
       copyConditionalQuestions[index][name] = value;
       this.setState({ conditionalQuestions: copyConditionalQuestions });
     }
   }, {
+    key: 'onSelect',
+    value: function onSelect(questionType, index) {
+      var copyConditionalQuestions = (0, _assign2.default)([], this.state.conditionalQuestions);
+      copyConditionalQuestions[index].input.type = questionType;
+      this.setState({ conditionalQuestions: copyConditionalQuestions });
+    }
+  }, {
     key: 'onSaveConditionalQuestion',
-    value: function onSaveConditionalQuestion(conditionalQuestionIndex) {
-      var _props = this.props,
-          currentQuestionSetIndex = _props.currentQuestionSetIndex,
-          currentQuestionIndex = _props.currentQuestionIndex,
-          questionOptionIndex = _props.questionOptionIndex;
+    value: function onSaveConditionalQuestion(conditionalQuestionIndex, path) {
       var _state$conditionalQue = this.state.conditionalQuestions[conditionalQuestionIndex],
           questionId = _state$conditionalQue.questionId,
           question = _state$conditionalQue.question,
           text = _state$conditionalQue.text,
           postText = _state$conditionalQue.postText,
-          type = _state$conditionalQue.type;
+          input = _state$conditionalQue.input;
 
-
-      this.props.saveConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, conditionalQuestionIndex, questionId, question, text, postText, type);
-    }
-  }, {
-    key: 'onDeleteConditionalQuestion',
-    value: function onDeleteConditionalQuestion(conditionalQuestionIndex) {
-      var _props2 = this.props,
-          currentQuestionSetIndex = _props2.currentQuestionSetIndex,
-          currentQuestionIndex = _props2.currentQuestionIndex,
-          questionOptionIndex = _props2.questionOptionIndex;
-
-
-      this.props.deleteConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, conditionalQuestionIndex);
+      var newPath = (0, _assign2.default)([], path);
+      newPath.push('conditionalQuestions');
+      newPath.push(conditionalQuestionIndex);
+      this.props.saveConditionalQuestion(newPath, questionId, question, text, postText, input.type, input.options);
     }
   }, {
     key: 'getConditionalQuestions',
     value: function getConditionalQuestions() {
       var _this2 = this;
 
-      return this.props.conditionalQuestions.map(function (conditionalQuestion, ix) {
-        return _react2.default.createElement(
-          'div',
-          { key: ix },
+      return this.state.conditionalQuestions.map(function (conditionalQuestion, ix) {
+        var questionId = conditionalQuestion.questionId,
+            question = conditionalQuestion.question,
+            text = conditionalQuestion.text,
+            postText = conditionalQuestion.postText,
+            input = conditionalQuestion.input;
+
+        var conditionalPath = (0, _assign2.default)([], _this2.props.parentPath);
+        conditionalPath.push('conditionalQuestions');
+        conditionalPath.push(ix);
+        return (// return #2
           _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            null,
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'questionId',
-              name: 'questionId',
-              label: 'Conditional Question ID ' + (ix + 1) + ':',
-              onChange: function onChange(e) {
-                return _this2.onChange(e, ix);
-              },
-              value: _this2.state.conditionalQuestions[ix].questionId
-            })
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            null,
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'question',
-              name: 'question',
-              label: 'Conditional Question ' + (ix + 1) + ':',
-              onChange: function onChange(e) {
-                return _this2.onChange(e, ix);
-              },
-              value: _this2.state.conditionalQuestions[ix].question
-            })
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            null,
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'text',
-              name: 'text',
-              label: 'Conditional Question Pre Text ' + (ix + 1) + ':',
-              onChange: function onChange(e) {
-                return _this2.onChange(e, ix);
-              },
-              value: _this2.state.conditionalQuestions[ix].text
-            })
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            null,
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'postText',
-              name: 'postText',
-              label: 'Conditional Question Post Text ' + (ix + 1) + ':',
-              onChange: function onChange(e) {
-                return _this2.onChange(e, ix);
-              },
-              value: _this2.state.conditionalQuestions[ix].postText
-            })
-          ),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement(
-            _reactBootstrap.ButtonGroup,
-            null,
-            _react2.default.createElement(_FormMenu.DeleteConditionalQuestionButton, {
-              currentQuestionSetIndex: _this2.props.currentQuestionSetIndex,
-              currentQuestionIndex: _this2.props.currentQuestionIndex,
-              questionOptionIndex: _this2.props.questionOptionIndex,
-              conditionalQuestionIndex: ix
-            }),
+            'div',
+            { key: ix },
             _react2.default.createElement(
-              _reactBootstrap.Button,
-              {
-                className: 'btn btn-warning',
-                title: 'save this conditional question',
-                onClick: function onClick() {
-                  return _this2.onSaveConditionalQuestion(ix);
-                }
-              },
-              'save'
-            )
-          ),
-          _react2.default.createElement('br', null)
-        );
-      });
+              _reactBootstrap.FormGroup,
+              null,
+              _react2.default.createElement(_FieldGroup2.default, {
+                id: 'questionId',
+                name: 'questionId',
+                label: 'Conditional Question ID ' + (ix + 1) + ':',
+                onChange: function onChange(e) {
+                  return _this2.onChange(e, ix);
+                },
+                value: questionId
+              })
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.FormGroup,
+              null,
+              _react2.default.createElement(_FieldGroup2.default, {
+                id: 'question',
+                name: 'question',
+                label: 'Conditional Question ' + (ix + 1) + ':',
+                onChange: function onChange(e) {
+                  return _this2.onChange(e, ix);
+                },
+                value: question
+              })
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.FormGroup,
+              null,
+              _react2.default.createElement(_FieldGroup2.default, {
+                id: 'text',
+                name: 'text',
+                label: 'Conditional Question Pre Text ' + (ix + 1) + ':',
+                onChange: function onChange(e) {
+                  return _this2.onChange(e, ix);
+                },
+                value: text
+              })
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.FormGroup,
+              null,
+              _react2.default.createElement(_FieldGroup2.default, {
+                id: 'postText',
+                name: 'postText',
+                label: 'Conditional Question Post Text ' + (ix + 1) + ':',
+                onChange: function onChange(e) {
+                  return _this2.onChange(e, ix);
+                },
+                value: postText
+              })
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.FormGroup,
+              null,
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'questionInputType' },
+                'Question Type'
+              ),
+              _react2.default.createElement(_SelectInput2.default, {
+                id: 'questionInputType',
+                labelId: 'questionInputType',
+                options: _constants.INPUT_TYPE_OPTIONS,
+                onSelect: function onSelect(e) {
+                  return _this2.onSelect(e, ix);
+                },
+                displayValue: input.type
+              })
+            ),
+            (input.type === 'checkboxOptionsInput' || input.type === 'selectInput' || input.type === 'radioOptionsInput') && _react2.default.createElement(_ConditionalQuestionOptionEditor2.default, {
+              questionInputOptions: input.options,
+              questionId: questionId,
+              currentQuestionPanelIndex: _this2.props.currentQuestionPanelIndex,
+              currentQuestionSetIndex: _this2.props.currentQuestionSetIndex,
+              path: conditionalPath
+            }),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(
+              _reactBootstrap.ButtonGroup,
+              null,
+              _react2.default.createElement(_FormMenu.DeleteConditionalQuestionButton, {
+                path: conditionalPath,
+                deleteConditionalQuestion: _this2.props.deleteConditionalQuestion
+              }),
+              _react2.default.createElement(
+                _reactBootstrap.Button,
+                {
+                  className: 'btn btn-warning',
+                  title: 'save this conditional question',
+                  onClick: function onClick() {
+                    return _this2.onSaveConditionalQuestion(ix, _this2.props.parentPath);
+                  }
+                },
+                'save'
+              )
+            ),
+            _react2.default.createElement('br', null)
+          )
+        ); // end of return #2
+      }); // end of return #1
     }
   }, {
     key: 'render',
@@ -219,7 +261,7 @@ var ConditionalQuestionEditor = function (_PureComponent) {
           _react2.default.createElement(
             'h6',
             null,
-            'Option \'' + this.props.text + '\' Conditional Questions:'
+            'Option \'' + this.props.parentOptionText + '\' Conditional Questions:'
           ),
           _react2.default.createElement(
             'h6',
@@ -230,16 +272,14 @@ var ConditionalQuestionEditor = function (_PureComponent) {
               'Display these questions if this option is selected'
             )
           ),
-          this.getConditionalQuestions()
+          this.props.conditionalQuestions && this.getConditionalQuestions()
         ),
         _react2.default.createElement(
           _reactBootstrap.Col,
           { xs: 12 },
           _react2.default.createElement('br', null),
           _react2.default.createElement(_FormMenu.AddConditionalQuestionButton, {
-            currentQuestionSetIndex: this.props.currentQuestionSetIndex,
-            currentQuestionIndex: this.props.currentQuestionIndex,
-            questionOptionIndex: this.props.questionOptionIndex
+            path: this.props.parentPath
           }),
           _react2.default.createElement('br', null)
         )
@@ -252,11 +292,11 @@ var ConditionalQuestionEditor = function (_PureComponent) {
 ConditionalQuestionEditor.propTypes = {
   conditionalQuestions: _propTypes2.default.object,
   currentQuestionSetIndex: _propTypes2.default.number.isRequired,
-  text: _propTypes2.default.string.isRequired,
-  currentQuestionIndex: _propTypes2.default.number.isRequired,
-  questionOptionIndex: _propTypes2.default.number.isRequired,
+  parentOptionText: _propTypes2.default.string.isRequired,
+  currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
   saveConditionalQuestion: _propTypes2.default.func.isRequired,
-  deleteConditionalQuestion: _propTypes2.default.func.isRequired
+  deleteConditionalQuestion: _propTypes2.default.func.isRequired,
+  parentPath: _propTypes2.default.array.isRequired
 };
 ConditionalQuestionEditor.defaultProps = {
   conditionalQuestions: (0, _immutable.fromJS)([])
@@ -265,8 +305,7 @@ ConditionalQuestionEditor.defaultProps = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    conditionalQuestions: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'input', 'options', ownProps.questionOptionIndex, 'conditionalQuestions']),
-    text: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex, 'questions', ownProps.currentQuestionIndex, 'input', 'options', ownProps.questionOptionIndex, 'text'])
+    conditionalQuestions: state.getIn(['form'].concat((0, _toConsumableArray3.default)(ownProps.parentPath), ['conditionalQuestions']))
   };
 }
 

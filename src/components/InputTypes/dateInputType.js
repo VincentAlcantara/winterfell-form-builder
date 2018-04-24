@@ -9,7 +9,7 @@ export default class DateInput extends React.Component {
     super(props);
 
     this.state = {
-      value: this.props.value.type ? this.props.value.value : this.props.value,
+      value: this.props.value.type ? this.props.value.value : moment(),
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -41,7 +41,7 @@ export default class DateInput extends React.Component {
 }
 
 DateInput.propTypes = {
-  value: PropTypes.object,
+  value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
   onBlur: PropTypes.func,
   name: PropTypes.string,

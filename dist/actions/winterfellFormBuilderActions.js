@@ -192,36 +192,35 @@ function changeQuestionType(currentQuestionSetIndex, currentQuestionIndex, quest
   };
 }
 
-function addQuestionOption(currentQuestionSetIndex, currentQuestionIndex, questionOptionText, questionOptionValue) {
+function addQuestionOption(key, questionOptionText, questionOptionValue) {
   return {
     type: _constants.ADD_QUESTION_OPTION_SUCCESS,
     payload: {
-      currentQuestionSetIndex: currentQuestionSetIndex,
-      currentQuestionIndex: currentQuestionIndex,
+      key: key,
       questionOptionText: questionOptionText,
       questionOptionValue: questionOptionValue
     }
   };
 }
 
-function editQuestionOptionText(currentQuestionSetIndex, currentQuestionIndex, optionIndex, option) {
+function editQuestionOptionText(path, text) {
   return {
     type: _constants.EDIT_QUESTION_OPTION_TEXT_SUCCESS,
-    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, optionIndex: optionIndex, option: option }
+    payload: { path: path, text: text }
   };
 }
 
-function editQuestionOptionValue(currentQuestionSetIndex, currentQuestionIndex, optionIndex, value) {
+function editQuestionOptionValue(path, value) {
   return {
     type: _constants.EDIT_QUESTION_OPTION_VALUE_SUCCESS,
-    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, optionIndex: optionIndex, value: value }
+    payload: { path: path, value: value }
   };
 }
 
-function deleteQuestionOption(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex) {
+function deleteQuestionOption(path) {
   return {
     type: _constants.DELETE_QUESTION_OPTION_SUCCESS,
-    payload: { currentQuestionSetIndex: currentQuestionSetIndex, currentQuestionIndex: currentQuestionIndex, questionOptionIndex: questionOptionIndex }
+    payload: { path: path }
   };
 }
 
@@ -280,13 +279,11 @@ function addQuestion(currentQuestionSetIndex, questionSetId, questionId, questio
   };
 }
 
-function addConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, questionId, question, questionText, questionType) {
+function addConditionalQuestion(path, questionId, question, questionText, questionType) {
   return {
     type: _constants.ADD_CONDITIONAL_QUESTION_SUCCESS,
     payload: {
-      currentQuestionSetIndex: currentQuestionSetIndex,
-      currentQuestionIndex: currentQuestionIndex,
-      questionOptionIndex: questionOptionIndex,
+      path: path,
       questionId: questionId,
       question: question,
       questionText: questionText,
@@ -336,31 +333,25 @@ function resetNextQuestionTarget(currentQuestionPanelIndex, value) {
   };
 }
 
-function saveConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, conditionalQuestionIndex, questionId, question, text, postText, type) {
+function saveConditionalQuestion(path, questionId, question, text, postText, type, options) {
   return {
     type: _constants.SAVE_CONDITIONAL_QUESTION_SUCCESS,
     payload: {
-      currentQuestionSetIndex: currentQuestionSetIndex,
-      currentQuestionIndex: currentQuestionIndex,
-      questionOptionIndex: questionOptionIndex,
-      conditionalQuestionIndex: conditionalQuestionIndex,
+      path: path,
       questionId: questionId,
       question: question,
       text: text,
       postText: postText,
-      type: type }
+      type: type,
+      options: options
+    }
   };
 }
 
-function deleteConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, conditionalQuestionIndex) {
+function deleteConditionalQuestion(path) {
   return {
     type: _constants.DELETE_CONDITIONAL_QUESTION_SUCCESS,
-    payload: {
-      currentQuestionSetIndex: currentQuestionSetIndex,
-      currentQuestionIndex: currentQuestionIndex,
-      questionOptionIndex: questionOptionIndex,
-      conditionalQuestionIndex: conditionalQuestionIndex
-    }
+    payload: { path: path }
   };
 }
 

@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button, Modal, Glyphicon } from 'react-bootstrap';
-import { deleteQuestionOption } from '../../actions/winterfellFormBuilderActions';
 
 class DeleteQuestionOptionButton extends Component {
   static propTypes = {
-    deleteQuestionOption: PropTypes.func.isRequired,
-    currentQuestionSetIndex: PropTypes.number.isRequired,
-    currentQuestionIndex: PropTypes.number.isRequired,
-    questionOptionIndex: PropTypes.number.isRequired,
+    onDeleteQuestionOption: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -28,11 +23,9 @@ class DeleteQuestionOptionButton extends Component {
   }
 
   onConfirmDelete(e) {
-    const { currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex } = this.props;
     e.preventDefault();
     this.setState({ showModal: false });
-    this.props.deleteQuestionOption(
-      currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex);
+    this.props.onDeleteQuestionOption();
   }
 
   render() {
@@ -67,12 +60,5 @@ class DeleteQuestionOptionButton extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
-  return {
-    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
-    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
-    questionOptionIndex: ownProps.questionOptionIndex,
-  };
-}
-export default connect(mapStateToProps, { deleteQuestionOption })(DeleteQuestionOptionButton);
+export default DeleteQuestionOptionButton;
 

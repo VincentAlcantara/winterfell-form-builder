@@ -11,7 +11,11 @@ class SaveFormButton extends Component {
   static propTypes = {
     saveJSON: PropTypes.func.isRequired,
     title: PropTypes.string.isRequired,
-    schema: PropTypes.object.isRequired,
+    schema: PropTypes.object,
+  }
+
+  static defaultProps = {
+    schema: null,
   }
 
   constructor(props) {
@@ -51,6 +55,7 @@ class SaveFormButton extends Component {
         onClick={() => {
           this.setState({ showModal: true });
         }}
+        disabled={!this.props.schema || this.props.schema === 'null'}
       >download
         <Modal show={this.state.showModal}>
           <Modal.Header>

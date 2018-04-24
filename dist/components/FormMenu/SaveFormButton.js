@@ -106,7 +106,8 @@ var SaveFormButton = function (_Component) {
           className: 'btn btn-block btn-primary',
           onClick: function onClick() {
             _this2.setState({ showModal: true });
-          }
+          },
+          disabled: !this.props.schema || this.props.schema === 'null'
         },
         'download',
         _react2.default.createElement(
@@ -174,7 +175,10 @@ var SaveFormButton = function (_Component) {
 SaveFormButton.propTypes = {
   saveJSON: _propTypes2.default.func.isRequired,
   title: _propTypes2.default.string.isRequired,
-  schema: _propTypes2.default.object.isRequired
+  schema: _propTypes2.default.object
+};
+SaveFormButton.defaultProps = {
+  schema: null
 };
 
 

@@ -97,17 +97,14 @@ var AddConditionalQuestionButton = function (_Component) {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
-      var _props = this.props,
-          currentQuestionSetIndex = _props.currentQuestionSetIndex,
-          currentQuestionIndex = _props.currentQuestionIndex,
-          questionOptionIndex = _props.questionOptionIndex;
+      var path = this.props.path;
       var _state = this.state,
           questionId = _state.questionId,
           question = _state.question,
           questionText = _state.questionText,
           questionType = _state.questionType;
 
-      this.props.addConditionalQuestion(currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex, questionId, question, questionText, questionType);
+      this.props.addConditionalQuestion(path, questionId, question, questionText, questionType);
       this.setState({ showModal: false });
     }
   }, {
@@ -215,17 +212,13 @@ var AddConditionalQuestionButton = function (_Component) {
 
 AddConditionalQuestionButton.propTypes = {
   addConditionalQuestion: _propTypes2.default.func.isRequired,
-  currentQuestionSetIndex: _propTypes2.default.number.isRequired,
-  currentQuestionIndex: _propTypes2.default.number.isRequired,
-  questionOptionIndex: _propTypes2.default.number.isRequired
+  path: _propTypes2.default.array.isRequired
 };
 
 
 function mapStateToProps(state, ownProps) {
   return {
-    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
-    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
-    questionOptionIndex: ownProps.questionOptionIndex
+    path: ownProps.path
   };
 }
 

@@ -32,7 +32,6 @@ class QuestionEditor extends PureComponent {
     editQuestionText: PropTypes.func.isRequired,
     editQuestionPostText: PropTypes.func.isRequired,
     changeQuestionType: PropTypes.func.isRequired,
-    addQuestionOption: PropTypes.func.isRequired,
     updateNextQuestionTarget: PropTypes.func.isRequired,
     questionSetId: PropTypes.string.isRequired,
     questionId: PropTypes.string,
@@ -90,7 +89,6 @@ class QuestionEditor extends PureComponent {
 
     this.onChange = this.onChange.bind(this);
     this.onSelect = this.onSelect.bind(this);
-    this.onAddQuestionOptionClick = this.onAddQuestionOptionClick.bind(this);
     this.onEditQuestionIdClick = this.onEditQuestionIdClick.bind(this);
     this.onUpdateNextQuestionTarget = this.onUpdateNextQuestionTarget.bind(this);
   }
@@ -135,27 +133,6 @@ class QuestionEditor extends PureComponent {
     if (questionType !== '') {
       this.props.changeQuestionType(currentQuestionSetIndex, currentQuestionIndex, questionType);
     }
-  }
-
-  onAddQuestionOptionClick() {
-    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
-    const questionInputOptions = [];
-    for (let i = 0; i < this.state.questionInputOptions.length; i += 1) {
-      questionInputOptions.push(this.state.questionInputOptions[i]);
-    }
-    questionInputOptions.push({ text: '', value: '' });
-
-    this.setState({ questionInputOptions });
-    this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex);
-  }
-
-  onDeleteOptionClick() {
-    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
-    const questionInputOptions = [];
-    for (let i = 0; i < this.state.questionInputOptions.length; i += 1) {
-      questionInputOptions.push(this.state.questionInputOptions[i]);
-    }
-    this.props.addQuestionOption(currentQuestionSetIndex, currentQuestionIndex);
   }
 
   onEditQuestionIdClick() {
@@ -270,7 +247,6 @@ class QuestionEditor extends PureComponent {
           questionInputType === 'radioOptionsInput') &&
           questionInputOptions &&
           this.props.currentQuestionIndex > -1 &&
-          // this.getQuestionOptions()
           <QuestionOptionEditor
             questionInputOptions={this.props.questionInputOptions}
             questionId={this.props.questionId}

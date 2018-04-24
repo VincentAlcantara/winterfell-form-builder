@@ -6,16 +6,19 @@ import { fromJS } from 'immutable';
 import { saveConditionalQuestion, deleteConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 import { AddConditionalQuestionButton, DeleteConditionalQuestionButton } from '../FormMenu/';
+import SelectInput from '../InputTypes/SelectInput';
+import ConditionalQuestionOptionEditor from './ConditionalQuestionOptionEditor';
+import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
 class ConditionalQuestionEditor extends PureComponent {
   static propTypes = {
     conditionalQuestions: PropTypes.object,
     currentQuestionSetIndex: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    currentQuestionIndex: PropTypes.number.isRequired,
-    questionOptionIndex: PropTypes.number.isRequired,
+    parentOptionText: PropTypes.string.isRequired,
+    currentQuestionPanelIndex: PropTypes.number.isRequired,
     saveConditionalQuestion: PropTypes.func.isRequired,
     deleteConditionalQuestion: PropTypes.func.isRequired,
+    parentPath: PropTypes.array.isRequired,
   }
 
   static defaultProps = {
@@ -35,7 +38,7 @@ class ConditionalQuestionEditor extends PureComponent {
 
     this.onChange = this.onChange.bind(this);
     this.onSaveConditionalQuestion = this.onSaveConditionalQuestion.bind(this);
-    this.onDeleteConditionalQuestion = this.onDeleteConditionalQuestion.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -46,112 +49,130 @@ class ConditionalQuestionEditor extends PureComponent {
 
   onChange(event, index) {
     const { name, value } = event.target;
-    const copyConditionalQuestions = Object.assign({}, this.state.conditionalQuestions);
+    const copyConditionalQuestions = Object.assign([], this.state.conditionalQuestions);
     copyConditionalQuestions[index][name] = value;
     this.setState({ conditionalQuestions: copyConditionalQuestions });
   }
 
-  onSaveConditionalQuestion(conditionalQuestionIndex) {
-    const {
-      currentQuestionSetIndex,
-      currentQuestionIndex,
-      questionOptionIndex,
-    } = this.props;
-    const {
-      questionId,
-      question,
-      text,
-      postText,
-      type,
-    } = this.state.conditionalQuestions[conditionalQuestionIndex];
-
-    this.props.saveConditionalQuestion(
-      currentQuestionSetIndex,
-      currentQuestionIndex,
-      questionOptionIndex,
-      conditionalQuestionIndex,
-      questionId,
-      question,
-      text,
-      postText,
-      type,
-    );
+  onSelect(questionType, index) {
+    const copyConditionalQuestions = Object.assign([], this.state.conditionalQuestions);
+    copyConditionalQuestions[index].input.type = questionType;
+    this.setState({ conditionalQuestions: copyConditionalQuestions });
   }
 
-  onDeleteConditionalQuestion(conditionalQuestionIndex) {
+  onSaveConditionalQuestion(conditionalQuestionIndex, path) {
     const {
-      currentQuestionSetIndex,
-      currentQuestionIndex,
-      questionOptionIndex,
-    } = this.props;
-
-    this.props.deleteConditionalQuestion(
-      currentQuestionSetIndex,
-      currentQuestionIndex,
-      questionOptionIndex,
-      conditionalQuestionIndex,
+      questionId,
+      question,
+      text,
+      postText,
+      input,
+    } = this.state.conditionalQuestions[conditionalQuestionIndex];
+    const newPath = Object.assign([], path);
+    newPath.push('conditionalQuestions');
+    newPath.push(conditionalQuestionIndex);
+    this.props.saveConditionalQuestion(
+      newPath,
+      questionId,
+      question,
+      text,
+      postText,
+      input.type,
+      input.options,
     );
   }
 
   getConditionalQuestions() {
-    return (this.props.conditionalQuestions.map((conditionalQuestion, ix) => (
-      <div key={ix}>
-        <FormGroup>
-          <FieldGroup
-            id="questionId"
-            name="questionId"
-            label={`Conditional Question ID ${ix + 1}:`}
-            onChange={e => this.onChange(e, ix)}
-            value={this.state.conditionalQuestions[ix].questionId}
-          />
-        </FormGroup>
-        <FormGroup>
-          <FieldGroup
-            id="question"
-            name="question"
-            label={`Conditional Question ${ix + 1}:`}
-            onChange={e => this.onChange(e, ix)}
-            value={this.state.conditionalQuestions[ix].question}
-          />
-        </FormGroup>
-        <FormGroup>
-          <FieldGroup
-            id="text"
-            name="text"
-            label={`Conditional Question Pre Text ${ix + 1}:`}
-            onChange={e => this.onChange(e, ix)}
-            value={this.state.conditionalQuestions[ix].text}
-          />
-        </FormGroup>
-        <FormGroup>
-          <FieldGroup
-            id="postText"
-            name="postText"
-            label={`Conditional Question Post Text ${ix + 1}:`}
-            onChange={e => this.onChange(e, ix)}
-            value={this.state.conditionalQuestions[ix].postText}
-          />
-        </FormGroup>
-        <br />
-        <br />
-        <ButtonGroup>
-          <DeleteConditionalQuestionButton
-            currentQuestionSetIndex={this.props.currentQuestionSetIndex}
-            currentQuestionIndex={this.props.currentQuestionIndex}
-            questionOptionIndex={this.props.questionOptionIndex}
-            conditionalQuestionIndex={ix}
-          />
-          <Button
-            className="btn btn-warning"
-            title="save this conditional question"
-            onClick={() => this.onSaveConditionalQuestion(ix)}
-          >save
-          </Button>
-        </ButtonGroup>
-        <br />
-      </div>
-    ))
-    );
+    return (this.state.conditionalQuestions.map((conditionalQuestion, ix) => {
+      const {
+        questionId,
+        question,
+        text,
+        postText,
+        input,
+      } = conditionalQuestion;
+      const conditionalPath = Object.assign([], this.props.parentPath);
+      conditionalPath.push('conditionalQuestions');
+      conditionalPath.push(ix);
+      return ( // return #2
+        <div key={ix}>
+          <FormGroup>
+            <FieldGroup
+              id="questionId"
+              name="questionId"
+              label={`Conditional Question ID ${ix + 1}:`}
+              onChange={e => this.onChange(e, ix)}
+              value={questionId}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FieldGroup
+              id="question"
+              name="question"
+              label={`Conditional Question ${ix + 1}:`}
+              onChange={e => this.onChange(e, ix)}
+              value={question}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FieldGroup
+              id="text"
+              name="text"
+              label={`Conditional Question Pre Text ${ix + 1}:`}
+              onChange={e => this.onChange(e, ix)}
+              value={text}
+            />
+          </FormGroup>
+          <FormGroup>
+            <FieldGroup
+              id="postText"
+              name="postText"
+              label={`Conditional Question Post Text ${ix + 1}:`}
+              onChange={e => this.onChange(e, ix)}
+              value={postText}
+            />
+          </FormGroup>
+          <FormGroup>
+            <label htmlFor="questionInputType">
+              Question Type
+            </label>
+            <SelectInput
+              id="questionInputType"
+              labelId="questionInputType"
+              options={INPUT_TYPE_OPTIONS}
+              onSelect={e => this.onSelect(e, ix)}
+              displayValue={input.type}
+            />
+          </FormGroup>
+          {
+            (input.type === 'checkboxOptionsInput' ||
+            input.type === 'selectInput' ||
+            input.type === 'radioOptionsInput') &&
+            <ConditionalQuestionOptionEditor
+              questionInputOptions={input.options}
+              questionId={questionId}
+              currentQuestionPanelIndex={this.props.currentQuestionPanelIndex}
+              currentQuestionSetIndex={this.props.currentQuestionSetIndex}
+              path={conditionalPath}
+            />
+          }
+          <br />
+          <br />
+          <ButtonGroup>
+            <DeleteConditionalQuestionButton
+              path={conditionalPath}
+              deleteConditionalQuestion={this.props.deleteConditionalQuestion}
+            />
+            <Button
+              className="btn btn-warning"
+              title="save this conditional question"
+              onClick={() => this.onSaveConditionalQuestion(ix, this.props.parentPath)}
+            >save
+            </Button>
+          </ButtonGroup>
+          <br />
+        </div>); // end of return #2
+    }));  // end of return #1
   }
 
   render() {
@@ -159,17 +180,15 @@ class ConditionalQuestionEditor extends PureComponent {
       <Row className="winterfell-form-builder-conditional-questions alert-info">
         <Col xs={12}>
           <h6>
-            {`Option '${this.props.text}' Conditional Questions:`}
+            {`Option '${this.props.parentOptionText}' Conditional Questions:`}
           </h6>
           <h6><i>Display these questions if this option is selected</i></h6>
-          { this.getConditionalQuestions() }
+          { this.props.conditionalQuestions && this.getConditionalQuestions() }
         </Col>
         <Col xs={12}>
           <br />
           <AddConditionalQuestionButton
-            currentQuestionSetIndex={this.props.currentQuestionSetIndex}
-            currentQuestionIndex={this.props.currentQuestionIndex}
-            questionOptionIndex={this.props.questionOptionIndex}
+            path={this.props.parentPath}
           />
           <br />
         </Col>
@@ -180,10 +199,7 @@ class ConditionalQuestionEditor extends PureComponent {
 
 function mapStateToProps(state, ownProps) {
   return {
-    conditionalQuestions: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex,
-      'questions', ownProps.currentQuestionIndex, 'input', 'options', ownProps.questionOptionIndex, 'conditionalQuestions']),
-    text: state.getIn(['form', 'schema', 'questionSets', ownProps.currentQuestionSetIndex,
-      'questions', ownProps.currentQuestionIndex, 'input', 'options', ownProps.questionOptionIndex, 'text']),
+    conditionalQuestions: state.getIn(['form', ...ownProps.parentPath, 'conditionalQuestions']),
   };
 }
 

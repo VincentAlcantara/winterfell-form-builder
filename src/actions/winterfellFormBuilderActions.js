@@ -188,40 +188,35 @@ export function changeQuestionType(currentQuestionSetIndex, currentQuestionIndex
   };
 }
 
-export function addQuestionOption(
-  currentQuestionSetIndex, currentQuestionIndex, questionOptionText, questionOptionValue) {
+export function addQuestionOption(key, questionOptionText, questionOptionValue) {
   return {
     type: ADD_QUESTION_OPTION_SUCCESS,
     payload: {
-      currentQuestionSetIndex,
-      currentQuestionIndex,
+      key,
       questionOptionText,
       questionOptionValue,
     },
   };
 }
 
-export function editQuestionOptionText(
-  currentQuestionSetIndex, currentQuestionIndex, optionIndex, option) {
+export function editQuestionOptionText(path, text) {
   return {
     type: EDIT_QUESTION_OPTION_TEXT_SUCCESS,
-    payload: { currentQuestionSetIndex, currentQuestionIndex, optionIndex, option },
+    payload: { path, text },
   };
 }
 
-export function editQuestionOptionValue(
-  currentQuestionSetIndex, currentQuestionIndex, optionIndex, value) {
+export function editQuestionOptionValue(path, value) {
   return {
     type: EDIT_QUESTION_OPTION_VALUE_SUCCESS,
-    payload: { currentQuestionSetIndex, currentQuestionIndex, optionIndex, value },
+    payload: { path, value },
   };
 }
 
-export function deleteQuestionOption(
-  currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex) {
+export function deleteQuestionOption(path) {
   return {
     type: DELETE_QUESTION_OPTION_SUCCESS,
-    payload: { currentQuestionSetIndex, currentQuestionIndex, questionOptionIndex },
+    payload: { path },
   };
 }
 
@@ -294,9 +289,7 @@ export function addQuestion(
 }
 
 export function addConditionalQuestion(
-  currentQuestionSetIndex,
-  currentQuestionIndex,
-  questionOptionIndex,
+  path,
   questionId,
   question,
   questionText,
@@ -304,9 +297,7 @@ export function addConditionalQuestion(
   return {
     type: ADD_CONDITIONAL_QUESTION_SUCCESS,
     payload: {
-      currentQuestionSetIndex,
-      currentQuestionIndex,
-      questionOptionIndex,
+      path,
       questionId,
       question,
       questionText,
@@ -360,43 +351,32 @@ export function resetNextQuestionTarget(currentQuestionPanelIndex, value) {
 }
 
 export function saveConditionalQuestion(
-  currentQuestionSetIndex,
-  currentQuestionIndex,
-  questionOptionIndex,
-  conditionalQuestionIndex,
+  path,
   questionId,
   question,
   text,
   postText,
-  type) {
+  type,
+  options,
+) {
   return {
     type: SAVE_CONDITIONAL_QUESTION_SUCCESS,
     payload: {
-      currentQuestionSetIndex,
-      currentQuestionIndex,
-      questionOptionIndex,
-      conditionalQuestionIndex,
+      path,
       questionId,
       question,
       text,
       postText,
-      type },
+      type,
+      options,
+    },
   };
 }
 
-export function deleteConditionalQuestion(
-  currentQuestionSetIndex,
-  currentQuestionIndex,
-  questionOptionIndex,
-  conditionalQuestionIndex) {
+export function deleteConditionalQuestion(path) {
   return {
     type: DELETE_CONDITIONAL_QUESTION_SUCCESS,
-    payload: {
-      currentQuestionSetIndex,
-      currentQuestionIndex,
-      questionOptionIndex,
-      conditionalQuestionIndex,
-    },
+    payload: { path },
   };
 }
 
