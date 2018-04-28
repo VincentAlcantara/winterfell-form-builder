@@ -76,6 +76,11 @@ class QuestionOptionEditor extends PureComponent {
     this.props.editQuestionOptionValue(path, event.target.value);
   }
 
+  onDeleteQuestionOption(index) {
+    const { currentQuestionSetIndex, currentQuestionIndex } = this.props;
+    const path = ['schema', 'questionSets', currentQuestionSetIndex, 'questions', currentQuestionIndex, 'input', 'options', index];
+    this.props.deleteQuestionOption(path);
+  }
   onAddOptionChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
@@ -159,8 +164,7 @@ class QuestionOptionEditor extends PureComponent {
                   <InputGroup.Button>
                     <DeleteQuestionOptionButton
                       questionOptionIndex={ix}
-                      onDeleteQuestionOption={() => this.props.deleteQuestionOption(
-                        currentQuestionSetIndex, currentQuestionIndex, ix)}
+                      onDeleteQuestionOption={() => this.onDeleteQuestionOption(ix)}
                     />
                   </InputGroup.Button>
                   <InputGroup.Button>
