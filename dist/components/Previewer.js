@@ -50,6 +50,10 @@ var _addressInputType = require('../components/InputTypes/addressInputType');
 
 var _addressInputType2 = _interopRequireDefault(_addressInputType);
 
+var _textAreaInputType = require('../components/InputTypes/textAreaInputType');
+
+var _textAreaInputType2 = _interopRequireDefault(_textAreaInputType);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var onRenderDefault = function onRenderDefault() {
@@ -111,7 +115,10 @@ var Previewer = function (_Component) {
           questionAnswers = _props.questionAnswers;
 
 
-      _winterfell2.default.addInputTypes({ dateInput: _dateInputType2.default, addressInput: _addressInputType2.default });
+      _winterfell2.default.addInputTypes({
+        dateInput: _dateInputType2.default,
+        addressInput: _addressInputType2.default,
+        textAreaInput: _textAreaInputType2.default });
       var displayWinterFellForm = function displayWinterFellForm() {
         return schema.formPanels.map(function (formPanel, index) {
           return formPanel.panelId === currentPanelId && _react2.default.createElement(_winterfell2.default, {
