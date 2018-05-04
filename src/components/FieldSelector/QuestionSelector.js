@@ -35,6 +35,16 @@ const FormQuestionEditor = (props) => {
         }
         {
           question.input &&
+          question.input.type === 'textAreaInput' &&
+          <textarea
+            id={question.questionId}
+            type="text"
+            className="form-control"
+            autoComplete={question.questionId}
+          />
+        }
+        {
+          question.input &&
           question.input.type === 'radioOptionsInput' &&
           <RadioButtonOptionsInput
             id={question.questionId}

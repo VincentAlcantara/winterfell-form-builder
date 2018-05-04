@@ -92,6 +92,9 @@ export const INPUT_TYPE_OPTIONS = [{
   text: 'text',
   value: 'textInput',
 }, {
+  text: 'textArea',
+  value: 'textAreaInput',
+}, {
   text: 'select',
   value: 'selectInput',
 }, {
