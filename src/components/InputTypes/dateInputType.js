@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 export default class DateInput extends React.Component {
-
   constructor(props) {
     super(props);
 
