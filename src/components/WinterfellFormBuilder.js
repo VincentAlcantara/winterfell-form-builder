@@ -75,18 +75,18 @@ class WinterfellFormBuilder extends Component {
       <Grid className="winterfell-form-builder">
         <div className="static-modal">
           <Modal show={errorMessage !== ''}>
-            <Modal.Header>
-              <Modal.Title>Error</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+            <div className="modal-header">
+              <div className="modal-title">Error</div>
+            </div>
+            <div className="modal-body">
               {errorMessage}
-            </Modal.Body>
-            <Modal.Footer>
+            </div>
+            <div className="modal-footer">
               <Button
                 bsStyle="primary"
                 onClick={this.props.clearErrorMessage}
               >Ok</Button>
-            </Modal.Footer>
+            </div>
           </Modal>
         </div>
         <Row>

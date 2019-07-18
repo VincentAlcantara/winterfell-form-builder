@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, FormGroup } from 'react-bootstrap';
 import { uploadJSON } from '../../actions/winterfellFormBuilderActions';
 
 
@@ -45,18 +45,19 @@ class UploadJSONButton extends Component {
   }
 
   render() {
-    return (
+    return [
       <Button
         className="btn btn-block btn-primary"
-        onClick={() => {
-          this.setState({ showModal: true });
-        }}
+        data-toggle="modal"
+        data-target="#uploadJSON"
       >upload
-        <Modal show={this.state.showModal}>
-          <Modal.Header>
-            <Modal.Title>Upload a form</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+      </Button>,
+      <div className="modal fade" id="uploadJSON" tabIndex="-1">
+        <div className="modal-dialog bg-white">
+          <div className="modal-header">
+            <div className="modal-title">Upload a form</div>
+          </div>
+          <div className="modal-body">
             Upload a form.  Note this will replace the current form.
             <form>
               <FormGroup>
@@ -71,8 +72,8 @@ class UploadJSONButton extends Component {
                 />
               </FormGroup>
             </form>
-          </Modal.Body>
-          <Modal.Footer>
+          </div>
+          <div className="modal-footer">
             <Button
               bsStyle="danger"
               onClick={() => { this.setState({ showModal: false }); }}
@@ -81,10 +82,10 @@ class UploadJSONButton extends Component {
               bsStyle="primary"
               onClick={this.onJSONUpload}
             >Continue</Button>
-          </Modal.Footer>
-        </Modal>
-      </Button>
-    );
+          </div>
+        </div>
+      </div>,
+    ];
   }
 }
 

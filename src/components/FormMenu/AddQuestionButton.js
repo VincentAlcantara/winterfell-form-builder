@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, FormGroup } from 'react-bootstrap';
 import { addQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 import SelectInput from '../InputTypes/SelectInput';
@@ -64,19 +64,21 @@ class AddQuestionButton extends Component {
   }
 
   render() {
-    return (
+    return [
       <Button
         className="btn btn-primary"
-        onClick={() => {
-          this.setState({ showModal: true });
-        }}
+        data-toggle="modal"
+        data-target="#addQuestion"
       >
-        <div className="static-modal">
-          <Modal show={this.state.showModal}>
-            <Modal.Header>
-              <Modal.Title>Add a new question to the question set</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
+        add question
+      </Button>,
+      <div className="static-modal">
+        <div className="modal fade" id="addQuestion" tabIndex="-1">
+          <div className="modal-dialog bg-white">
+            <div className="modal-header">
+              <div className="modal-title">Add a new question to the question set</div>
+            </div>
+            <div className="modal-body">
               <form>
                 <FormGroup>
                   <FieldGroup
@@ -111,8 +113,8 @@ class AddQuestionButton extends Component {
                   />
                 </FormGroup>
               </form>
-            </Modal.Body>
-            <Modal.Footer>
+            </div>
+            <div className="modal-footer">
               <Button
                 bsStyle="danger"
                 onClick={() => { this.setState({ showModal: false }); }}
@@ -121,12 +123,11 @@ class AddQuestionButton extends Component {
                 bsStyle="primary"
                 onClick={this.onFormUpdate}
               >Save changes</Button>
-            </Modal.Footer>
-          </Modal>
+            </div>
+          </div>
         </div>
-      add question
-      </Button>
-    );
+      </div>,
+    ];
   }
 }
 

@@ -24,7 +24,7 @@ const onSubmitDefault = (questionAndAnswers, target) => {
   console.log('-----');
   console.log('Target: ', target);
   console.log('-----');
-  alert('Submitted. Check the console to see the answers!');
+  // alert('Submitted. Check the console to see the answers!');
 };
 
 class Previewer extends Component {

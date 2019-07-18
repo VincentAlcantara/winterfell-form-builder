@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, FormGroup } from 'react-bootstrap';
 import { addPage } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
@@ -42,18 +42,19 @@ class AddPageButton extends Component {
   }
 
   render() {
-    return (
+    return [
       <Button
         className="btn btn-block btn-primary"
-        onClick={() => {
-          this.setState({ showModal: true });
-        }}
+        data-toggle="modal"
+        data-target="#createForm"
       >add page
-        <Modal show={this.state.showModal}>
-          <Modal.Header>
-            <Modal.Title>Add a new page to the form</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+      </Button>,
+      <div className="modal fade" id="createForm" tabIndex="-1">
+        <div className="modal-dialog bg-white">
+          <div className="modal-header">
+            <div className="modal-title">Add a new page to the form</div>
+          </div>
+          <div className="modal-body">
             <form>
               <FormGroup>
                 <FieldGroup
@@ -86,8 +87,8 @@ class AddPageButton extends Component {
                 />
               </FormGroup>
             </form>
-          </Modal.Body>
-          <Modal.Footer>
+          </div>
+          <div className="modal-footer">
             <Button
               bsStyle="danger"
               onClick={() => { this.setState({ showModal: false }); }}
@@ -96,11 +97,10 @@ class AddPageButton extends Component {
               bsStyle="primary"
               onClick={this.onFormUpdate}
             >Save changes</Button>
-          </Modal.Footer>
-        </Modal>
-      </Button>
-
-    );
+          </div>
+        </div>
+      </div>,
+    ];
   }
 }
 

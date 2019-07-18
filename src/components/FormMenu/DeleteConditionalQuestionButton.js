@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Modal } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { deleteConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 
 class DeleteConditionalQuestionButton extends Component {
@@ -33,22 +33,23 @@ class DeleteConditionalQuestionButton extends Component {
   }
 
   render() {
-    return (
+    return [
       <Button
         className="btn btn-danger"
         title="delete this conditional question"
-        onClick={() => {
-          this.setState({ showModal: true });
-        }}
+        data-toggle="modal"
+        data-target="#deleteConditionalQuestion"
       >delete
-        <Modal show={this.state.showModal}>
-          <Modal.Header>
-            <Modal.Title>Delete Conditional Question Confirmation</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+      </Button>,
+      <div className="modal fade" id="deleteConditionalQuestion" tabIndex="-1">
+        <div className="modal-dialog bg-white">
+          <div className="modal-header">
+            <div className="modal-title">Delete Conditional Question Confirmation</div>
+          </div>
+          <div className="modal-body">
             Are you sure you want to delete this conditional question?
-          </Modal.Body>
-          <Modal.Footer>
+          </div>
+          <div className="modal-footer">
             <Button
               bsStyle="danger"
               onClick={() => { this.setState({ showModal: false }); }}
@@ -57,10 +58,10 @@ class DeleteConditionalQuestionButton extends Component {
               bsStyle="primary"
               onClick={this.onConfirmDelete}
             >Confirm Delete</Button>
-          </Modal.Footer>
-        </Modal>
-      </Button>
-    );
+          </div>
+        </div>
+      </div>,
+    ];
   }
 }
 

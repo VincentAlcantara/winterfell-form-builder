@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, FormGroup } from 'react-bootstrap';
 
 import { updateForm } from '../../actions/winterfellFormBuilderActions';
 
 class EditSchemaButton extends Component {
   static propTypes = {
-    schema: PropTypes.object,
     updateForm: PropTypes.func.isRequired,
   };
 
@@ -36,23 +35,19 @@ class EditSchemaButton extends Component {
   }
 
   render() {
-    const schemaObject = this.props.schema && this.props.schema.toJS();
-
-    return (
+    return [
       <Button
         className="btn btn-block btn-primary"
-        onClick={() => {
-          this.setState({
-            schema: schemaObject,
-            showModal: true,
-          });
-        }}
+        data-toggle="modal"
+        data-target="#editSchema"
       >edit schema
-        <Modal show={this.state.showModal}>
-          <Modal.Header>
-            <Modal.Title>Edit Schema</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+      </Button>,
+      <div className="modal fade" id="editSchema" tabIndex="-1">
+        <div className="modal-dialog bg-white">
+          <div className="modal-header">
+            <div className="modal-title">Edit Schema</div>
+          </div>
+          <div className="modal-body">
             <form>
               <FormGroup>
                 <textarea
@@ -63,8 +58,8 @@ class EditSchemaButton extends Component {
                 />
               </FormGroup>
             </form>
-          </Modal.Body>
-          <Modal.Footer>
+          </div>
+          <div className="modal-footer">
             <Button
               bsStyle="danger"
               onClick={() => { this.setState({ showModal: false }); }}
@@ -73,10 +68,10 @@ class EditSchemaButton extends Component {
               bsStyle="primary"
               onClick={this.onFormUpdate}
             >Save changes</Button>
-          </Modal.Footer>
-        </Modal>
-      </Button>
-    );
+          </div>
+        </div>
+      </div>,
+    ];
   }
 }
 

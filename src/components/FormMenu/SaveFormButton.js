@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, FormGroup } from 'react-bootstrap';
 import fileDownload from 'js-file-download';
 import { saveJSON } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
@@ -49,19 +49,20 @@ class SaveFormButton extends Component {
   }
 
   render() {
-    return (
+    return [
       <Button
         className="btn btn-block btn-primary"
-        onClick={() => {
-          this.setState({ showModal: true });
-        }}
+        data-toggle="modal"
+        data-target="#uploadButton"
         disabled={!this.props.schema || this.props.schema === 'null'}
       >download
-        <Modal show={this.state.showModal}>
-          <Modal.Header>
-            <Modal.Title>Download Form</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+      </Button>,
+      <div className="modal fade" id="uploadButton" tabIndex="-1">
+        <div className="modal-dialog bg-white">
+          <div className="modal-header">
+            <div className="modal-title">Download Form</div>
+          </div>
+          <div className="modal-body">
             <form>
               <FormGroup>
                 <FieldGroup
@@ -74,8 +75,8 @@ class SaveFormButton extends Component {
                 />
               </FormGroup>
             </form>
-          </Modal.Body>
-          <Modal.Footer>
+          </div>
+          <div className="modal-footer">
             <Button
               bsStyle="danger"
               onClick={() => { this.setState({ showModal: false }); }}
@@ -85,10 +86,10 @@ class SaveFormButton extends Component {
               onClick={this.onJSONSave}
               disabled={!this.state.filename}
             >Continue</Button>
-          </Modal.Footer>
-        </Modal>
-      </Button>
-    );
+          </div>
+        </div>
+      </div>,
+    ];
   }
 }
 

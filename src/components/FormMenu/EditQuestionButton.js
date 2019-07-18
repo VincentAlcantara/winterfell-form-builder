@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, FormGroup } from 'react-bootstrap';
 import { updateQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
@@ -58,18 +58,19 @@ class updateQuestionButton extends Component {
   }
 
   render() {
-    return (
+    return [
       <Button
         className="btn"
-        onClick={() => {
-          this.setState({ showModal: true });
-        }}
+        data-toggle="modal"
+        data-target="#editQuestion"
       >edit
-        <Modal show={this.state.showModal}>
-          <Modal.Header>
-            <Modal.Title>Add a new question to the page</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+      </Button>,
+      <div className="modal fade" id="createForm" tabIndex="-1">
+        <div className="modal-dialog bg-white">
+          <div className="modal-header">
+            <div className="modal-title">Add a new question to the page</div>
+          </div>
+          <div className="modal-body">
             <form>
               <FormGroup>
                 <FieldGroup
@@ -92,8 +93,8 @@ class updateQuestionButton extends Component {
                 />
               </FormGroup>
             </form>
-          </Modal.Body>
-          <Modal.Footer>
+          </div>
+          <div className="modal-footer">
             <Button
               bsStyle="danger"
               onClick={() => { this.setState({ showModal: false }); }}
@@ -102,10 +103,10 @@ class updateQuestionButton extends Component {
               bsStyle="primary"
               onClick={this.onFormUpdate}
             >Save changes</Button>
-          </Modal.Footer>
-        </Modal>
-      </Button>
-    );
+          </div>
+        </div>
+      </div>,
+    ];
   }
 }
 
