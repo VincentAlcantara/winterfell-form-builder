@@ -1,36 +1,38 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, DropdownButton, MenuItem, FormGroup } from 'react-bootstrap';
 
 function Pagination(props) {
   const { currentPanelId, formPanels, onClick } = props;
   const getPages = () => formPanels.map((panel, index) => (
-    <MenuItem
+    <button
       key={`${index}-${panel}`}
       onClick={() => {
         onClick(panel);
       }}
-      className="btn-block"
+      className="dropdown-item"
     >
       {panel}
-    </MenuItem>
+    </button>
   ));
 
   return (
-    <Row>
-      <Col xs={12}>
-        <FormGroup>
-          <DropdownButton
-            id="pagination"
-            title={currentPanelId || 'Select Page'}
-            className="btn-block"
-          >
-            { formPanels && getPages() }
-          </DropdownButton>
-        </FormGroup>
-      </Col>
-    </Row>
+    <div className="dropdown my-2">
+      <button
+        id="pagination"
+        title={currentPanelId || 'Select Page'}
+        className="btn btn-secondary dropdown-toggle"
+        type="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Go to page
+      </button>
+      <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        { formPanels && getPages() }
+      </div>
+    </div>
   );
 }
 

@@ -46,10 +46,11 @@ class AddPageButton extends Component {
       <Button
         className="btn btn-block btn-primary"
         data-toggle="modal"
-        data-target="#createForm"
-      >add page
+        data-target="#addPage"
+        key="addPage"
+      >Add page
       </Button>,
-      <div className="modal fade" id="createForm" tabIndex="-1">
+      <div className="modal fade" id="addPage" tabIndex="-1" key="addPageModal">
         <div className="modal-dialog bg-white">
           <div className="modal-header">
             <div className="modal-title">Add a new page to the form</div>

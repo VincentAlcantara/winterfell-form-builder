@@ -50,9 +50,10 @@ class UploadJSONButton extends Component {
         className="btn btn-block btn-primary"
         data-toggle="modal"
         data-target="#uploadJSON"
-      >upload
+        key="uploadJSON"
+      >Upload
       </Button>,
-      <div className="modal fade" id="uploadJSON" tabIndex="-1">
+      <div className="modal fade" id="uploadJSON" tabIndex="-1" key="uploadJSONModal">
         <div className="modal-dialog bg-white">
           <div className="modal-header">
             <div className="modal-title">Upload a form</div>

@@ -54,10 +54,11 @@ class SaveFormButton extends Component {
         className="btn btn-block btn-primary"
         data-toggle="modal"
         data-target="#uploadButton"
+        key="uploadButton"
         disabled={!this.props.schema || this.props.schema === 'null'}
-      >download
+      >Download
       </Button>,
-      <div className="modal fade" id="uploadButton" tabIndex="-1">
+      <div className="modal fade" id="uploadButton" tabIndex="-1" key="uploadButtonModal">
         <div className="modal-dialog bg-white">
           <div className="modal-header">
             <div className="modal-title">Download Form</div>

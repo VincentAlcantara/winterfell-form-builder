@@ -43,9 +43,10 @@ class CreateFormButton extends Component {
         className="btn btn-block btn-primary"
         data-toggle="modal"
         data-target="#createButton"
+        key="createButton"
       >New
       </button>,
-      <div className="modal fade" id="createButton" tabIndex="-1">
+      <div className="modal fade" id="createButton" tabIndex="-1" key="createButtonModal">
         <div className="modal-dialog bg-white">
           <div className="modal-header">
             <div className="modal-title">Create a new form</div>

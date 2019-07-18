@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { Grid, Row, Col } from 'react-bootstrap';
 import WinterfellFormBuilder from './src';
 
 class WinterfellFormBuilderDemo extends Component {
@@ -24,13 +23,7 @@ class WinterfellFormBuilderDemo extends Component {
 
   render() {
     return (
-      <Grid>
-        <Row>
-          <Col xs={12}>
-            <WinterfellFormBuilder />
-          </Col>
-        </Row>
-      </Grid>
+      <WinterfellFormBuilder />
     );
   }
 }

@@ -47,9 +47,10 @@ class EditFormTitleButton extends Component {
         className="btn btn-block btn-primary"
         data-toggle="modal"
         data-target="#editFormTitle"
+        key="editFormTitle"
       >Edit filename
       </Button>,
-      <div className="modal fade" id="editFormTitle" tabIndex="-1">
+      <div className="modal fade" id="editFormTitle" tabIndex="-1" key="editFormTitleModal">
         <div className="modal-dialog bg-white">
           <div className="modal-header">
             <div className="modal-title">Edit form filename</div>

@@ -6,7 +6,8 @@ const PageSortButton = props => (
   <Button
     className="btn btn-block btn-primary"
     onClick={props.onClick}
-  >sort pages
+    key="sortPages"
+  >Sort pages
   </Button>
 );
 

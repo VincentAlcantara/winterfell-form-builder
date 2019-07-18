@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col, Alert, Breadcrumb, Modal, Button, ButtonGroup } from 'react-bootstrap';
+import { Col, Alert, Breadcrumb, Modal, Button, ButtonGroup } from 'react-bootstrap';
 import { goToPage, changeCurrentEditingField, clearErrorMessage } from '../actions/winterfellFormBuilderActions';
 import Pagination from './Pagination';
 import Previewer from './Previewer';
@@ -72,127 +72,120 @@ class WinterfellFormBuilder extends Component {
     } = this.props;
 
     return (
-      <Grid className="winterfell-form-builder">
-        <div className="static-modal">
-          <Modal show={errorMessage !== ''}>
-            <div className="modal-header">
-              <div className="modal-title">Error</div>
-            </div>
-            <div className="modal-body">
-              {errorMessage}
-            </div>
-            <div className="modal-footer">
-              <Button
-                bsStyle="primary"
-                onClick={this.props.clearErrorMessage}
-              >Ok</Button>
-            </div>
-          </Modal>
+      <div className="container winterfell-form-builder">
+        <div className="row">
+          <div className="static-modal">
+            <Modal show={errorMessage !== ''}>
+              <div className="modal-header">
+                <div className="modal-title">Error</div>
+              </div>
+              <div className="modal-body">
+                {errorMessage}
+              </div>
+              <div className="modal-footer">
+                <Button
+                  bsStyle="primary"
+                  onClick={this.props.clearErrorMessage}
+                >Ok</Button>
+              </div>
+            </Modal>
+          </div>
+          <div className="col-12">
+            <ButtonGroup>
+              <CreateFormButton />
+              <UploadJSONButton />
+              <SaveFormButton />
+              <AddPageButton />
+              <PageSortButton
+                onClick={() => this.props.changeCurrentEditingField('pageSort')}
+              />
+              <EditSchemaButton />
+              <EditFormTitleButton />
+            </ButtonGroup>
+          </div>
         </div>
-        <Row>
-          <Col xs={12}>
-            <Row>
-              <ButtonGroup>
-                <CreateFormButton />
-                <UploadJSONButton />
-                <SaveFormButton />
-                <AddPageButton />
-                <PageSortButton
-                  onClick={() => this.props.changeCurrentEditingField('pageSort')}
-                />
-                <EditSchemaButton />
-                <EditFormTitleButton />
-              </ButtonGroup>
-            </Row>
-            <br />
-            <Row>
-              <Col xs={4} className="text-left">
-                {
-                  formPanels &&
-                  <Pagination
-                    formPanels={formPanels.map(panel => panel.get('panelId'))}
-                    currentPanelId={currentPanelId}
-                    onClick={this.props.goToPage}
-                  />
-                }
-              </Col>
-              <Col xs={8}>
-                <Breadcrumb>
-                  <Breadcrumb.Item
-                    href="#"
-                    active={currentEditingField === 'page'}
-                    onClick={() => this.props.changeCurrentEditingField('page')}
-                  >
-                    { currentPanelId !== 'Select Page' && currentPanelId}
-                  </Breadcrumb.Item>
-                  {(currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets &&
-                    <Breadcrumb.Item
-                      href=""
-                      active={currentEditingField === 'questionSet'}
-                      onClick={() => this.props.changeCurrentEditingField('questionSet', currentQuestionSetIndex)}
-                    >{questionSets.getIn([currentQuestionSetIndex, 'questionSetId'])}
-                    </Breadcrumb.Item>
-                  }
-                  {(currentEditingField === 'question') && questionSets &&
-                    <Breadcrumb.Item
-                      active={currentEditingField === 'question'}
-                    >
-                      {questionSets.getIn([currentQuestionSetIndex, 'questions', currentQuestionIndex, 'questionId'])}
-                    </Breadcrumb.Item>
-                  }
-                </Breadcrumb>
-              </Col>
-            </Row>
-            <Row className="winterfell-form-builder-editor">
-              <Col xs={4} className="winterfell-form-builder-field-editor">
-                <Row>
-                  <Col xs={12}>
-                    { currentQuestionPanelIndex >= 0 &&
-                      <FieldEditor
-                        currentQuestionPanelIndex={currentQuestionPanelIndex}
-                        currentEditingField={currentEditingField}
-                        currentQuestionSetIndex={currentQuestionSetIndex}
-                        currentQuestionIndex={currentQuestionIndex}
-                      />
-                    }
-                  </Col>
-                </Row>
-              </Col>
-              <Col xs={8} className="winterfell-form-builder-page-editor">
-                { (this.props.schema && currentQuestionPanelIndex >= 0) &&
-                  <FieldSelector
-                    currentQuestionPanelIndex={currentQuestionPanelIndex}
-                  />
-                }
-                { (!this.props.schema || this.props.schema.size === 0) &&
-                  <Alert bsStyle="info">
-                    No form loaded.  Click on &#39;new&#39; to create a new form,
-                    or &#39;upload&#39; to load an existing form.
-                  </Alert>
-                }
-              </Col>
-            </Row>
-            <Row className="winterfell-form-builder-previewer">
-              <Col xs={12}>
-                <h3>Form Preview:</h3>
-                {
-                  schema &&
-                  <Previewer
-                    currentPanelId={currentPanelId}
-                    schema={schema.toJS()}
-                  />
-                }
-                {
-                  currentPanelId === 'Select Page' &&
-                  <Alert bsStyle="info">
-                    No page selected to preview.  Select a page from the dropdown above.
-                  </Alert>
-                }
-              </Col>
-            </Row>
+        <div className="row">
+          <div className="col-4 text-left">
+            {
+              formPanels &&
+              <Pagination
+                formPanels={formPanels.map(panel => panel.get('panelId'))}
+                currentPanelId={currentPanelId}
+                onClick={this.props.goToPage}
+              />
+            }
+          </div>
+          <div className="col-8">
+            <Breadcrumb>
+              <Breadcrumb.Item
+                href="#"
+                active={currentEditingField === 'page'}
+                onClick={() => this.props.changeCurrentEditingField('page')}
+              >
+                {currentPanelId !== 'Select Page' && currentPanelId}
+              </Breadcrumb.Item>
+              {(currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets &&
+                <Breadcrumb.Item
+                  href=""
+                  active={currentEditingField === 'questionSet'}
+                  onClick={() => this.props.changeCurrentEditingField('questionSet', currentQuestionSetIndex)}
+                >{questionSets.getIn([currentQuestionSetIndex, 'questionSetId'])}
+                </Breadcrumb.Item>
+              }
+              {(currentEditingField === 'question') && questionSets &&
+                <Breadcrumb.Item
+                  active={currentEditingField === 'question'}
+                >
+                  {questionSets.getIn([currentQuestionSetIndex, 'questions', currentQuestionIndex, 'questionId'])}
+                </Breadcrumb.Item>
+              }
+            </Breadcrumb>
+          </div>
+        </div>
+        <div className="row winterfell-form-builder-editor">
+          <div className="col-4 winterfell-form-builder-field-editor">
+            {currentQuestionPanelIndex >= 0 &&
+              <FieldEditor
+                currentQuestionPanelIndex={currentQuestionPanelIndex}
+                currentEditingField={currentEditingField}
+                currentQuestionSetIndex={currentQuestionSetIndex}
+                currentQuestionIndex={currentQuestionIndex}
+              />
+            }
+          </div>
+          <Col xs={8} className="winterfell-form-builder-page-editor">
+            {(this.props.schema && currentQuestionPanelIndex >= 0) &&
+              <FieldSelector
+                currentQuestionPanelIndex={currentQuestionPanelIndex}
+              />
+            }
+            {(!this.props.schema || this.props.schema.size === 0) &&
+              <Alert bsStyle="info">
+                No form loaded.  Click on &#39;new&#39; to create a new form,
+                or &#39;upload&#39; to load an existing form.
+              </Alert>
+            }
           </Col>
-        </Row>
-      </Grid>
+        </div>
+        <div className="row winterfell-form-builder-previewer">
+          <Col xs={12}>
+            <h3>Form Preview:</h3>
+            {
+              schema &&
+              <Previewer
+                currentPanelId={currentPanelId}
+                schema={schema.toJS()}
+              />
+            }
+            {
+              currentPanelId === 'Select Page' &&
+              <Alert bsStyle="info">
+                No page selected to preview.  Select a page from the dropdown above.
+              </Alert>
+            }
+          </Col>
+        </div>
+      </div>
     );
   }
 }

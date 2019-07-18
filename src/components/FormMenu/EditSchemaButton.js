@@ -40,9 +40,10 @@ class EditSchemaButton extends Component {
         className="btn btn-block btn-primary"
         data-toggle="modal"
         data-target="#editSchema"
-      >edit schema
+        key="editSchema"
+      >Edit schema
       </Button>,
-      <div className="modal fade" id="editSchema" tabIndex="-1">
+      <div className="modal fade" id="editSchema" tabIndex="-1" key="editSchemaModal">
         <div className="modal-dialog bg-white">
           <div className="modal-header">
             <div className="modal-title">Edit Schema</div>
