@@ -271,7 +271,7 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
                     onClick: function onClick(event) {
                       return _this2.onShowConditonalClick(ix, event);
                     },
-                    className: 'btn btn-primary'
+                    className: 'btn btn-dark'
                   },
                   _this2.state.showConditionalQuestions && !_this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, {
                     glyph: 'glyphicon glyphicon-menu-hamburger',

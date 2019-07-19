@@ -38,8 +38,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 var _FieldGroup = require('../InputTypes/FieldGroup');
@@ -57,7 +55,6 @@ var CreateFormButton = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (CreateFormButton.__proto__ || (0, _getPrototypeOf2.default)(CreateFormButton)).call(this, props));
 
     _this.state = {
-      showModal: false,
       formTitle: ''
     };
 
@@ -83,42 +80,52 @@ var CreateFormButton = function (_Component) {
     value: function onFormUpdate(e) {
       e.preventDefault();
       this.props.createForm(this.state.formTitle);
-      this.setState({ showModal: false });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
-        _reactBootstrap.Button,
+      return [_react2.default.createElement(
+        'button',
         {
-          className: 'btn btn-block btn-primary',
-          onClick: function onClick() {
-            _this2.setState({ showModal: true });
-          }
+          className: 'btn btn-block btn-dark',
+          'data-toggle': 'modal',
+          'data-target': '#createButton',
+          key: 'createButton',
+          title: 'Start new form'
         },
-        'new',
         _react2.default.createElement(
-          _reactBootstrap.Modal,
-          { show: this.state.showModal },
+          'i',
+          { 'class': 'material-icons' },
+          'create_new_folder'
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'icon-menu' },
+          'Create'
+        )
+      ), _react2.default.createElement(
+        'div',
+        { className: 'modal fade', id: 'createButton', tabIndex: '-1', key: 'createButtonModal' },
+        _react2.default.createElement(
+          'div',
+          { className: 'modal-dialog bg-white' },
           _react2.default.createElement(
-            _reactBootstrap.Modal.Header,
-            null,
+            'div',
+            { className: 'modal-content' },
             _react2.default.createElement(
-              _reactBootstrap.Modal.Title,
-              null,
-              'Create a new form'
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Body,
-            null,
-            _react2.default.createElement(
-              'form',
-              null,
+              'div',
+              { className: 'modal-header' },
               _react2.default.createElement(
-                _reactBootstrap.FormGroup,
+                'div',
+                { className: 'modal-title' },
+                'Create a new form'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'modal-body' },
+              _react2.default.createElement(
+                'form',
                 null,
                 _react2.default.createElement(_FieldGroup2.default, {
                   id: 'formTitle',
@@ -129,32 +136,30 @@ var CreateFormButton = function (_Component) {
                   value: this.state.formTitle
                 })
               )
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Footer,
-            null,
-            _react2.default.createElement(
-              _reactBootstrap.Button,
-              {
-                bsStyle: 'danger',
-                onClick: function onClick() {
-                  _this2.setState({ showModal: false });
-                }
-              },
-              'Cancel'
             ),
             _react2.default.createElement(
-              _reactBootstrap.Button,
-              {
-                bsStyle: 'primary',
-                onClick: this.onFormUpdate
-              },
-              'Save changes'
+              'div',
+              { className: 'modal-footer' },
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-danger',
+                  'data-dismiss': 'modal'
+                },
+                'Cancel'
+              ),
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-dark',
+                  onClick: this.onFormUpdate
+                },
+                'Save changes'
+              )
             )
           )
         )
-      );
+      )];
     }
   }]);
   return CreateFormButton;

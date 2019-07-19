@@ -38,8 +38,6 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = require('react-redux');
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -71,88 +69,91 @@ var EditSchemaButton = function (_Component) {
     value: function onFormUpdate(e) {
       e.preventDefault();
       this.props.updateForm(this.state.schema);
-      this.setState({ showModal: false });
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
-      var schemaObject = this.props.schema && this.props.schema.toJS();
-
-      return _react2.default.createElement(
-        _reactBootstrap.Button,
+      return [_react2.default.createElement(
+        'button',
         {
-          className: 'btn btn-block btn-primary',
-          onClick: function onClick() {
-            _this2.setState({
-              schema: schemaObject,
-              showModal: true
-            });
-          }
+          className: 'btn btn-block btn-dark',
+          'data-toggle': 'modal',
+          'data-target': '#editSchema',
+          key: 'editSchema',
+          title: 'Edit Schema'
         },
-        'edit schema',
         _react2.default.createElement(
-          _reactBootstrap.Modal,
-          { show: this.state.showModal },
+          'i',
+          { 'class': 'material-icons' },
+          'view_agenda'
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'icon-menu' },
+          'Schema'
+        )
+      ), _react2.default.createElement(
+        'div',
+        { className: 'modal fade', id: 'editSchema', tabIndex: '-1', key: 'editSchemaModal' },
+        _react2.default.createElement(
+          'div',
+          { className: 'modal-dialog bg-white' },
           _react2.default.createElement(
-            _reactBootstrap.Modal.Header,
-            null,
+            'div',
+            { className: 'modal-content' },
             _react2.default.createElement(
-              _reactBootstrap.Modal.Title,
-              null,
-              'Edit Schema'
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Body,
-            null,
-            _react2.default.createElement(
-              'form',
-              null,
+              'div',
+              { className: 'modal-header' },
               _react2.default.createElement(
-                _reactBootstrap.FormGroup,
+                'div',
+                { className: 'modal-title' },
+                'Edit Schema'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'modal-body' },
+              _react2.default.createElement(
+                'form',
                 null,
                 _react2.default.createElement('textarea', {
                   rows: '30',
-                  cols: '78',
+                  cols: '60',
                   value: (0, _stringify2.default)(this.state.schema, undefined, 2),
                   onChange: this.onChange
                 })
               )
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Footer,
-            null,
-            _react2.default.createElement(
-              _reactBootstrap.Button,
-              {
-                bsStyle: 'danger',
-                onClick: function onClick() {
-                  _this2.setState({ showModal: false });
-                }
-              },
-              'Cancel'
             ),
             _react2.default.createElement(
-              _reactBootstrap.Button,
-              {
-                bsStyle: 'primary',
-                onClick: this.onFormUpdate
-              },
-              'Save changes'
+              'div',
+              { className: 'modal-footer' },
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-danger',
+                  'data-dismiss': 'modal'
+                },
+                'Cancel'
+              ),
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-dark',
+                  onClick: this.onFormUpdate,
+                  'data-dismiss': 'modal'
+                },
+                'Save changes'
+              )
             )
           )
         )
-      );
+      )];
     }
   }]);
   return EditSchemaButton;
 }(_react.Component);
 
 EditSchemaButton.propTypes = {
-  schema: _propTypes2.default.object,
   updateForm: _propTypes2.default.func.isRequired
 };
 EditSchemaButton.defaultProps = {

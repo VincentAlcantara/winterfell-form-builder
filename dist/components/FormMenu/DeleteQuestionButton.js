@@ -76,62 +76,56 @@ var DeleteQuestionButton = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
+      return [_react2.default.createElement(
         _reactBootstrap.Button,
         {
           className: 'btn btn-danger',
-          onClick: function onClick() {
-            _this2.setState({ showModal: true });
-          }
+          'data-toggle': 'modal',
+          'data-target': '#deleteQuestion'
         },
+        'Delete question'
+      ), _react2.default.createElement(
+        'div',
+        { className: 'modal fade', id: 'deleteQuestion', tabIndex: '-1' },
         _react2.default.createElement(
           'div',
-          { className: 'static-modal' },
+          { className: 'modal-dialog bg-white' },
           _react2.default.createElement(
-            _reactBootstrap.Modal,
-            { show: this.state.showModal },
+            'div',
+            { className: 'modal-header' },
             _react2.default.createElement(
-              _reactBootstrap.Modal.Header,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Modal.Title,
-                null,
-                'Delete Option Confirmation'
-              )
+              'div',
+              { className: 'modal-title' },
+              'Delete Option Confirmation'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'modal-body' },
+            'Are you sure you want to delete this question?'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'modal-footer' },
+            _react2.default.createElement(
+              'button',
+              {
+                className: 'btn btn-danger',
+                'data-dismiss': 'modal'
+              },
+              'Cancel'
             ),
             _react2.default.createElement(
-              _reactBootstrap.Modal.Body,
-              null,
-              'Are you sure you want to delete this question?'
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Modal.Footer,
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'danger',
-                  onClick: function onClick() {
-                    _this2.setState({ showModal: false });
-                  }
-                },
-                'Cancel'
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                {
-                  bsStyle: 'primary',
-                  onClick: this.onConfirmDelete
-                },
-                'Confirm Delete'
-              )
+              'button',
+              {
+                className: 'btn btn-dark',
+                onClick: this.onConfirmDelete
+              },
+              'Confirm Delete'
             )
           )
-        ),
-        'delete question'
-      );
+        )
+      )];
     }
   }]);
   return DeleteQuestionButton;
