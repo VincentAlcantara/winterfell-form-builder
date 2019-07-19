@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Winterfell from 'winterfell';
-import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { updateQuestionAnswers } from '../actions/winterfellFormBuilderActions';
 import dateInputType from '../components/InputTypes/dateInputType';
 import addressInputType from '../components/InputTypes/addressInputType';
+import textAreaInputType from '../components/InputTypes/textAreaInputType';
 
 const onRenderDefault = () => {
   console.log('Great news! Winterfell rendered successfully');
@@ -23,7 +23,7 @@ const onSubmitDefault = (questionAndAnswers, target) => {
   console.log('-----');
   console.log('Target: ', target);
   console.log('-----');
-  alert('Submitted. Check the console to see the answers!');
+  // alert('Submitted. Check the console to see the answers!');
 };
 
 class Previewer extends Component {
@@ -68,7 +68,10 @@ class Previewer extends Component {
       questionAnswers,
     } = this.props;
 
-    Winterfell.addInputTypes({ dateInput: dateInputType, addressInput: addressInputType });
+    Winterfell.addInputTypes({
+      dateInput: dateInputType,
+      addressInput: addressInputType,
+      textAreaInput: textAreaInputType });
     const displayWinterFellForm = () => (
       schema.formPanels.map((formPanel, index) => (
         (formPanel.panelId === currentPanelId &&
@@ -98,8 +101,7 @@ class Previewer extends Component {
     );
 
     return (
-      <Row className="winterfell-form-builer-previewer" >
-        <Col xs={12}>
+      <div className="card p-3" >
           {(schema &&
             schema.formPanels &&
             schema.formPanels.length > 0) &&
@@ -107,8 +109,7 @@ class Previewer extends Component {
             currentPanelId !== 'Select Page' &&
             displayWinterFellForm()
           }
-        </Col>
-      </Row>
+        </div>
     );
   }
 }

@@ -61,6 +61,12 @@ var FormQuestionEditor = function FormQuestionEditor(props) {
             className: 'form-control',
             autoComplete: question.questionId
           }),
+          question.input && question.input.type === 'textAreaInput' && _react2.default.createElement('textarea', {
+            id: question.questionId,
+            type: 'text',
+            className: 'form-control',
+            autoComplete: question.questionId
+          }),
           question.input && question.input.type === 'radioOptionsInput' && _react2.default.createElement(_InputTypes.RadioButtonOptionsInput, {
             id: question.questionId,
             labelId: question.questionId,

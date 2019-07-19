@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Modal, Glyphicon } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 
 class DeleteQuestionOptionButton extends Component {
   static propTypes = {
@@ -29,34 +29,35 @@ class DeleteQuestionOptionButton extends Component {
   }
 
   render() {
-    return (
+    return [
       <Button
         className="btn btn-danger"
         title="delete this option"
-        onClick={() => {
-          this.setState({ showModal: true });
-        }}
+        data-toggle="modal"
+        data-target="#deleteQuestionOptionButton"
       ><Glyphicon glyph="glyphicon glyphicon-remove" />
-        <Modal show={this.state.showModal}>
-          <Modal.Header>
-            <Modal.Title>Delete Option Confirmation</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+      </Button>,
+      <div className="modal fade" id="deleteQuestionOptionButton" tabIndex="-1">
+        <div className="modal-dialog bg-white">
+          <div className="modal-header">
+            <div className="modal-title">Delete Option Confirmation</div>
+          </div>
+          <div className="modal-body">
             Are you sure you want to delete this option?
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
+          </div>
+          <div className="modal-footer">
+            <button
+              className="btn btn-danger"
+              data-dismiss="modal"
+            >Cancel</button>
+            <button
+              className="btn btn-dark"
               onClick={this.onConfirmDelete}
-            >Confirm Delete</Button>
-          </Modal.Footer>
-        </Modal>
-      </Button>
-    );
+            >Confirm Delete</button>
+          </div>
+        </div>
+      </div>,
+    ];
   }
 }
 

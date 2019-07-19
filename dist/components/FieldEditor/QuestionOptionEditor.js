@@ -129,6 +129,16 @@ var QuestionOptionEditor = function (_PureComponent) {
       this.props.editQuestionOptionValue(path, event.target.value);
     }
   }, {
+    key: 'onDeleteQuestionOption',
+    value: function onDeleteQuestionOption(index) {
+      var _props3 = this.props,
+          currentQuestionSetIndex = _props3.currentQuestionSetIndex,
+          currentQuestionIndex = _props3.currentQuestionIndex;
+
+      var path = ['schema', 'questionSets', currentQuestionSetIndex, 'questions', currentQuestionIndex, 'input', 'options', index];
+      this.props.deleteQuestionOption(path);
+    }
+  }, {
     key: 'onAddOptionChange',
     value: function onAddOptionChange(event) {
       event.preventDefault();
@@ -137,9 +147,9 @@ var QuestionOptionEditor = function (_PureComponent) {
   }, {
     key: 'onAddOption',
     value: function onAddOption() {
-      var _props3 = this.props,
-          currentQuestionSetIndex = _props3.currentQuestionSetIndex,
-          currentQuestionIndex = _props3.currentQuestionIndex;
+      var _props4 = this.props,
+          currentQuestionSetIndex = _props4.currentQuestionSetIndex,
+          currentQuestionIndex = _props4.currentQuestionIndex;
       var _state = this.state,
           questionOptionText = _state.questionOptionText,
           questionOptionValue = _state.questionOptionValue;
@@ -185,12 +195,12 @@ var QuestionOptionEditor = function (_PureComponent) {
     value: function render() {
       var _this2 = this;
 
-      var _props4 = this.props,
-          questionInputOptions = _props4.questionInputOptions,
-          questionId = _props4.questionId,
-          currentQuestionPanelIndex = _props4.currentQuestionPanelIndex,
-          currentQuestionSetIndex = _props4.currentQuestionSetIndex,
-          currentQuestionIndex = _props4.currentQuestionIndex;
+      var _props5 = this.props,
+          questionInputOptions = _props5.questionInputOptions,
+          questionId = _props5.questionId,
+          currentQuestionPanelIndex = _props5.currentQuestionPanelIndex,
+          currentQuestionSetIndex = _props5.currentQuestionSetIndex,
+          currentQuestionIndex = _props5.currentQuestionIndex;
 
       return _react2.default.createElement(
         'div',
@@ -230,7 +240,7 @@ var QuestionOptionEditor = function (_PureComponent) {
                 _react2.default.createElement(_DeleteQuestionOptionButton2.default, {
                   questionOptionIndex: ix,
                   onDeleteQuestionOption: function onDeleteQuestionOption() {
-                    return _this2.props.deleteQuestionOption(currentQuestionSetIndex, currentQuestionIndex, ix);
+                    return _this2.onDeleteQuestionOption(ix);
                   }
                 })
               ),

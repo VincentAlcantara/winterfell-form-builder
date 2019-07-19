@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Modal, FormGroup } from 'react-bootstrap';
+import { Button, FormGroup } from 'react-bootstrap';
 import { addConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 import SelectInput from '../InputTypes/SelectInput';
@@ -58,18 +58,19 @@ class AddConditionalQuestionButton extends Component {
   }
 
   render() {
-    return (
+    return [
       <Button
-        className="btn btn-primary btn-block"
-        onClick={() => {
-          this.setState({ showModal: true });
-        }}
+        className="btn btn-dark btn-block"
+        data-toggle="modal"
+        data-target="#createForm"
       >add conditional question
-        <Modal show={this.state.showModal}>
-          <Modal.Header>
-            <Modal.Title>Add a new conditional question to this question</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
+      </Button>,
+      <div className="modal fade" id="createForm" tabIndex="-1">
+        <div className="modal-dialog bg-white">
+          <div className="modal-header">
+            <div className="modal-title">Add a new conditional question to this question</div>
+          </div>
+          <div className="modal-body">
             <form>
               <FormGroup>
                 <FieldGroup
@@ -104,20 +105,21 @@ class AddConditionalQuestionButton extends Component {
                 />
               </FormGroup>
             </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
+          </div>
+          <div className="modal-footer">
+            <button
+              className="btn btn-danger"
+              data-dismiss="modal"
+            >Cancel</button>
+            <button
+              className="btn btn-dark"
               onClick={this.onFormUpdate}
-            >Save changes</Button>
-          </Modal.Footer>
-        </Modal>
-      </Button>
-    );
+              data-dismiss="modal"
+            >Save changes</button>
+          </div>
+        </div>
+      </div>,
+    ];
   }
 }
 

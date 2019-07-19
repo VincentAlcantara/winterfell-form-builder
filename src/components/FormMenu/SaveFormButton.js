@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Modal, FormGroup } from 'react-bootstrap';
 import fileDownload from 'js-file-download';
 import { saveJSON } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
@@ -49,46 +48,50 @@ class SaveFormButton extends Component {
   }
 
   render() {
-    return (
-      <Button
-        className="btn btn-block btn-primary"
-        onClick={() => {
-          this.setState({ showModal: true });
-        }}
+    return [
+      <button
+        className="btn btn-block btn-dark"
+        data-toggle="modal"
+        data-target="#uploadButton"
+        key="uploadButton"
+        title="Export"
         disabled={!this.props.schema || this.props.schema === 'null'}
-      >download
-        <Modal show={this.state.showModal}>
-          <Modal.Header>
-            <Modal.Title>Download Form</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <form>
-              <FormGroup>
-                <FieldGroup
-                  id="filename"
-                  name="filename"
-                  label="Filename"
-                  onChange={this.onChange}
-                  placeholder={this.props.title}
-                  value={this.state.filename}
-                />
-              </FormGroup>
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
-              onClick={this.onJSONSave}
-              disabled={!this.state.filename}
-            >Continue</Button>
-          </Modal.Footer>
-        </Modal>
-      </Button>
-    );
+      ><i class="material-icons">unarchive</i><span className="icon-menu">Export</span>
+      </button>,
+      <div className="modal fade" id="uploadButton" tabIndex="-1" key="uploadButtonModal">
+        <div className="modal-dialog bg-white">
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="modal-title">Export Winterfell Form</div>
+            </div>
+            <div className="modal-body">
+              <form>
+                  <FieldGroup
+                    id="filename"
+                    name="filename"
+                    label="Filename"
+                    onChange={this.onChange}
+                    placeholder={this.props.title}
+                    value={this.state.filename}
+                  />
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >Cancel</button>
+              <button
+                className="btn btn-dark"
+                onClick={this.onJSONSave}
+                disabled={!this.state.filename}
+                data-dismiss="modal"
+              >Continue</button>
+            </div>
+          </div>
+        </div>
+      </div>,
+    ];
   }
 }
 

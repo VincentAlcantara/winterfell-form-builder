@@ -81,7 +81,7 @@ export const BOOTSTRAP_CLASSES = {
   checkboxInput: 'checkbox',
   checkboxListItem: 'checkbox',
   checkboxList: 'clean-list',
-  controlButton: 'btn btn-primary pull-right',
+  controlButton: 'btn btn-dark pull-right',
   backButton: 'btn btn-default pull-left',
   errorMessage: 'alert alert-danger',
   questionPostText: 'push-top',
@@ -91,6 +91,9 @@ export const BOOTSTRAP_CLASSES = {
 export const INPUT_TYPE_OPTIONS = [{
   text: 'text',
   value: 'textInput',
+}, {
+  text: 'textArea',
+  value: 'textAreaInput',
 }, {
   text: 'select',
   value: 'selectInput',
