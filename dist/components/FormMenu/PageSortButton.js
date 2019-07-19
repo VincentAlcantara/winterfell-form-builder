@@ -18,12 +18,22 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var PageSortButton = function PageSortButton(props) {
   return _react2.default.createElement(
-    _reactBootstrap.Button,
+    'button',
     {
-      className: 'btn btn-block btn-primary',
-      onClick: props.onClick
+      className: 'btn btn-block btn-light',
+      onClick: props.onClick,
+      key: 'sortPages'
     },
-    'sort pages'
+    _react2.default.createElement(
+      'i',
+      { 'class': 'material-icons' },
+      'swap_vert'
+    ),
+    _react2.default.createElement(
+      'span',
+      { className: 'icon-menu' },
+      'Pages'
+    )
   );
 };
 

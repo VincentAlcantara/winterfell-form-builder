@@ -117,40 +117,31 @@ var FieldSelectorContainer = function (_Component) {
 
       var questionPanelsArray = questionPanels && questionPanels.toJS();
       var questionSetsArray = questionSets && questionSets.toJS();
-      return _react2.default.createElement(
-        _reactBootstrap.Row,
-        null,
-        _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
-          currentEditingField === 'pageSort' && _react2.default.createElement(_PageSortSelector2.default, null),
-          currentEditingField !== 'pageSort' && _react2.default.createElement(
-            'form',
-            null,
-            currentQuestionPanelIndex >= 0 && _react2.default.createElement(_PageSelector2.default, {
-              panelHeader: panelHeader,
-              panelText: panelText,
-              onClick: function onClick() {
-                return _this2.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex);
-              }
-            }),
-            currentQuestionPanelIndex >= 0 && questionPanelsArray && _react2.default.createElement(_QuestionSetSelector2.default, {
-              currentQuestionSets: questionPanelsArray[currentQuestionPanelIndex].questionSets,
-              questionSets: questionSetsArray,
-              onClick: this.props.changeCurrentEditingField,
-              currentQuestionIndex: this.props.currentQuestionIndex
-            }),
-            currentQuestionPanelIndex >= 0 && _react2.default.createElement(_ButtonBarSelector2.default, {
-              backButton: backButton,
-              backButtonDisabled: backButtonDisabled,
-              nextButton: nextButton,
-              onClick: function onClick() {
-                return _this2.props.changeCurrentEditingField('buttons', currentQuestionSetIndex, currentQuestionIndex);
-              }
-            })
-          )
-        )
-      );
+      return [currentEditingField === 'pageSort' && _react2.default.createElement(_PageSortSelector2.default, { key: 'pageSortSelector' }), currentEditingField !== 'pageSort' && _react2.default.createElement(
+        'div',
+        { key: true },
+        currentQuestionPanelIndex >= 0 && _react2.default.createElement(_PageSelector2.default, {
+          panelHeader: panelHeader,
+          panelText: panelText,
+          onClick: function onClick() {
+            return _this2.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex);
+          }
+        }),
+        currentQuestionPanelIndex >= 0 && questionPanelsArray && _react2.default.createElement(_QuestionSetSelector2.default, {
+          currentQuestionSets: questionPanelsArray[currentQuestionPanelIndex].questionSets,
+          questionSets: questionSetsArray,
+          onClick: this.props.changeCurrentEditingField,
+          currentQuestionIndex: this.props.currentQuestionIndex
+        }),
+        currentQuestionPanelIndex >= 0 && _react2.default.createElement(_ButtonBarSelector2.default, {
+          backButton: backButton,
+          backButtonDisabled: backButtonDisabled,
+          nextButton: nextButton,
+          onClick: function onClick() {
+            return _this2.props.changeCurrentEditingField('buttons', currentQuestionSetIndex, currentQuestionIndex);
+          }
+        })
+      )];
     }
   }]);
   return FieldSelectorContainer;

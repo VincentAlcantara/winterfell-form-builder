@@ -75,7 +75,7 @@ var AddQuestionOptionButton = function AddQuestionOptionButton(props) {
               _react2.default.createElement(
                 _reactBootstrap.Button,
                 {
-                  className: 'btn btn-primary',
+                  className: 'btn btn-dark',
                   onClick: onClick,
                   disabled: questionOptionText === '' || questionOptionValue === ''
                 },

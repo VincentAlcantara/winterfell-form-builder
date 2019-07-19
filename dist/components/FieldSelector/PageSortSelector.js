@@ -123,20 +123,11 @@ var PageSortSelector = function (_Component) {
           })
         );
       });
-      return _react2.default.createElement(
-        _reactBootstrap.Row,
-        { className: 'winterfell-form-builder-page-sorter' },
-        _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
-          _react2.default.createElement(
-            'label',
-            { htmlFor: 'sortableList' },
-            'Pages - Drag and Drop to Sort'
-          ),
-          _react2.default.createElement(SortableList, { items: this.state.items, onSortEnd: this.onSortEnd })
-        )
-      );
+      return [_react2.default.createElement(
+        'label',
+        { htmlFor: 'sortableList', key: 'sortPagesLabel' },
+        'Pages - Drag and Drop to Sort'
+      ), _react2.default.createElement(SortableList, { key: 'sortingPages', items: this.state.items, onSortEnd: this.onSortEnd })];
     }
   }]);
   return PageSortSelector;

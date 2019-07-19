@@ -12,8 +12,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function Pagination(props) {
@@ -24,13 +22,13 @@ function Pagination(props) {
   var getPages = function getPages() {
     return formPanels.map(function (panel, index) {
       return _react2.default.createElement(
-        _reactBootstrap.MenuItem,
+        'button',
         {
           key: index + '-' + panel,
           onClick: function onClick() {
             _onClick(panel);
           },
-          className: 'btn-block'
+          className: 'dropdown-item'
         },
         panel
       );
@@ -38,24 +36,25 @@ function Pagination(props) {
   };
 
   return _react2.default.createElement(
-    _reactBootstrap.Row,
-    null,
+    'div',
+    { className: 'dropdown' },
     _react2.default.createElement(
-      _reactBootstrap.Col,
-      { xs: 12 },
-      _react2.default.createElement(
-        _reactBootstrap.FormGroup,
-        null,
-        _react2.default.createElement(
-          _reactBootstrap.DropdownButton,
-          {
-            id: 'pagination',
-            title: currentPanelId || 'Select Page',
-            className: 'btn-block'
-          },
-          formPanels && getPages()
-        )
-      )
+      'button',
+      {
+        id: 'pagination',
+        title: currentPanelId || 'Select Page',
+        className: 'btn btn-light dropdown-toggle h-100 py-0',
+        type: 'button',
+        'data-toggle': 'dropdown',
+        'aria-haspopup': 'true',
+        'aria-expanded': 'false'
+      },
+      'Go to page'
+    ),
+    _react2.default.createElement(
+      'div',
+      { className: 'dropdown-menu', 'aria-labelledby': 'dropdownMenuButton' },
+      formPanels && getPages()
     )
   );
 }

@@ -88,36 +88,49 @@ var UploadJSONButton = function (_Component) {
     value: function render() {
       var _this3 = this;
 
-      return _react2.default.createElement(
-        _reactBootstrap.Button,
+      return [_react2.default.createElement(
+        'button',
         {
-          className: 'btn btn-block btn-primary',
-          onClick: function onClick() {
-            _this3.setState({ showModal: true });
-          }
+          className: 'btn btn-block btn-dark',
+          'data-toggle': 'modal',
+          'data-target': '#uploadJSON',
+          key: 'uploadJSON',
+          title: 'Upload Winterfell form'
         },
-        'upload',
         _react2.default.createElement(
-          _reactBootstrap.Modal,
-          { show: this.state.showModal },
+          'i',
+          { 'class': 'material-icons' },
+          'archive'
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'icon-menu' },
+          'Import'
+        )
+      ), _react2.default.createElement(
+        'div',
+        { className: 'modal fade', id: 'uploadJSON', tabIndex: '-1', key: 'uploadJSONModal' },
+        _react2.default.createElement(
+          'div',
+          { className: 'modal-dialog bg-white' },
           _react2.default.createElement(
-            _reactBootstrap.Modal.Header,
-            null,
+            'div',
+            { className: 'modal-content' },
             _react2.default.createElement(
-              _reactBootstrap.Modal.Title,
-              null,
-              'Upload a form'
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Body,
-            null,
-            'Upload a form.  Note this will replace the current form.',
-            _react2.default.createElement(
-              'form',
-              null,
+              'div',
+              { className: 'modal-header' },
               _react2.default.createElement(
-                _reactBootstrap.FormGroup,
+                'div',
+                { className: 'modal-title' },
+                'Upload a form'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'modal-body' },
+              'Upload an existing Winterfell form.',
+              _react2.default.createElement(
+                'form',
                 null,
                 _react2.default.createElement('label', {
                   htmlFor: 'jsonUpload'
@@ -131,32 +144,30 @@ var UploadJSONButton = function (_Component) {
                   }
                 })
               )
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Footer,
-            null,
-            _react2.default.createElement(
-              _reactBootstrap.Button,
-              {
-                bsStyle: 'danger',
-                onClick: function onClick() {
-                  _this3.setState({ showModal: false });
-                }
-              },
-              'Cancel'
             ),
             _react2.default.createElement(
-              _reactBootstrap.Button,
-              {
-                bsStyle: 'primary',
-                onClick: this.onJSONUpload
-              },
-              'Continue'
+              'div',
+              { className: 'modal-footer' },
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-danger',
+                  'data-dismiss': 'modal'
+                },
+                'Cancel'
+              ),
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-dark',
+                  onClick: this.onJSONUpload
+                },
+                'Continue'
+              )
             )
           )
         )
-      );
+      )];
     }
   }]);
   return UploadJSONButton;

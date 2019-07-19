@@ -158,8 +158,8 @@ var PageEditor = function (_PureComponent) {
             'Page ID'
           ),
           _react2.default.createElement(
-            _reactBootstrap.InputGroup,
-            null,
+            'div',
+            { className: 'input-group' },
             _react2.default.createElement(_reactBootstrap.FormControl, {
               id: 'panelId',
               name: 'panelId',
@@ -168,13 +168,13 @@ var PageEditor = function (_PureComponent) {
               value: this.state.panelId
             }),
             _react2.default.createElement(
-              _reactBootstrap.InputGroup.Button,
-              null,
+              'div',
+              { className: 'input-group-append' },
               _react2.default.createElement(
-                _reactBootstrap.Button,
+                'button',
                 {
                   onClick: this.onUpdatePageId,
-                  className: 'btn btn-primary',
+                  className: 'btn btn-dark',
                   title: 'Click to update page title'
                 },
                 'save'

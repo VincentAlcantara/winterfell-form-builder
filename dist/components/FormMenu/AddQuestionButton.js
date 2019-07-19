@@ -104,34 +104,35 @@ var AddQuestionButton = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
+      return [_react2.default.createElement(
         _reactBootstrap.Button,
         {
-          className: 'btn btn-primary',
-          onClick: function onClick() {
-            _this2.setState({ showModal: true });
-          }
+          className: 'btn btn-dark',
+          'data-toggle': 'modal',
+          'data-target': '#addQuestion'
         },
+        'Add question'
+      ), _react2.default.createElement(
+        'div',
+        { className: 'static-modal' },
         _react2.default.createElement(
           'div',
-          { className: 'static-modal' },
+          { className: 'modal fade', id: 'addQuestion', tabIndex: '-1' },
           _react2.default.createElement(
-            _reactBootstrap.Modal,
-            { show: this.state.showModal },
+            'div',
+            { className: 'modal-dialog bg-white' },
             _react2.default.createElement(
-              _reactBootstrap.Modal.Header,
-              null,
+              'div',
+              { className: 'modal-header' },
               _react2.default.createElement(
-                _reactBootstrap.Modal.Title,
-                null,
+                'div',
+                { className: 'modal-title' },
                 'Add a new question to the question set'
               )
             ),
             _react2.default.createElement(
-              _reactBootstrap.Modal.Body,
-              null,
+              'div',
+              { className: 'modal-body' },
               _react2.default.createElement(
                 'form',
                 null,
@@ -178,31 +179,29 @@ var AddQuestionButton = function (_Component) {
               )
             ),
             _react2.default.createElement(
-              _reactBootstrap.Modal.Footer,
-              null,
+              'div',
+              { className: 'modal-footer' },
               _react2.default.createElement(
-                _reactBootstrap.Button,
+                'button',
                 {
-                  bsStyle: 'danger',
-                  onClick: function onClick() {
-                    _this2.setState({ showModal: false });
-                  }
+                  className: 'btn btn-danger',
+                  'data-dismiss': 'modal'
                 },
                 'Cancel'
               ),
               _react2.default.createElement(
-                _reactBootstrap.Button,
+                'button',
                 {
-                  bsStyle: 'primary',
-                  onClick: this.onFormUpdate
+                  className: 'btn btn-dark',
+                  onClick: this.onFormUpdate,
+                  'data-dismiss': 'modal'
                 },
                 'Save changes'
               )
             )
           )
-        ),
-        'add question'
-      );
+        )
+      )];
     }
   }]);
   return AddQuestionButton;
