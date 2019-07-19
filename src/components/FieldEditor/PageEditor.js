@@ -100,7 +100,7 @@ class PageEditor extends PureComponent {
           <label htmlFor="panelId">
               Page ID
           </label>
-          <InputGroup>
+          <div className="input-group">
             <FormControl
               id="panelId"
               name="panelId"
@@ -108,15 +108,15 @@ class PageEditor extends PureComponent {
               placeholder={this.props.panelId}
               value={this.state.panelId}
             />
-            <InputGroup.Button>
-              <Button
+            <div className="input-group-append">
+              <button
                 onClick={this.onUpdatePageId}
-                className="btn btn-primary"
+                className="btn btn-dark"
                 title="Click to update page title"
               >save
-              </Button>
-            </InputGroup.Button>
-          </InputGroup>
+              </button>
+            </div>
+          </div>
         </FormGroup>
         <FormGroup>
           <FieldGroup

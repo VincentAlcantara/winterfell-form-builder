@@ -86,45 +86,36 @@ class FieldSelectorContainer extends Component {
     } = this.props;
     const questionPanelsArray = questionPanels && questionPanels.toJS();
     const questionSetsArray = questionSets && questionSets.toJS();
-    return (
-      <Row>
-        <Col xs={12}>
-          {
-            currentEditingField === 'pageSort' &&
-            <PageSortSelector />
-          }
-          {
-            currentEditingField !== 'pageSort' &&
-            <form>
-              { currentQuestionPanelIndex >= 0 &&
-              <PageSelector
-                panelHeader={panelHeader}
-                panelText={panelText}
-                onClick={() => this.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex)}
-              />
-              }
-              { currentQuestionPanelIndex >= 0 &&
-                questionPanelsArray &&
-                <QuestionSetSelector
-                  currentQuestionSets={questionPanelsArray[currentQuestionPanelIndex].questionSets}
-                  questionSets={questionSetsArray}
-                  onClick={this.props.changeCurrentEditingField}
-                  currentQuestionIndex={this.props.currentQuestionIndex}
-                />
-              }
-              { currentQuestionPanelIndex >= 0 &&
-                <ButtonBarSelector
-                  backButton={backButton}
-                  backButtonDisabled={backButtonDisabled}
-                  nextButton={nextButton}
-                  onClick={() => this.props.changeCurrentEditingField('buttons', currentQuestionSetIndex, currentQuestionIndex)}
-                />
-              }
-            </form>
-          }
-        </Col>
-      </Row>
-    );
+    return [
+      currentEditingField === 'pageSort' && <PageSortSelector key="pageSortSelector" />,
+      currentEditingField !== 'pageSort' &&
+      <div key>
+        {currentQuestionPanelIndex >= 0 &&
+          <PageSelector
+            panelHeader={panelHeader}
+            panelText={panelText}
+            onClick={() => this.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex)}
+          />
+        }
+        {currentQuestionPanelIndex >= 0 &&
+          questionPanelsArray &&
+          <QuestionSetSelector
+            currentQuestionSets={questionPanelsArray[currentQuestionPanelIndex].questionSets}
+            questionSets={questionSetsArray}
+            onClick={this.props.changeCurrentEditingField}
+            currentQuestionIndex={this.props.currentQuestionIndex}
+          />
+        }
+        {currentQuestionPanelIndex >= 0 &&
+          <ButtonBarSelector
+            backButton={backButton}
+            backButtonDisabled={backButtonDisabled}
+            nextButton={nextButton}
+            onClick={() => this.props.changeCurrentEditingField('buttons', currentQuestionSetIndex, currentQuestionIndex)}
+          />
+        }
+      </div>
+    ];
   }
 }
 

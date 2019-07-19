@@ -8,35 +8,23 @@
         margin-top: 8px;
       }
     }
-    .form-control {
-      border-top-right-radius: 0;
-      border-bottom-left-radius: 0;
-    }
   }
   .input-group .form-control:first-child {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-top-right-radius: unset;
+    border-bottom-right-radius: unset;
     -webkit-appearance: none;
   }
   #pagination {
-    margin-bottom: 15px;
     text-align: left;
-  }
-  .dropdown-menu {
-    width: 100%;
+    border-top-right-radius: unset;
+    border-bottom-right-radius: unset;
   }
   .btn-block+.btn-block {
     margin-top: 0
   }
 }
-.winterfell-form-builder-editor {
-  border: 1px solid #eee;
-}
 .winterfell-form-builder-field-editor {
-  background: #eee;
-  padding-top: 10px;
-  border-right: 1px solid #eee;
-  font-size: 0.9em;
+
   #edit-question-id-label {
     font-weight: normal;
   }
@@ -71,12 +59,12 @@
 
 .winterfell-form-builder-selector.btn-default {
   text-align: left;
-  border: 1px solid transparent;
+  border: 1px dashed #ccc;
   border-radius: 0;
   padding-top: 0;
   padding-bottom: 0;
   white-space: normal;
-  margin-top: 0;
+  margin-top: 1px;
   &:hover {
     text-align: left;
     border: 1px dotted #ccc;
@@ -157,4 +145,11 @@
   }
 }
 
+.btn-group .material-icons {
+  margin-left: -25%;  
+}
+.icon-menu {
+  position: absolute;
+  padding: 0 1px;
+}
 @import '../../../node_modules/react-datepicker/dist/react-datepicker.css';

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, Modal, FormGroup } from 'react-bootstrap';
 import { editFormTitle } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
-
 
 class EditFormTitleButton extends Component {
   static propTypes = {
@@ -43,20 +41,23 @@ class EditFormTitleButton extends Component {
   render() {
     const { title } = this.props;
 
-    return (
-      <Button
-        className="btn btn-block btn-primary"
-        onClick={() => {
-          this.setState({ showModal: true });
-        }}
-      >edit filename
-        <Modal show={this.state.showModal}>
-          <Modal.Header>
-            <Modal.Title>Edit form filename</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <form>
-              <FormGroup>
+    return [
+      <button
+        className="btn btn-block btn-dark"
+        data-toggle="modal"
+        data-target="#editFormTitle"
+        key="editFormTitle"
+        title="Edit Form Title"
+      ><i class="material-icons">edit</i><span className="icon-menu">Title</span>
+      </button>,
+      <div className="modal fade" id="editFormTitle" tabIndex="-1" key="editFormTitleModal">
+        <div className="modal-dialog bg-white">
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="modal-title">Edit form title</div>
+            </div>
+            <div className="modal-body">
+              <form>
                 <FieldGroup
                   id="formTitle"
                   name="formTitle"
@@ -65,22 +66,23 @@ class EditFormTitleButton extends Component {
                   placeholder={title}
                   value={this.state.formTitle}
                 />
-              </FormGroup>
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
-              onClick={this.onFormUpdate}
-            >Save changes</Button>
-          </Modal.Footer>
-        </Modal>
-      </Button>
-    );
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >Cancel</button>
+              <button
+                className="btn btn-dark"
+                onClick={this.onFormUpdate}
+                data-dismiss="modal"
+              >Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>,
+    ];
   }
 }
 

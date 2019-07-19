@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
 import PageEditor from './PageEditor';
 import QuestionSetEditor from './QuestionSetEditor';
 import QuestionEditor from './QuestionEditor';
@@ -17,39 +16,37 @@ function FieldEditor(props) {
   } = props;
 
   return (
-    <Row>
-      <Col xs={12}>
-        <label htmlFor="tree-view">
-          Navigation
-        </label>
-        <TreeView id="tree-view" />
-        <br />
-        {
-          (currentEditingField === 'page' || currentEditingField === 'pageSort') &&
-          <PageEditor
-            currentQuestionPanelIndex={currentQuestionPanelIndex}
-          />
-        }
-        {
-          currentEditingField === 'questionSet' &&
-          <QuestionSetEditor
-            currentQuestionSetIndex={currentQuestionSetIndex}
-          />
-        }
-        { currentEditingField === 'question' &&
-          <QuestionEditor
-            currentQuestionPanelIndex={currentQuestionPanelIndex}
-            currentQuestionSetIndex={currentQuestionSetIndex}
-            currentQuestionIndex={currentQuestionIndex}
-          />
-        }
-        { currentEditingField === 'buttons' &&
-          <ButtonBarEditor
-            currentQuestionPanelIndex={currentQuestionPanelIndex}
-          />
-        }
-      </Col>
-    </Row>
+    <div className="winterfell-form-builder-field-editor bg-light p-3">
+      <label htmlFor="tree-view">
+        Navigation
+      </label>
+      <TreeView id="tree-view" />
+      <br />
+      {
+        (currentEditingField === 'page' || currentEditingField === 'pageSort') &&
+        <PageEditor
+          currentQuestionPanelIndex={currentQuestionPanelIndex}
+        />
+      }
+      {
+        currentEditingField === 'questionSet' &&
+        <QuestionSetEditor
+          currentQuestionSetIndex={currentQuestionSetIndex}
+        />
+      }
+      { currentEditingField === 'question' &&
+        <QuestionEditor
+          currentQuestionPanelIndex={currentQuestionPanelIndex}
+          currentQuestionSetIndex={currentQuestionSetIndex}
+          currentQuestionIndex={currentQuestionIndex}
+        />
+      }
+      { currentEditingField === 'buttons' &&
+        <ButtonBarEditor
+          currentQuestionPanelIndex={currentQuestionPanelIndex}
+        />
+      }
+    </div>
   );
 }
 

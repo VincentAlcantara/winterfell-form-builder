@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Modal, FormGroup } from 'react-bootstrap';
 
 import { updateForm } from '../../actions/winterfellFormBuilderActions';
 
 class EditSchemaButton extends Component {
   static propTypes = {
-    schema: PropTypes.object,
     updateForm: PropTypes.func.isRequired,
   };
 
@@ -32,51 +30,49 @@ class EditSchemaButton extends Component {
   onFormUpdate(e) {
     e.preventDefault();
     this.props.updateForm(this.state.schema);
-    this.setState({ showModal: false });
   }
 
   render() {
-    const schemaObject = this.props.schema && this.props.schema.toJS();
-
-    return (
-      <Button
-        className="btn btn-block btn-primary"
-        onClick={() => {
-          this.setState({
-            schema: schemaObject,
-            showModal: true,
-          });
-        }}
-      >edit schema
-        <Modal show={this.state.showModal}>
-          <Modal.Header>
-            <Modal.Title>Edit Schema</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <form>
-              <FormGroup>
+    return [
+      <button
+        className="btn btn-block btn-dark"
+        data-toggle="modal"
+        data-target="#editSchema"
+        key="editSchema"
+        title="Edit Schema"
+      ><i class="material-icons">view_agenda</i><span className="icon-menu">Schema</span>
+      </button>,
+      <div className="modal fade" id="editSchema" tabIndex="-1" key="editSchemaModal">
+        <div className="modal-dialog bg-white">
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="modal-title">Edit Schema</div>
+            </div>
+            <div className="modal-body">
+              <form>
                 <textarea
                   rows="30"
-                  cols="78"
+                  cols="60"
                   value={JSON.stringify(this.state.schema, undefined, 2)}
                   onChange={this.onChange}
                 />
-              </FormGroup>
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
-              onClick={this.onFormUpdate}
-            >Save changes</Button>
-          </Modal.Footer>
-        </Modal>
-      </Button>
-    );
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >Cancel</button>
+              <button
+                className="btn btn-dark"
+                onClick={this.onFormUpdate}
+                data-dismiss="modal"
+              >Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>,
+    ];
   }
 }
 

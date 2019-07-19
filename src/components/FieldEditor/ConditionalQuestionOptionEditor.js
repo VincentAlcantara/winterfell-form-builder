@@ -182,7 +182,7 @@ class ConditionalQuestionOptionEditor extends PureComponent {
                   <Button
                     id="showConditionalQuestionButton"
                     onClick={event => this.onShowConditonalClick(ix, event)}
-                    className="btn btn-primary"
+                    className="btn btn-dark"
                   >
                     {this.state.showConditionalQuestions &&
                     !this.state.showConditionalQuestions[ix] &&
