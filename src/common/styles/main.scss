@@ -154,4 +154,11 @@
   }
 }
 
+.btn-group .material-icons {
+  margin-left: -25%;  
+}
+.icon-menu {
+  position: absolute;
+  padding: 0 1px;
+}
 @import '../../../node_modules/react-datepicker/dist/react-datepicker.css';

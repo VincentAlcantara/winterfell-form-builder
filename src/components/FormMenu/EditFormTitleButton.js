@@ -48,16 +48,17 @@ class EditFormTitleButton extends Component {
         data-toggle="modal"
         data-target="#editFormTitle"
         key="editFormTitle"
-      >Edit filename
+        title="Edit Form Title"
+      ><i class="material-icons">edit</i><span className="icon-menu">Title</span>
       </Button>,
       <div className="modal fade" id="editFormTitle" tabIndex="-1" key="editFormTitleModal">
         <div className="modal-dialog bg-white">
-          <div className="modal-header">
-            <div className="modal-title">Edit form filename</div>
-          </div>
-          <div className="modal-body">
-            <form>
-              <FormGroup>
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="modal-title">Edit form title</div>
+            </div>
+            <div className="modal-body">
+              <form>
                 <FieldGroup
                   id="formTitle"
                   name="formTitle"
@@ -66,18 +67,22 @@ class EditFormTitleButton extends Component {
                   placeholder={title}
                   value={this.state.formTitle}
                 />
-              </FormGroup>
-            </form>
-          </div>
-          <div className="modal-footer">
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
-              onClick={this.onFormUpdate}
-            >Save changes</Button>
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button
+                bsStyle="danger"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+                onClick={() => { this.setState({ showModal: false }); }}
+              >Cancel</button>
+              <button
+                className="btn btn-primary"
+                bsStyle="primary"
+                data-dismiss="modal"
+                onClick={this.onFormUpdate}
+              >Save changes</button>
+            </div>
           </div>
         </div>
       </div>,

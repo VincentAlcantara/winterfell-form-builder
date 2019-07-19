@@ -54,14 +54,10 @@ class PageSortSelector extends Component {
       </div>
     ),
     );
-    return (
-      <Row className="winterfell-form-builder-page-sorter">
-        <Col xs={12}>
-          <label htmlFor="sortableList">Pages - Drag and Drop to Sort</label>
-          <SortableList items={this.state.items} onSortEnd={this.onSortEnd} />
-        </Col>
-      </Row>
-    );
+    return [
+      <label htmlFor="sortableList" key="sortPagesLabel">Pages - Drag and Drop to Sort</label>,
+      <SortableList key="sortingPages" items={this.state.items} onSortEnd={this.onSortEnd} />
+    ];
   }
 }
 

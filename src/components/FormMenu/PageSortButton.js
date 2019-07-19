@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
 const PageSortButton = props => (
-  <Button
+  <button
     className="btn btn-block btn-primary"
     onClick={props.onClick}
     key="sortPages"
-  >Sort pages
-  </Button>
+  ><i class="material-icons">swap_vert</i><span className="icon-menu">Pages</span>
+  </button>
 );
 
 

@@ -15,7 +15,6 @@ class AddPageButton extends Component {
     super(props);
 
     this.state = {
-      showModal: false,
       panelId: '',
       panelHeader: '',
       panelText: '',
@@ -32,13 +31,11 @@ class AddPageButton extends Component {
 
   onClose(e) {
     e.preventDefault();
-    this.setState({ showModal: true });
   }
 
   onFormUpdate(e) {
     e.preventDefault();
     this.props.addPage(this.state.panelId, this.state.panelHeader, this.state.panelText);
-    this.setState({ showModal: false });
   }
 
   render() {
@@ -48,10 +45,12 @@ class AddPageButton extends Component {
         data-toggle="modal"
         data-target="#addPage"
         key="addPage"
-      >Add page
+        title="Add page"
+      ><i class="material-icons">note_add</i><span className="icon-menu">Page</span>
       </Button>,
       <div className="modal fade" id="addPage" tabIndex="-1" key="addPageModal">
         <div className="modal-dialog bg-white">
+          <div className="modal-content">
           <div className="modal-header">
             <div className="modal-title">Add a new page to the form</div>
           </div>
@@ -90,15 +89,17 @@ class AddPageButton extends Component {
             </form>
           </div>
           <div className="modal-footer">
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
+          <button
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >Cancel</button>
+            <button
+              className="btn btn-primary"
               onClick={this.onFormUpdate}
-            >Save changes</Button>
+              data-dismiss="modal"
+            >Save changes</button>
           </div>
+        </div>
         </div>
       </div>,
     ];

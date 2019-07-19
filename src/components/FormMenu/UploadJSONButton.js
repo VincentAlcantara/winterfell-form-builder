@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { Button, FormGroup } from 'react-bootstrap';
+import { FormGroup } from 'react-bootstrap';
 import { uploadJSON } from '../../actions/winterfellFormBuilderActions';
 
 
@@ -46,22 +46,23 @@ class UploadJSONButton extends Component {
 
   render() {
     return [
-      <Button
-        className="btn btn-block btn-primary"
+      <button
+        className="btn btn-block btn-secondary"
         data-toggle="modal"
         data-target="#uploadJSON"
         key="uploadJSON"
-      >Upload
-      </Button>,
+        title="Upload Winterfell form"
+      ><i class="material-icons">archive</i><span className="icon-menu">Import</span>
+      </button>,
       <div className="modal fade" id="uploadJSON" tabIndex="-1" key="uploadJSONModal">
         <div className="modal-dialog bg-white">
-          <div className="modal-header">
-            <div className="modal-title">Upload a form</div>
-          </div>
-          <div className="modal-body">
-            Upload a form.  Note this will replace the current form.
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="modal-title">Upload a form</div>
+            </div>
+            <div className="modal-body">
+              Upload an existing Winterfell form.
             <form>
-              <FormGroup>
                 <label
                   htmlFor="jsonUpload"
                 />
@@ -71,18 +72,18 @@ class UploadJSONButton extends Component {
                   type="file"
                   onChange={e => this.onChange(e)}
                 />
-              </FormGroup>
-            </form>
-          </div>
-          <div className="modal-footer">
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
-              onClick={this.onJSONUpload}
-            >Continue</Button>
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >Cancel</button>
+              <button
+                className="btn btn-primary"
+                onClick={this.onJSONUpload}
+              >Continue</button>
+            </div>
           </div>
         </div>
       </div>,

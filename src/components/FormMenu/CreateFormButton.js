@@ -13,7 +13,6 @@ class CreateFormButton extends Component {
     super(props);
 
     this.state = {
-      showModal: false,
       formTitle: '',
     };
 
@@ -34,44 +33,46 @@ class CreateFormButton extends Component {
   onFormUpdate(e) {
     e.preventDefault();
     this.props.createForm(this.state.formTitle);
-    this.setState({ showModal: false });
   }
 
   render() {
     return [
       <button
-        className="btn btn-block btn-primary"
+        className="btn btn-block btn-secondary"
         data-toggle="modal"
         data-target="#createButton"
         key="createButton"
-      >New
+        title="Start new form"
+      ><i class="material-icons">create_new_folder</i><span className="icon-menu">Create</span>
       </button>,
       <div className="modal fade" id="createButton" tabIndex="-1" key="createButtonModal">
         <div className="modal-dialog bg-white">
-          <div className="modal-header">
-            <div className="modal-title">Create a new form</div>
-          </div>
-          <div className="modal-body">
-            <form>
-              <FieldGroup
-                id="formTitle"
-                name="formTitle"
-                label="Enter title of the form"
-                onChange={this.onChange}
-                placeholder=""
-                value={this.state.formTitle}
-              />
-            </form>
-          </div>
-          <div className="modal-footer">
-            <button
-              className="btn btn-secondary"
-              data-dismiss="modal"
-            >Cancel</button>
-            <button
-              className="btn btn-primary"
-              onClick={this.onFormUpdate}
-            >Save changes</button>
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="modal-title">Create a new form</div>
+            </div>
+            <div className="modal-body">
+              <form>
+                <FieldGroup
+                  id="formTitle"
+                  name="formTitle"
+                  label="Enter title of the form"
+                  onChange={this.onChange}
+                  placeholder=""
+                  value={this.state.formTitle}
+                />
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >Cancel</button>
+              <button
+                className="btn btn-primary"
+                onClick={this.onFormUpdate}
+              >Save changes</button>
+            </div>
           </div>
         </div>
       </div>,

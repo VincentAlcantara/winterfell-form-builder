@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, FormGroup } from 'react-bootstrap';
 
 import { updateForm } from '../../actions/winterfellFormBuilderActions';
 
@@ -31,44 +30,45 @@ class EditSchemaButton extends Component {
   onFormUpdate(e) {
     e.preventDefault();
     this.props.updateForm(this.state.schema);
-    this.setState({ showModal: false });
   }
 
   render() {
     return [
-      <Button
+      <button
         className="btn btn-block btn-primary"
         data-toggle="modal"
         data-target="#editSchema"
         key="editSchema"
-      >Edit schema
-      </Button>,
+        title="Edit Schema"
+      ><i class="material-icons">view_agenda</i><span className="icon-menu">Schema</span>
+      </button>,
       <div className="modal fade" id="editSchema" tabIndex="-1" key="editSchemaModal">
         <div className="modal-dialog bg-white">
-          <div className="modal-header">
-            <div className="modal-title">Edit Schema</div>
-          </div>
-          <div className="modal-body">
-            <form>
-              <FormGroup>
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="modal-title">Edit Schema</div>
+            </div>
+            <div className="modal-body">
+              <form>
                 <textarea
                   rows="30"
-                  cols="78"
+                  cols="60"
                   value={JSON.stringify(this.state.schema, undefined, 2)}
                   onChange={this.onChange}
                 />
-              </FormGroup>
-            </form>
-          </div>
-          <div className="modal-footer">
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
-              onClick={this.onFormUpdate}
-            >Save changes</Button>
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >Cancel</button>
+              <button
+                className="btn btn-primary"
+                onClick={this.onFormUpdate}
+                data-dismiss="modal"
+              >Save changes</button>
+            </div>
           </div>
         </div>
       </div>,
