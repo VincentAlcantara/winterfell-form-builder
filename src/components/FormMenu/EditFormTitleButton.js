@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, FormGroup } from 'react-bootstrap';
 import { editFormTitle } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
@@ -43,14 +42,14 @@ class EditFormTitleButton extends Component {
     const { title } = this.props;
 
     return [
-      <Button
-        className="btn btn-block btn-primary"
+      <button
+        className="btn btn-block btn-dark"
         data-toggle="modal"
         data-target="#editFormTitle"
         key="editFormTitle"
         title="Edit Form Title"
       ><i class="material-icons">edit</i><span className="icon-menu">Title</span>
-      </Button>,
+      </button>,
       <div className="modal fade" id="editFormTitle" tabIndex="-1" key="editFormTitleModal">
         <div className="modal-dialog bg-white">
           <div className="modal-content">
@@ -71,16 +70,13 @@ class EditFormTitleButton extends Component {
             </div>
             <div className="modal-footer">
               <button
-                bsStyle="danger"
-                className="btn btn-secondary"
+                className="btn btn-danger"
                 data-dismiss="modal"
-                onClick={() => { this.setState({ showModal: false }); }}
               >Cancel</button>
               <button
-                className="btn btn-primary"
-                bsStyle="primary"
-                data-dismiss="modal"
+                className="btn btn-dark"
                 onClick={this.onFormUpdate}
+                data-dismiss="modal"
               >Save changes</button>
             </div>
           </div>

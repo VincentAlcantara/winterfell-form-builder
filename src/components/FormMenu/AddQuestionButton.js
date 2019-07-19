@@ -66,11 +66,11 @@ class AddQuestionButton extends Component {
   render() {
     return [
       <Button
-        className="btn btn-primary"
+        className="btn btn-dark"
         data-toggle="modal"
         data-target="#addQuestion"
       >
-        add question
+        Add question
       </Button>,
       <div className="static-modal">
         <div className="modal fade" id="addQuestion" tabIndex="-1">
@@ -115,14 +115,15 @@ class AddQuestionButton extends Component {
               </form>
             </div>
             <div className="modal-footer">
-              <Button
-                bsStyle="danger"
-                onClick={() => { this.setState({ showModal: false }); }}
-              >Cancel</Button>
-              <Button
-                bsStyle="primary"
+              <button
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >Cancel</button>
+              <button
+                className="btn btn-dark"
                 onClick={this.onFormUpdate}
-              >Save changes</Button>
+                data-dismiss="modal"
+              >Save changes</button>
             </div>
           </div>
         </div>

@@ -60,7 +60,7 @@ class AddConditionalQuestionButton extends Component {
   render() {
     return [
       <Button
-        className="btn btn-primary btn-block"
+        className="btn btn-dark btn-block"
         data-toggle="modal"
         data-target="#createForm"
       >add conditional question
@@ -107,14 +107,15 @@ class AddConditionalQuestionButton extends Component {
             </form>
           </div>
           <div className="modal-footer">
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
+            <button
+              className="btn btn-danger"
+              data-dismiss="modal"
+            >Cancel</button>
+            <button
+              className="btn btn-dark"
               onClick={this.onFormUpdate}
-            >Save changes</Button>
+              data-dismiss="modal"
+            >Save changes</button>
           </div>
         </div>
       </div>,

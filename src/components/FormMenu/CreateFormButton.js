@@ -38,7 +38,7 @@ class CreateFormButton extends Component {
   render() {
     return [
       <button
-        className="btn btn-block btn-secondary"
+        className="btn btn-block btn-dark"
         data-toggle="modal"
         data-target="#createButton"
         key="createButton"
@@ -65,11 +65,11 @@ class CreateFormButton extends Component {
             </div>
             <div className="modal-footer">
               <button
-                className="btn btn-secondary"
+                className="btn btn-danger"
                 data-dismiss="modal"
               >Cancel</button>
               <button
-                className="btn btn-primary"
+                className="btn btn-dark"
                 onClick={this.onFormUpdate}
               >Save changes</button>
             </div>

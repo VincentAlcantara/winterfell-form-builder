@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Winterfell from 'winterfell';
-import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { updateQuestionAnswers } from '../actions/winterfellFormBuilderActions';
@@ -102,8 +101,7 @@ class Previewer extends Component {
     );
 
     return (
-      <Row className="winterfell-form-builer-previewer" >
-        <Col xs={12}>
+      <div className="card p-3" >
           {(schema &&
             schema.formPanels &&
             schema.formPanels.length > 0) &&
@@ -111,8 +109,7 @@ class Previewer extends Component {
             currentPanelId !== 'Select Page' &&
             displayWinterFellForm()
           }
-        </Col>
-      </Row>
+        </div>
     );
   }
 }

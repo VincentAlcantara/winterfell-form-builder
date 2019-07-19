@@ -17,11 +17,11 @@ function Pagination(props) {
   ));
 
   return (
-    <div className="dropdown my-2">
+    <div className="dropdown">
       <button
         id="pagination"
         title={currentPanelId || 'Select Page'}
-        className="btn btn-secondary dropdown-toggle"
+        className="btn btn-light dropdown-toggle h-100 py-0"
         type="button"
         data-toggle="dropdown"
         aria-haspopup="true"

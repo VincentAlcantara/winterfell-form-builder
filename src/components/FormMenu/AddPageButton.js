@@ -41,7 +41,7 @@ class AddPageButton extends Component {
   render() {
     return [
       <Button
-        className="btn btn-block btn-primary"
+        className="btn btn-block btn-light"
         data-toggle="modal"
         data-target="#addPage"
         key="addPage"
@@ -51,55 +51,55 @@ class AddPageButton extends Component {
       <div className="modal fade" id="addPage" tabIndex="-1" key="addPageModal">
         <div className="modal-dialog bg-white">
           <div className="modal-content">
-          <div className="modal-header">
-            <div className="modal-title">Add a new page to the form</div>
-          </div>
-          <div className="modal-body">
-            <form>
-              <FormGroup>
-                <FieldGroup
-                  id="panelId"
-                  name="panelId"
-                  label="Page ID"
-                  onChange={this.onChange}
-                  placeholder="(optional)"
-                  value={this.state.panelId}
-                />
-              </FormGroup>
-              <FormGroup>
-                <FieldGroup
-                  id="panelHeader"
-                  name="panelHeader"
-                  label="Page Title"
-                  onChange={this.onChange}
-                  placeholder=""
-                  value={this.state.panelHeader}
-                />
-              </FormGroup>
-              <FormGroup>
-                <FieldGroup
-                  id="panelText"
-                  name="panelText"
-                  label="Enter Page Description"
-                  onChange={this.onChange}
-                  placeholder=""
-                  value={this.state.panelText}
-                />
-              </FormGroup>
-            </form>
-          </div>
-          <div className="modal-footer">
-          <button
-                className="btn btn-secondary"
+            <div className="modal-header">
+              <div className="modal-title">Add a new page to the form</div>
+            </div>
+            <div className="modal-body">
+              <form>
+                <FormGroup>
+                  <FieldGroup
+                    id="panelId"
+                    name="panelId"
+                    label="Page ID"
+                    onChange={this.onChange}
+                    placeholder="(optional)"
+                    value={this.state.panelId}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <FieldGroup
+                    id="panelHeader"
+                    name="panelHeader"
+                    label="Page Title"
+                    onChange={this.onChange}
+                    placeholder=""
+                    value={this.state.panelHeader}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <FieldGroup
+                    id="panelText"
+                    name="panelText"
+                    label="Enter Page Description"
+                    onChange={this.onChange}
+                    placeholder=""
+                    value={this.state.panelText}
+                  />
+                </FormGroup>
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-danger"
                 data-dismiss="modal"
               >Cancel</button>
-            <button
-              className="btn btn-primary"
-              onClick={this.onFormUpdate}
-              data-dismiss="modal"
-            >Save changes</button>
+              <button
+                className="btn btn-dark"
+                onClick={this.onFormUpdate}
+                data-dismiss="modal"
+              >Save changes</button>
+            </div>
           </div>
-        </div>
         </div>
       </div>,
     ];

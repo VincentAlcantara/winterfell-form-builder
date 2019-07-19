@@ -95,14 +95,15 @@ class updateQuestionButton extends Component {
             </form>
           </div>
           <div className="modal-footer">
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
+            <button
+              className="btn btn-danger"
+              data-dismiss="modal"
+            >Cancel</button>
+            <button
+              className="btn btn-dark"
               onClick={this.onFormUpdate}
-            >Save changes</Button>
+              data-dismiss="modal"
+            >Save changes</button>
           </div>
         </div>
       </div>,

@@ -41,7 +41,7 @@ class DeleteQuestionButton extends Component {
         data-toggle="modal"
         data-target="#deleteQuestion"
       >
-        delete question
+        Delete question
       </Button>,
       <div className="modal fade" id="deleteQuestion" tabIndex="-1">
         <div className="modal-dialog bg-white">
@@ -51,15 +51,15 @@ class DeleteQuestionButton extends Component {
           <div className="modal-body">
             Are you sure you want to delete this question?
             </div>
-          <div className="modal-footer">
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
+            <div className="modal-footer">
+            <button
+              className="btn btn-danger"
+              data-dismiss="modal"
+            >Cancel</button>
+            <button
+              className="btn btn-dark"
               onClick={this.onConfirmDelete}
-            >Confirm Delete</Button>
+            >Confirm Delete</button>
           </div>
         </div>
       </div>,

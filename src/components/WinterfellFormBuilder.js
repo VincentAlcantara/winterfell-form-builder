@@ -109,15 +109,13 @@ class WinterfellFormBuilder extends Component {
               <SaveFormButton />
               <EditSchemaButton />
               <EditFormTitleButton />
-              <AddPageButton />
-              <PageSortButton
-                onClick={() => this.props.changeCurrentEditingField('pageSort')}
-              />
+
             </div>
           </div>
         </div>
         <div className="row">
           <div className="col-4 text-left">
+            <div className="btn-group">
             {
               formPanels &&
               <Pagination
@@ -126,6 +124,11 @@ class WinterfellFormBuilder extends Component {
                 onClick={this.props.goToPage}
               />
             }
+              <AddPageButton />
+              <PageSortButton
+                onClick={() => this.props.changeCurrentEditingField('pageSort')}
+              />
+</div>
           </div>
           <div className="col-8">
             <nav aria-label="breadcrumb">
@@ -166,7 +169,7 @@ class WinterfellFormBuilder extends Component {
           </div>
         </div>
         <div className="row winterfell-form-builder-editor">
-          <div className="col-4 winterfell-form-builder-field-editor">
+          <div className="col-4">
             {currentQuestionPanelIndex >= 0 &&
               <FieldEditor
                 currentQuestionPanelIndex={currentQuestionPanelIndex}
@@ -191,8 +194,8 @@ class WinterfellFormBuilder extends Component {
           </div>
         </div>
         <div className="row winterfell-form-builder-previewer">
-          <Col xs={12}>
-            <h3>Form Preview:</h3>
+          <div className="col-12 mb-5 py-3">
+            <h2>Form Preview:</h2>
             {
               schema &&
               <Previewer
@@ -206,7 +209,7 @@ class WinterfellFormBuilder extends Component {
                 No page selected to preview.  Select a page from the dropdown above.
               </Alert>
             }
-          </Col>
+          </div>
         </div>
       </div>
 

@@ -35,7 +35,7 @@ class EditSchemaButton extends Component {
   render() {
     return [
       <button
-        className="btn btn-block btn-primary"
+        className="btn btn-block btn-dark"
         data-toggle="modal"
         data-target="#editSchema"
         key="editSchema"
@@ -60,11 +60,11 @@ class EditSchemaButton extends Component {
             </div>
             <div className="modal-footer">
               <button
-                className="btn btn-secondary"
+                className="btn btn-danger"
                 data-dismiss="modal"
               >Cancel</button>
               <button
-                className="btn btn-primary"
+                className="btn btn-dark"
                 onClick={this.onFormUpdate}
                 data-dismiss="modal"
               >Save changes</button>

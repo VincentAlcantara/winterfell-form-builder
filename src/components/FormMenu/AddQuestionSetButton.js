@@ -67,7 +67,7 @@ class AddQuestionSetButton extends Component {
   render() {
     return [
       <Button
-        className="btn btn-block btn-primary"
+        className="btn btn-block btn-dark"
         disabled={!this.props.currentPanelId || this.props.currentPanelId === 'Select Page'}
         data-toggle="modal"
         data-target="#addQuestionSet"
@@ -138,14 +138,15 @@ class AddQuestionSetButton extends Component {
             />
           </div>
           <div className="modal-footer">
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
+            <button
+              className="btn btn-danger"
+              data-dismiss="modal"
+            >Cancel</button>
+            <button
+              className="btn btn-dark"
               onClick={this.onFormUpdate}
-            >Save changes</Button>
+              data-dismiss="modal"
+            >Save changes</button>
           </div>
         </div>
       </div>,

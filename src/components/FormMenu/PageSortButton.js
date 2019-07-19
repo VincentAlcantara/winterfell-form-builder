@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 
 const PageSortButton = props => (
   <button
-    className="btn btn-block btn-primary"
+    className="btn btn-block btn-light"
     onClick={props.onClick}
     key="sortPages"
   ><i class="material-icons">swap_vert</i><span className="icon-menu">Pages</span>

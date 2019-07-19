@@ -41,7 +41,7 @@ const AddQuestionOptionButton = (props) => {
               </td>
               <td colSpan={2}>
                 <Button
-                  className="btn btn-primary"
+                  className="btn btn-dark"
                   onClick={onClick}
                   disabled={questionOptionText === '' || questionOptionValue === ''}
                 ><Glyphicon glyph="glyphicon glyphicon-plus" />

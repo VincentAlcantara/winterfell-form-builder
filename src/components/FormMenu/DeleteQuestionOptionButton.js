@@ -46,14 +46,14 @@ class DeleteQuestionOptionButton extends Component {
             Are you sure you want to delete this option?
           </div>
           <div className="modal-footer">
-            <Button
-              bsStyle="danger"
-              onClick={() => { this.setState({ showModal: false }); }}
-            >Cancel</Button>
-            <Button
-              bsStyle="primary"
+            <button
+              className="btn btn-danger"
+              data-dismiss="modal"
+            >Cancel</button>
+            <button
+              className="btn btn-dark"
               onClick={this.onConfirmDelete}
-            >Confirm Delete</Button>
+            >Confirm Delete</button>
           </div>
         </div>
       </div>,

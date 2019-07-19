@@ -16,7 +16,7 @@ function FieldEditor(props) {
   } = props;
 
   return (
-    <div>
+    <div className="winterfell-form-builder-field-editor bg-light p-3">
       <label htmlFor="tree-view">
         Navigation
       </label>
