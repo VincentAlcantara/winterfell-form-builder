@@ -36,8 +36,6 @@ var _winterfell = require('winterfell');
 
 var _winterfell2 = _interopRequireDefault(_winterfell);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _reactRedux = require('react-redux');
 
 var _winterfellFormBuilderActions = require('../actions/winterfellFormBuilderActions');
@@ -71,7 +69,7 @@ var onSubmitDefault = function onSubmitDefault(questionAndAnswers, target) {
   console.log('-----');
   console.log('Target: ', target);
   console.log('-----');
-  alert('Submitted. Check the console to see the answers!');
+  // alert('Submitted. Check the console to see the answers!');
 };
 
 var Previewer = function (_Component) {
@@ -144,13 +142,9 @@ var Previewer = function (_Component) {
       };
 
       return _react2.default.createElement(
-        _reactBootstrap.Row,
-        { className: 'winterfell-form-builer-previewer' },
-        _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
-          schema && schema.formPanels && schema.formPanels.length > 0 && currentPanelId && currentPanelId !== 'Select Page' && displayWinterFellForm()
-        )
+        'div',
+        { className: 'card p-3' },
+        schema && schema.formPanels && schema.formPanels.length > 0 && currentPanelId && currentPanelId !== 'Select Page' && displayWinterFellForm()
       );
     }
   }]);

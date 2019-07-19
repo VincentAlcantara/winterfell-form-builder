@@ -42,8 +42,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _jsFileDownload = require('js-file-download');
 
 var _jsFileDownload2 = _interopRequireDefault(_jsFileDownload);
@@ -98,38 +96,49 @@ var SaveFormButton = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
-
-      return _react2.default.createElement(
-        _reactBootstrap.Button,
+      return [_react2.default.createElement(
+        'button',
         {
-          className: 'btn btn-block btn-primary',
-          onClick: function onClick() {
-            _this2.setState({ showModal: true });
-          },
+          className: 'btn btn-block btn-dark',
+          'data-toggle': 'modal',
+          'data-target': '#uploadButton',
+          key: 'uploadButton',
+          title: 'Export',
           disabled: !this.props.schema || this.props.schema === 'null'
         },
-        'download',
         _react2.default.createElement(
-          _reactBootstrap.Modal,
-          { show: this.state.showModal },
+          'i',
+          { 'class': 'material-icons' },
+          'unarchive'
+        ),
+        _react2.default.createElement(
+          'span',
+          { className: 'icon-menu' },
+          'Export'
+        )
+      ), _react2.default.createElement(
+        'div',
+        { className: 'modal fade', id: 'uploadButton', tabIndex: '-1', key: 'uploadButtonModal' },
+        _react2.default.createElement(
+          'div',
+          { className: 'modal-dialog bg-white' },
           _react2.default.createElement(
-            _reactBootstrap.Modal.Header,
-            null,
+            'div',
+            { className: 'modal-content' },
             _react2.default.createElement(
-              _reactBootstrap.Modal.Title,
-              null,
-              'Download Form'
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Body,
-            null,
-            _react2.default.createElement(
-              'form',
-              null,
+              'div',
+              { className: 'modal-header' },
               _react2.default.createElement(
-                _reactBootstrap.FormGroup,
+                'div',
+                { className: 'modal-title' },
+                'Export Winterfell Form'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'modal-body' },
+              _react2.default.createElement(
+                'form',
                 null,
                 _react2.default.createElement(_FieldGroup2.default, {
                   id: 'filename',
@@ -140,33 +149,32 @@ var SaveFormButton = function (_Component) {
                   value: this.state.filename
                 })
               )
-            )
-          ),
-          _react2.default.createElement(
-            _reactBootstrap.Modal.Footer,
-            null,
-            _react2.default.createElement(
-              _reactBootstrap.Button,
-              {
-                bsStyle: 'danger',
-                onClick: function onClick() {
-                  _this2.setState({ showModal: false });
-                }
-              },
-              'Cancel'
             ),
             _react2.default.createElement(
-              _reactBootstrap.Button,
-              {
-                bsStyle: 'primary',
-                onClick: this.onJSONSave,
-                disabled: !this.state.filename
-              },
-              'Continue'
+              'div',
+              { className: 'modal-footer' },
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-danger',
+                  'data-dismiss': 'modal'
+                },
+                'Cancel'
+              ),
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-dark',
+                  onClick: this.onJSONSave,
+                  disabled: !this.state.filename,
+                  'data-dismiss': 'modal'
+                },
+                'Continue'
+              )
             )
           )
         )
-      );
+      )];
     }
   }]);
   return SaveFormButton;

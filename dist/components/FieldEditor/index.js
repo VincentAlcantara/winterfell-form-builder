@@ -12,8 +12,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _PageEditor = require('./PageEditor');
 
 var _PageEditor2 = _interopRequireDefault(_PageEditor);
@@ -44,33 +42,29 @@ function FieldEditor(props) {
 
 
   return _react2.default.createElement(
-    _reactBootstrap.Row,
-    null,
+    'div',
+    { className: 'winterfell-form-builder-field-editor bg-light p-3' },
     _react2.default.createElement(
-      _reactBootstrap.Col,
-      { xs: 12 },
-      _react2.default.createElement(
-        'label',
-        { htmlFor: 'tree-view' },
-        'Navigation'
-      ),
-      _react2.default.createElement(_TreeView2.default, { id: 'tree-view' }),
-      _react2.default.createElement('br', null),
-      (currentEditingField === 'page' || currentEditingField === 'pageSort') && _react2.default.createElement(_PageEditor2.default, {
-        currentQuestionPanelIndex: currentQuestionPanelIndex
-      }),
-      currentEditingField === 'questionSet' && _react2.default.createElement(_QuestionSetEditor2.default, {
-        currentQuestionSetIndex: currentQuestionSetIndex
-      }),
-      currentEditingField === 'question' && _react2.default.createElement(_QuestionEditor2.default, {
-        currentQuestionPanelIndex: currentQuestionPanelIndex,
-        currentQuestionSetIndex: currentQuestionSetIndex,
-        currentQuestionIndex: currentQuestionIndex
-      }),
-      currentEditingField === 'buttons' && _react2.default.createElement(_ButtonBarEditor2.default, {
-        currentQuestionPanelIndex: currentQuestionPanelIndex
-      })
-    )
+      'label',
+      { htmlFor: 'tree-view' },
+      'Navigation'
+    ),
+    _react2.default.createElement(_TreeView2.default, { id: 'tree-view' }),
+    _react2.default.createElement('br', null),
+    (currentEditingField === 'page' || currentEditingField === 'pageSort') && _react2.default.createElement(_PageEditor2.default, {
+      currentQuestionPanelIndex: currentQuestionPanelIndex
+    }),
+    currentEditingField === 'questionSet' && _react2.default.createElement(_QuestionSetEditor2.default, {
+      currentQuestionSetIndex: currentQuestionSetIndex
+    }),
+    currentEditingField === 'question' && _react2.default.createElement(_QuestionEditor2.default, {
+      currentQuestionPanelIndex: currentQuestionPanelIndex,
+      currentQuestionSetIndex: currentQuestionSetIndex,
+      currentQuestionIndex: currentQuestionIndex
+    }),
+    currentEditingField === 'buttons' && _react2.default.createElement(_ButtonBarEditor2.default, {
+      currentQuestionPanelIndex: currentQuestionPanelIndex
+    })
   );
 }
 
