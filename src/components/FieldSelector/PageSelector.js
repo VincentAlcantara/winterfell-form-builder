@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
 
 const PageSelector = (props) => {
   const { panelHeader, panelText, onClick } = props;
   return (
-    <Button
+    <button
+      type="button"
       className="winterfell-form-builder-selector btn-block"
       onClick={onClick}
     >
@@ -13,7 +13,7 @@ const PageSelector = (props) => {
         <h3>{panelHeader}</h3>
         <p>{panelText}</p>
       </div>
-    </Button>
+    </button>
   );
 };
 

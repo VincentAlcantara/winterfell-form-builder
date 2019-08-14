@@ -95,7 +95,7 @@ var CreateFormButton = function (_Component) {
         },
         _react2.default.createElement(
           'i',
-          { 'class': 'material-icons' },
+          { className: 'material-icons' },
           'create_new_folder'
         ),
         _react2.default.createElement(
@@ -168,7 +168,6 @@ var CreateFormButton = function (_Component) {
 CreateFormButton.propTypes = {
   createForm: _propTypes2.default.func.isRequired
 };
-
 
 function mapStateToProps(state) {
   return {

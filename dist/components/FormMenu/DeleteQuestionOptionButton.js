@@ -127,6 +127,7 @@ var DeleteQuestionOptionButton = function (_Component) {
 DeleteQuestionOptionButton.propTypes = {
   onDeleteQuestionOption: _propTypes2.default.func.isRequired
 };
+
 var _default = DeleteQuestionOptionButton;
 exports.default = _default;
 ;

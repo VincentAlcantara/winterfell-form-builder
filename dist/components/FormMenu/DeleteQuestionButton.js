@@ -137,7 +137,6 @@ DeleteQuestionButton.propTypes = {
   currentQuestionIndex: _propTypes2.default.number.isRequired
 };
 
-
 function mapStateToProps(state) {
   return {
     currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),

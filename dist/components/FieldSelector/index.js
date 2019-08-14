@@ -38,8 +38,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 var _PageSelector = require('./PageSelector');
@@ -162,6 +160,7 @@ FieldSelectorContainer.propTypes = {
   backButtonDisabled: _propTypes2.default.bool,
   nextButton: _propTypes2.default.string
 };
+
 FieldSelectorContainer.defaultProps = {
   currentPanelId: 'Select Page',
   currentQuestionPanelIndex: 0,
@@ -176,7 +175,6 @@ FieldSelectorContainer.defaultProps = {
   currentQuestionSetIndex: 0,
   currentQuestionIndex: 0
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

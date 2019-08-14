@@ -342,6 +342,7 @@ QuestionEditor.propTypes = {
   questionTargetMatch: _propTypes2.default.string,
   currentQuestionPanelIndex: _propTypes2.default.number.isRequired
 };
+
 QuestionEditor.defaultProps = {
   questionId: '',
   question: '',
@@ -352,7 +353,6 @@ QuestionEditor.defaultProps = {
   questionTarget: '',
   questionTargetMatch: ''
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

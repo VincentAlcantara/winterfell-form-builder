@@ -162,7 +162,7 @@ var QuestionSetEditor = function (_PureComponent) {
                 _reactBootstrap.Button,
                 {
                   key: 'question-' + index,
-                  bsStyle: 'link',
+                  variant: 'link',
                   onClick: function onClick() {
                     return _this2.props.changeCurrentEditingField('question', currentQuestionSetIndex, index);
                   }
@@ -188,6 +188,7 @@ QuestionSetEditor.propTypes = {
   currentQuestionSetIndex: _propTypes2.default.number.isRequired,
   questions: _propTypes2.default.object
 };
+
 QuestionSetEditor.defaultProps = {
   currentQuestionSetIndex: 0,
   questionSetId: '',
@@ -195,7 +196,6 @@ QuestionSetEditor.defaultProps = {
   questionSetText: '',
   questions: []
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

@@ -108,7 +108,7 @@ var SaveFormButton = function (_Component) {
         },
         _react2.default.createElement(
           'i',
-          { 'class': 'material-icons' },
+          { className: 'material-icons' },
           'unarchive'
         ),
         _react2.default.createElement(
@@ -185,10 +185,10 @@ SaveFormButton.propTypes = {
   title: _propTypes2.default.string.isRequired,
   schema: _propTypes2.default.object
 };
+
 SaveFormButton.defaultProps = {
   schema: null
 };
-
 
 function mapStateToProps(state) {
   return {

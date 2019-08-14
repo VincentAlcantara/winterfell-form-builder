@@ -5,14 +5,6 @@ import { connect } from 'react-redux';
 import { updateForm } from '../../actions/winterfellFormBuilderActions';
 
 class EditSchemaButton extends Component {
-  static propTypes = {
-    updateForm: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    schema: null,
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -40,7 +32,7 @@ class EditSchemaButton extends Component {
         data-target="#editSchema"
         key="editSchema"
         title="Edit Schema"
-      ><i class="material-icons">view_agenda</i><span className="icon-menu">Schema</span>
+      ><i className="material-icons">view_agenda</i><span className="icon-menu">Schema</span>
       </button>,
       <div className="modal fade" id="editSchema" tabIndex="-1" key="editSchemaModal">
         <div className="modal-dialog bg-white">
@@ -75,6 +67,14 @@ class EditSchemaButton extends Component {
     ];
   }
 }
+
+EditSchemaButton.propTypes = {
+  updateForm: PropTypes.func.isRequired,
+};
+
+EditSchemaButton.defaultProps = {
+  schema: null,
+};
 
 function mapStateToProps(state) {
   return {

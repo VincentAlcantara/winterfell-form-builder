@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, ButtonGroup } from 'react-bootstrap';
 import { fromJS } from 'immutable';
 import {
   editQuestionId,
@@ -26,38 +25,6 @@ import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 import QuestionOptionEditor from './QuestionOptionEditor';
 
 class QuestionEditor extends PureComponent {
-  static propTypes = {
-    editQuestionId: PropTypes.func.isRequired,
-    editQuestion: PropTypes.func.isRequired,
-    editQuestionText: PropTypes.func.isRequired,
-    editQuestionPostText: PropTypes.func.isRequired,
-    changeQuestionType: PropTypes.func.isRequired,
-    updateNextQuestionTarget: PropTypes.func.isRequired,
-    questionSetId: PropTypes.string.isRequired,
-    questionId: PropTypes.string,
-    question: PropTypes.string,
-    questionText: PropTypes.string,
-    questionPostText: PropTypes.string,
-    questionInputType: PropTypes.string,
-    questionInputOptions: PropTypes.object,
-    currentQuestionSetIndex: PropTypes.number.isRequired,
-    currentQuestionIndex: PropTypes.number.isRequired,
-    questionTarget: PropTypes.string,
-    questionTargetMatch: PropTypes.string,
-    currentQuestionPanelIndex: PropTypes.number.isRequired,
-  }
-
-  static defaultProps = {
-    questionId: '',
-    question: '',
-    questionText: '',
-    questionPostText: '',
-    questionInputType: '',
-    questionInputOptions: fromJS([]),
-    questionTarget: '',
-    questionTargetMatch: '',
-  }
-
   constructor(props) {
     super(props);
     const {
@@ -165,7 +132,7 @@ class QuestionEditor extends PureComponent {
       <form>
         { this.props.currentQuestionIndex > -1 &&
         <div>
-          <FormGroup>
+          <div className="form-group">
             <FieldGroup
               id="questionSetId"
               name="questionSetId"
@@ -175,8 +142,8 @@ class QuestionEditor extends PureComponent {
               value={this.state.questionSetId}
               disabled
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <FieldGroup
               id="questionId"
               name="questionId"
@@ -186,8 +153,8 @@ class QuestionEditor extends PureComponent {
               value={this.state.questionId}
               disabled={this.state.editQuestionId}
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <label htmlFor="edit-question-id" id="edit-question-id-label">
               <input
                 id="edit-question-id"
@@ -196,8 +163,8 @@ class QuestionEditor extends PureComponent {
               />
               &nbsp;edit question id (not recommended)
             </label>
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <FieldGroup
               id="question"
               name="question"
@@ -206,8 +173,8 @@ class QuestionEditor extends PureComponent {
               placeholder={question}
               value={this.state.question}
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <FieldGroup
               id="questionText"
               name="questionText"
@@ -216,8 +183,8 @@ class QuestionEditor extends PureComponent {
               onChange={this.onChange}
               value={this.state.questionText}
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <FieldGroup
               id="questionPostText"
               name="questionPostText"
@@ -226,8 +193,8 @@ class QuestionEditor extends PureComponent {
               onChange={this.onChange}
               value={this.state.questionPostText}
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <label htmlFor="questionInputType">
               Question Type
             </label>
@@ -238,7 +205,7 @@ class QuestionEditor extends PureComponent {
               onSelect={this.onSelect}
               displayValue={this.props.questionInputType}
             />
-          </FormGroup>
+          </div>
         </div>
         }
         {
@@ -258,7 +225,7 @@ class QuestionEditor extends PureComponent {
         <ButtonBarEditor
           currentQuestionPanelIndex={currentQuestionPanelIndex}
         />
-        <ButtonGroup>
+        <div className="button-group">
           { this.props.currentQuestionIndex > -1 &&
             <DeleteQuestionButton
               currentQuestionSetIndex={this.props.currentQuestionSetIndex}
@@ -271,12 +238,44 @@ class QuestionEditor extends PureComponent {
             currentQuestionSetIndex={this.props.currentQuestionSetIndex}
           />
           }
-        </ButtonGroup>
+        </div>
         <br />
       </form>
     );
   }
 }
+
+QuestionEditor.propTypes = {
+  editQuestionId: PropTypes.func.isRequired,
+  editQuestion: PropTypes.func.isRequired,
+  editQuestionText: PropTypes.func.isRequired,
+  editQuestionPostText: PropTypes.func.isRequired,
+  changeQuestionType: PropTypes.func.isRequired,
+  updateNextQuestionTarget: PropTypes.func.isRequired,
+  questionSetId: PropTypes.string.isRequired,
+  questionId: PropTypes.string,
+  question: PropTypes.string,
+  questionText: PropTypes.string,
+  questionPostText: PropTypes.string,
+  questionInputType: PropTypes.string,
+  questionInputOptions: PropTypes.object,
+  currentQuestionSetIndex: PropTypes.number.isRequired,
+  currentQuestionIndex: PropTypes.number.isRequired,
+  questionTarget: PropTypes.string,
+  questionTargetMatch: PropTypes.string,
+  currentQuestionPanelIndex: PropTypes.number.isRequired,
+};
+
+QuestionEditor.defaultProps = {
+  questionId: '',
+  question: '',
+  questionText: '',
+  questionPostText: '',
+  questionInputType: '',
+  questionInputOptions: fromJS([]),
+  questionTarget: '',
+  questionTargetMatch: '',
+};
 
 function mapStateToProps(state, ownProps) {
   return {

@@ -214,7 +214,6 @@ AddConditionalQuestionButton.propTypes = {
   path: _propTypes2.default.array.isRequired
 };
 
-
 function mapStateToProps(state, ownProps) {
   return {
     path: ownProps.path

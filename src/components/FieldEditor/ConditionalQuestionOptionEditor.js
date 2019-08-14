@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, InputGroup, FormControl, Glyphicon } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShare, faMinusCircle, faHamburger } from '@fortawesome/free-solid-svg-icons';
 import DeleteQuestionOptionButton from '../FormMenu/DeleteQuestionOptionButton';
 import ConditionalPageEditor from './ConditionalPageEditor';
 import ConditionalQuestionEditor from './ConditionalQuestionEditor';
@@ -18,16 +19,6 @@ import {
 } from '../../actions/winterfellFormBuilderActions';
 
 class ConditionalQuestionOptionEditor extends PureComponent {
-  static propTypes = {
-    questionInputOptions: PropTypes.array.isRequired,
-    questionId: PropTypes.string.isRequired,
-    editQuestionOptionText: PropTypes.func.isRequired,
-    editQuestionOptionValue: PropTypes.func.isRequired,
-    addQuestionOption: PropTypes.func.isRequired,
-    deleteQuestionOption: PropTypes.func.isRequired,
-    path: PropTypes.array.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -126,7 +117,7 @@ class ConditionalQuestionOptionEditor extends PureComponent {
     copyConditionalQuestions.splice(index, 1);
     this.setState({ questionInputOptions: copyConditionalQuestions });
   }
-  onDeleteQuestionOption
+
   render() {
     const {
       questionInputOptions,
@@ -145,60 +136,54 @@ class ConditionalQuestionOptionEditor extends PureComponent {
         {this.state.questionInputOptions &&
           this.state.questionInputOptions.map((option, ix) => (
             <div key={`${ix}`} >
-              <InputGroup className="winterfell-form-builder-conditional-question">
-                <FormControl
+              <div className="input-group winterfell-form-builder-conditional-question">
+                <input
+                  className="form-control"
                   type="text"
                   name={this.state.questionInputOptions[ix].text}
                   value={this.state.questionInputOptions[ix].text}
                   onChange={event => this.onOptionTextChange(event, ix)}
                 />
-                <FormControl
+                <input
+                  className="form-control"
                   type="text"
                   name={this.state.questionInputOptions[ix].value}
                   value={this.state.questionInputOptions[ix].value}
                   onChange={event => this.onOptionValueChange(event, ix)}
                 />
-                <InputGroup.Button>
+                <div>
                   <DeleteQuestionOptionButton
                     onDeleteQuestionOption={() => this.props.deleteQuestionOption([...path, 'input', 'options', ix])}
                   />
-                </InputGroup.Button>
-                <InputGroup.Button>
-                  <Button
+                </div>
+                <div>
+                  <button
+                    type="button"
                     onClick={event => this.onShowConditonalClick(ix, event)}
                     className="btn btn-warning"
                     id="showConditionalPageButton"
                   >
                     {this.state.showConditionalPage && !this.state.showConditionalPage[ix] &&
-                    <Glyphicon glyph="glyphicon glyphicon-share-alt" id="showConditionalPage" />}
+                    <FontAwesomeIcon icon={faShare} id="showConditionalPage" />}
                     {this.state.showConditionalPage && this.state.showConditionalPage[ix] &&
-                    <Glyphicon
-                      glyph="glyphicon glyphicon glyphicon-minus-sign"
-                      id="showConditionalPage"
-                    />}
-                  </Button>
-                </InputGroup.Button>
-                <InputGroup.Button>
-                  <Button
+                    <FontAwesomeIcon icon={faMinusCircle} id="showConditionalPage" />}
+                  </button>
+                </div>
+                <div>
+                  <button
+                    type="button"
                     id="showConditionalQuestionButton"
                     onClick={event => this.onShowConditonalClick(ix, event)}
                     className="btn btn-dark"
                   >
                     {this.state.showConditionalQuestions &&
                     !this.state.showConditionalQuestions[ix] &&
-                    <Glyphicon
-                      glyph="glyphicon glyphicon-menu-hamburger"
-                      id="showConditionalQuestion"
-                    />
-                    }
+                    <FontAwesomeIcon icon={faHamburger} id="showConditionalQuestion" />}
                     {this.state.showConditionalQuestions &&
                     this.state.showConditionalQuestions[ix] &&
-                    <Glyphicon
-                      glyph="glyphicon glyphicon glyphicon-minus-sign"
-                      id="showConditionalQuestion"
-                    />}
-                  </Button>
-                </InputGroup.Button>
+                    <FontAwesomeIcon icon={faMinusCircle} id="showConditionalQuestion" />}
+                  </button>
+                </div>
 
                 {this.state.showConditionalPage[ix] &&
                   <ConditionalPageEditor
@@ -213,7 +198,7 @@ class ConditionalQuestionOptionEditor extends PureComponent {
                     parentOptionText={this.state.questionInputOptions[ix].text}
                   />
                 }
-              </InputGroup>
+              </div>
             </div>))
             }
         <br />
@@ -229,6 +214,16 @@ class ConditionalQuestionOptionEditor extends PureComponent {
     );
   }
 }
+
+ConditionalQuestionOptionEditor.propTypes = {
+  questionInputOptions: PropTypes.array.isRequired,
+  questionId: PropTypes.string.isRequired,
+  editQuestionOptionText: PropTypes.func.isRequired,
+  editQuestionOptionValue: PropTypes.func.isRequired,
+  addQuestionOption: PropTypes.func.isRequired,
+  deleteQuestionOption: PropTypes.func.isRequired,
+  path: PropTypes.array.isRequired,
+};
 
 export default connect(
   null,

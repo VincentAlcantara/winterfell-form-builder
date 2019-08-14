@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import { FormGroup } from 'react-bootstrap';
 import { uploadJSON } from '../../actions/winterfellFormBuilderActions';
 
-
 class UploadJSONButton extends Component {
-  static propTypes = {
-    uploadJSON: PropTypes.func.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
@@ -52,7 +45,7 @@ class UploadJSONButton extends Component {
         data-target="#uploadJSON"
         key="uploadJSON"
         title="Upload Winterfell form"
-      ><i class="material-icons">archive</i><span className="icon-menu">Import</span>
+      ><i className="material-icons">archive</i><span className="icon-menu">Import</span>
       </button>,
       <div className="modal fade" id="uploadJSON" tabIndex="-1" key="uploadJSONModal">
         <div className="modal-dialog bg-white">
@@ -63,16 +56,16 @@ class UploadJSONButton extends Component {
             <div className="modal-body">
               Upload an existing Winterfell form.
             <form>
-                <label
-                  htmlFor="jsonUpload"
-                />
-                <input
-                  name="schema"
-                  id="jsonUpload"
-                  type="file"
-                  onChange={e => this.onChange(e)}
-                />
-              </form>
+              <label
+                htmlFor="jsonUpload"
+              />
+              <input
+                name="schema"
+                id="jsonUpload"
+                type="file"
+                onChange={e => this.onChange(e)}
+              />
+            </form>
             </div>
             <div className="modal-footer">
               <button
@@ -90,6 +83,10 @@ class UploadJSONButton extends Component {
     ];
   }
 }
+
+UploadJSONButton.propTypes = {
+  uploadJSON: PropTypes.func.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

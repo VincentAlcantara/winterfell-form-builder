@@ -5,10 +5,6 @@ import { createForm } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
 class CreateFormButton extends Component {
-  static propTypes = {
-    createForm: PropTypes.func.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
@@ -43,7 +39,7 @@ class CreateFormButton extends Component {
         data-target="#createButton"
         key="createButton"
         title="Start new form"
-      ><i class="material-icons">create_new_folder</i><span className="icon-menu">Create</span>
+      ><i className="material-icons">create_new_folder</i><span className="icon-menu">Create</span>
       </button>,
       <div className="modal fade" id="createButton" tabIndex="-1" key="createButtonModal">
         <div className="modal-dialog bg-white">
@@ -79,6 +75,10 @@ class CreateFormButton extends Component {
     ];
   }
 }
+
+CreateFormButton.propTypes = {
+  createForm: PropTypes.func.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

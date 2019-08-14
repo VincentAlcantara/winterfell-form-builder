@@ -1,23 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
 
 import { goToPage, changeCurrentEditingField } from '../actions/winterfellFormBuilderActions';
 
 class TreeView extends Component {
-  static propTypes = {
-    questionPanels: PropTypes.object,
-    questionSets: PropTypes.object,
-    changeCurrentEditingField: PropTypes.func.isRequired,
-    goToPage: PropTypes.func.isRequired,
-  }
-
-  static defaultProps = {
-    questionPanels: null,
-    questionSets: null,
-  }
-
   constructor(props) {
     super(props);
 
@@ -58,11 +45,12 @@ class TreeView extends Component {
       this.props.questionSets.getIn([questionSetIndex, 'questions']).toJS();
     return questionsArray.map((question, index) => (
       <div key={`${questionPanelId}-${questionSetId}-${index}`}>&nbsp;&nbsp;&nbsp;+&nbsp;
-        <Button
+        <button
+          type="button"
           className="btn btn-link"
           onClick={() => this.onQuestionClick(questionPanelId, questionSetIndex, index)}
         >Question: {question.questionId}
-        </Button>
+        </button>
       </div>
     ));
   }
@@ -70,12 +58,13 @@ class TreeView extends Component {
   getQuestionSets(questionSets, questionPanelId) {
     return questionSets && questionSets.map((questionSet, index) => (
       <div key={`${questionPanelId}-${index}`}>&nbsp;+&nbsp;
-        <Button
+        <button
+          type="button"
           href="#"
           className="btn btn-link"
           onClick={() => this.onQuestionSetClick(questionPanelId, index)}
         >Set: {questionSet.questionSetId}
-        </Button>
+        </button>
         { this.getQuestions(questionSet.questionSetId, questionPanelId) }
       </div>
     ));
@@ -86,12 +75,13 @@ class TreeView extends Component {
     const questionPanelsArray = questionPanels && questionPanels.toJS();
     return questionPanelsArray && questionPanelsArray.map((questionPanel, index) => (
       <div key={index}>
-        <Button
+        <button
+          type="button"
           href="#"
           className="btn btn-link"
           onClick={() => this.onQuestionPanelClick(questionPanel.panelId)}
         >Page: {questionPanel.panelId}
-        </Button>
+        </button>
         {this.getQuestionSets(questionPanel.questionSets, questionPanel.panelId)}
       </div>));
   }
@@ -105,6 +95,18 @@ class TreeView extends Component {
     );
   }
 }
+
+TreeView.propTypes = {
+  questionPanels: PropTypes.object,
+  questionSets: PropTypes.object,
+  changeCurrentEditingField: PropTypes.func.isRequired,
+  goToPage: PropTypes.func.isRequired,
+};
+
+TreeView.defaultProps = {
+  questionPanels: null,
+  questionSets: null,
+};
 
 function mapStateToProps(state, ownProps) {
   return {

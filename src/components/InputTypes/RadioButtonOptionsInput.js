@@ -2,29 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class RadioButtonOptionsInput extends React.Component {
-  static propTypes = {
-    value: PropTypes.array.isRequired,
-    // onChange: PropTypes.func,
-    options: PropTypes.array.isRequired,
-    classes: PropTypes.object,
-    name: PropTypes.string,
-    labelId: PropTypes.string,
-    required: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    classes: {
-      checkboxList: 'clean-list',
-      checkboxListItem: 'radio',
-    },
-    labelId: '',
-    name: '',
-    value: [],
-    options: [],
-    onChange: () => {},
-    onBlur: () => {},
-    required: false,
-  };
   constructor(props) {
     super(props);
 
@@ -92,5 +69,29 @@ class RadioButtonOptionsInput extends React.Component {
     );
   }
 }
+
+RadioButtonOptionsInput.propTypes = {
+  value: PropTypes.array.isRequired,
+  // onChange: PropTypes.func,
+  options: PropTypes.array.isRequired,
+  classes: PropTypes.object,
+  name: PropTypes.string,
+  labelId: PropTypes.string,
+  required: PropTypes.bool,
+};
+
+RadioButtonOptionsInput.defaultProps = {
+  classes: {
+    checkboxList: 'clean-list',
+    checkboxListItem: 'radio',
+  },
+  labelId: '',
+  name: '',
+  value: [],
+  options: [],
+  onChange: () => {},
+  onBlur: () => {},
+  required: false,
+};
 
 export default RadioButtonOptionsInput;

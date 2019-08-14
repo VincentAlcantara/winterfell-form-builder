@@ -298,10 +298,10 @@ ConditionalQuestionEditor.propTypes = {
   deleteConditionalQuestion: _propTypes2.default.func.isRequired,
   parentPath: _propTypes2.default.array.isRequired
 };
+
 ConditionalQuestionEditor.defaultProps = {
   conditionalQuestions: (0, _immutable.fromJS)([])
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

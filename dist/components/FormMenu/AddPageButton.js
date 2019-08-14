@@ -61,7 +61,6 @@ var AddPageButton = function (_Component) {
       panelHeader: '',
       panelText: ''
     };
-
     _this.onChange = _this.onChange.bind(_this);
     _this.onFormUpdate = _this.onFormUpdate.bind(_this);
     return _this;
@@ -73,6 +72,9 @@ var AddPageButton = function (_Component) {
       event.preventDefault();
       this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
     }
+
+    // eslint-disable-next-line class-methods-use-this
+
   }, {
     key: 'onClose',
     value: function onClose(e) {
@@ -98,7 +100,7 @@ var AddPageButton = function (_Component) {
         },
         _react2.default.createElement(
           'i',
-          { 'class': 'material-icons' },
+          { className: 'material-icons' },
           'note_add'
         ),
         _react2.default.createElement(
@@ -200,7 +202,6 @@ var AddPageButton = function (_Component) {
 AddPageButton.propTypes = {
   addPage: _propTypes2.default.func.isRequired
 };
-
 
 function mapStateToProps(state) {
   return {

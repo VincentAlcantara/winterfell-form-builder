@@ -100,7 +100,7 @@ var EditFormTitleButton = function (_Component) {
         },
         _react2.default.createElement(
           'i',
-          { 'class': 'material-icons' },
+          { className: 'material-icons' },
           'edit'
         ),
         _react2.default.createElement(
@@ -175,7 +175,6 @@ EditFormTitleButton.propTypes = {
   editFormTitle: _propTypes2.default.func.isRequired,
   title: _propTypes2.default.string.isRequired
 };
-
 
 function mapStateToProps(state) {
   return {

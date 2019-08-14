@@ -212,6 +212,7 @@ AddQuestionButton.propTypes = {
   questionSetId: _propTypes2.default.string,
   currentQuestionSetIndex: _propTypes2.default.number.isRequired
 };
+
 AddQuestionButton.defaultProps = {
   questionSetId: ''
 };

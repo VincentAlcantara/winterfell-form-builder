@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Col, Alert, Breadcrumb, Button } from 'react-bootstrap';
 import { goToPage, changeCurrentEditingField, clearErrorMessage } from '../actions/winterfellFormBuilderActions';
 import Pagination from './Pagination';
 import Previewer from './Previewer';
@@ -18,35 +17,6 @@ import FieldSelector from './FieldSelector';
 import FieldEditor from './FieldEditor';
 
 class WinterfellFormBuilder extends Component {
-  static propTypes = {
-    schema: PropTypes.object,
-    currentPanelId: PropTypes.string,
-    currentQuestionPanelIndex: PropTypes.number,
-    currentQuestionSetIndex: PropTypes.number,
-    currentQuestionIndex: PropTypes.number,
-    formPanels: PropTypes.object,
-    questionSets: PropTypes.object,
-    goToPage: PropTypes.func.isRequired,
-    currentEditingField: PropTypes.string,
-    changeCurrentEditingField: PropTypes.func.isRequired,
-    clearErrorMessage: PropTypes.func.isRequired,
-    errorMessage: PropTypes.string,
-  }
-
-  static defaultProps = {
-    title: '',
-    schema: null,
-    currentPanelId: null,
-    inputSchema: {},
-    formPanels: null,
-    questionSets: null,
-    currentQuestionPanelIndex: 0, // first page by default
-    currentQuestionSetIndex: null,
-    currentQuestionIndex: null,
-    currentEditingField: 'page',
-    errorMessage: '',
-  }
-
   constructor(props) {
     super(props);
 
@@ -93,10 +63,13 @@ class WinterfellFormBuilder extends Component {
                 {errorMessage}
               </div>
               <div className="modal-footer">
-                <Button
-                  bsStyle="primary"
+                <button
+                  type="button"
+                  className="btn btn-primary"
                   onClick={this.props.clearErrorMessage}
-                >Ok</Button>
+                >
+                  Ok
+                </button>
               </div>
             </div>
           </div>
@@ -116,24 +89,24 @@ class WinterfellFormBuilder extends Component {
         <div className="row">
           <div className="col-4 text-left">
             <div className="btn-group">
-            {
-              formPanels &&
-              <Pagination
-                formPanels={formPanels.map(panel => panel.get('panelId'))}
-                currentPanelId={currentPanelId}
-                onClick={this.props.goToPage}
-              />
-            }
+              {
+                formPanels &&
+                <Pagination
+                  formPanels={formPanels.map(panel => panel.get('panelId'))}
+                  currentPanelId={currentPanelId}
+                  onClick={this.props.goToPage}
+                />
+              }
               <AddPageButton />
               <PageSortButton
                 onClick={() => this.props.changeCurrentEditingField('pageSort')}
               />
-</div>
+            </div>
           </div>
           <div className="col-8">
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
-                <li class="breadcrumb-item">
+                <li className="breadcrumb-item">
                   <a
                     href="#"
                     active={currentEditingField === 'page'}
@@ -143,7 +116,7 @@ class WinterfellFormBuilder extends Component {
                   </a>
                 </li>
                 {(currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets &&
-                  <li class="breadcrumb-item">
+                  <li className="breadcrumb-item">
                     <a
                       href=""
                       active={currentEditingField === 'questionSet'}
@@ -153,9 +126,7 @@ class WinterfellFormBuilder extends Component {
                   </li>
                 }
                 {(currentEditingField === 'question') && questionSets &&
-
-                  <li class="breadcrumb-item">
-
+                  <li className="breadcrumb-item">
                     <a
                       active={currentEditingField === 'question'}
                     >
@@ -163,7 +134,6 @@ class WinterfellFormBuilder extends Component {
                     </a>
                   </li>
                 }
-
               </ol>
             </nav>
           </div>
@@ -186,10 +156,10 @@ class WinterfellFormBuilder extends Component {
               />
             }
             {(!this.props.schema || this.props.schema.size === 0) &&
-              <Alert bsStyle="info">
+              <div className="alert alert-info" role="alert">
                 No form loaded.  Click on &#39;new&#39; to create a new form,
                 or &#39;upload&#39; to load an existing form.
-              </Alert>
+              </div>
             }
           </div>
         </div>
@@ -205,9 +175,9 @@ class WinterfellFormBuilder extends Component {
             }
             {
               currentPanelId === 'Select Page' &&
-              <Alert bsStyle="info">
+              <div className="alert alert-info" role="alert">
                 No page selected to preview.  Select a page from the dropdown above.
-              </Alert>
+              </div>
             }
           </div>
         </div>
@@ -216,6 +186,35 @@ class WinterfellFormBuilder extends Component {
     );
   }
 }
+
+WinterfellFormBuilder.propTypes = {
+  schema: PropTypes.object,
+  currentPanelId: PropTypes.string,
+  currentQuestionPanelIndex: PropTypes.number,
+  currentQuestionSetIndex: PropTypes.number,
+  currentQuestionIndex: PropTypes.number,
+  formPanels: PropTypes.object,
+  questionSets: PropTypes.object,
+  goToPage: PropTypes.func.isRequired,
+  currentEditingField: PropTypes.string,
+  changeCurrentEditingField: PropTypes.func.isRequired,
+  clearErrorMessage: PropTypes.func.isRequired,
+  errorMessage: PropTypes.string,
+};
+
+WinterfellFormBuilder.defaultProps = {
+  title: '',
+  schema: null,
+  currentPanelId: null,
+  inputSchema: {},
+  formPanels: null,
+  questionSets: null,
+  currentQuestionPanelIndex: 0, // first page by default
+  currentQuestionSetIndex: null,
+  currentQuestionIndex: null,
+  currentEditingField: 'page',
+  errorMessage: '',
+};
 
 function mapStateToProps(state) {
   return {
