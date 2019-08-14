@@ -12,7 +12,7 @@ const QuestionSetSelector = (props) => {
           if (currentQuestionSet.questionSetId === questionSet.questionSetId
           ) {
             return (
-              <span>
+              <span key={questionSetIndex}>
                 { questionSet.questionSetHeader &&
                 <button
                   className="winterfell-form-builder-selector btn-block"

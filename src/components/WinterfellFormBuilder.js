@@ -135,7 +135,7 @@ class WinterfellFormBuilder extends Component {
                 <li className="breadcrumb-item">
                   <a
                     href="#"
-                    active={currentEditingField === 'page'}
+                    active={`${currentEditingField === 'page'}`}
                     onClick={() => this.props.changeCurrentEditingField('page')}
                   >
                     {currentPanelId !== 'Select Page' && currentPanelId}
@@ -145,7 +145,7 @@ class WinterfellFormBuilder extends Component {
                   <li className="breadcrumb-item">
                     <a
                       href=""
-                      active={currentEditingField === 'questionSet'}
+                      active={`${currentEditingField === 'questionSet'}`}
                       onClick={() => this.props.changeCurrentEditingField('questionSet', currentQuestionSetIndex)}
                     >{questionSets.getIn([currentQuestionSetIndex, 'questionSetId'])}
                     </a>
@@ -156,7 +156,7 @@ class WinterfellFormBuilder extends Component {
                   <li className="breadcrumb-item">
 
                     <a
-                      active={currentEditingField === 'question'}
+                      active={`${currentEditingField === 'question'}`}
                     >
                       {questionSets.getIn([currentQuestionSetIndex, 'questions', currentQuestionIndex, 'questionId'])}
                     </a>
