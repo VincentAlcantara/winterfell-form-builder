@@ -50,8 +50,8 @@ class DeleteQuestionButton extends Component {
           </div>
           <div className="modal-body">
             Are you sure you want to delete this question?
-            </div>
-            <div className="modal-footer">
+          </div>
+          <div className="modal-footer">
             <button
               className="btn btn-danger"
               data-dismiss="modal"

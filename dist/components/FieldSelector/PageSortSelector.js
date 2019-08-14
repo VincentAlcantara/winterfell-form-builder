@@ -34,8 +34,6 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = require('react-redux');
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _reactSortableHoc = require('react-sortable-hoc');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');

@@ -43,7 +43,7 @@ class CreateFormButton extends Component {
         data-target="#createButton"
         key="createButton"
         title="Start new form"
-      ><i class="material-icons">create_new_folder</i><span className="icon-menu">Create</span>
+      ><i className="material-icons">create_new_folder</i><span className="icon-menu">Create</span>
       </button>,
       <div className="modal fade" id="createButton" tabIndex="-1" key="createButtonModal">
         <div className="modal-dialog bg-white">

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'react-bootstrap';
 
 import { changeCurrentEditingField, editFormTitle } from '../../actions/winterfellFormBuilderActions';
 import PageSelector from './PageSelector';
@@ -114,7 +113,7 @@ class FieldSelectorContainer extends Component {
             onClick={() => this.props.changeCurrentEditingField('buttons', currentQuestionSetIndex, currentQuestionIndex)}
           />
         }
-      </div>
+      </div>,
     ];
   }
 }

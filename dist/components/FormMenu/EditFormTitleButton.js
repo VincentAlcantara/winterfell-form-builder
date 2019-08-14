@@ -100,7 +100,7 @@ var EditFormTitleButton = function (_Component) {
         },
         _react2.default.createElement(
           'i',
-          { 'class': 'material-icons' },
+          { className: 'material-icons' },
           'edit'
         ),
         _react2.default.createElement(

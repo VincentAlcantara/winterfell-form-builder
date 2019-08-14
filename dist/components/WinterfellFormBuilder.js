@@ -34,8 +34,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _winterfellFormBuilderActions = require('../actions/winterfellFormBuilderActions');
 
 var _Pagination = require('./Pagination');
@@ -141,9 +139,9 @@ var WinterfellFormBuilder = function (_Component) {
                 'div',
                 { className: 'modal-footer' },
                 _react2.default.createElement(
-                  _reactBootstrap.Button,
+                  'button',
                   {
-                    bsStyle: 'primary',
+                    className: 'btn btn-primary',
                     onClick: this.props.clearErrorMessage
                   },
                   'Ok'
@@ -204,7 +202,7 @@ var WinterfellFormBuilder = function (_Component) {
                 { className: 'breadcrumb' },
                 _react2.default.createElement(
                   'li',
-                  { 'class': 'breadcrumb-item' },
+                  { className: 'breadcrumb-item' },
                   _react2.default.createElement(
                     'a',
                     {
@@ -219,7 +217,7 @@ var WinterfellFormBuilder = function (_Component) {
                 ),
                 (currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets && _react2.default.createElement(
                   'li',
-                  { 'class': 'breadcrumb-item' },
+                  { className: 'breadcrumb-item' },
                   _react2.default.createElement(
                     'a',
                     {
@@ -234,7 +232,7 @@ var WinterfellFormBuilder = function (_Component) {
                 ),
                 currentEditingField === 'question' && questionSets && _react2.default.createElement(
                   'li',
-                  { 'class': 'breadcrumb-item' },
+                  { className: 'breadcrumb-item' },
                   _react2.default.createElement(
                     'a',
                     {
@@ -267,8 +265,8 @@ var WinterfellFormBuilder = function (_Component) {
               currentQuestionPanelIndex: currentQuestionPanelIndex
             }),
             (!this.props.schema || this.props.schema.size === 0) && _react2.default.createElement(
-              _reactBootstrap.Alert,
-              { bsStyle: 'info' },
+              'div',
+              { className: 'bg-blue-lagoon' },
               'No form loaded.  Click on \'new\' to create a new form, or \'upload\' to load an existing form.'
             )
           )
@@ -289,8 +287,8 @@ var WinterfellFormBuilder = function (_Component) {
               schema: schema.toJS()
             }),
             currentPanelId === 'Select Page' && _react2.default.createElement(
-              _reactBootstrap.Alert,
-              { bsStyle: 'info' },
+              'div',
+              { className: 'bg-blue-lagoon' },
               'No page selected to preview.  Select a page from the dropdown above.'
             )
           )

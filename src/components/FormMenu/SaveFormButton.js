@@ -56,7 +56,7 @@ class SaveFormButton extends Component {
         key="uploadButton"
         title="Export"
         disabled={!this.props.schema || this.props.schema === 'null'}
-      ><i class="material-icons">unarchive</i><span className="icon-menu">Export</span>
+      ><i className="material-icons">unarchive</i><span className="icon-menu">Export</span>
       </button>,
       <div className="modal fade" id="uploadButton" tabIndex="-1" key="uploadButtonModal">
         <div className="modal-dialog bg-white">
@@ -66,14 +66,14 @@ class SaveFormButton extends Component {
             </div>
             <div className="modal-body">
               <form>
-                  <FieldGroup
-                    id="filename"
-                    name="filename"
-                    label="Filename"
-                    onChange={this.onChange}
-                    placeholder={this.props.title}
-                    value={this.state.filename}
-                  />
+                <FieldGroup
+                  id="filename"
+                  name="filename"
+                  label="Filename"
+                  onChange={this.onChange}
+                  placeholder={this.props.title}
+                  value={this.state.filename}
+                />
               </form>
             </div>
             <div className="modal-footer">

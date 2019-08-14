@@ -102,14 +102,14 @@ class Previewer extends Component {
 
     return (
       <div className="card p-3" >
-          {(schema &&
-            schema.formPanels &&
-            schema.formPanels.length > 0) &&
-            currentPanelId &&
-            currentPanelId !== 'Select Page' &&
-            displayWinterFellForm()
-          }
-        </div>
+        {(schema &&
+          schema.formPanels &&
+          schema.formPanels.length > 0) &&
+          currentPanelId &&
+          currentPanelId !== 'Select Page' &&
+          displayWinterFellForm()
+        }
+      </div>
     );
   }
 }

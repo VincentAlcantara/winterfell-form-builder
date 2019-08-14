@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import { movePage, changeCurrentEditingField } from '../../actions/winterfellFormBuilderActions';
 
@@ -56,7 +55,7 @@ class PageSortSelector extends Component {
     );
     return [
       <label htmlFor="sortableList" key="sortPagesLabel">Pages - Drag and Drop to Sort</label>,
-      <SortableList key="sortingPages" items={this.state.items} onSortEnd={this.onSortEnd} />
+      <SortableList key="sortingPages" items={this.state.items} onSortEnd={this.onSortEnd} />,
     ];
   }
 }

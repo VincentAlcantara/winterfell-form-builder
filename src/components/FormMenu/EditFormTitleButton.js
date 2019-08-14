@@ -48,7 +48,7 @@ class EditFormTitleButton extends Component {
         data-target="#editFormTitle"
         key="editFormTitle"
         title="Edit Form Title"
-      ><i class="material-icons">edit</i><span className="icon-menu">Title</span>
+      ><i className="material-icons">edit</i><span className="icon-menu">Title</span>
       </button>,
       <div className="modal fade" id="editFormTitle" tabIndex="-1" key="editFormTitleModal">
         <div className="modal-dialog bg-white">

@@ -177,7 +177,7 @@ class ConditionalQuestionEditor extends PureComponent {
 
   render() {
     return (
-      <Row className="winterfell-form-builder-conditional-questions alert-info">
+      <Row className="winterfell-form-builder-conditional-questions alert alert-info">
         <Col xs={12}>
           <h6>
             {`Option '${this.props.parentOptionText}' Conditional Questions:`}

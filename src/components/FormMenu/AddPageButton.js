@@ -29,10 +29,6 @@ class AddPageButton extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  onClose(e) {
-    e.preventDefault();
-  }
-
   onFormUpdate(e) {
     e.preventDefault();
     this.props.addPage(this.state.panelId, this.state.panelHeader, this.state.panelText);
@@ -46,7 +42,7 @@ class AddPageButton extends Component {
         data-target="#addPage"
         key="addPage"
         title="Add page"
-      ><i class="material-icons">note_add</i><span className="icon-menu">Page</span>
+      ><i className="material-icons">note_add</i><span className="icon-menu">Page</span>
       </Button>,
       <div className="modal fade" id="addPage" tabIndex="-1" key="addPageModal">
         <div className="modal-dialog bg-white">

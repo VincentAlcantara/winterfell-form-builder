@@ -40,7 +40,7 @@ class EditSchemaButton extends Component {
         data-target="#editSchema"
         key="editSchema"
         title="Edit Schema"
-      ><i class="material-icons">view_agenda</i><span className="icon-menu">Schema</span>
+      ><i className="material-icons">view_agenda</i><span className="icon-menu">Schema</span>
       </button>,
       <div className="modal fade" id="editSchema" tabIndex="-1" key="editSchemaModal">
         <div className="modal-dialog bg-white">
@@ -52,7 +52,7 @@ class EditSchemaButton extends Component {
               <form>
                 <textarea
                   rows="30"
-                  cols="60"
+                  cols="50"
                   value={JSON.stringify(this.state.schema, undefined, 2)}
                   onChange={this.onChange}
                 />

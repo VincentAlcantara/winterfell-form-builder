@@ -84,7 +84,7 @@ var EditSchemaButton = function (_Component) {
         },
         _react2.default.createElement(
           'i',
-          { 'class': 'material-icons' },
+          { className: 'material-icons' },
           'view_agenda'
         ),
         _react2.default.createElement(

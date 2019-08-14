@@ -108,7 +108,7 @@ var SaveFormButton = function (_Component) {
         },
         _react2.default.createElement(
           'i',
-          { 'class': 'material-icons' },
+          { className: 'material-icons' },
           'unarchive'
         ),
         _react2.default.createElement(

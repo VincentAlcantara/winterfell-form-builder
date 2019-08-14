@@ -34,8 +34,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -99,7 +97,7 @@ var UploadJSONButton = function (_Component) {
         },
         _react2.default.createElement(
           'i',
-          { 'class': 'material-icons' },
+          { className: 'material-icons' },
           'archive'
         ),
         _react2.default.createElement(

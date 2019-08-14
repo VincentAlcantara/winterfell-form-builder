@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Col, Alert, Breadcrumb, Button } from 'react-bootstrap';
 import { goToPage, changeCurrentEditingField, clearErrorMessage } from '../actions/winterfellFormBuilderActions';
 import Pagination from './Pagination';
 import Previewer from './Previewer';
@@ -93,10 +92,10 @@ class WinterfellFormBuilder extends Component {
                 {errorMessage}
               </div>
               <div className="modal-footer">
-                <Button
-                  bsStyle="primary"
+                <button
+                  className="btn btn-primary"
                   onClick={this.props.clearErrorMessage}
-                >Ok</Button>
+                >Ok</button>
               </div>
             </div>
           </div>
@@ -116,24 +115,24 @@ class WinterfellFormBuilder extends Component {
         <div className="row">
           <div className="col-4 text-left">
             <div className="btn-group">
-            {
-              formPanels &&
-              <Pagination
-                formPanels={formPanels.map(panel => panel.get('panelId'))}
-                currentPanelId={currentPanelId}
-                onClick={this.props.goToPage}
-              />
-            }
+              {
+                formPanels &&
+                <Pagination
+                  formPanels={formPanels.map(panel => panel.get('panelId'))}
+                  currentPanelId={currentPanelId}
+                  onClick={this.props.goToPage}
+                />
+              }
               <AddPageButton />
               <PageSortButton
                 onClick={() => this.props.changeCurrentEditingField('pageSort')}
               />
-</div>
+            </div>
           </div>
           <div className="col-8">
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb">
-                <li class="breadcrumb-item">
+                <li className="breadcrumb-item">
                   <a
                     href="#"
                     active={currentEditingField === 'page'}
@@ -143,7 +142,7 @@ class WinterfellFormBuilder extends Component {
                   </a>
                 </li>
                 {(currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets &&
-                  <li class="breadcrumb-item">
+                  <li className="breadcrumb-item">
                     <a
                       href=""
                       active={currentEditingField === 'questionSet'}
@@ -154,7 +153,7 @@ class WinterfellFormBuilder extends Component {
                 }
                 {(currentEditingField === 'question') && questionSets &&
 
-                  <li class="breadcrumb-item">
+                  <li className="breadcrumb-item">
 
                     <a
                       active={currentEditingField === 'question'}
@@ -186,10 +185,10 @@ class WinterfellFormBuilder extends Component {
               />
             }
             {(!this.props.schema || this.props.schema.size === 0) &&
-              <Alert bsStyle="info">
+              <div className="alert alert-info">
                 No form loaded.  Click on &#39;new&#39; to create a new form,
                 or &#39;upload&#39; to load an existing form.
-              </Alert>
+              </div>
             }
           </div>
         </div>
@@ -205,9 +204,9 @@ class WinterfellFormBuilder extends Component {
             }
             {
               currentPanelId === 'Select Page' &&
-              <Alert bsStyle="info">
+              <div className="alert alert-info">
                 No page selected to preview.  Select a page from the dropdown above.
-              </Alert>
+              </div>
             }
           </div>
         </div>

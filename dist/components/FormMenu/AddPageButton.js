@@ -74,11 +74,6 @@ var AddPageButton = function (_Component) {
       this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
     }
   }, {
-    key: 'onClose',
-    value: function onClose(e) {
-      e.preventDefault();
-    }
-  }, {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
@@ -98,7 +93,7 @@ var AddPageButton = function (_Component) {
         },
         _react2.default.createElement(
           'i',
-          { 'class': 'material-icons' },
+          { className: 'material-icons' },
           'note_add'
         ),
         _react2.default.createElement(
