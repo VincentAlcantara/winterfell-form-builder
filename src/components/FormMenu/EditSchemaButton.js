@@ -7,6 +7,7 @@ import { updateForm } from '../../actions/winterfellFormBuilderActions';
 class EditSchemaButton extends Component {
   static propTypes = {
     updateForm: PropTypes.func.isRequired,
+    schema: PropTypes.object,
   };
 
   static defaultProps = {
@@ -16,11 +17,17 @@ class EditSchemaButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      schemaObject: null,
+      schema: this.props.schema,
     };
 
     this.onChange = this.onChange.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.state = {
+      schema: nextProps.schema,
+    };
   }
 
   onChange(e) {
