@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Alert, Button } from 'react-bootstrap';
 import { goToPage, changeCurrentEditingField, clearErrorMessage } from '../actions/winterfellFormBuilderActions';
 import Pagination from './Pagination';
 import Previewer from './Previewer';
@@ -64,10 +63,13 @@ class WinterfellFormBuilder extends Component {
                 {errorMessage}
               </div>
               <div className="modal-footer">
-                <Button
-                  variant="primary"
+                <button
+                  type="button"
+                  className="btn btn-primary"
                   onClick={this.props.clearErrorMessage}
-                >Ok</Button>
+                >
+                  Ok
+                </button>
               </div>
             </div>
           </div>
@@ -154,10 +156,10 @@ class WinterfellFormBuilder extends Component {
               />
             }
             {(!this.props.schema || this.props.schema.size === 0) &&
-              <Alert variant="info">
+              <div className="alert alert-info" role="alert">
                 No form loaded.  Click on &#39;new&#39; to create a new form,
                 or &#39;upload&#39; to load an existing form.
-              </Alert>
+              </div>
             }
           </div>
         </div>
@@ -173,9 +175,9 @@ class WinterfellFormBuilder extends Component {
             }
             {
               currentPanelId === 'Select Page' &&
-              <Alert variant="info">
+              <div className="alert alert-info" role="alert">
                 No page selected to preview.  Select a page from the dropdown above.
-              </Alert>
+              </div>
             }
           </div>
         </div>

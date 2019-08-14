@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Glyphicon } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 class DeleteQuestionOptionButton extends Component {
   constructor(props) {
@@ -26,13 +27,14 @@ class DeleteQuestionOptionButton extends Component {
 
   render() {
     return [
-      <Button
+      <button
+        type="button"
         className="btn btn-danger"
-        title="delete this option"
         data-toggle="modal"
         data-target="#deleteQuestionOptionButton"
-      ><Glyphicon glyph="glyphicon glyphicon-remove" />
-      </Button>,
+      >
+        <FontAwesomeIcon icon={faTrash} /><span>delete this option</span>
+      </button>,
       <div className="modal fade" id="deleteQuestionOptionButton" tabIndex="-1">
         <div className="modal-dialog bg-white">
           <div className="modal-header">

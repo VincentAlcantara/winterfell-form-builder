@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, FormGroup } from 'react-bootstrap';
 import { addConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 import SelectInput from '../InputTypes/SelectInput';
@@ -54,12 +53,13 @@ class AddConditionalQuestionButton extends Component {
 
   render() {
     return [
-      <Button
+      <button
+        type="button"
         className="btn btn-dark btn-block"
         data-toggle="modal"
         data-target="#createForm"
       >add conditional question
-      </Button>,
+      </button>,
       <div className="modal fade" id="createForm" tabIndex="-1">
         <div className="modal-dialog bg-white">
           <div className="modal-header">
@@ -67,7 +67,7 @@ class AddConditionalQuestionButton extends Component {
           </div>
           <div className="modal-body">
             <form>
-              <FormGroup>
+              <div className="form-group">
                 <FieldGroup
                   id="questionId"
                   name="questionId"
@@ -76,8 +76,8 @@ class AddConditionalQuestionButton extends Component {
                   placeholder="(optional)"
                   value={this.state.questionId}
                 />
-              </FormGroup>
-              <FormGroup>
+              </div>
+              <div className="form-group">
                 <FieldGroup
                   id="question"
                   name="question"
@@ -86,8 +86,8 @@ class AddConditionalQuestionButton extends Component {
                   placeholder=""
                   value={this.state.question}
                 />
-              </FormGroup>
-              <FormGroup>
+              </div>
+              <div className="form-group">
                 <label htmlFor="questionType">
                   Select Question Type
                 </label>
@@ -98,7 +98,7 @@ class AddConditionalQuestionButton extends Component {
                   onSelect={this.onSelect}
                   displayValue={this.state.questionType}
                 />
-              </FormGroup>
+              </div>
             </form>
           </div>
           <div className="modal-footer">

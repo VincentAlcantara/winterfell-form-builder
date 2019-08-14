@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, Button, ButtonGroup, Row, Col } from 'react-bootstrap';
 import { fromJS } from 'immutable';
 import { saveConditionalQuestion, deleteConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
@@ -82,7 +81,7 @@ class ConditionalQuestionEditor extends PureComponent {
       conditionalPath.push(ix);
       return ( // return #2
         <div key={ix}>
-          <FormGroup>
+          <div className="form-group">
             <FieldGroup
               id="questionId"
               name="questionId"
@@ -90,8 +89,8 @@ class ConditionalQuestionEditor extends PureComponent {
               onChange={e => this.onChange(e, ix)}
               value={questionId}
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <FieldGroup
               id="question"
               name="question"
@@ -99,8 +98,8 @@ class ConditionalQuestionEditor extends PureComponent {
               onChange={e => this.onChange(e, ix)}
               value={question}
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <FieldGroup
               id="text"
               name="text"
@@ -108,8 +107,8 @@ class ConditionalQuestionEditor extends PureComponent {
               onChange={e => this.onChange(e, ix)}
               value={text}
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <FieldGroup
               id="postText"
               name="postText"
@@ -117,8 +116,8 @@ class ConditionalQuestionEditor extends PureComponent {
               onChange={e => this.onChange(e, ix)}
               value={postText}
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <label htmlFor="questionInputType">
               Question Type
             </label>
@@ -129,7 +128,7 @@ class ConditionalQuestionEditor extends PureComponent {
               onSelect={e => this.onSelect(e, ix)}
               displayValue={input.type}
             />
-          </FormGroup>
+          </div>
           {
             (input.type === 'checkboxOptionsInput' ||
             input.type === 'selectInput' ||
@@ -144,18 +143,19 @@ class ConditionalQuestionEditor extends PureComponent {
           }
           <br />
           <br />
-          <ButtonGroup>
+          <div>
             <DeleteConditionalQuestionButton
               path={conditionalPath}
               deleteConditionalQuestion={this.props.deleteConditionalQuestion}
             />
-            <Button
+            <button
+              type="button"
               className="btn btn-warning"
               title="save this conditional question"
               onClick={() => this.onSaveConditionalQuestion(ix, this.props.parentPath)}
             >save
-            </Button>
-          </ButtonGroup>
+            </button>
+          </div>
           <br />
         </div>); // end of return #2
     }));  // end of return #1
@@ -163,22 +163,22 @@ class ConditionalQuestionEditor extends PureComponent {
 
   render() {
     return (
-      <Row className="winterfell-form-builder-conditional-questions alert-info">
-        <Col xs={12}>
+      <div className="row winterfell-form-builder-conditional-questions alert-info">
+        <div className="col-xs-12">
           <h6>
             {`Option '${this.props.parentOptionText}' Conditional Questions:`}
           </h6>
           <h6><i>Display these questions if this option is selected</i></h6>
           { this.props.conditionalQuestions && this.getConditionalQuestions() }
-        </Col>
-        <Col xs={12}>
+        </div>
+        <div className="col-xs-12">
           <br />
           <AddConditionalQuestionButton
             path={this.props.parentPath}
           />
           <br />
-        </Col>
-      </Row>
+        </div>
+      </div>
     );
   }
 }

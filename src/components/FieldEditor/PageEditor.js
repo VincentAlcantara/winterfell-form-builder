@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import { fromJS } from 'immutable';
 import { editPageId, editPageHeader, editPageText, changeCurrentEditingField, updateErrorMessage, clearErrorMessage } from '../../actions/winterfellFormBuilderActions';
 import { AddQuestionSetButton } from '../FormMenu';
@@ -61,20 +60,21 @@ class PageEditor extends PureComponent {
     const questionSetsArray = this.props.currentQuestionSets.toJS();
     return (
       <form>
-        <FormGroup>
+        <div className="form-group">
           <label htmlFor="filename">
             Filename
           </label>
           <p disabled id="filename" >
             {this.props.title}
           </p>
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div className="form-group">
           <label htmlFor="panelId">
               Page ID
           </label>
           <div className="input-group">
-            <FormControl
+            <div
+              className="form-control"
               id="panelId"
               name="panelId"
               onChange={this.onChange}
@@ -90,8 +90,8 @@ class PageEditor extends PureComponent {
               </button>
             </div>
           </div>
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div className="form-group">
           <FieldGroup
             id="panelHeader"
             name="panelHeader"
@@ -100,8 +100,8 @@ class PageEditor extends PureComponent {
             placeholder={this.props.panelHeader}
             value={this.state.panelHeader}
           />
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div className="form-group">
           <FieldGroup
             id="panelText"
             name="panelText"
@@ -110,25 +110,26 @@ class PageEditor extends PureComponent {
             onChange={this.onChange}
             value={this.state.panelText}
           />
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div className="form-group">
           <AddQuestionSetButton />
-        </FormGroup>
+        </div>
         { questionSetsArray && questionSetsArray.length > 0 &&
-        <FormGroup>
+        <div className="form-group">
           <label htmlFor="questionSetList">Question Sets</label>
           <div id="questionSetList">
             { questionSetsArray.map((questionSet, index) => (
-              <Button
+              <button
+                type="button"
                 key={`questionSet-${index}`}
                 variant="link"
                 onClick={() => this.onClick(questionSet.questionSetId)}
               >{questionSet.questionSetId}
-              </Button>
+              </button>
             ))
             }
           </div>
-        </FormGroup>
+        </div>
         }
       </form>
     );

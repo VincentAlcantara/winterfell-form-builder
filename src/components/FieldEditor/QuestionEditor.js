@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, ButtonGroup } from 'react-bootstrap';
 import { fromJS } from 'immutable';
 import {
   editQuestionId,
@@ -133,7 +132,7 @@ class QuestionEditor extends PureComponent {
       <form>
         { this.props.currentQuestionIndex > -1 &&
         <div>
-          <FormGroup>
+          <div className="form-group">
             <FieldGroup
               id="questionSetId"
               name="questionSetId"
@@ -143,8 +142,8 @@ class QuestionEditor extends PureComponent {
               value={this.state.questionSetId}
               disabled
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <FieldGroup
               id="questionId"
               name="questionId"
@@ -154,8 +153,8 @@ class QuestionEditor extends PureComponent {
               value={this.state.questionId}
               disabled={this.state.editQuestionId}
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <label htmlFor="edit-question-id" id="edit-question-id-label">
               <input
                 id="edit-question-id"
@@ -164,8 +163,8 @@ class QuestionEditor extends PureComponent {
               />
               &nbsp;edit question id (not recommended)
             </label>
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <FieldGroup
               id="question"
               name="question"
@@ -174,8 +173,8 @@ class QuestionEditor extends PureComponent {
               placeholder={question}
               value={this.state.question}
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <FieldGroup
               id="questionText"
               name="questionText"
@@ -184,8 +183,8 @@ class QuestionEditor extends PureComponent {
               onChange={this.onChange}
               value={this.state.questionText}
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <FieldGroup
               id="questionPostText"
               name="questionPostText"
@@ -194,8 +193,8 @@ class QuestionEditor extends PureComponent {
               onChange={this.onChange}
               value={this.state.questionPostText}
             />
-          </FormGroup>
-          <FormGroup>
+          </div>
+          <div className="form-group">
             <label htmlFor="questionInputType">
               Question Type
             </label>
@@ -206,7 +205,7 @@ class QuestionEditor extends PureComponent {
               onSelect={this.onSelect}
               displayValue={this.props.questionInputType}
             />
-          </FormGroup>
+          </div>
         </div>
         }
         {
@@ -226,7 +225,7 @@ class QuestionEditor extends PureComponent {
         <ButtonBarEditor
           currentQuestionPanelIndex={currentQuestionPanelIndex}
         />
-        <ButtonGroup>
+        <div className="button-group">
           { this.props.currentQuestionIndex > -1 &&
             <DeleteQuestionButton
               currentQuestionSetIndex={this.props.currentQuestionSetIndex}
@@ -239,7 +238,7 @@ class QuestionEditor extends PureComponent {
             currentQuestionSetIndex={this.props.currentQuestionSetIndex}
           />
           }
-        </ButtonGroup>
+        </div>
         <br />
       </form>
     );

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
 import { deleteConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 
 class DeleteConditionalQuestionButton extends Component {
@@ -29,13 +28,14 @@ class DeleteConditionalQuestionButton extends Component {
 
   render() {
     return [
-      <Button
+      <button
+        type="button"
         className="btn btn-danger"
         title="delete this conditional question"
         data-toggle="modal"
         data-target="#deleteConditionalQuestion"
       >delete
-      </Button>,
+      </button>,
       <div className="modal fade" id="deleteConditionalQuestion" tabIndex="-1">
         <div className="modal-dialog bg-white">
           <div className="modal-header">

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fromJS } from 'immutable';
-import { Row, Col, Button, InputGroup, FormGroup } from 'react-bootstrap';
 import { addConditionalQuestion, updateNextQuestionTarget, resetNextQuestionTarget } from '../../actions/winterfellFormBuilderActions';
 import SelectInput from '../InputTypes/SelectInput';
 
@@ -64,14 +63,14 @@ class ConditionalPageEditor extends Component {
 
   render() {
     return (
-      <Row className="winterfell-form-builder-conditional-page alert-warning">
-        <Col xs={12}>
+      <div className="row winterfell-form-builder-conditional-page alert-warning">
+        <div className="col-xs-12">
           <h6>
             {`Option '${this.props.text}' Conditional Page:`}
           </h6>
           <p><i>Go to this page if this is option selected.</i></p>
-          <FormGroup>
-            <InputGroup>
+          <div className="form-group">
+            <div className="input-group">
               <SelectInput
                 id="questionTarget"
                 labelId="questionTarget"
@@ -80,18 +79,17 @@ class ConditionalPageEditor extends Component {
                 displayValue={this.initialTarget()}
                 value={this.state.questionTarget}
               />
-              <InputGroup.Button>
-                <Button
-                  label="find"
-                  className="btn btn-danger"
-                  onClick={this.onResetNextQuestionTarget}
-                >reset
-                </Button>
-              </InputGroup.Button>
-            </InputGroup>
-          </FormGroup>
-        </Col>
-      </Row>
+              <button
+                type="button"
+                label="find"
+                className="btn btn-danger"
+                onClick={this.onResetNextQuestionTarget}
+              >reset
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }

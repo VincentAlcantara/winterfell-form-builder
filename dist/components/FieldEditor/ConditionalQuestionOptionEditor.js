@@ -46,8 +46,6 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = require('react-redux');
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _DeleteQuestionOptionButton = require('../FormMenu/DeleteQuestionOptionButton');
 
 var _DeleteQuestionOptionButton2 = _interopRequireDefault(_DeleteQuestionOptionButton);
@@ -215,9 +213,10 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
             'div',
             { key: '' + ix },
             _react2.default.createElement(
-              _reactBootstrap.InputGroup,
-              { className: 'winterfell-form-builder-conditional-question' },
-              _react2.default.createElement(_reactBootstrap.FormControl, {
+              'div',
+              { className: 'input-group winterfell-form-builder-conditional-question' },
+              _react2.default.createElement('input', {
+                className: 'form-control',
                 type: 'text',
                 name: _this2.state.questionInputOptions[ix].text,
                 value: _this2.state.questionInputOptions[ix].text,
@@ -225,7 +224,8 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
                   return _this2.onOptionTextChange(event, ix);
                 }
               }),
-              _react2.default.createElement(_reactBootstrap.FormControl, {
+              _react2.default.createElement('input', {
+                className: 'form-control',
                 type: 'text',
                 name: _this2.state.questionInputOptions[ix].value,
                 value: _this2.state.questionInputOptions[ix].value,
@@ -234,7 +234,7 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
                 }
               }),
               _react2.default.createElement(
-                _reactBootstrap.InputGroup.Button,
+                InputGroup.Button,
                 null,
                 _react2.default.createElement(_DeleteQuestionOptionButton2.default, {
                   onDeleteQuestionOption: function onDeleteQuestionOption() {
@@ -243,10 +243,10 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
                 })
               ),
               _react2.default.createElement(
-                _reactBootstrap.InputGroup.Button,
+                InputGroup.Button,
                 null,
                 _react2.default.createElement(
-                  _reactBootstrap.Button,
+                  Button,
                   {
                     onClick: function onClick(event) {
                       return _this2.onShowConditonalClick(ix, event);
@@ -254,18 +254,18 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
                     className: 'btn btn-warning',
                     id: 'showConditionalPageButton'
                   },
-                  _this2.state.showConditionalPage && !_this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-share-alt', id: 'showConditionalPage' }),
-                  _this2.state.showConditionalPage && _this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, {
+                  _this2.state.showConditionalPage && !_this2.state.showConditionalPage[ix] && _react2.default.createElement(Glyphicon, { glyph: 'glyphicon glyphicon-share-alt', id: 'showConditionalPage' }),
+                  _this2.state.showConditionalPage && _this2.state.showConditionalPage[ix] && _react2.default.createElement(Glyphicon, {
                     glyph: 'glyphicon glyphicon glyphicon-minus-sign',
                     id: 'showConditionalPage'
                   })
                 )
               ),
               _react2.default.createElement(
-                _reactBootstrap.InputGroup.Button,
+                InputGroup.Button,
                 null,
                 _react2.default.createElement(
-                  _reactBootstrap.Button,
+                  Button,
                   {
                     id: 'showConditionalQuestionButton',
                     onClick: function onClick(event) {
@@ -273,11 +273,11 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
                     },
                     className: 'btn btn-dark'
                   },
-                  _this2.state.showConditionalQuestions && !_this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, {
+                  _this2.state.showConditionalQuestions && !_this2.state.showConditionalQuestions[ix] && _react2.default.createElement(Glyphicon, {
                     glyph: 'glyphicon glyphicon-menu-hamburger',
                     id: 'showConditionalQuestion'
                   }),
-                  _this2.state.showConditionalQuestions && _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, {
+                  _this2.state.showConditionalQuestions && _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(Glyphicon, {
                     glyph: 'glyphicon glyphicon glyphicon-minus-sign',
                     id: 'showConditionalQuestion'
                   })

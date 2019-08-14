@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup } from 'react-bootstrap';
 
 class CheckboxOptionsInput extends React.Component {
   constructor(props) {
@@ -31,7 +30,7 @@ class CheckboxOptionsInput extends React.Component {
             key={opt.value}
             className={this.props.classes.checkboxListItem}
           >
-            <FormGroup>
+            <div className="form-group">
               <label
                 className={this.props.classes.checkboxLabel}
                 htmlFor={`${this.props.name}-${opt.value}`}
@@ -51,7 +50,7 @@ class CheckboxOptionsInput extends React.Component {
                 />
                 {opt.text}
               </label>
-            </FormGroup>
+            </div>
           </li>),
         )}
       </ul>
