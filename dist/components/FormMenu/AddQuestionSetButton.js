@@ -224,10 +224,10 @@ AddQuestionSetButton.propTypes = {
   addQuestionSet: _propTypes2.default.func.isRequired,
   currentPanelId: _propTypes2.default.string
 };
+
 AddQuestionSetButton.defaultProps = {
   currentPanelId: ''
 };
-
 
 function mapStateToProps(state) {
   return {

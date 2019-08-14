@@ -11,20 +11,6 @@ import ConditionalQuestionOptionEditor from './ConditionalQuestionOptionEditor';
 import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
 class ConditionalQuestionEditor extends PureComponent {
-  static propTypes = {
-    conditionalQuestions: PropTypes.object,
-    currentQuestionSetIndex: PropTypes.number.isRequired,
-    parentOptionText: PropTypes.string.isRequired,
-    currentQuestionPanelIndex: PropTypes.number.isRequired,
-    saveConditionalQuestion: PropTypes.func.isRequired,
-    deleteConditionalQuestion: PropTypes.func.isRequired,
-    parentPath: PropTypes.array.isRequired,
-  }
-
-  static defaultProps = {
-    conditionalQuestions: fromJS([]),
-  }
-
   constructor(props) {
     super(props);
 
@@ -196,6 +182,20 @@ class ConditionalQuestionEditor extends PureComponent {
     );
   }
 }
+
+ConditionalQuestionEditor.propTypes = {
+  conditionalQuestions: PropTypes.object,
+  currentQuestionSetIndex: PropTypes.number.isRequired,
+  parentOptionText: PropTypes.string.isRequired,
+  currentQuestionPanelIndex: PropTypes.number.isRequired,
+  saveConditionalQuestion: PropTypes.func.isRequired,
+  deleteConditionalQuestion: PropTypes.func.isRequired,
+  parentPath: PropTypes.array.isRequired,
+};
+
+ConditionalQuestionEditor.defaultProps = {
+  conditionalQuestions: fromJS([]),
+};
 
 function mapStateToProps(state, ownProps) {
   return {

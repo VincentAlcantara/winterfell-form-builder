@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import { Button, Glyphicon } from 'react-bootstrap';
 
 class DeleteQuestionOptionButton extends Component {
-  static propTypes = {
-    onDeleteQuestionOption: PropTypes.func.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
@@ -60,6 +56,10 @@ class DeleteQuestionOptionButton extends Component {
     ];
   }
 }
+
+DeleteQuestionOptionButton.propTypes = {
+  onDeleteQuestionOption: PropTypes.func.isRequired,
+};
 
 export default DeleteQuestionOptionButton;
 

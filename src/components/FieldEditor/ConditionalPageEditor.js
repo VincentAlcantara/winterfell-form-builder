@@ -7,25 +7,6 @@ import { addConditionalQuestion, updateNextQuestionTarget, resetNextQuestionTarg
 import SelectInput from '../InputTypes/SelectInput';
 
 class ConditionalPageEditor extends Component {
-  static propTypes = {
-    updateNextQuestionTarget: PropTypes.func.isRequired,
-    resetNextQuestionTarget: PropTypes.func.isRequired,
-    questionOptionIndex: PropTypes.number.isRequired,
-    formPanels: PropTypes.object.isRequired,
-    currentQuestionPanelIndex: PropTypes.number.isRequired,
-    questionId: PropTypes.string.isRequired,
-    text: PropTypes.string,
-    value: PropTypes.string,
-    conditions: PropTypes.object,
-  }
-
-  static defaultProps = {
-    text: '',
-    value: '',
-    questionTarget: '',
-    conditions: fromJS([]),
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -72,6 +53,7 @@ class ConditionalPageEditor extends Component {
     return '';
   }
 
+  // eslint-disable-next-line no-undef
   nextButtonTargetOptions = () => this.props.formPanels &&
   this.props.formPanels.toJS().map((formPanel) => {
     const option = {};
@@ -113,6 +95,25 @@ class ConditionalPageEditor extends Component {
     );
   }
 }
+
+ConditionalPageEditor.propTypes = {
+  updateNextQuestionTarget: PropTypes.func.isRequired,
+  resetNextQuestionTarget: PropTypes.func.isRequired,
+  questionOptionIndex: PropTypes.number.isRequired,
+  formPanels: PropTypes.object.isRequired,
+  currentQuestionPanelIndex: PropTypes.number.isRequired,
+  questionId: PropTypes.string.isRequired,
+  text: PropTypes.string,
+  value: PropTypes.string,
+  conditions: PropTypes.object,
+};
+
+ConditionalPageEditor.defaultProps = {
+  text: '',
+  value: '',
+  questionTarget: '',
+  conditions: fromJS([]),
+};
 
 function mapStateToProps(state, ownProps) {
   return {

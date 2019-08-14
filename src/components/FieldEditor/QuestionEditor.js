@@ -26,38 +26,6 @@ import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 import QuestionOptionEditor from './QuestionOptionEditor';
 
 class QuestionEditor extends PureComponent {
-  static propTypes = {
-    editQuestionId: PropTypes.func.isRequired,
-    editQuestion: PropTypes.func.isRequired,
-    editQuestionText: PropTypes.func.isRequired,
-    editQuestionPostText: PropTypes.func.isRequired,
-    changeQuestionType: PropTypes.func.isRequired,
-    updateNextQuestionTarget: PropTypes.func.isRequired,
-    questionSetId: PropTypes.string.isRequired,
-    questionId: PropTypes.string,
-    question: PropTypes.string,
-    questionText: PropTypes.string,
-    questionPostText: PropTypes.string,
-    questionInputType: PropTypes.string,
-    questionInputOptions: PropTypes.object,
-    currentQuestionSetIndex: PropTypes.number.isRequired,
-    currentQuestionIndex: PropTypes.number.isRequired,
-    questionTarget: PropTypes.string,
-    questionTargetMatch: PropTypes.string,
-    currentQuestionPanelIndex: PropTypes.number.isRequired,
-  }
-
-  static defaultProps = {
-    questionId: '',
-    question: '',
-    questionText: '',
-    questionPostText: '',
-    questionInputType: '',
-    questionInputOptions: fromJS([]),
-    questionTarget: '',
-    questionTargetMatch: '',
-  }
-
   constructor(props) {
     super(props);
     const {
@@ -277,6 +245,38 @@ class QuestionEditor extends PureComponent {
     );
   }
 }
+
+QuestionEditor.propTypes = {
+  editQuestionId: PropTypes.func.isRequired,
+  editQuestion: PropTypes.func.isRequired,
+  editQuestionText: PropTypes.func.isRequired,
+  editQuestionPostText: PropTypes.func.isRequired,
+  changeQuestionType: PropTypes.func.isRequired,
+  updateNextQuestionTarget: PropTypes.func.isRequired,
+  questionSetId: PropTypes.string.isRequired,
+  questionId: PropTypes.string,
+  question: PropTypes.string,
+  questionText: PropTypes.string,
+  questionPostText: PropTypes.string,
+  questionInputType: PropTypes.string,
+  questionInputOptions: PropTypes.object,
+  currentQuestionSetIndex: PropTypes.number.isRequired,
+  currentQuestionIndex: PropTypes.number.isRequired,
+  questionTarget: PropTypes.string,
+  questionTargetMatch: PropTypes.string,
+  currentQuestionPanelIndex: PropTypes.number.isRequired,
+};
+
+QuestionEditor.defaultProps = {
+  questionId: '',
+  question: '',
+  questionText: '',
+  questionPostText: '',
+  questionInputType: '',
+  questionInputOptions: fromJS([]),
+  questionTarget: '',
+  questionTargetMatch: '',
+};
 
 function mapStateToProps(state, ownProps) {
   return {

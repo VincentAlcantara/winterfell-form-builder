@@ -7,10 +7,6 @@ import FieldGroup from '../InputTypes/FieldGroup';
 
 
 class AddPageButton extends Component {
-  static propTypes = {
-    addPage: PropTypes.func.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
@@ -19,7 +15,6 @@ class AddPageButton extends Component {
       panelHeader: '',
       panelText: '',
     };
-
     this.onChange = this.onChange.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
   }
@@ -29,6 +24,7 @@ class AddPageButton extends Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  // eslint-disable-next-line class-methods-use-this
   onClose(e) {
     e.preventDefault();
   }
@@ -46,7 +42,7 @@ class AddPageButton extends Component {
         data-target="#addPage"
         key="addPage"
         title="Add page"
-      ><i class="material-icons">note_add</i><span className="icon-menu">Page</span>
+      ><i className="material-icons">note_add</i><span className="icon-menu">Page</span>
       </Button>,
       <div className="modal fade" id="addPage" tabIndex="-1" key="addPageModal">
         <div className="modal-dialog bg-white">
@@ -105,6 +101,10 @@ class AddPageButton extends Component {
     ];
   }
 }
+
+AddPageButton.propTypes = {
+  addPage: PropTypes.func.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

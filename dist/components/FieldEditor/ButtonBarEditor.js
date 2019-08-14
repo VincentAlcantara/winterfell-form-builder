@@ -260,6 +260,7 @@ ButtonBarEditor.propTypes = {
   defaultGoToAction: _propTypes2.default.string,
   defaultGoToTarget: _propTypes2.default.string
 };
+
 ButtonBarEditor.defaultProps = {
   currentQuestionPanelIndex: 0,
   backButtonText: '',
@@ -269,7 +270,6 @@ ButtonBarEditor.defaultProps = {
   defaultGoToAction: '',
   defaultGoToTarget: ''
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

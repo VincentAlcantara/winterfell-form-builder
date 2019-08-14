@@ -6,18 +6,6 @@ import { Button } from 'react-bootstrap';
 import { goToPage, changeCurrentEditingField } from '../actions/winterfellFormBuilderActions';
 
 class TreeView extends Component {
-  static propTypes = {
-    questionPanels: PropTypes.object,
-    questionSets: PropTypes.object,
-    changeCurrentEditingField: PropTypes.func.isRequired,
-    goToPage: PropTypes.func.isRequired,
-  }
-
-  static defaultProps = {
-    questionPanels: null,
-    questionSets: null,
-  }
-
   constructor(props) {
     super(props);
 
@@ -105,6 +93,18 @@ class TreeView extends Component {
     );
   }
 }
+
+TreeView.propTypes = {
+  questionPanels: PropTypes.object,
+  questionSets: PropTypes.object,
+  changeCurrentEditingField: PropTypes.func.isRequired,
+  goToPage: PropTypes.func.isRequired,
+};
+
+TreeView.defaultProps = {
+  questionPanels: null,
+  questionSets: null,
+};
 
 function mapStateToProps(state, ownProps) {
   return {

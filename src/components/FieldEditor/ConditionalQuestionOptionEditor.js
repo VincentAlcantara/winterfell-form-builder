@@ -18,16 +18,6 @@ import {
 } from '../../actions/winterfellFormBuilderActions';
 
 class ConditionalQuestionOptionEditor extends PureComponent {
-  static propTypes = {
-    questionInputOptions: PropTypes.array.isRequired,
-    questionId: PropTypes.string.isRequired,
-    editQuestionOptionText: PropTypes.func.isRequired,
-    editQuestionOptionValue: PropTypes.func.isRequired,
-    addQuestionOption: PropTypes.func.isRequired,
-    deleteQuestionOption: PropTypes.func.isRequired,
-    path: PropTypes.array.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -126,7 +116,7 @@ class ConditionalQuestionOptionEditor extends PureComponent {
     copyConditionalQuestions.splice(index, 1);
     this.setState({ questionInputOptions: copyConditionalQuestions });
   }
-  onDeleteQuestionOption
+
   render() {
     const {
       questionInputOptions,
@@ -229,6 +219,16 @@ class ConditionalQuestionOptionEditor extends PureComponent {
     );
   }
 }
+
+ConditionalQuestionOptionEditor.propTypes = {
+  questionInputOptions: PropTypes.array.isRequired,
+  questionId: PropTypes.string.isRequired,
+  editQuestionOptionText: PropTypes.func.isRequired,
+  editQuestionOptionValue: PropTypes.func.isRequired,
+  addQuestionOption: PropTypes.func.isRequired,
+  deleteQuestionOption: PropTypes.func.isRequired,
+  path: PropTypes.array.isRequired,
+};
 
 export default connect(
   null,

@@ -183,11 +183,11 @@ TreeView.propTypes = {
   changeCurrentEditingField: _propTypes2.default.func.isRequired,
   goToPage: _propTypes2.default.func.isRequired
 };
+
 TreeView.defaultProps = {
   questionPanels: null,
   questionSets: null
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

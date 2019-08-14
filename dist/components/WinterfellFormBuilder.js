@@ -143,7 +143,7 @@ var WinterfellFormBuilder = function (_Component) {
                 _react2.default.createElement(
                   _reactBootstrap.Button,
                   {
-                    bsStyle: 'primary',
+                    variant: 'primary',
                     onClick: this.props.clearErrorMessage
                   },
                   'Ok'
@@ -204,7 +204,7 @@ var WinterfellFormBuilder = function (_Component) {
                 { className: 'breadcrumb' },
                 _react2.default.createElement(
                   'li',
-                  { 'class': 'breadcrumb-item' },
+                  { className: 'breadcrumb-item' },
                   _react2.default.createElement(
                     'a',
                     {
@@ -219,7 +219,7 @@ var WinterfellFormBuilder = function (_Component) {
                 ),
                 (currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets && _react2.default.createElement(
                   'li',
-                  { 'class': 'breadcrumb-item' },
+                  { className: 'breadcrumb-item' },
                   _react2.default.createElement(
                     'a',
                     {
@@ -234,7 +234,7 @@ var WinterfellFormBuilder = function (_Component) {
                 ),
                 currentEditingField === 'question' && questionSets && _react2.default.createElement(
                   'li',
-                  { 'class': 'breadcrumb-item' },
+                  { className: 'breadcrumb-item' },
                   _react2.default.createElement(
                     'a',
                     {
@@ -268,7 +268,7 @@ var WinterfellFormBuilder = function (_Component) {
             }),
             (!this.props.schema || this.props.schema.size === 0) && _react2.default.createElement(
               _reactBootstrap.Alert,
-              { bsStyle: 'info' },
+              { variant: 'info' },
               'No form loaded.  Click on \'new\' to create a new form, or \'upload\' to load an existing form.'
             )
           )
@@ -290,7 +290,7 @@ var WinterfellFormBuilder = function (_Component) {
             }),
             currentPanelId === 'Select Page' && _react2.default.createElement(
               _reactBootstrap.Alert,
-              { bsStyle: 'info' },
+              { variant: 'info' },
               'No page selected to preview.  Select a page from the dropdown above.'
             )
           )
@@ -315,6 +315,7 @@ WinterfellFormBuilder.propTypes = {
   clearErrorMessage: _propTypes2.default.func.isRequired,
   errorMessage: _propTypes2.default.string
 };
+
 WinterfellFormBuilder.defaultProps = {
   title: '',
   schema: null,
@@ -328,7 +329,6 @@ WinterfellFormBuilder.defaultProps = {
   currentEditingField: 'page',
   errorMessage: ''
 };
-
 
 function mapStateToProps(state) {
   return {

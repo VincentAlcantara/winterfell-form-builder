@@ -10,30 +10,6 @@ import SelectInput from '../InputTypes/SelectInput';
 import FieldGroup from '../InputTypes/FieldGroup';
 
 class ButtonBarEditor extends PureComponent {
-  static propTypes = {
-    editNextButtonText: PropTypes.func.isRequired,
-    backButtonDisabled: PropTypes.bool,
-    editBackButtonText: PropTypes.func.isRequired,
-    disableBackButton: PropTypes.func.isRequired,
-    onSelectNextButtonAction: PropTypes.func.isRequired,
-    onSelectNextButtonTarget: PropTypes.func.isRequired,
-    backButtonText: PropTypes.string,
-    nextButtonText: PropTypes.string,
-    formPanels: PropTypes.object,
-    currentQuestionPanelIndex: PropTypes.number.isRequired,
-    defaultGoToAction: PropTypes.string,
-    defaultGoToTarget: PropTypes.string,
-  }
-
-  static defaultProps = {
-    currentQuestionPanelIndex: 0,
-    backButtonText: '',
-    backButtonDisabled: false,
-    nextButtonText: '',
-    formPanels: fromJS({}),
-    defaultGoToAction: '',
-    defaultGoToTarget: '',
-  }
   constructor(props) {
     super(props);
     const { backButtonText, nextButtonText, defaultGoToAction, defaultGoToTarget } = props;
@@ -186,6 +162,31 @@ class ButtonBarEditor extends PureComponent {
     );
   }
 }
+
+ButtonBarEditor.propTypes = {
+  editNextButtonText: PropTypes.func.isRequired,
+  backButtonDisabled: PropTypes.bool,
+  editBackButtonText: PropTypes.func.isRequired,
+  disableBackButton: PropTypes.func.isRequired,
+  onSelectNextButtonAction: PropTypes.func.isRequired,
+  onSelectNextButtonTarget: PropTypes.func.isRequired,
+  backButtonText: PropTypes.string,
+  nextButtonText: PropTypes.string,
+  formPanels: PropTypes.object,
+  currentQuestionPanelIndex: PropTypes.number.isRequired,
+  defaultGoToAction: PropTypes.string,
+  defaultGoToTarget: PropTypes.string,
+};
+
+ButtonBarEditor.defaultProps = {
+  currentQuestionPanelIndex: 0,
+  backButtonText: '',
+  backButtonDisabled: false,
+  nextButtonText: '',
+  formPanels: fromJS({}),
+  defaultGoToAction: '',
+  defaultGoToTarget: '',
+};
 
 function mapStateToProps(state, ownProps) {
   return {

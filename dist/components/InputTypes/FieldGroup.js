@@ -30,7 +30,7 @@ function FieldGroup(props) {
     _reactBootstrap.FormGroup,
     { controlId: id },
     _react2.default.createElement(
-      _reactBootstrap.ControlLabel,
+      _reactBootstrap.FormLabel,
       null,
       label
     ),

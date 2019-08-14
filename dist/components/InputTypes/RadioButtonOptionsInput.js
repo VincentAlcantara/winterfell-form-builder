@@ -133,6 +133,7 @@ RadioButtonOptionsInput.propTypes = {
   labelId: _propTypes2.default.string,
   required: _propTypes2.default.bool
 };
+
 RadioButtonOptionsInput.defaultProps = {
   classes: {
     checkboxList: 'clean-list',
@@ -146,6 +147,7 @@ RadioButtonOptionsInput.defaultProps = {
   onBlur: function onBlur() {},
   required: false
 };
+
 var _default = RadioButtonOptionsInput;
 exports.default = _default;
 ;

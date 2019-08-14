@@ -18,18 +18,6 @@ import {
 } from '../../actions/winterfellFormBuilderActions';
 
 class QuestionOptionEditor extends PureComponent {
-  static propTypes = {
-    questionInputOptions: PropTypes.object.isRequired,
-    questionId: PropTypes.string.isRequired,
-    currentQuestionPanelIndex: PropTypes.number.isRequired,
-    currentQuestionSetIndex: PropTypes.number.isRequired,
-    currentQuestionIndex: PropTypes.number.isRequired,
-    editQuestionOptionText: PropTypes.func.isRequired,
-    editQuestionOptionValue: PropTypes.func.isRequired,
-    deleteQuestionOption: PropTypes.func.isRequired,
-    addQuestionOption: PropTypes.func.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -237,6 +225,18 @@ class QuestionOptionEditor extends PureComponent {
     );
   }
 }
+
+QuestionOptionEditor.propTypes = {
+  questionInputOptions: PropTypes.object.isRequired,
+  questionId: PropTypes.string.isRequired,
+  currentQuestionPanelIndex: PropTypes.number.isRequired,
+  currentQuestionSetIndex: PropTypes.number.isRequired,
+  currentQuestionIndex: PropTypes.number.isRequired,
+  editQuestionOptionText: PropTypes.func.isRequired,
+  editQuestionOptionValue: PropTypes.func.isRequired,
+  deleteQuestionOption: PropTypes.func.isRequired,
+  addQuestionOption: PropTypes.func.isRequired,
+};
 
 export default connect(
   null,

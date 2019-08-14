@@ -8,11 +8,6 @@ import SelectInput from '../InputTypes/SelectInput';
 import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
 class AddConditionalQuestionButton extends Component {
-  static propTypes = {
-    addConditionalQuestion: PropTypes.func.isRequired,
-    path: PropTypes.array.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
@@ -122,6 +117,11 @@ class AddConditionalQuestionButton extends Component {
     ];
   }
 }
+
+AddConditionalQuestionButton.propTypes = {
+  addConditionalQuestion: PropTypes.func.isRequired,
+  path: PropTypes.array.isRequired,
+};
 
 function mapStateToProps(state, ownProps) {
   return {

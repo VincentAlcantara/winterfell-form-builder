@@ -5,11 +5,6 @@ import { Button } from 'react-bootstrap';
 import { deleteConditionalQuestion } from '../../actions/winterfellFormBuilderActions';
 
 class DeleteConditionalQuestionButton extends Component {
-  static propTypes = {
-    deleteConditionalQuestion: PropTypes.func.isRequired,
-    path: PropTypes.array.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
@@ -65,6 +60,10 @@ class DeleteConditionalQuestionButton extends Component {
   }
 }
 
+DeleteConditionalQuestionButton.propTypes = {
+  deleteConditionalQuestion: PropTypes.func.isRequired,
+  path: PropTypes.array.isRequired,
+};
 
 export default connect(null, { deleteConditionalQuestion })(DeleteConditionalQuestionButton);
 

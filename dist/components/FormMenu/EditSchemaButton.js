@@ -84,7 +84,7 @@ var EditSchemaButton = function (_Component) {
         },
         _react2.default.createElement(
           'i',
-          { 'class': 'material-icons' },
+          { className: 'material-icons' },
           'view_agenda'
         ),
         _react2.default.createElement(
@@ -156,10 +156,10 @@ var EditSchemaButton = function (_Component) {
 EditSchemaButton.propTypes = {
   updateForm: _propTypes2.default.func.isRequired
 };
+
 EditSchemaButton.defaultProps = {
   schema: null
 };
-
 
 function mapStateToProps(state) {
   return {

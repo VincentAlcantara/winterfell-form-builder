@@ -115,6 +115,9 @@ var ConditionalPageEditor = function (_Component) {
       }
       return '';
     }
+
+    // eslint-disable-next-line no-undef
+
   }, {
     key: '__nextButtonTargetOptions__REACT_HOT_LOADER__',
     value: function __nextButtonTargetOptions__REACT_HOT_LOADER__() {
@@ -195,13 +198,13 @@ ConditionalPageEditor.propTypes = {
   value: _propTypes2.default.string,
   conditions: _propTypes2.default.object
 };
+
 ConditionalPageEditor.defaultProps = {
   text: '',
   value: '',
   questionTarget: '',
   conditions: (0, _immutable.fromJS)([])
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

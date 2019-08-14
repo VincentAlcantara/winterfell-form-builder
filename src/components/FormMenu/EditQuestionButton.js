@@ -7,19 +7,6 @@ import FieldGroup from '../InputTypes/FieldGroup';
 
 
 class updateQuestionButton extends Component {
-  static propTypes = {
-    updateQuestion: PropTypes.func.isRequired,
-    questionSetIndex: PropTypes.number.isRequired,
-    questionIndex: PropTypes.number.isRequired,
-    question: PropTypes.string.isRequired,
-    questionText: PropTypes.string,
-    questionType: PropTypes.string.isRequired,
-  };
-
-  static defaultProps = {
-    questionText: '',
-  };
-
   constructor(props) {
     super(props);
     const { question, questionText, questionType } = props;
@@ -110,6 +97,19 @@ class updateQuestionButton extends Component {
     ];
   }
 }
+
+updateQuestionButton.propTypes = {
+  updateQuestion: PropTypes.func.isRequired,
+  questionSetIndex: PropTypes.number.isRequired,
+  questionIndex: PropTypes.number.isRequired,
+  question: PropTypes.string.isRequired,
+  questionText: PropTypes.string,
+  questionType: PropTypes.string.isRequired,
+};
+
+updateQuestionButton.defaultProps = {
+  questionText: '',
+};
 
 function mapStateToProps(state, ownProps) {
   return {

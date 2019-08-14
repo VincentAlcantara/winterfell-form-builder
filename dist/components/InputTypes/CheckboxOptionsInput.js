@@ -47,7 +47,6 @@ var CheckboxOptionsInput = function (_React$Component) {
     _this.state = {
       value: _this.props.value.length > 0 ? _this.props.value : []
     };
-
     _this.handleChange = _this.handleChange.bind(_this);
     return _this;
   }
@@ -124,6 +123,7 @@ CheckboxOptionsInput.propTypes = {
   labelId: _propTypes2.default.string,
   required: _propTypes2.default.bool
 };
+
 CheckboxOptionsInput.defaultProps = {
   classes: {
     checkboxList: 'clean-list',
@@ -136,6 +136,7 @@ CheckboxOptionsInput.defaultProps = {
   onChange: function onChange() {},
   required: false
 };
+
 var _default = CheckboxOptionsInput;
 exports.default = _default;
 ;

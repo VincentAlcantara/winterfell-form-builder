@@ -7,18 +7,7 @@ import FieldGroup from '../InputTypes/FieldGroup';
 import SelectInput from '../InputTypes/SelectInput';
 import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
-
 class AddQuestionButton extends Component {
-  static propTypes = {
-    addQuestion: PropTypes.func.isRequired,
-    questionSetId: PropTypes.string,
-    currentQuestionSetIndex: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    questionSetId: '',
-  };
-
   constructor(props) {
     super(props);
 
@@ -131,6 +120,16 @@ class AddQuestionButton extends Component {
     ];
   }
 }
+
+AddQuestionButton.propTypes = {
+  addQuestion: PropTypes.func.isRequired,
+  questionSetId: PropTypes.string,
+  currentQuestionSetIndex: PropTypes.number.isRequired,
+};
+
+AddQuestionButton.defaultProps = {
+  questionSetId: '',
+};
 
 export default connect(null, { addQuestion })(AddQuestionButton);
 

@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { FormGroup, FormLabel, FormControl } from 'react-bootstrap';
 
 function FieldGroup(props) {
   const { id, label, value } = props;
 
   return (
     <FormGroup controlId={id}>
-      <ControlLabel>{label}</ControlLabel>
+      <FormLabel>{label}</FormLabel>
       <FormControl value={value} {...props} autoComplete={id} />
     </FormGroup>
   );

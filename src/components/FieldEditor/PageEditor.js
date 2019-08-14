@@ -1,40 +1,13 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, InputGroup, FormControl, Button } from 'react-bootstrap';
+import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import { fromJS } from 'immutable';
-
 import { editPageId, editPageHeader, editPageText, changeCurrentEditingField, updateErrorMessage, clearErrorMessage } from '../../actions/winterfellFormBuilderActions';
 import { AddQuestionSetButton } from '../FormMenu';
 import FieldGroup from '../InputTypes/FieldGroup';
 
 class PageEditor extends PureComponent {
-  static propTypes = {
-    editPageId: PropTypes.func.isRequired,
-    editPageHeader: PropTypes.func.isRequired,
-    editPageText: PropTypes.func.isRequired,
-    updateErrorMessage: PropTypes.func.isRequired,
-    changeCurrentEditingField: PropTypes.func.isRequired,
-    title: PropTypes.string,
-    panelId: PropTypes.string,
-    panelHeader: PropTypes.string,
-    panelText: PropTypes.string,
-    currentQuestionSets: PropTypes.object,
-    questionSets: PropTypes.object,
-    currentQuestionPanelIndex: PropTypes.number.isRequired,
-    formPanels: PropTypes.object.isRequired,
-  }
-
-  static defaultProps = {
-    currentQuestionPanelIndex: 0,
-    title: '',
-    panelId: '',
-    panelHeader: '',
-    panelText: '',
-    questionSets: fromJS({}),
-    currentQuestionSets: fromJS({}),
-    formPanels: fromJS({}),
-  }
   constructor(props) {
     super(props);
     const { title, panelId, panelHeader, panelText } = props;
@@ -148,7 +121,7 @@ class PageEditor extends PureComponent {
             { questionSetsArray.map((questionSet, index) => (
               <Button
                 key={`questionSet-${index}`}
-                bsStyle="link"
+                variant="link"
                 onClick={() => this.onClick(questionSet.questionSetId)}
               >{questionSet.questionSetId}
               </Button>
@@ -161,6 +134,33 @@ class PageEditor extends PureComponent {
     );
   }
 }
+
+PageEditor.propTypes = {
+  editPageId: PropTypes.func.isRequired,
+  editPageHeader: PropTypes.func.isRequired,
+  editPageText: PropTypes.func.isRequired,
+  updateErrorMessage: PropTypes.func.isRequired,
+  changeCurrentEditingField: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  panelId: PropTypes.string,
+  panelHeader: PropTypes.string,
+  panelText: PropTypes.string,
+  currentQuestionSets: PropTypes.object,
+  questionSets: PropTypes.object,
+  currentQuestionPanelIndex: PropTypes.number.isRequired,
+  formPanels: PropTypes.object.isRequired,
+};
+
+PageEditor.defaultProps = {
+  currentQuestionPanelIndex: 0,
+  title: '',
+  panelId: '',
+  panelHeader: '',
+  panelText: '',
+  questionSets: fromJS({}),
+  currentQuestionSets: fromJS({}),
+  formPanels: fromJS({}),
+};
 
 function mapStateToProps(state, ownProps) {
   return {

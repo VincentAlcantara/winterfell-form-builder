@@ -12,8 +12,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var PageSortButton = function PageSortButton(props) {
@@ -26,7 +24,7 @@ var PageSortButton = function PageSortButton(props) {
     },
     _react2.default.createElement(
       'i',
-      { 'class': 'material-icons' },
+      { className: 'material-icons' },
       'swap_vert'
     ),
     _react2.default.createElement(

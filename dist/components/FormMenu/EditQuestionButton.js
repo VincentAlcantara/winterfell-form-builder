@@ -186,10 +186,10 @@ updateQuestionButton.propTypes = {
   questionText: _propTypes2.default.string,
   questionType: _propTypes2.default.string.isRequired
 };
+
 updateQuestionButton.defaultProps = {
   questionText: ''
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

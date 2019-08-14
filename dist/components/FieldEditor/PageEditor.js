@@ -227,7 +227,7 @@ var PageEditor = function (_PureComponent) {
                 _reactBootstrap.Button,
                 {
                   key: 'questionSet-' + index,
-                  bsStyle: 'link',
+                  variant: 'link',
                   onClick: function onClick() {
                     return _this3.onClick(questionSet.questionSetId);
                   }
@@ -258,6 +258,7 @@ PageEditor.propTypes = {
   currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
   formPanels: _propTypes2.default.object.isRequired
 };
+
 PageEditor.defaultProps = {
   currentQuestionPanelIndex: 0,
   title: '',
@@ -268,7 +269,6 @@ PageEditor.defaultProps = {
   currentQuestionSets: (0, _immutable.fromJS)({}),
   formPanels: (0, _immutable.fromJS)({})
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {
