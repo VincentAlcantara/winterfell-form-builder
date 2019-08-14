@@ -14,33 +14,29 @@ class EditFormTitleButton extends Component {
     super(props);
 
     this.state = {
-      showModal: false,
-      formTitle: '',
+      formTitle: props.title,
     };
 
     this.onChange = this.onChange.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.state = {
+      formTitle: nextProps.title,
+    };
+  }
   onChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  onClose(e) {
-    e.preventDefault();
-    this.setState({ showModal: true });
-  }
-
   onFormUpdate(e) {
     e.preventDefault();
     this.props.editFormTitle(this.state.formTitle);
-    this.setState({ showModal: false });
   }
 
   render() {
-    const { title } = this.props;
-
     return [
       <button
         className="btn btn-block btn-dark"
@@ -63,7 +59,6 @@ class EditFormTitleButton extends Component {
                   name="formTitle"
                   label="Enter title of the form"
                   onChange={this.onChange}
-                  placeholder={title}
                   value={this.state.formTitle}
                 />
               </form>
