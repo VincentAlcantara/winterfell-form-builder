@@ -32,12 +32,12 @@ class AddPageButton extends Component {
     return [
       <button
         type="button"
-        className="btn btn-block btn-light"
+        className="btn btn-block btn-secondary"
         data-toggle="modal"
         data-target="#addPage"
         key="addPage"
         title="Add page"
-      ><i className="material-icons">note_add</i><span className="icon-menu">Page</span>
+      >Add Page
       </button>,
       <div className="modal fade" id="addPage" tabIndex="-1" key="addPageModal">
         <div className="modal-dialog bg-white">

@@ -58,22 +58,15 @@ class PageEditor extends PureComponent {
 
   render() {
     const questionSetsArray = this.props.currentQuestionSets.toJS();
-    return (
+    return [
+      <h3>Question Editor</h3>,
       <form>
-        <div className="form-group">
-          <label htmlFor="filename">
-            Filename
-          </label>
-          <p disabled id="filename" >
-            {this.props.title}
-          </p>
-        </div>
         <div className="form-group">
           <label htmlFor="panelId">
               Page ID
           </label>
           <div className="input-group">
-            <div
+            <input
               className="form-control"
               id="panelId"
               name="panelId"
@@ -131,8 +124,8 @@ class PageEditor extends PureComponent {
           </div>
         </div>
         }
-      </form>
-    );
+      </form>,
+    ];
   }
 }
 

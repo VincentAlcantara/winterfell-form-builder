@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { goToPage, changeCurrentEditingField, clearErrorMessage } from '../actions/winterfellFormBuilderActions';
 import Pagination from './Pagination';
 import Previewer from './Previewer';
+import TreeView from './TreeView';
 import {
   CreateFormButton,
   EditFormTitleButton,
@@ -37,8 +38,8 @@ class WinterfellFormBuilder extends Component {
       currentQuestionPanelIndex,
       currentQuestionSetIndex,
       currentQuestionIndex,
-      questionSets,
       errorMessage,
+      title,
     } = this.props;
 
     return (
@@ -82,90 +83,62 @@ class WinterfellFormBuilder extends Component {
               <SaveFormButton />
               <EditSchemaButton />
               <EditFormTitleButton />
+            </div>
+          </div>
+        </div>
+        {(!this.props.schema || this.props.schema.size === 0) ?
+          (<div className="alert alert-info" role="alert">
+            No form loaded.  Click on <b>Create</b> to create a new form,
+                or <b>Import</b> to load an existing form (.json).
+              </div>)
+          : (
 
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-4 text-left">
-            <div className="btn-group">
-              {
-                formPanels &&
-                <Pagination
-                  formPanels={formPanels.map(panel => panel.get('panelId'))}
-                  currentPanelId={currentPanelId}
-                  onClick={this.props.goToPage}
-                />
-              }
-              <AddPageButton />
-              <PageSortButton
-                onClick={() => this.props.changeCurrentEditingField('pageSort')}
-              />
-            </div>
-          </div>
-          <div className="col-8">
-            <nav aria-label="breadcrumb">
-              <ol className="breadcrumb">
-                <li className="breadcrumb-item">
-                  <a
-                    href="#"
-                    active={`${currentEditingField === 'page'}`}
-                    onClick={() => this.props.changeCurrentEditingField('page')}
-                  >
-                    {currentPanelId !== 'Select Page' && currentPanelId}
-                  </a>
-                </li>
-                {(currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets &&
-                  <li className="breadcrumb-item">
-                    <a
-                      href=""
-                      active={`${currentEditingField === 'questionSet'}`}
-                      onClick={() => this.props.changeCurrentEditingField('questionSet', currentQuestionSetIndex)}
-                    >{questionSets.getIn([currentQuestionSetIndex, 'questionSetId'])}
-                    </a>
-                  </li>
+            <div className="row winterfell-form-builder-editor">
+              <div className="col-4">
+                <h3>Page Editor</h3>
+
+                <div className="btn-group">
+
+                  <AddPageButton />
+                  <PageSortButton
+                    onClick={() => this.props.changeCurrentEditingField('pageSort')}
+                  />
+                </div>
+                <br />
+
+                <TreeView id="tree-view" />
+                <br />
+                {
+                    formPanels &&
+                    <Pagination
+                      formPanels={formPanels.map(panel => panel.get('panelId'))}
+                      currentPanelId={currentPanelId}
+                      onClick={this.props.goToPage}
+                    />
+                  }
+                {currentQuestionPanelIndex >= 0 &&
+                  <FieldEditor
+                    currentQuestionPanelIndex={currentQuestionPanelIndex}
+                    currentEditingField={currentEditingField}
+                    currentQuestionSetIndex={currentQuestionSetIndex}
+                    currentQuestionIndex={currentQuestionIndex}
+                  />
                 }
-                {(currentEditingField === 'question') && questionSets &&
-                  <li className="breadcrumb-item">
-                    <a
-                      active={`${currentEditingField === 'question'}`}
-                    >
-                      {questionSets.getIn([currentQuestionSetIndex, 'questions', currentQuestionIndex, 'questionId'])}
-                    </a>
-                  </li>
-                }
-              </ol>
-            </nav>
-          </div>
-        </div>
-        <div className="row winterfell-form-builder-editor">
-          <div className="col-4">
-            {currentQuestionPanelIndex >= 0 &&
-              <FieldEditor
-                currentQuestionPanelIndex={currentQuestionPanelIndex}
-                currentEditingField={currentEditingField}
-                currentQuestionSetIndex={currentQuestionSetIndex}
-                currentQuestionIndex={currentQuestionIndex}
-              />
-            }
-          </div>
-          <div className="col-8 winterfell-form-builder-page-editor">
-            {(this.props.schema && currentQuestionPanelIndex >= 0) &&
-              <FieldSelector
-                currentQuestionPanelIndex={currentQuestionPanelIndex}
-              />
-            }
-            {(!this.props.schema || this.props.schema.size === 0) &&
-              <div className="alert alert-info" role="alert">
-                No form loaded.  Click on &#39;new&#39; to create a new form,
-                or &#39;upload&#39; to load an existing form.
               </div>
-            }
-          </div>
-        </div>
+              <div className="col-8 winterfell-form-builder-page-editor">
+                <h3>{title}</h3>
+                {(this.props.schema && currentQuestionPanelIndex >= 0) &&
+                  <FieldSelector
+                    currentQuestionPanelIndex={currentQuestionPanelIndex}
+                  />
+                }
+
+              </div>
+            </div>)}
+
         <div className="row winterfell-form-builder-previewer">
           <div className="col-12 mb-5 py-3">
-            <h2>Form Preview:</h2>
+            <h3>Winterfell Form Preview:</h3>
             {
               schema &&
               <Previewer
@@ -182,7 +155,6 @@ class WinterfellFormBuilder extends Component {
           </div>
         </div>
       </div>
-
     );
   }
 }
@@ -194,12 +166,12 @@ WinterfellFormBuilder.propTypes = {
   currentQuestionSetIndex: PropTypes.number,
   currentQuestionIndex: PropTypes.number,
   formPanels: PropTypes.object,
-  questionSets: PropTypes.object,
   goToPage: PropTypes.func.isRequired,
   currentEditingField: PropTypes.string,
   changeCurrentEditingField: PropTypes.func.isRequired,
   clearErrorMessage: PropTypes.func.isRequired,
   errorMessage: PropTypes.string,
+  title: PropTypes.string,
 };
 
 WinterfellFormBuilder.defaultProps = {

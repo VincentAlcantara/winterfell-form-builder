@@ -49,7 +49,8 @@ class PageSortSelector extends Component {
     ),
     );
     return [
-      <label htmlFor="sortableList" key="sortPagesLabel">Pages - Drag and Drop to Sort</label>,
+      <h3 htmlFor="sortableList" key="sortPagesLabel">Page Sort</h3>,
+      <p>To sort, drag and drop the pages below to the desired order.</p>,
       <SortableList key="sortingPages" items={this.state.items} onSortEnd={this.onSortEnd} />,
     ];
   }
