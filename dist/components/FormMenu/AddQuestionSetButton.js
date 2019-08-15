@@ -111,7 +111,8 @@ var AddQuestionSetButton = function (_Component) {
           disabled: !this.props.currentPanelId || this.props.currentPanelId === 'Select Page',
           'data-toggle': 'modal',
           'data-target': '#addQuestionSet',
-          key: 'addQuestionSet'
+          key: 'addQuestionSet',
+          tittle: 'Add question'
         },
         'Add question set'
       ), _react2.default.createElement(
@@ -122,94 +123,98 @@ var AddQuestionSetButton = function (_Component) {
           { className: 'modal-dialog bg-white' },
           _react2.default.createElement(
             'div',
-            { className: 'modal-header' },
+            { className: 'modal-content' },
             _react2.default.createElement(
               'div',
-              { className: 'modal-title' },
-              'Add a new question set'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'modal-body' },
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'questionSetId',
-              name: 'questionSetId',
-              label: 'Question Set ID',
-              onChange: this.onChange,
-              placeholder: '(optional)',
-              value: this.state.questionSetId,
-              key: 'questionSetId'
-            }),
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'questionSetHeader',
-              name: 'questionSetHeader',
-              label: 'Question Set Title',
-              onChange: this.onChange,
-              placeholder: '',
-              value: this.state.questionSetHeader,
-              key: 'questionSetHeader'
-            }),
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'questionSetText',
-              name: 'questionSetText',
-              label: 'Enter Question Set Description',
-              onChange: this.onChange,
-              placeholder: '',
-              value: this.state.questionSetText,
-              key: 'questionSetText'
-            }),
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'question',
-              name: 'question',
-              label: 'Enter Question',
-              onChange: this.onChange,
-              placeholder: '',
-              value: this.state.question,
-              key: 'question'
-            }),
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'questionText',
-              name: 'questionText',
-              label: 'Enter Question Text',
-              onChange: this.onChange,
-              placeholder: '',
-              value: this.state.questionText,
-              key: 'questionText'
-            }),
-            _react2.default.createElement(
-              'label',
-              { htmlFor: 'questionType' },
-              'Select Question Type'
-            ),
-            _react2.default.createElement(_SelectInput2.default, {
-              id: 'questionType',
-              labelId: 'questionType',
-              options: _constants.INPUT_TYPE_OPTIONS,
-              onSelect: this.onSelect,
-              value: this.state.questionType,
-              key: 'questionType'
-            })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'modal-footer' },
-            _react2.default.createElement(
-              'button',
-              {
-                className: 'btn btn-danger',
-                'data-dismiss': 'modal'
-              },
-              'Cancel'
+              { className: 'modal-header' },
+              _react2.default.createElement(
+                'div',
+                { className: 'modal-title' },
+                'Add a new question set'
+              )
             ),
             _react2.default.createElement(
-              'button',
-              {
-                className: 'btn btn-dark',
-                onClick: this.onFormUpdate,
-                'data-dismiss': 'modal'
-              },
-              'Save changes'
+              'div',
+              { className: 'modal-body' },
+              _react2.default.createElement(_FieldGroup2.default, {
+                id: 'questionSetId',
+                name: 'questionSetId',
+                label: 'Question Set ID',
+                onChange: this.onChange,
+                placeholder: '(optional)',
+                value: this.state.questionSetId,
+                key: 'questionSetId'
+              }),
+              _react2.default.createElement(_FieldGroup2.default, {
+                id: 'questionSetHeader',
+                name: 'questionSetHeader',
+                label: 'Question Set Title',
+                onChange: this.onChange,
+                placeholder: '',
+                value: this.state.questionSetHeader,
+                key: 'questionSetHeader'
+              }),
+              _react2.default.createElement(_FieldGroup2.default, {
+                id: 'questionSetText',
+                name: 'questionSetText',
+                label: 'Enter Question Set Description',
+                onChange: this.onChange,
+                placeholder: '',
+                value: this.state.questionSetText,
+                key: 'questionSetText'
+              }),
+              _react2.default.createElement(_FieldGroup2.default, {
+                id: 'question',
+                name: 'question',
+                label: 'Enter Question',
+                onChange: this.onChange,
+                placeholder: '',
+                value: this.state.question,
+                key: 'question'
+              }),
+              _react2.default.createElement(_FieldGroup2.default, {
+                id: 'questionText',
+                name: 'questionText',
+                label: 'Enter Question Text',
+                onChange: this.onChange,
+                placeholder: '',
+                value: this.state.questionText,
+                key: 'questionText'
+              }),
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'questionType' },
+                'Select Question Type'
+              ),
+              _react2.default.createElement(_SelectInput2.default, {
+                id: 'questionType',
+                labelId: 'questionType',
+                options: _constants.INPUT_TYPE_OPTIONS,
+                onSelect: this.onSelect,
+                value: this.state.questionType,
+                key: 'questionType'
+              })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'modal-footer' },
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-danger',
+                  'data-dismiss': 'modal'
+                },
+                'Cancel'
+              ),
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-dark',
+                  onClick: this.onFormUpdate,
+                  'data-dismiss': 'modal'
+                },
+                'Save changes'
+              )
             )
           )
         )

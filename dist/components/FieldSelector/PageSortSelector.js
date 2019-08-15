@@ -113,9 +113,13 @@ var PageSortSelector = function (_Component) {
         );
       });
       return [_react2.default.createElement(
-        'label',
+        'h3',
         { htmlFor: 'sortableList', key: 'sortPagesLabel' },
-        'Pages - Drag and Drop to Sort'
+        'Page Sort'
+      ), _react2.default.createElement(
+        'p',
+        null,
+        'To sort, drag and drop the pages below to the desired order.'
       ), _react2.default.createElement(SortableList, { key: 'sortingPages', items: this.state.items, onSortEnd: this.onSortEnd })];
     }
   }]);

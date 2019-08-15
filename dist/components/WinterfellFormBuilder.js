@@ -44,6 +44,10 @@ var _Previewer = require('./Previewer');
 
 var _Previewer2 = _interopRequireDefault(_Previewer);
 
+var _TreeView = require('./TreeView');
+
+var _TreeView2 = _interopRequireDefault(_TreeView);
+
 var _FormMenu = require('./FormMenu');
 
 var _FieldSelector = require('./FieldSelector');
@@ -87,8 +91,8 @@ var WinterfellFormBuilder = function (_Component) {
           currentQuestionPanelIndex = _props.currentQuestionPanelIndex,
           currentQuestionSetIndex = _props.currentQuestionSetIndex,
           currentQuestionIndex = _props.currentQuestionIndex,
-          questionSets = _props.questionSets,
-          errorMessage = _props.errorMessage;
+          errorMessage = _props.errorMessage,
+          title = _props.title;
 
 
       return _react2.default.createElement(
@@ -168,90 +172,53 @@ var WinterfellFormBuilder = function (_Component) {
             )
           )
         ),
-        _react2.default.createElement(
+        !this.props.schema || this.props.schema.size === 0 ? _react2.default.createElement(
           'div',
-          { className: 'row' },
+          { className: 'alert alert-info', role: 'alert' },
+          'No form loaded.  Click on ',
+          _react2.default.createElement(
+            'b',
+            null,
+            'Create'
+          ),
+          ' to create a new form, or ',
+          _react2.default.createElement(
+            'b',
+            null,
+            'Import'
+          ),
+          ' to load an existing form (.json).'
+        ) : _react2.default.createElement(
+          'div',
+          { className: 'row winterfell-form-builder-editor' },
           _react2.default.createElement(
             'div',
-            { className: 'col-4 text-left' },
+            { className: 'col-4' },
+            _react2.default.createElement(
+              'h3',
+              null,
+              'Page Editor'
+            ),
             _react2.default.createElement(
               'div',
               { className: 'btn-group' },
-              formPanels && _react2.default.createElement(_Pagination2.default, {
-                formPanels: formPanels.map(function (panel) {
-                  return panel.get('panelId');
-                }),
-                currentPanelId: currentPanelId,
-                onClick: this.props.goToPage
-              }),
               _react2.default.createElement(_FormMenu.AddPageButton, null),
               _react2.default.createElement(_FormMenu.PageSortButton, {
                 onClick: function onClick() {
                   return _this2.props.changeCurrentEditingField('pageSort');
                 }
               })
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'col-8' },
-            _react2.default.createElement(
-              'nav',
-              { 'aria-label': 'breadcrumb' },
-              _react2.default.createElement(
-                'ol',
-                { className: 'breadcrumb' },
-                _react2.default.createElement(
-                  'li',
-                  { className: 'breadcrumb-item' },
-                  _react2.default.createElement(
-                    'a',
-                    {
-                      href: '#',
-                      active: '' + (currentEditingField === 'page'),
-                      onClick: function onClick() {
-                        return _this2.props.changeCurrentEditingField('page');
-                      }
-                    },
-                    currentPanelId !== 'Select Page' && currentPanelId
-                  )
-                ),
-                (currentEditingField === 'questionSet' || currentEditingField === 'question') && questionSets && _react2.default.createElement(
-                  'li',
-                  { className: 'breadcrumb-item' },
-                  _react2.default.createElement(
-                    'a',
-                    {
-                      href: '',
-                      active: '' + (currentEditingField === 'questionSet'),
-                      onClick: function onClick() {
-                        return _this2.props.changeCurrentEditingField('questionSet', currentQuestionSetIndex);
-                      }
-                    },
-                    questionSets.getIn([currentQuestionSetIndex, 'questionSetId'])
-                  )
-                ),
-                currentEditingField === 'question' && questionSets && _react2.default.createElement(
-                  'li',
-                  { className: 'breadcrumb-item' },
-                  _react2.default.createElement(
-                    'a',
-                    {
-                      active: '' + (currentEditingField === 'question')
-                    },
-                    questionSets.getIn([currentQuestionSetIndex, 'questions', currentQuestionIndex, 'questionId'])
-                  )
-                )
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'row winterfell-form-builder-editor' },
-          _react2.default.createElement(
-            'div',
-            { className: 'col-4' },
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(_TreeView2.default, { id: 'tree-view' }),
+            _react2.default.createElement('br', null),
+            formPanels && _react2.default.createElement(_Pagination2.default, {
+              formPanels: formPanels.map(function (panel) {
+                return panel.get('panelId');
+              }),
+              currentPanelId: currentPanelId,
+              onClick: this.props.goToPage
+            }),
             currentQuestionPanelIndex >= 0 && _react2.default.createElement(_FieldEditor2.default, {
               currentQuestionPanelIndex: currentQuestionPanelIndex,
               currentEditingField: currentEditingField,
@@ -262,14 +229,14 @@ var WinterfellFormBuilder = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'col-8 winterfell-form-builder-page-editor' },
+            _react2.default.createElement(
+              'h3',
+              null,
+              title
+            ),
             this.props.schema && currentQuestionPanelIndex >= 0 && _react2.default.createElement(_FieldSelector2.default, {
               currentQuestionPanelIndex: currentQuestionPanelIndex
-            }),
-            (!this.props.schema || this.props.schema.size === 0) && _react2.default.createElement(
-              'div',
-              { className: 'alert alert-info', role: 'alert' },
-              'No form loaded.  Click on \'new\' to create a new form, or \'upload\' to load an existing form.'
-            )
+            })
           )
         ),
         _react2.default.createElement(
@@ -279,9 +246,9 @@ var WinterfellFormBuilder = function (_Component) {
             'div',
             { className: 'col-12 mb-5 py-3' },
             _react2.default.createElement(
-              'h2',
+              'h3',
               null,
-              'Form Preview:'
+              'Winterfell Form Preview:'
             ),
             schema && _react2.default.createElement(_Previewer2.default, {
               currentPanelId: currentPanelId,
@@ -307,12 +274,12 @@ WinterfellFormBuilder.propTypes = {
   currentQuestionSetIndex: _propTypes2.default.number,
   currentQuestionIndex: _propTypes2.default.number,
   formPanels: _propTypes2.default.object,
-  questionSets: _propTypes2.default.object,
   goToPage: _propTypes2.default.func.isRequired,
   currentEditingField: _propTypes2.default.string,
   changeCurrentEditingField: _propTypes2.default.func.isRequired,
   clearErrorMessage: _propTypes2.default.func.isRequired,
-  errorMessage: _propTypes2.default.string
+  errorMessage: _propTypes2.default.string,
+  title: _propTypes2.default.string
 };
 
 WinterfellFormBuilder.defaultProps = {

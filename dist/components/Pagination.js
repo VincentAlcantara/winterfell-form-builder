@@ -43,14 +43,15 @@ function Pagination(props) {
       {
         id: 'pagination',
         title: currentPanelId || 'Select Page',
-        className: 'btn btn-light dropdown-toggle h-100 py-0',
+        className: 'btn btn-secondary btn-block dropdown-toggle h-100 text-left',
         type: 'button',
         'data-toggle': 'dropdown',
         'aria-haspopup': 'true',
         'aria-expanded': 'false'
       },
-      'Go to page'
+      'Quick link to page'
     ),
+    _react2.default.createElement('br', null),
     _react2.default.createElement(
       'div',
       { className: 'dropdown-menu', 'aria-labelledby': 'dropdownMenuButton' },
