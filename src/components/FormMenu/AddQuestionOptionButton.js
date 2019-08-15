@@ -1,8 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
-
 
 const AddQuestionOptionButton = (props) => {
   const {
@@ -14,19 +11,19 @@ const AddQuestionOptionButton = (props) => {
 
   return (
     <div className="row">
-      <div className="col-xs-12">
+      <div className="col">
         <label
           htmlFor="addOption"
         >
           Add Option
         </label>
       </div>
-      <div className="col-xs-12">
+      <div className="col">
         <table>
           <tbody id="addOption">
             <tr>
               <td>
-                <div
+                <input
                   className="form-control"
                   type="text"
                   name="questionOptionText"
@@ -35,7 +32,7 @@ const AddQuestionOptionButton = (props) => {
                 />
               </td>
               <td>
-                <div
+                <input
                   className="form-control"
                   type="text"
                   name="questionOptionValue"
@@ -46,10 +43,10 @@ const AddQuestionOptionButton = (props) => {
               <td colSpan={2}>
                 <button
                   type="button"
-                  className="btn btn-dark"
+                  className="btn btn-dark py-0"
                   onClick={onClick}
                   disabled={questionOptionText === '' || questionOptionValue === ''}
-                ><FontAwesomeIcon icon={faPlusCircle} id="showConditionalPage" />
+                ><i className="material-icons" id="showConditionalPage" >add_circle</i>
                 </button>
               </td>
             </tr>

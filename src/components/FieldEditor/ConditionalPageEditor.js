@@ -64,7 +64,7 @@ class ConditionalPageEditor extends Component {
   render() {
     return (
       <div className="row winterfell-form-builder-conditional-page alert-warning">
-        <div className="col-xs-12">
+        <div className="col">
           <h6>
             {`Option '${this.props.text}' Conditional Page:`}
           </h6>

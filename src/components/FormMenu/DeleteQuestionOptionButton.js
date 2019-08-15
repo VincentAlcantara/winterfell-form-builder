@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 class DeleteQuestionOptionButton extends Component {
   constructor(props) {
@@ -33,7 +31,7 @@ class DeleteQuestionOptionButton extends Component {
         data-toggle="modal"
         data-target="#deleteQuestionOptionButton"
       >
-        <FontAwesomeIcon icon={faTrash} /><span>delete this option</span>
+        <i className="material-icons">delete</i><span>delete this option</span>
       </button>,
       <div className="modal fade" id="deleteQuestionOptionButton" tabIndex="-1">
         <div className="modal-dialog bg-white">

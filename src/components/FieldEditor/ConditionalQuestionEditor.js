@@ -164,14 +164,14 @@ class ConditionalQuestionEditor extends PureComponent {
   render() {
     return (
       <div className="row winterfell-form-builder-conditional-questions alert alert-info">
-        <div className="col-xs-12">
+        <div className="col">
           <h6>
             {`Option '${this.props.parentOptionText}' Conditional Questions:`}
           </h6>
           <h6><i>Display these questions if this option is selected</i></h6>
           { this.props.conditionalQuestions && this.getConditionalQuestions() }
         </div>
-        <div className="col-xs-12">
+        <div className="col">
           <br />
           <AddConditionalQuestionButton
             path={this.props.parentPath}

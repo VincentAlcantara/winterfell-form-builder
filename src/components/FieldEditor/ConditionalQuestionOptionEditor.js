@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShare, faMinusCircle, faHamburger } from '@fortawesome/free-solid-svg-icons';
 import DeleteQuestionOptionButton from '../FormMenu/DeleteQuestionOptionButton';
 import ConditionalPageEditor from './ConditionalPageEditor';
 import ConditionalQuestionEditor from './ConditionalQuestionEditor';
@@ -164,9 +162,9 @@ class ConditionalQuestionOptionEditor extends PureComponent {
                     id="showConditionalPageButton"
                   >
                     {this.state.showConditionalPage && !this.state.showConditionalPage[ix] &&
-                    <FontAwesomeIcon icon={faShare} id="showConditionalPage" />}
+                    <i className="material-icons" id="showConditionalPage" >share</i>}
                     {this.state.showConditionalPage && this.state.showConditionalPage[ix] &&
-                    <FontAwesomeIcon icon={faMinusCircle} id="showConditionalPage" />}
+                    <i className="material-icons" id="showConditionalPage" >remove_circle </i>}
                   </button>
                 </div>
                 <div>
@@ -178,10 +176,10 @@ class ConditionalQuestionOptionEditor extends PureComponent {
                   >
                     {this.state.showConditionalQuestions &&
                     !this.state.showConditionalQuestions[ix] &&
-                    <FontAwesomeIcon icon={faHamburger} id="showConditionalQuestion" />}
+                    <i className="material-icons" id="showConditionalPage" >menu</i>}
                     {this.state.showConditionalQuestions &&
                     this.state.showConditionalQuestions[ix] &&
-                    <FontAwesomeIcon icon={faMinusCircle} id="showConditionalQuestion" />}
+                    <i className="material-icons" id="showConditionalPage" >remove_circle </i>}
                   </button>
                 </div>
 
