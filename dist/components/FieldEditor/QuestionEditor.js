@@ -38,8 +38,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _immutable = require('immutable');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
@@ -201,8 +199,8 @@ var QuestionEditor = function (_PureComponent) {
           'div',
           null,
           _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            null,
+            'div',
+            { className: 'form-group' },
             _react2.default.createElement(_FieldGroup2.default, {
               id: 'questionSetId',
               name: 'questionSetId',
@@ -214,8 +212,8 @@ var QuestionEditor = function (_PureComponent) {
             })
           ),
           _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            null,
+            'div',
+            { className: 'form-group' },
             _react2.default.createElement(_FieldGroup2.default, {
               id: 'questionId',
               name: 'questionId',
@@ -227,8 +225,8 @@ var QuestionEditor = function (_PureComponent) {
             })
           ),
           _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            null,
+            'div',
+            { className: 'form-group' },
             _react2.default.createElement(
               'label',
               { htmlFor: 'edit-question-id', id: 'edit-question-id-label' },
@@ -241,8 +239,8 @@ var QuestionEditor = function (_PureComponent) {
             )
           ),
           _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            null,
+            'div',
+            { className: 'form-group' },
             _react2.default.createElement(_FieldGroup2.default, {
               id: 'question',
               name: 'question',
@@ -253,8 +251,8 @@ var QuestionEditor = function (_PureComponent) {
             })
           ),
           _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            null,
+            'div',
+            { className: 'form-group' },
             _react2.default.createElement(_FieldGroup2.default, {
               id: 'questionText',
               name: 'questionText',
@@ -265,8 +263,8 @@ var QuestionEditor = function (_PureComponent) {
             })
           ),
           _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            null,
+            'div',
+            { className: 'form-group' },
             _react2.default.createElement(_FieldGroup2.default, {
               id: 'questionPostText',
               name: 'questionPostText',
@@ -277,8 +275,8 @@ var QuestionEditor = function (_PureComponent) {
             })
           ),
           _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            null,
+            'div',
+            { className: 'form-group' },
             _react2.default.createElement(
               'label',
               { htmlFor: 'questionInputType' },
@@ -304,8 +302,8 @@ var QuestionEditor = function (_PureComponent) {
           currentQuestionPanelIndex: currentQuestionPanelIndex
         }),
         _react2.default.createElement(
-          _reactBootstrap.ButtonGroup,
-          null,
+          'div',
+          { className: 'button-group' },
           this.props.currentQuestionIndex > -1 && _react2.default.createElement(_DeleteQuestionButton2.default, {
             currentQuestionSetIndex: this.props.currentQuestionSetIndex,
             currentQuestionIndex: this.props.currentQuestionIndex
@@ -342,6 +340,7 @@ QuestionEditor.propTypes = {
   questionTargetMatch: _propTypes2.default.string,
   currentQuestionPanelIndex: _propTypes2.default.number.isRequired
 };
+
 QuestionEditor.defaultProps = {
   questionId: '',
   question: '',
@@ -352,7 +351,6 @@ QuestionEditor.defaultProps = {
   questionTarget: '',
   questionTargetMatch: ''
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

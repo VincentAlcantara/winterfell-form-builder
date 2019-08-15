@@ -48,10 +48,6 @@ var PageSortSelector = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (PageSortSelector.__proto__ || (0, _getPrototypeOf2.default)(PageSortSelector)).call(this, props));
 
-    _this.onSortEnd = function () {
-      return _this.__onSortEnd__REACT_HOT_LOADER__.apply(_this, arguments);
-    };
-
     _this.state = {
       items: _this.props.formPanels.map(function (formPanel) {
         return formPanel.get('panelId');
@@ -63,11 +59,6 @@ var PageSortSelector = function (_Component) {
   }
 
   (0, _createClass3.default)(PageSortSelector, [{
-    key: '__onSortEnd__REACT_HOT_LOADER__',
-    value: function __onSortEnd__REACT_HOT_LOADER__() {
-      return this.__onSortEnd__REACT_HOT_LOADER__.apply(this, arguments);
-    }
-  }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       this.state = {
@@ -77,8 +68,8 @@ var PageSortSelector = function (_Component) {
       };
     }
   }, {
-    key: '__onSortEnd__REACT_HOT_LOADER__',
-    value: function __onSortEnd__REACT_HOT_LOADER__(_ref) {
+    key: 'onSortEnd',
+    value: function onSortEnd(_ref) {
       var oldIndex = _ref.oldIndex,
           newIndex = _ref.newIndex;
 
@@ -136,7 +127,6 @@ PageSortSelector.propTypes = {
   changeCurrentEditingField: _propTypes2.default.func.isRequired,
   formPanels: _propTypes2.default.object.isRequired
 };
-
 
 function mapStateToProps(state) {
   return {

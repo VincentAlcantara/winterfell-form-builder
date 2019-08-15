@@ -1,25 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, FormGroup } from 'react-bootstrap';
 import { updateQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
 
 class updateQuestionButton extends Component {
-  static propTypes = {
-    updateQuestion: PropTypes.func.isRequired,
-    questionSetIndex: PropTypes.number.isRequired,
-    questionIndex: PropTypes.number.isRequired,
-    question: PropTypes.string.isRequired,
-    questionText: PropTypes.string,
-    questionType: PropTypes.string.isRequired,
-  };
-
-  static defaultProps = {
-    questionText: '',
-  };
-
   constructor(props) {
     super(props);
     const { question, questionText, questionType } = props;
@@ -59,12 +45,13 @@ class updateQuestionButton extends Component {
 
   render() {
     return [
-      <Button
+      <button
+        type="button"
         className="btn"
         data-toggle="modal"
         data-target="#editQuestion"
       >edit
-      </Button>,
+      </button>,
       <div className="modal fade" id="createForm" tabIndex="-1">
         <div className="modal-dialog bg-white">
           <div className="modal-header">
@@ -72,7 +59,7 @@ class updateQuestionButton extends Component {
           </div>
           <div className="modal-body">
             <form>
-              <FormGroup>
+              <div className="form-group">
                 <FieldGroup
                   id="question"
                   name="question"
@@ -81,8 +68,8 @@ class updateQuestionButton extends Component {
                   placeholder=""
                   value={this.state.question}
                 />
-              </FormGroup>
-              <FormGroup>
+              </div>
+              <div className="form-group">
                 <FieldGroup
                   id="questionText"
                   name="questionText"
@@ -91,7 +78,7 @@ class updateQuestionButton extends Component {
                   placeholder=""
                   value={this.state.questionText}
                 />
-              </FormGroup>
+              </div>
             </form>
           </div>
           <div className="modal-footer">
@@ -110,6 +97,19 @@ class updateQuestionButton extends Component {
     ];
   }
 }
+
+updateQuestionButton.propTypes = {
+  updateQuestion: PropTypes.func.isRequired,
+  questionSetIndex: PropTypes.number.isRequired,
+  questionIndex: PropTypes.number.isRequired,
+  question: PropTypes.string.isRequired,
+  questionText: PropTypes.string,
+  questionType: PropTypes.string.isRequired,
+};
+
+updateQuestionButton.defaultProps = {
+  questionText: '',
+};
 
 function mapStateToProps(state, ownProps) {
   return {

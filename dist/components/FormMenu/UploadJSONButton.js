@@ -175,7 +175,6 @@ UploadJSONButton.propTypes = {
   uploadJSON: _propTypes2.default.func.isRequired
 };
 
-
 function mapStateToProps(state) {
   return {
     title: state.getIn(['form', 'currentForm', 'title'])

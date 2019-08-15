@@ -160,6 +160,7 @@ FieldSelectorContainer.propTypes = {
   backButtonDisabled: _propTypes2.default.bool,
   nextButton: _propTypes2.default.string
 };
+
 FieldSelectorContainer.defaultProps = {
   currentPanelId: 'Select Page',
   currentQuestionPanelIndex: 0,
@@ -174,7 +175,6 @@ FieldSelectorContainer.defaultProps = {
   currentQuestionSetIndex: 0,
   currentQuestionIndex: 0
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

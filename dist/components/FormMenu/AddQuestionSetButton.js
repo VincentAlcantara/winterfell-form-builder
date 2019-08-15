@@ -38,8 +38,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 var _FieldGroup = require('../InputTypes/FieldGroup');
@@ -106,8 +104,9 @@ var AddQuestionSetButton = function (_Component) {
     key: 'render',
     value: function render() {
       return [_react2.default.createElement(
-        _reactBootstrap.Button,
+        'button',
         {
+          type: 'button',
           className: 'btn btn-block btn-dark',
           disabled: !this.props.currentPanelId || this.props.currentPanelId === 'Select Page',
           'data-toggle': 'modal',
@@ -224,10 +223,10 @@ AddQuestionSetButton.propTypes = {
   addQuestionSet: _propTypes2.default.func.isRequired,
   currentPanelId: _propTypes2.default.string
 };
+
 AddQuestionSetButton.defaultProps = {
   currentPanelId: ''
 };
-
 
 function mapStateToProps(state) {
   return {

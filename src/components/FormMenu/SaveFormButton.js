@@ -5,18 +5,7 @@ import fileDownload from 'js-file-download';
 import { saveJSON } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
-
 class SaveFormButton extends Component {
-  static propTypes = {
-    saveJSON: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
-    schema: PropTypes.object,
-  }
-
-  static defaultProps = {
-    schema: null,
-  }
-
   constructor(props) {
     super(props);
 
@@ -94,6 +83,16 @@ class SaveFormButton extends Component {
     ];
   }
 }
+
+SaveFormButton.propTypes = {
+  saveJSON: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  schema: PropTypes.object,
+};
+
+SaveFormButton.defaultProps = {
+  schema: null,
+};
 
 function mapStateToProps(state) {
   return {

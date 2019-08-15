@@ -1,24 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, FormGroup } from 'react-bootstrap';
 import { addQuestion } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 import SelectInput from '../InputTypes/SelectInput';
 import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
-
 class AddQuestionButton extends Component {
-  static propTypes = {
-    addQuestion: PropTypes.func.isRequired,
-    questionSetId: PropTypes.string,
-    currentQuestionSetIndex: PropTypes.number.isRequired,
-  };
-
-  static defaultProps = {
-    questionSetId: '',
-  };
-
   constructor(props) {
     super(props);
 
@@ -65,13 +53,14 @@ class AddQuestionButton extends Component {
 
   render() {
     return [
-      <Button
+      <button
+        type="button"
         className="btn btn-dark"
         data-toggle="modal"
         data-target="#addQuestion"
       >
         Add question
-      </Button>,
+      </button>,
       <div className="static-modal">
         <div className="modal fade" id="addQuestion" tabIndex="-1">
           <div className="modal-dialog bg-white">
@@ -80,7 +69,7 @@ class AddQuestionButton extends Component {
             </div>
             <div className="modal-body">
               <form>
-                <FormGroup>
+                <div className="form-group">
                   <FieldGroup
                     id="questionId"
                     name="questionId"
@@ -89,8 +78,8 @@ class AddQuestionButton extends Component {
                     placeholder="(optional)"
                     value={this.state.questionId}
                   />
-                </FormGroup>
-                <FormGroup>
+                </div>
+                <div className="form-group">
                   <FieldGroup
                     id="question"
                     name="question"
@@ -99,8 +88,8 @@ class AddQuestionButton extends Component {
                     placeholder=""
                     value={this.state.question}
                   />
-                </FormGroup>
-                <FormGroup>
+                </div>
+                <div className="form-group">
                   <label htmlFor="questionType">
                     Select Question Type
                   </label>
@@ -111,7 +100,7 @@ class AddQuestionButton extends Component {
                     onSelect={this.onSelect}
                     displayValue={this.state.questionType}
                   />
-                </FormGroup>
+                </div>
               </form>
             </div>
             <div className="modal-footer">
@@ -131,6 +120,16 @@ class AddQuestionButton extends Component {
     ];
   }
 }
+
+AddQuestionButton.propTypes = {
+  addQuestion: PropTypes.func.isRequired,
+  questionSetId: PropTypes.string,
+  currentQuestionSetIndex: PropTypes.number.isRequired,
+};
+
+AddQuestionButton.defaultProps = {
+  questionSetId: '',
+};
 
 export default connect(null, { addQuestion })(AddQuestionButton);
 

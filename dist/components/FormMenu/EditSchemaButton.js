@@ -51,7 +51,7 @@ var EditSchemaButton = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (EditSchemaButton.__proto__ || (0, _getPrototypeOf2.default)(EditSchemaButton)).call(this, props));
 
     _this.state = {
-      schemaObject: null
+      schema: _this.props.schema
     };
 
     _this.onChange = _this.onChange.bind(_this);
@@ -60,6 +60,13 @@ var EditSchemaButton = function (_Component) {
   }
 
   (0, _createClass3.default)(EditSchemaButton, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.state = {
+        schema: nextProps.schema
+      };
+    }
+  }, {
     key: 'onChange',
     value: function onChange(e) {
       this.setState({ schema: JSON.parse(e.target.value) });
@@ -118,7 +125,7 @@ var EditSchemaButton = function (_Component) {
                 null,
                 _react2.default.createElement('textarea', {
                   rows: '30',
-                  cols: '60',
+                  cols: '50',
                   value: (0, _stringify2.default)(this.state.schema, undefined, 2),
                   onChange: this.onChange
                 })
@@ -154,12 +161,21 @@ var EditSchemaButton = function (_Component) {
 }(_react.Component);
 
 EditSchemaButton.propTypes = {
-  updateForm: _propTypes2.default.func.isRequired
+  updateForm: _propTypes2.default.func.isRequired,
+  schema: _propTypes2.default.object
 };
 EditSchemaButton.defaultProps = {
   schema: null
 };
 
+
+EditSchemaButton.propTypes = {
+  updateForm: _propTypes2.default.func.isRequired
+};
+
+EditSchemaButton.defaultProps = {
+  schema: null
+};
 
 function mapStateToProps(state) {
   return {

@@ -34,8 +34,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _winterfellFormBuilderActions = require('../actions/winterfellFormBuilderActions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -97,8 +95,9 @@ var TreeView = function (_Component) {
           { key: questionPanelId + '-' + questionSetId + '-' + index },
           '\xA0\xA0\xA0+\xA0',
           _react2.default.createElement(
-            _reactBootstrap.Button,
+            'button',
             {
+              type: 'button',
               className: 'btn btn-link',
               onClick: function onClick() {
                 return _this2.onQuestionClick(questionPanelId, questionSetIndex, index);
@@ -121,8 +120,9 @@ var TreeView = function (_Component) {
           { key: questionPanelId + '-' + index },
           '\xA0+\xA0',
           _react2.default.createElement(
-            _reactBootstrap.Button,
+            'button',
             {
+              type: 'button',
               href: '#',
               className: 'btn btn-link',
               onClick: function onClick() {
@@ -149,8 +149,9 @@ var TreeView = function (_Component) {
           'div',
           { key: index },
           _react2.default.createElement(
-            _reactBootstrap.Button,
+            'button',
             {
+              type: 'button',
               href: '#',
               className: 'btn btn-link',
               onClick: function onClick() {
@@ -183,11 +184,11 @@ TreeView.propTypes = {
   changeCurrentEditingField: _propTypes2.default.func.isRequired,
   goToPage: _propTypes2.default.func.isRequired
 };
+
 TreeView.defaultProps = {
   questionPanels: null,
   questionSets: null
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

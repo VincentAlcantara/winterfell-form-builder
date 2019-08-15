@@ -38,8 +38,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 var _FieldGroup = require('../InputTypes/FieldGroup');
@@ -96,8 +94,9 @@ var updateQuestionButton = function (_Component) {
     key: 'render',
     value: function render() {
       return [_react2.default.createElement(
-        _reactBootstrap.Button,
+        'button',
         {
+          type: 'button',
           className: 'btn',
           'data-toggle': 'modal',
           'data-target': '#editQuestion'
@@ -125,8 +124,8 @@ var updateQuestionButton = function (_Component) {
               'form',
               null,
               _react2.default.createElement(
-                _reactBootstrap.FormGroup,
-                null,
+                'div',
+                { className: 'form-group' },
                 _react2.default.createElement(_FieldGroup2.default, {
                   id: 'question',
                   name: 'question',
@@ -137,8 +136,8 @@ var updateQuestionButton = function (_Component) {
                 })
               ),
               _react2.default.createElement(
-                _reactBootstrap.FormGroup,
-                null,
+                'div',
+                { className: 'form-group' },
                 _react2.default.createElement(_FieldGroup2.default, {
                   id: 'questionText',
                   name: 'questionText',
@@ -186,10 +185,10 @@ updateQuestionButton.propTypes = {
   questionText: _propTypes2.default.string,
   questionType: _propTypes2.default.string.isRequired
 };
+
 updateQuestionButton.defaultProps = {
   questionText: ''
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

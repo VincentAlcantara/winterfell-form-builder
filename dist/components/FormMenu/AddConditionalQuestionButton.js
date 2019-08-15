@@ -38,8 +38,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 var _FieldGroup = require('../InputTypes/FieldGroup');
@@ -111,8 +109,9 @@ var AddConditionalQuestionButton = function (_Component) {
     key: 'render',
     value: function render() {
       return [_react2.default.createElement(
-        _reactBootstrap.Button,
+        'button',
         {
+          type: 'button',
           className: 'btn btn-dark btn-block',
           'data-toggle': 'modal',
           'data-target': '#createForm'
@@ -140,8 +139,8 @@ var AddConditionalQuestionButton = function (_Component) {
               'form',
               null,
               _react2.default.createElement(
-                _reactBootstrap.FormGroup,
-                null,
+                'div',
+                { className: 'form-group' },
                 _react2.default.createElement(_FieldGroup2.default, {
                   id: 'questionId',
                   name: 'questionId',
@@ -152,8 +151,8 @@ var AddConditionalQuestionButton = function (_Component) {
                 })
               ),
               _react2.default.createElement(
-                _reactBootstrap.FormGroup,
-                null,
+                'div',
+                { className: 'form-group' },
                 _react2.default.createElement(_FieldGroup2.default, {
                   id: 'question',
                   name: 'question',
@@ -164,8 +163,8 @@ var AddConditionalQuestionButton = function (_Component) {
                 })
               ),
               _react2.default.createElement(
-                _reactBootstrap.FormGroup,
-                null,
+                'div',
+                { className: 'form-group' },
                 _react2.default.createElement(
                   'label',
                   { htmlFor: 'questionType' },
@@ -213,7 +212,6 @@ AddConditionalQuestionButton.propTypes = {
   addConditionalQuestion: _propTypes2.default.func.isRequired,
   path: _propTypes2.default.array.isRequired
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

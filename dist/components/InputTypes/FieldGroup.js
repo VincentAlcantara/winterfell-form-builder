@@ -16,8 +16,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactBootstrap = require('react-bootstrap');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function FieldGroup(props) {
@@ -27,14 +25,14 @@ function FieldGroup(props) {
 
 
   return _react2.default.createElement(
-    _reactBootstrap.FormGroup,
-    { controlId: id },
+    'div',
+    { className: 'form-group', controlId: id },
     _react2.default.createElement(
-      _reactBootstrap.ControlLabel,
-      null,
+      'label',
+      { htmlFor: id },
       label
     ),
-    _react2.default.createElement(_reactBootstrap.FormControl, (0, _extends3.default)({ value: value }, props, { autoComplete: id }))
+    _react2.default.createElement('input', (0, _extends3.default)({ className: 'form-control', value: value }, props, { autoComplete: id }))
   );
 }
 

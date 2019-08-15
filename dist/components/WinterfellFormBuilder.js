@@ -141,6 +141,7 @@ var WinterfellFormBuilder = function (_Component) {
                 _react2.default.createElement(
                   'button',
                   {
+                    type: 'button',
                     className: 'btn btn-primary',
                     onClick: this.props.clearErrorMessage
                   },
@@ -207,7 +208,7 @@ var WinterfellFormBuilder = function (_Component) {
                     'a',
                     {
                       href: '#',
-                      active: currentEditingField === 'page',
+                      active: '' + (currentEditingField === 'page'),
                       onClick: function onClick() {
                         return _this2.props.changeCurrentEditingField('page');
                       }
@@ -222,7 +223,7 @@ var WinterfellFormBuilder = function (_Component) {
                     'a',
                     {
                       href: '',
-                      active: currentEditingField === 'questionSet',
+                      active: '' + (currentEditingField === 'questionSet'),
                       onClick: function onClick() {
                         return _this2.props.changeCurrentEditingField('questionSet', currentQuestionSetIndex);
                       }
@@ -236,7 +237,7 @@ var WinterfellFormBuilder = function (_Component) {
                   _react2.default.createElement(
                     'a',
                     {
-                      active: currentEditingField === 'question'
+                      active: '' + (currentEditingField === 'question')
                     },
                     questionSets.getIn([currentQuestionSetIndex, 'questions', currentQuestionIndex, 'questionId'])
                   )
@@ -266,7 +267,7 @@ var WinterfellFormBuilder = function (_Component) {
             }),
             (!this.props.schema || this.props.schema.size === 0) && _react2.default.createElement(
               'div',
-              { className: 'bg-blue-lagoon' },
+              { className: 'alert alert-info', role: 'alert' },
               'No form loaded.  Click on \'new\' to create a new form, or \'upload\' to load an existing form.'
             )
           )
@@ -288,7 +289,7 @@ var WinterfellFormBuilder = function (_Component) {
             }),
             currentPanelId === 'Select Page' && _react2.default.createElement(
               'div',
-              { className: 'bg-blue-lagoon' },
+              { className: 'alert alert-info', role: 'alert' },
               'No page selected to preview.  Select a page from the dropdown above.'
             )
           )
@@ -313,6 +314,7 @@ WinterfellFormBuilder.propTypes = {
   clearErrorMessage: _propTypes2.default.func.isRequired,
   errorMessage: _propTypes2.default.string
 };
+
 WinterfellFormBuilder.defaultProps = {
   title: '',
   schema: null,
@@ -326,7 +328,6 @@ WinterfellFormBuilder.defaultProps = {
   currentEditingField: 'page',
   errorMessage: ''
 };
-
 
 function mapStateToProps(state) {
   return {

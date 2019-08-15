@@ -38,8 +38,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 var _FieldGroup = require('../InputTypes/FieldGroup');
@@ -61,7 +59,6 @@ var AddPageButton = function (_Component) {
       panelHeader: '',
       panelText: ''
     };
-
     _this.onChange = _this.onChange.bind(_this);
     _this.onFormUpdate = _this.onFormUpdate.bind(_this);
     return _this;
@@ -83,8 +80,9 @@ var AddPageButton = function (_Component) {
     key: 'render',
     value: function render() {
       return [_react2.default.createElement(
-        _reactBootstrap.Button,
+        'button',
         {
+          type: 'button',
           className: 'btn btn-block btn-light',
           'data-toggle': 'modal',
           'data-target': '#addPage',
@@ -126,8 +124,8 @@ var AddPageButton = function (_Component) {
                 'form',
                 null,
                 _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
+                  'div',
+                  { className: 'form-group' },
                   _react2.default.createElement(_FieldGroup2.default, {
                     id: 'panelId',
                     name: 'panelId',
@@ -138,8 +136,8 @@ var AddPageButton = function (_Component) {
                   })
                 ),
                 _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
+                  'div',
+                  { className: 'form-group' },
                   _react2.default.createElement(_FieldGroup2.default, {
                     id: 'panelHeader',
                     name: 'panelHeader',
@@ -150,8 +148,8 @@ var AddPageButton = function (_Component) {
                   })
                 ),
                 _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
+                  'div',
+                  { className: 'form-group' },
                   _react2.default.createElement(_FieldGroup2.default, {
                     id: 'panelText',
                     name: 'panelText',
@@ -195,7 +193,6 @@ var AddPageButton = function (_Component) {
 AddPageButton.propTypes = {
   addPage: _propTypes2.default.func.isRequired
 };
-
 
 function mapStateToProps(state) {
   return {

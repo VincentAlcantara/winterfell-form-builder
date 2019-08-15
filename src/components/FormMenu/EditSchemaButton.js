@@ -83,6 +83,14 @@ class EditSchemaButton extends Component {
   }
 }
 
+EditSchemaButton.propTypes = {
+  updateForm: PropTypes.func.isRequired,
+};
+
+EditSchemaButton.defaultProps = {
+  schema: null,
+};
+
 function mapStateToProps(state) {
   return {
     schema: state.getIn(['form', 'schema']),

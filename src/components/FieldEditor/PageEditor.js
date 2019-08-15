@@ -1,40 +1,12 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, FormControl, Button } from 'react-bootstrap';
 import { fromJS } from 'immutable';
-
 import { editPageId, editPageHeader, editPageText, changeCurrentEditingField, updateErrorMessage, clearErrorMessage } from '../../actions/winterfellFormBuilderActions';
 import { AddQuestionSetButton } from '../FormMenu';
 import FieldGroup from '../InputTypes/FieldGroup';
 
 class PageEditor extends PureComponent {
-  static propTypes = {
-    editPageId: PropTypes.func.isRequired,
-    editPageHeader: PropTypes.func.isRequired,
-    editPageText: PropTypes.func.isRequired,
-    updateErrorMessage: PropTypes.func.isRequired,
-    changeCurrentEditingField: PropTypes.func.isRequired,
-    title: PropTypes.string,
-    panelId: PropTypes.string,
-    panelHeader: PropTypes.string,
-    panelText: PropTypes.string,
-    currentQuestionSets: PropTypes.object,
-    questionSets: PropTypes.object,
-    currentQuestionPanelIndex: PropTypes.number.isRequired,
-    formPanels: PropTypes.object.isRequired,
-  }
-
-  static defaultProps = {
-    currentQuestionPanelIndex: 0,
-    title: '',
-    panelId: '',
-    panelHeader: '',
-    panelText: '',
-    questionSets: fromJS({}),
-    currentQuestionSets: fromJS({}),
-    formPanels: fromJS({}),
-  }
   constructor(props) {
     super(props);
     const { title, panelId, panelHeader, panelText } = props;
@@ -88,20 +60,21 @@ class PageEditor extends PureComponent {
     const questionSetsArray = this.props.currentQuestionSets.toJS();
     return (
       <form>
-        <FormGroup>
+        <div className="form-group">
           <label htmlFor="filename">
             Filename
           </label>
           <p disabled id="filename" >
             {this.props.title}
           </p>
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div className="form-group">
           <label htmlFor="panelId">
               Page ID
           </label>
           <div className="input-group">
-            <FormControl
+            <div
+              className="form-control"
               id="panelId"
               name="panelId"
               onChange={this.onChange}
@@ -117,8 +90,8 @@ class PageEditor extends PureComponent {
               </button>
             </div>
           </div>
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div className="form-group">
           <FieldGroup
             id="panelHeader"
             name="panelHeader"
@@ -127,8 +100,8 @@ class PageEditor extends PureComponent {
             placeholder={this.props.panelHeader}
             value={this.state.panelHeader}
           />
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div className="form-group">
           <FieldGroup
             id="panelText"
             name="panelText"
@@ -137,30 +110,58 @@ class PageEditor extends PureComponent {
             onChange={this.onChange}
             value={this.state.panelText}
           />
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div className="form-group">
           <AddQuestionSetButton />
-        </FormGroup>
+        </div>
         { questionSetsArray && questionSetsArray.length > 0 &&
-        <FormGroup>
+        <div className="form-group">
           <label htmlFor="questionSetList">Question Sets</label>
           <div id="questionSetList">
             { questionSetsArray.map((questionSet, index) => (
-              <Button
+              <button
+                type="button"
                 key={`questionSet-${index}`}
-                bsStyle="link"
+                variant="link"
                 onClick={() => this.onClick(questionSet.questionSetId)}
               >{questionSet.questionSetId}
-              </Button>
+              </button>
             ))
             }
           </div>
-        </FormGroup>
+        </div>
         }
       </form>
     );
   }
 }
+
+PageEditor.propTypes = {
+  editPageId: PropTypes.func.isRequired,
+  editPageHeader: PropTypes.func.isRequired,
+  editPageText: PropTypes.func.isRequired,
+  updateErrorMessage: PropTypes.func.isRequired,
+  changeCurrentEditingField: PropTypes.func.isRequired,
+  title: PropTypes.string,
+  panelId: PropTypes.string,
+  panelHeader: PropTypes.string,
+  panelText: PropTypes.string,
+  currentQuestionSets: PropTypes.object,
+  questionSets: PropTypes.object,
+  currentQuestionPanelIndex: PropTypes.number.isRequired,
+  formPanels: PropTypes.object.isRequired,
+};
+
+PageEditor.defaultProps = {
+  currentQuestionPanelIndex: 0,
+  title: '',
+  panelId: '',
+  panelHeader: '',
+  panelText: '',
+  questionSets: fromJS({}),
+  currentQuestionSets: fromJS({}),
+  formPanels: fromJS({}),
+};
 
 function mapStateToProps(state, ownProps) {
   return {

@@ -5,11 +5,6 @@ import { editFormTitle } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
 class EditFormTitleButton extends Component {
-  static propTypes = {
-    editFormTitle: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
@@ -80,6 +75,11 @@ class EditFormTitleButton extends Component {
     ];
   }
 }
+
+EditFormTitleButton.propTypes = {
+  editFormTitle: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

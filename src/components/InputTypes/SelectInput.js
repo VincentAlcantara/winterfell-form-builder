@@ -2,28 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class SelectInput extends React.Component {
-  static propTypes = {
-    displayValue: PropTypes.string,
-    options: PropTypes.array.isRequired,
-    classes: PropTypes.object,
-    name: PropTypes.string,
-    onSelect: PropTypes.func,
-    required: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    classes: {
-      select: 'form-control',
-    },
-    id: '',
-    name: '',
-    value: '',
-    options: [],
-    onChange: () => {},
-    onSelect: () => {},
-    required: false,
-    displayValue: '',
-  };
   constructor(props) {
     super(props);
 
@@ -71,5 +49,28 @@ class SelectInput extends React.Component {
     );
   }
 }
+
+SelectInput.propTypes = {
+  displayValue: PropTypes.string,
+  options: PropTypes.array.isRequired,
+  classes: PropTypes.object,
+  name: PropTypes.string,
+  onSelect: PropTypes.func,
+  required: PropTypes.bool,
+};
+
+SelectInput.defaultProps = {
+  classes: {
+    select: 'form-control',
+  },
+  id: '',
+  name: '',
+  value: '',
+  options: [],
+  onChange: () => {},
+  onSelect: () => {},
+  required: false,
+  displayValue: '',
+};
 
 export default SelectInput;

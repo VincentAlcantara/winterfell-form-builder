@@ -31,7 +31,7 @@ var QuestionSetSelector = function QuestionSetSelector(props) {
         if (currentQuestionSet.questionSetId === questionSet.questionSetId) {
           return _react2.default.createElement(
             'span',
-            null,
+            { key: questionSetIndex },
             questionSet.questionSetHeader && _react2.default.createElement(
               'button',
               {

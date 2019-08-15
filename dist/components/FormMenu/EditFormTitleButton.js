@@ -55,8 +55,7 @@ var EditFormTitleButton = function (_Component) {
     var _this = (0, _possibleConstructorReturn3.default)(this, (EditFormTitleButton.__proto__ || (0, _getPrototypeOf2.default)(EditFormTitleButton)).call(this, props));
 
     _this.state = {
-      showModal: false,
-      formTitle: ''
+      formTitle: props.title
     };
 
     _this.onChange = _this.onChange.bind(_this);
@@ -65,30 +64,27 @@ var EditFormTitleButton = function (_Component) {
   }
 
   (0, _createClass3.default)(EditFormTitleButton, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.state = {
+        formTitle: nextProps.title
+      };
+    }
+  }, {
     key: 'onChange',
     value: function onChange(event) {
       event.preventDefault();
       this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
     }
   }, {
-    key: 'onClose',
-    value: function onClose(e) {
-      e.preventDefault();
-      this.setState({ showModal: true });
-    }
-  }, {
     key: 'onFormUpdate',
     value: function onFormUpdate(e) {
       e.preventDefault();
       this.props.editFormTitle(this.state.formTitle);
-      this.setState({ showModal: false });
     }
   }, {
     key: 'render',
     value: function render() {
-      var title = this.props.title;
-
-
       return [_react2.default.createElement(
         'button',
         {
@@ -137,7 +133,6 @@ var EditFormTitleButton = function (_Component) {
                   name: 'formTitle',
                   label: 'Enter title of the form',
                   onChange: this.onChange,
-                  placeholder: title,
                   value: this.state.formTitle
                 })
               )
@@ -175,7 +170,6 @@ EditFormTitleButton.propTypes = {
   editFormTitle: _propTypes2.default.func.isRequired,
   title: _propTypes2.default.string.isRequired
 };
-
 
 function mapStateToProps(state) {
   return {

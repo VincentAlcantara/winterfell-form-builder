@@ -80,22 +80,13 @@ var Previewer = function (_Component) {
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (Previewer.__proto__ || (0, _getPrototypeOf2.default)(Previewer)).call(this, props));
 
-    _this.onUpdateQuestionAnswers = function () {
-      return _this.__onUpdateQuestionAnswers__REACT_HOT_LOADER__.apply(_this, arguments);
-    };
-
     _this.onUpdateQuestionAnswers = _this.onUpdateQuestionAnswers.bind(_this);
     return _this;
   }
 
   (0, _createClass3.default)(Previewer, [{
-    key: '__onUpdateQuestionAnswers__REACT_HOT_LOADER__',
-    value: function __onUpdateQuestionAnswers__REACT_HOT_LOADER__() {
-      return this.__onUpdateQuestionAnswers__REACT_HOT_LOADER__.apply(this, arguments);
-    }
-  }, {
-    key: '__onUpdateQuestionAnswers__REACT_HOT_LOADER__',
-    value: function __onUpdateQuestionAnswers__REACT_HOT_LOADER__(questionAndAnswers) {
+    key: 'onUpdateQuestionAnswers',
+    value: function onUpdateQuestionAnswers(questionAndAnswers) {
       console.log('Question Updated! The current set of answers is: ', questionAndAnswers);
       this.props.updateQuestionAnswers(questionAndAnswers);
     }
@@ -160,6 +151,7 @@ Previewer.propTypes = {
   onSwitchPanel: _propTypes2.default.func,
   questionAnswers: _propTypes2.default.object
 };
+
 Previewer.defaultProps = {
   currentPanelId: null,
   schema: {},

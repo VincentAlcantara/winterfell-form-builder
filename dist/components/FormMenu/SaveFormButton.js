@@ -185,10 +185,10 @@ SaveFormButton.propTypes = {
   title: _propTypes2.default.string.isRequired,
   schema: _propTypes2.default.object
 };
+
 SaveFormButton.defaultProps = {
   schema: null
 };
-
 
 function mapStateToProps(state) {
   return {

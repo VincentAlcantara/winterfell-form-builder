@@ -169,7 +169,6 @@ CreateFormButton.propTypes = {
   createForm: _propTypes2.default.func.isRequired
 };
 
-
 function mapStateToProps(state) {
   return {
     title: state.getIn(['form', 'title'])

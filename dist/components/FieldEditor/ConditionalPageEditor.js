@@ -36,8 +36,6 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _immutable = require('immutable');
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 var _SelectInput = require('../InputTypes/SelectInput');
@@ -115,6 +113,9 @@ var ConditionalPageEditor = function (_Component) {
       }
       return '';
     }
+
+    // eslint-disable-next-line no-undef
+
   }, {
     key: '__nextButtonTargetOptions__REACT_HOT_LOADER__',
     value: function __nextButtonTargetOptions__REACT_HOT_LOADER__() {
@@ -129,11 +130,11 @@ var ConditionalPageEditor = function (_Component) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        _reactBootstrap.Row,
-        { className: 'winterfell-form-builder-conditional-page alert-warning' },
+        'div',
+        { className: 'row winterfell-form-builder-conditional-page alert-warning' },
         _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
+          'div',
+          { className: 'col-xs-12' },
           _react2.default.createElement(
             'h6',
             null,
@@ -149,11 +150,11 @@ var ConditionalPageEditor = function (_Component) {
             )
           ),
           _react2.default.createElement(
-            _reactBootstrap.FormGroup,
-            null,
+            'div',
+            { className: 'form-group' },
             _react2.default.createElement(
-              _reactBootstrap.InputGroup,
-              null,
+              'div',
+              { className: 'input-group' },
               _react2.default.createElement(_SelectInput2.default, {
                 id: 'questionTarget',
                 labelId: 'questionTarget',
@@ -163,17 +164,14 @@ var ConditionalPageEditor = function (_Component) {
                 value: this.state.questionTarget
               }),
               _react2.default.createElement(
-                _reactBootstrap.InputGroup.Button,
-                null,
-                _react2.default.createElement(
-                  _reactBootstrap.Button,
-                  {
-                    label: 'find',
-                    className: 'btn btn-danger',
-                    onClick: this.onResetNextQuestionTarget
-                  },
-                  'reset'
-                )
+                'button',
+                {
+                  type: 'button',
+                  label: 'find',
+                  className: 'btn btn-danger',
+                  onClick: this.onResetNextQuestionTarget
+                },
+                'reset'
               )
             )
           )
@@ -195,13 +193,13 @@ ConditionalPageEditor.propTypes = {
   value: _propTypes2.default.string,
   conditions: _propTypes2.default.object
 };
+
 ConditionalPageEditor.defaultProps = {
   text: '',
   value: '',
   questionTarget: '',
   conditions: (0, _immutable.fromJS)([])
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

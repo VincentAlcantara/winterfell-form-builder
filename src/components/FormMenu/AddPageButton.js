@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button, FormGroup } from 'react-bootstrap';
 import { addPage } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
 
 class AddPageButton extends Component {
-  static propTypes = {
-    addPage: PropTypes.func.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
@@ -19,7 +14,6 @@ class AddPageButton extends Component {
       panelHeader: '',
       panelText: '',
     };
-
     this.onChange = this.onChange.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
   }
@@ -36,14 +30,15 @@ class AddPageButton extends Component {
 
   render() {
     return [
-      <Button
+      <button
+        type="button"
         className="btn btn-block btn-light"
         data-toggle="modal"
         data-target="#addPage"
         key="addPage"
         title="Add page"
       ><i className="material-icons">note_add</i><span className="icon-menu">Page</span>
-      </Button>,
+      </button>,
       <div className="modal fade" id="addPage" tabIndex="-1" key="addPageModal">
         <div className="modal-dialog bg-white">
           <div className="modal-content">
@@ -52,7 +47,7 @@ class AddPageButton extends Component {
             </div>
             <div className="modal-body">
               <form>
-                <FormGroup>
+                <div className="form-group">
                   <FieldGroup
                     id="panelId"
                     name="panelId"
@@ -61,8 +56,8 @@ class AddPageButton extends Component {
                     placeholder="(optional)"
                     value={this.state.panelId}
                   />
-                </FormGroup>
-                <FormGroup>
+                </div>
+                <div className="form-group">
                   <FieldGroup
                     id="panelHeader"
                     name="panelHeader"
@@ -71,8 +66,8 @@ class AddPageButton extends Component {
                     placeholder=""
                     value={this.state.panelHeader}
                   />
-                </FormGroup>
-                <FormGroup>
+                </div>
+                <div className="form-group">
                   <FieldGroup
                     id="panelText"
                     name="panelText"
@@ -81,7 +76,7 @@ class AddPageButton extends Component {
                     placeholder=""
                     value={this.state.panelText}
                   />
-                </FormGroup>
+                </div>
               </form>
             </div>
             <div className="modal-footer">
@@ -101,6 +96,10 @@ class AddPageButton extends Component {
     ];
   }
 }
+
+AddPageButton.propTypes = {
+  addPage: PropTypes.func.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

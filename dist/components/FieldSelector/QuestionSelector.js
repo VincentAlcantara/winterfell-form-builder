@@ -12,8 +12,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _InputTypes = require('../InputTypes/');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -27,8 +25,9 @@ var FormQuestionEditor = function FormQuestionEditor(props) {
   var displayQuestionButtons = function displayQuestionButtons() {
     return questions.map(function (question, questionIndex) {
       return _react2.default.createElement(
-        _reactBootstrap.Button,
+        'button',
         {
+          type: 'button',
           className: 'winterfell-form-builder-selector btn-block',
           onClick: function onClick() {
             return _onClick('question', questionSetIndex, questionIndex);
@@ -36,8 +35,8 @@ var FormQuestionEditor = function FormQuestionEditor(props) {
           key: '' + question.questionId
         },
         _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(
             'label',
             { htmlFor: question.questionId },

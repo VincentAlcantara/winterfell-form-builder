@@ -46,7 +46,9 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = require('react-redux');
 
-var _reactBootstrap = require('react-bootstrap');
+var _reactFontawesome = require('@fortawesome/react-fontawesome');
+
+var _freeSolidSvgIcons = require('@fortawesome/free-solid-svg-icons');
 
 var _DeleteQuestionOptionButton = require('../FormMenu/DeleteQuestionOptionButton');
 
@@ -215,9 +217,10 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
             'div',
             { key: '' + ix },
             _react2.default.createElement(
-              _reactBootstrap.InputGroup,
-              { className: 'winterfell-form-builder-conditional-question' },
-              _react2.default.createElement(_reactBootstrap.FormControl, {
+              'div',
+              { className: 'input-group winterfell-form-builder-conditional-question' },
+              _react2.default.createElement('input', {
+                className: 'form-control',
                 type: 'text',
                 name: _this2.state.questionInputOptions[ix].text,
                 value: _this2.state.questionInputOptions[ix].text,
@@ -225,7 +228,8 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
                   return _this2.onOptionTextChange(event, ix);
                 }
               }),
-              _react2.default.createElement(_reactBootstrap.FormControl, {
+              _react2.default.createElement('input', {
+                className: 'form-control',
                 type: 'text',
                 name: _this2.state.questionInputOptions[ix].value,
                 value: _this2.state.questionInputOptions[ix].value,
@@ -234,7 +238,7 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
                 }
               }),
               _react2.default.createElement(
-                _reactBootstrap.InputGroup.Button,
+                'div',
                 null,
                 _react2.default.createElement(_DeleteQuestionOptionButton2.default, {
                   onDeleteQuestionOption: function onDeleteQuestionOption() {
@@ -243,44 +247,37 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
                 })
               ),
               _react2.default.createElement(
-                _reactBootstrap.InputGroup.Button,
+                'div',
                 null,
                 _react2.default.createElement(
-                  _reactBootstrap.Button,
+                  'button',
                   {
+                    type: 'button',
                     onClick: function onClick(event) {
                       return _this2.onShowConditonalClick(ix, event);
                     },
                     className: 'btn btn-warning',
                     id: 'showConditionalPageButton'
                   },
-                  _this2.state.showConditionalPage && !_this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-share-alt', id: 'showConditionalPage' }),
-                  _this2.state.showConditionalPage && _this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, {
-                    glyph: 'glyphicon glyphicon glyphicon-minus-sign',
-                    id: 'showConditionalPage'
-                  })
+                  _this2.state.showConditionalPage && !_this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faShare, id: 'showConditionalPage' }),
+                  _this2.state.showConditionalPage && _this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMinusCircle, id: 'showConditionalPage' })
                 )
               ),
               _react2.default.createElement(
-                _reactBootstrap.InputGroup.Button,
+                'div',
                 null,
                 _react2.default.createElement(
-                  _reactBootstrap.Button,
+                  'button',
                   {
+                    type: 'button',
                     id: 'showConditionalQuestionButton',
                     onClick: function onClick(event) {
                       return _this2.onShowConditonalClick(ix, event);
                     },
                     className: 'btn btn-dark'
                   },
-                  _this2.state.showConditionalQuestions && !_this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, {
-                    glyph: 'glyphicon glyphicon-menu-hamburger',
-                    id: 'showConditionalQuestion'
-                  }),
-                  _this2.state.showConditionalQuestions && _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactBootstrap.Glyphicon, {
-                    glyph: 'glyphicon glyphicon glyphicon-minus-sign',
-                    id: 'showConditionalQuestion'
-                  })
+                  _this2.state.showConditionalQuestions && !_this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faHamburger, id: 'showConditionalQuestion' }),
+                  _this2.state.showConditionalQuestions && _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMinusCircle, id: 'showConditionalQuestion' })
                 )
               ),
               _this2.state.showConditionalPage[ix] && _react2.default.createElement(_ConditionalPageEditor2.default, {

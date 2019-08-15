@@ -5,12 +5,6 @@ import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-ho
 import { movePage, changeCurrentEditingField } from '../../actions/winterfellFormBuilderActions';
 
 class PageSortSelector extends Component {
-  static propTypes = {
-    movePage: PropTypes.func.isRequired,
-    changeCurrentEditingField: PropTypes.func.isRequired,
-    formPanels: PropTypes.object.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
@@ -26,13 +20,14 @@ class PageSortSelector extends Component {
       items: nextProps.formPanels.map(formPanel => formPanel.get('panelId')),
     };
   }
-  onSortEnd = ({ oldIndex, newIndex }) => {
+
+  onSortEnd({ oldIndex, newIndex }) {
     if (oldIndex === newIndex) return;
     this.setState({
       items: arrayMove(this.state.items, oldIndex, newIndex),
     });
     this.props.movePage(oldIndex, newIndex);
-  };
+  }
 
   render() {
     const SortableItem = SortableElement(({ value }) =>
@@ -59,6 +54,12 @@ class PageSortSelector extends Component {
     ];
   }
 }
+
+PageSortSelector.propTypes = {
+  movePage: PropTypes.func.isRequired,
+  changeCurrentEditingField: PropTypes.func.isRequired,
+  formPanels: PropTypes.object.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

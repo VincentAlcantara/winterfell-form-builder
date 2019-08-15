@@ -27,36 +27,15 @@ const onSubmitDefault = (questionAndAnswers, target) => {
 };
 
 class Previewer extends Component {
-  static propTypes = {
-    currentPanelId: PropTypes.string,
-    schema: PropTypes.object.isRequired,
-    onRender: PropTypes.func,
-    updateQuestionAnswers: PropTypes.func,
-    onSubmit: PropTypes.func,
-    onSwitchPanel: PropTypes.func,
-    questionAnswers: PropTypes.object,
-  };
-
-  static defaultProps = {
-    currentPanelId: null,
-    schema: {},
-    onRender: onRenderDefault,
-    onSubmit: onSubmitDefault,
-    onSwitchPanel: onSwitchPanelDefault,
-    questionAnswers: {},
-    onUpdate: () => {},
-    updateQuestionAnswers: () => {},
-  };
-
   constructor(props) {
     super(props);
     this.onUpdateQuestionAnswers = this.onUpdateQuestionAnswers.bind(this);
   }
 
-  onUpdateQuestionAnswers = (questionAndAnswers) => {
+  onUpdateQuestionAnswers(questionAndAnswers) {
     console.log('Question Updated! The current set of answers is: ', questionAndAnswers);
     this.props.updateQuestionAnswers(questionAndAnswers);
-  };
+  }
 
   render() {
     const {
@@ -113,6 +92,27 @@ class Previewer extends Component {
     );
   }
 }
+
+Previewer.propTypes = {
+  currentPanelId: PropTypes.string,
+  schema: PropTypes.object.isRequired,
+  onRender: PropTypes.func,
+  updateQuestionAnswers: PropTypes.func,
+  onSubmit: PropTypes.func,
+  onSwitchPanel: PropTypes.func,
+  questionAnswers: PropTypes.object,
+};
+
+Previewer.defaultProps = {
+  currentPanelId: null,
+  schema: {},
+  onRender: onRenderDefault,
+  onSubmit: onSubmitDefault,
+  onSwitchPanel: onSwitchPanelDefault,
+  questionAnswers: {},
+  onUpdate: () => {},
+  updateQuestionAnswers: () => {},
+};
 
 export default connect(null, { updateQuestionAnswers })(Previewer);
 

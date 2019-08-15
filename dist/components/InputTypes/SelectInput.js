@@ -111,6 +111,7 @@ SelectInput.propTypes = {
   onSelect: _propTypes2.default.func,
   required: _propTypes2.default.bool
 };
+
 SelectInput.defaultProps = {
   classes: {
     select: 'form-control'
@@ -124,6 +125,7 @@ SelectInput.defaultProps = {
   required: false,
   displayValue: ''
 };
+
 var _default = SelectInput;
 exports.default = _default;
 ;

@@ -5,10 +5,6 @@ import { createForm } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
 class CreateFormButton extends Component {
-  static propTypes = {
-    createForm: PropTypes.func.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
@@ -79,6 +75,10 @@ class CreateFormButton extends Component {
     ];
   }
 }
+
+CreateFormButton.propTypes = {
+  createForm: PropTypes.func.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

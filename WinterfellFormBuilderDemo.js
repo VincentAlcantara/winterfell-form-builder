@@ -5,14 +5,6 @@ import PropTypes from 'prop-types';
 import WinterfellFormBuilder from './src';
 
 class WinterfellFormBuilderDemo extends Component {
-  static propTypes = {
-    schema: PropTypes.object,
-  };
-
-  static defaultProps = {
-    schema: {},
-  };
-
   constructor(props) {
     super(props);
 
@@ -27,6 +19,14 @@ class WinterfellFormBuilderDemo extends Component {
     );
   }
 }
+
+WinterfellFormBuilderDemo.propTypes = {
+  schema: PropTypes.object,
+};
+
+WinterfellFormBuilderDemo.defaultProps = {
+  schema: {},
+};
 
 function mapStateToProps(state) {
   return {

@@ -10,37 +10,6 @@ import PageSortSelector from './PageSortSelector';
 
 
 class FieldSelectorContainer extends Component {
-  static propTypes = {
-    editFormTitle: PropTypes.func.isRequired,
-    changeCurrentEditingField: PropTypes.func.isRequired,
-    currentQuestionPanelIndex: PropTypes.number.isRequired,
-    currentEditingField: PropTypes.string,
-    currentQuestionSetIndex: PropTypes.number,
-    currentQuestionIndex: PropTypes.number,
-    questionSets: PropTypes.object,
-    questionPanels: PropTypes.object,
-    panelHeader: PropTypes.string,
-    panelText: PropTypes.string,
-    backButton: PropTypes.string,
-    backButtonDisabled: PropTypes.bool,
-    nextButton: PropTypes.string,
-  };
-
-  static defaultProps = {
-    currentPanelId: 'Select Page',
-    currentQuestionPanelIndex: 0,
-    currentEditingField: 'page',
-    questionPanels: null,
-    questionSets: null,
-    panelHeader: '',
-    panelText: '',
-    backButton: '',
-    backButtonDisabled: false,
-    nextButton: '',
-    currentQuestionSetIndex: 0,
-    currentQuestionIndex: 0,
-  }
-
   constructor(props) {
     super(props);
 
@@ -117,6 +86,37 @@ class FieldSelectorContainer extends Component {
     ];
   }
 }
+
+FieldSelectorContainer.propTypes = {
+  editFormTitle: PropTypes.func.isRequired,
+  changeCurrentEditingField: PropTypes.func.isRequired,
+  currentQuestionPanelIndex: PropTypes.number.isRequired,
+  currentEditingField: PropTypes.string,
+  currentQuestionSetIndex: PropTypes.number,
+  currentQuestionIndex: PropTypes.number,
+  questionSets: PropTypes.object,
+  questionPanels: PropTypes.object,
+  panelHeader: PropTypes.string,
+  panelText: PropTypes.string,
+  backButton: PropTypes.string,
+  backButtonDisabled: PropTypes.bool,
+  nextButton: PropTypes.string,
+};
+
+FieldSelectorContainer.defaultProps = {
+  currentPanelId: 'Select Page',
+  currentQuestionPanelIndex: 0,
+  currentEditingField: 'page',
+  questionPanels: null,
+  questionSets: null,
+  panelHeader: '',
+  panelText: '',
+  backButton: '',
+  backButtonDisabled: false,
+  nextButton: '',
+  currentQuestionSetIndex: 0,
+  currentQuestionIndex: 0,
+};
 
 function mapStateToProps(state, ownProps) {
   return {

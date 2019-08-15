@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import { uploadJSON } from '../../actions/winterfellFormBuilderActions';
 
-
 class UploadJSONButton extends Component {
-  static propTypes = {
-    uploadJSON: PropTypes.func.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
@@ -89,6 +83,10 @@ class UploadJSONButton extends Component {
     ];
   }
 }
+
+UploadJSONButton.propTypes = {
+  uploadJSON: PropTypes.func.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

@@ -1,16 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
 import { deleteQuestion } from '../../actions/winterfellFormBuilderActions';
 
 class DeleteQuestionButton extends Component {
-  static propTypes = {
-    deleteQuestion: PropTypes.func.isRequired,
-    currentQuestionSetIndex: PropTypes.number.isRequired,
-    currentQuestionIndex: PropTypes.number.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
@@ -36,13 +29,14 @@ class DeleteQuestionButton extends Component {
 
   render() {
     return [
-      <Button
+      <button
+        type="button"
         className="btn btn-danger"
         data-toggle="modal"
         data-target="#deleteQuestion"
       >
         Delete question
-      </Button>,
+      </button>,
       <div className="modal fade" id="deleteQuestion" tabIndex="-1">
         <div className="modal-dialog bg-white">
           <div className="modal-header">
@@ -55,17 +49,25 @@ class DeleteQuestionButton extends Component {
             <button
               className="btn btn-danger"
               data-dismiss="modal"
-            >Cancel</button>
+            >Cancel
+            </button>
             <button
               className="btn btn-dark"
               onClick={this.onConfirmDelete}
-            >Confirm Delete</button>
+            >Confirm Delete
+            </button>
           </div>
         </div>
       </div>,
     ];
   }
 }
+
+DeleteQuestionButton.propTypes = {
+  deleteQuestion: PropTypes.func.isRequired,
+  currentQuestionSetIndex: PropTypes.number.isRequired,
+  currentQuestionIndex: PropTypes.number.isRequired,
+};
 
 function mapStateToProps(state) {
   return {
