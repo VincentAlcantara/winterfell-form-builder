@@ -18,20 +18,11 @@ var PageSortButton = function PageSortButton(props) {
   return _react2.default.createElement(
     'button',
     {
-      className: 'btn btn-block btn-light',
+      className: 'btn btn-block btn-secondary',
       onClick: props.onClick,
       key: 'sortPages'
     },
-    _react2.default.createElement(
-      'i',
-      { className: 'material-icons' },
-      'swap_vert'
-    ),
-    _react2.default.createElement(
-      'span',
-      { className: 'icon-menu' },
-      'Pages'
-    )
+    'Sort Pages'
   );
 };
 

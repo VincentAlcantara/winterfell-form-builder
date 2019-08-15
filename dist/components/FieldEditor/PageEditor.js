@@ -130,23 +130,13 @@ var PageEditor = function (_PureComponent) {
       var _this3 = this;
 
       var questionSetsArray = this.props.currentQuestionSets.toJS();
-      return _react2.default.createElement(
+      return [_react2.default.createElement(
+        'h3',
+        null,
+        'Question Editor'
+      ), _react2.default.createElement(
         'form',
         null,
-        _react2.default.createElement(
-          'div',
-          { className: 'form-group' },
-          _react2.default.createElement(
-            'label',
-            { htmlFor: 'filename' },
-            'Filename'
-          ),
-          _react2.default.createElement(
-            'p',
-            { disabled: true, id: 'filename' },
-            this.props.title
-          )
-        ),
         _react2.default.createElement(
           'div',
           { className: 'form-group' },
@@ -158,7 +148,7 @@ var PageEditor = function (_PureComponent) {
           _react2.default.createElement(
             'div',
             { className: 'input-group' },
-            _react2.default.createElement('div', {
+            _react2.default.createElement('input', {
               className: 'form-control',
               id: 'panelId',
               name: 'panelId',
@@ -237,7 +227,7 @@ var PageEditor = function (_PureComponent) {
             })
           )
         )
-      );
+      )];
     }
   }]);
   return PageEditor;

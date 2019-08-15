@@ -83,22 +83,13 @@ var AddPageButton = function (_Component) {
         'button',
         {
           type: 'button',
-          className: 'btn btn-block btn-light',
+          className: 'btn btn-block btn-secondary',
           'data-toggle': 'modal',
           'data-target': '#addPage',
           key: 'addPage',
           title: 'Add page'
         },
-        _react2.default.createElement(
-          'i',
-          { className: 'material-icons' },
-          'note_add'
-        ),
-        _react2.default.createElement(
-          'span',
-          { className: 'icon-menu' },
-          'Page'
-        )
+        'Add Page'
       ), _react2.default.createElement(
         'div',
         { className: 'modal fade', id: 'addPage', tabIndex: '-1', key: 'addPageModal' },

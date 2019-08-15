@@ -28,10 +28,6 @@ var _ButtonBarEditor = require('./ButtonBarEditor');
 
 var _ButtonBarEditor2 = _interopRequireDefault(_ButtonBarEditor);
 
-var _TreeView = require('../TreeView');
-
-var _TreeView2 = _interopRequireDefault(_TreeView);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function FieldEditor(props) {
@@ -44,13 +40,6 @@ function FieldEditor(props) {
   return _react2.default.createElement(
     'div',
     { className: 'winterfell-form-builder-field-editor bg-light p-3' },
-    _react2.default.createElement(
-      'label',
-      { htmlFor: 'tree-view' },
-      'Navigation'
-    ),
-    _react2.default.createElement(_TreeView2.default, { id: 'tree-view' }),
-    _react2.default.createElement('br', null),
     (currentEditingField === 'page' || currentEditingField === 'pageSort') && _react2.default.createElement(_PageEditor2.default, {
       currentQuestionPanelIndex: currentQuestionPanelIndex
     }),
