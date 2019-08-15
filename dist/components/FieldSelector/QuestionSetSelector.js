@@ -12,8 +12,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _QuestionSelector = require('./QuestionSelector');
 
 var _QuestionSelector2 = _interopRequireDefault(_QuestionSelector);
@@ -33,7 +31,7 @@ var QuestionSetSelector = function QuestionSetSelector(props) {
         if (currentQuestionSet.questionSetId === questionSet.questionSetId) {
           return _react2.default.createElement(
             'span',
-            null,
+            { key: questionSetIndex },
             questionSet.questionSetHeader && _react2.default.createElement(
               'button',
               {

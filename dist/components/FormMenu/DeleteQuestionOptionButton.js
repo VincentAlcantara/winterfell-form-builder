@@ -32,7 +32,9 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
+var _reactFontawesome = require('@fortawesome/react-fontawesome');
+
+var _freeSolidSvgIcons = require('@fortawesome/free-solid-svg-icons');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -69,14 +71,19 @@ var DeleteQuestionOptionButton = function (_Component) {
     key: 'render',
     value: function render() {
       return [_react2.default.createElement(
-        _reactBootstrap.Button,
+        'button',
         {
+          type: 'button',
           className: 'btn btn-danger',
-          title: 'delete this option',
           'data-toggle': 'modal',
           'data-target': '#deleteQuestionOptionButton'
         },
-        _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-remove' })
+        _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faTrash }),
+        _react2.default.createElement(
+          'span',
+          null,
+          'delete this option'
+        )
       ), _react2.default.createElement(
         'div',
         { className: 'modal fade', id: 'deleteQuestionOptionButton', tabIndex: '-1' },
@@ -127,6 +134,7 @@ var DeleteQuestionOptionButton = function (_Component) {
 DeleteQuestionOptionButton.propTypes = {
   onDeleteQuestionOption: _propTypes2.default.func.isRequired
 };
+
 var _default = DeleteQuestionOptionButton;
 exports.default = _default;
 ;

@@ -38,8 +38,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _immutable = require('immutable');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
@@ -136,8 +134,8 @@ var PageEditor = function (_PureComponent) {
         'form',
         null,
         _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(
             'label',
             { htmlFor: 'filename' },
@@ -150,8 +148,8 @@ var PageEditor = function (_PureComponent) {
           )
         ),
         _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(
             'label',
             { htmlFor: 'panelId' },
@@ -160,7 +158,8 @@ var PageEditor = function (_PureComponent) {
           _react2.default.createElement(
             'div',
             { className: 'input-group' },
-            _react2.default.createElement(_reactBootstrap.FormControl, {
+            _react2.default.createElement('div', {
+              className: 'form-control',
               id: 'panelId',
               name: 'panelId',
               onChange: this.onChange,
@@ -183,8 +182,8 @@ var PageEditor = function (_PureComponent) {
           )
         ),
         _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(_FieldGroup2.default, {
             id: 'panelHeader',
             name: 'panelHeader',
@@ -195,8 +194,8 @@ var PageEditor = function (_PureComponent) {
           })
         ),
         _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(_FieldGroup2.default, {
             id: 'panelText',
             name: 'panelText',
@@ -207,13 +206,13 @@ var PageEditor = function (_PureComponent) {
           })
         ),
         _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(_FormMenu.AddQuestionSetButton, null)
         ),
         questionSetsArray && questionSetsArray.length > 0 && _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(
             'label',
             { htmlFor: 'questionSetList' },
@@ -224,10 +223,11 @@ var PageEditor = function (_PureComponent) {
             { id: 'questionSetList' },
             questionSetsArray.map(function (questionSet, index) {
               return _react2.default.createElement(
-                _reactBootstrap.Button,
+                'button',
                 {
+                  type: 'button',
                   key: 'questionSet-' + index,
-                  bsStyle: 'link',
+                  variant: 'link',
                   onClick: function onClick() {
                     return _this3.onClick(questionSet.questionSetId);
                   }
@@ -258,6 +258,7 @@ PageEditor.propTypes = {
   currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
   formPanels: _propTypes2.default.object.isRequired
 };
+
 PageEditor.defaultProps = {
   currentQuestionPanelIndex: 0,
   title: '',
@@ -268,7 +269,6 @@ PageEditor.defaultProps = {
   currentQuestionSets: (0, _immutable.fromJS)({}),
   formPanels: (0, _immutable.fromJS)({})
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

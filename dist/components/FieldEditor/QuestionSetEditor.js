@@ -38,8 +38,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 var _FieldGroup = require('../InputTypes/FieldGroup');
@@ -115,8 +113,8 @@ var QuestionSetEditor = function (_PureComponent) {
         'form',
         null,
         _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(_FieldGroup2.default, {
             id: 'questionSetId',
             name: 'questionSetId',
@@ -135,8 +133,8 @@ var QuestionSetEditor = function (_PureComponent) {
           })
         ),
         _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(_FieldGroup2.default, {
             id: 'questionSetText',
             name: 'questionSetText',
@@ -147,8 +145,8 @@ var QuestionSetEditor = function (_PureComponent) {
           })
         ),
         questionsArray && questionsArray.length > 0 && _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(
             'label',
             { htmlFor: 'questionList' },
@@ -159,10 +157,11 @@ var QuestionSetEditor = function (_PureComponent) {
             { id: 'questionList' },
             questionsArray.map(function (question, index) {
               return _react2.default.createElement(
-                _reactBootstrap.Button,
+                'button',
                 {
+                  type: 'button',
                   key: 'question-' + index,
-                  bsStyle: 'link',
+                  variant: 'link',
                   onClick: function onClick() {
                     return _this2.props.changeCurrentEditingField('question', currentQuestionSetIndex, index);
                   }
@@ -188,6 +187,7 @@ QuestionSetEditor.propTypes = {
   currentQuestionSetIndex: _propTypes2.default.number.isRequired,
   questions: _propTypes2.default.object
 };
+
 QuestionSetEditor.defaultProps = {
   currentQuestionSetIndex: 0,
   questionSetId: '',
@@ -195,7 +195,6 @@ QuestionSetEditor.defaultProps = {
   questionSetText: '',
   questions: []
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

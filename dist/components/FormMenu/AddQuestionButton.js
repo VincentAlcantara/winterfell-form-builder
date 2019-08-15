@@ -38,8 +38,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
 
 var _FieldGroup = require('../InputTypes/FieldGroup');
@@ -105,8 +103,9 @@ var AddQuestionButton = function (_Component) {
     key: 'render',
     value: function render() {
       return [_react2.default.createElement(
-        _reactBootstrap.Button,
+        'button',
         {
+          type: 'button',
           className: 'btn btn-dark',
           'data-toggle': 'modal',
           'data-target': '#addQuestion'
@@ -137,8 +136,8 @@ var AddQuestionButton = function (_Component) {
                 'form',
                 null,
                 _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
+                  'div',
+                  { className: 'form-group' },
                   _react2.default.createElement(_FieldGroup2.default, {
                     id: 'questionId',
                     name: 'questionId',
@@ -149,8 +148,8 @@ var AddQuestionButton = function (_Component) {
                   })
                 ),
                 _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
+                  'div',
+                  { className: 'form-group' },
                   _react2.default.createElement(_FieldGroup2.default, {
                     id: 'question',
                     name: 'question',
@@ -161,8 +160,8 @@ var AddQuestionButton = function (_Component) {
                   })
                 ),
                 _react2.default.createElement(
-                  _reactBootstrap.FormGroup,
-                  null,
+                  'div',
+                  { className: 'form-group' },
                   _react2.default.createElement(
                     'label',
                     { htmlFor: 'questionType' },
@@ -212,6 +211,7 @@ AddQuestionButton.propTypes = {
   questionSetId: _propTypes2.default.string,
   currentQuestionSetIndex: _propTypes2.default.number.isRequired
 };
+
 AddQuestionButton.defaultProps = {
   questionSetId: ''
 };

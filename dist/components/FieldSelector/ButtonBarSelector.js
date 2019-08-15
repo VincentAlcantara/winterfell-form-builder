@@ -12,8 +12,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ButtonBarSelector = function ButtonBarSelector(props) {
@@ -24,8 +22,9 @@ var ButtonBarSelector = function ButtonBarSelector(props) {
 
 
   return _react2.default.createElement(
-    _reactBootstrap.Button,
+    'button',
     {
+      type: 'button',
       className: 'winterfell-form-builder-selector btn-block',
       onClick: onClick
     },

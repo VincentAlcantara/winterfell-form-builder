@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import { movePage, changeCurrentEditingField } from '../../actions/winterfellFormBuilderActions';
 
 class PageSortSelector extends Component {
-  static propTypes = {
-    movePage: PropTypes.func.isRequired,
-    changeCurrentEditingField: PropTypes.func.isRequired,
-    formPanels: PropTypes.object.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
@@ -27,13 +20,14 @@ class PageSortSelector extends Component {
       items: nextProps.formPanels.map(formPanel => formPanel.get('panelId')),
     };
   }
-  onSortEnd = ({ oldIndex, newIndex }) => {
+
+  onSortEnd({ oldIndex, newIndex }) {
     if (oldIndex === newIndex) return;
     this.setState({
       items: arrayMove(this.state.items, oldIndex, newIndex),
     });
     this.props.movePage(oldIndex, newIndex);
-  };
+  }
 
   render() {
     const SortableItem = SortableElement(({ value }) =>
@@ -55,11 +49,18 @@ class PageSortSelector extends Component {
     ),
     );
     return [
-      <label htmlFor="sortableList" key="sortPagesLabel">Pages - Drag and Drop to Sort</label>,
-      <SortableList key="sortingPages" items={this.state.items} onSortEnd={this.onSortEnd} />
+      <h3 htmlFor="sortableList" key="sortPagesLabel">Page Sort</h3>,
+      <p>To sort, drag and drop the pages below to the desired order.</p>,
+      <SortableList key="sortingPages" items={this.state.items} onSortEnd={this.onSortEnd} />,
     ];
   }
 }
+
+PageSortSelector.propTypes = {
+  movePage: PropTypes.func.isRequired,
+  changeCurrentEditingField: PropTypes.func.isRequired,
+  formPanels: PropTypes.object.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

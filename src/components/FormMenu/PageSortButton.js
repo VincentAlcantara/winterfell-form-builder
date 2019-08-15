@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
 
 const PageSortButton = props => (
   <button
-    className="btn btn-block btn-light"
+    className="btn btn-block btn-secondary"
     onClick={props.onClick}
     key="sortPages"
-  ><i class="material-icons">swap_vert</i><span className="icon-menu">Pages</span>
+  >Sort Pages
   </button>
 );
-
 
 PageSortButton.propTypes = {
   onClick: PropTypes.func.isRequired,

@@ -5,42 +5,33 @@ import { editFormTitle } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
 class EditFormTitleButton extends Component {
-  static propTypes = {
-    editFormTitle: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired,
-  }
-
   constructor(props) {
     super(props);
 
     this.state = {
-      showModal: false,
-      formTitle: '',
+      formTitle: props.title,
     };
 
     this.onChange = this.onChange.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.state = {
+      formTitle: nextProps.title,
+    };
+  }
   onChange(event) {
     event.preventDefault();
     this.setState({ [event.target.name]: event.target.value });
   }
 
-  onClose(e) {
-    e.preventDefault();
-    this.setState({ showModal: true });
-  }
-
   onFormUpdate(e) {
     e.preventDefault();
     this.props.editFormTitle(this.state.formTitle);
-    this.setState({ showModal: false });
   }
 
   render() {
-    const { title } = this.props;
-
     return [
       <button
         className="btn btn-block btn-dark"
@@ -48,7 +39,7 @@ class EditFormTitleButton extends Component {
         data-target="#editFormTitle"
         key="editFormTitle"
         title="Edit Form Title"
-      ><i class="material-icons">edit</i><span className="icon-menu">Title</span>
+      ><i className="material-icons">edit</i><span className="icon-menu">Title</span>
       </button>,
       <div className="modal fade" id="editFormTitle" tabIndex="-1" key="editFormTitleModal">
         <div className="modal-dialog bg-white">
@@ -63,7 +54,6 @@ class EditFormTitleButton extends Component {
                   name="formTitle"
                   label="Enter title of the form"
                   onChange={this.onChange}
-                  placeholder={title}
                   value={this.state.formTitle}
                 />
               </form>
@@ -85,6 +75,11 @@ class EditFormTitleButton extends Component {
     ];
   }
 }
+
+EditFormTitleButton.propTypes = {
+  editFormTitle: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 function mapStateToProps(state) {
   return {

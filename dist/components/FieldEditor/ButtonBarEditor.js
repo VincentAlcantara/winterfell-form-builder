@@ -38,8 +38,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _immutable = require('immutable');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
@@ -156,8 +154,8 @@ var ButtonBarEditor = function (_PureComponent) {
         'div',
         null,
         _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(_FieldGroup2.default, {
             id: 'backButtonText',
             name: 'backButtonText',
@@ -168,8 +166,8 @@ var ButtonBarEditor = function (_PureComponent) {
           })
         ),
         _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(
             'span',
             { htmlFor: 'disable-back-button', id: 'disable-back-button-label' },
@@ -183,8 +181,8 @@ var ButtonBarEditor = function (_PureComponent) {
           )
         ),
         _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(_FieldGroup2.default, {
             id: 'nextButtonText',
             name: 'nextButtonText',
@@ -195,8 +193,8 @@ var ButtonBarEditor = function (_PureComponent) {
           })
         ),
         _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(
             'label',
             { htmlFor: 'goToAction' },
@@ -217,8 +215,8 @@ var ButtonBarEditor = function (_PureComponent) {
           })
         ),
         this.state.defaultGoToAction === 'GOTO' && _react2.default.createElement(
-          _reactBootstrap.FormGroup,
-          null,
+          'div',
+          { className: 'form-group' },
           _react2.default.createElement(
             'label',
             { htmlFor: 'goToPanel' },
@@ -260,6 +258,7 @@ ButtonBarEditor.propTypes = {
   defaultGoToAction: _propTypes2.default.string,
   defaultGoToTarget: _propTypes2.default.string
 };
+
 ButtonBarEditor.defaultProps = {
   currentQuestionPanelIndex: 0,
   backButtonText: '',
@@ -269,7 +268,6 @@ ButtonBarEditor.defaultProps = {
   defaultGoToAction: '',
   defaultGoToTarget: ''
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

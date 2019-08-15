@@ -7,6 +7,7 @@ import { updateForm } from '../../actions/winterfellFormBuilderActions';
 class EditSchemaButton extends Component {
   static propTypes = {
     updateForm: PropTypes.func.isRequired,
+    schema: PropTypes.object,
   };
 
   static defaultProps = {
@@ -16,11 +17,17 @@ class EditSchemaButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      schemaObject: null,
+      schema: this.props.schema,
     };
 
     this.onChange = this.onChange.bind(this);
     this.onFormUpdate = this.onFormUpdate.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.state = {
+      schema: nextProps.schema,
+    };
   }
 
   onChange(e) {
@@ -40,7 +47,7 @@ class EditSchemaButton extends Component {
         data-target="#editSchema"
         key="editSchema"
         title="Edit Schema"
-      ><i class="material-icons">view_agenda</i><span className="icon-menu">Schema</span>
+      ><i className="material-icons">view_agenda</i><span className="icon-menu">Schema</span>
       </button>,
       <div className="modal fade" id="editSchema" tabIndex="-1" key="editSchemaModal">
         <div className="modal-dialog bg-white">
@@ -52,7 +59,7 @@ class EditSchemaButton extends Component {
               <form>
                 <textarea
                   rows="30"
-                  cols="60"
+                  cols="50"
                   value={JSON.stringify(this.state.schema, undefined, 2)}
                   onChange={this.onChange}
                 />
@@ -75,6 +82,14 @@ class EditSchemaButton extends Component {
     ];
   }
 }
+
+EditSchemaButton.propTypes = {
+  updateForm: PropTypes.func.isRequired,
+};
+
+EditSchemaButton.defaultProps = {
+  schema: null,
+};
 
 function mapStateToProps(state) {
   return {

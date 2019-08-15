@@ -1,29 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup, Button } from 'react-bootstrap';
 import { editQuestionSetHeader, editQuestionSetText, changeCurrentEditingField } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 
 class QuestionSetEditor extends PureComponent {
-  static propTypes = {
-    editQuestionSetHeader: PropTypes.func.isRequired,
-    editQuestionSetText: PropTypes.func.isRequired,
-    changeCurrentEditingField: PropTypes.func.isRequired,
-    questionSetId: PropTypes.string,
-    questionSetHeader: PropTypes.string,
-    questionSetText: PropTypes.string,
-    currentQuestionSetIndex: PropTypes.number.isRequired,
-    questions: PropTypes.object,
-  }
-
-  static defaultProps = {
-    currentQuestionSetIndex: 0,
-    questionSetId: '',
-    questionSetHeader: '',
-    questionSetText: '',
-    questions: [],
-  }
   constructor(props) {
     super(props);
     const { questionSetId, questionSetHeader, questionSetText, questions } = props;
@@ -64,7 +45,7 @@ class QuestionSetEditor extends PureComponent {
     const questionsArray = questions.toJS();
     return (
       <form>
-        <FormGroup>
+        <div className="form-group">
           <FieldGroup
             id="questionSetId"
             name="questionSetId"
@@ -81,8 +62,8 @@ class QuestionSetEditor extends PureComponent {
             placeholder={this.props.questionSetHeader}
             value={this.state.questionSetHeader}
           />
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div className="form-group">
           <FieldGroup
             id="questionSetText"
             name="questionSetText"
@@ -91,30 +72,50 @@ class QuestionSetEditor extends PureComponent {
             onChange={this.onChangeQuestionSetText}
             value={this.state.questionSetText}
           />
-        </FormGroup>
+        </div>
         { questionsArray && questionsArray.length > 0 &&
-        <FormGroup>
+        <div className="form-group">
           <label htmlFor="questionList">Questions
           </label>
           <div id="questionList">
             { questionsArray.map((question, index) => (
-              <Button
+              <button
+                type="button"
                 key={`question-${index}`}
-                bsStyle="link"
+                variant="link"
                 onClick={() =>
                   this.props.changeCurrentEditingField('question', currentQuestionSetIndex, index)
                 }
               >{question.questionId}
-              </Button>
+              </button>
             ))
             }
           </div>
-        </FormGroup>
+        </div>
         }
       </form>
     );
   }
 }
+
+QuestionSetEditor.propTypes = {
+  editQuestionSetHeader: PropTypes.func.isRequired,
+  editQuestionSetText: PropTypes.func.isRequired,
+  changeCurrentEditingField: PropTypes.func.isRequired,
+  questionSetId: PropTypes.string,
+  questionSetHeader: PropTypes.string,
+  questionSetText: PropTypes.string,
+  currentQuestionSetIndex: PropTypes.number.isRequired,
+  questions: PropTypes.object,
+};
+
+QuestionSetEditor.defaultProps = {
+  currentQuestionSetIndex: 0,
+  questionSetId: '',
+  questionSetHeader: '',
+  questionSetText: '',
+  questions: [],
+};
 
 function mapStateToProps(state, ownProps) {
   return {

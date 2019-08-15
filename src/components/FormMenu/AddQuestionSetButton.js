@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Button } from 'react-bootstrap';
 import { addQuestionSet } from '../../actions/winterfellFormBuilderActions';
 import FieldGroup from '../InputTypes/FieldGroup';
 import SelectInput from '../InputTypes/SelectInput';
 import { INPUT_TYPE_OPTIONS } from '../../common/constants';
 
-
 class AddQuestionSetButton extends Component {
-  static propTypes = {
-    addQuestionSet: PropTypes.func.isRequired,
-    currentPanelId: PropTypes.string,
-  }
-
-  static defaultProps = {
-    currentPanelId: '',
-  };
-
   constructor(props) {
     super(props);
 
@@ -66,87 +55,93 @@ class AddQuestionSetButton extends Component {
 
   render() {
     return [
-      <Button
+      <button
+        type="button"
         className="btn btn-block btn-dark"
         disabled={!this.props.currentPanelId || this.props.currentPanelId === 'Select Page'}
         data-toggle="modal"
         data-target="#addQuestionSet"
         key="addQuestionSet"
-      >Add question set
-    </Button>,
+        tittle="Add question"
+      >
+        Add question set
+      </button>,
       <div className="modal fade" id="addQuestionSet" tabIndex="-1" key="addQuestionSetModal">
         <div className="modal-dialog bg-white">
-          <div className="modal-header">
-            <div className="modal-title">Add a new question set</div>
-          </div>
-          <div className="modal-body">
-            <FieldGroup
-              id="questionSetId"
-              name="questionSetId"
-              label="Question Set ID"
-              onChange={this.onChange}
-              placeholder="(optional)"
-              value={this.state.questionSetId}
-              key="questionSetId"
-            />
-            <FieldGroup
-              id="questionSetHeader"
-              name="questionSetHeader"
-              label="Question Set Title"
-              onChange={this.onChange}
-              placeholder=""
-              value={this.state.questionSetHeader}
-              key="questionSetHeader"
-            />
-            <FieldGroup
-              id="questionSetText"
-              name="questionSetText"
-              label="Enter Question Set Description"
-              onChange={this.onChange}
-              placeholder=""
-              value={this.state.questionSetText}
-              key="questionSetText"
-            />
-            <FieldGroup
-              id="question"
-              name="question"
-              label="Enter Question"
-              onChange={this.onChange}
-              placeholder=""
-              value={this.state.question}
-              key="question"
-            />
-            <FieldGroup
-              id="questionText"
-              name="questionText"
-              label="Enter Question Text"
-              onChange={this.onChange}
-              placeholder=""
-              value={this.state.questionText}
-              key="questionText"
-            />
-            <label htmlFor="questionType">
-              Select Question Type
+          <div className="modal-content">
+
+            <div className="modal-header">
+              <div className="modal-title">Add a new question set</div>
+            </div>
+            <div className="modal-body">
+              <FieldGroup
+                id="questionSetId"
+                name="questionSetId"
+                label="Question Set ID"
+                onChange={this.onChange}
+                placeholder="(optional)"
+                value={this.state.questionSetId}
+                key="questionSetId"
+              />
+              <FieldGroup
+                id="questionSetHeader"
+                name="questionSetHeader"
+                label="Question Set Title"
+                onChange={this.onChange}
+                placeholder=""
+                value={this.state.questionSetHeader}
+                key="questionSetHeader"
+              />
+              <FieldGroup
+                id="questionSetText"
+                name="questionSetText"
+                label="Enter Question Set Description"
+                onChange={this.onChange}
+                placeholder=""
+                value={this.state.questionSetText}
+                key="questionSetText"
+              />
+              <FieldGroup
+                id="question"
+                name="question"
+                label="Enter Question"
+                onChange={this.onChange}
+                placeholder=""
+                value={this.state.question}
+                key="question"
+              />
+              <FieldGroup
+                id="questionText"
+                name="questionText"
+                label="Enter Question Text"
+                onChange={this.onChange}
+                placeholder=""
+                value={this.state.questionText}
+                key="questionText"
+              />
+              <label htmlFor="questionType">
+                Select Question Type
                   </label>
-            <SelectInput
-              id="questionType"
-              labelId="questionType"
-              options={INPUT_TYPE_OPTIONS}
-              onSelect={this.onSelect}
-              value={this.state.questionType}
-              key="questionType"
-            />
-          </div>
-          <div className="modal-footer">
-            <button
-              className="btn btn-danger"
-              data-dismiss="modal"
-            >Cancel</button>
-            <button
-              className="btn btn-dark"
-              onClick={this.onFormUpdate}
-              data-dismiss="modal"
-            >Save changes</button>
+              <SelectInput
+                id="questionType"
+                labelId="questionType"
+                options={INPUT_TYPE_OPTIONS}
+                onSelect={this.onSelect}
+                value={this.state.questionType}
+                key="questionType"
+              />
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >Cancel</button>
+              <button
+                className="btn btn-dark"
+                onClick={this.onFormUpdate}
+                data-dismiss="modal"
+              >Save changes</button>
+            </div>
           </div>
         </div>
       </div>,
@@ -154,6 +149,15 @@ class AddQuestionSetButton extends Component {
     ];
   }
 }
+
+AddQuestionSetButton.propTypes = {
+  addQuestionSet: PropTypes.func.isRequired,
+  currentPanelId: PropTypes.string,
+};
+
+AddQuestionSetButton.defaultProps = {
+  currentPanelId: '',
+};
 
 function mapStateToProps(state) {
   return {

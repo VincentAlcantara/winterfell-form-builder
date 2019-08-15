@@ -12,7 +12,9 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
+var _reactFontawesome = require('@fortawesome/react-fontawesome');
+
+var _freeSolidSvgIcons = require('@fortawesome/free-solid-svg-icons');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24,11 +26,11 @@ var AddQuestionOptionButton = function AddQuestionOptionButton(props) {
 
 
   return _react2.default.createElement(
-    _reactBootstrap.Row,
-    null,
+    'div',
+    { className: 'row' },
     _react2.default.createElement(
-      _reactBootstrap.Col,
-      { xs: 12 },
+      'div',
+      { className: 'col-xs-12' },
       _react2.default.createElement(
         'label',
         {
@@ -38,8 +40,8 @@ var AddQuestionOptionButton = function AddQuestionOptionButton(props) {
       )
     ),
     _react2.default.createElement(
-      _reactBootstrap.Col,
-      { xs: 12 },
+      'div',
+      { className: 'col-xs-12' },
       _react2.default.createElement(
         'table',
         null,
@@ -52,7 +54,8 @@ var AddQuestionOptionButton = function AddQuestionOptionButton(props) {
             _react2.default.createElement(
               'td',
               null,
-              _react2.default.createElement(_reactBootstrap.FormControl, {
+              _react2.default.createElement('div', {
+                className: 'form-control',
                 type: 'text',
                 name: 'questionOptionText',
                 value: questionOptionText,
@@ -62,7 +65,8 @@ var AddQuestionOptionButton = function AddQuestionOptionButton(props) {
             _react2.default.createElement(
               'td',
               null,
-              _react2.default.createElement(_reactBootstrap.FormControl, {
+              _react2.default.createElement('div', {
+                className: 'form-control',
                 type: 'text',
                 name: 'questionOptionValue',
                 value: questionOptionValue,
@@ -73,13 +77,14 @@ var AddQuestionOptionButton = function AddQuestionOptionButton(props) {
               'td',
               { colSpan: 2 },
               _react2.default.createElement(
-                _reactBootstrap.Button,
+                'button',
                 {
+                  type: 'button',
                   className: 'btn btn-dark',
                   onClick: onClick,
                   disabled: questionOptionText === '' || questionOptionValue === ''
                 },
-                _react2.default.createElement(_reactBootstrap.Glyphicon, { glyph: 'glyphicon glyphicon-plus' })
+                _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faPlusCircle, id: 'showConditionalPage' })
               )
             )
           )

@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { FormGroup } from 'react-bootstrap';
 import { fromJS } from 'immutable';
 
 import { editNextButtonText, disableBackButton, editBackButtonText, onSelectNextButtonAction, onSelectNextButtonTarget } from '../../actions/winterfellFormBuilderActions';
@@ -10,30 +9,6 @@ import SelectInput from '../InputTypes/SelectInput';
 import FieldGroup from '../InputTypes/FieldGroup';
 
 class ButtonBarEditor extends PureComponent {
-  static propTypes = {
-    editNextButtonText: PropTypes.func.isRequired,
-    backButtonDisabled: PropTypes.bool,
-    editBackButtonText: PropTypes.func.isRequired,
-    disableBackButton: PropTypes.func.isRequired,
-    onSelectNextButtonAction: PropTypes.func.isRequired,
-    onSelectNextButtonTarget: PropTypes.func.isRequired,
-    backButtonText: PropTypes.string,
-    nextButtonText: PropTypes.string,
-    formPanels: PropTypes.object,
-    currentQuestionPanelIndex: PropTypes.number.isRequired,
-    defaultGoToAction: PropTypes.string,
-    defaultGoToTarget: PropTypes.string,
-  }
-
-  static defaultProps = {
-    currentQuestionPanelIndex: 0,
-    backButtonText: '',
-    backButtonDisabled: false,
-    nextButtonText: '',
-    formPanels: fromJS({}),
-    defaultGoToAction: '',
-    defaultGoToTarget: '',
-  }
   constructor(props) {
     super(props);
     const { backButtonText, nextButtonText, defaultGoToAction, defaultGoToTarget } = props;
@@ -109,7 +84,7 @@ class ButtonBarEditor extends PureComponent {
   render() {
     return (
       <div>
-        <FormGroup>
+        <div className="form-group">
           <FieldGroup
             id="backButtonText"
             name="backButtonText"
@@ -118,8 +93,8 @@ class ButtonBarEditor extends PureComponent {
             placeholder={this.props.backButtonText}
             value={this.state.backButtonText}
           />
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div className="form-group">
           <span htmlFor="disable-back-button" id="disable-back-button-label">
             <input
               id="disable-back-button"
@@ -129,8 +104,8 @@ class ButtonBarEditor extends PureComponent {
             />
             &nbsp;disable back button
           </span>
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div className="form-group">
           <FieldGroup
             id="nextButtonText"
             name="nextButtonText"
@@ -139,8 +114,8 @@ class ButtonBarEditor extends PureComponent {
             onChange={this.onChangeNextButtonText}
             value={this.state.nextButtonText}
           />
-        </FormGroup>
-        <FormGroup>
+        </div>
+        <div className="form-group">
           <label htmlFor="goToAction">
             Default Next Button Option
           </label>
@@ -157,9 +132,9 @@ class ButtonBarEditor extends PureComponent {
             onSelect={this.onSelectDefaultAction}
             displayValue={this.props.defaultGoToAction}
           />
-        </FormGroup>
+        </div>
         { this.state.defaultGoToAction === 'GOTO' &&
-          <FormGroup>
+          <div className="form-group">
             <label htmlFor="goToPanel">
               Default Next Button Target
             </label>
@@ -170,7 +145,7 @@ class ButtonBarEditor extends PureComponent {
               onSelect={this.onSelectDefaultTarget}
               displayValue={this.props.defaultGoToTarget}
             />
-          </FormGroup>
+          </div>
         }
         { this.state.defaultGoToAction === 'SUBMIT' &&
           <FieldGroup
@@ -186,6 +161,31 @@ class ButtonBarEditor extends PureComponent {
     );
   }
 }
+
+ButtonBarEditor.propTypes = {
+  editNextButtonText: PropTypes.func.isRequired,
+  backButtonDisabled: PropTypes.bool,
+  editBackButtonText: PropTypes.func.isRequired,
+  disableBackButton: PropTypes.func.isRequired,
+  onSelectNextButtonAction: PropTypes.func.isRequired,
+  onSelectNextButtonTarget: PropTypes.func.isRequired,
+  backButtonText: PropTypes.string,
+  nextButtonText: PropTypes.string,
+  formPanels: PropTypes.object,
+  currentQuestionPanelIndex: PropTypes.number.isRequired,
+  defaultGoToAction: PropTypes.string,
+  defaultGoToTarget: PropTypes.string,
+};
+
+ButtonBarEditor.defaultProps = {
+  currentQuestionPanelIndex: 0,
+  backButtonText: '',
+  backButtonDisabled: false,
+  nextButtonText: '',
+  formPanels: fromJS({}),
+  defaultGoToAction: '',
+  defaultGoToTarget: '',
+};
 
 function mapStateToProps(state, ownProps) {
   return {

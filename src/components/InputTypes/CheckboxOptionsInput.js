@@ -1,37 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormGroup } from 'react-bootstrap';
 
 class CheckboxOptionsInput extends React.Component {
-  static propTypes = {
-    value: PropTypes.array.isRequired,
-    // onChange: PropTypes.func,
-    options: PropTypes.array.isRequired,
-    classes: PropTypes.object,
-    name: PropTypes.string,
-    labelId: PropTypes.string,
-    required: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    classes: {
-      checkboxList: 'clean-list',
-      checkboxListItem: 'checkbox',
-    },
-    labelId: '',
-    name: '',
-    value: [],
-    options: [],
-    onChange: () => {},
-    required: false,
-  };
   constructor(props) {
     super(props);
-
     this.state = {
       value: this.props.value.length > 0 ? this.props.value : [],
     };
-
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -55,7 +30,7 @@ class CheckboxOptionsInput extends React.Component {
             key={opt.value}
             className={this.props.classes.checkboxListItem}
           >
-            <FormGroup>
+            <div className="form-group">
               <label
                 className={this.props.classes.checkboxLabel}
                 htmlFor={`${this.props.name}-${opt.value}`}
@@ -75,12 +50,35 @@ class CheckboxOptionsInput extends React.Component {
                 />
                 {opt.text}
               </label>
-            </FormGroup>
+            </div>
           </li>),
         )}
       </ul>
     );
   }
 }
+
+CheckboxOptionsInput.propTypes = {
+  value: PropTypes.array.isRequired,
+  // onChange: PropTypes.func,
+  options: PropTypes.array.isRequired,
+  classes: PropTypes.object,
+  name: PropTypes.string,
+  labelId: PropTypes.string,
+  required: PropTypes.bool,
+};
+
+CheckboxOptionsInput.defaultProps = {
+  classes: {
+    checkboxList: 'clean-list',
+    checkboxListItem: 'checkbox',
+  },
+  labelId: '',
+  name: '',
+  value: [],
+  options: [],
+  onChange: () => {},
+  required: false,
+};
 
 export default CheckboxOptionsInput;

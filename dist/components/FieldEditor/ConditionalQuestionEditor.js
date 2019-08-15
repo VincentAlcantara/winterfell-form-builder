@@ -42,8 +42,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactBootstrap = require('react-bootstrap');
-
 var _immutable = require('immutable');
 
 var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
@@ -147,8 +145,8 @@ var ConditionalQuestionEditor = function (_PureComponent) {
             'div',
             { key: ix },
             _react2.default.createElement(
-              _reactBootstrap.FormGroup,
-              null,
+              'div',
+              { className: 'form-group' },
               _react2.default.createElement(_FieldGroup2.default, {
                 id: 'questionId',
                 name: 'questionId',
@@ -160,8 +158,8 @@ var ConditionalQuestionEditor = function (_PureComponent) {
               })
             ),
             _react2.default.createElement(
-              _reactBootstrap.FormGroup,
-              null,
+              'div',
+              { className: 'form-group' },
               _react2.default.createElement(_FieldGroup2.default, {
                 id: 'question',
                 name: 'question',
@@ -173,8 +171,8 @@ var ConditionalQuestionEditor = function (_PureComponent) {
               })
             ),
             _react2.default.createElement(
-              _reactBootstrap.FormGroup,
-              null,
+              'div',
+              { className: 'form-group' },
               _react2.default.createElement(_FieldGroup2.default, {
                 id: 'text',
                 name: 'text',
@@ -186,8 +184,8 @@ var ConditionalQuestionEditor = function (_PureComponent) {
               })
             ),
             _react2.default.createElement(
-              _reactBootstrap.FormGroup,
-              null,
+              'div',
+              { className: 'form-group' },
               _react2.default.createElement(_FieldGroup2.default, {
                 id: 'postText',
                 name: 'postText',
@@ -199,8 +197,8 @@ var ConditionalQuestionEditor = function (_PureComponent) {
               })
             ),
             _react2.default.createElement(
-              _reactBootstrap.FormGroup,
-              null,
+              'div',
+              { className: 'form-group' },
               _react2.default.createElement(
                 'label',
                 { htmlFor: 'questionInputType' },
@@ -226,15 +224,16 @@ var ConditionalQuestionEditor = function (_PureComponent) {
             _react2.default.createElement('br', null),
             _react2.default.createElement('br', null),
             _react2.default.createElement(
-              _reactBootstrap.ButtonGroup,
+              'div',
               null,
               _react2.default.createElement(_FormMenu.DeleteConditionalQuestionButton, {
                 path: conditionalPath,
                 deleteConditionalQuestion: _this2.props.deleteConditionalQuestion
               }),
               _react2.default.createElement(
-                _reactBootstrap.Button,
+                'button',
                 {
+                  type: 'button',
                   className: 'btn btn-warning',
                   title: 'save this conditional question',
                   onClick: function onClick() {
@@ -253,11 +252,11 @@ var ConditionalQuestionEditor = function (_PureComponent) {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        _reactBootstrap.Row,
-        { className: 'winterfell-form-builder-conditional-questions alert-info' },
+        'div',
+        { className: 'row winterfell-form-builder-conditional-questions alert alert-info' },
         _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
+          'div',
+          { className: 'col-xs-12' },
           _react2.default.createElement(
             'h6',
             null,
@@ -275,8 +274,8 @@ var ConditionalQuestionEditor = function (_PureComponent) {
           this.props.conditionalQuestions && this.getConditionalQuestions()
         ),
         _react2.default.createElement(
-          _reactBootstrap.Col,
-          { xs: 12 },
+          'div',
+          { className: 'col-xs-12' },
           _react2.default.createElement('br', null),
           _react2.default.createElement(_FormMenu.AddConditionalQuestionButton, {
             path: this.props.parentPath
@@ -298,10 +297,10 @@ ConditionalQuestionEditor.propTypes = {
   deleteConditionalQuestion: _propTypes2.default.func.isRequired,
   parentPath: _propTypes2.default.array.isRequired
 };
+
 ConditionalQuestionEditor.defaultProps = {
   conditionalQuestions: (0, _immutable.fromJS)([])
 };
-
 
 function mapStateToProps(state, ownProps) {
   return {

@@ -4,7 +4,6 @@ import PageEditor from './PageEditor';
 import QuestionSetEditor from './QuestionSetEditor';
 import QuestionEditor from './QuestionEditor';
 import ButtonBarEditor from './ButtonBarEditor';
-import TreeView from '../TreeView';
 
 
 function FieldEditor(props) {
@@ -17,11 +16,7 @@ function FieldEditor(props) {
 
   return (
     <div className="winterfell-form-builder-field-editor bg-light p-3">
-      <label htmlFor="tree-view">
-        Navigation
-      </label>
-      <TreeView id="tree-view" />
-      <br />
+
       {
         (currentEditingField === 'page' || currentEditingField === 'pageSort') &&
         <PageEditor
