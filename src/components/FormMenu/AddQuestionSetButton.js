@@ -62,82 +62,86 @@ class AddQuestionSetButton extends Component {
         data-toggle="modal"
         data-target="#addQuestionSet"
         key="addQuestionSet"
+        tittle="Add question"
       >
         Add question set
       </button>,
       <div className="modal fade" id="addQuestionSet" tabIndex="-1" key="addQuestionSetModal">
         <div className="modal-dialog bg-white">
-          <div className="modal-header">
-            <div className="modal-title">Add a new question set</div>
-          </div>
-          <div className="modal-body">
-            <FieldGroup
-              id="questionSetId"
-              name="questionSetId"
-              label="Question Set ID"
-              onChange={this.onChange}
-              placeholder="(optional)"
-              value={this.state.questionSetId}
-              key="questionSetId"
-            />
-            <FieldGroup
-              id="questionSetHeader"
-              name="questionSetHeader"
-              label="Question Set Title"
-              onChange={this.onChange}
-              placeholder=""
-              value={this.state.questionSetHeader}
-              key="questionSetHeader"
-            />
-            <FieldGroup
-              id="questionSetText"
-              name="questionSetText"
-              label="Enter Question Set Description"
-              onChange={this.onChange}
-              placeholder=""
-              value={this.state.questionSetText}
-              key="questionSetText"
-            />
-            <FieldGroup
-              id="question"
-              name="question"
-              label="Enter Question"
-              onChange={this.onChange}
-              placeholder=""
-              value={this.state.question}
-              key="question"
-            />
-            <FieldGroup
-              id="questionText"
-              name="questionText"
-              label="Enter Question Text"
-              onChange={this.onChange}
-              placeholder=""
-              value={this.state.questionText}
-              key="questionText"
-            />
-            <label htmlFor="questionType">
-              Select Question Type
+          <div className="modal-content">
+
+            <div className="modal-header">
+              <div className="modal-title">Add a new question set</div>
+            </div>
+            <div className="modal-body">
+              <FieldGroup
+                id="questionSetId"
+                name="questionSetId"
+                label="Question Set ID"
+                onChange={this.onChange}
+                placeholder="(optional)"
+                value={this.state.questionSetId}
+                key="questionSetId"
+              />
+              <FieldGroup
+                id="questionSetHeader"
+                name="questionSetHeader"
+                label="Question Set Title"
+                onChange={this.onChange}
+                placeholder=""
+                value={this.state.questionSetHeader}
+                key="questionSetHeader"
+              />
+              <FieldGroup
+                id="questionSetText"
+                name="questionSetText"
+                label="Enter Question Set Description"
+                onChange={this.onChange}
+                placeholder=""
+                value={this.state.questionSetText}
+                key="questionSetText"
+              />
+              <FieldGroup
+                id="question"
+                name="question"
+                label="Enter Question"
+                onChange={this.onChange}
+                placeholder=""
+                value={this.state.question}
+                key="question"
+              />
+              <FieldGroup
+                id="questionText"
+                name="questionText"
+                label="Enter Question Text"
+                onChange={this.onChange}
+                placeholder=""
+                value={this.state.questionText}
+                key="questionText"
+              />
+              <label htmlFor="questionType">
+                Select Question Type
                   </label>
-            <SelectInput
-              id="questionType"
-              labelId="questionType"
-              options={INPUT_TYPE_OPTIONS}
-              onSelect={this.onSelect}
-              value={this.state.questionType}
-              key="questionType"
-            />
-          </div>
-          <div className="modal-footer">
-            <button
-              className="btn btn-danger"
-              data-dismiss="modal"
-            >Cancel</button>
-            <button
-              className="btn btn-dark"
-              onClick={this.onFormUpdate}
-              data-dismiss="modal"
-            >Save changes</button>
+              <SelectInput
+                id="questionType"
+                labelId="questionType"
+                options={INPUT_TYPE_OPTIONS}
+                onSelect={this.onSelect}
+                value={this.state.questionType}
+                key="questionType"
+              />
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >Cancel</button>
+              <button
+                className="btn btn-dark"
+                onClick={this.onFormUpdate}
+                data-dismiss="modal"
+              >Save changes</button>
+            </div>
           </div>
         </div>
       </div>,
