@@ -134,7 +134,7 @@ var ConditionalPageEditor = function (_Component) {
         { className: 'row winterfell-form-builder-conditional-page alert-warning' },
         _react2.default.createElement(
           'div',
-          { className: 'col-xs-12' },
+          { className: 'col' },
           _react2.default.createElement(
             'h6',
             null,
