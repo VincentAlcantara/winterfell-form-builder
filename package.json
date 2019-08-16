@@ -32,7 +32,7 @@
   "author": "Vincent Alcantara <vincent.alcantara@yahoo.com.au>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/VincentAlcantara/Winterfell-Formbuilder.git"
+    "url": "git://github.com/LawPath/winterfell-form-builder.git"
   },
   "license": "MIT",
   "peerDependencies": {
