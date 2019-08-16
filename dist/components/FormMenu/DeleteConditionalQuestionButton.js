@@ -90,36 +90,40 @@ var DeleteConditionalQuestionButton = function (_Component) {
           { className: 'modal-dialog bg-white' },
           _react2.default.createElement(
             'div',
-            { className: 'modal-header' },
+            { className: 'modal-content' },
             _react2.default.createElement(
               'div',
-              { className: 'modal-title' },
-              'Delete Conditional Question Confirmation'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'modal-body' },
-            'Are you sure you want to delete this conditional question?'
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'modal-footer' },
-            _react2.default.createElement(
-              'button',
-              {
-                className: 'btn btn-danger',
-                'data-dismiss': 'modal'
-              },
-              'Cancel'
+              { className: 'modal-header' },
+              _react2.default.createElement(
+                'div',
+                { className: 'modal-title' },
+                'Delete Conditional Question Confirmation'
+              )
             ),
             _react2.default.createElement(
-              'button',
-              {
-                className: 'btn btn-dark',
-                onClick: this.onConfirmDelete
-              },
-              'Confirm Delete'
+              'div',
+              { className: 'modal-body' },
+              'Are you sure you want to delete this conditional question?'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'modal-footer' },
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-danger',
+                  'data-dismiss': 'modal'
+                },
+                'Cancel'
+              ),
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-dark',
+                  onClick: this.onConfirmDelete
+                },
+                'Confirm Delete'
+              )
             )
           )
         )

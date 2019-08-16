@@ -57,20 +57,22 @@ class WinterfellFormBuilder extends Component {
             key="errorMessageModal"
           >
             <div className="modal-dialog bg-white">
-              <div className="modal-header">
-                <div className="modal-title">Error</div>
-              </div>
-              <div className="modal-body">
-                {errorMessage}
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={this.props.clearErrorMessage}
-                >
-                  Ok
-                </button>
+              <div className="modal-content">
+                <div className="modal-header">
+                  <div className="modal-title">Error</div>
+                </div>
+                <div className="modal-body">
+                  {errorMessage}
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={this.props.clearErrorMessage}
+                  >
+                    Ok
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -96,16 +98,13 @@ class WinterfellFormBuilder extends Component {
             <div className="row winterfell-form-builder-editor">
               <div className="col-4">
                 <h3>Page Editor</h3>
-
                 <div className="btn-group">
-
                   <AddPageButton />
                   <PageSortButton
                     onClick={() => this.props.changeCurrentEditingField('pageSort')}
                   />
                 </div>
                 <br />
-
                 <TreeView id="tree-view" />
                 <br />
                 {

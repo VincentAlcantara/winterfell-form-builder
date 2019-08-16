@@ -62,55 +62,57 @@ class AddConditionalQuestionButton extends Component {
       </button>,
       <div className="modal fade" id="createForm" tabIndex="-1">
         <div className="modal-dialog bg-white">
-          <div className="modal-header">
-            <div className="modal-title">Add a new conditional question to this question</div>
-          </div>
-          <div className="modal-body">
-            <form>
-              <div className="form-group">
-                <FieldGroup
-                  id="questionId"
-                  name="questionId"
-                  label="Question ID"
-                  onChange={this.onChange}
-                  placeholder="(optional)"
-                  value={this.state.questionId}
-                />
-              </div>
-              <div className="form-group">
-                <FieldGroup
-                  id="question"
-                  name="question"
-                  label="Enter Question"
-                  onChange={this.onChange}
-                  placeholder=""
-                  value={this.state.question}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="questionType">
-                  Select Question Type
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="modal-title">Add a new conditional question to this question</div>
+            </div>
+            <div className="modal-body">
+              <form>
+                <div className="form-group">
+                  <FieldGroup
+                    id="questionId"
+                    name="questionId"
+                    label="Question ID"
+                    onChange={this.onChange}
+                    placeholder="(optional)"
+                    value={this.state.questionId}
+                  />
+                </div>
+                <div className="form-group">
+                  <FieldGroup
+                    id="question"
+                    name="question"
+                    label="Enter Question"
+                    onChange={this.onChange}
+                    placeholder=""
+                    value={this.state.question}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="questionType">
+                    Select Question Type
                 </label>
-                <SelectInput
-                  id="questionType"
-                  labelId="questionType"
-                  options={INPUT_TYPE_OPTIONS}
-                  onSelect={this.onSelect}
-                  displayValue={this.state.questionType}
-                />
-              </div>
-            </form>
-          </div>
-          <div className="modal-footer">
-            <button
-              className="btn btn-danger"
-              data-dismiss="modal"
-            >Cancel</button>
-            <button
-              className="btn btn-dark"
-              onClick={this.onFormUpdate}
-              data-dismiss="modal"
-            >Save changes</button>
+                  <SelectInput
+                    id="questionType"
+                    labelId="questionType"
+                    options={INPUT_TYPE_OPTIONS}
+                    onSelect={this.onSelect}
+                    displayValue={this.state.questionType}
+                  />
+                </div>
+              </form>
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >Cancel</button>
+              <button
+                className="btn btn-dark"
+                onClick={this.onFormUpdate}
+                data-dismiss="modal"
+              >Save changes</button>
+            </div>
           </div>
         </div>
       </div>,

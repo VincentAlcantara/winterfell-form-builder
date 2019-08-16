@@ -23,7 +23,7 @@ var PageSelector = function PageSelector(props) {
     'button',
     {
       type: 'button',
-      className: 'winterfell-form-builder-selector btn-block',
+      className: 'winterfell-form-builder-selector btn-default btn-block',
       onClick: onClick
     },
     _react2.default.createElement(

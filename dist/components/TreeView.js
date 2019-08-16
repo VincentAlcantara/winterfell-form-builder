@@ -103,7 +103,6 @@ var TreeView = function (_Component) {
                 return _this2.onQuestionClick(questionPanelId, questionSetIndex, index);
               }
             },
-            'Question: ',
             question.questionId
           )
         );
@@ -118,7 +117,7 @@ var TreeView = function (_Component) {
         return _react2.default.createElement(
           'div',
           { key: questionPanelId + '-' + index },
-          '\xA0+\xA0',
+          '\xA0\xA0+\xA0',
           _react2.default.createElement(
             'button',
             {
@@ -129,7 +128,6 @@ var TreeView = function (_Component) {
                 return _this3.onQuestionSetClick(questionPanelId, index);
               }
             },
-            'Set: ',
             questionSet.questionSetId
           ),
           _this3.getQuestions(questionSet.questionSetId, questionPanelId)
@@ -158,7 +156,11 @@ var TreeView = function (_Component) {
                 return _this4.onQuestionPanelClick(questionPanel.panelId);
               }
             },
-            'Page: ',
+            _react2.default.createElement(
+              'i',
+              { className: 'material-icons' },
+              'insert_drive_file'
+            ),
             questionPanel.panelId
           ),
           _this4.getQuestionSets(questionPanel.questionSets, questionPanel.panelId)

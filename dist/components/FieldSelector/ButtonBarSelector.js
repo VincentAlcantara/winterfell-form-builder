@@ -25,7 +25,7 @@ var ButtonBarSelector = function ButtonBarSelector(props) {
     'button',
     {
       type: 'button',
-      className: 'winterfell-form-builder-selector btn-block',
+      className: 'winterfell-form-builder-selector btn-default btn-block',
       onClick: onClick
     },
     _react2.default.createElement(
@@ -33,17 +33,17 @@ var ButtonBarSelector = function ButtonBarSelector(props) {
       { className: 'button-bar' },
       backButton && !backButtonDisabled && _react2.default.createElement(
         'button',
-        { className: 'btn btn-danger pull-left' },
+        { className: 'btn btn-danger float-left' },
         backButton
       ),
       nextButton && _react2.default.createElement(
         'button',
-        { className: 'btn btn-dark pull-right' },
+        { className: 'btn btn-dark float-right' },
         nextButton
       ),
       !nextButton && _react2.default.createElement(
         'button',
-        { className: 'btn btn-dark pull-right' },
+        { className: 'btn btn-dark float-right' },
         'Submit'
       )
     )

@@ -127,29 +127,33 @@ var WinterfellFormBuilder = function (_Component) {
               { className: 'modal-dialog bg-white' },
               _react2.default.createElement(
                 'div',
-                { className: 'modal-header' },
+                { className: 'modal-content' },
                 _react2.default.createElement(
                   'div',
-                  { className: 'modal-title' },
-                  'Error'
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'modal-body' },
-                errorMessage
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'modal-footer' },
+                  { className: 'modal-header' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'modal-title' },
+                    'Error'
+                  )
+                ),
                 _react2.default.createElement(
-                  'button',
-                  {
-                    type: 'button',
-                    className: 'btn btn-primary',
-                    onClick: this.props.clearErrorMessage
-                  },
-                  'Ok'
+                  'div',
+                  { className: 'modal-body' },
+                  errorMessage
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'modal-footer' },
+                  _react2.default.createElement(
+                    'button',
+                    {
+                      type: 'button',
+                      className: 'btn btn-primary',
+                      onClick: this.props.clearErrorMessage
+                    },
+                    'Ok'
+                  )
                 )
               )
             )

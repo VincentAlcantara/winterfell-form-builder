@@ -49,7 +49,7 @@ class TreeView extends Component {
           type="button"
           className="btn btn-link"
           onClick={() => this.onQuestionClick(questionPanelId, questionSetIndex, index)}
-        >Question: {question.questionId}
+        >{question.questionId}
         </button>
       </div>
     ));
@@ -57,13 +57,13 @@ class TreeView extends Component {
 
   getQuestionSets(questionSets, questionPanelId) {
     return questionSets && questionSets.map((questionSet, index) => (
-      <div key={`${questionPanelId}-${index}`}>&nbsp;+&nbsp;
+      <div key={`${questionPanelId}-${index}`}>&nbsp;&nbsp;+&nbsp;
         <button
           type="button"
           href="#"
           className="btn btn-link"
           onClick={() => this.onQuestionSetClick(questionPanelId, index)}
-        >Set: {questionSet.questionSetId}
+        >{questionSet.questionSetId}
         </button>
         { this.getQuestions(questionSet.questionSetId, questionPanelId) }
       </div>
@@ -80,7 +80,9 @@ class TreeView extends Component {
           href="#"
           className="btn btn-link"
           onClick={() => this.onQuestionPanelClick(questionPanel.panelId)}
-        >Page: {questionPanel.panelId}
+        ><i className="material-icons">
+        insert_drive_file
+        </i>{questionPanel.panelId}
         </button>
         {this.getQuestionSets(questionPanel.questionSets, questionPanel.panelId)}
       </div>));

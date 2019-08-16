@@ -225,7 +225,7 @@ class QuestionEditor extends PureComponent {
         <ButtonBarEditor
           currentQuestionPanelIndex={currentQuestionPanelIndex}
         />
-        <div className="button-group">
+        <div className="btn-group">
           { this.props.currentQuestionIndex > -1 &&
             <DeleteQuestionButton
               currentQuestionSetIndex={this.props.currentQuestionSetIndex}

@@ -15,7 +15,7 @@ const QuestionSetSelector = (props) => {
               <span key={questionSetIndex}>
                 { questionSet.questionSetHeader &&
                 <button
-                  className="winterfell-form-builder-selector btn-block"
+                  className="winterfell-form-builder-selector btn-default btn-block"
                   onClick={() => onClick('questionSet', questionSetIndex, currentQuestionIndex)}
                 >
                   <div>

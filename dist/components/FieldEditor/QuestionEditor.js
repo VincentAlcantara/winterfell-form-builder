@@ -303,7 +303,7 @@ var QuestionEditor = function (_PureComponent) {
         }),
         _react2.default.createElement(
           'div',
-          { className: 'button-group' },
+          { className: 'btn-group' },
           this.props.currentQuestionIndex > -1 && _react2.default.createElement(_DeleteQuestionButton2.default, {
             currentQuestionSetIndex: this.props.currentQuestionSetIndex,
             currentQuestionIndex: this.props.currentQuestionIndex

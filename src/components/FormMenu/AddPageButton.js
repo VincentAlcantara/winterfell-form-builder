@@ -38,61 +38,61 @@ class AddPageButton extends Component {
         key="addPage"
         title="Add page"
       >Add Page
-      </button>,
-      <div className="modal fade" id="addPage" tabIndex="-1" key="addPageModal">
-        <div className="modal-dialog bg-white">
-          <div className="modal-content">
-            <div className="modal-header">
-              <div className="modal-title">Add a new page to the form</div>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="form-group">
-                  <FieldGroup
-                    id="panelId"
-                    name="panelId"
-                    label="Page ID"
-                    onChange={this.onChange}
-                    placeholder="(optional)"
-                    value={this.state.panelId}
-                  />
-                </div>
-                <div className="form-group">
-                  <FieldGroup
-                    id="panelHeader"
-                    name="panelHeader"
-                    label="Page Title"
-                    onChange={this.onChange}
-                    placeholder=""
-                    value={this.state.panelHeader}
-                  />
-                </div>
-                <div className="form-group">
-                  <FieldGroup
-                    id="panelText"
-                    name="panelText"
-                    label="Enter Page Description"
-                    onChange={this.onChange}
-                    placeholder=""
-                    value={this.state.panelText}
-                  />
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                className="btn btn-danger"
-                data-dismiss="modal"
-              >Cancel</button>
-              <button
-                className="btn btn-dark"
-                onClick={this.onFormUpdate}
-                data-dismiss="modal"
-              >Save changes</button>
+        <div className="modal fade" id="addPage" tabIndex="-1" key="addPageModal">
+          <div className="modal-dialog bg-white">
+            <div className="modal-content">
+              <div className="modal-header">
+                <div className="modal-title">Add a new page to the form</div>
+              </div>
+              <div className="modal-body">
+                <form>
+                  <div className="form-group">
+                    <FieldGroup
+                      id="panelId"
+                      name="panelId"
+                      label="Page ID"
+                      onChange={this.onChange}
+                      placeholder="(optional)"
+                      value={this.state.panelId}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <FieldGroup
+                      id="panelHeader"
+                      name="panelHeader"
+                      label="Page Title"
+                      onChange={this.onChange}
+                      placeholder=""
+                      value={this.state.panelHeader}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <FieldGroup
+                      id="panelText"
+                      name="panelText"
+                      label="Enter Page Description"
+                      onChange={this.onChange}
+                      placeholder=""
+                      value={this.state.panelText}
+                    />
+                  </div>
+                </form>
+              </div>
+              <div className="modal-footer">
+                <button
+                  className="btn btn-danger"
+                  data-dismiss="modal"
+                >Cancel</button>
+                <button
+                  className="btn btn-dark"
+                  onClick={this.onFormUpdate}
+                  data-dismiss="modal"
+                >Save changes</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>,
+      </button>,
     ];
   }
 }

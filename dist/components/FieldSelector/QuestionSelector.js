@@ -28,7 +28,7 @@ var FormQuestionEditor = function FormQuestionEditor(props) {
         'button',
         {
           type: 'button',
-          className: 'winterfell-form-builder-selector btn-block',
+          className: 'winterfell-form-builder-selector btn-default btn-block',
           onClick: function onClick() {
             return _onClick('question', questionSetIndex, questionIndex);
           },

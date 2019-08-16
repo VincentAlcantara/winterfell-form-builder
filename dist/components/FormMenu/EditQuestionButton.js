@@ -110,64 +110,68 @@ var updateQuestionButton = function (_Component) {
           { className: 'modal-dialog bg-white' },
           _react2.default.createElement(
             'div',
-            { className: 'modal-header' },
+            { className: 'modal-content' },
             _react2.default.createElement(
               'div',
-              { className: 'modal-title' },
-              'Add a new question to the page'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'modal-body' },
-            _react2.default.createElement(
-              'form',
-              null,
+              { className: 'modal-header' },
               _react2.default.createElement(
                 'div',
-                { className: 'form-group' },
-                _react2.default.createElement(_FieldGroup2.default, {
-                  id: 'question',
-                  name: 'question',
-                  label: 'Enter Question',
-                  onChange: this.onChange,
-                  placeholder: '',
-                  value: this.state.question
-                })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'form-group' },
-                _react2.default.createElement(_FieldGroup2.default, {
-                  id: 'questionText',
-                  name: 'questionText',
-                  label: 'Enter Question Text',
-                  onChange: this.onChange,
-                  placeholder: '',
-                  value: this.state.questionText
-                })
+                { className: 'modal-title' },
+                'Add a new question to the page'
               )
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'modal-footer' },
-            _react2.default.createElement(
-              'button',
-              {
-                className: 'btn btn-danger',
-                'data-dismiss': 'modal'
-              },
-              'Cancel'
             ),
             _react2.default.createElement(
-              'button',
-              {
-                className: 'btn btn-dark',
-                onClick: this.onFormUpdate,
-                'data-dismiss': 'modal'
-              },
-              'Save changes'
+              'div',
+              { className: 'modal-body' },
+              _react2.default.createElement(
+                'form',
+                null,
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group' },
+                  _react2.default.createElement(_FieldGroup2.default, {
+                    id: 'question',
+                    name: 'question',
+                    label: 'Enter Question',
+                    onChange: this.onChange,
+                    placeholder: '',
+                    value: this.state.question
+                  })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group' },
+                  _react2.default.createElement(_FieldGroup2.default, {
+                    id: 'questionText',
+                    name: 'questionText',
+                    label: 'Enter Question Text',
+                    onChange: this.onChange,
+                    placeholder: '',
+                    value: this.state.questionText
+                  })
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'modal-footer' },
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-danger',
+                  'data-dismiss': 'modal'
+                },
+                'Cancel'
+              ),
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-dark',
+                  onClick: this.onFormUpdate,
+                  'data-dismiss': 'modal'
+                },
+                'Save changes'
+              )
             )
           )
         )

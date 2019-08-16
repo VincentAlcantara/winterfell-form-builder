@@ -69,7 +69,6 @@ class AddQuestionSetButton extends Component {
       <div className="modal fade" id="addQuestionSet" tabIndex="-1" key="addQuestionSetModal">
         <div className="modal-dialog bg-white">
           <div className="modal-content">
-
             <div className="modal-header">
               <div className="modal-title">Add a new question set</div>
             </div>
