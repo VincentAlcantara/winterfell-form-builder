@@ -145,7 +145,6 @@ class AddQuestionSetButton extends Component {
           </div>
         </div>
       </div>,
-
     ];
   }
 }
