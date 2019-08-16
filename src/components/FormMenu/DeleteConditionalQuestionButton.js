@@ -38,21 +38,23 @@ class DeleteConditionalQuestionButton extends Component {
       </button>,
       <div className="modal fade" id="deleteConditionalQuestion" tabIndex="-1">
         <div className="modal-dialog bg-white">
-          <div className="modal-header">
-            <div className="modal-title">Delete Conditional Question Confirmation</div>
-          </div>
-          <div className="modal-body">
-            Are you sure you want to delete this conditional question?
-          </div>
-          <div className="modal-footer">
-            <button
-              className="btn btn-danger"
-              data-dismiss="modal"
-            >Cancel</button>
-            <button
-              className="btn btn-dark"
-              onClick={this.onConfirmDelete}
-            >Confirm Delete</button>
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="modal-title">Delete Conditional Question Confirmation</div>
+            </div>
+            <div className="modal-body">
+              Are you sure you want to delete this conditional question?
+            </div>
+            <div className="modal-footer">
+              <button
+                className="btn btn-danger"
+                data-dismiss="modal"
+              >Cancel</button>
+              <button
+                className="btn btn-dark"
+                onClick={this.onConfirmDelete}
+              >Confirm Delete</button>
+            </div>
           </div>
         </div>
       </div>,

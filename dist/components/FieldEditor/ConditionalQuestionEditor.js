@@ -256,7 +256,7 @@ var ConditionalQuestionEditor = function (_PureComponent) {
         { className: 'row winterfell-form-builder-conditional-questions alert alert-info' },
         _react2.default.createElement(
           'div',
-          { className: 'col-xs-12' },
+          { className: 'col' },
           _react2.default.createElement(
             'h6',
             null,
@@ -275,7 +275,7 @@ var ConditionalQuestionEditor = function (_PureComponent) {
         ),
         _react2.default.createElement(
           'div',
-          { className: 'col-xs-12' },
+          { className: 'col' },
           _react2.default.createElement('br', null),
           _react2.default.createElement(_FormMenu.AddConditionalQuestionButton, {
             path: this.props.parentPath

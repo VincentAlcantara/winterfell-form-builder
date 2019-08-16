@@ -46,10 +46,6 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = require('react-redux');
 
-var _reactFontawesome = require('@fortawesome/react-fontawesome');
-
-var _freeSolidSvgIcons = require('@fortawesome/free-solid-svg-icons');
-
 var _DeleteQuestionOptionButton = require('../FormMenu/DeleteQuestionOptionButton');
 
 var _DeleteQuestionOptionButton2 = _interopRequireDefault(_DeleteQuestionOptionButton);
@@ -259,8 +255,16 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
                     className: 'btn btn-warning',
                     id: 'showConditionalPageButton'
                   },
-                  _this2.state.showConditionalPage && !_this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faShare, id: 'showConditionalPage' }),
-                  _this2.state.showConditionalPage && _this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMinusCircle, id: 'showConditionalPage' })
+                  _this2.state.showConditionalPage && !_this2.state.showConditionalPage[ix] && _react2.default.createElement(
+                    'i',
+                    { className: 'material-icons', id: 'showConditionalPage' },
+                    'share'
+                  ),
+                  _this2.state.showConditionalPage && _this2.state.showConditionalPage[ix] && _react2.default.createElement(
+                    'i',
+                    { className: 'material-icons', id: 'showConditionalPage' },
+                    'remove_circle '
+                  )
                 )
               ),
               _react2.default.createElement(
@@ -276,8 +280,16 @@ var ConditionalQuestionOptionEditor = function (_PureComponent) {
                     },
                     className: 'btn btn-dark'
                   },
-                  _this2.state.showConditionalQuestions && !_this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faHamburger, id: 'showConditionalQuestion' }),
-                  _this2.state.showConditionalQuestions && _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMinusCircle, id: 'showConditionalQuestion' })
+                  _this2.state.showConditionalQuestions && !_this2.state.showConditionalQuestions[ix] && _react2.default.createElement(
+                    'i',
+                    { className: 'material-icons', id: 'showConditionalPage' },
+                    'menu'
+                  ),
+                  _this2.state.showConditionalQuestions && _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(
+                    'i',
+                    { className: 'material-icons', id: 'showConditionalPage' },
+                    'remove_circle '
+                  )
                 )
               ),
               _this2.state.showConditionalPage[ix] && _react2.default.createElement(_ConditionalPageEditor2.default, {

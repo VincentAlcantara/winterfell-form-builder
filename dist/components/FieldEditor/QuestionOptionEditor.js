@@ -46,10 +46,6 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = require('react-redux');
 
-var _reactFontawesome = require('@fortawesome/react-fontawesome');
-
-var _freeSolidSvgIcons = require('@fortawesome/free-solid-svg-icons');
-
 var _DeleteQuestionOptionButton = require('../FormMenu/DeleteQuestionOptionButton');
 
 var _DeleteQuestionOptionButton2 = _interopRequireDefault(_DeleteQuestionOptionButton);
@@ -206,109 +202,129 @@ var QuestionOptionEditor = function (_PureComponent) {
 
       return _react2.default.createElement(
         'div',
-        null,
-        questionInputOptions && _react2.default.createElement(
-          'b',
-          null,
-          'Options'
-        ),
-        this.state.questionInputOptions && this.state.questionInputOptions.map(function (option, ix) {
-          var currentPath = ['schema', 'questionSets', currentQuestionSetIndex, 'questions', currentQuestionIndex, 'input', 'options', ix];
-          return _react2.default.createElement(
-            'div',
-            { key: '' + ix },
-            _react2.default.createElement(
-              'div',
-              { className: 'input-group winterfell-form-builder-conditional-question' },
-              _react2.default.createElement('input', {
-                className: 'form-control',
-                type: 'text',
-                name: _this2.state.questionInputOptions[ix].text,
-                value: _this2.state.questionInputOptions[ix].text,
-                onChange: function onChange(event) {
-                  return _this2.onOptionTextChange(event, ix);
-                }
-              }),
-              _react2.default.createElement('input', {
-                className: 'form-control',
-                type: 'text',
-                name: _this2.state.questionInputOptions[ix].value,
-                value: _this2.state.questionInputOptions[ix].value,
-                onChange: function onChange(event) {
-                  return _this2.onOptionValueChange(event, ix);
-                }
-              }),
-              _react2.default.createElement(
-                'div',
-                { className: 'input-group' },
-                _react2.default.createElement(_DeleteQuestionOptionButton2.default, {
-                  questionOptionIndex: ix,
-                  onDeleteQuestionOption: function onDeleteQuestionOption() {
-                    return _this2.onDeleteQuestionOption(ix);
-                  }
-                })
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'input-group' },
-                _react2.default.createElement(
-                  'button',
-                  {
-                    type: 'button',
-                    onClick: function onClick(event) {
-                      return _this2.onShowConditonalClick(ix, event);
-                    },
-                    className: 'btn btn-warning',
-                    id: 'showConditionalPageButton'
-                  },
-                  _this2.state.showConditionalPage && !_this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faShare, id: 'showConditionalPage' }),
-                  _this2.state.showConditionalPage && _this2.state.showConditionalPage[ix] && _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMinusCircle, id: 'showConditionalPage' })
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'input-group' },
-                _react2.default.createElement(
-                  'button',
-                  {
-                    type: 'button',
-                    id: 'showConditionalQuestionButton',
-                    onClick: function onClick(event) {
-                      return _this2.onShowConditonalClick(ix, event);
-                    },
-                    className: 'btn btn-dark'
-                  },
-                  _this2.state.showConditionalQuestions && !_this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faHamburger, id: 'showConditionalQuestion' }),
-                  _this2.state.showConditionalQuestions && _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faMinusCircle, id: 'showConditionalQuestion' })
-                )
-              ),
-              _this2.state.showConditionalPage[ix] && _react2.default.createElement(_ConditionalPageEditor2.default, {
-                questionOptionIndex: ix,
-                questionId: questionId,
-                currentQuestionPanelIndex: currentQuestionPanelIndex,
-                currentQuestionSetIndex: currentQuestionSetIndex,
-                currentQuestionIndex: currentQuestionIndex,
-                text: _this2.state.questionInputOptions[ix].text
-              }),
-              _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_ConditionalQuestionEditor2.default, {
-                parentPath: currentPath,
-                parentOptionText: _this2.state.questionInputOptions[ix].text
-              })
-            )
-          );
-        }),
-        _react2.default.createElement('br', null),
+        { className: 'row' },
         _react2.default.createElement(
           'div',
-          null,
-          _react2.default.createElement(_AddQuestionOptionButton2.default, {
-            questionOptionText: this.state.questionOptionText,
-            questionOptionValue: this.state.questionOptionValue,
-            onChange: function onChange(e) {
-              return _this2.onAddOptionChange(e);
-            },
-            onClick: this.onAddOption
-          })
+          { className: 'col' },
+          questionInputOptions && _react2.default.createElement(
+            'b',
+            null,
+            'Options'
+          ),
+          this.state.questionInputOptions && this.state.questionInputOptions.map(function (option, ix) {
+            var currentPath = ['schema', 'questionSets', currentQuestionSetIndex, 'questions', currentQuestionIndex, 'input', 'options', ix];
+            return _react2.default.createElement(
+              'div',
+              { key: '' + ix },
+              _react2.default.createElement(
+                'div',
+                { className: 'input-group winterfell-form-builder-conditional-question' },
+                _react2.default.createElement('input', {
+                  className: 'form-control',
+                  type: 'text',
+                  name: _this2.state.questionInputOptions[ix].text,
+                  value: _this2.state.questionInputOptions[ix].text,
+                  onChange: function onChange(event) {
+                    return _this2.onOptionTextChange(event, ix);
+                  }
+                }),
+                _react2.default.createElement('input', {
+                  className: 'form-control',
+                  type: 'text',
+                  name: _this2.state.questionInputOptions[ix].value,
+                  value: _this2.state.questionInputOptions[ix].value,
+                  onChange: function onChange(event) {
+                    return _this2.onOptionValueChange(event, ix);
+                  }
+                }),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'input-group' },
+                  _react2.default.createElement(_DeleteQuestionOptionButton2.default, {
+                    questionOptionIndex: ix,
+                    onDeleteQuestionOption: function onDeleteQuestionOption() {
+                      return _this2.onDeleteQuestionOption(ix);
+                    }
+                  })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'input-group' },
+                  _react2.default.createElement(
+                    'button',
+                    {
+                      type: 'button',
+                      onClick: function onClick(event) {
+                        return _this2.onShowConditonalClick(ix, event);
+                      },
+                      className: 'btn btn-warning',
+                      id: 'showConditionalPageButton'
+                    },
+                    _this2.state.showConditionalPage && !_this2.state.showConditionalPage[ix] && _react2.default.createElement(
+                      'i',
+                      { className: 'material-icons', id: 'showConditionalPage' },
+                      'share'
+                    ),
+                    _this2.state.showConditionalPage && _this2.state.showConditionalPage[ix] && _react2.default.createElement(
+                      'i',
+                      { className: 'material-icons', id: 'showConditionalPage' },
+                      'remove_circle '
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'input-group' },
+                  _react2.default.createElement(
+                    'button',
+                    {
+                      type: 'button',
+                      id: 'showConditionalQuestionButton',
+                      onClick: function onClick(event) {
+                        return _this2.onShowConditonalClick(ix, event);
+                      },
+                      className: 'btn btn-dark'
+                    },
+                    _this2.state.showConditionalQuestions && !_this2.state.showConditionalQuestions[ix] && _react2.default.createElement(
+                      'i',
+                      { className: 'material-icons', id: 'showConditionalPage' },
+                      'menu'
+                    ),
+                    _this2.state.showConditionalQuestions && _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(
+                      'i',
+                      { className: 'material-icons', id: 'showConditionalPage' },
+                      'remove_circle '
+                    )
+                  )
+                ),
+                _this2.state.showConditionalPage[ix] && _react2.default.createElement(_ConditionalPageEditor2.default, {
+                  questionOptionIndex: ix,
+                  questionId: questionId,
+                  currentQuestionPanelIndex: currentQuestionPanelIndex,
+                  currentQuestionSetIndex: currentQuestionSetIndex,
+                  currentQuestionIndex: currentQuestionIndex,
+                  text: _this2.state.questionInputOptions[ix].text
+                }),
+                _this2.state.showConditionalQuestions[ix] && _react2.default.createElement(_ConditionalQuestionEditor2.default, {
+                  parentPath: currentPath,
+                  parentOptionText: _this2.state.questionInputOptions[ix].text
+                })
+              )
+            );
+          }),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(_AddQuestionOptionButton2.default, {
+              questionOptionText: this.state.questionOptionText,
+              questionOptionValue: this.state.questionOptionValue,
+              onChange: function onChange(e) {
+                return _this2.onAddOptionChange(e);
+              },
+              onClick: this.onAddOption
+            })
+          )
         )
       );
     }

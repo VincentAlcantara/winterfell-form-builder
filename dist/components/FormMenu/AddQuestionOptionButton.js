@@ -12,10 +12,6 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactFontawesome = require('@fortawesome/react-fontawesome');
-
-var _freeSolidSvgIcons = require('@fortawesome/free-solid-svg-icons');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var AddQuestionOptionButton = function AddQuestionOptionButton(props) {
@@ -30,7 +26,7 @@ var AddQuestionOptionButton = function AddQuestionOptionButton(props) {
     { className: 'row' },
     _react2.default.createElement(
       'div',
-      { className: 'col-xs-12' },
+      { className: 'col' },
       _react2.default.createElement(
         'label',
         {
@@ -41,7 +37,7 @@ var AddQuestionOptionButton = function AddQuestionOptionButton(props) {
     ),
     _react2.default.createElement(
       'div',
-      { className: 'col-xs-12' },
+      { className: 'col' },
       _react2.default.createElement(
         'table',
         null,
@@ -54,7 +50,7 @@ var AddQuestionOptionButton = function AddQuestionOptionButton(props) {
             _react2.default.createElement(
               'td',
               null,
-              _react2.default.createElement('div', {
+              _react2.default.createElement('input', {
                 className: 'form-control',
                 type: 'text',
                 name: 'questionOptionText',
@@ -65,7 +61,7 @@ var AddQuestionOptionButton = function AddQuestionOptionButton(props) {
             _react2.default.createElement(
               'td',
               null,
-              _react2.default.createElement('div', {
+              _react2.default.createElement('input', {
                 className: 'form-control',
                 type: 'text',
                 name: 'questionOptionValue',
@@ -80,11 +76,15 @@ var AddQuestionOptionButton = function AddQuestionOptionButton(props) {
                 'button',
                 {
                   type: 'button',
-                  className: 'btn btn-dark',
+                  className: 'btn btn-dark py-0',
                   onClick: onClick,
                   disabled: questionOptionText === '' || questionOptionValue === ''
                 },
-                _react2.default.createElement(_reactFontawesome.FontAwesomeIcon, { icon: _freeSolidSvgIcons.faPlusCircle, id: 'showConditionalPage' })
+                _react2.default.createElement(
+                  'i',
+                  { className: 'material-icons', id: 'showConditionalPage' },
+                  'add_circle'
+                )
               )
             )
           )

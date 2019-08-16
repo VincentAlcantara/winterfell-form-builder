@@ -7,22 +7,22 @@ const ButtonBarSelector = (props) => {
   return (
     <button
       type="button"
-      className="winterfell-form-builder-selector btn-block"
+      className="winterfell-form-builder-selector btn-default btn-block"
       onClick={onClick}
     >
       <div className="button-bar">
         {backButton && !backButtonDisabled &&
-        <button className="btn btn-danger pull-left">
+        <button className="btn btn-danger float-left">
           {backButton}
         </button>
         }
         {nextButton &&
-        <button className="btn btn-dark pull-right">
+        <button className="btn btn-dark float-right">
           {nextButton}
         </button>
         }
         {!nextButton &&
-        <button className="btn btn-dark pull-right">
+        <button className="btn btn-dark float-right">
           Submit
         </button>
         }

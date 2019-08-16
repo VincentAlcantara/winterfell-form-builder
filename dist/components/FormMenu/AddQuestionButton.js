@@ -103,15 +103,6 @@ var AddQuestionButton = function (_Component) {
     key: 'render',
     value: function render() {
       return [_react2.default.createElement(
-        'button',
-        {
-          type: 'button',
-          className: 'btn btn-dark',
-          'data-toggle': 'modal',
-          'data-target': '#addQuestion'
-        },
-        'Add question'
-      ), _react2.default.createElement(
         'div',
         { className: 'static-modal' },
         _react2.default.createElement(
@@ -122,84 +113,97 @@ var AddQuestionButton = function (_Component) {
             { className: 'modal-dialog bg-white' },
             _react2.default.createElement(
               'div',
-              { className: 'modal-header' },
+              { className: 'modal-content' },
               _react2.default.createElement(
                 'div',
-                { className: 'modal-title' },
-                'Add a new question to the question set'
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'modal-body' },
-              _react2.default.createElement(
-                'form',
-                null,
+                { className: 'modal-header' },
                 _react2.default.createElement(
                   'div',
-                  { className: 'form-group' },
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'questionId',
-                    name: 'questionId',
-                    label: 'Question ID',
-                    onChange: this.onChange,
-                    placeholder: '(optional)',
-                    value: this.state.questionId
-                  })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group' },
-                  _react2.default.createElement(_FieldGroup2.default, {
-                    id: 'question',
-                    name: 'question',
-                    label: 'Enter Question',
-                    onChange: this.onChange,
-                    placeholder: '',
-                    value: this.state.question
-                  })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'form-group' },
-                  _react2.default.createElement(
-                    'label',
-                    { htmlFor: 'questionType' },
-                    'Select Question Type'
-                  ),
-                  _react2.default.createElement(_SelectInput2.default, {
-                    id: 'questionType',
-                    labelId: 'questionType',
-                    options: _constants.INPUT_TYPE_OPTIONS,
-                    onSelect: this.onSelect,
-                    displayValue: this.state.questionType
-                  })
+                  { className: 'modal-title' },
+                  'Add a new question to the question set'
                 )
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'modal-footer' },
-              _react2.default.createElement(
-                'button',
-                {
-                  className: 'btn btn-danger',
-                  'data-dismiss': 'modal'
-                },
-                'Cancel'
               ),
               _react2.default.createElement(
-                'button',
-                {
-                  className: 'btn btn-dark',
-                  onClick: this.onFormUpdate,
-                  'data-dismiss': 'modal'
-                },
-                'Save changes'
+                'div',
+                { className: 'modal-body' },
+                _react2.default.createElement(
+                  'form',
+                  null,
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    _react2.default.createElement(_FieldGroup2.default, {
+                      id: 'questionId',
+                      name: 'questionId',
+                      label: 'Question ID',
+                      onChange: this.onChange,
+                      placeholder: '(optional)',
+                      value: this.state.questionId
+                    })
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    _react2.default.createElement(_FieldGroup2.default, {
+                      id: 'question',
+                      name: 'question',
+                      label: 'Enter Question',
+                      onChange: this.onChange,
+                      placeholder: '',
+                      value: this.state.question
+                    })
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'questionType' },
+                      'Select Question Type'
+                    ),
+                    _react2.default.createElement(_SelectInput2.default, {
+                      id: 'questionType',
+                      labelId: 'questionType',
+                      options: _constants.INPUT_TYPE_OPTIONS,
+                      onSelect: this.onSelect,
+                      displayValue: this.state.questionType
+                    })
+                  )
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'modal-footer' },
+                _react2.default.createElement(
+                  'button',
+                  {
+                    className: 'btn btn-danger',
+                    'data-dismiss': 'modal'
+                  },
+                  'Cancel'
+                ),
+                _react2.default.createElement(
+                  'button',
+                  {
+                    className: 'btn btn-dark',
+                    onClick: this.onFormUpdate,
+                    'data-dismiss': 'modal'
+                  },
+                  'Save changes'
+                )
               )
             )
           )
         )
+      ), _react2.default.createElement(
+        'button',
+        {
+          type: 'button',
+          className: 'btn btn-dark',
+          'data-toggle': 'modal',
+          'data-target': '#addQuestion'
+        },
+        'Add question'
       )];
     }
   }]);
