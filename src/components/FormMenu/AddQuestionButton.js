@@ -53,7 +53,6 @@ class AddQuestionButton extends Component {
 
   render() {
     return [
-
       <div className="static-modal">
         <div className="modal fade" id="addQuestion" tabIndex="-1">
           <div className="modal-dialog bg-white">
