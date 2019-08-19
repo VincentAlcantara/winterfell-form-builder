@@ -89,89 +89,88 @@ var AddPageButton = function (_Component) {
           key: 'addPage',
           title: 'Add page'
         },
-        'Add Page',
+        'Add Page'
+      ), _react2.default.createElement(
+        'div',
+        { className: 'modal fade', id: 'addPage', tabIndex: '-1', key: 'addPageModal' },
         _react2.default.createElement(
           'div',
-          { className: 'modal fade', id: 'addPage', tabIndex: '-1', key: 'addPageModal' },
+          { className: 'modal-dialog bg-white' },
           _react2.default.createElement(
             'div',
-            { className: 'modal-dialog bg-white' },
+            { className: 'modal-content' },
             _react2.default.createElement(
               'div',
-              { className: 'modal-content' },
+              { className: 'modal-header' },
               _react2.default.createElement(
                 'div',
-                { className: 'modal-header' },
+                { className: 'modal-title' },
+                'Add a new page to the form'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'modal-body' },
+              _react2.default.createElement(
+                'form',
+                null,
                 _react2.default.createElement(
                   'div',
-                  { className: 'modal-title' },
-                  'Add a new page to the form'
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'modal-body' },
-                _react2.default.createElement(
-                  'form',
-                  null,
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group' },
-                    _react2.default.createElement(_FieldGroup2.default, {
-                      id: 'panelId',
-                      name: 'panelId',
-                      label: 'Page ID',
-                      onChange: this.onChange,
-                      placeholder: '(optional)',
-                      value: this.state.panelId
-                    })
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group' },
-                    _react2.default.createElement(_FieldGroup2.default, {
-                      id: 'panelHeader',
-                      name: 'panelHeader',
-                      label: 'Page Title',
-                      onChange: this.onChange,
-                      placeholder: '',
-                      value: this.state.panelHeader
-                    })
-                  ),
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'form-group' },
-                    _react2.default.createElement(_FieldGroup2.default, {
-                      id: 'panelText',
-                      name: 'panelText',
-                      label: 'Enter Page Description',
-                      onChange: this.onChange,
-                      placeholder: '',
-                      value: this.state.panelText
-                    })
-                  )
-                )
-              ),
-              _react2.default.createElement(
-                'div',
-                { className: 'modal-footer' },
-                _react2.default.createElement(
-                  'button',
-                  {
-                    className: 'btn btn-danger',
-                    'data-dismiss': 'modal'
-                  },
-                  'Cancel'
+                  { className: 'form-group' },
+                  _react2.default.createElement(_FieldGroup2.default, {
+                    id: 'panelId',
+                    name: 'panelId',
+                    label: 'Page ID',
+                    onChange: this.onChange,
+                    placeholder: '(optional)',
+                    value: this.state.panelId
+                  })
                 ),
                 _react2.default.createElement(
-                  'button',
-                  {
-                    className: 'btn btn-dark',
-                    onClick: this.onFormUpdate,
-                    'data-dismiss': 'modal'
-                  },
-                  'Save changes'
+                  'div',
+                  { className: 'form-group' },
+                  _react2.default.createElement(_FieldGroup2.default, {
+                    id: 'panelHeader',
+                    name: 'panelHeader',
+                    label: 'Page Title',
+                    onChange: this.onChange,
+                    placeholder: '',
+                    value: this.state.panelHeader
+                  })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'form-group' },
+                  _react2.default.createElement(_FieldGroup2.default, {
+                    id: 'panelText',
+                    name: 'panelText',
+                    label: 'Enter Page Description',
+                    onChange: this.onChange,
+                    placeholder: '',
+                    value: this.state.panelText
+                  })
                 )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'modal-footer' },
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-danger',
+                  'data-dismiss': 'modal'
+                },
+                'Cancel'
+              ),
+              _react2.default.createElement(
+                'button',
+                {
+                  className: 'btn btn-dark',
+                  onClick: this.onFormUpdate,
+                  'data-dismiss': 'modal'
+                },
+                'Save changes'
               )
             )
           )
