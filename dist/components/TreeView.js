@@ -1,51 +1,48 @@
-'use strict';
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _reactRedux = require("react-redux");
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _winterfellFormBuilderActions = require("../actions/winterfellFormBuilderActions");
 
-var _react = require('react');
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 
-var _react2 = _interopRequireDefault(_react);
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
-var _reactRedux = require('react-redux');
+var TreeView = /*#__PURE__*/function (_Component) {
+  (0, _inherits2["default"])(TreeView, _Component);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _winterfellFormBuilderActions = require('../actions/winterfellFormBuilderActions');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var TreeView = function (_Component) {
-  (0, _inherits3.default)(TreeView, _Component);
+  var _super = _createSuper(TreeView);
 
   function TreeView(props) {
-    (0, _classCallCheck3.default)(this, TreeView);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (TreeView.__proto__ || (0, _getPrototypeOf2.default)(TreeView)).call(this, props));
-
+    (0, _classCallCheck2["default"])(this, TreeView);
+    _this = _super.call(this, props);
     _this.state = {
       showModal: false,
       questionId: '',
@@ -53,35 +50,34 @@ var TreeView = function (_Component) {
       questionText: '',
       questionType: ''
     };
-
-    _this.getQuestionPanels = _this.getQuestionPanels.bind(_this);
-    _this.getQuestionSets = _this.getQuestionSets.bind(_this);
-    _this.onQuestionPanelClick = _this.onQuestionPanelClick.bind(_this);
-    _this.onQuestionSetClick = _this.onQuestionSetClick.bind(_this);
-    _this.onQuestionClick = _this.onQuestionClick.bind(_this);
+    _this.getQuestionPanels = _this.getQuestionPanels.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.getQuestionSets = _this.getQuestionSets.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.onQuestionPanelClick = _this.onQuestionPanelClick.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.onQuestionSetClick = _this.onQuestionSetClick.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.onQuestionClick = _this.onQuestionClick.bind((0, _assertThisInitialized2["default"])(_this));
     return _this;
   }
 
-  (0, _createClass3.default)(TreeView, [{
-    key: 'onQuestionPanelClick',
+  (0, _createClass2["default"])(TreeView, [{
+    key: "onQuestionPanelClick",
     value: function onQuestionPanelClick(questionPanelId) {
       this.props.changeCurrentEditingField('page');
       this.props.goToPage(questionPanelId);
     }
   }, {
-    key: 'onQuestionSetClick',
+    key: "onQuestionSetClick",
     value: function onQuestionSetClick(questionPanelId, questionSetIndex) {
       this.props.goToPage(questionPanelId);
       this.props.changeCurrentEditingField('questionSet', questionSetIndex);
     }
   }, {
-    key: 'onQuestionClick',
+    key: "onQuestionClick",
     value: function onQuestionClick(questionPanelId, questionSetIndex, questionIndex) {
       this.props.goToPage(questionPanelId);
       this.props.changeCurrentEditingField('question', questionSetIndex, questionIndex);
     }
   }, {
-    key: 'getQuestions',
+    key: "getQuestions",
     value: function getQuestions(questionSetId, questionPanelId) {
       var _this2 = this;
 
@@ -90,103 +86,74 @@ var TreeView = function (_Component) {
       });
       var questionsArray = questionSetIndex !== -1 && this.props.questionSets.getIn([questionSetIndex, 'questions']).toJS();
       return questionsArray.map(function (question, index) {
-        return _react2.default.createElement(
-          'div',
-          { key: questionPanelId + '-' + questionSetId + '-' + index },
-          '\xA0\xA0\xA0+\xA0',
-          _react2.default.createElement(
-            'button',
-            {
-              type: 'button',
-              className: 'btn btn-link',
-              onClick: function onClick() {
-                return _this2.onQuestionClick(questionPanelId, questionSetIndex, index);
-              }
-            },
-            question.questionId
-          )
-        );
+        return /*#__PURE__*/_react["default"].createElement("div", {
+          key: "".concat(questionPanelId, "-").concat(questionSetId, "-").concat(index)
+        }, "\xA0\xA0\xA0+\xA0", /*#__PURE__*/_react["default"].createElement("button", {
+          type: "button",
+          className: "btn btn-link",
+          onClick: function onClick() {
+            return _this2.onQuestionClick(questionPanelId, questionSetIndex, index);
+          }
+        }, question.questionId));
       });
     }
   }, {
-    key: 'getQuestionSets',
+    key: "getQuestionSets",
     value: function getQuestionSets(questionSets, questionPanelId) {
       var _this3 = this;
 
       return questionSets && questionSets.map(function (questionSet, index) {
-        return _react2.default.createElement(
-          'div',
-          { key: questionPanelId + '-' + index },
-          '\xA0\xA0+\xA0',
-          _react2.default.createElement(
-            'button',
-            {
-              type: 'button',
-              href: '#',
-              className: 'btn btn-link',
-              onClick: function onClick() {
-                return _this3.onQuestionSetClick(questionPanelId, index);
-              }
-            },
-            questionSet.questionSetId
-          ),
-          _this3.getQuestions(questionSet.questionSetId, questionPanelId)
-        );
+        return /*#__PURE__*/_react["default"].createElement("div", {
+          key: "".concat(questionPanelId, "-").concat(index)
+        }, "\xA0\xA0+\xA0", /*#__PURE__*/_react["default"].createElement("button", {
+          type: "button",
+          href: "#",
+          className: "btn btn-link",
+          onClick: function onClick() {
+            return _this3.onQuestionSetClick(questionPanelId, index);
+          }
+        }, questionSet.questionSetId), _this3.getQuestions(questionSet.questionSetId, questionPanelId));
       });
     }
   }, {
-    key: 'getQuestionPanels',
+    key: "getQuestionPanels",
     value: function getQuestionPanels() {
       var _this4 = this;
 
       var questionPanels = this.props.questionPanels;
-
       var questionPanelsArray = questionPanels && questionPanels.toJS();
       return questionPanelsArray && questionPanelsArray.map(function (questionPanel, index) {
-        return _react2.default.createElement(
-          'div',
-          { key: index },
-          _react2.default.createElement(
-            'button',
-            {
-              type: 'button',
-              href: '#',
-              className: 'btn btn-link',
-              onClick: function onClick() {
-                return _this4.onQuestionPanelClick(questionPanel.panelId);
-              }
-            },
-            _react2.default.createElement(
-              'i',
-              { className: 'material-icons' },
-              'insert_drive_file'
-            ),
-            questionPanel.panelId
-          ),
-          _this4.getQuestionSets(questionPanel.questionSets, questionPanel.panelId)
-        );
+        return /*#__PURE__*/_react["default"].createElement("div", {
+          key: index
+        }, /*#__PURE__*/_react["default"].createElement("button", {
+          type: "button",
+          href: "#",
+          className: "btn btn-link",
+          onClick: function onClick() {
+            return _this4.onQuestionPanelClick(questionPanel.panelId);
+          }
+        }, /*#__PURE__*/_react["default"].createElement("i", {
+          className: "material-icons"
+        }, "insert_drive_file"), questionPanel.panelId), _this4.getQuestionSets(questionPanel.questionSets, questionPanel.panelId));
       });
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'winterfell-form-builder-tree-view' },
-        this.getQuestionPanels()
-      );
+      return /*#__PURE__*/_react["default"].createElement("div", {
+        className: "winterfell-form-builder-tree-view"
+      }, this.getQuestionPanels());
     }
   }]);
   return TreeView;
 }(_react.Component);
 
 TreeView.propTypes = {
-  questionPanels: _propTypes2.default.object,
-  questionSets: _propTypes2.default.object,
-  changeCurrentEditingField: _propTypes2.default.func.isRequired,
-  goToPage: _propTypes2.default.func.isRequired
+  questionPanels: _propTypes["default"].object,
+  questionSets: _propTypes["default"].object,
+  changeCurrentEditingField: _propTypes["default"].func.isRequired,
+  goToPage: _propTypes["default"].func.isRequired
 };
-
 TreeView.defaultProps = {
   questionPanels: null,
   questionSets: null
@@ -202,21 +169,9 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { goToPage: _winterfellFormBuilderActions.goToPage, changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField })(TreeView);
+var _default = (0, _reactRedux.connect)(mapStateToProps, {
+  goToPage: _winterfellFormBuilderActions.goToPage,
+  changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField
+})(TreeView);
 
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(TreeView, 'TreeView', 'src/components/TreeView.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/TreeView.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/TreeView.js');
-}();
-
-;
+exports["default"] = _default;

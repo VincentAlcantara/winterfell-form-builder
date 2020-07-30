@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class TextAreaInput extends React.Component {
+export default class TextAreaInput extends React.Component {
   constructor(props) {
     super(props);
 
@@ -64,4 +64,3 @@ TextAreaInput.defaultProps = {
   required: false,
 };
 
-module.exports = TextAreaInput;

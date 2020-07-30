@@ -34,34 +34,22 @@ module.exports = {
       inject: 'body',
       filename: 'index.html',
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.optimize.CommonsChunkPlugin('common', 'common.js'),
     new webpack.ProvidePlugin({
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch',
     }),
   ],
-  eslint: {
-    configFile: '.eslintrc',
-    failOnWarning: false,
-    failOnError: false,
-  },
   module: {
-    preLoaders: [
+   
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'eslint',
-      },
-    ],
-    loaders: [
-      {
-        test: /\.js/,
-        exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          plugins: ['transform-runtime', 'array-includes'],
-          presets: ['es2015', 'stage-0', 'react'],
+        loader: 'babel-loader',
+        options: {
+          plugins: ["@babel/plugin-proposal-class-properties", "@babel/plugin-transform-runtime"],
+          presets: ["@babel/preset-env", '@babel/preset-react'],
         },
       },
       {
@@ -71,15 +59,24 @@ module.exports = {
           'file?hash=sha512&digest=hex',
           'image-webpack?bypassOnDebug=false&optimizationLevel=1&interlaced=true',
         ],
-        include: './static/images/',
+        include: path.join(__dirname, './static/images/'),
+        
       },
       {
-        test: /\.scss$/,
-        loader: 'style!css!sass?outputStyle=compressed',
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader?modules&importLoaders=1!postcss-loader',// eslint-disable-line
+        test: /\.s?css$/,
+        use: [
+          "style-loader",
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: false,
+              importLoaders: 1,
+            }
+          },
+          "sass-loader",
+          "postcss-loader",
+        ]
       },
       {
         test: /\.json$/,
@@ -92,11 +89,21 @@ module.exports = {
     ],
   },
   resolve: {
-    root: [
-      path.resolve('./node_modules'),
+    modules: [
+      "./node_modules",
     ],
-    extensions: ['', '.js', '.json'], // <- Just append a '.json' here
+    extensions: ['.js', '.json'], // <- Just append a '.json' here
   },
-  // Process the CSS with PostCSS
-  postcss: () => [postcssMixins, autoprefixer, postcssNested, postcssExtend],
+  optimization: {
+    runtimeChunk: true,
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "common",
+          chunks: "all"
+        }
+      }
+    }
+ },
 };

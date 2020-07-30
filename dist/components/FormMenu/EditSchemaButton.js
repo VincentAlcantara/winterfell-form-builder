@@ -1,178 +1,136 @@
-'use strict';
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _stringify = require('babel-runtime/core-js/json/stringify');
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
-var _stringify2 = _interopRequireDefault(_stringify);
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _reactRedux = require("react-redux");
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _winterfellFormBuilderActions = require("../../actions/winterfellFormBuilderActions");
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 
-var _react = require('react');
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
-var _react2 = _interopRequireDefault(_react);
+var EditSchemaButton = /*#__PURE__*/function (_Component) {
+  (0, _inherits2["default"])(EditSchemaButton, _Component);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _reactRedux = require('react-redux');
-
-var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var EditSchemaButton = function (_Component) {
-  (0, _inherits3.default)(EditSchemaButton, _Component);
+  var _super = _createSuper(EditSchemaButton);
 
   function EditSchemaButton(props) {
-    (0, _classCallCheck3.default)(this, EditSchemaButton);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (EditSchemaButton.__proto__ || (0, _getPrototypeOf2.default)(EditSchemaButton)).call(this, props));
-
+    (0, _classCallCheck2["default"])(this, EditSchemaButton);
+    _this = _super.call(this, props);
     _this.state = {
       schema: _this.props.schema
     };
-
-    _this.onChange = _this.onChange.bind(_this);
-    _this.onFormUpdate = _this.onFormUpdate.bind(_this);
+    _this.onChange = _this.onChange.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.onFormUpdate = _this.onFormUpdate.bind((0, _assertThisInitialized2["default"])(_this));
     return _this;
   }
 
-  (0, _createClass3.default)(EditSchemaButton, [{
-    key: 'componentWillReceiveProps',
+  (0, _createClass2["default"])(EditSchemaButton, [{
+    key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
       this.state = {
         schema: nextProps.schema
       };
     }
   }, {
-    key: 'onChange',
+    key: "onChange",
     value: function onChange(e) {
-      this.setState({ schema: JSON.parse(e.target.value) });
+      this.setState({
+        schema: JSON.parse(e.target.value)
+      });
     }
   }, {
-    key: 'onFormUpdate',
+    key: "onFormUpdate",
     value: function onFormUpdate(e) {
       e.preventDefault();
       this.props.updateForm(this.state.schema);
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      return [_react2.default.createElement(
-        'button',
-        {
-          className: 'btn btn-block btn-dark',
-          'data-toggle': 'modal',
-          'data-target': '#editSchema',
-          key: 'editSchema',
-          title: 'Edit Schema'
-        },
-        _react2.default.createElement(
-          'i',
-          { className: 'material-icons' },
-          'view_agenda'
-        ),
-        _react2.default.createElement(
-          'span',
-          { className: 'icon-menu' },
-          'Schema'
-        )
-      ), _react2.default.createElement(
-        'div',
-        { className: 'modal fade', id: 'editSchema', tabIndex: '-1', key: 'editSchemaModal' },
-        _react2.default.createElement(
-          'div',
-          { className: 'modal-dialog bg-white' },
-          _react2.default.createElement(
-            'div',
-            { className: 'modal-content' },
-            _react2.default.createElement(
-              'div',
-              { className: 'modal-header' },
-              _react2.default.createElement(
-                'div',
-                { className: 'modal-title' },
-                'Edit Schema'
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'modal-body' },
-              _react2.default.createElement(
-                'form',
-                null,
-                _react2.default.createElement('textarea', {
-                  rows: '30',
-                  cols: '50',
-                  value: (0, _stringify2.default)(this.state.schema, undefined, 2),
-                  onChange: this.onChange
-                })
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'modal-footer' },
-              _react2.default.createElement(
-                'button',
-                {
-                  className: 'btn btn-danger',
-                  'data-dismiss': 'modal'
-                },
-                'Cancel'
-              ),
-              _react2.default.createElement(
-                'button',
-                {
-                  className: 'btn btn-dark',
-                  onClick: this.onFormUpdate,
-                  'data-dismiss': 'modal'
-                },
-                'Save changes'
-              )
-            )
-          )
-        )
-      )];
+      return [/*#__PURE__*/_react["default"].createElement("button", {
+        className: "btn btn-block btn-dark",
+        "data-toggle": "modal",
+        "data-target": "#editSchema",
+        key: "editSchema",
+        title: "Edit Schema"
+      }, /*#__PURE__*/_react["default"].createElement("i", {
+        className: "material-icons"
+      }, "view_agenda"), /*#__PURE__*/_react["default"].createElement("span", {
+        className: "icon-menu"
+      }, "Schema")), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "modal fade",
+        id: "editSchema",
+        tabIndex: "-1",
+        key: "editSchemaModal"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        className: "modal-dialog bg-white"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        className: "modal-content"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        className: "modal-header"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        className: "modal-title"
+      }, "Edit Schema")), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "modal-body"
+      }, /*#__PURE__*/_react["default"].createElement("form", null, /*#__PURE__*/_react["default"].createElement("textarea", {
+        rows: "30",
+        cols: "50",
+        value: JSON.stringify(this.state.schema, undefined, 2),
+        onChange: this.onChange
+      }))), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "modal-footer"
+      }, /*#__PURE__*/_react["default"].createElement("button", {
+        className: "btn btn-danger",
+        "data-dismiss": "modal"
+      }, "Cancel"), /*#__PURE__*/_react["default"].createElement("button", {
+        className: "btn btn-dark",
+        onClick: this.onFormUpdate,
+        "data-dismiss": "modal"
+      }, "Save changes")))))];
     }
   }]);
   return EditSchemaButton;
 }(_react.Component);
 
-EditSchemaButton.propTypes = {
-  updateForm: _propTypes2.default.func.isRequired,
-  schema: _propTypes2.default.object
-};
-EditSchemaButton.defaultProps = {
+(0, _defineProperty2["default"])(EditSchemaButton, "propTypes", {
+  updateForm: _propTypes["default"].func.isRequired,
+  schema: _propTypes["default"].object
+});
+(0, _defineProperty2["default"])(EditSchemaButton, "defaultProps", {
   schema: null
-};
-
-
+});
 EditSchemaButton.propTypes = {
-  updateForm: _propTypes2.default.func.isRequired
+  updateForm: _propTypes["default"].func.isRequired
 };
-
 EditSchemaButton.defaultProps = {
   schema: null
 };
@@ -183,21 +141,8 @@ function mapStateToProps(state) {
   };
 }
 
-var _default = (0, _reactRedux.connect)(mapStateToProps, { updateForm: _winterfellFormBuilderActions.updateForm })(EditSchemaButton);
+var _default = (0, _reactRedux.connect)(mapStateToProps, {
+  updateForm: _winterfellFormBuilderActions.updateForm
+})(EditSchemaButton);
 
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(EditSchemaButton, 'EditSchemaButton', 'src/components/FormMenu/EditSchemaButton.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FormMenu/EditSchemaButton.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FormMenu/EditSchemaButton.js');
-}();
-
-;
+exports["default"] = _default;
