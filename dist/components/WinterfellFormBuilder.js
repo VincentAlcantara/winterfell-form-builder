@@ -142,24 +142,23 @@ function mapStateToProps(state, ownProps) {
   };
   console.log("This is data ", data);
   return {
-    title: state.getIn(['form', 'title']) // schema: state.getIn(['form', 'schema']),
-    // currentPanelId: state.getIn(['form', 'currentPanelId']),
-    // formPanels: state.getIn(['form', 'schema', 'formPanels']),
-    // questionSets: state.getIn(['form', 'schema', 'questionSets']),
-    // currentEditingField: state.getIn(['form', 'currentEditingField']),
-    // currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
-    // currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
-    // currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
-    // errorMessage: state.getIn(['error', 'message']),
-
+    title: state.getIn(['form', 'title']),
+    schema: state.getIn(['form', 'schema']),
+    currentPanelId: state.getIn(['form', 'currentPanelId']),
+    formPanels: state.getIn(['form', 'schema', 'formPanels']),
+    questionSets: state.getIn(['form', 'schema', 'questionSets']),
+    currentEditingField: state.getIn(['form', 'currentEditingField']),
+    currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
+    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
+    errorMessage: state.getIn(['error', 'message'])
   };
-} // export default connect(
-// mapStateToProps,
-// { goToPage, changeCurrentEditingField, clearErrorMessage },
-// )(WinterfellFormBuilder);
+}
 
-
-var _default = (0, _reactRedux.connect)(mapStateToProps)(WinterfellFormBuilder); // export default WinterfellFormBuilder
-
+var _default = (0, _reactRedux.connect)(mapStateToProps, {
+  goToPage: _winterfellFormBuilderActions.goToPage,
+  changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField,
+  clearErrorMessage: _winterfellFormBuilderActions.clearErrorMessage
+})(WinterfellFormBuilder);
 
 exports["default"] = _default;

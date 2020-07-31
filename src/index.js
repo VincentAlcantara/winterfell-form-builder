@@ -1,7 +1,6 @@
 import WinterfellFormBuilder from './components/WinterfellFormBuilder';
-import winterfellFormBuilderReducer from './reducers/winterfellFormBuilderReducer';
-import winterfellFormBuilderActions from './actions/winterfellFormBuilderActions';
+import WinterfellFormBuilderReducer from './reducers/winterfellFormBuilderReducer';
 
-export { winterfellFormBuilderReducer, winterfellFormBuilderActions };
+export { WinterfellFormBuilderReducer };
 export default WinterfellFormBuilder;
 

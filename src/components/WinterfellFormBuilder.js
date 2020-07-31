@@ -45,7 +45,7 @@ class WinterfellFormBuilder extends Component {
             <h1>Winterfell Form Builder</h1>
           </div>
         </div>
-        {/* <div className="row">
+        <div className="row">
           <div
             className={`modal fade ${errorMessage !== '' ? 'show' : ''}`}
             id="errorMessage"
@@ -72,8 +72,8 @@ class WinterfellFormBuilder extends Component {
               </div>
             </div>
           </div>
-        </div> */}
-        {/* <div className="row py-3">
+        </div>
+        <div className="row py-3">
           <div className="col-12">
             <div className="btn-group">
               <CreateFormButton />
@@ -83,8 +83,8 @@ class WinterfellFormBuilder extends Component {
               <EditFormTitleButton />
             </div>
           </div>
-        </div> */}
-        {/* {(!this.props.schema || this.props.schema.size === 0) ?
+        </div>
+        {(!this.props.schema || this.props.schema.size === 0) ?
           (<div className="alert alert-info" role="alert">
             No form loaded.  Click on <b>Create</b> to create a new form,
                 or <b>Import</b> to load an existing form (.json).
@@ -129,9 +129,9 @@ class WinterfellFormBuilder extends Component {
                 }
 
               </div>
-            </div>)} */}
+            </div>)}
 
-        {/* <div className="row winterfell-form-builder-previewer">
+        <div className="row winterfell-form-builder-previewer">
           <div className="col-12 mb-5 py-3">
             <h3>Winterfell Form Preview:</h3>
             {
@@ -148,7 +148,7 @@ class WinterfellFormBuilder extends Component {
               </div>
             }
           </div>
-        </div> */}
+        </div>
       </div>
     );
   }
@@ -201,23 +201,20 @@ function mapStateToProps(state, ownProps) {
 
   return {
     title: state.getIn(['form', 'title']),
-    // schema: state.getIn(['form', 'schema']),
-    // currentPanelId: state.getIn(['form', 'currentPanelId']),
-    // formPanels: state.getIn(['form', 'schema', 'formPanels']),
-    // questionSets: state.getIn(['form', 'schema', 'questionSets']),
-    // currentEditingField: state.getIn(['form', 'currentEditingField']),
-    // currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
-    // currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
-    // currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
-    // errorMessage: state.getIn(['error', 'message']),
+    schema: state.getIn(['form', 'schema']),
+    currentPanelId: state.getIn(['form', 'currentPanelId']),
+    formPanels: state.getIn(['form', 'schema', 'formPanels']),
+    questionSets: state.getIn(['form', 'schema', 'questionSets']),
+    currentEditingField: state.getIn(['form', 'currentEditingField']),
+    currentQuestionPanelIndex: state.getIn(['form', 'currentQuestionPanelIndex']),
+    currentQuestionSetIndex: state.getIn(['form', 'currentQuestionSetIndex']),
+    currentQuestionIndex: state.getIn(['form', 'currentQuestionIndex']),
+    errorMessage: state.getIn(['error', 'message']),
   };
 }
 
-// export default connect(
-  // mapStateToProps,
-  // { goToPage, changeCurrentEditingField, clearErrorMessage },
-// )(WinterfellFormBuilder);
+export default connect(
+  mapStateToProps,
+  { goToPage, changeCurrentEditingField, clearErrorMessage },
+)(WinterfellFormBuilder);
 
-export default connect(mapStateToProps)(WinterfellFormBuilder);
-
-// export default WinterfellFormBuilder
