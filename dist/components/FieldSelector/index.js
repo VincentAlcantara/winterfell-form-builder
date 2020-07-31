@@ -115,7 +115,7 @@ var FieldSelectorContainer = /*#__PURE__*/function (_Component) {
         onClick: function onClick() {
           return _this2.props.changeCurrentEditingField('page', currentQuestionSetIndex, currentQuestionIndex);
         }
-      }), currentQuestionPanelIndex >= 0 && questionPanelsArray && /*#__PURE__*/_react["default"].createElement(_QuestionSetSelector["default"], {
+      }), currentQuestionPanelIndex >= 0 && questionPanelsArray && questionPanelsArray[currentQuestionPanelIndex].questionSets && /*#__PURE__*/_react["default"].createElement(_QuestionSetSelector["default"], {
         currentQuestionSets: questionPanelsArray[currentQuestionPanelIndex].questionSets,
         questionSets: questionSetsArray,
         onClick: this.props.changeCurrentEditingField,
