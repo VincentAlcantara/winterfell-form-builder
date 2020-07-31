@@ -2,26 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class SelectInput extends React.Component {
-  constructor(props) {
-    super(props);
-
-    console.log("this.props.displayValue", this.props.displayValue)
-
-    this.state = {
-      value: this.props.displayValue,
-    };
+  state = {
+    value: this.props.displayValue,
+  };
+  componentDidMount(){
 
   }
-
   componentWillReceiveProps(nextProps) {
-    console.log("This is handle change is called", nextProps)
+    console.log("This is handle change is called", nextProps, this.props)
     
     this.setState({
       value: nextProps.displayValue,
     });
   }
+  
   handleChange = (e) => {
-    console.log("This is handle change is called")
+    console.log("This is handle change is called", e)
     this.setState({ value: e.target.value });
     this.props.onSelect(e.target.value);
   }

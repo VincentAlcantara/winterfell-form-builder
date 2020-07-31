@@ -34,13 +34,21 @@ var SelectInput = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(SelectInput);
 
-  function SelectInput(props) {
+  function SelectInput() {
     var _this;
 
     (0, _classCallCheck2["default"])(this, SelectInput);
-    _this = _super.call(this, props);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+    (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this), "state", {
+      value: _this.props.displayValue
+    });
     (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this), "handleChange", function (e) {
-      console.log("This is handle change is called");
+      console.log("This is handle change is called", e);
 
       _this.setState({
         value: e.target.value
@@ -48,17 +56,16 @@ var SelectInput = /*#__PURE__*/function (_React$Component) {
 
       _this.props.onSelect(e.target.value);
     });
-    console.log("this.props.displayValue", _this.props.displayValue);
-    _this.state = {
-      value: _this.props.displayValue
-    };
     return _this;
   }
 
   (0, _createClass2["default"])(SelectInput, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
-      console.log("This is handle change is called", nextProps);
+      console.log("This is handle change is called", nextProps, this.props);
       this.setState({
         value: nextProps.displayValue
       });
