@@ -5,19 +5,23 @@ class SelectInput extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log("this.props.displayValue", this.props.displayValue)
+
     this.state = {
       value: this.props.displayValue,
     };
 
-    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("This is handle change is called", nextProps)
+    
     this.setState({
       value: nextProps.displayValue,
     });
   }
-  handleChange(e) {
+  handleChange = (e) => {
+    console.log("This is handle change is called")
     this.setState({ value: e.target.value });
     this.props.onSelect(e.target.value);
   }
@@ -40,7 +44,7 @@ class SelectInput extends React.Component {
           ? 'required'
           : undefined}
         onChange={this.handleChange}
-        onSelect={() => this.onSelect}
+        onSelect={() => this.props.onSelect}
         autoComplete={this.props.name}
       >
         <option value="">&nbsp;</option>

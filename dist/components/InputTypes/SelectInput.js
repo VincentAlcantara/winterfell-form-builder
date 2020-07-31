@@ -19,6 +19,8 @@ var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime
 
 var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
 var _react = _interopRequireDefault(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
@@ -37,27 +39,29 @@ var SelectInput = /*#__PURE__*/function (_React$Component) {
 
     (0, _classCallCheck2["default"])(this, SelectInput);
     _this = _super.call(this, props);
+    (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this), "handleChange", function (e) {
+      console.log("This is handle change is called");
+
+      _this.setState({
+        value: e.target.value
+      });
+
+      _this.props.onSelect(e.target.value);
+    });
+    console.log("this.props.displayValue", _this.props.displayValue);
     _this.state = {
       value: _this.props.displayValue
     };
-    _this.handleChange = _this.handleChange.bind((0, _assertThisInitialized2["default"])(_this));
     return _this;
   }
 
   (0, _createClass2["default"])(SelectInput, [{
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
+      console.log("This is handle change is called", nextProps);
       this.setState({
         value: nextProps.displayValue
       });
-    }
-  }, {
-    key: "handleChange",
-    value: function handleChange(e) {
-      this.setState({
-        value: e.target.value
-      });
-      this.props.onSelect(e.target.value);
     }
   }, {
     key: "render",
@@ -77,7 +81,7 @@ var SelectInput = /*#__PURE__*/function (_React$Component) {
         required: this.props.required ? 'required' : undefined,
         onChange: this.handleChange,
         onSelect: function onSelect() {
-          return _this2.onSelect;
+          return _this2.props.onSelect;
         },
         autoComplete: this.props.name
       }, /*#__PURE__*/_react["default"].createElement("option", {
