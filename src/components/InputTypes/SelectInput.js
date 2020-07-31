@@ -31,6 +31,7 @@ class SelectInput extends React.Component {
         {opt.text}
       </option>),
     );
+    console.log("This is the options: ", options)
     return (
       <select
         name={this.props.name}

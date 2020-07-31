@@ -81,6 +81,7 @@ var SelectInput = /*#__PURE__*/function (_React$Component) {
           value: opt.value
         }, opt.text);
       });
+      console.log("This is the options: ", options);
       return /*#__PURE__*/_react["default"].createElement("select", {
         name: this.props.name,
         className: this.props.classes.select,
