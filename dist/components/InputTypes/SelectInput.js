@@ -60,9 +60,6 @@ var SelectInput = /*#__PURE__*/function (_React$Component) {
   }
 
   (0, _createClass2["default"])(SelectInput, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {}
-  }, {
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
       console.log("This is handle change is called", nextProps, this.props);

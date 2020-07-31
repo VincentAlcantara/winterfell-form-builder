@@ -7,7 +7,7 @@ const QuestionSetSelector = (props) => {
 
   const displayQuestionSet = () => currentQuestionSets.map(
     currentQuestionSet => (
-      questionSets.map(
+      questionSets && questionSets.map(
         (questionSet, questionSetIndex) => {
           if (currentQuestionSet.questionSetId === questionSet.questionSetId
           ) {

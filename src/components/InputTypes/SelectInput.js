@@ -5,9 +5,7 @@ class SelectInput extends React.Component {
   state = {
     value: this.props.displayValue,
   };
-  componentDidMount(){
 
-  }
   componentWillReceiveProps(nextProps) {
     console.log("This is handle change is called", nextProps, this.props)
     
