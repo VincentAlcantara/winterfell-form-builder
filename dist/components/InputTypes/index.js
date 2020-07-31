@@ -29,10 +29,10 @@ Object.defineProperty(exports, "FieldGroup", {
     return _FieldGroup["default"];
   }
 });
-Object.defineProperty(exports, "dateInputType", {
+Object.defineProperty(exports, "DateInputType", {
   enumerable: true,
   get: function get() {
-    return _dateInputType["default"];
+    return _DateInputType["default"];
   }
 });
 Object.defineProperty(exports, "addressInputType", {
@@ -50,6 +50,6 @@ var _SelectInput = _interopRequireDefault(require("./SelectInput"));
 
 var _FieldGroup = _interopRequireDefault(require("./FieldGroup"));
 
-var _dateInputType = _interopRequireDefault(require("./dateInputType"));
+var _DateInputType = _interopRequireDefault(require("./DateInputType"));
 
 var _addressInputType = _interopRequireDefault(require("./addressInputType"));

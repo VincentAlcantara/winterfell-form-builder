@@ -31,7 +31,7 @@ var _reactRedux = require("react-redux");
 
 var _winterfellFormBuilderActions = require("../actions/winterfellFormBuilderActions");
 
-var _dateInputType = _interopRequireDefault(require("../components/InputTypes/dateInputType"));
+var _DateInputType = _interopRequireDefault(require("../components/InputTypes/DateInputType"));
 
 var _addressInputType = _interopRequireDefault(require("../components/InputTypes/addressInputType"));
 
@@ -92,7 +92,7 @@ var Previewer = /*#__PURE__*/function (_Component) {
           questionAnswers = _this$props.questionAnswers;
 
       _winterfell["default"].addInputTypes({
-        dateInput: _dateInputType["default"],
+        dateInput: _DateInputType["default"],
         addressInput: _addressInputType["default"],
         textAreaInput: _textAreaInputType["default"]
       });
