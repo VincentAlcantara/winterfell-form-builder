@@ -175,11 +175,11 @@ AddressInput.defaultProps = {
     text: 'Select state',
     value: '',
   }, {
-    text: 'Australian Capital Territory',
-    value: 'ACT',
-  }, {
     text: 'New South Wales',
     value: 'NSW',
+  }, {
+    text: 'Australian Capital Territory',
+    value: 'ACT',
   }, {
     text: 'Northern Territory',
     value: 'NT',
