@@ -33,7 +33,7 @@ var DateInput = function DateInput(_ref) {
       _onFocus = _ref.onFocus,
       labelId = _ref.labelId;
 
-  var _useState = (0, _react.useState)(value && value.type ? value.value : (0, _moment["default"])().toDate()),
+  var _useState = (0, _react.useState)(value && value.type ? (0, _moment["default"])(value.value).toDate() : (0, _moment["default"])().toDate()),
       _useState2 = (0, _slicedToArray2["default"])(_useState, 2),
       selectedDate = _useState2[0],
       setSelectedDate = _useState2[1];

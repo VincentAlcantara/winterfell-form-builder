@@ -7,7 +7,7 @@ require("react-datepicker/dist/react-datepicker-cssmodules.css");
 const DATE_FORMAT = "dd/MM/yyyy";
 
 export const DateInput = ({ value, onChange, onBlur, name, id, classes, onFocus, labelId }) => {
-  const [selectedDate, setSelectedDate] = useState(value && value.type ? value.value : moment().toDate());
+  const [selectedDate, setSelectedDate] = useState(value && value.type ? moment(value.value).toDate() : moment().toDate());
   const handleChange = (date) => {
     setSelectedDate(date);
     onChange({ type: "date", value: moment(date) });
