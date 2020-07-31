@@ -238,8 +238,8 @@ AddressInput.defaultProps = {
     line2: '',
     city: '',
     state: {
-      text: 'Australian Capital Territory',
-      value: 'ACT'
+      text: 'New South Wales',
+      value: 'NSW'
     },
     postcode: ''
   },
