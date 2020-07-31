@@ -21,7 +21,7 @@ var QuestionSetSelector = function QuestionSetSelector(props) {
 
   var displayQuestionSet = function displayQuestionSet() {
     return currentQuestionSets.map(function (currentQuestionSet) {
-      return questionSets && questionSets.map(function (questionSet, questionSetIndex) {
+      return questionSets ? questionSets.map(function (questionSet, questionSetIndex) {
         if (currentQuestionSet.questionSetId === questionSet.questionSetId) {
           return /*#__PURE__*/_react["default"].createElement("span", {
             key: questionSetIndex
@@ -39,7 +39,7 @@ var QuestionSetSelector = function QuestionSetSelector(props) {
         }
 
         return null;
-      });
+      }) : null;
     });
   };
 

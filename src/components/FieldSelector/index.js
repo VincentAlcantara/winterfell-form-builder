@@ -53,6 +53,7 @@ class FieldSelectorContainer extends Component {
       currentEditingField,
     } = this.props;
     const questionPanelsArray = questionPanels && questionPanels.toJS();
+    console.log("questionSetsArray = questionSets && questionSets.toJS() ", questionSets)
     const questionSetsArray = questionSets && questionSets.toJS();
     return [
       currentEditingField === 'pageSort' && <PageSortSelector key="pageSortSelector" />,
