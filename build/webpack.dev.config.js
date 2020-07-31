@@ -89,6 +89,9 @@ module.exports = {
     ],
   },
   resolve: {
+    alias: {
+      react: path.resolve('./node_modules/react')
+    },
     modules: [
       "./node_modules",
     ],
@@ -106,4 +109,8 @@ module.exports = {
       }
     }
  },
+  externals: {
+    react: 'commonjs react',
+  'react-dom': 'commonjs react-dom',
+  },
 };
