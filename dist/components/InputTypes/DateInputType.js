@@ -15,9 +15,11 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
 
+var _moment = _interopRequireDefault(require("moment"));
+
 var _constants = require("../../common/constants");
 
-var _moment = _interopRequireDefault(require("moment"));
+require("react-datepicker/dist/react-datepicker-cssmodules.css");
 
 var DateInput = function DateInput(_ref) {
   var value = _ref.value,

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import { DATE_FORMAT } from "../../common/constants";
 import moment from "moment";
+import { DATE_FORMAT } from "../../common/constants";
+require("react-datepicker/dist/react-datepicker-cssmodules.css");
 
 export const DateInput = ({
   value,
