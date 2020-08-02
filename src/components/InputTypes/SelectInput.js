@@ -7,15 +7,12 @@ class SelectInput extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log("This is handle change is called", nextProps, this.props)
-    
     this.setState({
       value: nextProps.displayValue,
     });
   }
   
   handleChange = (e) => {
-    console.log("This is handle change is called", e)
     this.setState({ value: e.target.value });
     this.props.onSelect(e.target.value);
   }
@@ -29,7 +26,6 @@ class SelectInput extends React.Component {
         {opt.text}
       </option>),
     );
-    console.log("This is the options: ", options)
     return (
       <select
         name={this.props.name}

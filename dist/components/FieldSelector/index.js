@@ -103,7 +103,6 @@ var FieldSelectorContainer = /*#__PURE__*/function (_Component) {
           nextButton = _this$props.nextButton,
           currentEditingField = _this$props.currentEditingField;
       var questionPanelsArray = questionPanels && questionPanels.toJS();
-      console.log("questionSetsArray = questionSets && questionSets.toJS() ", questionSets);
       var questionSetsArray = questionSets && questionSets.toJS();
       return [currentEditingField === 'pageSort' && /*#__PURE__*/_react["default"].createElement(_PageSortSelector["default"], {
         key: "pageSortSelector"

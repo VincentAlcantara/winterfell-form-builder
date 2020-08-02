@@ -48,8 +48,6 @@ var SelectInput = /*#__PURE__*/function (_React$Component) {
       value: _this.props.displayValue
     });
     (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this), "handleChange", function (e) {
-      console.log("This is handle change is called", e);
-
       _this.setState({
         value: e.target.value
       });
@@ -62,7 +60,6 @@ var SelectInput = /*#__PURE__*/function (_React$Component) {
   (0, _createClass2["default"])(SelectInput, [{
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
-      console.log("This is handle change is called", nextProps, this.props);
       this.setState({
         value: nextProps.displayValue
       });
@@ -78,7 +75,6 @@ var SelectInput = /*#__PURE__*/function (_React$Component) {
           value: opt.value
         }, opt.text);
       });
-      console.log("This is the options: ", options);
       return /*#__PURE__*/_react["default"].createElement("select", {
         name: this.props.name,
         className: this.props.classes.select,
