@@ -114,3 +114,4 @@ export const INPUT_TYPE_OPTIONS = [{
   value: 'checkboxInput',
 }];
 
+export const DATE_FORMAT = "dd/MM/yyyy";

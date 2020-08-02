@@ -19,8 +19,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
-require("react-datepicker/dist/react-datepicker-cssmodules.css");
-
+// require("react-datepicker/dist/react-datepicker-cssmodules.css");
 var DATE_FORMAT = "dd/MM/yyyy";
 
 var DateInput = function DateInput(_ref) {
