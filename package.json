@@ -61,8 +61,6 @@
     "redux-storage-merger-immutablejs": "^1.0.5",
     "validator": "^13.1.1",
     "vinyl-source-stream": "^2.0.0",
-    "webpack": "4.44.0",
-    "webpack-dev-server": "3.11.0",
     "winterfell": "https://github.com/andrewhathaway/Winterfell.git"
   },
   "devDependencies": {
@@ -108,6 +106,8 @@
     "eslint-plugin-json": "^2.1.2",
     "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
-    "json-loader": "^0.5.7"
+    "json-loader": "^0.5.7",
+    "webpack": "4.44.0",
+    "webpack-dev-server": "3.11.0"
   }
 }
