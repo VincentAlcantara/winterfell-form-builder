@@ -15,12 +15,9 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactDatepicker = _interopRequireDefault(require("react-datepicker"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
+var _constants = require("../../common/constants");
 
 var _moment = _interopRequireDefault(require("moment"));
-
-// require("react-datepicker/dist/react-datepicker-cssmodules.css");
-var DATE_FORMAT = "dd/MM/yyyy";
 
 var DateInput = function DateInput(_ref) {
   var value = _ref.value,
@@ -58,7 +55,7 @@ var DateInput = function DateInput(_ref) {
     onChange: function onChange(date) {
       return handleChange(date);
     },
-    dateFormat: DATE_FORMAT,
+    dateFormat: _constants.DATE_FORMAT,
     peekNextMonth: true,
     showMonthDropdown: true,
     showYearDropdown: true
