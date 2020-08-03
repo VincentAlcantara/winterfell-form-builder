@@ -60,7 +60,8 @@ var DateInput = function DateInput(_ref) {
     dateFormat: _constants.DATE_FORMAT,
     peekNextMonth: true,
     showMonthDropdown: true,
-    showYearDropdown: true
+    showYearDropdown: true,
+    dropdownMode: "select"
   }));
 };
 

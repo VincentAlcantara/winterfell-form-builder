@@ -36,6 +36,7 @@ export const DateInput = ({
         peekNextMonth
         showMonthDropdown
         showYearDropdown
+        dropdownMode="select"
       />
     </div>
   );
