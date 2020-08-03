@@ -1,65 +1,52 @@
-'use strict';
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _winterfell = _interopRequireDefault(require("winterfell"));
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _reactRedux = require("react-redux");
 
-var _react = require('react');
+var _winterfellFormBuilderActions = require("../actions/winterfellFormBuilderActions");
 
-var _react2 = _interopRequireDefault(_react);
+var _DateInputType = _interopRequireDefault(require("../components/InputTypes/DateInputType"));
 
-var _propTypes = require('prop-types');
+var _addressInputType = _interopRequireDefault(require("../components/InputTypes/addressInputType"));
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _textAreaInputType = _interopRequireDefault(require("../components/InputTypes/textAreaInputType"));
 
-var _winterfell = require('winterfell');
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 
-var _winterfell2 = _interopRequireDefault(_winterfell);
-
-var _reactRedux = require('react-redux');
-
-var _winterfellFormBuilderActions = require('../actions/winterfellFormBuilderActions');
-
-var _dateInputType = require('../components/InputTypes/dateInputType');
-
-var _dateInputType2 = _interopRequireDefault(_dateInputType);
-
-var _addressInputType = require('../components/InputTypes/addressInputType');
-
-var _addressInputType2 = _interopRequireDefault(_addressInputType);
-
-var _textAreaInputType = require('../components/InputTypes/textAreaInputType');
-
-var _textAreaInputType2 = _interopRequireDefault(_textAreaInputType);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 var onRenderDefault = function onRenderDefault() {
   console.log('Great news! Winterfell rendered successfully');
 };
 
 var onSwitchPanelDefault = function onSwitchPanelDefault(panel) {
-  console.log('Moving on to the panel that is identified as ' + panel.panelId);
+  console.log("Moving on to the panel that is identified as ".concat(panel.panelId));
 };
 
 var onSubmitDefault = function onSubmitDefault(questionAndAnswers, target) {
@@ -68,49 +55,51 @@ var onSubmitDefault = function onSubmitDefault(questionAndAnswers, target) {
   console.log('For this example, we disabled normal form submission functionality. ');
   console.log('-----');
   console.log('Target: ', target);
-  console.log('-----');
-  // alert('Submitted. Check the console to see the answers!');
+  console.log('-----'); // alert('Submitted. Check the console to see the answers!');
 };
 
-var Previewer = function (_Component) {
-  (0, _inherits3.default)(Previewer, _Component);
+var Previewer = /*#__PURE__*/function (_Component) {
+  (0, _inherits2["default"])(Previewer, _Component);
+
+  var _super = _createSuper(Previewer);
 
   function Previewer(props) {
-    (0, _classCallCheck3.default)(this, Previewer);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (Previewer.__proto__ || (0, _getPrototypeOf2.default)(Previewer)).call(this, props));
-
-    _this.onUpdateQuestionAnswers = _this.onUpdateQuestionAnswers.bind(_this);
+    (0, _classCallCheck2["default"])(this, Previewer);
+    _this = _super.call(this, props);
+    _this.onUpdateQuestionAnswers = _this.onUpdateQuestionAnswers.bind((0, _assertThisInitialized2["default"])(_this));
     return _this;
   }
 
-  (0, _createClass3.default)(Previewer, [{
-    key: 'onUpdateQuestionAnswers',
+  (0, _createClass2["default"])(Previewer, [{
+    key: "onUpdateQuestionAnswers",
     value: function onUpdateQuestionAnswers(questionAndAnswers) {
       console.log('Question Updated! The current set of answers is: ', questionAndAnswers);
       this.props.updateQuestionAnswers(questionAndAnswers);
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
-      var _props = this.props,
-          schema = _props.schema,
-          currentPanelId = _props.currentPanelId,
-          onRender = _props.onRender,
-          onSwitchPanel = _props.onSwitchPanel,
-          onSubmit = _props.onSubmit,
-          questionAnswers = _props.questionAnswers;
+      var _this$props = this.props,
+          schema = _this$props.schema,
+          currentPanelId = _this$props.currentPanelId,
+          onRender = _this$props.onRender,
+          onSwitchPanel = _this$props.onSwitchPanel,
+          onSubmit = _this$props.onSubmit,
+          questionAnswers = _this$props.questionAnswers;
 
+      _winterfell["default"].addInputTypes({
+        dateInput: _DateInputType["default"],
+        addressInput: _addressInputType["default"],
+        textAreaInput: _textAreaInputType["default"]
+      });
 
-      _winterfell2.default.addInputTypes({
-        dateInput: _dateInputType2.default,
-        addressInput: _addressInputType2.default,
-        textAreaInput: _textAreaInputType2.default });
       var displayWinterFellForm = function displayWinterFellForm() {
         return schema.formPanels.map(function (formPanel, index) {
-          return formPanel.panelId === currentPanelId && _react2.default.createElement(_winterfell2.default, {
+          return formPanel.panelId === currentPanelId && /*#__PURE__*/_react["default"].createElement(_winterfell["default"], {
             schema: schema,
             disableSubmit: true,
             onRender: onRender,
@@ -120,7 +109,7 @@ var Previewer = function (_Component) {
             questionAnswers: questionAnswers,
             panelId: currentPanelId,
             key: index
-          }) || currentPanelId === 'Select Page' && _react2.default.createElement(_winterfell2.default, {
+          }) || currentPanelId === 'Select Page' && /*#__PURE__*/_react["default"].createElement(_winterfell["default"], {
             schema: schema,
             disableSubmit: true,
             onRender: onRender,
@@ -132,26 +121,23 @@ var Previewer = function (_Component) {
         });
       };
 
-      return _react2.default.createElement(
-        'div',
-        { className: 'card p-3' },
-        schema && schema.formPanels && schema.formPanels.length > 0 && currentPanelId && currentPanelId !== 'Select Page' && displayWinterFellForm()
-      );
+      return /*#__PURE__*/_react["default"].createElement("div", {
+        className: "card p-3"
+      }, schema && schema.formPanels && schema.formPanels.length > 0 && currentPanelId && currentPanelId !== 'Select Page' && displayWinterFellForm());
     }
   }]);
   return Previewer;
 }(_react.Component);
 
 Previewer.propTypes = {
-  currentPanelId: _propTypes2.default.string,
-  schema: _propTypes2.default.object.isRequired,
-  onRender: _propTypes2.default.func,
-  updateQuestionAnswers: _propTypes2.default.func,
-  onSubmit: _propTypes2.default.func,
-  onSwitchPanel: _propTypes2.default.func,
-  questionAnswers: _propTypes2.default.object
+  currentPanelId: _propTypes["default"].string,
+  schema: _propTypes["default"].object.isRequired,
+  onRender: _propTypes["default"].func,
+  updateQuestionAnswers: _propTypes["default"].func,
+  onSubmit: _propTypes["default"].func,
+  onSwitchPanel: _propTypes["default"].func,
+  questionAnswers: _propTypes["default"].object
 };
-
 Previewer.defaultProps = {
   currentPanelId: null,
   schema: {},
@@ -163,25 +149,8 @@ Previewer.defaultProps = {
   updateQuestionAnswers: function updateQuestionAnswers() {}
 };
 
-var _default = (0, _reactRedux.connect)(null, { updateQuestionAnswers: _winterfellFormBuilderActions.updateQuestionAnswers })(Previewer);
+var _default = (0, _reactRedux.connect)(null, {
+  updateQuestionAnswers: _winterfellFormBuilderActions.updateQuestionAnswers
+})(Previewer);
 
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(onRenderDefault, 'onRenderDefault', 'src/components/Previewer.js');
-
-  __REACT_HOT_LOADER__.register(onSwitchPanelDefault, 'onSwitchPanelDefault', 'src/components/Previewer.js');
-
-  __REACT_HOT_LOADER__.register(onSubmitDefault, 'onSubmitDefault', 'src/components/Previewer.js');
-
-  __REACT_HOT_LOADER__.register(Previewer, 'Previewer', 'src/components/Previewer.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/Previewer.js');
-}();
-
-;
+exports["default"] = _default;

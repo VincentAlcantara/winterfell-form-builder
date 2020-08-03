@@ -2,22 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class SelectInput extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: this.props.displayValue,
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-  }
+  state = {
+    value: this.props.displayValue,
+  };
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       value: nextProps.displayValue,
     });
   }
-  handleChange(e) {
+  
+  handleChange = (e) => {
     this.setState({ value: e.target.value });
     this.props.onSelect(e.target.value);
   }
@@ -40,7 +35,7 @@ class SelectInput extends React.Component {
           ? 'required'
           : undefined}
         onChange={this.handleChange}
-        onSelect={() => this.onSelect}
+        onSelect={() => this.props.onSelect}
         autoComplete={this.props.name}
       >
         <option value="">&nbsp;</option>

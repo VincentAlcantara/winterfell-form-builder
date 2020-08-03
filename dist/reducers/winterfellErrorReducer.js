@@ -1,12 +1,13 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _immutable = require('immutable');
+var _immutable = require("immutable");
 
-var _constants = require('../common/constants');
+var _constants = require("../common/constants");
 
 var initialState = (0, _immutable.fromJS)({
   message: ''
@@ -14,7 +15,7 @@ var initialState = (0, _immutable.fromJS)({
 
 function winterfellFormBuilderReducer() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-  var action = arguments[1];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
     case _constants.RETRIEVE_FORMLIST_ERROR:
@@ -27,7 +28,8 @@ function winterfellFormBuilderReducer() {
     case _constants.ADD_QUESTION_ERROR:
     case _constants.UPDATE_QUESTION_ERROR:
     case _constants.DELETE_QUESTION_ERROR:
-      return state.set('message', '' + action.payload.message);
+      return state.set('message', "".concat(action.payload.message));
+
     case _constants.GOTO_PAGE_SUCCESS:
     case _constants.CREATE_FORM_SUCCESS:
     case _constants.EDIT_FORM_TITLE_SUCCESS:
@@ -41,6 +43,7 @@ function winterfellFormBuilderReducer() {
     case _constants.DELETE_QUESTION_SUCCESS:
     case _constants.CLEAR_FORM_ERROR:
       return state.set('message', '');
+
     default:
       {
         return state;
@@ -49,19 +52,4 @@ function winterfellFormBuilderReducer() {
 }
 
 var _default = winterfellFormBuilderReducer;
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(initialState, 'initialState', 'src/reducers/winterfellErrorReducer.js');
-
-  __REACT_HOT_LOADER__.register(winterfellFormBuilderReducer, 'winterfellFormBuilderReducer', 'src/reducers/winterfellErrorReducer.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/reducers/winterfellErrorReducer.js');
-}();
-
-;
+exports["default"] = _default;

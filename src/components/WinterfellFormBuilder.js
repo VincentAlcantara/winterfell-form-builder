@@ -18,13 +18,9 @@ import FieldSelector from './FieldSelector';
 import FieldEditor from './FieldEditor';
 
 class WinterfellFormBuilder extends Component {
-  constructor(props) {
-    super(props);
+  
 
-    this.onFormUpdate = this.onFormUpdate.bind(this);
-  }
-
-  onFormUpdate(e) {
+  onFormUpdate = (e) => {
     e.preventDefault();
     this.setState({ schema: JSON.parse(e.target.value) });
   }
@@ -187,7 +183,7 @@ WinterfellFormBuilder.defaultProps = {
   errorMessage: '',
 };
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     title: state.getIn(['form', 'title']),
     schema: state.getIn(['form', 'schema']),
@@ -206,3 +202,4 @@ export default connect(
   mapStateToProps,
   { goToPage, changeCurrentEditingField, clearErrorMessage },
 )(WinterfellFormBuilder);
+

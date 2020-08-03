@@ -1,58 +1,52 @@
-'use strict';
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _react = _interopRequireDefault(require("react"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
-var _react = require('react');
+var RadioButtonOptionsInput = /*#__PURE__*/function (_React$Component) {
+  (0, _inherits2["default"])(RadioButtonOptionsInput, _React$Component);
 
-var _react2 = _interopRequireDefault(_react);
-
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var RadioButtonOptionsInput = function (_React$Component) {
-  (0, _inherits3.default)(RadioButtonOptionsInput, _React$Component);
+  var _super = _createSuper(RadioButtonOptionsInput);
 
   function RadioButtonOptionsInput(props) {
-    (0, _classCallCheck3.default)(this, RadioButtonOptionsInput);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (RadioButtonOptionsInput.__proto__ || (0, _getPrototypeOf2.default)(RadioButtonOptionsInput)).call(this, props));
-
+    (0, _classCallCheck2["default"])(this, RadioButtonOptionsInput);
+    _this = _super.call(this, props);
     _this.state = {
       value: _this.props.value.length > 0 ? _this.props.value : []
     };
-
-    _this.handleChange = _this.handleChange.bind(_this);
-    _this.onBlur = _this.onBlur.bind(_this);
+    _this.handleChange = _this.handleChange.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.onBlur = _this.onBlur.bind((0, _assertThisInitialized2["default"])(_this));
     return _this;
   }
 
-  (0, _createClass3.default)(RadioButtonOptionsInput, [{
-    key: 'onBlur',
+  (0, _createClass2["default"])(RadioButtonOptionsInput, [{
+    key: "onBlur",
     value: function onBlur(e) {
       var currentValue = this.state.value;
 
@@ -62,10 +56,12 @@ var RadioButtonOptionsInput = function (_React$Component) {
         });
       }
 
-      this.setState({ value: currentValue });
+      this.setState({
+        value: currentValue
+      });
     }
   }, {
-    key: 'handleChange',
+    key: "handleChange",
     value: function handleChange(e) {
       var currentValue = this.state.value;
 
@@ -77,63 +73,53 @@ var RadioButtonOptionsInput = function (_React$Component) {
         });
       }
 
-      this.setState({ value: currentValue });
+      this.setState({
+        value: currentValue
+      });
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
-      return _react2.default.createElement(
-        'ul',
-        { className: this.props.classes.checkboxList },
-        this.props.options.map(function (opt) {
-          return _react2.default.createElement(
-            'li',
-            {
-              key: opt.value,
-              className: _this2.props.classes.checkboxListItem
-            },
-            _react2.default.createElement(
-              'label',
-              {
-                className: _this2.props.classes.checkboxLabel,
-                htmlFor: _this2.props.name + '-' + opt.value,
-                id: _this2.props.labelId
-              },
-              _react2.default.createElement('input', {
-                type: 'radio',
-                id: _this2.props.name + '-' + opt.value,
-                name: _this2.props.name,
-                'aria-labelledby': _this2.props.labelId,
-                value: opt.value,
-                checked: _this2.state.value.indexOf(opt.value) > -1,
-                className: _this2.props.classes.checkbox,
-                required: _this2.props.required ? 'required' : undefined,
-                onChange: _this2.handleChange,
-                onBlur: _this2.onBlur,
-                autoComplete: _this2.props.name + '-' + opt.value
-              }),
-              opt.text
-            )
-          );
-        })
-      );
+      return /*#__PURE__*/_react["default"].createElement("ul", {
+        className: this.props.classes.checkboxList
+      }, this.props.options.map(function (opt) {
+        return /*#__PURE__*/_react["default"].createElement("li", {
+          key: opt.value,
+          className: _this2.props.classes.checkboxListItem
+        }, /*#__PURE__*/_react["default"].createElement("label", {
+          className: _this2.props.classes.checkboxLabel,
+          htmlFor: "".concat(_this2.props.name, "-").concat(opt.value),
+          id: _this2.props.labelId
+        }, /*#__PURE__*/_react["default"].createElement("input", {
+          type: "radio",
+          id: "".concat(_this2.props.name, "-").concat(opt.value),
+          name: _this2.props.name,
+          "aria-labelledby": _this2.props.labelId,
+          value: opt.value,
+          checked: _this2.state.value.indexOf(opt.value) > -1,
+          className: _this2.props.classes.checkbox,
+          required: _this2.props.required ? 'required' : undefined,
+          onChange: _this2.handleChange,
+          onBlur: _this2.onBlur,
+          autoComplete: "".concat(_this2.props.name, "-").concat(opt.value)
+        }), opt.text));
+      }));
     }
   }]);
   return RadioButtonOptionsInput;
-}(_react2.default.Component);
+}(_react["default"].Component);
 
 RadioButtonOptionsInput.propTypes = {
-  value: _propTypes2.default.array.isRequired,
+  value: _propTypes["default"].array.isRequired,
   // onChange: PropTypes.func,
-  options: _propTypes2.default.array.isRequired,
-  classes: _propTypes2.default.object,
-  name: _propTypes2.default.string,
-  labelId: _propTypes2.default.string,
-  required: _propTypes2.default.bool
+  options: _propTypes["default"].array.isRequired,
+  classes: _propTypes["default"].object,
+  name: _propTypes["default"].string,
+  labelId: _propTypes["default"].string,
+  required: _propTypes["default"].bool
 };
-
 RadioButtonOptionsInput.defaultProps = {
   classes: {
     checkboxList: 'clean-list',
@@ -147,19 +133,5 @@ RadioButtonOptionsInput.defaultProps = {
   onBlur: function onBlur() {},
   required: false
 };
-
 var _default = RadioButtonOptionsInput;
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(RadioButtonOptionsInput, 'RadioButtonOptionsInput', 'src/components/InputTypes/RadioButtonOptionsInput.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/InputTypes/RadioButtonOptionsInput.js');
-}();
-
-;
+exports["default"] = _default;

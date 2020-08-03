@@ -4,7 +4,7 @@ import Winterfell from 'winterfell';
 import { connect } from 'react-redux';
 
 import { updateQuestionAnswers } from '../actions/winterfellFormBuilderActions';
-import dateInputType from '../components/InputTypes/dateInputType';
+import DateInputType from '../components/InputTypes/DateInputType';
 import addressInputType from '../components/InputTypes/addressInputType';
 import textAreaInputType from '../components/InputTypes/textAreaInputType';
 
@@ -48,7 +48,7 @@ class Previewer extends Component {
     } = this.props;
 
     Winterfell.addInputTypes({
-      dateInput: dateInputType,
+      dateInput: DateInputType,
       addressInput: addressInputType,
       textAreaInput: textAreaInputType });
     const displayWinterFellForm = () => (

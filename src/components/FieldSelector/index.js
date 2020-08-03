@@ -66,7 +66,7 @@ class FieldSelectorContainer extends Component {
           />
         }
         {currentQuestionPanelIndex >= 0 &&
-          questionPanelsArray &&
+            questionPanelsArray && questionPanelsArray[currentQuestionPanelIndex] &&
           <QuestionSetSelector
             currentQuestionSets={questionPanelsArray[currentQuestionPanelIndex].questionSets}
             questionSets={questionSetsArray}

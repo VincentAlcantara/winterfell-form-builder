@@ -160,8 +160,8 @@ AddressInput.defaultProps = {
     line2: '',
     city: '',
     state: {
-      text: 'Australian Capital Territory',
-      value: 'ACT',
+      text: 'New South Wales',
+      value: 'NSW',
     },
     postcode: '',
   },
@@ -175,11 +175,11 @@ AddressInput.defaultProps = {
     text: 'Select state',
     value: '',
   }, {
-    text: 'Australian Capital Territory',
-    value: 'ACT',
-  }, {
     text: 'New South Wales',
     value: 'NSW',
+  }, {
+    text: 'Australian Capital Territory',
+    value: 'ACT',
   }, {
     text: 'Northern Territory',
     value: 'NT',

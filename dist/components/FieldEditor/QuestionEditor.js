@@ -1,83 +1,66 @@
-'use strict';
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _reactRedux = require("react-redux");
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _immutable = require("immutable");
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _winterfellFormBuilderActions = require("../../actions/winterfellFormBuilderActions");
 
-var _react = require('react');
+var _FieldGroup = _interopRequireDefault(require("../InputTypes/FieldGroup"));
 
-var _react2 = _interopRequireDefault(_react);
+var _DeleteQuestionButton = _interopRequireDefault(require("../FormMenu/DeleteQuestionButton"));
 
-var _reactRedux = require('react-redux');
+var _AddQuestionButton = _interopRequireDefault(require("../FormMenu/AddQuestionButton"));
 
-var _propTypes = require('prop-types');
+var _SelectInput = _interopRequireDefault(require("../InputTypes/SelectInput"));
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _ButtonBarEditor = _interopRequireDefault(require("./ButtonBarEditor"));
 
-var _immutable = require('immutable');
+var _constants = require("../../common/constants");
 
-var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
+var _QuestionOptionEditor = _interopRequireDefault(require("./QuestionOptionEditor"));
 
-var _FieldGroup = require('../InputTypes/FieldGroup');
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 
-var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
-var _DeleteQuestionButton = require('../FormMenu/DeleteQuestionButton');
+var QuestionEditor = /*#__PURE__*/function (_PureComponent) {
+  (0, _inherits2["default"])(QuestionEditor, _PureComponent);
 
-var _DeleteQuestionButton2 = _interopRequireDefault(_DeleteQuestionButton);
-
-var _AddQuestionButton = require('../FormMenu/AddQuestionButton');
-
-var _AddQuestionButton2 = _interopRequireDefault(_AddQuestionButton);
-
-var _SelectInput = require('../InputTypes/SelectInput');
-
-var _SelectInput2 = _interopRequireDefault(_SelectInput);
-
-var _ButtonBarEditor = require('./ButtonBarEditor');
-
-var _ButtonBarEditor2 = _interopRequireDefault(_ButtonBarEditor);
-
-var _constants = require('../../common/constants');
-
-var _QuestionOptionEditor = require('./QuestionOptionEditor');
-
-var _QuestionOptionEditor2 = _interopRequireDefault(_QuestionOptionEditor);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var QuestionEditor = function (_PureComponent) {
-  (0, _inherits3.default)(QuestionEditor, _PureComponent);
+  var _super = _createSuper(QuestionEditor);
 
   function QuestionEditor(props) {
-    (0, _classCallCheck3.default)(this, QuestionEditor);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (QuestionEditor.__proto__ || (0, _getPrototypeOf2.default)(QuestionEditor)).call(this, props));
-
+    (0, _classCallCheck2["default"])(this, QuestionEditor);
+    _this = _super.call(this, props);
     var questionSetId = props.questionSetId,
         questionId = props.questionId,
         question = props.question,
@@ -87,8 +70,6 @@ var QuestionEditor = function (_PureComponent) {
         questionInputOptions = props.questionInputOptions,
         questionTarget = props.questionTarget,
         questionTargetMatch = props.questionTargetMatch;
-
-
     _this.state = {
       questionSetId: questionSetId,
       questionId: questionId,
@@ -103,16 +84,15 @@ var QuestionEditor = function (_PureComponent) {
       questionTarget: questionTarget,
       questionTargetMatch: questionTargetMatch
     };
-
-    _this.onChange = _this.onChange.bind(_this);
-    _this.onSelect = _this.onSelect.bind(_this);
-    _this.onEditQuestionIdClick = _this.onEditQuestionIdClick.bind(_this);
-    _this.onUpdateNextQuestionTarget = _this.onUpdateNextQuestionTarget.bind(_this);
+    _this.onChange = _this.onChange.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.onSelect = _this.onSelect.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.onEditQuestionIdClick = _this.onEditQuestionIdClick.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.onUpdateNextQuestionTarget = _this.onUpdateNextQuestionTarget.bind((0, _assertThisInitialized2["default"])(_this));
     return _this;
   }
 
-  (0, _createClass3.default)(QuestionEditor, [{
-    key: 'componentWillReceiveProps',
+  (0, _createClass2["default"])(QuestionEditor, [{
+    key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
       this.setState({
         questionId: nextProps.questionId,
@@ -126,221 +106,185 @@ var QuestionEditor = function (_PureComponent) {
       });
     }
   }, {
-    key: 'onChange',
+    key: "onChange",
     value: function onChange(event) {
       var _event$target = event.target,
           name = _event$target.name,
           value = _event$target.value;
-      var _props = this.props,
-          currentQuestionSetIndex = _props.currentQuestionSetIndex,
-          currentQuestionIndex = _props.currentQuestionIndex;
+      var _this$props = this.props,
+          currentQuestionSetIndex = _this$props.currentQuestionSetIndex,
+          currentQuestionIndex = _this$props.currentQuestionIndex;
+      this.setState((0, _defineProperty2["default"])({}, name, value));
 
-      this.setState((0, _defineProperty3.default)({}, name, value));
       switch (name) {
         case 'questionId':
           this.props.editQuestionId(currentQuestionSetIndex, currentQuestionIndex, value);
           break;
+
         case 'question':
           this.props.editQuestion(currentQuestionSetIndex, currentQuestionIndex, value);
           break;
+
         case 'questionText':
           this.props.editQuestionText(currentQuestionSetIndex, currentQuestionIndex, value);
           break;
+
         case 'questionPostText':
           this.props.editQuestionPostText(currentQuestionSetIndex, currentQuestionIndex, value);
           break;
+
         default:
       }
     }
   }, {
-    key: 'onSelect',
+    key: "onSelect",
     value: function onSelect(questionType) {
-      var _props2 = this.props,
-          currentQuestionSetIndex = _props2.currentQuestionSetIndex,
-          currentQuestionIndex = _props2.currentQuestionIndex;
+      var _this$props2 = this.props,
+          currentQuestionSetIndex = _this$props2.currentQuestionSetIndex,
+          currentQuestionIndex = _this$props2.currentQuestionIndex;
+      this.setState({
+        questionInputType: questionType
+      });
 
-      this.setState({ questionInputType: questionType });
       if (questionType !== '') {
         this.props.changeQuestionType(currentQuestionSetIndex, currentQuestionIndex, questionType);
       }
     }
   }, {
-    key: 'onEditQuestionIdClick',
+    key: "onEditQuestionIdClick",
     value: function onEditQuestionIdClick() {
-      this.setState({ editQuestionId: !this.state.editQuestionId });
+      this.setState({
+        editQuestionId: !this.state.editQuestionId
+      });
     }
   }, {
-    key: 'onUpdateNextQuestionTarget',
+    key: "onUpdateNextQuestionTarget",
     value: function onUpdateNextQuestionTarget() {
-      var _props3 = this.props,
-          currentQuestionPanelIndex = _props3.currentQuestionPanelIndex,
-          questionId = _props3.questionId;
-
+      var _this$props3 = this.props,
+          currentQuestionPanelIndex = _this$props3.currentQuestionPanelIndex,
+          questionId = _this$props3.questionId;
       this.props.updateNextQuestionTarget(currentQuestionPanelIndex, questionId, this.state.questionTargetMatch, this.state.questionTarget);
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
-      var _props4 = this.props,
-          questionSetId = _props4.questionSetId,
-          questionId = _props4.questionId,
-          question = _props4.question,
-          questionText = _props4.questionText,
-          questionPostText = _props4.questionPostText,
-          questionInputType = _props4.questionInputType,
-          questionInputOptions = _props4.questionInputOptions,
-          currentQuestionPanelIndex = _props4.currentQuestionPanelIndex;
-
-
-      return _react2.default.createElement(
-        'form',
-        null,
-        this.props.currentQuestionIndex > -1 && _react2.default.createElement(
-          'div',
-          null,
-          _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'questionSetId',
-              name: 'questionSetId',
-              label: 'Question Set ID',
-              onChange: this.onChange,
-              placeholder: questionSetId,
-              value: this.state.questionSetId,
-              disabled: true
-            })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'questionId',
-              name: 'questionId',
-              label: 'Question ID',
-              onChange: this.onChange,
-              placeholder: questionId,
-              value: this.state.questionId,
-              disabled: this.state.editQuestionId
-            })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(
-              'label',
-              { htmlFor: 'edit-question-id', id: 'edit-question-id-label' },
-              _react2.default.createElement('input', {
-                id: 'edit-question-id',
-                type: 'checkbox',
-                onClick: this.onEditQuestionIdClick
-              }),
-              '\xA0edit question id (not recommended)'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'question',
-              name: 'question',
-              label: 'Question',
-              onChange: this.onChange,
-              placeholder: question,
-              value: this.state.question
-            })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'questionText',
-              name: 'questionText',
-              label: 'Question Pre Text',
-              placeholder: questionText,
-              onChange: this.onChange,
-              value: this.state.questionText
-            })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(_FieldGroup2.default, {
-              id: 'questionPostText',
-              name: 'questionPostText',
-              label: 'Question Post Text',
-              placeholder: questionPostText,
-              onChange: this.onChange,
-              value: this.state.questionPostText
-            })
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(
-              'label',
-              { htmlFor: 'questionInputType' },
-              'Question Type'
-            ),
-            _react2.default.createElement(_SelectInput2.default, {
-              id: 'questionInputType',
-              labelId: 'questionInputType',
-              options: _constants.INPUT_TYPE_OPTIONS,
-              onSelect: this.onSelect,
-              displayValue: this.props.questionInputType
-            })
-          )
-        ),
-        (questionInputType === 'checkboxOptionsInput' || questionInputType === 'selectInput' || questionInputType === 'radioOptionsInput') && questionInputOptions && this.props.currentQuestionIndex > -1 && _react2.default.createElement(_QuestionOptionEditor2.default, {
-          questionInputOptions: this.props.questionInputOptions,
-          questionId: this.props.questionId,
-          currentQuestionPanelIndex: this.props.currentQuestionPanelIndex,
-          currentQuestionSetIndex: this.props.currentQuestionSetIndex,
-          currentQuestionIndex: this.props.currentQuestionIndex
-        }),
-        _react2.default.createElement(_ButtonBarEditor2.default, {
-          currentQuestionPanelIndex: currentQuestionPanelIndex
-        }),
-        _react2.default.createElement(
-          'div',
-          { className: 'btn-group' },
-          this.props.currentQuestionIndex > -1 && _react2.default.createElement(_DeleteQuestionButton2.default, {
-            currentQuestionSetIndex: this.props.currentQuestionSetIndex,
-            currentQuestionIndex: this.props.currentQuestionIndex
-          }),
-          this.props.currentQuestionIndex > -1 && _react2.default.createElement(_AddQuestionButton2.default, {
-            questionSetId: this.props.questionSetId,
-            currentQuestionSetIndex: this.props.currentQuestionSetIndex
-          })
-        ),
-        _react2.default.createElement('br', null)
-      );
+      var _this$props4 = this.props,
+          questionSetId = _this$props4.questionSetId,
+          questionId = _this$props4.questionId,
+          question = _this$props4.question,
+          questionText = _this$props4.questionText,
+          questionPostText = _this$props4.questionPostText,
+          questionInputType = _this$props4.questionInputType,
+          questionInputOptions = _this$props4.questionInputOptions,
+          currentQuestionPanelIndex = _this$props4.currentQuestionPanelIndex;
+      return /*#__PURE__*/_react["default"].createElement("form", null, this.props.currentQuestionIndex > -1 && /*#__PURE__*/_react["default"].createElement("div", null, /*#__PURE__*/_react["default"].createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/_react["default"].createElement(_FieldGroup["default"], {
+        id: "questionSetId",
+        name: "questionSetId",
+        label: "Question Set ID",
+        onChange: this.onChange,
+        placeholder: questionSetId,
+        value: this.state.questionSetId,
+        disabled: true
+      })), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/_react["default"].createElement(_FieldGroup["default"], {
+        id: "questionId",
+        name: "questionId",
+        label: "Question ID",
+        onChange: this.onChange,
+        placeholder: questionId,
+        value: this.state.questionId,
+        disabled: this.state.editQuestionId
+      })), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/_react["default"].createElement("label", {
+        htmlFor: "edit-question-id",
+        id: "edit-question-id-label"
+      }, /*#__PURE__*/_react["default"].createElement("input", {
+        id: "edit-question-id",
+        type: "checkbox",
+        onClick: this.onEditQuestionIdClick
+      }), "\xA0edit question id (not recommended)")), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/_react["default"].createElement(_FieldGroup["default"], {
+        id: "question",
+        name: "question",
+        label: "Question",
+        onChange: this.onChange,
+        placeholder: question,
+        value: this.state.question
+      })), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/_react["default"].createElement(_FieldGroup["default"], {
+        id: "questionText",
+        name: "questionText",
+        label: "Question Pre Text",
+        placeholder: questionText,
+        onChange: this.onChange,
+        value: this.state.questionText
+      })), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/_react["default"].createElement(_FieldGroup["default"], {
+        id: "questionPostText",
+        name: "questionPostText",
+        label: "Question Post Text",
+        placeholder: questionPostText,
+        onChange: this.onChange,
+        value: this.state.questionPostText
+      })), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/_react["default"].createElement("label", {
+        htmlFor: "questionInputType"
+      }, "Question Type"), /*#__PURE__*/_react["default"].createElement(_SelectInput["default"], {
+        id: "questionInputType",
+        labelId: "questionInputType",
+        options: _constants.INPUT_TYPE_OPTIONS,
+        onSelect: this.onSelect,
+        displayValue: this.props.questionInputType
+      }))), (questionInputType === 'checkboxOptionsInput' || questionInputType === 'selectInput' || questionInputType === 'radioOptionsInput') && questionInputOptions && this.props.currentQuestionIndex > -1 && /*#__PURE__*/_react["default"].createElement(_QuestionOptionEditor["default"], {
+        questionInputOptions: this.props.questionInputOptions,
+        questionId: this.props.questionId,
+        currentQuestionPanelIndex: this.props.currentQuestionPanelIndex,
+        currentQuestionSetIndex: this.props.currentQuestionSetIndex,
+        currentQuestionIndex: this.props.currentQuestionIndex
+      }), /*#__PURE__*/_react["default"].createElement(_ButtonBarEditor["default"], {
+        currentQuestionPanelIndex: currentQuestionPanelIndex
+      }), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "btn-group"
+      }, this.props.currentQuestionIndex > -1 && /*#__PURE__*/_react["default"].createElement(_DeleteQuestionButton["default"], {
+        currentQuestionSetIndex: this.props.currentQuestionSetIndex,
+        currentQuestionIndex: this.props.currentQuestionIndex
+      }), this.props.currentQuestionIndex > -1 && /*#__PURE__*/_react["default"].createElement(_AddQuestionButton["default"], {
+        questionSetId: this.props.questionSetId,
+        currentQuestionSetIndex: this.props.currentQuestionSetIndex
+      })), /*#__PURE__*/_react["default"].createElement("br", null));
     }
   }]);
   return QuestionEditor;
 }(_react.PureComponent);
 
 QuestionEditor.propTypes = {
-  editQuestionId: _propTypes2.default.func.isRequired,
-  editQuestion: _propTypes2.default.func.isRequired,
-  editQuestionText: _propTypes2.default.func.isRequired,
-  editQuestionPostText: _propTypes2.default.func.isRequired,
-  changeQuestionType: _propTypes2.default.func.isRequired,
-  updateNextQuestionTarget: _propTypes2.default.func.isRequired,
-  questionSetId: _propTypes2.default.string.isRequired,
-  questionId: _propTypes2.default.string,
-  question: _propTypes2.default.string,
-  questionText: _propTypes2.default.string,
-  questionPostText: _propTypes2.default.string,
-  questionInputType: _propTypes2.default.string,
-  questionInputOptions: _propTypes2.default.object,
-  currentQuestionSetIndex: _propTypes2.default.number.isRequired,
-  currentQuestionIndex: _propTypes2.default.number.isRequired,
-  questionTarget: _propTypes2.default.string,
-  questionTargetMatch: _propTypes2.default.string,
-  currentQuestionPanelIndex: _propTypes2.default.number.isRequired
+  editQuestionId: _propTypes["default"].func.isRequired,
+  editQuestion: _propTypes["default"].func.isRequired,
+  editQuestionText: _propTypes["default"].func.isRequired,
+  editQuestionPostText: _propTypes["default"].func.isRequired,
+  changeQuestionType: _propTypes["default"].func.isRequired,
+  updateNextQuestionTarget: _propTypes["default"].func.isRequired,
+  questionSetId: _propTypes["default"].string.isRequired,
+  questionId: _propTypes["default"].string,
+  question: _propTypes["default"].string,
+  questionText: _propTypes["default"].string,
+  questionPostText: _propTypes["default"].string,
+  questionInputType: _propTypes["default"].string,
+  questionInputOptions: _propTypes["default"].object,
+  currentQuestionSetIndex: _propTypes["default"].number.isRequired,
+  currentQuestionIndex: _propTypes["default"].number.isRequired,
+  questionTarget: _propTypes["default"].string,
+  questionTargetMatch: _propTypes["default"].string,
+  currentQuestionPanelIndex: _propTypes["default"].number.isRequired
 };
-
 QuestionEditor.defaultProps = {
   questionId: '',
   question: '',
@@ -383,19 +327,4 @@ var _default = (0, _reactRedux.connect)(mapStateToProps, {
   updateNextQuestionTarget: _winterfellFormBuilderActions.updateNextQuestionTarget
 })(QuestionEditor);
 
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(QuestionEditor, 'QuestionEditor', 'src/components/FieldEditor/QuestionEditor.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FieldEditor/QuestionEditor.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldEditor/QuestionEditor.js');
-}();
-
-;
+exports["default"] = _default;

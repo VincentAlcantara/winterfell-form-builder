@@ -1,85 +1,74 @@
-'use strict';
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
-var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _reactRedux = require("react-redux");
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _winterfellFormBuilderActions = require("../../actions/winterfellFormBuilderActions");
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _FieldGroup = _interopRequireDefault(require("../InputTypes/FieldGroup"));
 
-var _react = require('react');
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 
-var _react2 = _interopRequireDefault(_react);
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
-var _reactRedux = require('react-redux');
+var QuestionSetEditor = /*#__PURE__*/function (_PureComponent) {
+  (0, _inherits2["default"])(QuestionSetEditor, _PureComponent);
 
-var _propTypes = require('prop-types');
-
-var _propTypes2 = _interopRequireDefault(_propTypes);
-
-var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
-
-var _FieldGroup = require('../InputTypes/FieldGroup');
-
-var _FieldGroup2 = _interopRequireDefault(_FieldGroup);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var QuestionSetEditor = function (_PureComponent) {
-  (0, _inherits3.default)(QuestionSetEditor, _PureComponent);
+  var _super = _createSuper(QuestionSetEditor);
 
   function QuestionSetEditor(props) {
-    (0, _classCallCheck3.default)(this, QuestionSetEditor);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (QuestionSetEditor.__proto__ || (0, _getPrototypeOf2.default)(QuestionSetEditor)).call(this, props));
-
+    (0, _classCallCheck2["default"])(this, QuestionSetEditor);
+    _this = _super.call(this, props);
     var questionSetId = props.questionSetId,
         questionSetHeader = props.questionSetHeader,
         questionSetText = props.questionSetText,
         questions = props.questions;
-
-
     _this.state = {
       questionSetId: questionSetId,
       questionSetHeader: questionSetHeader,
       questionSetText: questionSetText,
       questions: questions
     };
-
-    _this.onChangeQuestionSetHeader = _this.onChangeQuestionSetHeader.bind(_this);
-    _this.onChangeQuestionSetText = _this.onChangeQuestionSetText.bind(_this);
+    _this.onChangeQuestionSetHeader = _this.onChangeQuestionSetHeader.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.onChangeQuestionSetText = _this.onChangeQuestionSetText.bind((0, _assertThisInitialized2["default"])(_this));
     return _this;
   }
 
-  (0, _createClass3.default)(QuestionSetEditor, [{
-    key: 'componentWillReceiveProps',
+  (0, _createClass2["default"])(QuestionSetEditor, [{
+    key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
       var questionSetId = nextProps.questionSetId,
           questionSetHeader = nextProps.questionSetHeader,
           questionSetText = nextProps.questionSetText,
           questions = nextProps.questions;
-
       this.state = {
         questionSetId: questionSetId,
         questionSetHeader: questionSetHeader,
@@ -88,106 +77,82 @@ var QuestionSetEditor = function (_PureComponent) {
       };
     }
   }, {
-    key: 'onChangeQuestionSetHeader',
+    key: "onChangeQuestionSetHeader",
     value: function onChangeQuestionSetHeader(event) {
-      this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
+      this.setState((0, _defineProperty2["default"])({}, event.target.name, event.target.value));
       this.props.editQuestionSetHeader(this.props.currentQuestionSetIndex, event.target.value);
     }
   }, {
-    key: 'onChangeQuestionSetText',
+    key: "onChangeQuestionSetText",
     value: function onChangeQuestionSetText(event) {
-      this.setState((0, _defineProperty3.default)({}, event.target.name, event.target.value));
+      this.setState((0, _defineProperty2["default"])({}, event.target.name, event.target.value));
       this.props.editQuestionSetText(this.props.currentQuestionSetIndex, event.target.value);
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
-      var _props = this.props,
-          currentQuestionSetIndex = _props.currentQuestionSetIndex,
-          questions = _props.questions;
-
+      var _this$props = this.props,
+          currentQuestionSetIndex = _this$props.currentQuestionSetIndex,
+          questions = _this$props.questions;
       var questionsArray = questions.toJS();
-      return _react2.default.createElement(
-        'form',
-        null,
-        _react2.default.createElement(
-          'div',
-          { className: 'form-group' },
-          _react2.default.createElement(_FieldGroup2.default, {
-            id: 'questionSetId',
-            name: 'questionSetId',
-            label: 'Question Set ID',
-            placeholder: this.props.questionSetId,
-            value: this.state.questionSetId,
-            disabled: true
-          }),
-          _react2.default.createElement(_FieldGroup2.default, {
-            id: 'questionSetHeader',
-            name: 'questionSetHeader',
-            label: 'Question Set Header',
-            onChange: this.onChangeQuestionSetHeader,
-            placeholder: this.props.questionSetHeader,
-            value: this.state.questionSetHeader
-          })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'form-group' },
-          _react2.default.createElement(_FieldGroup2.default, {
-            id: 'questionSetText',
-            name: 'questionSetText',
-            label: 'Question Set Text',
-            placeholder: this.props.questionSetText,
-            onChange: this.onChangeQuestionSetText,
-            value: this.state.questionSetText
-          })
-        ),
-        questionsArray && questionsArray.length > 0 && _react2.default.createElement(
-          'div',
-          { className: 'form-group' },
-          _react2.default.createElement(
-            'label',
-            { htmlFor: 'questionList' },
-            'Questions'
-          ),
-          _react2.default.createElement(
-            'div',
-            { id: 'questionList' },
-            questionsArray.map(function (question, index) {
-              return _react2.default.createElement(
-                'button',
-                {
-                  type: 'button',
-                  key: 'question-' + index,
-                  variant: 'link',
-                  onClick: function onClick() {
-                    return _this2.props.changeCurrentEditingField('question', currentQuestionSetIndex, index);
-                  }
-                },
-                question.questionId
-              );
-            })
-          )
-        )
-      );
+      return /*#__PURE__*/_react["default"].createElement("form", null, /*#__PURE__*/_react["default"].createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/_react["default"].createElement(_FieldGroup["default"], {
+        id: "questionSetId",
+        name: "questionSetId",
+        label: "Question Set ID",
+        placeholder: this.props.questionSetId,
+        value: this.state.questionSetId,
+        disabled: true
+      }), /*#__PURE__*/_react["default"].createElement(_FieldGroup["default"], {
+        id: "questionSetHeader",
+        name: "questionSetHeader",
+        label: "Question Set Header",
+        onChange: this.onChangeQuestionSetHeader,
+        placeholder: this.props.questionSetHeader,
+        value: this.state.questionSetHeader
+      })), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/_react["default"].createElement(_FieldGroup["default"], {
+        id: "questionSetText",
+        name: "questionSetText",
+        label: "Question Set Text",
+        placeholder: this.props.questionSetText,
+        onChange: this.onChangeQuestionSetText,
+        value: this.state.questionSetText
+      })), questionsArray && questionsArray.length > 0 && /*#__PURE__*/_react["default"].createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/_react["default"].createElement("label", {
+        htmlFor: "questionList"
+      }, "Questions"), /*#__PURE__*/_react["default"].createElement("div", {
+        id: "questionList"
+      }, questionsArray.map(function (question, index) {
+        return /*#__PURE__*/_react["default"].createElement("button", {
+          type: "button",
+          key: "question-".concat(index),
+          variant: "link",
+          onClick: function onClick() {
+            return _this2.props.changeCurrentEditingField('question', currentQuestionSetIndex, index);
+          }
+        }, question.questionId);
+      }))));
     }
   }]);
   return QuestionSetEditor;
 }(_react.PureComponent);
 
 QuestionSetEditor.propTypes = {
-  editQuestionSetHeader: _propTypes2.default.func.isRequired,
-  editQuestionSetText: _propTypes2.default.func.isRequired,
-  changeCurrentEditingField: _propTypes2.default.func.isRequired,
-  questionSetId: _propTypes2.default.string,
-  questionSetHeader: _propTypes2.default.string,
-  questionSetText: _propTypes2.default.string,
-  currentQuestionSetIndex: _propTypes2.default.number.isRequired,
-  questions: _propTypes2.default.object
+  editQuestionSetHeader: _propTypes["default"].func.isRequired,
+  editQuestionSetText: _propTypes["default"].func.isRequired,
+  changeCurrentEditingField: _propTypes["default"].func.isRequired,
+  questionSetId: _propTypes["default"].string,
+  questionSetHeader: _propTypes["default"].string,
+  questionSetText: _propTypes["default"].string,
+  currentQuestionSetIndex: _propTypes["default"].number.isRequired,
+  questions: _propTypes["default"].object
 };
-
 QuestionSetEditor.defaultProps = {
   currentQuestionSetIndex: 0,
   questionSetId: '',
@@ -209,21 +174,7 @@ function mapStateToProps(state, ownProps) {
 var _default = (0, _reactRedux.connect)(mapStateToProps, {
   editQuestionSetHeader: _winterfellFormBuilderActions.editQuestionSetHeader,
   editQuestionSetText: _winterfellFormBuilderActions.editQuestionSetText,
-  changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField })(QuestionSetEditor);
+  changeCurrentEditingField: _winterfellFormBuilderActions.changeCurrentEditingField
+})(QuestionSetEditor);
 
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(QuestionSetEditor, 'QuestionSetEditor', 'src/components/FieldEditor/QuestionSetEditor.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FieldEditor/QuestionSetEditor.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldEditor/QuestionSetEditor.js');
-}();
-
-;
+exports["default"] = _default;

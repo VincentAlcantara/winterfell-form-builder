@@ -1,31 +1,21 @@
-'use strict';
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.WinterfellFormBuilderReducer = undefined;
-
-var _WinterfellFormBuilder = require('./components/WinterfellFormBuilder');
-
-var _WinterfellFormBuilder2 = _interopRequireDefault(_WinterfellFormBuilder);
-
-var _winterfellFormBuilderReducer = require('./reducers/winterfellFormBuilderReducer');
-
-var _winterfellFormBuilderReducer2 = _interopRequireDefault(_winterfellFormBuilderReducer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.WinterfellFormBuilderReducer = _winterfellFormBuilderReducer2.default;
-var _default = _WinterfellFormBuilder2.default;
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
+Object.defineProperty(exports, "WinterfellFormBuilderReducer", {
+  enumerable: true,
+  get: function get() {
+    return _winterfellFormBuilderReducer["default"];
   }
+});
+exports["default"] = void 0;
 
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/index.js');
-}();
+var _WinterfellFormBuilder = _interopRequireDefault(require("./components/WinterfellFormBuilder"));
 
-;
+var _winterfellFormBuilderReducer = _interopRequireDefault(require("./reducers/winterfellFormBuilderReducer"));
+
+var _default = _WinterfellFormBuilder["default"];
+exports["default"] = _default;

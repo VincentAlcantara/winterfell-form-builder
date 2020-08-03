@@ -1,199 +1,157 @@
-'use strict';
+"use strict";
+
+var _interopRequireWildcard = require("@babel/runtime/helpers/interopRequireWildcard");
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _getPrototypeOf = require('babel-runtime/core-js/object/get-prototype-of');
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
-var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
 
-var _classCallCheck2 = require('babel-runtime/helpers/classCallCheck');
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
-var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
 
-var _createClass2 = require('babel-runtime/helpers/createClass');
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
 
-var _createClass3 = _interopRequireDefault(_createClass2);
+var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
 
-var _possibleConstructorReturn2 = require('babel-runtime/helpers/possibleConstructorReturn');
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
-var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+var _react = _interopRequireWildcard(require("react"));
 
-var _inherits2 = require('babel-runtime/helpers/inherits');
+var _reactRedux = require("react-redux");
 
-var _inherits3 = _interopRequireDefault(_inherits2);
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _react = require('react');
+var _immutable = require("immutable");
 
-var _react2 = _interopRequireDefault(_react);
+var _winterfellFormBuilderActions = require("../../actions/winterfellFormBuilderActions");
 
-var _reactRedux = require('react-redux');
+var _SelectInput = _interopRequireDefault(require("../InputTypes/SelectInput"));
 
-var _propTypes = require('prop-types');
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2["default"])(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2["default"])(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2["default"])(this, result); }; }
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
-var _immutable = require('immutable');
+var ConditionalPageEditor = /*#__PURE__*/function (_Component) {
+  (0, _inherits2["default"])(ConditionalPageEditor, _Component);
 
-var _winterfellFormBuilderActions = require('../../actions/winterfellFormBuilderActions');
-
-var _SelectInput = require('../InputTypes/SelectInput');
-
-var _SelectInput2 = _interopRequireDefault(_SelectInput);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var ConditionalPageEditor = function (_Component) {
-  (0, _inherits3.default)(ConditionalPageEditor, _Component);
+  var _super = _createSuper(ConditionalPageEditor);
 
   function ConditionalPageEditor(props) {
-    (0, _classCallCheck3.default)(this, ConditionalPageEditor);
+    var _this;
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (ConditionalPageEditor.__proto__ || (0, _getPrototypeOf2.default)(ConditionalPageEditor)).call(this, props));
-
-    _this.nextButtonTargetOptions = function () {
-      return _this.__nextButtonTargetOptions__REACT_HOT_LOADER__.apply(_this, arguments);
-    };
-
-    _this.state = {
-      questionTarget: ''
-    };
-
-    _this.onSelect = _this.onSelect.bind(_this);
-    _this.nextButtonTargetOptions = _this.nextButtonTargetOptions.bind(_this);
-    _this.initialTarget = _this.initialTarget.bind(_this);
-    _this.onResetNextQuestionTarget = _this.onResetNextQuestionTarget.bind(_this);
-    return _this;
-  }
-
-  (0, _createClass3.default)(ConditionalPageEditor, [{
-    key: '__nextButtonTargetOptions__REACT_HOT_LOADER__',
-    value: function __nextButtonTargetOptions__REACT_HOT_LOADER__() {
-      return this.__nextButtonTargetOptions__REACT_HOT_LOADER__.apply(this, arguments);
-    }
-  }, {
-    key: 'onSelect',
-    value: function onSelect(page) {
-      this.setState({ questionTarget: page });
-      var _props = this.props,
-          currentQuestionPanelIndex = _props.currentQuestionPanelIndex,
-          questionId = _props.questionId,
-          value = _props.value;
-
-      this.props.updateNextQuestionTarget(currentQuestionPanelIndex, questionId, value, page, this.props.questionOptionIndex);
-    }
-  }, {
-    key: 'onClose',
-    value: function onClose(e) {
-      e.preventDefault();
-      this.setState({ showModal: true });
-    }
-  }, {
-    key: 'onResetNextQuestionTarget',
-    value: function onResetNextQuestionTarget() {
-      var _props2 = this.props,
-          currentQuestionPanelIndex = _props2.currentQuestionPanelIndex,
-          value = _props2.value;
-
-      this.props.resetNextQuestionTarget(currentQuestionPanelIndex, value);
-    }
-  }, {
-    key: 'initialTarget',
-    value: function initialTarget() {
-      var _props3 = this.props,
-          conditions = _props3.conditions,
-          value = _props3.value;
-
-      var conditionIndex = conditions.findIndex(function (condition) {
-        return condition.get('value') === value;
-      });
-      if (conditionIndex !== -1) {
-        return conditions.getIn([conditionIndex, 'target']);
-      }
-      return '';
-    }
-
-    // eslint-disable-next-line no-undef
-
-  }, {
-    key: '__nextButtonTargetOptions__REACT_HOT_LOADER__',
-    value: function __nextButtonTargetOptions__REACT_HOT_LOADER__() {
-      return this.props.formPanels && this.props.formPanels.toJS().map(function (formPanel) {
+    (0, _classCallCheck2["default"])(this, ConditionalPageEditor);
+    _this = _super.call(this, props);
+    (0, _defineProperty2["default"])((0, _assertThisInitialized2["default"])(_this), "nextButtonTargetOptions", function () {
+      return _this.props.formPanels && _this.props.formPanels.toJS().map(function (formPanel) {
         var option = {};
         option.text = formPanel.panelId;
         option.value = formPanel.panelId;
         return option;
       });
+    });
+    _this.state = {
+      questionTarget: ''
+    };
+    _this.onSelect = _this.onSelect.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.nextButtonTargetOptions = _this.nextButtonTargetOptions.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.initialTarget = _this.initialTarget.bind((0, _assertThisInitialized2["default"])(_this));
+    _this.onResetNextQuestionTarget = _this.onResetNextQuestionTarget.bind((0, _assertThisInitialized2["default"])(_this));
+    return _this;
+  }
+
+  (0, _createClass2["default"])(ConditionalPageEditor, [{
+    key: "onSelect",
+    value: function onSelect(page) {
+      this.setState({
+        questionTarget: page
+      });
+      var _this$props = this.props,
+          currentQuestionPanelIndex = _this$props.currentQuestionPanelIndex,
+          questionId = _this$props.questionId,
+          value = _this$props.value;
+      this.props.updateNextQuestionTarget(currentQuestionPanelIndex, questionId, value, page, this.props.questionOptionIndex);
     }
   }, {
-    key: 'render',
+    key: "onClose",
+    value: function onClose(e) {
+      e.preventDefault();
+      this.setState({
+        showModal: true
+      });
+    }
+  }, {
+    key: "onResetNextQuestionTarget",
+    value: function onResetNextQuestionTarget() {
+      var _this$props2 = this.props,
+          currentQuestionPanelIndex = _this$props2.currentQuestionPanelIndex,
+          value = _this$props2.value;
+      this.props.resetNextQuestionTarget(currentQuestionPanelIndex, value);
+    }
+  }, {
+    key: "initialTarget",
+    value: function initialTarget() {
+      var _this$props3 = this.props,
+          conditions = _this$props3.conditions,
+          value = _this$props3.value;
+      var conditionIndex = conditions.findIndex(function (condition) {
+        return condition.get('value') === value;
+      });
+
+      if (conditionIndex !== -1) {
+        return conditions.getIn([conditionIndex, 'target']);
+      }
+
+      return '';
+    } // eslint-disable-next-line no-undef
+
+  }, {
+    key: "render",
     value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'row winterfell-form-builder-conditional-page alert-warning' },
-        _react2.default.createElement(
-          'div',
-          { className: 'col' },
-          _react2.default.createElement(
-            'h6',
-            null,
-            'Option \'' + this.props.text + '\' Conditional Page:'
-          ),
-          _react2.default.createElement(
-            'p',
-            null,
-            _react2.default.createElement(
-              'i',
-              null,
-              'Go to this page if this is option selected.'
-            )
-          ),
-          _react2.default.createElement(
-            'div',
-            { className: 'form-group' },
-            _react2.default.createElement(
-              'div',
-              { className: 'input-group' },
-              _react2.default.createElement(_SelectInput2.default, {
-                id: 'questionTarget',
-                labelId: 'questionTarget',
-                options: this.nextButtonTargetOptions(),
-                onSelect: this.onSelect,
-                displayValue: this.initialTarget(),
-                value: this.state.questionTarget
-              }),
-              _react2.default.createElement(
-                'button',
-                {
-                  type: 'button',
-                  label: 'find',
-                  className: 'btn btn-danger',
-                  onClick: this.onResetNextQuestionTarget
-                },
-                'reset'
-              )
-            )
-          )
-        )
-      );
+      return /*#__PURE__*/_react["default"].createElement("div", {
+        className: "row winterfell-form-builder-conditional-page alert-warning"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        className: "col"
+      }, /*#__PURE__*/_react["default"].createElement("h6", null, "Option '".concat(this.props.text, "' Conditional Page:")), /*#__PURE__*/_react["default"].createElement("p", null, /*#__PURE__*/_react["default"].createElement("i", null, "Go to this page if this is option selected.")), /*#__PURE__*/_react["default"].createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/_react["default"].createElement("div", {
+        className: "input-group"
+      }, /*#__PURE__*/_react["default"].createElement(_SelectInput["default"], {
+        id: "questionTarget",
+        labelId: "questionTarget",
+        options: this.nextButtonTargetOptions(),
+        onSelect: this.onSelect,
+        displayValue: this.initialTarget(),
+        value: this.state.questionTarget
+      }), /*#__PURE__*/_react["default"].createElement("button", {
+        type: "button",
+        label: "find",
+        className: "btn btn-danger",
+        onClick: this.onResetNextQuestionTarget
+      }, "reset")))));
     }
   }]);
   return ConditionalPageEditor;
 }(_react.Component);
 
 ConditionalPageEditor.propTypes = {
-  updateNextQuestionTarget: _propTypes2.default.func.isRequired,
-  resetNextQuestionTarget: _propTypes2.default.func.isRequired,
-  questionOptionIndex: _propTypes2.default.number.isRequired,
-  formPanels: _propTypes2.default.object.isRequired,
-  currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
-  questionId: _propTypes2.default.string.isRequired,
-  text: _propTypes2.default.string,
-  value: _propTypes2.default.string,
-  conditions: _propTypes2.default.object
+  updateNextQuestionTarget: _propTypes["default"].func.isRequired,
+  resetNextQuestionTarget: _propTypes["default"].func.isRequired,
+  questionOptionIndex: _propTypes["default"].number.isRequired,
+  formPanels: _propTypes["default"].object.isRequired,
+  currentQuestionPanelIndex: _propTypes["default"].number.isRequired,
+  questionId: _propTypes["default"].string.isRequired,
+  text: _propTypes["default"].string,
+  value: _propTypes["default"].string,
+  conditions: _propTypes["default"].object
 };
-
 ConditionalPageEditor.defaultProps = {
   text: '',
   value: '',
@@ -219,19 +177,4 @@ var _default = (0, _reactRedux.connect)(mapStateToProps, {
   resetNextQuestionTarget: _winterfellFormBuilderActions.resetNextQuestionTarget
 })(ConditionalPageEditor);
 
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(ConditionalPageEditor, 'ConditionalPageEditor', 'src/components/FieldEditor/ConditionalPageEditor.js');
-
-  __REACT_HOT_LOADER__.register(mapStateToProps, 'mapStateToProps', 'src/components/FieldEditor/ConditionalPageEditor.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldEditor/ConditionalPageEditor.js');
-}();
-
-;
+exports["default"] = _default;

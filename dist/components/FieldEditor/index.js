@@ -1,86 +1,53 @@
-'use strict';
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _react = require('react');
+var _react = _interopRequireDefault(require("react"));
 
-var _react2 = _interopRequireDefault(_react);
+var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _propTypes = require('prop-types');
+var _PageEditor = _interopRequireDefault(require("./PageEditor"));
 
-var _propTypes2 = _interopRequireDefault(_propTypes);
+var _QuestionSetEditor = _interopRequireDefault(require("./QuestionSetEditor"));
 
-var _PageEditor = require('./PageEditor');
+var _QuestionEditor = _interopRequireDefault(require("./QuestionEditor"));
 
-var _PageEditor2 = _interopRequireDefault(_PageEditor);
-
-var _QuestionSetEditor = require('./QuestionSetEditor');
-
-var _QuestionSetEditor2 = _interopRequireDefault(_QuestionSetEditor);
-
-var _QuestionEditor = require('./QuestionEditor');
-
-var _QuestionEditor2 = _interopRequireDefault(_QuestionEditor);
-
-var _ButtonBarEditor = require('./ButtonBarEditor');
-
-var _ButtonBarEditor2 = _interopRequireDefault(_ButtonBarEditor);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ButtonBarEditor = _interopRequireDefault(require("./ButtonBarEditor"));
 
 function FieldEditor(props) {
   var currentEditingField = props.currentEditingField,
       currentQuestionPanelIndex = props.currentQuestionPanelIndex,
       currentQuestionSetIndex = props.currentQuestionSetIndex,
       currentQuestionIndex = props.currentQuestionIndex;
-
-
-  return _react2.default.createElement(
-    'div',
-    { className: 'winterfell-form-builder-field-editor bg-light p-3' },
-    (currentEditingField === 'page' || currentEditingField === 'pageSort') && _react2.default.createElement(_PageEditor2.default, {
-      currentQuestionPanelIndex: currentQuestionPanelIndex
-    }),
-    currentEditingField === 'questionSet' && _react2.default.createElement(_QuestionSetEditor2.default, {
-      currentQuestionSetIndex: currentQuestionSetIndex
-    }),
-    currentEditingField === 'question' && _react2.default.createElement(_QuestionEditor2.default, {
-      currentQuestionPanelIndex: currentQuestionPanelIndex,
-      currentQuestionSetIndex: currentQuestionSetIndex,
-      currentQuestionIndex: currentQuestionIndex
-    }),
-    currentEditingField === 'buttons' && _react2.default.createElement(_ButtonBarEditor2.default, {
-      currentQuestionPanelIndex: currentQuestionPanelIndex
-    })
-  );
+  return /*#__PURE__*/_react["default"].createElement("div", {
+    className: "winterfell-form-builder-field-editor bg-light p-3"
+  }, (currentEditingField === 'page' || currentEditingField === 'pageSort') && /*#__PURE__*/_react["default"].createElement(_PageEditor["default"], {
+    currentQuestionPanelIndex: currentQuestionPanelIndex
+  }), currentEditingField === 'questionSet' && /*#__PURE__*/_react["default"].createElement(_QuestionSetEditor["default"], {
+    currentQuestionSetIndex: currentQuestionSetIndex
+  }), currentEditingField === 'question' && /*#__PURE__*/_react["default"].createElement(_QuestionEditor["default"], {
+    currentQuestionPanelIndex: currentQuestionPanelIndex,
+    currentQuestionSetIndex: currentQuestionSetIndex,
+    currentQuestionIndex: currentQuestionIndex
+  }), currentEditingField === 'buttons' && /*#__PURE__*/_react["default"].createElement(_ButtonBarEditor["default"], {
+    currentQuestionPanelIndex: currentQuestionPanelIndex
+  }));
 }
 
 FieldEditor.propTypes = {
-  currentEditingField: _propTypes2.default.string.isRequired,
-  currentQuestionPanelIndex: _propTypes2.default.number.isRequired,
-  currentQuestionSetIndex: _propTypes2.default.number,
-  currentQuestionIndex: _propTypes2.default.number
+  currentEditingField: _propTypes["default"].string.isRequired,
+  currentQuestionPanelIndex: _propTypes["default"].number.isRequired,
+  currentQuestionSetIndex: _propTypes["default"].number,
+  currentQuestionIndex: _propTypes["default"].number
 };
-
 FieldEditor.defaultProps = {
   currentQuestionSetIndex: null,
   currentQuestionIndex: null
 };
-
 var _default = FieldEditor;
-exports.default = _default;
-;
-
-var _temp = function () {
-  if (typeof __REACT_HOT_LOADER__ === 'undefined') {
-    return;
-  }
-
-  __REACT_HOT_LOADER__.register(FieldEditor, 'FieldEditor', 'src/components/FieldEditor/index.js');
-
-  __REACT_HOT_LOADER__.register(_default, 'default', 'src/components/FieldEditor/index.js');
-}();
-
-;
+exports["default"] = _default;
