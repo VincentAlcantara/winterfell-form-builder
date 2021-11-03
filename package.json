@@ -71,7 +71,7 @@
     "redux-storage-merger-immutablejs": "^1.0.5",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
-    "validator": "^4.0.5",
+    "validator": "^13.7.0",
     "vinyl-source-stream": "^1.1.0",
     "webpack": "1.14.0",
     "webpack-dev-server": "1.16.2",
